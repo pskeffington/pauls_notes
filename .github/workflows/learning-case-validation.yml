@@ -30,6 +30,8 @@ jobs:
       - name: Check documentation and shell syntax
         run: |
           python3 scripts/check_documentation.py
+          python3 scripts/check_book_learning.py
+          python3 03_learning/tests/test_book_learning.py
           bash -n 03_learning/examples/run_case.sh
       - name: Exercise the analysis and output contract
         run: Rscript --vanilla 03_learning/tests/test_research_case.R

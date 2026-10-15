@@ -6,11 +6,11 @@
 
 `ANNOTATION_VERIFIED` means the three public identity records agreed at access. `ABSTRACT_ONLY` means bibliographic information and the abstract were reviewed; full methods, supplements and results were not independently audited. `PRIMARY_EVIDENCE_VERIFIED` would require a documented full-text claim audit; no study is assigned that state in this edition. `INSUFFICIENT_EVIDENCE` denotes an unsupported proposed inference; `REVIEW_REQUIRED` denotes an unresolved source or mapping problem. A paper being primary research does not itself establish its reliability, reproducibility or clinical validity.
 
-56 unique primary publications support 60 card-level accounts or clearly labeled contextual readings. Recent studies were searched within 2021–2026-10-10; useful foundational classification, receptor, stress and trial studies were retained. Publication titles and identifiers were checked against Europe PMC/PubMed records. No complete reference texts or raw database dumps are distributed. Gene-specific mechanism and subtype claims remain limited to the findings described below.
+56 unique primary publications support 60 integrated profile accounts or clearly labeled contextual readings. Recent studies were searched within 2021–2026-10-10; useful foundational classification, receptor, stress and trial studies were retained. Publication titles and identifiers were checked against Europe PMC/PubMed records. No complete reference texts or raw database dumps are distributed. Gene-specific mechanism and subtype claims remain limited to the findings described below.
 
 ## AKT1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#akt1) · [Capivasertib in Hormone Receptor-Positive Advanced Breast Cancer. (2023)](https://pubmed.ncbi.nlm.nih.gov/37256976/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#akt1) · [Capivasertib in Hormone Receptor-Positive Advanced Breast Cancer. (2023)](https://pubmed.ncbi.nlm.nih.gov/37256976/)
 
 - DOI: [10.1056/nejmoa2214131](https://doi.org/10.1056/nejmoa2214131); PMID: 37256976; year: 2023.
 - Design: Randomized phase 3 trial.
@@ -21,7 +21,7 @@
 
 ## ATM
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#atm) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#atm) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
 
 - DOI: [10.1056/nejmoa2005936](https://doi.org/10.1056/nejmoa2005936); PMID: 33471974; year: 2021.
 - Design: Population-based case-control sequencing.
@@ -32,7 +32,7 @@
 
 ## AURKA
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#aurka) · [A peripheral blood-based approach involving vimentin along with AURKA enabled efficient tracking of elusive Oct4/Sox2-expressing disseminated breast cancer stem cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42289849/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#aurka) · [A peripheral blood-based approach involving vimentin along with AURKA enabled efficient tracking of elusive Oct4/Sox2-expressing disseminated breast cancer stem cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42289849/)
 
 - DOI: [10.1042/bsr20253828](https://doi.org/10.1042/bsr20253828); PMID: 42289849; year: 2026.
 - Design: Exploratory circulating-cell marker study.
@@ -43,7 +43,7 @@
 
 ## BARD1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#bard1) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#bard1) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
 
 - DOI: [10.1056/nejmoa2005936](https://doi.org/10.1056/nejmoa2005936); PMID: 33471974; year: 2021.
 - Design: Population-based case-control sequencing.
@@ -54,7 +54,7 @@
 
 ## BAX
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#bax) · [VALD-3 Induces GSDME-Dependent Pyroptosis via ROS/JNK/Bax Pathway in Triple-Negative Breast Cancer Cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42384357/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#bax) · [VALD-3 Induces GSDME-Dependent Pyroptosis via ROS/JNK/Bax Pathway in Triple-Negative Breast Cancer Cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42384357/)
 
 - DOI: [10.1007/s10528-026-11423-0](https://doi.org/10.1007/s10528-026-11423-0); PMID: 42384357; year: 2026.
 - Design: Compound perturbation study.
@@ -65,7 +65,7 @@
 
 ## BCL2
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#bcl2) · [Discovery of new thiazolyl hydrazone derivatives as anti-breast cancer agents: Synthesis, biological evaluation and in silico studies. (2026)](https://pubmed.ncbi.nlm.nih.gov/42320114/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#bcl2) · [Discovery of new thiazolyl hydrazone derivatives as anti-breast cancer agents: Synthesis, biological evaluation and in silico studies. (2026)](https://pubmed.ncbi.nlm.nih.gov/42320114/)
 
 - DOI: [10.1016/j.bioorg.2026.110112](https://doi.org/10.1016/j.bioorg.2026.110112); PMID: 42320114; year: 2026.
 - Design: Compound synthesis and cell experiments with modeling.
@@ -76,7 +76,7 @@
 
 ## BRCA1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#brca1) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#brca1) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
 
 - DOI: [10.1056/nejmoa2005936](https://doi.org/10.1056/nejmoa2005936); PMID: 33471974; year: 2021.
 - Design: Population-based case-control sequencing.
@@ -87,7 +87,7 @@
 
 ## BRCA2
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#brca2) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#brca2) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
 
 - DOI: [10.1056/nejmoa2005936](https://doi.org/10.1056/nejmoa2005936); PMID: 33471974; year: 2021.
 - Design: Population-based case-control sequencing.
@@ -98,7 +98,7 @@
 
 ## CCNB1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#ccnb1) · [An Integrated Cellular Computational Pipeline Decodes Luteolin to Design Possible Allosteric CDK1/CYCLIN B1 Inhibitors That Overcome Breast Cancer Stemness. (2026)](https://pubmed.ncbi.nlm.nih.gov/42515730/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#ccnb1) · [An Integrated Cellular Computational Pipeline Decodes Luteolin to Design Possible Allosteric CDK1/CYCLIN B1 Inhibitors That Overcome Breast Cancer Stemness. (2026)](https://pubmed.ncbi.nlm.nih.gov/42515730/)
 
 - DOI: [10.3390/ph19071048](https://doi.org/10.3390/ph19071048); PMID: 42515730; year: 2026.
 - Design: Computational screening with cellular follow-up.
@@ -109,7 +109,7 @@
 
 ## CCND1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#ccnd1) · [Optimizing the ER Cutoff in HER2-Positive Breast Cancer: ER ≥ 50% Predicts Low pCR Rates and Resistance to Antibody-Drug Conjugates in the Neoadjuvant Setting. (2026)](https://pubmed.ncbi.nlm.nih.gov/42811741/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#ccnd1) · [Optimizing the ER Cutoff in HER2-Positive Breast Cancer: ER ≥ 50% Predicts Low pCR Rates and Resistance to Antibody-Drug Conjugates in the Neoadjuvant Setting. (2026)](https://pubmed.ncbi.nlm.nih.gov/42811741/)
 
 - DOI: [10.1002/cam4.72331](https://doi.org/10.1002/cam4.72331); PMID: 42811741; year: 2026.
 - Design: Retrospective cohort with public-data comparisons.
@@ -120,7 +120,7 @@
 
 ## CCNE1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#ccne1) · [Assessing the significance of CCNE1 overexpression in triple negative breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42517982/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#ccne1) · [Assessing the significance of CCNE1 overexpression in triple negative breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42517982/)
 
 - DOI: [10.1007/s12094-026-04477-4](https://doi.org/10.1007/s12094-026-04477-4); PMID: 42517982; year: 2026.
 - Design: Cohort analysis with cell perturbation.
@@ -131,7 +131,7 @@
 
 ## CD274
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cd274) · [Integrative transcriptomic and structural modeling reveal CASP1, TLR3, PYCARD, and CD274 as immune-modulatory drivers in breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/41549178/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cd274) · [Integrative transcriptomic and structural modeling reveal CASP1, TLR3, PYCARD, and CD274 as immune-modulatory drivers in breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/41549178/)
 
 - DOI: [10.1007/s00210-026-04978-7](https://doi.org/10.1007/s00210-026-04978-7); PMID: 41549178; year: 2026.
 - Design: Computational expression, survival and structural modeling.
@@ -142,7 +142,7 @@
 
 ## CD3D
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cd3d) · [Exploration of CD2 and CD3D as potential immune-related biomarkers for IORT in breast cancer treatment. (2026)](https://pubmed.ncbi.nlm.nih.gov/42065189/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cd3d) · [Exploration of CD2 and CD3D as potential immune-related biomarkers for IORT in breast cancer treatment. (2026)](https://pubmed.ncbi.nlm.nih.gov/42065189/)
 
 - DOI: [10.1097/md.0000000000048367](https://doi.org/10.1097/md.0000000000048367); PMID: 42065189; year: 2026.
 - Design: Exploratory transcriptomic comparison.
@@ -153,7 +153,7 @@
 
 ## CD68
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cd68) · [Detection of Human Cytomegalovirus <i>lncRNA4.9</i> in Breast Tumor Tissue Using RNA In Situ Hybridization. (2026)](https://pubmed.ncbi.nlm.nih.gov/42615360/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cd68) · [Detection of Human Cytomegalovirus <i>lncRNA4.9</i> in Breast Tumor Tissue Using RNA In Situ Hybridization. (2026)](https://pubmed.ncbi.nlm.nih.gov/42615360/)
 
 - DOI: [10.1369/00221554261474562](https://doi.org/10.1369/00221554261474562); PMID: 42615360; year: 2026.
 - Design: Tissue in situ and immunohistochemistry study.
@@ -164,7 +164,7 @@
 
 ## CD8A
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cd8a) · [HSP90AA1 Knockdown Enhances Doxorubicin Sensitivity by Promoting Immunogenic Cell Death-Related Signaling and Immune-Related Tumor Microenvironment Remodeling in Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42794881/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cd8a) · [HSP90AA1 Knockdown Enhances Doxorubicin Sensitivity by Promoting Immunogenic Cell Death-Related Signaling and Immune-Related Tumor Microenvironment Remodeling in Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42794881/)
 
 - DOI: [10.3390/cancers18182913](https://doi.org/10.3390/cancers18182913); PMID: 42794881; year: 2026.
 - Design: Cell and mouse perturbation study.
@@ -175,7 +175,7 @@
 
 ## CDC20
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cdc20) · [LncTRDMT1-5 promotes chromosomal instability through MSRB3-mediated cell cycle and DNA damage in breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42620215/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cdc20) · [LncTRDMT1-5 promotes chromosomal instability through MSRB3-mediated cell cycle and DNA damage in breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42620215/)
 
 - DOI: [10.3389/fonc.2026.1899923](https://doi.org/10.3389/fonc.2026.1899923); PMID: 42620215; year: 2026.
 - Design: Noncoding-RNA perturbation study.
@@ -186,7 +186,7 @@
 
 ## CDH1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cdh1) · [A Transcriptional ILCness Score Reveals Lobular-like Biology and Clinical Behavior Beyond CDH1 Mutation Status. (2026)](https://pubmed.ncbi.nlm.nih.gov/42641685/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cdh1) · [A Transcriptional ILCness Score Reveals Lobular-like Biology and Clinical Behavior Beyond CDH1 Mutation Status. (2026)](https://pubmed.ncbi.nlm.nih.gov/42641685/)
 
 - DOI: [10.1016/j.modpat.2026.101072](https://doi.org/10.1016/j.modpat.2026.101072); PMID: 42641685; year: 2026.
 - Design: Expression and histopathology study.
@@ -197,7 +197,7 @@
 
 ## CDK4
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cdk4) · [Ribociclib plus Endocrine Therapy in Early Breast Cancer. (2024)](https://pubmed.ncbi.nlm.nih.gov/38507751/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cdk4) · [Ribociclib plus Endocrine Therapy in Early Breast Cancer. (2024)](https://pubmed.ncbi.nlm.nih.gov/38507751/)
 
 - DOI: [10.1056/nejmoa2305488](https://doi.org/10.1056/nejmoa2305488); PMID: 38507751; year: 2024.
 - Design: Randomized phase 3 trial.
@@ -208,7 +208,7 @@
 
 ## CDK6
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cdk6) · [Ribociclib plus Endocrine Therapy in Early Breast Cancer. (2024)](https://pubmed.ncbi.nlm.nih.gov/38507751/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cdk6) · [Ribociclib plus Endocrine Therapy in Early Breast Cancer. (2024)](https://pubmed.ncbi.nlm.nih.gov/38507751/)
 
 - DOI: [10.1056/nejmoa2305488](https://doi.org/10.1056/nejmoa2305488); PMID: 38507751; year: 2024.
 - Design: Randomized phase 3 trial.
@@ -219,7 +219,7 @@
 
 ## CDKN1A
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cdkn1a) · [CDKN1A/p21 Influences the Survival and Expansion of Breast Cancer Stem Cells after Oxidative Damage. (2026)](https://pubmed.ncbi.nlm.nih.gov/42065068/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cdkn1a) · [CDKN1A/p21 Influences the Survival and Expansion of Breast Cancer Stem Cells after Oxidative Damage. (2026)](https://pubmed.ncbi.nlm.nih.gov/42065068/)
 
 - DOI: [10.32604/or.2026.074965](https://doi.org/10.32604/or.2026.074965); PMID: 42065068; year: 2026.
 - Design: Oxidative-damage cell experiments.
@@ -230,7 +230,7 @@
 
 ## CHEK2
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#chek2) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#chek2) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
 
 - DOI: [10.1056/nejmoa2005936](https://doi.org/10.1056/nejmoa2005936); PMID: 33471974; year: 2021.
 - Design: Population-based case-control sequencing.
@@ -241,7 +241,7 @@
 
 ## COL1A1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#col1a1) · [SERPINH1 expression represents a reliable biomarker of human breast cancer aggressiveness. (2026)](https://pubmed.ncbi.nlm.nih.gov/42464413/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#col1a1) · [SERPINH1 expression represents a reliable biomarker of human breast cancer aggressiveness. (2026)](https://pubmed.ncbi.nlm.nih.gov/42464413/)
 
 - DOI: [10.1186/s13062-026-00869-2](https://doi.org/10.1186/s13062-026-00869-2); PMID: 42464413; year: 2026.
 - Design: Multimodal tissue association study.
@@ -252,7 +252,7 @@
 
 ## CXCL12
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#cxcl12) · [CXCL12-mediated T cell infiltration drives breast cancer metastasis. (2026)](https://pubmed.ncbi.nlm.nih.gov/41902967/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#cxcl12) · [CXCL12-mediated T cell infiltration drives breast cancer metastasis. (2026)](https://pubmed.ncbi.nlm.nih.gov/41902967/)
 
 - DOI: [10.1007/s10238-026-02126-2](https://doi.org/10.1007/s10238-026-02126-2); PMID: 41902967; year: 2026.
 - Design: Tissue profiling and knockdown experiments.
@@ -263,7 +263,7 @@
 
 ## EGFR
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#egfr) · [Inhibitory effects of 2'-nitroflavone and apigenin on EGFR signaling in breast cancer cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42469310/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#egfr) · [Inhibitory effects of 2'-nitroflavone and apigenin on EGFR signaling in breast cancer cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42469310/)
 
 - DOI: [10.1038/s41598-026-62101-5](https://doi.org/10.1038/s41598-026-62101-5); PMID: 42469310; year: 2026.
 - Design: Compound and cell-line experiments.
@@ -274,7 +274,7 @@
 
 ## EPCAM
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#epcam) · [Single-Exosome EpCAM Heterogeneity Profiling for Breast Cancer Diagnosis and Progression Monitoring. (2026)](https://pubmed.ncbi.nlm.nih.gov/42708763/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#epcam) · [Single-Exosome EpCAM Heterogeneity Profiling for Breast Cancer Diagnosis and Progression Monitoring. (2026)](https://pubmed.ncbi.nlm.nih.gov/42708763/)
 
 - DOI: [10.1021/acs.analchem.6c01556](https://doi.org/10.1021/acs.analchem.6c01556); PMID: 42708763; year: 2026.
 - Design: Exploratory extracellular-vesicle assay development.
@@ -285,7 +285,7 @@
 
 ## ERBB2
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#erbb2) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#erbb2) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
 
 - DOI: [10.1038/nature11412](https://doi.org/10.1038/nature11412); PMID: 23000897; year: 2012.
 - Design: Multi-platform molecular profiling.
@@ -296,7 +296,7 @@
 
 ## ERBB3
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#erbb3) · [Anti-breast cancer effects of the Xingxiao Pill are associated with inhibition of the ErbB3/PI3K/AKT/mTOR pathway, modulation of amino acid metabolism, and promotion of apoptosis. (2026)](https://pubmed.ncbi.nlm.nih.gov/42648410/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#erbb3) · [Anti-breast cancer effects of the Xingxiao Pill are associated with inhibition of the ErbB3/PI3K/AKT/mTOR pathway, modulation of amino acid metabolism, and promotion of apoptosis. (2026)](https://pubmed.ncbi.nlm.nih.gov/42648410/)
 
 - DOI: [10.1016/j.jep.2026.122321](https://doi.org/10.1016/j.jep.2026.122321); PMID: 42648410; year: 2026.
 - Design: Compound perturbation and biochemical study.
@@ -307,7 +307,7 @@
 
 ## ERBB4
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#erbb4) · [NRG4 suppresses breast cancer metastasis via ERBB4-YAP1-mediated down-regulation of MMPs. (2026)](https://pubmed.ncbi.nlm.nih.gov/41716632/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#erbb4) · [NRG4 suppresses breast cancer metastasis via ERBB4-YAP1-mediated down-regulation of MMPs. (2026)](https://pubmed.ncbi.nlm.nih.gov/41716632/)
 
 - DOI: [10.1016/j.gendis.2025.101691](https://doi.org/10.1016/j.gendis.2025.101691); PMID: 41716632; year: 2026.
 - Design: Receptor perturbation study.
@@ -318,7 +318,7 @@
 
 ## ESR1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#esr1) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#esr1) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
 
 - DOI: [10.1038/nature11412](https://doi.org/10.1038/nature11412); PMID: 23000897; year: 2012.
 - Design: Multi-platform molecular profiling.
@@ -329,7 +329,7 @@
 
 ## FGFR1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#fgfr1) · [FGFR1 Suppresses STING-Mediated Interferon Response in Endocrine Therapy-Resistant Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42617046/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#fgfr1) · [FGFR1 Suppresses STING-Mediated Interferon Response in Endocrine Therapy-Resistant Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42617046/)
 
 - DOI: [10.1158/2767-9764.crc-25-0821](https://doi.org/10.1158/2767-9764.crc-25-0821); PMID: 42617046; year: 2026.
 - Design: Resistance-model perturbation with cohort context.
@@ -340,7 +340,7 @@
 
 ## FN1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#fn1) · [Plasma small-extracellular vesicles' proteomic signature in neoadjuvant chemotherapy-naïve breast cancer patients. (2026)](https://pubmed.ncbi.nlm.nih.gov/42085441/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#fn1) · [Plasma small-extracellular vesicles' proteomic signature in neoadjuvant chemotherapy-naïve breast cancer patients. (2026)](https://pubmed.ncbi.nlm.nih.gov/42085441/)
 
 - DOI: [10.1371/journal.pone.0348500](https://doi.org/10.1371/journal.pone.0348500); PMID: 42085441; year: 2026.
 - Design: Extracellular-vesicle proteomics and cell assays.
@@ -351,7 +351,7 @@
 
 ## FOXA1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#foxa1) · [FOXA1 is a key determinant of estrogen receptor function and endocrine response. (2011)](https://pubmed.ncbi.nlm.nih.gov/21151129/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#foxa1) · [FOXA1 is a key determinant of estrogen receptor function and endocrine response. (2011)](https://pubmed.ncbi.nlm.nih.gov/21151129/)
 
 - DOI: [10.1038/ng.730](https://doi.org/10.1038/ng.730); PMID: 21151129; year: 2011.
 - Design: Genome-binding and functional perturbation study.
@@ -362,7 +362,7 @@
 
 ## FOXC1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#foxc1) · [FOXC1 is a potential prognostic biomarker with functional significance in basal-like breast cancer. (2010)](https://pubmed.ncbi.nlm.nih.gov/20406990/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#foxc1) · [FOXC1 is a potential prognostic biomarker with functional significance in basal-like breast cancer. (2010)](https://pubmed.ncbi.nlm.nih.gov/20406990/)
 
 - DOI: [10.1158/0008-5472.can-09-4120](https://doi.org/10.1158/0008-5472.can-09-4120); PMID: 20406990; year: 2010.
 - Design: Expression association with functional experiments.
@@ -373,7 +373,7 @@
 
 ## GATA3
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#gata3) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#gata3) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
 
 - DOI: [10.1038/nature11412](https://doi.org/10.1038/nature11412); PMID: 23000897; year: 2012.
 - Design: Multi-platform molecular profiling.
@@ -384,7 +384,7 @@
 
 ## HIF1A
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#hif1a) · [HNRNPF-driven retention of exon 14 in HIF1A pre-mRNA promotes breast cancer metastasis. (2026)](https://pubmed.ncbi.nlm.nih.gov/42480772/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#hif1a) · [HNRNPF-driven retention of exon 14 in HIF1A pre-mRNA promotes breast cancer metastasis. (2026)](https://pubmed.ncbi.nlm.nih.gov/42480772/)
 
 - DOI: [10.1016/j.bbadis.2026.168379](https://doi.org/10.1016/j.bbadis.2026.168379); PMID: 42480772; year: 2026.
 - Design: Isoform and splicing experiments.
@@ -395,7 +395,7 @@
 
 ## ITGA6
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#itga6) · [ASH2L induces tamoxifen resistance via H3K4me3 dependent ITGA6/ERK signaling in ER-positive breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/41735581/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#itga6) · [ASH2L induces tamoxifen resistance via H3K4me3 dependent ITGA6/ERK signaling in ER-positive breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/41735581/)
 
 - DOI: [10.1038/s41416-026-03347-8](https://doi.org/10.1038/s41416-026-03347-8); PMID: 41735581; year: 2026.
 - Design: Regulatory perturbation study.
@@ -406,7 +406,7 @@
 
 ## KRT14
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#krt14) · [MechanoAge, a machine learning platform to identify individuals susceptible to breast cancer based on mechanical properties of single cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42031621/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#krt14) · [MechanoAge, a machine learning platform to identify individuals susceptible to breast cancer based on mechanical properties of single cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42031621/)
 
 - DOI: [10.1016/j.ebiom.2026.106241](https://doi.org/10.1016/j.ebiom.2026.106241); PMID: 42031621; year: 2026.
 - Design: Exploratory mechanics and epithelial-cell study.
@@ -417,7 +417,7 @@
 
 ## KRT17
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#krt17) · [KRT17 promotes triple negative breast cancer through activation of Wnt signaling and γδ T-cells recruitment. (2026)](https://pubmed.ncbi.nlm.nih.gov/41888575/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#krt17) · [KRT17 promotes triple negative breast cancer through activation of Wnt signaling and γδ T-cells recruitment. (2026)](https://pubmed.ncbi.nlm.nih.gov/41888575/)
 
 - DOI: [10.1038/s42003-026-09897-0](https://doi.org/10.1038/s42003-026-09897-0); PMID: 41888575; year: 2026.
 - Design: Immune and signaling model study.
@@ -428,7 +428,7 @@
 
 ## KRT18
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#krt18) · [Single-cell transcriptomics profiling elucidates RBP-driven metastatic signaling pathways in ER<sup>+</sup> breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42256294/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#krt18) · [Single-cell transcriptomics profiling elucidates RBP-driven metastatic signaling pathways in ER<sup>+</sup> breast cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42256294/)
 
 - DOI: [10.1016/j.isci.2026.116155](https://doi.org/10.1016/j.isci.2026.116155); PMID: 42256294; year: 2026.
 - Design: Single-cell computational association study.
@@ -439,7 +439,7 @@
 
 ## KRT19
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#krt19) · [Impact of Copper Nanoparticles on Keratin 19 (KRT19) Gene Expression in Breast Cancer Subtypes: Integrating Experimental and Bioinformatics Approaches. (2025)](https://pubmed.ncbi.nlm.nih.gov/40806403/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#krt19) · [Impact of Copper Nanoparticles on Keratin 19 (KRT19) Gene Expression in Breast Cancer Subtypes: Integrating Experimental and Bioinformatics Approaches. (2025)](https://pubmed.ncbi.nlm.nih.gov/40806403/)
 
 - DOI: [10.3390/ijms26157269](https://doi.org/10.3390/ijms26157269); PMID: 40806403; year: 2025.
 - Design: Compound-exposure cell study.
@@ -450,7 +450,7 @@
 
 ## KRT5
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#krt5) · [Distinct transcriptomic features of tumor and stromal cells in direct contact in luminal and triple-negative breast cancers. (2026)](https://pubmed.ncbi.nlm.nih.gov/42539924/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#krt5) · [Distinct transcriptomic features of tumor and stromal cells in direct contact in luminal and triple-negative breast cancers. (2026)](https://pubmed.ncbi.nlm.nih.gov/42539924/)
 
 - DOI: [10.37349/etat.2026.1002388](https://doi.org/10.37349/etat.2026.1002388); PMID: 42539924; year: 2026.
 - Design: Spatial expression study.
@@ -461,7 +461,7 @@
 
 ## KRT8
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#krt8) · [Investigating phenotypic plasticity due to toxicants with exposure disparities in primary human breast cells <i>in vitro</i>. (2024)](https://pubmed.ncbi.nlm.nih.gov/38915368/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#krt8) · [Investigating phenotypic plasticity due to toxicants with exposure disparities in primary human breast cells <i>in vitro</i>. (2024)](https://pubmed.ncbi.nlm.nih.gov/38915368/)
 
 - DOI: [10.3389/fonc.2024.1411295](https://doi.org/10.3389/fonc.2024.1411295); PMID: 38915368; year: 2024.
 - Design: Exposure and epithelial-state study.
@@ -472,7 +472,7 @@
 
 ## MALAT1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#malat1) · [Long noncoding RNA MALAT1 suppresses breast cancer metastasis. (2018)](https://pubmed.ncbi.nlm.nih.gov/30349115/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#malat1) · [Long noncoding RNA MALAT1 suppresses breast cancer metastasis. (2018)](https://pubmed.ncbi.nlm.nih.gov/30349115/)
 
 - DOI: [10.1038/s41588-018-0252-3](https://doi.org/10.1038/s41588-018-0252-3); PMID: 30349115; year: 2018.
 - Design: Genetic perturbation and add-back study.
@@ -483,7 +483,7 @@
 
 ## MKI67
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#mki67) · [Ki67 Gene Expression is Associated with Immune Cell Infiltration and Neoadjuvant Chemotherapy Response in ER+/HER2- Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/41963560/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#mki67) · [Ki67 Gene Expression is Associated with Immune Cell Infiltration and Neoadjuvant Chemotherapy Response in ER+/HER2- Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/41963560/)
 
 - DOI: [10.1245/s10434-026-19620-2](https://doi.org/10.1245/s10434-026-19620-2); PMID: 41963560; year: 2026.
 - Design: Multi-cohort observational RNA study.
@@ -494,7 +494,7 @@
 
 ## MMP9
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#mmp9) · [Mechanistic insights into daidzin from Glycine max against breast cancer via network pharmacology and multi-level molecular modeling. (2026)](https://pubmed.ncbi.nlm.nih.gov/42579698/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#mmp9) · [Mechanistic insights into daidzin from Glycine max against breast cancer via network pharmacology and multi-level molecular modeling. (2026)](https://pubmed.ncbi.nlm.nih.gov/42579698/)
 
 - DOI: [10.1371/journal.pone.0355672](https://doi.org/10.1371/journal.pone.0355672); PMID: 42579698; year: 2026.
 - Design: Network modeling and docking.
@@ -505,7 +505,7 @@
 
 ## MTOR
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#mtor) · [Everolimus in postmenopausal hormone-receptor-positive advanced breast cancer. (2012)](https://pubmed.ncbi.nlm.nih.gov/22149876/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#mtor) · [Everolimus in postmenopausal hormone-receptor-positive advanced breast cancer. (2012)](https://pubmed.ncbi.nlm.nih.gov/22149876/)
 
 - DOI: [10.1056/nejmoa1109653](https://doi.org/10.1056/nejmoa1109653); PMID: 22149876; year: 2012.
 - Design: Randomized phase 3 trial.
@@ -516,7 +516,7 @@
 
 ## PALB2
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#palb2) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#palb2) · [A Population-Based Study of Genes Previously Implicated in Breast Cancer. (2021)](https://pubmed.ncbi.nlm.nih.gov/33471974/)
 
 - DOI: [10.1056/nejmoa2005936](https://doi.org/10.1056/nejmoa2005936); PMID: 33471974; year: 2021.
 - Design: Population-based case-control sequencing.
@@ -527,7 +527,7 @@
 
 ## PDCD1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#pdcd1) · [Machine Learning-Based Enhanced MRI Radiomics for PDCD1 Prognostication and Expression Prediction in Breast Cancer. (2025)](https://pubmed.ncbi.nlm.nih.gov/41322014/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#pdcd1) · [Machine Learning-Based Enhanced MRI Radiomics for PDCD1 Prognostication and Expression Prediction in Breast Cancer. (2025)](https://pubmed.ncbi.nlm.nih.gov/41322014/)
 
 - DOI: [10.1177/11795549251399383](https://doi.org/10.1177/11795549251399383); PMID: 41322014; year: 2025.
 - Design: Retrospective radiomics and expression modeling.
@@ -538,7 +538,7 @@
 
 ## PGR
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#pgr) · [Progesterone receptor modulates ERα action in breast cancer. (2015)](https://pubmed.ncbi.nlm.nih.gov/26153859/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#pgr) · [Progesterone receptor modulates ERα action in breast cancer. (2015)](https://pubmed.ncbi.nlm.nih.gov/26153859/)
 
 - DOI: [10.1038/nature14583](https://doi.org/10.1038/nature14583); PMID: 26153859; year: 2015.
 - Design: Receptor binding and functional experiments.
@@ -549,7 +549,7 @@
 
 ## PIK3CA
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#pik3ca) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#pik3ca) · [Comprehensive molecular portraits of human breast tumours. (2012)](https://pubmed.ncbi.nlm.nih.gov/23000897/)
 
 - DOI: [10.1038/nature11412](https://doi.org/10.1038/nature11412); PMID: 23000897; year: 2012.
 - Design: Multi-platform molecular profiling.
@@ -560,7 +560,7 @@
 
 ## PTEN
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#pten) · [Distinct Associations of PTEN and TMPRSS4 Expression with Clinical Outcomes and Fudan Immunohistochemistry-Based Subtypes in Triple-Negative Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42795427/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#pten) · [Distinct Associations of PTEN and TMPRSS4 Expression with Clinical Outcomes and Fudan Immunohistochemistry-Based Subtypes in Triple-Negative Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42795427/)
 
 - DOI: [10.3390/life16091563](https://doi.org/10.3390/life16091563); PMID: 42795427; year: 2026.
 - Design: Retrospective protein and outcome association.
@@ -571,7 +571,7 @@
 
 ## PTPRC
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#ptprc) · [Immune-based molecular subtyping of triple-negative breast cancer via SNF-CC and functional validation of key immune-associated genes. (2025)](https://pubmed.ncbi.nlm.nih.gov/40627035/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#ptprc) · [Immune-based molecular subtyping of triple-negative breast cancer via SNF-CC and functional validation of key immune-associated genes. (2025)](https://pubmed.ncbi.nlm.nih.gov/40627035/)
 
 - DOI: [10.1007/s10142-025-01654-6](https://doi.org/10.1007/s10142-025-01654-6); PMID: 40627035; year: 2025.
 - Design: Computational immune subtyping with cell experiments.
@@ -582,7 +582,7 @@
 
 ## RAD51
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#rad51) · [MND1 reduces breast cancer chemosensitivity by promoting RAD51-mediated homologous recombination repair. (2026)](https://pubmed.ncbi.nlm.nih.gov/42236675/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#rad51) · [MND1 reduces breast cancer chemosensitivity by promoting RAD51-mediated homologous recombination repair. (2026)](https://pubmed.ncbi.nlm.nih.gov/42236675/)
 
 - DOI: [10.1038/s41419-026-08912-w](https://doi.org/10.1038/s41419-026-08912-w); PMID: 42236675; year: 2026.
 - Design: Repair-pathway perturbation study.
@@ -593,7 +593,7 @@
 
 ## RB1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#rb1) · [Inorganic Phosphate Is Associated with RB1-E2F-Related Transcriptional and DNA Repair-Associated Changes Under Cisplatin Exposure in MDA-MB-231 Cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42651837/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#rb1) · [Inorganic Phosphate Is Associated with RB1-E2F-Related Transcriptional and DNA Repair-Associated Changes Under Cisplatin Exposure in MDA-MB-231 Cells. (2026)](https://pubmed.ncbi.nlm.nih.gov/42651837/)
 
 - DOI: [10.3390/cimb48080839](https://doi.org/10.3390/cimb48080839); PMID: 42651837; year: 2026.
 - Design: Exposure and transcriptional study.
@@ -604,7 +604,7 @@
 
 ## SLC2A1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#slc2a1) · [EFO2 promotes triple-negative breast cancer progression and reduces CD8<sup>+</sup> T cell-mediated killing by acetylating USF1 to enhance SLC2A1-mediated glycolysis. (2026)](https://pubmed.ncbi.nlm.nih.gov/42456828/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#slc2a1) · [EFO2 promotes triple-negative breast cancer progression and reduces CD8<sup>+</sup> T cell-mediated killing by acetylating USF1 to enhance SLC2A1-mediated glycolysis. (2026)](https://pubmed.ncbi.nlm.nih.gov/42456828/)
 
 - DOI: [10.1016/j.bcp.2026.118260](https://doi.org/10.1016/j.bcp.2026.118260); PMID: 42456828; year: 2026.
 - Design: Metabolic perturbation and immune co-culture study.
@@ -615,7 +615,7 @@
 
 ## STAT1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#stat1) · [Chromosomal instability promotes cell migration and invasion via EFEMP1 secretion into extracellular vesicles. (2026)](https://pubmed.ncbi.nlm.nih.gov/41974939/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#stat1) · [Chromosomal instability promotes cell migration and invasion via EFEMP1 secretion into extracellular vesicles. (2026)](https://pubmed.ncbi.nlm.nih.gov/41974939/)
 
 - DOI: [10.1038/s44318-026-00766-4](https://doi.org/10.1038/s44318-026-00766-4); PMID: 41974939; year: 2026.
 - Design: Chromosomal-instability and extracellular-vesicle perturbation study.
@@ -626,7 +626,7 @@
 
 ## TOP2A
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#top2a) · [STUB1 downregulates TOP2A through a dual mechanism of ubiquitination and FOXM1-mediated transcription repression, suppressing breast cancer growth and enhancing sensitivity to chemotherapy. (2026)](https://pubmed.ncbi.nlm.nih.gov/41851614/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#top2a) · [STUB1 downregulates TOP2A through a dual mechanism of ubiquitination and FOXM1-mediated transcription repression, suppressing breast cancer growth and enhancing sensitivity to chemotherapy. (2026)](https://pubmed.ncbi.nlm.nih.gov/41851614/)
 
 - DOI: [10.1186/s11658-026-00902-2](https://doi.org/10.1186/s11658-026-00902-2); PMID: 41851614; year: 2026.
 - Design: Protein-regulation perturbation with tissue associations.
@@ -637,7 +637,7 @@
 
 ## TP53
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#tp53) · [TP53 mutations predict poor breast cancer-specific survival in ER-positive breast cancer patients. (2026)](https://pubmed.ncbi.nlm.nih.gov/42607633/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#tp53) · [TP53 mutations predict poor breast cancer-specific survival in ER-positive breast cancer patients. (2026)](https://pubmed.ncbi.nlm.nih.gov/42607633/)
 
 - DOI: [10.1016/j.canep.2026.103204](https://doi.org/10.1016/j.canep.2026.103204); PMID: 42607633; year: 2026.
 - Design: Retrospective mutation and survival study.
@@ -648,7 +648,7 @@
 
 ## VIM
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#vim) · [Targeting the Vim-PGI<sub>2</sub> Pathway Enhances CD8<sup>+</sup> T Cell-Mediated Antitumor Immunity in Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42058674/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#vim) · [Targeting the Vim-PGI<sub>2</sub> Pathway Enhances CD8<sup>+</sup> T Cell-Mediated Antitumor Immunity in Breast Cancer. (2026)](https://pubmed.ncbi.nlm.nih.gov/42058674/)
 
 - DOI: [10.1155/humu/8880918](https://doi.org/10.1155/humu/8880918); PMID: 42058674; year: 2026.
 - Design: Immune-pathway perturbation study.
@@ -659,7 +659,7 @@
 
 ## XBP1
 
-[Card](../BREAST_CANCER_60_GENE_COMPANION.md#xbp1) · [XBP1 promotes triple-negative breast cancer by controlling the HIF1α pathway. (2014)](https://pubmed.ncbi.nlm.nih.gov/24670641/)
+[Profile](../BREAST_CANCER_60_GENE_COMPANION.md#xbp1) · [XBP1 promotes triple-negative breast cancer by controlling the HIF1α pathway. (2014)](https://pubmed.ncbi.nlm.nih.gov/24670641/)
 
 - DOI: [10.1038/nature13119](https://doi.org/10.1038/nature13119); PMID: 24670641; year: 2014.
 - Design: Stress-pathway functional study.

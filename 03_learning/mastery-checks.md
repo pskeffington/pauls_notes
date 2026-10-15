@@ -100,6 +100,8 @@ These are learner checks, not claims that an automated test can assess understan
 
 ## Reusable resources and the book
 
+The [book learning checker](../scripts/check_book_learning.py) checks chapter order, sixty integrated profiles, matching annotation identities and evidence records, alphabetical lookup, review boundaries, captions, text equivalents and reading routes. Its [negative tests](tests/test_book_learning.py) deliberately remove or corrupt those elements in memory and confirm rejection. The checks assess local consistency rather than fresh biological annotation verification.
+
 The [resource contract suite](tests/test_resource_contracts.R) verifies summary counts, quartiles, IQR, missingness percentages, single-observation uncertainty, empty inputs, narrative summaries, the book's paired arithmetic and all 24 heatmap table values against the figure source.
 
 Continuous integration also executes all seven retained [R resource suites](../06_RESOURCES/tests/). Their dependencies include ggplot2, plotly, htmlwidgets, pROC, survival and edgeR. These checks exercise the actual retained helper functions, including statistical dispatch, keyed feature metadata, color scales, annotations, paired plots, calibration, uncertainty and interactive exports. They do not convert a software test into a validated scientific finding.
