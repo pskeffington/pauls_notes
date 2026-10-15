@@ -25,10 +25,10 @@ quoted <- read.csv(file.path(workspace, "quoted.csv"), colClasses = "character")
 stopifnot(ncol(quoted) == 2L, quoted$label == "two, words")
 cli <- normalizePath("03_learning/examples/summarize_records.R")
 rscript <- file.path(R.home("bin"), "Rscript")
-call <- function(arguments) suppressWarnings(system2(rscript,
-  c("--vanilla", shQuote(cli), vapply(arguments, shQuote, character(1))), stdout = FALSE, stderr = FALSE))
+call <- function(arguments, quiet = TRUE) suppressWarnings(system2(rscript,
+  c("--vanilla", shQuote(cli), vapply(arguments, shQuote, character(1))), stdout = FALSE, stderr = if (quiet) FALSE else ""))
 output <- file.path(workspace, "checked summary.csv")
-stopifnot(call(c(input, "3", output)) == 0L)
+stopifnot(call(c(input, "3", output), quiet = FALSE) == 0L)
 actual <- read.csv(output)
 stopifnot(is.na(actual$mean_au[1]), actual$mean_au[2] == 10)
 before <- tools::md5sum(c(input, output))
