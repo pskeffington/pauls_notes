@@ -12,7 +12,7 @@ This repository is organized by subject and technical dependency, not by class, 
 
 Navigate files safely, reason about pipes and program status, write small Bash programs, and verify a synthetic research metadata workflow.
 
-The next sections will be added only after their contents and references have been reviewed. Empty topic directories and placeholder lessons are intentionally omitted.
+The [curated reusable research resources](06_RESOURCES/README.md) preserve selected source code, tests, and technical references from a private research repository. This is a file-only import, with [SHA inventory and exclusions](RESOURCE_IMPORT_MANIFEST.md), not a Git-history transfer or a declaration that every archived method is currently validated. New topic modules are added after their contents and references have been reviewed.
 
 ## Editorial and publication rules
 
