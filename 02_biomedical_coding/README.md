@@ -16,15 +16,11 @@ This section connects influential biomedical computing, statistics, genomics, an
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
-## Learning and deployment sequence
+## Learn and run
 
-1. [Unix and Bash](../01_unix_bash/README.md) — established runnable foundation.
-2. R programming, tidy data, biostatistics, resampling and `caret` — **planned**.
-3. Bioconductor, differential expression, feature-level uncertainty, and genomic plots — **planned**.
-4. Python biomedical ML, patient-aware validation, calibrated prediction and explainability — **planned**.
-5. Computational workflows, clinical data interoperability, and clinical AI reporting — **planned**.
+Start with the [task-based learning sections](../03_learning/README.md). They cover R objects, checked joins, reshaping, missingness, paired comparisons, exploratory models, visualization, simulation and a complete local Bash-to-R deployment. The case uses base R; optional examples show dplyr, tidyr and survey interfaces.
 
-See the [curated preserved resources](../06_RESOURCES/README.md) for original implementation references retained as source files. The resource archive is not a certification that its scripts were re-executed or that software dependencies remain current.
+Use the [Unix and Bash guide](../01_unix_bash/README.md) for shell foundations, and the [R tools](../06_RESOURCES/R/README.md) for additional plotting helpers. Advanced resampling with caret, full RNA-seq workflows and predictive-model deployments remain topics for later executable sections; the literature matrix supplies planning references for those areas.
 
 ## Boundaries
 

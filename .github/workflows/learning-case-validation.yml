@@ -1,0 +1,42 @@
+name: Biomedical learning case
+
+on:
+  push:
+    branches: [main, work/biomedical-learning]
+    paths:
+      - "03_learning/**"
+      - ".github/workflows/learning-case-validation.yml"
+  pull_request:
+    paths:
+      - "03_learning/**"
+      - ".github/workflows/learning-case-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  execute-case:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install R and optional example packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey
+      - name: Check documentation and shell syntax
+        run: |
+          python3 scripts/check_documentation.py
+          bash -n 03_learning/examples/run_case.sh
+      - name: Exercise the analysis and output contract
+        run: Rscript --vanilla 03_learning/tests/test_research_case.R
+      - name: Execute learning page examples
+        run: Rscript --vanilla 03_learning/tests/check_learning_pages.R
+      - name: Execute Bash-to-R deployment
+        run: |
+          bash 03_learning/examples/run_case.sh "$RUNNER_TEMP/learning run"
+          test -s "$RUNNER_TEMP/learning run/analysis_bundle.rds"
+          test -s "$RUNNER_TEMP/learning run/diagnostics.pdf"

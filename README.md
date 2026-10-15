@@ -12,6 +12,7 @@ A working reference for planning biomedical studies, understanding molecular dat
 | --- | --- |
 | Plan a study and organize its analysis | [Research workflow](docs/research-workflow.md) |
 | Find documentation, methods and reusable code | [Resource guide](docs/resource-guide.md) |
+| Practice the biomedical computing workflow | [Learning sections and runnable case](03_learning/README.md) |
 | Learn command-line research computing | [Unix and Bash](01_unix_bash/README.md) |
 | Connect biomedical literature to coding practice | [Biomedical coding and literature](02_biomedical_coding/README.md) |
 | Read the breast cancer book | [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) |

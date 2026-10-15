@@ -48,6 +48,13 @@ def main():
         errors.append('Book must retain exactly 60 integrated gene profiles')
     if len(re.findall(r'^## Chapter \d+:', text, re.M)) != 12:
         errors.append('Book must retain 12 chapters')
+    learning = ROOT / '03_learning'
+    for name in ('README.md', 'objects-and-meaning.md', 'keys-and-reshaping.md',
+                 'missingness-and-comparisons.md', 'models-and-uncertainty.md',
+                 'figures-and-features.md', 'probability-and-design.md', 'run-and-package.md'):
+        path = learning / name
+        if not path.is_file():
+            errors.append(f'Missing learning section: {name}')
     home = (ROOT / 'README.md').read_text()
     if 'Authored by Paul Skeffington · Compiled with OpenAI' not in home:
         errors.append('Missing front-page attribution')

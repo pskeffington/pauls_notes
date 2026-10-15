@@ -4,6 +4,7 @@
 
 | Area | Local entry point | Use it for |
 | --- | --- | --- |
+| Task-based learning | [Learning sections](../03_learning/README.md) | Objects, linkage, repeated measures, models, figures, simulation and execution |
 | Shell and filesystem | [Unix and Bash](../01_unix_bash/README.md) | Paths, streams, quoting, exit status and synthetic metadata processing |
 | Research software | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, dependency records and acceptance checks |
 | Biomedical methods | [Publication matrix](../02_biomedical_coding/BIOMEDICAL_CODING_LITERATURE_MATRIX.md) | Papers, coding implications, test expectations and failure modes |
