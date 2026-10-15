@@ -47,6 +47,18 @@ The R case writes to a temporary sibling directory, checks the RDS round trip, c
 
 The demonstration is not a general secure artifact store or a crash-recovery service. For study deployment, also pin dependencies, define data access, capture external input checksums, and record the code version and exact invocation in the [analysis record](../templates/analysis-record.md).
 
+## Filter and summarize additional practice records
+
+The [TSV filter](examples/filter_records.sh) takes input, panel and new output paths. It accepts exactly `record_id`, `panel`, `signal_au` columns, panel labels Alpha/Beta, signed decimal measurements or `NA`, and unique alphanumeric/underscore/hyphen IDs. It preserves the header even when no records match. It rejects existing outputs and malformed records, including records outside the selected panel.
+
+The [R summary CLI](examples/summarize_records.R) takes the TSV, a positive integer minimum observed count and a new CSV path. The [practice suite](tests/test_shell_practice.sh) constructs disposable inputs, invokes both programs with quoted paths, verifies expected summaries, and checks failure behavior:
+
+```bash
+bash 03_learning/tests/test_shell_practice.sh
+```
+
+Alpha's three invented records contain values 4, unavailable, and 6; its measured denominator is two and its descriptive mean is five. A minimum of three withholds that mean while retaining counts. This teaching threshold is not a disclosure-safety or clinical rule. The [batch helper](examples/practice_tools.R) takes uniquely named paths, validates every input, and checks unchanged input bytes. Use a precise file-selection pattern; do not ingest every file in a study directory indiscriminately.
+
 ## Verify before adapting
 
 ```bash

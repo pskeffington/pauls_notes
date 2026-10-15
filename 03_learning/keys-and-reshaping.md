@@ -61,6 +61,10 @@ if (requireNamespace("dplyr", quietly = TRUE) && requireNamespace("tidyr", quiet
 
 Check unsupported and unmatched identifiers separately; the relationship argument constrains multiplicity but does not implement every study-specific missing-match rule. Typical pipelines use `filter()` for rows, `mutate()` for derived columns, `group_by()` with `summarise()` for group summaries, and `arrange()` for order. State the observation unit after each operation.
 
+## Extend the join check
+
+The [learning checks](mastery-checks.md#transform-compare-and-model) include left, inner, full and anti-join counts, repeated visits, a failed duplicate relationship, every basic transformation verb, and a wide/long round trip that compares values as well as dimensions. Explain each expected row count before executing the check.
+
 ## Transfer exercise
 
 Duplicate one registry row and catch the resulting error. Next, insert an unknown person in one visit. Explain why each case needs a different correction and why deleting arbitrary rows is not a defensible general fix.

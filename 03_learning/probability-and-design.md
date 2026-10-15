@@ -46,6 +46,10 @@ if (requireNamespace("survey", quietly = TRUE)) {
 
 The artificial design has two sampled clusters per stratum. Real designs may require nesting rules, finite-population corrections, replicate weights, domain estimation and special handling of single-cluster strata. Use the study's documentation rather than inventing missing design variables.
 
+## Check repeatability and support
+
+[Learning check LC17](mastery-checks.md#transform-compare-and-model) repeats normal, uniform and Bernoulli draws under the same seed. LC25 compares a weighted estimate with a design-aware survey calculation and checks its standard error. Explain why matching weighted means does not establish that an ordinary weighted regression uses the correct sampling variance.
+
 ## Transfer exercise
 
 Repeat the probability experiment with the same seed, then a different seed. Separate invariant support constraints from sample means that naturally fluctuate. Describe what additional design information would be needed before applying the survey example to a real public-health dataset.
