@@ -116,9 +116,8 @@ The contributors are not ranked and papers with collaborative authorship are rep
 | --- | --- | --- | --- | --- | --- |
 | BM-041 | [Retrieval-augmented generation for knowledge-intensive NLP tasks](https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html) · Lewis; Perez; Piktus et al. (2020) | Foundational NLP method | Trace retrieved evidence and citation references per answer | Measure source coverage, faithfulness and abstention | General NLP RAG is not clinical validation |
 
-## Reconciled additions from the private research matrix
+## Additional methods and visualization literature
 
-These new entries were drawn from the earlier independently authored HSE literature registers. Their reference identities were checked against journal/publisher or primary bibliographic information; implementation practices and tests below are new summaries rather than copied passages. The [source reconciliation ledger](LEGACY_SOURCE_RECONCILIATION.md) records original file IDs and deduplication.
 
 ### Scientific visualization (19 added)
 
@@ -204,4 +203,3 @@ Review the [implementation gates](IMPLEMENTATION_GATES.md) for practical accepta
 
 ## Maintenance
 
-The CSV is canonical for IDs and bibliographic metadata. Imported-source correspondence is separately recorded in the [source reconciliation ledger](LEGACY_SOURCE_RECONCILIATION.md). Additions require real source links, explicit source category, coding purpose, verified year/author details and a scoped validation gate. Run the offline matrix consistency test before publication. Never import private study data or legacy repository history into this literature section.

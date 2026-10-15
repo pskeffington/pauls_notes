@@ -11,7 +11,6 @@ PAPERS = ROOT / "biomedical_coding_literature_matrix.csv"
 PAPER_MD = ROOT / "BIOMEDICAL_CODING_LITERATURE_MATRIX.md"
 METHODS = ROOT / "official_methods_register.csv"
 METHOD_MD = ROOT / "OFFICIAL_METHODS_REGISTER.md"
-LEDGER = ROOT / "LEGACY_SOURCE_RECONCILIATION.md"
 
 PAPER_FIELDS = {
     "id", "domain", "authors", "year", "title", "source_type", "doi",
@@ -21,16 +20,9 @@ PAPER_FIELDS = {
 METHOD_FIELDS = {
     "id", "source_ref", "category", "title", "source_type",
     "primary_url", "implementation_practice", "acceptance_check",
-    "caveat", "origin_path", "origin_blob_sha",
+    "caveat",
     "version_requirement", "reviewed"
 }
-ALLOWED_ORIGIN = (
-    "BIOMEDICAL_CODING_METHODS.md",
-    "RESEARCH_CODE_QUALITY_MATRIX.md",
-    "BIOMEDICAL_CODING_STANDARDS.md",
-    "INTEROPERABILITY_METADATA_STANDARDS.md",
-    "WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md",
-)
 
 
 def load_table(path: Path, required_columns: set[str]) -> list[dict[str, str]]:
@@ -46,7 +38,6 @@ def verify_papers() -> tuple[int, int]:
     records = load_table(PAPERS, PAPER_FIELDS)
     assert len(records) == 71, f"Expected exactly 71 sources, got {len(records)}"
     text = PAPER_MD.read_text(encoding="utf-8")
-    ledger = LEDGER.read_text(encoding="utf-8")
     unique_dois: set[str] = set()
     groups: set[str] = set()
     for n, row in enumerate(records, 1):
@@ -65,10 +56,7 @@ def verify_papers() -> tuple[int, int]:
             unique_dois.add(doi)
             assert row["primary_url"] == "https://doi.org/" + row["doi"], code
         groups.add(row["domain"])
-        if n > 41:
-            assert f"| {code} |" in ledger, f"Missing migration provenance: {code}"
     assert len(groups) >= 14
-    assert "30" in ledger and "private" in ledger.lower()
     return len(records), len(groups)
 
 
@@ -82,9 +70,6 @@ def verify_official_register() -> int:
         assert row["id"] == code, code
         assert all(row[k].strip() for k in METHOD_FIELDS), code
         assert row["reviewed"] == "2026-10-15", code
-        assert row["origin_path"].startswith("06_RESOURCES/Literature/"), code
-        assert row["origin_path"].rsplit("/", 1)[-1] in ALLOWED_ORIGIN, code
-        assert re.fullmatch(r"[a-f0-9]{40}", row["origin_blob_sha"]), code
         assert re.fullmatch(r"(BIO|QA|STD|INT|ML)-[0-9]{2}", row["source_ref"]), code
         assert row["primary_url"].startswith("https://"), code
         url_key = row["primary_url"].casefold()
@@ -102,7 +87,6 @@ def main() -> int:
         "BIOMEDICAL_CODING_LITERATURE_MATRIX.md",
         "official_methods_register.csv",
         "OFFICIAL_METHODS_REGISTER.md",
-        "LEGACY_SOURCE_RECONCILIATION.md",
     ):
         assert link in index, f"Missing section navigation: {link}"
     for other in (

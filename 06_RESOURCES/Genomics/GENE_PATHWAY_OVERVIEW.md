@@ -2,20 +2,20 @@
 
 Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md).
 
-[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Domain lessons](GENE_BIOLOGY_LEARNING_GUIDE.md) · [Gene index](GENE_ATLAS_INDEX.md)
+[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Domain lessons](GENE_BIOLOGY_LEARNING_GUIDE.md) · [Gene index](BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas)
 
 A cell coordinates information, growth, repair and survival while interacting with its surroundings. The 12 domains are a teaching map of that coordination. They are not mutually exclusive modules or a reconstructed molecular interaction network. Gene-specific normal-function records are linked on the cards; the [category network figure](FIGURES/README.md#category-network) illustrates membership rather than binding.
 
 | Connection to investigate | Starting cards | Evidence you would need |
 |---|---|---|
-| Hormone response and transcription | [ESR1](GENE_CARDS/ESR1.md), [FOXA1](GENE_CARDS/FOXA1.md), [GATA3](GENE_CARDS/GATA3.md) | Receptor binding, chromatin and perturbation; co-expression is insufficient |
-| Growth signaling and cell-cycle control | [ERBB2](GENE_CARDS/ERBB2.md), [AKT1](GENE_CARDS/AKT1.md), [CCND1](GENE_CARDS/CCND1.md) | DNA dosage/variants, protein activation and time-resolved cell state |
-| Repair and checkpoint decisions | [BRCA2](GENE_CARDS/BRCA2.md), [RAD51](GENE_CARDS/RAD51.md), [TP53](GENE_CARDS/TP53.md), [RB1](GENE_CARDS/RB1.md) | Variant interpretation plus functional assays; RNA is not repair capacity |
-| Epithelial identity and adhesion | [KRT8](GENE_CARDS/KRT8.md), [KRT5](GENE_CARDS/KRT5.md), [CDH1](GENE_CARDS/CDH1.md) | Histology, localization and cell-resolved composition |
-| Matrix and tissue interactions | [COL1A1](GENE_CARDS/COL1A1.md), [FN1](GENE_CARDS/FN1.md), [MMP9](GENE_CARDS/MMP9.md) | Producing cells, matrix context and enzyme activity |
-| Immune composition and signaling | [CD8A](GENE_CARDS/CD8A.md), [CD274](GENE_CARDS/CD274.md), [STAT1](GENE_CARDS/STAT1.md) | Cell identity, location, activation and independently tested response |
-| Stress, metabolism and regulation | [HIF1A](GENE_CARDS/HIF1A.md), [SLC2A1](GENE_CARDS/SLC2A1.md), [XBP1](GENE_CARDS/XBP1.md) | Oxygen, metabolic flux, protein regulation and isoform assays |
-| Emerging noncoding mechanisms | [MALAT1](GENE_CARDS/MALAT1.md) | Controlled perturbation, rescue, neighboring genes and disease-stage context |
+| Hormone response and transcription | [ESR1](BREAST_CANCER_60_GENE_COMPANION.md#esr1), [FOXA1](BREAST_CANCER_60_GENE_COMPANION.md#foxa1), [GATA3](BREAST_CANCER_60_GENE_COMPANION.md#gata3) | Receptor binding, chromatin and perturbation; co-expression is insufficient |
+| Growth signaling and cell-cycle control | [ERBB2](BREAST_CANCER_60_GENE_COMPANION.md#erbb2), [AKT1](BREAST_CANCER_60_GENE_COMPANION.md#akt1), [CCND1](BREAST_CANCER_60_GENE_COMPANION.md#ccnd1) | DNA dosage/variants, protein activation and time-resolved cell state |
+| Repair and checkpoint decisions | [BRCA2](BREAST_CANCER_60_GENE_COMPANION.md#brca2), [RAD51](BREAST_CANCER_60_GENE_COMPANION.md#rad51), [TP53](BREAST_CANCER_60_GENE_COMPANION.md#tp53), [RB1](BREAST_CANCER_60_GENE_COMPANION.md#rb1) | Variant interpretation plus functional assays; RNA is not repair capacity |
+| Epithelial identity and adhesion | [KRT8](BREAST_CANCER_60_GENE_COMPANION.md#krt8), [KRT5](BREAST_CANCER_60_GENE_COMPANION.md#krt5), [CDH1](BREAST_CANCER_60_GENE_COMPANION.md#cdh1) | Histology, localization and cell-resolved composition |
+| Matrix and tissue interactions | [COL1A1](BREAST_CANCER_60_GENE_COMPANION.md#col1a1), [FN1](BREAST_CANCER_60_GENE_COMPANION.md#fn1), [MMP9](BREAST_CANCER_60_GENE_COMPANION.md#mmp9) | Producing cells, matrix context and enzyme activity |
+| Immune composition and signaling | [CD8A](BREAST_CANCER_60_GENE_COMPANION.md#cd8a), [CD274](BREAST_CANCER_60_GENE_COMPANION.md#cd274), [STAT1](BREAST_CANCER_60_GENE_COMPANION.md#stat1) | Cell identity, location, activation and independently tested response |
+| Stress, metabolism and regulation | [HIF1A](BREAST_CANCER_60_GENE_COMPANION.md#hif1a), [SLC2A1](BREAST_CANCER_60_GENE_COMPANION.md#slc2a1), [XBP1](BREAST_CANCER_60_GENE_COMPANION.md#xbp1) | Oxygen, metabolic flux, protein regulation and isoform assays |
+| Emerging noncoding mechanisms | [MALAT1](BREAST_CANCER_60_GENE_COMPANION.md#malat1) | Controlled perturbation, rescue, neighboring genes and disease-stage context |
 
 ## An evidence exercise
 

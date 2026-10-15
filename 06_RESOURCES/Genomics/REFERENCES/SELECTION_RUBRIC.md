@@ -38,10 +38,9 @@ unpublished experiment.
   motivates distinguishing inherited variant evidence from tumor expression.
 - [HGNC identity and nomenclature](https://www.genenames.org/)
   supplies approved human symbols; its data are [CC0](https://www.genenames.org/about/license/).
-- [NCI biomarker explanation](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests)
+- [biomarker explanation](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests)
   supplies the measurement distinction between RNA research and pathology tests.
 
-No private selection table, ranks, paired cohort or unpublished effect estimate
-is an authoring input. The catalog is fixed after the domain review and listed
+The catalog is fixed after the domain review and listed
 alphabetically in the index. Inclusion does not imply that a gene is necessary,
 sufficient, specific, clinically actionable or recently discovered.

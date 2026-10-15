@@ -1,6 +1,6 @@
 # Validated biomedical code corpus — acquisition and acceptance protocol
 
-[Library index](README.md) · [Coding standards](BIOMEDICAL_CODING_STANDARDS.md) · [Program roadmap](PROGRAM_COMPANION_ROADMAP.md)
+[Library index](README.md) · [Coding standards](BIOMEDICAL_CODING_STANDARDS.md) · [Program roadmap](../../docs/research-workflow.md)
 
 **Status: candidate-source registry; no downloaded implementation is represented as tested.** This document defines an independent, reproducible collection workflow. Documentation and software licenses must be verified at the exact version/commit before redistribution. Prefer links and dependency manifests over copying upstream code.
 

@@ -1,17 +1,16 @@
-# Curated research resources
+# Research resources
 
-This is a **byte-for-byte preservation snapshot of selected reusable files**, not a copy of the source repository or its history. The imported files preserve the original source contents; a subsequent rename of the reusable R functions file is recorded in the import manifest. Review the [import manifest](../RESOURCE_IMPORT_MANIFEST.md) for pinned source commit, SHA inventory, and inclusion/exclusion rules.
+[Paul's Notes](../README.md) · [Resource guide](../docs/resource-guide.md)
 
-## Preserved groups
+| Collection | Contents |
+| --- | --- |
+| [Genomics and breast cancer book](Genomics/README.md) | Complete 12-chapter guide, 60 integrated gene profiles, figures and source registers |
+| [Bash](Bash/README.md) | Command sheets, scripting guidance and helper functions |
+| [R tools](R/README.md) | Summary functions, plotting helpers, synthetic inputs and tests |
+| [Literature](Literature/README.md) | Research code quality, methods and visualization evidence |
+| [Manuscript and bibliography](LaTeX/README.md) | Writing guidance, reference examples and manuscript source |
+| [Reading plots](READING_PLOTS.md) | Plot structure, units and interpretation |
+| [One-call plots](ONE_CALL_PLOTS.md) | Small plotting examples |
+| [Plot annotations](PLOT_ANNOTATIONS.md) | Captions, counts and statistical labels |
+| [Specialist visualizations](SPECIALIST_VISUALIZATIONS.md) | Paired measurements, calibration, cell-level context and uncertainty |
 
-- **Bash:** 4 files — command and scripting guides plus helper source.
-- **R:** 11 files — research visualization, reusable functions, and teaching data.
-- **tests:** 7 files — companion R test scripts.
-- **Literature:** 5 files — code quality, reproducibility, and visualization methods references.
-- **LaTeX:** 5 files — bibliography examples and manuscript-generation source.
-- **Genomics:** 4 files — generic expression interpretation, pathways, and annotation guidance.
-- **Visualization guides:** 4 files — reusable plotting and annotation guidance.
-
-## Usage and limitations
-
-Use these files as traceable archived references. They have not all been rerun in the new repository. For newly authored notebooks, [Unix/Bash](../01_unix_bash/README.md) and future topic modules provide canonical lessons. Some imported links lead to material intentionally excluded from this curated archive. No private history, project coursework, or external research data was transferred by this operation.

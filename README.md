@@ -1,40 +1,38 @@
 # Paul's Notes
 
-**Independent notes on computing and reproducible research**
+## Biomedical research documentation and resource guide
 
-**Author:** Paul Skeffington · **Prepared with OpenAI**
+Authored by Paul Skeffington · Compiled with OpenAI
 
-This repository is organized by subject and technical dependency, not by class, calendar week, assignment, or institution. Each published topic should have a usable explanation, authoritative references, a reproducible example where appropriate, and an explicit account of its limitations.
+A working reference for planning biomedical studies, understanding molecular data, writing reproducible analysis code, and communicating results. Start with the research workflow or open a subject guide directly.
 
-## Begin here
+## Start here
 
-**[01 — Unix and Bash](01_unix_bash/README.md)**
+| Research task | Guide |
+| --- | --- |
+| Plan a study and organize its analysis | [Research workflow](docs/research-workflow.md) |
+| Find documentation, methods and reusable code | [Resource guide](docs/resource-guide.md) |
+| Learn command-line research computing | [Unix and Bash](01_unix_bash/README.md) |
+| Connect biomedical literature to coding practice | [Biomedical coding and literature](02_biomedical_coding/README.md) |
+| Read the breast cancer book | [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) |
+| Look up gene functions, assays and evidence | [Genomics and gene atlas](06_RESOURCES/Genomics/README.md) |
+| Build plots and summarize data in R | [R tools](06_RESOURCES/R/README.md) |
+| Prepare a manuscript and bibliography | [Writing resources](06_RESOURCES/LaTeX/README.md) |
 
-**[02 — Biomedical Coding Literature](02_biomedical_coding/README.md)**
+## Working materials
 
-A 71-publication research matrix of biomedical methods and authors, complemented by 36 official specifications and software manuals; includes source reconciliation, validation requirements and evidence-to-code quality gates.
+Use the [study protocol](templates/study-protocol.md), [data dictionary](templates/data-dictionary.md), and [analysis record](templates/analysis-record.md) to connect the research question, input definitions, analysis decisions and reported outputs.
 
-Navigate files safely, reason about pipes and program status, write small Bash programs, and verify a synthetic research metadata workflow.
+The [resource collection](06_RESOURCES/README.md) brings together Bash, R, genomics, visualization, literature and manuscript tools. The literature section includes 71 publications and 36 documentation resources, with implementation checks and method-specific limits.
 
-The [curated reusable research resources](06_RESOURCES/README.md) preserve selected source code, tests, and technical references from a private research repository. This is a file-only import, with [SHA inventory and exclusions](RESOURCE_IMPORT_MANIFEST.md), not a Git-history transfer or a declaration that every archived method is currently validated. New topic modules are added after their contents and references have been reviewed.
-
-## Editorial and publication rules
-
-- **Provenance first.** Use independent explanations and examples. Link to primary manuals and reputable teaching references; do not mirror their prose, examples, or lesson ordering.
-- **Known-good gate.** A document must identify its assumptions, platform requirements, authoritative references, and failure modes. Executable examples require syntax checks and testable output contracts.
-- **Scoped publication.** No private repository material, third-party teaching material, restricted study data, student submissions, or identifiable participant records are imported by default.
-- **One canonical page per topic.** Prefer short, directly linked Markdown files to duplicate renderings or numbered week copies.
-- **Clean changes.** Keep each commit focused; run the relevant checks before publishing, and use descriptive commit messages.
-
-This is an independent reference notebook, not an official curriculum or a source of verified research findings. Examples use invented data; commands should be run only in workspaces you control.
-
-## Validation
+## Run the checks
 
 From the repository root:
 
-~~~bash
-bash -n 01_unix_bash/examples/summarize_metadata.sh
+```bash
 bash 01_unix_bash/tests/test_summarize_metadata.sh
-~~~
+python3 02_biomedical_coding/tests/test_literature_matrix.py
+python3 scripts/check_documentation.py
+```
 
-The [Unix/Bash source register](01_unix_bash/reference-register.md) records documentation used for this first module. See the [MIT license](LICENSE) for this repository's license; linked external references retain their own terms.
+For R prerequisites and individual checks, see [R tools](06_RESOURCES/R/README.md). Repository reuse terms are in [LICENSE](LICENSE).

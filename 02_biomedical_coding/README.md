@@ -1,6 +1,6 @@
 # Biomedical coding: evidence to implementation
 
-**Paul's Notes · Independent technical research**
+**Paul's Notes · Biomedical research computing**
 
 **Author:** Paul Skeffington · **Prepared with OpenAI**
 
@@ -14,7 +14,6 @@ This section connects influential biomedical computing, statistics, genomics, an
 - [Primary implementation manuals](PRIMARY_DOCUMENTATION.md) — up-to-date package documentation for implementation; papers describe methods at publication time.
 - [Official biomedical specification and methods register](OFFICIAL_METHODS_REGISTER.md) — 36 authoritative provider references kept separate from peer-reviewed research.
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
-- [Source reconciliation ledger](LEGACY_SOURCE_RECONCILIATION.md) — the 30 newly selected research papers and their pinned legacy source IDs; duplicate papers excluded.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
 ## Learning and deployment sequence

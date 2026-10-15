@@ -4,9 +4,8 @@
 **Author:** Paul Skeffington · **Prepared with OpenAI**  
 **Curated:** 2026-10-15 · **36 primary software, standards and methodological documentation entries**
 
-[Machine-readable CSV](official_methods_register.csv) · [Research papers](BIOMEDICAL_CODING_LITERATURE_MATRIX.md) · [Transfer reconciliation](LEGACY_SOURCE_RECONCILIATION.md)
 
-This register is **separate from the peer-reviewed paper matrix** because programming manuals, federal methods guidance, interoperability specifications, and reporting standards serve different roles. Original references and brief technical mappings were selected from the former private HSE resource matrices. No historical Git commit chain, private data or full external publication was copied into this new topic module.
+This register is **separate from the peer-reviewed paper matrix** because programming manuals, federal methods guidance, interoperability specifications, and reporting standards serve different roles. Use the linked manuals and specifications to check method applicability, input contracts and software behavior.
 
 A source is listed because its identified provider is the appropriate documentation authority, **not because the associated source code has passed modern runtime or study-level tests**. Versioned standards such as FHIR, OMOP, CDISC and vocabulary releases must be checked against their applicable implementation guide. Documentation links can change over time.
 
@@ -71,16 +70,8 @@ A source is listed because its identified provider is the appropriate documentat
 | OFF-035 | [tidymodels: resampling](https://rsample.tidymodels.org/) · Primary software manual | `ML-07` | Separate resampling specifications from fitting recipes | Demonstrate R-compatible resampling without sharing holdout information | Demonstrate R-compatible resampling without sharing holdout information |
 | OFF-036 | [tidymodels: recipes](https://recipes.tidymodels.org/) · Primary software manual | `ML-08` | Declare feature preparation as explicit, estimable steps | Verify predictor selection, missingness and fold-specific preprocessing | Verify predictor selection, missingness and fold-specific preprocessing |
 
-## Provenance and maintenance boundary
+## Maintenance
 
-The CSV preserves `origin_path` and `origin_blob_sha` per row, and all 36 source IDs trace to the pinned private repository snapshot `8edc8ba7ac010a961b5640a5f6b92e841aee6fa0`. The source matrices are independently authored notes, not provider licensing grants.
-
-| Source matrix from former HSE repository | Git blob SHA | Retained entries |
-| --- | --- | ---: |
-| `06_RESOURCES/Literature/BIOMEDICAL_CODING_METHODS.md` | `5ffc6d166eea31d3db1c26a8f77a4516c2ba531a` | 7 |
-| `06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md` | `a55f3a54b370808dcad982b6c83acc0776be029f` | 9 |
-| `06_RESOURCES/Literature/BIOMEDICAL_CODING_STANDARDS.md` | `9862c4140ca3a15558a50e8ac831b3225c4e8bf2` | 2 |
-| `06_RESOURCES/Literature/INTEROPERABILITY_METADATA_STANDARDS.md` | `9747e9b82f12cec3b84d5a39f429d7234d5828e4` | 14 |
-| `06_RESOURCES/Literature/WEEK_5_MACHINE_LEARNING_LITERATURE_REVIEW.md` | `de022c27e2d812a27509cd257f95b73165582f16` | 4 |
+The CSV records documentation URLs, version requirements and method-specific checks.
 
 **Publication gate:** Revisit the authoritative provider URL, pin the relevant standard/software version and complete local unit/schema tests before upgrading any documented reference into a validated implementation. A statistical or clinical inference claim requires a separate study-level assessment.

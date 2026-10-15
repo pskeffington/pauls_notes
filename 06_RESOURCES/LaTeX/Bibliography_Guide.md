@@ -23,11 +23,11 @@ Open the practice catalogue and search for a citation key from this table. Each 
 | --- | --- | --- |
 | Periodicals | `practice-journal`, `practice-article-id`, `practice-magazine`, `practice-newspaper`, `practice-inpress` | `@article`: author, date, article title, journal/newspaper, volume, issue, pages or `eid`. Use `pubstate = {inpress}` for an accepted work in press. |
 | Books and reference works | `practice-edition`, `practice-edited`, `practice-translation`, `practice-ebook`, `practice-chapter`, `practice-referencebook`, `practice-dictionary`, `practice-updating` | `@book`, `@collection`, `@incollection`, `@reference`, `@inreference`: author/editor, date, title, edition, publisher; chapter author, editor, book title and pages for a chapter; translator/original date when applicable. |
-| Reports and gray literature | `practice-report`, `practice-government`, `practice-brief`, `practice-standard` | `@report`, `@manual`: issuing organization, date, title, report/standard number, institution or organization, URL. A PDF's file format does not determine its reference type. |
+| Reports and gray literature | `practice-report`, `practice-government`, `practice-brief`, `practice-standard` | `@report`, `@manual`: issuing organization, date, title, report/standard number, issuing body, URL. A PDF's file format does not determine its reference type. |
 | Conferences | `practice-talk`, `practice-poster`, `practice-proceedings-paper`, `practice-proceedings` | `@presentation`, `@inproceedings`, `@proceedings`: presentation type, event name/date/location, or the published proceedings' editor, publisher and pages. A proceedings article in a journal uses `@article`. |
-| Dissertations and theses | `practice-dissertation`, `practice-thesis` | `@phdthesis`, `@mastersthesis`: degree institution, publication status, repository/database and URL when applicable. Use an explicit unpublished-thesis descriptor in `type` for this example. |
+| Dissertations and theses | `practice-dissertation`, `practice-thesis` | `@phdthesis`, `@mastersthesis`: degree-awarding body, publication status, repository/database and URL when applicable. Use an explicit unpublished-thesis descriptor in `type` for this example. |
 | Reviews | `practice-review` | `@article` with `titleaddon`: review author and date, review title, description of the reviewed work, journal details. The reviewer is the author of the review. |
-| Unpublished and informally published works | `practice-manuscript`, `practice-preprint` | `@unpublished`, `@online`: manuscript status/institution or preprint archive and URL. Identify the preprint archive and publication status. |
+| Unpublished and informally published works | `practice-manuscript`, `practice-preprint` | `@unpublished`, `@online`: manuscript status and affiliation or preprint archive and URL. Identify the preprint archive and publication status. |
 | Data | `practice-data` | `@dataset`: creator, date, title, version, repository/publisher, DOI or URL, and data-set descriptor. Record the exact version used. |
 | Software and apparatus | `practice-software`, `practice-app`, `practice-apparatus` | `@software`, `@hardware`: developer, date, title, version, publisher, software/app/apparatus descriptor and URL. |
 | Tests and measurement instruments | `practice-test` | `@misc`: creator, date, title, instrument description and source. Cite a published manual as a book/manual and a published validation article as an article. |
@@ -40,7 +40,7 @@ The catalogue uses types and fields supported by [biblatex-apa](https://ctan.org
 
 ## Connect, cite and print
 
-1. Follow the [README's ready-linked build](README.md#ready-linked-apa-7-build). The source already connects the example bibliography.
+1. Follow the [README's ready-linked build](README.md). The source already connects the example bibliography.
 2. Keep the real reference file connected through the existing `\addbibresource{Example_References.bib}` line. Add verified sources to that file or rename it and update the connection.
 3. Use the entry key, not the filename, in your citation:
 
@@ -57,17 +57,9 @@ The first example displays an author in the sentence with a parenthesized year; 
 
 The template already contains `\printbibliography[heading=none]` under its References heading. Cite every retained reference. The ready-linked template uses automatic sorting, date-letter disambiguation and metadata formatting from `biblatex-apa`.
 
-## Ready-built practice catalogue
+## Practice reference records
 
-The separate [catalogue source](Example_APA_7_Reference_Catalogue.tex) already loads `Example_Entry_Types.bib` and uses `\nocite{*}` to print all 52 records. Its [compiled PDF](Example_APA_7_Reference_Catalogue.pdf) is included. Build it from this folder:
-
-```bash
-bash compile_manuscript.sh --catalogue
-```
-
-The same script runs PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX for either document. The manuscript loads only its real Dr. Seuss book file; the catalogue loads its fictional practice file. If you borrow a record for research, replace its metadata and put the verified record into your manuscript's bibliography.
-
-The fictional constitution example uses a custom localization key defined in the catalogue source. Replace it with the supported key for the actual jurisdiction when adapting the record; the `source` field uses a localization key.
+`Example_Entry_Types.bib` contains fictional examples of reference categories. Adapt their structure, then replace the metadata with accurate records. The included build script supports the manuscript source described in the [writing guide](README.md).
 
 ## Fields students commonly need
 

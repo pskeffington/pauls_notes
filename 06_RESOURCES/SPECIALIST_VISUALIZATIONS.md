@@ -1,7 +1,7 @@
 # Specialist biomedical visualizations: six manuscript-oriented R calls
 
 **Author:** Paul Skeffington · **Prepared with OpenAI**  
-[Resources](README.md) · [R modules](R/README.md) · [Scientific visualization gallery](VISUALIZATION_GALLERY.md) · [Literature evidence matrix](Literature/BIOSTAT_R_VISUALIZATION_EVIDENCE_MATRIX.md)
+[Resources](README.md) · [R modules](R/README.md) · [Scientific visualization gallery](SPECIALIST_VISUALIZATIONS.md) · [Literature evidence matrix](Literature/BIOSTAT_R_VISUALIZATION_EVIDENCE_MATRIX.md)
 
 These six original functions extend existing ggplot2 and tidyverse-compatible conventions without copying published figures. They require explicit measurement units, informative captions, and preservation of independent-observation structure. Code examples below are **entirely synthetic**; none are clinical findings. Execute from the repository root with R and ggplot2 installed.
 

@@ -1,6 +1,6 @@
 # Read a plot and explain what it shows
 
-[Resource index](README.md) · [R function sheet](R/EASY_FUNCTION_SHEET.md) · [Follow-along guide](../FOLLOW_ALONG.md)
+[Resource index](README.md) · [R function sheet](R/EASY_FUNCTION_SHEET.md) · [Follow-along guide](../docs/research-workflow.md)
 
 Begin with the question, then identify the observations, axes, units and groups. Describe the visible pattern before interpreting a statistical test. The descriptions below explain plot types used in the learning material; they are not computed results from the course data.
 

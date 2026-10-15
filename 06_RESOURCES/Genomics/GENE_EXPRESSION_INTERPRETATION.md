@@ -8,7 +8,7 @@ Focused supporting reference for the [Breast Cancer Research Guide — People, D
 
 A DNA assay can detect sequence variants or copy number. RNA sequencing counts fragments assigned to annotated transcripts or genes. Immunohistochemistry localizes a protein in tissue; other protein assays quantify abundance or phosphorylation. These are complementary observations, with different inputs, errors and units. Higher RNA is not proof of an activating mutation, more protein, protein activation or treatment eligibility.
 
-Before a comparison, write down specimen type, assay, units, cell composition, annotation and experimental design. A clinical ER or HER2 category is an assay-defined classification. PAM50 is a specified expression-based multi-gene classifier. Neither is assigned by selecting a familiar gene from this teaching catalog. [Parker et al. (2009)](https://pubmed.ncbi.nlm.nih.gov/19204204/) provides classifier-development context; [NCI](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests) explains clinical biomarker testing.
+Before a comparison, write down specimen type, assay, units, cell composition, annotation and experimental design. A clinical ER or HER2 category is an assay-defined classification. PAM50 is a specified expression-based multi-gene classifier. Neither is assigned by selecting a familiar gene from this teaching catalog. [Parker et al. (2009)](https://pubmed.ncbi.nlm.nih.gov/19204204/) provides classifier-development context; [Clinical biomarker guidance](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests) explains clinical biomarker testing.
 
 ## A worked invented pair
 

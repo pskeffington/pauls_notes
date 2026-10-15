@@ -1,6 +1,6 @@
 # Easy Bash command sheet
 
-[Resource index](../README.md) · [Follow-along guide](../../FOLLOW_ALONG.md) · [Full operation sheet](BASH_OPERATION_SHEET.md) · [Helper source](bash_functions.sh)
+[Resource index](../README.md) · [Follow-along guide](../../docs/research-workflow.md) · [Full operation sheet](BASH_OPERATION_SHEET.md) · [Helper source](bash_functions.sh)
 
 Use a Bash terminal. Quoted paths preserve spaces. Read a command before running it; `>` creates or overwrites a destination file.
 
