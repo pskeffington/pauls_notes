@@ -24,3 +24,5 @@ Rscript --vanilla 06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R
 ```
 
 Additional companion checks are in [tests](../tests/). The `hse_` function prefix is retained for compatibility with existing callers. Synthetic demonstrations are not estimated clinical findings.
+
+For additional summary, figure and interactive-export checks, see the [learning checks](../../03_learning/mastery-checks.md#reusable-resources-and-the-book). Continuous integration runs every retained R test suite with its dependencies installed.

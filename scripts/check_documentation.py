@@ -51,7 +51,8 @@ def main():
     learning = ROOT / '03_learning'
     for name in ('README.md', 'objects-and-meaning.md', 'keys-and-reshaping.md',
                  'missingness-and-comparisons.md', 'models-and-uncertainty.md',
-                 'figures-and-features.md', 'probability-and-design.md', 'run-and-package.md'):
+                 'figures-and-features.md', 'probability-and-design.md', 'run-and-package.md',
+                 'mastery-checks.md'):
         path = learning / name
         if not path.is_file():
             errors.append(f'Missing learning section: {name}')

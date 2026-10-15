@@ -66,6 +66,10 @@ Use `if` for one checked logical decision; use vectorized predicates for row sel
 
 CSV is useful for rectangular interchange but does not preserve every R attribute or object class. `saveRDS()` and `readRDS()` preserve one R object, including its nested structure; read only trusted serialized inputs. Save code rather than relying on a restored interactive workspace.
 
+## Check the foundations
+
+Use [learning checks LC01–LC11](mastery-checks.md#r-operations-and-data-meaning) to predict arithmetic and extraction behavior, test safe vector lengths, compare finite and missing states, clean categories and verify a CSV/RDS round trip. The runnable cases include recovery from deliberately invalid inputs.
+
 ## Transfer exercise
 
 Reorder the registry without reordering the matrix. Predict which check should fail. Then explicitly align matrix columns to registry IDs with `match()` and verify the identities again. Explain why equal dimensions alone would not detect the original mismatch.

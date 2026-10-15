@@ -46,6 +46,12 @@ State what a point or line represents, counts of independent units, units, trans
 
 Inspect [specialist visualization guidance](../06_RESOURCES/SPECIALIST_VISUALIZATIONS.md) for paired, calibration, cell-level and uncertainty displays. Read the [breast cancer figure explanations](../06_RESOURCES/Genomics/FIGURES/README.md) for molecular context.
 
+## Test figure functions and numerical summaries
+
+The [extended checks](tests/test_mastery.R) export a PDF containing Anscombe's four datasets, then labeled histogram, density, ECDF, box and violin displays. The nearly equal slopes in Anscombe's examples conceal different point patterns; inspect the graphs alongside the summaries.
+
+The [checked plotting helper](examples/practice_tools.R) returns total, eligible and excluded row counts and rejects nonnumeric inputs or missing unit labels. Use it to explain why a distribution panel and a two-variable association panel can have different denominators.
+
 ## Transfer exercise
 
 Create a feature with one observed value and seven missing values. Predict its scaling status before running `scale_features()`. Explain why forcing a colored row would communicate more information than the data support.

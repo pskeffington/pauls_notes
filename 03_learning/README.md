@@ -43,6 +43,8 @@ The fixture, typed CSV import, analysis and export are in [research_case.R](exam
 
 ## Check the work
 
+Use the [learning checks](mastery-checks.md) for executable competencies, expected results, deliberate failures, and learner explanations. Additional practice tools cover label cleaning, response codes, checked plotting, input batches and reporting minimums.
+
 ```bash
 python3 scripts/check_documentation.py
 Rscript --vanilla 03_learning/tests/test_research_case.R

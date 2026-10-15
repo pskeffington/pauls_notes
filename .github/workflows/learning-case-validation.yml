@@ -2,13 +2,21 @@ name: Biomedical learning case
 
 on:
   push:
-    branches: [main, work/biomedical-learning]
+    branches: [main, work/biomedical-learning, work/learning-check-coverage]
     paths:
       - "03_learning/**"
+      - "06_RESOURCES/R/**"
+      - "06_RESOURCES/tests/**"
+      - "06_RESOURCES/Genomics/**"
+      - "scripts/check_book_learning.py"
       - ".github/workflows/learning-case-validation.yml"
   pull_request:
     paths:
       - "03_learning/**"
+      - "06_RESOURCES/R/**"
+      - "06_RESOURCES/tests/**"
+      - "06_RESOURCES/Genomics/**"
+      - "scripts/check_book_learning.py"
       - ".github/workflows/learning-case-validation.yml"
 
 permissions:
@@ -26,13 +34,26 @@ jobs:
       - name: Install R and optional example packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-proc r-cran-survival r-bioc-edger
       - name: Check documentation and shell syntax
         run: |
           python3 scripts/check_documentation.py
+          python3 scripts/check_book_learning.py
+          python3 03_learning/tests/test_book_learning.py
           bash -n 03_learning/examples/run_case.sh
       - name: Exercise the analysis and output contract
         run: Rscript --vanilla 03_learning/tests/test_research_case.R
+      - name: Exercise extended learning competencies
+        run: Rscript --vanilla 03_learning/tests/test_mastery.R
+      - name: Exercise shell filtering and the R summary bridge
+        run: bash 03_learning/tests/test_shell_practice.sh
+      - name: Check book examples and reusable resource summaries
+        run: Rscript --vanilla 03_learning/tests/test_resource_contracts.R
+      - name: Run every retained R resource suite
+        run: |
+          for test_file in 06_RESOURCES/tests/test_*.R; do
+            Rscript --vanilla "$test_file"
+          done
       - name: Execute learning page examples
         run: Rscript --vanilla 03_learning/tests/check_learning_pages.R
       - name: Execute Bash-to-R deployment
