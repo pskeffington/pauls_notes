@@ -1,0 +1,27 @@
+name: Biomedical literature integrity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "02_biomedical_coding/**"
+      - ".github/workflows/biomedical-literature-validation.yml"
+  pull_request:
+    paths:
+      - "02_biomedical_coding/**"
+      - ".github/workflows/biomedical-literature-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Offline source integrity checks
+        run: python3 02_biomedical_coding/tests/test_literature_matrix.py
