@@ -40,7 +40,8 @@ for (value in c("0", "1.2", "Inf", "missing")) {
 }
 for (name in c("duplicate", "header", "value", "category", "fields")) {
   candidate <- file.path(workspace, paste0("bridge-rejected-", name, ".csv"))
-  stopifnot(call(c(file.path(workspace, paste0(name, ".tsv")), "1", candidate)) != 0L,
-    !file.exists(candidate))
+  status <- call(c(file.path(workspace, paste0(name, ".tsv")), "1", candidate))
+  if (status == 0L) stop(paste("Accepted malformed input:", name))
+  stopifnot(!file.exists(candidate))
 }
 cat("PASS: parsed numeric TSV, batch identities, reporting minimum, all-missing data, quoted CSV and actual Rscript failures\n")

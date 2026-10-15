@@ -54,10 +54,19 @@ summarize_signal <- function(data, minimum) {
 }
 
 read_signal <- function(path) {
-  data <- read.delim(path, colClasses = c("character", "character", "numeric"),
-    na.strings = "NA", quote = "", comment.char = "", check.names = FALSE,
-    stringsAsFactors = FALSE, blank.lines.skip = FALSE)
-  # Validation also covers header-only input; numeric NA has a declared column type.
+  widths <- count.fields(path, sep = "\t", quote = "", comment.char = "", blank.lines.skip = FALSE)
+  stopifnot(length(widths) > 0L, !anyNA(widths), all(widths == 3L))
+  data <- read.delim(path, colClasses = "character", na.strings = character(),
+    quote = "", comment.char = "", check.names = FALSE, row.names = NULL,
+    stringsAsFactors = FALSE, blank.lines.skip = FALSE, fill = FALSE)
+  stopifnot(identical(names(data), c("record_id", "panel", "signal_au")))
+  literal <- data$signal_au
+  stopifnot(!anyNA(literal), all(literal == "NA" | grepl("^[+-]?[0-9]+([.][0-9]+)?$", literal)))
+  parsed <- rep(NA_real_, length(literal))
+  measured <- literal != "NA"
+  parsed[measured] <- as.numeric(literal[measured])
+  data$signal_au <- parsed
+  # Header-only input retains a declared numeric measurement column.
   summarize_signal(data, 1)
   data
 }

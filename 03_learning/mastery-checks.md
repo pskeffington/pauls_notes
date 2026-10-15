@@ -66,6 +66,7 @@ The [shell practice suite](tests/test_shell_practice.sh) exercises these tasks. 
 | Locate a disposable workspace; copy, rename and quote paths with spaces | Copied bytes agree; the original input is unchanged |
 | Inspect a header, final row and physical line count | Seven physical lines represent six records plus a header |
 | Extract, sort and count categories | Three records in each of two panels |
+| Explain executable permissions and Bash function arguments | A copied script runs directly after setting its executable bit; a bad function argument returns status 2 |
 | Handle grep and pipeline statuses | Match, no-match and execution failure are distinguished |
 | Filter the constrained TSV with awk | Header and selected IDs retained, including an unavailable value |
 | Select a category with no records | Header-only result, rather than an invented observation |

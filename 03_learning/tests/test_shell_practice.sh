@@ -26,6 +26,18 @@ for panel in Alpha Beta; do
 done
 printf 'record_id\tpanel\tsignal_au\n01\tAlpha\t4\n03\tAlpha\tNA\n05\tAlpha\t6\n' > "$work/expected.tsv"
 cmp -- "$work/Alpha.tsv" "$work/expected.tsv"
+# Calling bash does not need an executable bit; direct execution does.
+cp -- "$filter" "$work/executable filter.sh"
+chmod u+x "$work/executable filter.sh"
+"$work/executable filter.sh" "$input" Beta "$work/direct-execution.tsv"
+cmp -- "$work/direct-execution.tsv" "$work/Beta.tsv"
+count_panel() {
+  [[ $# -eq 2 && -f "$1" ]] || return 2
+  [[ "$2" == Alpha || "$2" == Beta ]] || return 2
+  awk -F '\t' -v panel="$2" 'NR>1 && $2==panel {n++} END {print n+0}' "$1"
+}
+[[ $(count_panel "$input" Alpha) -eq 3 ]]
+if count_panel "$input" Unsupported >/dev/null; then exit 1; else [[ $? -eq 2 ]]; fi
 # Header-only selection is valid and does not invent a record.
 printf 'record_id\tpanel\tsignal_au\nOnly\tBeta\t2\n' > "$work/beta-only.tsv"
 bash "$filter" "$work/beta-only.tsv" Alpha "$work/empty-selection.tsv"
@@ -37,6 +49,7 @@ reject() {
 }
 reject "$input" Alpha "$work/Alpha.tsv"
 cmp -- "$work/Alpha.tsv" "$work/expected.tsv"
+
 reject "$input" Alpha "$input"
 ln -s "$input" "$work/input-link.tsv"
 reject "$input" Alpha "$work/input-link.tsv"
