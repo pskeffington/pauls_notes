@@ -15,6 +15,10 @@ The list below contains **only selected working documents, source code and compa
 
 **Validation boundary:** Matching Git blob hashes prove identity of copied bytes, not correctness, licensing clearance, current dependencies, or manuscript readiness. Existing comments and links may still refer to omitted source-repository files. Run the associated tests and re-check references before promoting any archived code to a current study-aware module.
 
+## Post-import path maintenance
+
+After the verified source-file import, a separate repository commit (`c87220c`) renamed `06_RESOURCES/R/Week_3_Reusable_Functions.R` to `06_RESOURCES/R/Reusable_Functions.R`. The file's Git blob SHA remained `6234ffe9435983e698da601c203b47bed40c5ba4`; the historical inventory below retains the **original source path at import**. The current destination filename is `06_RESOURCES/R/Reusable_Functions.R`. This is a filename change, not a Git-history transfer.
+
 ## File-by-file inventory
 
 | Preserved relative path | Source Git blob SHA | Bytes |

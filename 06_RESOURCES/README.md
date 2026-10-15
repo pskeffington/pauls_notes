@@ -1,6 +1,6 @@
 # Curated research resources
 
-This is a **byte-for-byte preservation snapshot of selected reusable files**, not a copy of the source repository or its history. The imported files retain their original relative paths and names. Review the [import manifest](../RESOURCE_IMPORT_MANIFEST.md) for pinned source commit, SHA inventory, and inclusion/exclusion rules.
+This is a **byte-for-byte preservation snapshot of selected reusable files**, not a copy of the source repository or its history. The imported files preserve the original source contents; a subsequent rename of the reusable R functions file is recorded in the import manifest. Review the [import manifest](../RESOURCE_IMPORT_MANIFEST.md) for pinned source commit, SHA inventory, and inclusion/exclusion rules.
 
 ## Preserved groups
 
