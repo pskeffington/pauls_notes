@@ -1,5 +1,7 @@
 # Primary software documentation — current API sources
 
+See the separate [official methods and specifications register](OFFICIAL_METHODS_REGISTER.md) for 36 version-sensitive health-data, research-software, genomics and clinical research standards.
+
 Foundational papers describe methods and historical software. Before implementing an algorithm, use its maintained manual, write down the installed version, and separately validate study assumptions. URLs here are **documentation pointers**, not mirrored external content.
 
 | Technical area | Maintainer documentation | Implementation purpose |

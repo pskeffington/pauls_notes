@@ -2,7 +2,7 @@
 
 **Paul's Notes** | Independent, source-linked methods and software literature  
 **Author:** Paul Skeffington · **Prepared with OpenAI**  
-**Reviewed:** October 15, 2026 · **41 sources across 10 areas**
+**Reviewed:** October 15, 2026 · **71 sources across 15 areas**
 
 [Machine-readable matrix](biomedical_coding_literature_matrix.csv) · [Quality gates](IMPLEMENTATION_GATES.md) · [Current manuals](PRIMARY_DOCUMENTATION.md) · [Section index](README.md)
 
@@ -116,6 +116,80 @@ The contributors are not ranked and papers with collaborative authorship are rep
 | --- | --- | --- | --- | --- | --- |
 | BM-041 | [Retrieval-augmented generation for knowledge-intensive NLP tasks](https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html) · Lewis; Perez; Piktus et al. (2020) | Foundational NLP method | Trace retrieved evidence and citation references per answer | Measure source coverage, faithfulness and abstention | General NLP RAG is not clinical validation |
 
+## Reconciled additions from the private research matrix
+
+These new entries were drawn from the earlier independently authored HSE literature registers. Their reference identities were checked against journal/publisher or primary bibliographic information; implementation practices and tests below are new summaries rather than copied passages. The [source reconciliation ledger](LEGACY_SOURCE_RECONCILIATION.md) records original file IDs and deduplication.
+
+### Scientific visualization (19 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-042 | [Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods](https://doi.org/10.1080/01621459.1984.10478080) · Cleveland; McGill (1984) | Experimental methods | Prefer quantitative comparison through aligned position rather than unnecessary visual encodings | Compare slopes, points and color encodings for unambiguous units and comparable scales | Perceptual accuracy varies by encoding |
+| BM-043 | [A Layered Grammar of Graphics](https://doi.org/10.1198/jcgs.2009.07098) · Wickham (2010) | Methods framework | Declare aesthetic mappings, geometry, statistical transform and scales explicitly | Generate a fixed fixture plot and verify displayed mapping against source columns | Visual consistency is not inference validity |
+| BM-044 | [Welcome to the Tidyverse](https://doi.org/10.21105/joss.01686) · Wickham; Averick; Bryan et al. (2019) | Software ecosystem | Record data transformations and package versions in the plotting pipeline | Test join cardinality and output schema before creating plots | Software ecosystem does not provide analysis design |
+| BM-045 | [Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm](https://doi.org/10.1371/journal.pbio.1002128) · Weissgerber; Milic; Winham; Garovic (2015) | Empirical research and perspective | Include individual observations where the number and privacy of units allow it | Verify paired/independent IDs and denominators before plotting raw values | Mean-only bar graphs can conceal distributions |
+| BM-046 | [Reveal, Don't Conceal: Transforming Data Visualization to Improve Transparency](https://doi.org/10.1161/CIRCULATIONAHA.118.037777) · Weissgerber; Winham et al. (2019) | Methods review | Show raw data, paired relationships and uncertainty with study-aware graphics | Check true sample size, missingness and grouping labels on rendered figure | Apparent replication may hide nested samples |
+| BM-047 | [Raincloud plots: a multi-platform tool for robust data visualization (version 2)](https://doi.org/10.12688/wellcomeopenres.15191.2) · Allen; Poggiali; Whitaker et al. (2019) | Visualization method | Combine raw values, density and distribution summary without double counting | Confirm each point and distribution summarize the same valid study units | Small-sample density may mislead |
+| BM-048 | [Moving beyond P values: data analysis with estimation graphics](https://doi.org/10.1038/s41592-019-0470-3) · Ho; Tumkaya; Aryal et al. (2019) | Perspective and method | Show effect sizes alongside uncertainty, not dichotomous significance alone | Validate contrast orientation, estimator, CI method and paired structure | Confidence intervals require appropriate assumptions |
+| BM-049 | [Visualizations with statistical details: The ggstatsplot approach](https://doi.org/10.21105/joss.03167) · Patil (2021) | Software paper | Link descriptive display to declared inferential test and its assumptions | Confirm plot annotations match tested model and multiplicity handling | Automatic annotations can conceal invalid test choice |
+| BM-050 | [ggdist: Visualizations of Distributions and Uncertainty in the Grammar of Graphics](https://doi.org/10.1109/TVCG.2023.3327195) · Kay (2024) | Software method | Show intervals and estimated distribution rather than a single point estimate | Compare interval labels, tail probabilities and estimand to test fixture | Ambiguous intervals or uncertainty type |
+| BM-051 | [colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes](https://doi.org/10.18637/jss.v096.i01) · Zeileis; Fisher; Hornik et al. (2020) | Software method | Use ordered palettes for ordered values and diverging scales with meaningful midpoint | Inspect grayscale and color-vision simulations at final export size | Palette color order may imply nonexistent structure |
+| BM-052 | [The misuse of colour in science communication](https://doi.org/10.1038/s41467-020-19160-7) · Crameri; Shephard; Heron (2020) | Perspective | Avoid misleading nonuniform colorscales; provide accessible print-safe legends | Check monotonic perceptual luminance and threshold semantics | Rainbow color scales can introduce artificial boundaries |
+| BM-053 | [A checklist for designing and improving the visualization of scientific data](https://doi.org/10.1038/s41556-025-01684-z) · Jambor (2025) | Comment and checklist | Review legibility, visual hierarchy, axes and annotations at final output size | Render and inspect labels, padding and readable type at print dimensions | Checklist is not a substitute for review of statistical design |
+| BM-054 | [What is a Good figure: Scoring of biomedical data visualization](https://doi.org/10.1371/journal.pone.0336917) · Torres; Ozturk; Fang et al. (2025) | Empirical and proposed scoring method | Treat automated figure scores as exploratory feedback alongside human review | Compare score behavior with independent visual and statistical-quality judgments | Proposed score is not a universally accepted quality metric |
+| BM-055 | [Ten simple rules for designing graphical abstracts](https://doi.org/10.1371/journal.pcbi.1011789) · Jambor; Bornhäuser (2024) | Perspective and design guidance | Convey scientific question and main relationship without inserting uncited data | Check terms, causal claims, visual hierarchy and attribution | Graphical abstract is not a substitute for methods/results |
+| BM-056 | [Reproducible Summary Tables with the gtsummary Package](https://doi.org/10.32614/RJ-2021-053) · Sjoberg; Whiting; Curry et al. (2021) | Software paper | Generate data- and model-derived manuscript tables without manual retyping | Validate denominators, units, confidence intervals, p-value corrections and headers | Default tables can conceal eligibility and missingness rules |
+| BM-061 | [effectsize: Estimation of Effect Size Indices and Standardized Parameters](https://doi.org/10.21105/joss.02815) · Ben-Shachar; Lüdecke; Makowski (2020) | Software paper | Report effect estimates and confidence intervals on a declared scale | Match standardization, formula, estimand and CI procedure | Effect size is not itself a clinical utility estimate |
+| BM-062 | [Showing the data in published biology research](https://doi.org/10.1128/mbio.00572-26) · Freeman; Haldopoulos et al. (2026) | Perspective with empirical audit | Prefer distribution-revealing plots where they suit experimental design | Check unit-of-analysis, duplicate measurements and raw-value disclosure boundaries | Mean-and-error-only plots obscure variation |
+| BM-063 | [Graphic Portrayal of Studies With Paired Data: A Tutorial](https://doi.org/10.1016/j.annemergmed.2017.05.033) · Schriger (2018) | Tutorial | Visualize within-person change without breaking match links | Assert each subject-pair mapping and denominator before drawing lines | Group-only summaries can hide discordant responses |
+| BM-070 | [Graphs in Statistical Analysis](https://doi.org/10.2307/2682899) · Anscombe (1973) | Methods demonstration | Inspect scatter and residual geometry before interpreting numeric summaries | Generate toy datasets with identical moments and different visible relationships | Summary-only assessment can conceal structure |
+
+### Genomic visualization (1 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-057 | [Complex heatmap visualization](https://doi.org/10.1002/imt2.43) · Gu (2022) | Protocol and software review | Make heatmap design, multiomic annotations and clustering reproducible | Test dimension labels, order, colors and scaling in exported files | Row z-scores may be confused with expression magnitude |
+
+### Clinical model evaluation (5 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-058 | [pROC: an open-source package for R and S+ to analyze and compare ROC curves](https://doi.org/10.1186/1471-2105-12-77) · Robin; Turck; Hainard et al. (2011) | Software paper | Construct ROC analyses with declared event direction and held-out predictions | Check positive class, CI and threshold definitions against known scores | In-sample ROC overstates external performance |
+| BM-059 | [plotROC: A Tool for Plotting ROC Curves](https://doi.org/10.18637/jss.v079.c02) · Sachs (2017) | Software paper | Present threshold-oriented ROC figures with informative axes and labels | Confirm axes, event definition, thresholds and uncertainty labels | Visually polished ROC does not establish clinical usefulness |
+| BM-060 | [Statistical methods for assessing agreement between two methods of clinical measurement](https://doi.org/10.1016/S0140-6736(86)90837-8) · Bland; Altman (1986) | Statistical method | Use difference-against-mean plots and prespecified agreement limits | Test paired identities, signed bias, repeatability and limits calculations | Correlation is not measurement-method agreement |
+| BM-066 | [Assessing the Performance of Prediction Models: A Framework for Traditional and Novel Measures](https://doi.org/10.1097/EDE.0b013e3181c30fb2) · Steyerberg; Vickers; Cook et al. (2010) | Methods paper | Evaluate calibration, discrimination, accuracy and decision usefulness as distinct outputs | Report Brier/discrimination/calibration on held-out observations | One metric cannot summarize all clinical performance |
+| BM-067 | [Decision Curve Analysis: A Novel Method for Evaluating Prediction Models](https://doi.org/10.1177/0272989X06295361) · Vickers; Elkin (2006) | Methods paper | Compute net benefit for a specified decision, event and threshold range | Check threshold bounds, event definition and treat-all/none baselines | Decision curve without defensible decision thresholds |
+
+### Single-cell methods (1 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-064 | [Statistical method scDEED for detecting dubious 2D single-cell embeddings and optimizing t-SNE and UMAP hyperparameters](https://doi.org/10.1038/s41467-024-45891-y) · Xia; Lee; Li (2024) | Statistical method | Check embedding fidelity and sensitivity rather than treating UMAP distances as truth | Repeat embeddings across settings and assess neighborhood/stability metrics | 2D clusters can misrepresent original high-dimensional relations |
+
+### Quantitative bioimaging (1 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-065 | [A biologist's guide to planning and performing quantitative bioimaging experiments](https://doi.org/10.1371/journal.pbio.3002167) · Senft; Diaz-Rohrer et al. (2023) | Methods essay | Preserve acquisition, image processing, sampling and segmentation provenance | Review field/cell/specimen nesting and segmentation QC | Counting cells as independent biological replicates |
+
+### Prediction validation (1 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-068 | [No free lunch theorems for optimization](https://doi.org/10.1109/4235.585893) · Wolpert; Macready (1997) | Theory | Document inductive assumptions and compare baselines for target problem | Define data-generating/task assumptions before choosing algorithms | Optimization theory should not be generalized as an empirical clinical model ranking |
+
+### Data stewardship (1 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-069 | [Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989) · Broman; Woo (2018) | Methods paper | Use validated rectangular tables, dictionaries and stable typed identifiers | Check date parse, one-cell-one-value and unique row/unit meaning | Spreadsheet formatting is not data semantics |
+
+### Reproducibility (1 added)
+
+| ID | Publication and contributors | Evidence class | Coding practice | Verification | Failure mode |
+| --- | --- | --- | --- | --- | --- |
+| BM-071 | [Reproducibility and Replicability in Science](https://doi.org/10.17226/25303) · National Academies of Sciences, Engineering, and Medicine (2019) | Consensus report | Separate computational replay from independent empirical replication | Record repeated-run results and clarify which evidence has been independently collected | Reproducible code can reproduce an incorrect conclusion |
+
 ## Use and verification rules
 
 - **Primary citation:** metadata and source URL checked against publisher, PubMed, journal, or primary proceedings records. The original research remains under its own publishing terms.
@@ -130,4 +204,4 @@ Review the [implementation gates](IMPLEMENTATION_GATES.md) for practical accepta
 
 ## Maintenance
 
-The CSV is canonical for IDs and bibliographic metadata. Additions require real source links, explicit source category, coding purpose, verified year/author details and a scoped validation gate. Run the offline matrix consistency test before publication. Never import private study data or legacy repository history into this literature section.
+The CSV is canonical for IDs and bibliographic metadata. Imported-source correspondence is separately recorded in the [source reconciliation ledger](LEGACY_SOURCE_RECONCILIATION.md). Additions require real source links, explicit source category, coding purpose, verified year/author details and a scoped validation gate. Run the offline matrix consistency test before publication. Never import private study data or legacy repository history into this literature section.

@@ -43,4 +43,6 @@
 
 **Source-linked** means a publication is traceable. **Code tested** means a specified implementation passed a stated fixture. **Scientifically reviewed** requires study-level appraisal. **Manuscript-ready** requires presentation and reporting review. **Clinically deployable** needs independent governance, safety evidence, authorizations and monitoring. Never silently promote one label into the next.
 
+Provider documentation and standards must be selected from the [official methods register](OFFICIAL_METHODS_REGISTER.md), while published methodological evidence belongs in the [71-record research matrix](BIOMEDICAL_CODING_LITERATURE_MATRIX.md). Consult the [source reconciliation ledger](LEGACY_SOURCE_RECONCILIATION.md) for original citation IDs and duplicate decisions.
+
 [Return to matrix](BIOMEDICAL_CODING_LITERATURE_MATRIX.md).

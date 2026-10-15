@@ -12,7 +12,7 @@ This repository is organized by subject and technical dependency, not by class, 
 
 **[02 — Biomedical Coding Literature](02_biomedical_coding/README.md)**
 
-A 41-publication research matrix of major biomedical methods and authors, with reproducibility, data assumptions, model validation, clinical AI reporting and evidence-to-code quality gates.
+A 71-publication research matrix of biomedical methods and authors, complemented by 36 official specifications and software manuals; includes source reconciliation, validation requirements and evidence-to-code quality gates.
 
 Navigate files safely, reason about pipes and program status, write small Bash programs, and verify a synthetic research metadata workflow.
 
