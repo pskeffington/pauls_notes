@@ -5,10 +5,18 @@ on:
     branches: [main, work/biomedical-learning, work/learning-check-coverage]
     paths:
       - "03_learning/**"
+      - "06_RESOURCES/R/**"
+      - "06_RESOURCES/tests/**"
+      - "06_RESOURCES/Genomics/**"
+      - "scripts/check_book_learning.py"
       - ".github/workflows/learning-case-validation.yml"
   pull_request:
     paths:
       - "03_learning/**"
+      - "06_RESOURCES/R/**"
+      - "06_RESOURCES/tests/**"
+      - "06_RESOURCES/Genomics/**"
+      - "scripts/check_book_learning.py"
       - ".github/workflows/learning-case-validation.yml"
 
 permissions:

@@ -39,4 +39,4 @@ if (requireNamespace("edgeR", quietly=TRUE)) {
   logcpm <- hse_cpm(counts)
   stopifnot(identical(dim(logcpm), dim(counts)), all(is.finite(logcpm)))
 }
-cat("PASS: HSE 711 base statistical, sample-alignment and available optional package smoke tests\n")
+cat("PASS: base statistical, sample-alignment and available optional package smoke tests\n")
