@@ -39,10 +39,11 @@ Choose a new output directory outside the repository whose parent exists. Existi
 | `report.json` | Protocol/seeds, all split coordinates, six-candidate traces, matched assessment summaries, fixed settings and code/protocol hashes |
 | `predictions.csv` | All 120 specimens, identity, target, development/test membership, outer fold, three probabilities and three squared errors |
 | `models.joblib`, `synthetic_inputs.npz` | Both fitted procedures and invented input values for trusted prediction replay |
-| `gallery/` | Two figures in SVG, PDF and PNG, plus figure-input metadata |
+| `display-inputs.json` | Raw missingness masks, specimen identities, final coefficients and selection/importance summaries |
+| `gallery/` | Seven figures in SVG, PDF and PNG, plus auditable plot calculations and calibration counts |
 | `versions.json`, `sha256.json` | Runtime versions and file-integrity inventory |
 
-The [plotting command](examples/plot_comparison.py) rebuilds figures from `report.json` and `predictions.csv`, without fitting a model or loading a model object. It rejects incomplete rows, broken pairs, incorrect fold labels, invalid probabilities, and disagreements between saved predictions and error summaries.
+The [plotting command](examples/plot_comparison.py) rebuilds figures from `report.json`, `predictions.csv` and `display-inputs.json`, without fitting a model or loading a model object. It rejects incomplete rows, broken pairs, incorrect fold labels, invalid probabilities, and disagreements between saved predictions and error summaries.
 
 ## Read the version 1 result
 
@@ -56,7 +57,7 @@ The [committed numeric example](gallery/example/report.json) and [specimen recor
 
 Brier error is the mean of `(probability - binary label)^2`; smaller is better. The saved difference is **selected minus all-feature**, so a negative difference favors the selected procedure on these invented observations. It does not establish clinical superiority, an optimized gene signature, calibration, or a feature-selection-only benefit.
 
-Each person has exactly two specimens, so averaging the two errors per person and then averaging people gives the same mean as averaging all specimens here. With unequal specimen counts that equivalence would fail. Neither plot supplies a clinical confidence interval, and overlapping outer folds are not independent patient cohorts.
+Each person has exactly two specimens, so averaging the two errors per person and then averaging people gives the same mean as averaging all specimens here. With unequal specimen counts that equivalence would fail. The Brier and person-difference figures have no intervals. The calibration display separately includes conditional whole-person bootstrap ranges, with sparse bins withheld and training uncertainty omitted; these are not full-procedure or clinical confidence intervals. Overlapping outer folds are not independent patient cohorts.
 
 ## Learning checks
 
@@ -66,7 +67,7 @@ Each person has exactly two specimens, so averaging the two errors per person an
 4. Explain which further, separately assessed comparison would isolate selection from regularization tuning.
 5. Describe what changes if one person contributes more specimens, or the target becomes recurrence time.
 
-The [recorded comparison validation](evidence/comparison-validation-2026-10-16.json) passed all 19 Python tests across the four suites and replayed both saved comparison models with zero probability difference. The earlier corpus run remains separately archived.
+The [recorded comparison validation](evidence/comparison-validation-2026-10-16.json) passed all 19 Python tests across the four suites and replayed both saved comparison models with zero probability difference. The [expanded gallery validation](evidence/gallery-validation-2026-10-16.json) adds six diagnostic tests, for 25 tests across five suites, and retains three Python deployments. The earlier corpus run remains separately archived.
 
 The [comparison tests](tests/test_breast_cancer_comparison.py) observe the comparator’s actual training inputs and transformations, perturb reserved values, replay both saved models, challenge malformed plot inputs and verify artifact hashes. The [corpus validation command](corpus-review.md#repeat-the-run) runs them and this deployment in CI. Tests require correct computation and boundaries, not a favorable metric.
 

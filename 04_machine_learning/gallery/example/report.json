@@ -2205,9 +2205,11 @@
     "brier_difference": -0.04260119096022154
   },
   "source_sha256": {
-    "04_machine_learning/examples/breast_cancer_comparison.py": "c6e46a18947fdffc8506eeb8f4fcfe325eb27fdb6ebe55d4a678ac25877f7bad",
+    "04_machine_learning/examples/breast_cancer_comparison.py": "f3aedca2168b010ae5eb22cdb241624159c8a487c54ad3b3100643087dc29182",
     "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
-    "04_machine_learning/examples/plot_comparison.py": "26dac90ac09320f2ecd5aed8707e77c6cd41afdedc678b197da12297a798a476",
+    "04_machine_learning/examples/plot_comparison.py": "9957eb0247965fe1977fd77a5056a38793ed15d921f0cccb89fb069c9ba6466d",
+    "04_machine_learning/examples/gallery_diagnostics.py": "d912f93d4dd542e3f513ad1a703c1f5faab7598b567a963211b28aa3533c4569",
+    "04_machine_learning/gallery/plotting-contract.md": "7b24b3207dc96dc5d2603c23a2cc4eec0c4e99bcdd1a5dfda071c815811a7e96",
     "04_machine_learning/comparison-protocol.md": "141b0374337e5431aff5f69f4f8b811833b0979610efe802b9eeaf6564b8994c"
   }
 }

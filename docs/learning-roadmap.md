@@ -17,9 +17,9 @@ The shared narrative is **people → specimens → measurements → prediction �
 | R caret, direct R and Python examples | Independently executable teaching mechanisms with stated input and partition contracts |
 | Paired-specimen selection with candidate traces | Training-only selection, grouped nested assessment and saved prediction replay on invented data |
 | 36-paper register and dated review | Traceable sources and limitations; three records remain abstract-limited |
-| Recorded validation | The earlier 14-test run remains archived; the [comparison guide](../04_machine_learning/model-comparison.md) adds five tests and a third Python deployment, checked by the current validation command |
+| Recorded validation | The earlier 14-test run remains archived; the [comparison guide](../04_machine_learning/model-comparison.md) adds a third Python deployment; the [gallery validation](../04_machine_learning/evidence/gallery-validation-2026-10-16.json) records 25 tests across five suites |
 
-These are repository capabilities. Your understanding has not been assessed by CI. The 60-gene book remains a teaching catalog, and the synthetic features are not those genes. The [ML gallery](../04_machine_learning/gallery/README.md) now has two generated comparison figures with saved numeric inputs; the remaining training, stability and calibration displays are planned.
+These are repository capabilities. Your understanding has not been assessed by CI. The 60-gene book remains a teaching catalog, and the synthetic features are not those genes. The [ML gallery](../04_machine_learning/gallery/README.md) has seven generated figures covering allocation, missingness, tuning, feature variation, errors and calibration, with saved numeric inputs and interpretation prompts. A broader repeated-sampling stability experiment remains planned.
 
 ## Next phases
 
@@ -27,7 +27,7 @@ These are repository capabilities. Your understanding has not been assessed by C
 | --- | --- | --- | --- | --- |
 | 1. Data meaning and training boundaries | What exactly does each row and prediction represent? | Use the existing guides and outputs | Annotated data dictionary, hand-traced split and explanation of one deliberate input failure | Ready for practice |
 | 2. Fair baseline comparisons | How does the tuned subset procedure compare with a fixed all-feature model? | Inspect the implemented fixed all-feature comparator under the same assessment plan | Matched outer predictions and documented comparison; no gain is required to pass | Implemented; ready for practice |
-| 3. Visual interpretation | Can I see where data went and why predictions differ? | Build a reproducible ML plotting gallery | Labeled figures rebuilt from saved outputs, with denominators and interpretation prompts | Two comparison figures available; remaining displays planned |
+| 3. Visual interpretation | Can I see where data went and why predictions differ? | Build a reproducible ML plotting gallery | Labeled figures rebuilt from saved outputs, with denominators and interpretation prompts | Implemented; seven figures ready for practice |
 | 4. Stability and tuning budgets | Which choices survive changes in development people or search budget? | Add a bounded robustness experiment and one justified search extension | Trial history, fit/time budget, descriptive panel stability and assessed comparison | Planned after baseline and figure contracts |
 | 5. New endpoints and R methods | What changes when the question becomes recurrence or treatment response? | Introduce a separate survival learning case and compare R/Python contracts | Correct time/event schema, censoring-aware assessment and a declared Cox baseline | Planned; requires a new endpoint contract |
 | 6. Paper-to-code capstone | Can I reproduce a precisely defined research result and explain its limits? | Reproduce a bounded published component, then package a complete teaching analysis | Pinned artifact, explicit result target, reproduction record and independent replay | Planned after the relevant method checks |
@@ -50,9 +50,9 @@ Build the comparator with the same imputation/scaling boundary, an independently
 
 ## Phase 3: build the plotting gallery from real run outputs
 
-Use [figures and feature matrices](../03_learning/figures-and-features.md), [models and uncertainty](../03_learning/models-and-uncertainty.md), and the [candidate-trace fields](../04_machine_learning/model-tuning.md#read-every-candidate-not-just-the-winner) as the starting material. The [initial gallery](../04_machine_learning/gallery/README.md) now includes checked code, saved inputs and explanations for two comparison figures. The following additional views remain part of the phase.
+Use [figures and feature matrices](../03_learning/figures-and-features.md), [models and uncertainty](../03_learning/models-and-uncertainty.md), and the [candidate-trace fields](../04_machine_learning/model-tuning.md#read-every-candidate-not-just-the-winner) as the starting material. The [gallery](../04_machine_learning/gallery/README.md) now implements all the following views from saved run outputs, including [declared conditional calibration ranges](../04_machine_learning/gallery/plotting-contract.md). The inclusion counts describe the existing three outer fits; they do not complete Phase 4's robustness experiment.
 
-| Planned display | What the learner should explain |
+| Available display | What the learner should explain |
 | --- | --- |
 | Person/specimen allocation and missingness | Observation unit, eligibility and why specimen totals differ from person totals |
 | Candidate Brier errors by inner fold | Metric direction, the selection rule and why the winning inner score is not an independent test |
@@ -93,7 +93,7 @@ Write down the target table or metric, dataset subset, source commit, environmen
 
 ## Work order and completion record
 
-**Phase 2’s comparator and Phase 3’s initial comparison figures are implemented. The next development priority is the remaining training-allocation and candidate-score displays, followed by stability experiments.** Phase 1 can be practiced now with the existing material. The remaining phases build on those results; adding literature alone does not complete them.
+**Phase 2's comparator and Phase 3's seven-figure gallery are implemented. The next development priority is Phase 4's prespecified stability and tuning-budget experiment.** Phase 1 can be practiced now with the existing material. The remaining phases build on those results; adding literature alone does not complete them.
 
 For each phase, record the question, code/document change, executed command, observed result, learner explanation and remaining limitation in the [analysis record](../templates/analysis-record.md). A failed hypothesis or unchanged predictive performance can be a valid learning result. Mark repository delivery and personal understanding separately.
 

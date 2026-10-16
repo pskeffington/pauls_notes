@@ -122,6 +122,19 @@ def prediction_rows(data, report):
     return sorted(rows, key=lambda r: r['cohort_row'])
 
 
+def display_inputs(models, data, report):
+    """Export plot-only numeric summaries; retain missing coefficients as absent."""
+    features = selection.feature_review(models['selected'], report['selected'])
+    fixed = dict(zip(data['feature_names'], models['all_features'].named_steps['model'].coef_[0]))
+    for row in features:
+        row['all_feature_standardized_coefficient'] = float(fixed[row['feature']])
+    return dict(schema_version=1, feature_names=data['feature_names'].tolist(),
+        specimens=[dict(cohort_row=i, person_id=int(data['person_id'][i]),
+            specimen_id=str(data['specimen_id'][i]), label=int(data['y'][i]),
+            missing=np.isnan(data['x'][i]).tolist()) for i in range(len(data['y']))],
+        feature_review=features)
+
+
 def run(output):
     output = Path(output).absolute()
     output = output.parent.resolve(strict=True) / output.name
@@ -135,6 +148,8 @@ def run(output):
         report.update(cohort_seed=COHORT_SEED, split_seed=SPLIT_SEED)
         report['final_test'] = assess(models, data, report)
         sources = [Path(__file__), Path(selection.__file__), Path(__file__).with_name('plot_comparison.py'),
+                   Path(__file__).with_name('gallery_diagnostics.py'),
+                   ROOT / '04_machine_learning/gallery/plotting-contract.md',
                    ROOT / '04_machine_learning/comparison-protocol.md']
         report['source_sha256'] = {str(p.resolve().relative_to(ROOT)):
                                   hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
@@ -143,6 +158,8 @@ def run(output):
             writer = csv.DictWriter(stream, fieldnames=PREDICTION_FIELDS)
             writer.writeheader()
             writer.writerows(prediction_rows(data, report))
+        (stage / 'display-inputs.json').write_text(json.dumps(
+            display_inputs(models, data, report), indent=2, allow_nan=False))
         np.savez(stage / 'synthetic_inputs.npz', **data)
         joblib.dump(models, stage / 'models.joblib')
         versions = {p: importlib.metadata.version(p)
@@ -155,7 +172,8 @@ def run(output):
             'Invented paired specimens; no participant data or named-gene effects.\n'
             'Both models predict the same excluded people; neither is selected from final-test results.\n'
             'The contrast changes selection AND tuning; no isolated selection benefit is claimed.\n'
-            'Report differences are descriptive; figures contain no clinical confidence intervals.\n'
+            'Report differences are descriptive; calibration ranges condition on fixed predictions.\n'
+            'Person-bootstrap ranges omit training uncertainty; no clinical intervals are claimed.\n'
             'Load only trusted, repository-generated model bundles.\n')
         manifest = {str(p.relative_to(stage)): hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in sorted(stage.rglob('*')) if p.is_file()}

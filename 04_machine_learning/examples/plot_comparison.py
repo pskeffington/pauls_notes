@@ -4,12 +4,17 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict
 import csv
+import hashlib
 import json
 from pathlib import Path
 import shutil
 import tempfile
 
 import numpy as np
+
+from gallery_diagnostics import DIAGNOSTIC_NAMES, load_display_inputs, render_diagnostics
+
+PLOT_NAMES = ('brier-comparison', 'person-errors', *DIAGNOSTIC_NAMES)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -79,6 +84,7 @@ def load_results(bundle):
 
 def render_gallery(bundle, output):
     report, rows, people = load_results(bundle)
+    display = load_display_inputs(bundle, report, rows)
     output = Path(output).absolute()
     output = output.parent.resolve(strict=True) / output.name
     if output.exists() or output.is_symlink() or output == ROOT or ROOT in output.parents:
@@ -132,10 +138,14 @@ def render_gallery(bundle, output):
             fig.supxlabel('Below zero favors selected + tuned C; above zero favors fixed all-feature\nDescriptive paired differences, not independent fold estimates or confidence intervals')
             save(fig, stage, 'person-errors')
             plt.close(fig)
+            calculations = render_diagnostics(report, rows, display, stage, save, plt)
         (stage / 'plot-data.json').write_text(json.dumps(dict(protocol_id=report['protocol_id'],
-            cohort_seed=report['cohort_seed'], source_files=['report.json', 'predictions.csv'],
+            cohort_seed=report['cohort_seed'], source_files=['report.json', 'predictions.csv', 'display-inputs.json'],
+            source_sha256={name: hashlib.sha256((Path(bundle) / name).read_bytes()).hexdigest()
+                for name in ('report.json', 'predictions.csv', 'display-inputs.json')},
+            calculations=calculations,
             development_people=sum(pair[0]['partition'] == 'development' for pair in people.values()),
-            test_people=sum(pair[0]['partition'] == 'test' for pair in people.values())), indent=2))
+            test_people=sum(pair[0]['partition'] == 'test' for pair in people.values())), indent=2, allow_nan=False))
         if output.exists() or output.is_symlink():
             raise FileExistsError(output)
         stage.rename(output)

@@ -62,3 +62,8 @@ jobs:
           test -s "$RUNNER_TEMP/corpus-validation/paired/report.json"
           test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/brier-comparison.svg"
           test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/person-errors.pdf"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/allocation-missingness.svg"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/candidate-scores.pdf"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/selection-frequency.svg"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/feature-contrasts.pdf"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/calibration.svg"

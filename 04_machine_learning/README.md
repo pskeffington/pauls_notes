@@ -15,7 +15,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Resampling, preprocessing and tuning | [Caret deployment](caret-deployment.md) | Fit elastic-net and random-forest classifiers with a protected test partition |
 | Advanced training and informative variables | [Breast cancer training and feature selection](advanced-breast-cancer-training.md) | Select assay columns inside nested person-grouped folds; inspect coefficients, selection frequency and held-out importance |
 | Fair model comparison | [Matched assay procedures](model-comparison.md) | Fixed all-feature baseline and tuned subset procedure assessed on the same excluded people |
-| Reading ML figures | [Plotting gallery](gallery/README.md) | Rebuild probability-error and person-level difference figures from saved results |
+| Reading ML figures | [Plotting gallery](gallery/README.md) | Rebuild seven figures from saved splits, candidates, feature summaries and predictions |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
 | Breast cancer evidence | [Study evidence and implementation](breast-cancer-evidence.md) | Screening trials, future risk, prognosis, response prediction, author-code mechanisms and review limits |
 | Methods from recent research | [Paper-to-code studies](recent-code-studies.md) | Connect 2025–2026 papers and a leakage reference to implementation decisions |
@@ -26,7 +26,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
-The [learning roadmap](../docs/learning-roadmap.md) now includes an implemented fixed all-feature comparison and the first two generated gallery figures; additional displays, stability experiments and a separate survival case remain planned. It distinguishes available practice from planned implementations.
+The [learning roadmap](../docs/learning-roadmap.md) now includes an implemented fixed all-feature comparison and the seven-figure gallery; a broader stability experiment and a separate survival case remain planned. It distinguishes available practice from planned implementations.
 
 ## Run the caret example
 

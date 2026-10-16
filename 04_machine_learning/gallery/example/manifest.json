@@ -1,7 +1,14 @@
 {
+  "allocation-missingness.svg": "c362304dbc86cafb5b8982993d037bb5ecb4b344a9bae559b8e86f402cc38bb8",
   "brier-comparison.svg": "e8ec4767a021c3644c63010c6bf004cd40abad2a662b1d6447e778ed72f89f1c",
+  "calibration.svg": "9fc5c7ebecf275b749c92d3f3089f81ae159cda5e8a58291321559d246fbe627",
+  "candidate-scores.svg": "8819f73a38d46b92d31d1ef2a52f5f0a3537200e2d4914a70e9fe5e2da313da5",
+  "display-inputs.json": "41dd408b36846386d5c8fb713e80a455ccbbfdf4b185e672d719408f7788d3c5",
+  "feature-contrasts.svg": "79e62397734f08862816933624eca08c7b0962d77009a777fc9e219414e920a2",
   "person-errors.svg": "70fc9e62fdb4bcddf94e97df221d364b812eed641a3501c6ef20ebddb5e1c317",
+  "plot-data.json": "212fe844b38a89d7fc79b63c9fa38d7ed5ae165b78889e9c72bd916df98eb415",
   "predictions.csv": "1f7a82c71e59fb6796d2826183b34a5109b95982dcd6449c680bc7e4cecf7bc6",
-  "report.json": "1a988b25fdc26da4ef03a173bb1449a67e8deb26a1fab37e7f912d141b3bc592",
+  "report.json": "aace90634b5bef7701a15d8df1e12363cbfb64eeee2aebe5509767c5232b0f87",
+  "selection-frequency.svg": "a35be4e4d8b22e9ec8d8fa0d83f1cc03b8926dc7b8a8b47712156f95357059f1",
   "versions.json": "0696ae2568c8f0f3545983f9f77b172124267b46e20ea192ffc373f3494c3229"
 }

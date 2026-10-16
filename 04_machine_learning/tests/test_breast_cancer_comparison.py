@@ -96,9 +96,20 @@ class ComparisonTests(unittest.TestCase):
                 for name, model in models.items():
                     p = comparison.selection.probabilities(model, data['x'][report['selected']['test']])
                     np.testing.assert_allclose(p, report['final_test'][name]['prediction'])
+            display = plots.load_display_inputs(output, report, rows)
+            with np.load(output / 'synthetic_inputs.npz', allow_pickle=False) as data:
+                for item in display['specimens']:
+                    np.testing.assert_array_equal(item['missing'], np.isnan(data['x'][item['cohort_row']]))
+            coefficients = dict(zip(comparison.selection.selected_features(models['selected']),
+                models['selected'].best_estimator_.named_steps['model'].coef_[0]))
+            fixed_coefficients = dict(zip(comparison.selection.FEATURES,
+                models['all_features'].named_steps['model'].coef_[0]))
+            for feature in display['feature_review']:
+                self.assertEqual(feature['all_feature_standardized_coefficient'], fixed_coefficients[feature['feature']])
+                self.assertEqual(feature['standardized_coefficient'], coefficients.get(feature['feature'], ''))
             for name, digest in json.loads((output / 'sha256.json').read_text()).items():
                 self.assertEqual(hashlib.sha256((output / name).read_bytes()).hexdigest(), digest)
-            for figure in ('brier-comparison', 'person-errors'):
+            for figure in plots.PLOT_NAMES:
                 for suffix in ('svg', 'pdf', 'png'):
                     self.assertGreater((output / 'gallery' / f'{figure}.{suffix}').stat().st_size, 1000)
             with self.assertRaises(ValueError):
