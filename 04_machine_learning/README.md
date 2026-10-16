@@ -16,6 +16,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Advanced training and informative variables | [Breast cancer training and feature selection](advanced-breast-cancer-training.md) | Select assay columns inside nested person-grouped folds; inspect coefficients, selection frequency and held-out importance |
 | Fair model comparison | [Matched assay procedures](model-comparison.md) | Fixed all-feature baseline and tuned subset procedure assessed on the same excluded people |
 | Reading ML figures | [Plotting gallery](gallery/README.md) | Rebuild seven figures from saved splits, candidates, feature summaries and predictions |
+| Robustness and tuning budgets | [Phase 4 synthetic stress experiment](robustness-experiment.md) | Prespecified changes in allocation, missingness and correlation; equal-fit grid/random search, complete candidate histories and guarded validation |
 | Rust model deployment | [Frozen assay inference in Rust](rust-deployment.md) | Compile a prediction CLI and check both fitted procedures against Python |
 | Rust ML research | [Five-year literature review](rust-ml-literature.md) | Appraise 11 publications/manuscripts and six pinned software sources; connect deployment, native training and single-cell methods to the book |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |

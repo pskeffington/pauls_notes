@@ -40,6 +40,8 @@ The [Rust deployment](04_machine_learning/rust-deployment.md) runs both frozen a
 
 For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
 
+The [Phase 4 assay robustness gate](04_machine_learning/robustness-experiment.md) adds four prespecified synthetic stress scenarios, paired development-only assessment and a bounded six-candidate randomized tuning comparison; it does not establish clinical or independent validation.
+
 Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.
 
 ## Research templates
