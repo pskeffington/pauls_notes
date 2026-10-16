@@ -3,9 +3,9 @@ args <- commandArgs(FALSE)
 f <- grep("^--file=", args, value=TRUE)
 if (!length(f)) stop("Run via Rscript --vanilla")
 here <- dirname(normalizePath(sub("^--file=","",f[1])))
-source(file.path(here,"..","R","hse_stats_plots.R"))
-source(file.path(here,"..","R","hse_one_call_plots.R"))
-source(file.path(here,"..","R","hse_biostat_panels.R"))
+source(file.path(here,"..","R","stats_plots.R"))
+source(file.path(here,"..","R","one_call_plots.R"))
+source(file.path(here,"..","R","biostat_panels.R"))
 if (!requireNamespace("ggplot2",quietly=TRUE)) {
   cat("SKIP: ggplot2 not installed\n")
 } else {
@@ -15,37 +15,37 @@ if (!requireNamespace("ggplot2",quietly=TRUE)) {
                   group=rep(c("A","B"),each=60),
                   value=rnorm(120))
   d$facet <- rep(rep(c("x","y"),each=20),each=3)
-  p <- hse_plot_panel_box(d,"value","group","facet")
+  p <- plot_panel_box(d,"value","group","facet")
   stopifnot(inherits(p,"ggplot"))
   # Distinct independent groups inside each facet.
   b <- data.frame(value=rnorm(80), group=rep(rep(c("A","B"),each=20),2),
                   facet=rep(c("x","y"),each=40))
-  p <- hse_plot_panel_wilcox(b,"value","group","facet")
-  stopifnot(inherits(p,"ggplot"), nrow(attr(p,"hse_tests"))==2L,
-            all(is.finite(attr(p,"hse_tests")$p_adjusted)))
-  stopifnot(inherits(hse_plot_trajectory(d,"id","time","value"),"ggplot"))
-  stopifnot(inherits(hse_plot_mean_ci(d,"time","value","group"),"ggplot"))
+  p <- plot_panel_wilcox(b,"value","group","facet")
+  stopifnot(inherits(p,"ggplot"), nrow(attr(p,"statistical_tests"))==2L,
+            all(is.finite(attr(p,"statistical_tests")$p_adjusted)))
+  stopifnot(inherits(plot_trajectory(d,"id","time","value"),"ggplot"))
+  stopifnot(inherits(plot_mean_ci(d,"time","value","group"),"ggplot"))
   e <- data.frame(term=c("A","B"),est=c(.2,-.3),
                   low=c(.1,-.5), high=c(.4,-.1))
   old_warn <- getOption("warn")
   options(warn = 2)
-  forest_plot <- hse_plot_forest(e, "term", "est", "low", "high")
+  forest_plot <- plot_forest(e, "term", "est", "low", "high")
   forest_layers <- ggplot2::ggplot_build(forest_plot)$data
   options(warn = old_warn)
   stopifnot(inherits(forest_plot, "ggplot"),
             isTRUE(all.equal(forest_layers[[2]]$xmin, e$low)),
             isTRUE(all.equal(forest_layers[[2]]$xmax, e$high)))
   fit <- stats::lm(value ~ group, data=b)
-  stopifnot(inherits(hse_plot_lm_diagnostics(fit),"ggplot"))
+  stopifnot(inherits(plot_lm_diagnostics(fit),"ggplot"))
   if (requireNamespace("pROC",quietly=TRUE)) {
     roc <- data.frame(outcome=rep(c("Control","Case"),each=25),
                       score=c(runif(25,0,.5),runif(25,.5,1)))
-    stopifnot(inherits(hse_plot_roc(roc,"outcome","score","Case"),"ggplot"))
+    stopifnot(inherits(plot_roc(roc,"outcome","score","Case"),"ggplot"))
   }
   if (requireNamespace("survival",quietly=TRUE)) {
     s <- data.frame(time=seq_len(40),event=rep(c(1,0),20),
                     group=rep(c("A","B"),each=20))
-    stopifnot(inherits(hse_plot_survival(s,"time","event","group"),"ggplot"))
+    stopifnot(inherits(plot_survival(s,"time","event","group"),"ggplot"))
   }
   cat("PASS: biostatistics panel smoke tests (installed optional modules)\n")
 }

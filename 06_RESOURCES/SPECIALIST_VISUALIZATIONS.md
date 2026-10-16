@@ -8,13 +8,13 @@ These six original functions extend existing ggplot2 and tidyverse-compatible co
 ## Prepare the plotting modules
 
 ```r
-source("06_RESOURCES/R/hse_stats_plots.R")
-source("06_RESOURCES/R/hse_plot_annotations.R")
-source("06_RESOURCES/R/hse_scientific_palette.R")
-source("06_RESOURCES/R/hse_specialist_visuals.R")
+source("06_RESOURCES/R/stats_plots.R")
+source("06_RESOURCES/R/plot_annotations.R")
+source("06_RESOURCES/R/scientific_palette.R")
+source("06_RESOURCES/R/specialist_visuals.R")
 ```
 
-Functions create a `ggplot` without writing files. To publish an audited PNG/PDF pair, call `hse_save_figure(plot, "/path/outside/repo/stem")`. That helper uses the existing annotation checker and also writes sidecar manifests. For examples that write output, choose a deliberate output directory outside Git.
+Functions create a `ggplot` without writing files. To publish an audited PNG/PDF pair, call `save_figure(plot, "/path/outside/repo/stem")`. That helper uses the existing annotation checker and also writes sidecar manifests. For examples that write output, choose a deliberate output directory outside Git.
 
 ## 1. Paired clinical observations
 
@@ -26,14 +26,14 @@ paired <- data.frame(
   Visit = rep(c("Baseline", "Month 6"), 8),
   Creatinine = c(0.9, 1.0, 1.2, 1.1, 0.8, 0.9, 1.1, 1.2,
                  1.0, 1.1, 0.9, 0.8, 1.3, 1.4, 1.0, NA_real_))
-paired_plot <- hse_plot_paired_comparison(
+paired_plot <- plot_paired_comparison(
   paired, id = "Subject_ID", visit = "Visit",
   value = "Creatinine", visit_levels = c("Baseline", "Month 6"),
   unit = "mg/dL", paired_ci = "t", conf_level = .95
 )
 print(paired_plot)
-attr(paired_plot, "hse_design")  # denominator audit
-attr(paired_plot, "hse_paired_change")  # individual differences and paired t CI
+attr(paired_plot, "design")  # denominator audit
+attr(paired_plot, "paired_change")  # individual differences and paired t CI
 ```
 
 **Interpretation:** Each segment connects two observations from the *same* participant, not two groups' unrelated means. No p-value or causal statement is created. [Weissgerber et al.](https://doi.org/10.1161/CIRCULATIONAHA.118.037777)
@@ -48,13 +48,13 @@ calibration_data <- data.frame(
   PredictedRisk = (seq_len(200) - 0.5) / 200,
   Subject_ID = paste0("S", seq_len(200))
 )
-calibration_plot <- hse_plot_calibration(
+calibration_plot <- plot_calibration(
   calibration_data, outcome = "Event", risk = "PredictedRisk",
   horizon = "12 months", evaluation_partition = "test", bins = 5L,
   interval = "wilson", subject_id = "Subject_ID", conf_level = .95
 )
 print(calibration_plot)
-attr(calibration_plot, "hse_calibration")$tabulation
+attr(calibration_plot, "calibration")$tabulation
 ```
 
 **Interpretation:** The identity reference is displayed with equal x/y probability scales. Black/gray dashed identity means perfect average agreement; blue points show observed event proportions within bins. Vertical bars use 95% Wilson binomial confidence intervals under independent subject outcomes; the function retains bin event counts and n. Binned calibration is not a smooth curve. For clinical model assessment include a flexible calibration curve and confidence band when feasible. This synthetic fixture is not a fitted prediction model. [Van Calster et al.](https://doi.org/10.1186/s12916-019-1466-7)
@@ -73,7 +73,7 @@ cells <- data.frame(
   UMAP1 = rnorm(40),
   UMAP2 = rnorm(40)
 )
-embedding_plot <- hse_plot_cell_embedding(
+embedding_plot <- plot_cell_embedding(
   cells, cell_id = "Cell_ID", sample_id = "Sample_ID",
   batch = "Batch", group = "Cell_Type",
   x = "UMAP1", y = "UMAP2",
@@ -97,13 +97,13 @@ microscopy <- data.frame(
   Treatment = rep(c("Control", "Control", "Treated", "Treated"), each = 6),
   Intensity = rep(c(10, 11, 12), 8)
 )
-micro_plot <- hse_plot_microscopy(
+micro_plot <- plot_microscopy(
   microscopy, specimen = "Specimen_ID", field = "Field_ID",
   cell = "Cell_ID", group = "Treatment",
   measurement = "Intensity", unit = "a.u."
 )
 print(micro_plot)
-attr(micro_plot, "hse_specimens")
+attr(micro_plot, "specimens")
 ```
 
 **Interpretation:** Multiple cell measurements do not increase the count of independent biological replicates. This is descriptive; it does not fit a hierarchical model. [Quantitative microscopy](https://doi.org/10.1371/journal.pbio.3002167)
@@ -117,12 +117,12 @@ large <- data.frame(
   Group = rep(c("A", "B", "C"), each = 200),
   Biomarker = rep(seq_len(200), 3) + rep(c(0, 250, 500), each = 200)
 )
-sampled_plot <- hse_plot_sampled_distribution(
+sampled_plot <- plot_sampled_distribution(
   large, value = "Biomarker", group = "Group",
   unit = "mg/L", max_points = 60L, seed = 711L
 )
 print(sampled_plot)
-attr(sampled_plot, "hse_sampling")$displayed
+attr(sampled_plot, "sampling")$displayed
 ```
 
 **Interpretation:** The density uses full observations; the points are not an independent sample drawn for inference. Extreme retention is deliberately biased, so the overlaid points must not be interpreted as representative. [Weissgerber et al.](https://doi.org/10.1371/journal.pbio.1002128)
@@ -139,14 +139,14 @@ estimate_data <- data.frame(
   Group = large$Group,
   Biomarker = large$Biomarker
 )
-estimate_plot <- hse_plot_group_estimate_ci(
+estimate_plot <- plot_group_estimate_ci(
   estimate_data, id = "Subject_ID",
   value = "Biomarker", group = "Group", unit = "mg/L",
   estimand = "median", conf_level = .95,
   n_boot = 2000L, seed = 711L
 )
 print(estimate_plot)
-attr(estimate_plot, "hse_estimates")
+attr(estimate_plot, "estimates")
 ```
 
 The marker denotes group median and the vertical/horizontal bar is the 95% **percentile bootstrap CI** from 2,000 within-group resamples of independently sampled IDs. Specify the estimand, level, independent unit, number of draws and random seed. This is **not** an automatically valid CI when observations are clustered or longitudinal. Percentile intervals can perform poorly with small samples, strong skewness or highly discrete data; prefer sensitivity analyses and design-appropriate bootstrap or hierarchical models.
@@ -175,15 +175,15 @@ Methodology: [error bars in experimental biology](https://pmc.ncbi.nlm.nih.gov/a
 The **same six validated ggplot2 objects** are the source of truth for both manuscript figures (PNG and vector PDF) and interactive Plotly figures (local HTML). Plotly provides hover inspection, legend interactions where relevant, zoom/pan and browser image export. A browser rendering can differ from ggplot2's static geoms; verify critical interval geometry against the companion vector PDF. Do not interpret hover values as additional inference.
 
 ```r
-source("06_RESOURCES/R/hse_plotly_visuals.R")
-interactive <- hse_plotly_view(paired_plot)    # RStudio viewer / interactive browser
-hse_save_plotly(paired_plot, "/tmp/paired.html") # portable offline HTML + paired_files/
+source("06_RESOURCES/R/plotly_visuals.R")
+interactive <- plotly_view(paired_plot)    # RStudio viewer / interactive browser
+save_plotly(paired_plot, "/tmp/paired.html") # portable offline HTML + paired_files/
 # Or convert and export all six plot objects after making them:
 plots <- list(paired = paired_plot, calibration = calibration_plot,
               embedding = embedding_plot, microscopy = micro_plot,
               sampled = sampled_plot, estimates = estimate_plot)
 for (name in names(plots)) {
-  hse_save_plotly(plots[[name]], file.path("/tmp", paste0(name, ".html")))
+  save_plotly(plots[[name]], file.path("/tmp", paste0(name, ".html")))
 }
 ```
 
@@ -195,18 +195,18 @@ The installed R packages are `plotly` and `htmlwidgets` (from CRAN); the HTML ex
 
 | Gate | Requirement | How checked |
 | --- | --- | --- |
-| Q17 independent units | A valid specimen/group key; unique cell nesting and matched patient visits | `test_hse_specialist_visuals.R` |
-| Q18 embedding provenance | Explicit seed/settings, complete finite coordinates, unique cell identifiers | `test_hse_specialist_visuals.R` |
-| Q19 calibration admission | Held-out partition label, binary observed outcomes, finite risk in [0, 1], recorded horizon | `test_hse_specialist_visuals.R`; operator audits prediction origin |
-| Q20 sampling transparency | Fixed seed, retained extremes, N versus plotted n, preserved full distribution | `test_hse_specialist_visuals.R` |
-| Publication | All four plot labels, six raster/vector figure pairs, annotation sidecars | `hse_save_figure()`; test suite and visual review |
-| Interactive delivery | Six Plotly widgets, independent offline dependency folders, hover/zoom checks and HTML gallery | `hse_plotly_view()`, `hse_save_plotly()` and CI HTML artifact |
+| Q17 independent units | A valid specimen/group key; unique cell nesting and matched patient visits | `test_specialist_visuals.R` |
+| Q18 embedding provenance | Explicit seed/settings, complete finite coordinates, unique cell identifiers | `test_specialist_visuals.R` |
+| Q19 calibration admission | Held-out partition label, binary observed outcomes, finite risk in [0, 1], recorded horizon | `test_specialist_visuals.R`; operator audits prediction origin |
+| Q20 sampling transparency | Fixed seed, retained extremes, N versus plotted n, preserved full distribution | `test_specialist_visuals.R` |
+| Publication | All four plot labels, six raster/vector figure pairs, annotation sidecars | `save_figure()`; test suite and visual review |
+| Interactive delivery | Six Plotly widgets, independent offline dependency folders, hover/zoom checks and HTML gallery | `plotly_view()`, `save_plotly()` and CI HTML artifact |
 | Privacy/security | No confidential datasets or identifiers embedded in released HTML | Manual embedded-data audit before publishing non-synthetic plots |
 
 Run from the repository root:
 
 ```bash
-Rscript --vanilla 06_RESOURCES/tests/test_hse_specialist_visuals.R
+Rscript --vanilla 06_RESOURCES/tests/test_specialist_visuals.R
 python3 06_RESOURCES/Presentation/check_navigation.py
 python3 06_RESOURCES/Presentation/build_reading_editions.py --check
 ```
@@ -214,8 +214,8 @@ python3 06_RESOURCES/Presentation/build_reading_editions.py --check
 For independent visual review, the **Scientific visualization validation** GitHub Actions run publishes a downloadable **specialist-visual-review** artifact with six synthetic PNG previews, six vector PDFs, six interactive Plotly HTML pages with local dependencies, annotation sidecars, and an offline HTML figure index. Inspect each image for clipping, legibility, captions, point visibility, contrast and intended palette semantics. The automated PNG geometry/PDF signature checks cannot certify these perceptual properties. Reproduce locally with an output directory outside Git:
 
 ```bash
-HSE_SPECIALIST_FIGURE_DIR=/tmp/hse-specialist-preview Rscript --vanilla 06_RESOURCES/tests/test_hse_specialist_visuals.R
-python3 scripts/audit_specialist_preview.py --directory /tmp/hse-specialist-preview
+SPECIALIST_FIGURE_DIR=/tmp/specialist-preview Rscript --vanilla 06_RESOURCES/tests/test_specialist_visuals.R
+python3 scripts/audit_specialist_preview.py --directory /tmp/specialist-preview
 ```
 
 The full [literature matrix](Literature/BIOSTAT_R_VISUALIZATION_EVIDENCE_MATRIX.md) explains the methodology and limitations. Production clinical results still require separate provenance and inference authorization.

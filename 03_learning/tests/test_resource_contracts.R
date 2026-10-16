@@ -1,18 +1,18 @@
 # Check reusable summaries and the book's numerical examples against their current source.
-source("06_RESOURCES/R/hse_stats_plots.R")
+source("06_RESOURCES/R/stats_plots.R")
 source("06_RESOURCES/Genomics/FIGURES/gene_companion_heatmap.R")
 source("06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R")
 rejects <- function(expr) inherits(tryCatch({force(expr); NULL}, error = identity), "error")
 small <- data.frame(group = c("A", "A", "A", "A", "B"), marker = c(2, 4, 6, NA, 9))
-table <- hse_describe(small, "marker", group = "group")
+table <- describe_measurements(small, "marker", group = "group")
 stopifnot(table$n[1] == 3L, table$n_missing[1] == 1L, table$pct_missing[1] == 25,
   table$median[1] == 4, table$iqr[1] == 2, is.na(table$sd[2]), is.na(table$se[2]))
-report <- hse_summary_report(small, "marker", group = "group", unit = "invented au")
+report <- summary_report(small, "marker", group = "group", unit = "invented au")
 stopifnot(length(report$narrative) == 2L, grepl("IQR", report$narrative[1], fixed = TRUE),
   grepl("missing", report$narrative[1], fixed = TRUE),
-  nrow(hse_describe(data.frame(marker = numeric()), "marker")) == 0L,
-  rejects(hse_describe(data.frame(marker = "not numeric"), "marker")))
-missing <- hse_summary_report(data.frame(marker = c(NA_real_, NA_real_)), "marker")
+  nrow(describe_measurements(data.frame(marker = numeric()), "marker")) == 0L,
+  rejects(describe_measurements(data.frame(marker = "not numeric"), "marker")))
+missing <- summary_report(data.frame(marker = c(NA_real_, NA_real_)), "marker")
 stopifnot(missing$statistics$n == 0L, grepl("no observed", missing$narrative[1], fixed = TRUE))
 walk <- paired_teaching_summary()
 stopifnot(isTRUE(all.equal(mean(walk$contrasts), .5)),

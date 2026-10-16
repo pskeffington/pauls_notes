@@ -75,7 +75,7 @@ count_rows() {
 count_rows "metadata.tsv"
 ```
 
-This helper counts physical records including the header. For header-excluded TSV data counts, use `hse_tsv_records` from the helper library.
+This helper counts physical records including the header. For header-excluded TSV data counts, use `count_tsv_records` from the helper library.
 
 ```bash
 # Reading TSV rows: IFS prevents tab-delimited fields from being split on spaces.

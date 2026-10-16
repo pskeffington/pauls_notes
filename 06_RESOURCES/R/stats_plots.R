@@ -2,7 +2,7 @@
 # Inputs use column names as strings. Keep raw counts for edgeR inference.
 
 # Validate an input data.frame and a list of column names before plotting.
-hse_check_cols <- function(data, cols) {
+validate_columns <- function(data, cols) {
   if (!is.data.frame(data)) stop("data must be a data.frame.", call. = FALSE)
   missing <- setdiff(cols, names(data))
   if (length(missing)) {
@@ -13,7 +13,7 @@ hse_check_cols <- function(data, cols) {
 
 # Validate numeric observations; missing values are permitted but are removed
 # explicitly by summary/test functions. Infinite values are not permitted.
-hse_numeric <- function(x, label = "x") {
+validate_numeric <- function(x, label = "x") {
   if (!is.numeric(x)) stop(label, " must be numeric.", call. = FALSE)
   if (any(is.infinite(x))) stop(label, " contains infinite values.", call. = FALSE)
   invisible(TRUE)
@@ -24,9 +24,9 @@ hse_numeric <- function(x, label = "x") {
 # IQR is Q3 - Q1 using the same type=7 quantile convention as base R.
 # CV and skewness are intentionally omitted: they require additional
 # assumptions and can mislead on values near zero or signed scales.
-hse_describe <- function(data, value, group = NULL, digits = 3L) {
-  hse_check_cols(data, c(value, group))
-  hse_numeric(data[[value]], value)
+describe_measurements <- function(data, value, group = NULL, digits = 3L) {
+  validate_columns(data, c(value, group))
+  validate_numeric(data[[value]], value)
   if (length(digits) != 1L || is.na(digits) || digits < 0 ||
       digits != as.integer(digits)) stop("digits must be a nonnegative integer")
   if (!is.null(group) && identical(group, value))
@@ -77,10 +77,10 @@ hse_describe <- function(data, value, group = NULL, digits = 3L) {
 
 # Plain-language statistical summary for a reader. Describes the observed
 # sample only; does not invent a statistical test or imply causation.
-hse_describe_narrative <- function(summary, value, unit = NULL, digits = 2L) {
+describe_summary <- function(summary, value, unit = NULL, digits = 2L) {
   needed <- c("group","n_total","n","n_missing","mean","sd",
               "median","q1","q3","iqr","min","max")
-  hse_check_cols(summary, needed)
+  validate_columns(summary, needed)
   if (!is.character(value) || length(value)!=1L || !nzchar(value))
     stop("value must identify the measured variable")
   fmt <- function(x) if(is.na(x)) "unavailable" else
@@ -106,17 +106,17 @@ hse_describe_narrative <- function(summary, value, unit = NULL, digits = 2L) {
 
 # Single-call reader-facing report with numeric table + generated narrative.
 # Return a list to preserve programmatic access to the exact summary.
-hse_summary_report <- function(data, value, group = NULL, unit = NULL,
+summary_report <- function(data, value, group = NULL, unit = NULL,
                                digits = 3L) {
-  tab <- hse_describe(data,value,group,digits=digits)
-  narrative <- hse_describe_narrative(tab,value,unit)
+  tab <- describe_measurements(data,value,group,digits=digits)
+  narrative <- describe_summary(tab,value,unit)
   list(statistics=tab, narrative=narrative)
 }
 
 # Print a report in a compact form suitable for an exploratory report.
-hse_print_summary <- function(report) {
+print_summary <- function(report) {
   if (!is.list(report) || is.null(report$statistics) ||
-      is.null(report$narrative)) stop("Expected hse_summary_report output")
+      is.null(report$narrative)) stop("Expected summary_report output")
   print(report$statistics, row.names=FALSE)
   cat("\nReader summary:\n",paste(report$narrative,collapse="\n"),"\n",sep="")
   invisible(report)
@@ -124,10 +124,10 @@ hse_print_summary <- function(report) {
 
 # Two-group Wilcoxon rank-sum test for independent samples.
 # It tests the distributions, not universally a difference of medians.
-# Do not use it for matched samples; use hse_wilcox_paired instead.
-hse_wilcox_independent <- function(data, value, group, conf_int = FALSE) {
-  hse_check_cols(data, c(value, group))
-  hse_numeric(data[[value]], value)
+# Do not use it for matched samples; use wilcox_paired instead.
+wilcox_independent <- function(data, value, group, conf_int = FALSE) {
+  validate_columns(data, c(value, group))
+  validate_numeric(data[[value]], value)
   ok <- !is.na(data[[value]]) & !is.na(data[[group]])
   d <- data[ok, , drop = FALSE]
   groups <- unique(as.character(d[[group]]))
@@ -141,9 +141,9 @@ hse_wilcox_independent <- function(data, value, group, conf_int = FALSE) {
 
 # Paired Wilcoxon signed-rank test. Requires an explicit subject ID.
 # Only complete pairs are used; duplicate subject-by-group IDs are rejected.
-hse_wilcox_paired <- function(data, value, group, id) {
-  hse_check_cols(data, c(value, group, id))
-  hse_numeric(data[[value]], value)
+wilcox_paired <- function(data, value, group, id) {
+  validate_columns(data, c(value, group, id))
+  validate_numeric(data[[value]], value)
   d <- data[stats::complete.cases(data[c(value, group, id)]), , drop = FALSE]
   groups <- sort(unique(as.character(d[[group]])))
   if (length(groups) != 2L) stop("Exactly two groups required.")
@@ -160,10 +160,10 @@ hse_wilcox_paired <- function(data, value, group, id) {
 
 # Pearson or Spearman association; assumptions depend on method and design.
 # Report correlation alongside sample size and avoid causal interpretation.
-hse_cor <- function(data, x, y, method = "spearman") {
-  hse_check_cols(data, c(x, y))
-  hse_numeric(data[[x]], x)
-  hse_numeric(data[[y]], y)
+correlation_summary <- function(data, x, y, method = "spearman") {
+  validate_columns(data, c(x, y))
+  validate_numeric(data[[x]], x)
+  validate_numeric(data[[y]], y)
   method <- match.arg(method, c("spearman", "pearson", "kendall"))
   ok <- stats::complete.cases(data[c(x, y)])
   if (sum(ok) < 3L) stop("At least three complete observations required.")
@@ -173,7 +173,7 @@ hse_cor <- function(data, x, y, method = "spearman") {
 }
 
 # Plotting dependency is evaluated only when a figure is requested.
-hse_require_plot <- function() {
+require_plotting_packages <- function() {
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("Install ggplot2 first: install.packages('ggplot2')")
   invisible(TRUE)
@@ -181,8 +181,8 @@ hse_require_plot <- function() {
 
 # A consistent minimal publication-oriented theme. The returned theme may be
 # composed with any ggplot; no global graphics settings are changed.
-hse_theme <- function(base_size = 12) {
-  hse_require_plot()
+theme_publication <- function(base_size = 12) {
+  require_plotting_packages()
   ggplot2::theme_bw(base_size = base_size) +
     ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
                    plot.title.position = "plot",
@@ -192,10 +192,10 @@ hse_theme <- function(base_size = 12) {
 
 # Histogram of a continuous variable. The number of bins is explicit,
 # making comparisons more reproducible between runs.
-hse_hist <- function(data, value, bins = 30L, title = NULL) {
-  hse_check_cols(data, value)
-  hse_numeric(data[[value]], value)
-  hse_require_plot()
+plot_histogram <- function(data, value, bins = 30L, title = NULL) {
+  validate_columns(data, value)
+  validate_numeric(data[[value]], value)
+  require_plotting_packages()
   if (length(bins) != 1L || is.na(bins) || bins < 1 || bins != as.integer(bins))
     stop("bins must be a positive integer.")
   d <- data.frame(x = data[[value]])
@@ -203,17 +203,17 @@ hse_hist <- function(data, value, bins = 30L, title = NULL) {
     ggplot2::geom_histogram(bins = bins, fill = "#3179A8", color = "white",
                             na.rm = TRUE) +
     ggplot2::labs(title = title %||% paste("Distribution of", value),
-                  x = value, y = "Number of observations") + hse_theme()
+                  x = value, y = "Number of observations") + theme_publication()
 }
 
 # Boxplots with transparent points reveal sample distributions and outliers.
 # A fixed seed controls jitter reproducibility where the installed ggplot2
 # supports position_jitter(seed=...). Jitter is display-only.
-hse_box <- function(data, value, group, y_label = value,
+plot_boxplot <- function(data, value, group, y_label = value,
                     title = NULL, show_points = TRUE, fill_scale = NULL) {
-  hse_check_cols(data, c(value, group))
-  hse_numeric(data[[value]], value)
-  hse_require_plot()
+  validate_columns(data, c(value, group))
+  validate_numeric(data[[value]], value)
+  require_plotting_packages()
   d <- data.frame(value = data[[value]], group = as.factor(data[[group]]))
   p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$group, y = .data$value)) +
     ggplot2::geom_boxplot(width = .55, outlier.shape = if (show_points) NA else 19,
@@ -223,16 +223,16 @@ hse_box <- function(data, value, group, y_label = value,
     position = ggplot2::position_jitter(width = .12, height = 0, seed = 711),
     alpha = .32, size = 1, na.rm = TRUE)
   p + ggplot2::labs(title = title %||% paste(value, "by", group),
-                    x = group, y = y_label) + hse_theme()
+                    x = group, y = y_label) + theme_publication()
 }
 
 # Scatter plot with optional least-squares regression line. A fitted line
 # describes association and is not evidence of causality.
-hse_scatter <- function(data, x, y, group = NULL, fit = FALSE) {
-  hse_check_cols(data, c(x, y, group))
-  hse_numeric(data[[x]], x)
-  hse_numeric(data[[y]], y)
-  hse_require_plot()
+plot_scatter <- function(data, x, y, group = NULL, fit = FALSE) {
+  validate_columns(data, c(x, y, group))
+  validate_numeric(data[[x]], x)
+  validate_numeric(data[[y]], y)
+  require_plotting_packages()
   d <- data.frame(x = data[[x]], y = data[[y]])
   if (is.null(group)) {
     p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$x, y = .data$y))
@@ -246,15 +246,15 @@ hse_scatter <- function(data, x, y, group = NULL, fit = FALSE) {
     data = d, mapping = ggplot2::aes(x = .data$x, y = .data$y),
     inherit.aes = FALSE, method = "lm", formula = y ~ x,
     se = TRUE, color = "black", na.rm = TRUE)
-  p + ggplot2::labs(x = x, y = y, color = group) + hse_theme()
+  p + ggplot2::labs(x = x, y = y, color = group) + theme_publication()
 }
 
 # CPM helper: counts are genes x samples and must be nonnegative integers.
 # Normalization factors come from edgeR's TMM method; returned values are
 # appropriate for EXPLORATION, not direct substitutes for NB model counts.
-hse_cpm <- function(counts, log = TRUE, prior_count = 1) {
+normalized_cpm <- function(counts, log = TRUE, prior_count = 1) {
   if (!requireNamespace("edgeR", quietly = TRUE))
-    stop("Install edgeR through BiocManager before using hse_cpm().")
+    stop("Install edgeR through BiocManager before using normalized_cpm().")
   if (!is.matrix(counts) || !is.numeric(counts) ||
       anyNA(counts) || any(!is.finite(counts)) ||
       any(counts < 0) || any(counts != floor(counts)))
@@ -272,9 +272,9 @@ hse_cpm <- function(counts, log = TRUE, prior_count = 1) {
 # Turn a gene-by-sample expression matrix into a compact plotting table.
 # Alignment is keyed by sample IDs rather than relying on row ordering.
 # Supply a small selected gene panel to avoid unnecessary full-matrix pivots.
-hse_gene_long <- function(expr, genes, metadata, sample_col = "Sample") {
+gene_expression_long <- function(expr, genes, metadata, sample_col = "Sample") {
   if (!is.matrix(expr) || !is.numeric(expr)) stop("expr must be a numeric matrix.")
-  hse_check_cols(metadata, sample_col)
+  validate_columns(metadata, sample_col)
   if (is.null(rownames(expr)) || is.null(colnames(expr)))
     stop("expr must have gene and sample dimnames.")
   if (anyDuplicated(rownames(expr)) || anyDuplicated(colnames(expr)) ||
@@ -296,19 +296,19 @@ hse_gene_long <- function(expr, genes, metadata, sample_col = "Sample") {
 }
 
 # Gene panel plot. Explicit scale labels avoid mixing raw CPM and logCPM.
-hse_gene_panel <- function(long_data, group, scale = c("log2 CPM", "CPM")) {
+plot_gene_panel <- function(long_data, group, scale = c("log2 CPM", "CPM")) {
   scale <- match.arg(scale)
-  hse_check_cols(long_data, c("Gene", "Expression", group))
-  hse_numeric(long_data$Expression, "Expression")
-  p <- hse_box(long_data, "Expression", group, y_label = scale,
+  validate_columns(long_data, c("Gene", "Expression", group))
+  validate_numeric(long_data$Expression, "Expression")
+  p <- plot_boxplot(long_data, "Expression", group, y_label = scale,
                title = "Gene expression by group")
   p + ggplot2::facet_wrap(~ Gene, scales = "free_y")
 }
 
 # Export a plot without modifying the current working directory or graphics
 # device. Use PDF for vectors and PNG (>=300 dpi) for manuscript figures.
-hse_save_plot <- function(plot, file, width = 7, height = 5, dpi = 300) {
-  hse_require_plot()
+save_plot <- function(plot, file, width = 7, height = 5, dpi = 300) {
+  require_plotting_packages()
   if (!inherits(plot, "ggplot")) stop("plot must be a ggplot object.")
   if (!grepl("\\.(pdf|png|svg)$", tolower(file)))
     stop("file extension must be .pdf, .png or .svg")

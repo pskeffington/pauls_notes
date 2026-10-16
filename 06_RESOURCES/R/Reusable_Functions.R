@@ -1,7 +1,7 @@
 # Independently authored general-purpose R summary and graph functions
-# Load once: source("06_RESOURCES/R/Week_3_Reusable_Functions.R")
+# Load once: source("06_RESOURCES/R/Reusable_Functions.R")
 # Requires ggplot2. Loading this file defines functions; it reads no data.
-# Use only datasets you have permission to analyze; no course files are distributed.
+# Use only datasets you have permission to analyze.
 # Pass column names as strings: plt_hist(my_data, "measurement").
 # .data[[variable]] selects a named column inside ggplot2 mappings.
 

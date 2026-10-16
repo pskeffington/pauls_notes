@@ -2,12 +2,12 @@
 
 [Resource index](../README.md) · [Follow-along guide](../../docs/research-workflow.md) · [Reusable source](Reusable_Functions.R)
 
-Run these examples in R or RStudio from the **repository root**. Column names are case-sensitive. The [synthetic cohort generator](hse_teaching_data.R) supplies every input using base R. Its 48 invented adult participants demonstrate biomedical methods; they are not patient data. Age is years, creatinine mg/dL, albumin g/dL, RBC count 10^12 cells/L, and WBC count 10^9 cells/L. Sex and collection site are fictional categories. No sex or site effect is programmed; the age–creatinine association is a chosen simulation rule.
+Run these examples in R or RStudio from the **repository root**. Column names are case-sensitive. The [synthetic cohort generator](teaching_data.R) supplies every input using base R. Its 48 invented adult participants demonstrate biomedical methods; they are not patient data. Age is years, creatinine mg/dL, albumin g/dL, RBC count 10^12 cells/L, and WBC count 10^9 cells/L. Sex and collection site are fictional categories. No sex or site effect is programmed; the age–creatinine association is a chosen simulation rule.
 
 ## Inspect before analyzing
 
 ```r
-source("06_RESOURCES/R/hse_teaching_data.R")
+source("06_RESOURCES/R/teaching_data.R")
 health_data <- make_teaching_cohort()
 head(health_data)
 str(health_data)

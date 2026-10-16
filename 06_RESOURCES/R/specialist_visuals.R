@@ -1,29 +1,29 @@
 # Original specialist scientific visualizations: descriptive, synthetic-testable.
-# Source hse_stats_plots.R and hse_scientific_palette.R before this module.
+# Source stats_plots.R and scientific_palette.R before this module.
 # Requires ggplot2 at call time; loading the file performs no I/O or installs.
 
-hse_vis_input <- function(data, columns) {
-  hse_check_cols(data, columns)
+validate_plot_input <- function(data, columns) {
+  validate_columns(data, columns)
   if (!requireNamespace("ggplot2", quietly = TRUE))
     stop("ggplot2 required; install before plotting", call. = FALSE)
-  if (!exists("hse_group_colors", mode = "function") ||
-      !exists("hse_theme_scientific", mode = "function") ||
-      !exists("hse_axis_label", mode = "function"))
-    stop("Source hse_scientific_palette.R first", call. = FALSE)
+  if (!exists("group_colors", mode = "function") ||
+      !exists("theme_scientific", mode = "function") ||
+      !exists("axis_label", mode = "function"))
+    stop("Source scientific_palette.R first", call. = FALSE)
   if (!length(columns) || anyNA(columns) || anyDuplicated(columns) ||
       any(!nzchar(trimws(columns))))
     stop("Distinct nonempty column names required", call. = FALSE)
   invisible(TRUE)
 }
 
-hse_vis_text <- function(x, label) {
+validate_text_scalar <- function(x, label) {
   if (!is.character(x) || length(x) != 1L || is.na(x) ||
       !nzchar(trimws(x)))
     stop(label, " must be one nonempty string", call. = FALSE)
   invisible(TRUE)
 }
 
-hse_vis_integer <- function(x, label, minimum = 1L) {
+validate_integer_scalar <- function(x, label, minimum = 1L) {
   if (!is.numeric(x) || length(x) != 1L || is.na(x) ||
       !is.finite(x) || x != as.integer(x) || x < minimum)
     stop(label, " must be an integer >= ", minimum, call. = FALSE)
@@ -31,7 +31,7 @@ hse_vis_integer <- function(x, label, minimum = 1L) {
 }
 
 # Interval assumptions must be explicit, not inferred from a visual encoding.
-hse_vis_conf_level <- function(conf_level) {
+validate_confidence_level <- function(conf_level) {
   if (!is.numeric(conf_level) || length(conf_level) != 1L ||
       is.na(conf_level) || !is.finite(conf_level) ||
       conf_level <= 0 || conf_level >= 1)
@@ -39,7 +39,7 @@ hse_vis_conf_level <- function(conf_level) {
   invisible(TRUE)
 }
 
-hse_vis_keys <- function(data, columns) {
+validate_plot_keys <- function(data, columns) {
   for (name in columns) {
     v <- as.character(data[[name]])
     if (anyNA(v) || any(!nzchar(trimws(v))))
@@ -49,19 +49,19 @@ hse_vis_keys <- function(data, columns) {
 }
 
 # 1. Exact two-visit paired trajectories. No test statistic is inferred.
-hse_plot_paired_comparison <- function(data, id, visit, value,
+plot_paired_comparison <- function(data, id, visit, value,
                                        visit_levels, unit, paired_ci = c("none", "t"),
                                        conf_level = .95) {
-  hse_vis_input(data, c(id, visit, value))
-  hse_vis_text(unit, "unit")
+  validate_plot_input(data, c(id, visit, value))
+  validate_text_scalar(unit, "unit")
   paired_ci <- match.arg(paired_ci)
-  if (paired_ci == "t") hse_vis_conf_level(conf_level)
+  if (paired_ci == "t") validate_confidence_level(conf_level)
   if (!is.character(visit_levels) || length(visit_levels) != 2L ||
       anyNA(visit_levels) || anyDuplicated(visit_levels) ||
       any(!nzchar(trimws(visit_levels))))
     stop("visit_levels must contain two distinct named visits")
-  hse_numeric(data[[value]], value)
-  hse_vis_keys(data, c(id, visit))
+  validate_numeric(data[[value]], value)
+  validate_plot_keys(data, c(id, visit))
   if (anyDuplicated(data.frame(id = data[[id]], visit = data[[visit]])))
     stop("Duplicate subject x visit keys")
   if (!all(as.character(data[[visit]]) %in% visit_levels))
@@ -99,37 +99,37 @@ hse_plot_paired_comparison <- function(data, id, visit, value,
     ggplot2::geom_point(size = 1.8, colour = "#0072B2") +
     ggplot2::labs(
       title = paste(value, "within-participant change"),
-      x = "Visit", y = hse_axis_label(value, unit),
+      x = "Visit", y = axis_label(value, unit),
       caption = paste0(sprintf("Complete pairs: %d/%d subjects; %d incomplete excluded.",
                         length(complete_ids), n_subjects,
                         n_subjects - length(complete_ids)), "\n", detail)) +
-    hse_theme_scientific()
-  attr(p, "hse_design") <- list(subjects = n_subjects,
+    theme_scientific()
+  attr(p, "design") <- list(subjects = n_subjects,
     complete_pairs = length(complete_ids),
     omitted_subjects = n_subjects - length(complete_ids))
-  attr(p, "hse_paired_change") <- list(individual = change_table,
+  attr(p, "paired_change") <- list(individual = change_table,
     summary = estimate, interval = paired_ci, conf_level = if (paired_ci == "t") conf_level else NA_real_)
   p
 }
 
 # 2. Held-out binary risk calibration. Equal-width bins; no confidence bands.
-hse_plot_calibration <- function(data, outcome, risk, horizon,
+plot_calibration <- function(data, outcome, risk, horizon,
                                  evaluation_partition, bins = 5L,
                                  interval = c("none", "wilson"),
                                  subject_id = NULL, conf_level = .95) {
-  hse_vis_input(data, c(outcome, risk))
-  hse_vis_text(horizon, "horizon")
-  hse_vis_text(evaluation_partition, "evaluation_partition")
+  validate_plot_input(data, c(outcome, risk))
+  validate_text_scalar(horizon, "horizon")
+  validate_text_scalar(evaluation_partition, "evaluation_partition")
   permitted <- c("holdout", "validation", "test", "external", "temporal", "out-of-fold")
   if (!evaluation_partition %in% permitted)
     stop("evaluation_partition must identify held-out/out-of-fold evaluation")
-  hse_vis_integer(bins, "bins", minimum = 2L)
+  validate_integer_scalar(bins, "bins", minimum = 2L)
   interval <- match.arg(interval)
   if (interval == "wilson") {
-    hse_vis_conf_level(conf_level)
-    hse_vis_text(subject_id, "subject_id")
-    hse_check_cols(data, subject_id)
-    hse_vis_keys(data, subject_id)
+    validate_confidence_level(conf_level)
+    validate_text_scalar(subject_id, "subject_id")
+    validate_columns(data, subject_id)
+    validate_plot_keys(data, subject_id)
     if (anyDuplicated(as.character(data[[subject_id]])))
       stop("Wilson intervals require one independent outcome per subject ID")
   }
@@ -138,7 +138,7 @@ hse_plot_calibration <- function(data, outcome, risk, horizon,
       !all(data[[outcome]] %in% c(0, 1)) ||
       length(unique(data[[outcome]])) != 2L)
     stop("Outcome must have observed 0 and 1 with no missing values")
-  hse_numeric(data[[risk]], risk)
+  validate_numeric(data[[risk]], risk)
   if (anyNA(data[[risk]]) || any(data[[risk]] < 0 | data[[risk]] > 1))
     stop("Risk predictions must be complete probabilities in [0,1]")
   if (nrow(data) < 10L) stop("At least ten evaluations required")
@@ -188,8 +188,8 @@ hse_plot_calibration <- function(data, outcome, risk, horizon,
         "\n", if (interval == "wilson")
           sprintf("Bars: %.0f%% Wilson CIs; independent outcomes assumed.\nGrouped calibration only; no smooth curve.", 100 * conf_level)
         else "No uncertainty bars; grouped calibration is not a smooth curve.")) +
-    hse_theme_scientific()
-  attr(p, "hse_calibration") <- list(tabulation = tab,
+    theme_scientific()
+  attr(p, "calibration") <- list(tabulation = tab,
     denominator = nrow(data), horizon = horizon,
     evaluation_partition = evaluation_partition, bins = bins,
     interval = interval, conf_level = if (interval == "wilson") conf_level else NA_real_,
@@ -198,23 +198,23 @@ hse_plot_calibration <- function(data, outcome, risk, horizon,
 }
 
 # 3. Visualize *supplied* embeddings; never re-estimate or test clusters.
-hse_plot_cell_embedding <- function(data, cell_id, sample_id, batch, group,
+plot_cell_embedding <- function(data, cell_id, sample_id, batch, group,
                                     x, y, method = c("UMAP", "t-SNE"),
                                     seed, settings) {
-  hse_vis_input(data, c(cell_id, sample_id, batch, group, x, y))
+  validate_plot_input(data, c(cell_id, sample_id, batch, group, x, y))
   method <- match.arg(method)
-  hse_vis_integer(seed, "seed", minimum = 0L)
-  hse_vis_text(settings, "settings")
-  hse_vis_keys(data, c(cell_id, sample_id, batch, group))
+  validate_integer_scalar(seed, "seed", minimum = 0L)
+  validate_text_scalar(settings, "settings")
+  validate_plot_keys(data, c(cell_id, sample_id, batch, group))
   if (anyDuplicated(as.character(data[[cell_id]])))
     stop("Cell identifiers must be unique")
   for (coord in c(x, y)) {
-    hse_numeric(data[[coord]], coord)
+    validate_numeric(data[[coord]], coord)
     if (anyNA(data[[coord]])) stop("Embedding coordinates must be complete")
   }
   if (nrow(data) < 3L) stop("At least three cells required")
   groups <- sort(unique(as.character(data[[group]])), method = "radix")
-  colors <- hse_group_colors(as.character(data[[group]]), levels = groups)
+  colors <- group_colors(as.character(data[[group]]), levels = groups)
   d <- data.frame(X = data[[x]], Y = data[[y]],
     Group = factor(as.character(data[[group]]), levels = groups),
     Batch = factor(as.character(data[[batch]])),
@@ -236,19 +236,19 @@ hse_plot_cell_embedding <- function(data, cell_id, sample_id, batch, group,
                         nrow(d), length(unique(d$Sample)), batch_text),
         "\n", sprintf("Seed=%d; settings: %s. Embeddings are descriptive; no uncertainty or test inferred.",
                        seed, settings))) +
-    hse_theme_scientific()
+    theme_scientific()
 }
 
 # 4. Specimen is the independent unit; cell-level points are contextual.
-hse_plot_microscopy <- function(data, specimen, field, cell, group,
+plot_microscopy <- function(data, specimen, field, cell, group,
                                 measurement, unit,
                                 interval = c("none", "t"), conf_level = .95) {
-  hse_vis_input(data, c(specimen, field, cell, group, measurement))
-  hse_vis_text(unit, "unit")
+  validate_plot_input(data, c(specimen, field, cell, group, measurement))
+  validate_text_scalar(unit, "unit")
   interval <- match.arg(interval)
-  if (interval == "t") hse_vis_conf_level(conf_level)
-  hse_vis_keys(data, c(specimen, field, cell, group))
-  hse_numeric(data[[measurement]], measurement)
+  if (interval == "t") validate_confidence_level(conf_level)
+  validate_plot_keys(data, c(specimen, field, cell, group))
+  validate_numeric(data[[measurement]], measurement)
   if (anyNA(data[[measurement]])) stop("Measurements must be complete")
   if (anyDuplicated(data.frame(specimen = data[[specimen]],
                               field = data[[field]], cell = data[[cell]])))
@@ -260,7 +260,7 @@ hse_plot_microscopy <- function(data, specimen, field, cell, group,
     stop("Each specimen must belong to exactly one group")
   if (length(by_specimen) < 2L) stop("At least two specimens required")
   levels <- sort(unique(as.character(data[[group]])), method = "radix")
-  palette <- hse_group_colors(as.character(data[[group]]), levels = levels)
+  palette <- group_colors(as.character(data[[group]]), levels = levels)
   d <- data.frame(
     Specimen = as.character(data[[specimen]]),
     Group = factor(as.character(data[[group]]), levels = levels),
@@ -312,7 +312,7 @@ hse_plot_microscopy <- function(data, specimen, field, cell, group,
       subtitle = if (interval == "t")
         "Cells: points; specimen medians: diamonds\nOffset circles and bars: specimen-level mean and t CI"
       else "Colored points: cells; black diamonds: specimen medians",
-      x = group, y = hse_axis_label(measurement, unit),
+      x = group, y = axis_label(measurement, unit),
       caption = paste0(sprintf("%d independent specimens; %d cell measurements; specimens/group: %s.",
                         nrow(med), nrow(d),
                         paste(paste0(names(counts), "=", as.integer(counts)), collapse = "; ")),
@@ -320,23 +320,23 @@ hse_plot_microscopy <- function(data, specimen, field, cell, group,
           sprintf("%.0f%% t CIs assume independent specimen medians and approximately normal variation; cells are not replicates.",
                   100 * conf_level)
         else "Cells are nested observations; no confidence interval calculated.")) +
-    hse_theme_scientific() +
+    theme_scientific() +
     ggplot2::theme(legend.position = "none")
-  attr(p, "hse_specimens") <- med
-  attr(p, "hse_specimen_uncertainty") <- estimates
+  attr(p, "specimens") <- med
+  attr(p, "specimen_uncertainty") <- estimates
   p
 }
 
 # 5. Full-data violin plus deterministic subset of raw points, retaining
 # observed min/max within each group. Sampling never alters the violins.
-hse_plot_sampled_distribution <- function(data, value, group, unit,
+plot_sampled_distribution <- function(data, value, group, unit,
                                            max_points = 1000L, seed = 711L) {
-  hse_vis_input(data, c(value, group))
-  hse_vis_text(unit, "unit")
-  hse_vis_integer(max_points, "max_points", minimum = 2L)
-  hse_vis_integer(seed, "seed", minimum = 0L)
-  hse_vis_keys(data, group)
-  hse_numeric(data[[value]], value)
+  validate_plot_input(data, c(value, group))
+  validate_text_scalar(unit, "unit")
+  validate_integer_scalar(max_points, "max_points", minimum = 2L)
+  validate_integer_scalar(seed, "seed", minimum = 0L)
+  validate_plot_keys(data, group)
+  validate_numeric(data[[value]], value)
   if (anyNA(data[[value]])) stop("Measurement must be complete")
   levels <- sort(unique(as.character(data[[group]])), method = "radix")
   if (max_points < 2L * length(levels))
@@ -344,7 +344,7 @@ hse_plot_sampled_distribution <- function(data, value, group, unit,
   counts <- table(as.character(data[[group]]))
   if (any(counts < 3L))
     stop("Each group needs >=3 observations for a violin density")
-  colors <- hse_group_colors(as.character(data[[group]]), levels = levels)
+  colors <- group_colors(as.character(data[[group]]), levels = levels)
   d <- data.frame(Value = data[[value]],
                   Group = factor(as.character(data[[group]]), levels = levels))
   idx <- split(seq_len(nrow(d)), d$Group, drop = TRUE)
@@ -383,20 +383,20 @@ hse_plot_sampled_distribution <- function(data, value, group, unit,
       paste0(z, " (n=", as.integer(counts[as.character(z)]), ")")) +
     ggplot2::labs(
       title = paste(value, "distribution and observed points"),
-      x = group, y = hse_axis_label(value, unit),
+      x = group, y = axis_label(value, unit),
       caption = paste0(sprintf("Full-data KDE + box (median/IQR; 1.5×IQR whiskers); N=%d.",
                         nrow(d)),
         "\n", sprintf("Displayed points n=%d (seed=%d; each group's minima/maxima retained); plotted dots are not representative.",
                        nrow(shown), seed))) +
-    hse_theme_scientific() +
+    theme_scientific() +
     ggplot2::theme(legend.position = "none")
   tab <- do.call(rbind, lapply(idx, function(ii)
     data.frame(Group = as.character(d$Group[ii[1]]), n = length(ii),
                median = stats::median(d$Value[ii]),
                q1 = unname(stats::quantile(d$Value[ii], .25)),
                q3 = unname(stats::quantile(d$Value[ii], .75)))))
-  attr(p, "hse_group_descriptives") <- tab
-  attr(p, "hse_sampling") <- list(original = nrow(d),
+  attr(p, "group_descriptives") <- tab
+  attr(p, "sampling") <- list(original = nrow(d),
     displayed = nrow(shown), indices = selected, extrema = extrema,
     seed = seed, sampled_points = shown)
   p
@@ -406,20 +406,20 @@ hse_plot_sampled_distribution <- function(data, value, group, unit,
 # Companion estimate figure; CIs are deliberately separate from violin
 # quartiles/whiskers. One row per independently sampled subject/specimen.
 # Resampling the individual IDs (not rows nested within specimens) is required.
-hse_plot_group_estimate_ci <- function(data, id, value, group, unit,
+plot_group_estimate_ci <- function(data, id, value, group, unit,
                                        estimand = c("median", "mean"),
                                        conf_level = .95, n_boot = 1000L,
                                        seed = 711L) {
-  hse_vis_input(data, c(id, value, group))
-  hse_vis_text(unit, "unit")
-  hse_vis_conf_level(conf_level)
-  hse_vis_integer(n_boot, "n_boot", minimum = 200L)
-  hse_vis_integer(seed, "seed", minimum = 0L)
+  validate_plot_input(data, c(id, value, group))
+  validate_text_scalar(unit, "unit")
+  validate_confidence_level(conf_level)
+  validate_integer_scalar(n_boot, "n_boot", minimum = 200L)
+  validate_integer_scalar(seed, "seed", minimum = 0L)
   estimand <- match.arg(estimand)
-  hse_vis_keys(data, c(id, group))
+  validate_plot_keys(data, c(id, group))
   if (anyDuplicated(as.character(data[[id]])))
     stop("One measurement per independently sampled subject/specimen ID required")
-  hse_numeric(data[[value]], value)
+  validate_numeric(data[[value]], value)
   if (anyNA(data[[value]]))
     stop("Remove or explicitly disclose missing measurements before estimation")
   groups <- sort(unique(as.character(data[[group]])), method = "radix")
@@ -447,7 +447,7 @@ hse_plot_group_estimate_ci <- function(data, id, value, group, unit,
                Lower = bounds[1], Upper = bounds[2])
   }))
   tab$Group <- factor(tab$Group, levels = groups)
-  color_values <- hse_group_colors(as.character(tab$Group), groups)
+  color_values <- group_colors(as.character(tab$Group), groups)
   p <- ggplot2::ggplot(tab, ggplot2::aes(x = .data$Group,
       y = .data$Estimate, ymin = .data$Lower, ymax = .data$Upper,
       colour = .data$Group)) +
@@ -457,12 +457,12 @@ hse_plot_group_estimate_ci <- function(data, id, value, group, unit,
       paste0(z, " (n=", tab$n[match(z, as.character(tab$Group))], ")")) +
     ggplot2::coord_flip() +
     ggplot2::labs(title = paste(value, estimand, "and uncertainty by", group),
-                  x = group, y = hse_axis_label(value, unit),
+                  x = group, y = axis_label(value, unit),
                   caption = sprintf("Point: group %s; bar: %.0f%% percentile-bootstrap CI.\nDraws=%d; seed=%d. Independent %s assumed; no contrast test.",
                                     estimand, 100*conf_level, n_boot, seed, id)) +
-    hse_theme_scientific() + ggplot2::theme(legend.position = "none")
-  attr(p, "hse_estimates") <- tab
-  attr(p, "hse_bootstrap_design") <- list(unit_id = id, estimator = estimand,
+    theme_scientific() + ggplot2::theme(legend.position = "none")
+  attr(p, "estimates") <- tab
+  attr(p, "bootstrap_design") <- list(unit_id = id, estimator = estimand,
     conf_level = conf_level, draws = n_boot, seed = seed)
   p
 }

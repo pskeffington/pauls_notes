@@ -11,7 +11,7 @@ companion_matrix <- function() {
 
 companion_heatmap <- function() {
   if (!requireNamespace("ggplot2", quietly = TRUE)) stop("ggplot2 required")
-  source("06_RESOURCES/R/hse_scientific_palette.R", local = TRUE)
+  source("06_RESOURCES/R/scientific_palette.R", local = TRUE)
   values <- companion_matrix()
   table <- expand.grid(label = rownames(values), contrast = colnames(values),
                        stringsAsFactors = FALSE)
@@ -27,7 +27,7 @@ companion_heatmap <- function() {
     ggplot2::scale_fill_gradient2(low = "#2166AC", mid = "#F7F7F7",
       high = "#B2182B", midpoint = 0, limits = c(-2, 2), breaks = -2:2,
       name = "Signed log2 fold change\nTumor / adjacent-normal (simulated)") +
-    ggplot2::coord_fixed() + hse_theme_scientific(12) +
+    ggplot2::coord_fixed() + theme_scientific(12) +
     ggplot2::labs(title = "Synthetic expression demonstration",
       subtitle = "Invented labels and contrasts; no patient data or fitted estimates",
       x = "Simulated comparison (C1-C4)", y = "Invented teaching label (TeachA-TeachF)",

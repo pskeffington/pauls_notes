@@ -5,37 +5,37 @@ The examples use 48 independently simulated adult participants from `make_teachi
 Source **after** the core R plotting modules:
 
 ```r
-source("06_RESOURCES/R/hse_teaching_data.R")
+source("06_RESOURCES/R/teaching_data.R")
 health_data <- make_teaching_cohort()
-source("06_RESOURCES/R/hse_stats_plots.R")
-source("06_RESOURCES/R/hse_one_call_plots.R")
-source("06_RESOURCES/R/hse_biostat_panels.R")
-source("06_RESOURCES/R/hse_plot_annotations.R")
+source("06_RESOURCES/R/stats_plots.R")
+source("06_RESOURCES/R/one_call_plots.R")
+source("06_RESOURCES/R/biostat_panels.R")
+source("06_RESOURCES/R/plot_annotations.R")
 ```
 
-The annotation module decorates the existing plotting functions so a normal **one-call** statistical plot includes clear figure title, x/y axes, statistical method, sample size, p-value if applicable, multiple-testing details, and an appropriate limitations caption. Original statistical test objects remain available in `attr(plot, "hse_test")` or the existing function-specific attributes.
+The annotation module decorates the existing plotting functions so a normal **one-call** statistical plot includes clear figure title, x/y axes, statistical method, sample size, p-value if applicable, multiple-testing details, and an appropriate limitations caption. Original statistical test objects remain available in `attr(plot, "statistical_test")` or the existing function-specific attributes.
 
 ## One-call examples
 
 ```r
-p <- hse_plot_test(health_data, "Age", "Creatinine", method="pearson", fit=TRUE)
+p <- plot_test(health_data, "Age", "Creatinine", method="pearson", fit=TRUE)
 p <- p + ggplot2::labs(x = "Age (years)", y = "Creatinine (mg/dL)")
 print(p)
-hse_plot_annotation(p)              # machine-readable annotation fields
-hse_plot_audit(p)                   # missing-label and caption check
+get_plot_annotation(p)              # machine-readable annotation fields
+audit_plot_annotations(p)                   # missing-label and caption check
 
 # Add figure-specific publication provenance without changing the test:
-p <- hse_annotation(
+p <- annotate_plot(
   p,
   title="Synthetic age and creatinine",
   x="Age (years)", y="Creatinine (mg/dL)",
   source="make_teaching_cohort(): independently simulated data",
   note="Exploratory association; not causal"
 )
-hse_save_annotated(p, "figures/age_creatinine.pdf", require_source=TRUE)
+save_annotated_plot(p, "figures/age_creatinine.pdf", require_source=TRUE)
 ```
 
-`hse_save_annotated()` creates the figure and a neighboring `.annotations.R` manifest containing annotation fields, units, and export size. The manifest is a base-R `dput` file readable with `dget`.
+`save_annotated_plot()` creates the figure and a neighboring `.annotations.R` manifest containing annotation fields, units, and export size. The manifest is a base-R `dput` file readable with `dget`.
 
 ## Scope and statistical integrity
 
@@ -52,7 +52,7 @@ hse_save_annotated(p, "figures/age_creatinine.pdf", require_source=TRUE)
 ## Publication gate
 
 ```r
-audit <- hse_plot_audit(p, require_source=TRUE)
+audit <- audit_plot_annotations(p, require_source=TRUE)
 stopifnot(audit$pass)
 ```
 
@@ -61,5 +61,5 @@ This checks annotation presence, **not** correctness of the statistical model or
 To validate the implementation:
 
 ```sh
-Rscript --vanilla 06_RESOURCES/tests/test_hse_plot_annotations.R
+Rscript --vanilla 06_RESOURCES/tests/test_plot_annotations.R
 ```

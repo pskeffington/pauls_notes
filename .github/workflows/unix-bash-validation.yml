@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "01_unix_bash/**"
+      - "06_RESOURCES/Bash/**"
+      - "06_RESOURCES/tests/test_bash_helpers.sh"
       - ".github/workflows/unix-bash-validation.yml"
       - "README.md"
   push:
@@ -11,6 +13,8 @@ on:
       - main
     paths:
       - "01_unix_bash/**"
+      - "06_RESOURCES/Bash/**"
+      - "06_RESOURCES/tests/test_bash_helpers.sh"
       - ".github/workflows/unix-bash-validation.yml"
       - "README.md"
 
@@ -32,3 +36,6 @@ jobs:
           bash -n 01_unix_bash/examples/summarize_metadata.sh
           bash -n 01_unix_bash/tests/test_summarize_metadata.sh
           bash 01_unix_bash/tests/test_summarize_metadata.sh
+          bash -n 06_RESOURCES/Bash/bash_functions.sh
+          bash -n 06_RESOURCES/tests/test_bash_helpers.sh
+          bash 06_RESOURCES/tests/test_bash_helpers.sh

@@ -1046,7 +1046,7 @@ flowchart LR
 | TeachE | −2 | 0 | +2 | +1 |
 | TeachF | 0 | +2 | +1 | 0 |
 
-**Figure 6 caption.** Synthetic signed-expression demonstration with deliberately invented labels and values. This is **log2 fold change, not row z-score**. No clustering or subtype interpretation is warranted. **Inputs:** the literal invented matrix in [original R source](FIGURES/gene_companion_heatmap.R); PNG/PDF output is optional and restricted to a directory outside Git. The R contract verifies the numerical diagram labels against that matrix. **Sources:** the repository's [scientific palette](../R/hse_scientific_palette.R), independently authored fold-change arithmetic and [measurement explanation](GENE_EXPRESSION_INTERPRETATION.md).
+**Figure 6 caption.** Synthetic signed-expression demonstration with deliberately invented labels and values. This is **log2 fold change, not row z-score**. No clustering or subtype interpretation is warranted. **Inputs:** the literal invented matrix in [original R source](FIGURES/gene_companion_heatmap.R); PNG/PDF output is optional and restricted to a directory outside Git. The R contract verifies the numerical diagram labels against that matrix. **Sources:** the repository's [scientific palette](../R/scientific_palette.R), independently authored fold-change arithmetic and [measurement explanation](GENE_EXPRESSION_INTERPRETATION.md).
 
 **Text equivalent:** The six-row numerical table above reproduces every diagram value. On narrow screens, use that table or GitHub's diagram zoom controls; color is never the only carrier of the value.
 

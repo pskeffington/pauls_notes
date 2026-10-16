@@ -3,7 +3,7 @@
 **Author:** Paul Skeffington · **Prepared with OpenAI**  
 **Reviewed:** 11 October 2026 · **Status:** curated methodological bibliography and implementation plan
 
-[Resource index](../README.md) · [Literature index](README.md) · [Visualization gallery](../SPECIALIST_VISUALIZATIONS.md) · [Reusable R modules](../R/README.md) · [Scientific palette](../R/hse_scientific_palette.R)
+[Resource index](../README.md) · [Literature index](README.md) · [Visualization gallery](../SPECIALIST_VISUALIZATIONS.md) · [Reusable R modules](../R/README.md) · [Scientific palette](../R/scientific_palette.R)
 
 This original guide maps peer-reviewed biostatistics, data-visualization methods, reporting guidance and software references to reproducible R plots. It is a *targeted literature matrix*, not an exhaustive or systematic review. Papers about visual perception, software, statistical models, and study/reporting guidelines provide different types of evidence; no single paper certifies that a plot is clinically valid. Runtime tests, patient privacy review and scientific admission are separate release gates.
 
@@ -12,10 +12,10 @@ This original guide maps peer-reviewed biostatistics, data-visualization methods
 | Research question | Preferred visualization | Existing R implementation / next implementation | Interpretive safeguard |
 | --- | --- | --- | --- |
 | What is the distribution of a biomarker? | Raw dots with box/violin; histogram or ECDF | [one-call plots](../ONE_CALL_PLOTS.md), [gallery](../SPECIALIST_VISUALIZATIONS.md) | Show n, units and missingness; never treat box whiskers as CIs |
-| How does a patient's value change over time? | Matched trajectory, hybrid paired line | hse_plot_trajectory in [hse_biostat_panels.R](../R/hse_biostat_panels.R) | Confirm unique ID × visit; specify complete-pair denominator |
+| How does a patient's value change over time? | Matched trajectory, hybrid paired line | plot_trajectory in [biostat_panels.R](../R/biostat_panels.R) | Confirm unique ID × visit; specify complete-pair denominator |
 | What are the estimated group effects? | Effect-size / coefficient forest with intervals | ggplot2::geom_pointrange; only verified model output | State reference group, estimator, uncertainty type and multiplicity |
 | How do measurements relate? | Scatter, fitted model and diagnostics | [one-call plots](../ONE_CALL_PLOTS.md) | State units; no causal claim from association |
-| What patterns occur in gene expression? | Annotated heatmap, PCA, MA | [hse_gene_visuals.R](../R/hse_gene_visuals.R) | Freeze matrix identifiers; describe normalized expression versus row z-score |
+| What patterns occur in gene expression? | Annotated heatmap, PCA, MA | [gene_visuals.R](../R/gene_visuals.R) | Freeze matrix identifiers; describe normalized expression versus row z-score |
 | Do statistical tests support a contrast? | Volcano or uncertainty interval | Gene plotting only after inferential gate | Do not derive FDR/CI from descriptive effect sizes |
 | How well does a diagnostic classifier discriminate? | ROC plus PR when cases are rare | [biostat panels](../R/README.md); pROC / yardstick | Use out-of-sample labels and scores; record event prevalence |
 | Are predicted clinical risks calibrated? | Observed versus predicted risk / calibration curve | Planned validation plot: ggplot2::geom_point + geom_line + geom_abline | Require held-out predictions, events, horizon and smoothing details |

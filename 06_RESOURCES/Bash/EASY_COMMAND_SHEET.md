@@ -42,9 +42,9 @@ awk 'END { print (NR > 0 ? NR - 1 : 0) }' "$practice_dir/serum.csv"
 
 ```bash
 source "06_RESOURCES/Bash/bash_functions.sh"
-hse_require_command awk
-hse_require_file "data/example_table.csv"
-hse_sha256 "data/example_table.csv"
+require_command awk
+require_file "data/example_table.csv"
+file_sha256 "data/example_table.csv"
 ```
 
-The first two helper calls return success silently when their checks pass. The checksum identifies file contents; it does not establish their scientific validity. `hse_tsv_columns` and `hse_tsv_records` are for simple **tab-delimited** files. Use the [full operation sheet](BASH_OPERATION_SHEET.md) for loops, pipelines, arguments and additional examples.
+The first two helper calls return success silently when their checks pass. The checksum identifies file contents; it does not establish their scientific validity. `list_tsv_columns` and `count_tsv_records` are for simple **tab-delimited** files. Use the [full operation sheet](BASH_OPERATION_SHEET.md) for loops, pipelines, arguments and additional examples.

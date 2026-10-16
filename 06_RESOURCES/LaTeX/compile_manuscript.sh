@@ -20,7 +20,7 @@ for pkg in biblatex.sty apa.bbx csquotes.sty babel.sty mathptmx.sty; do
 done
 mkdir -p -- "$output_dir"
 output_dir=$(cd -- "$output_dir" && pwd)
-apa_build_dir=$(mktemp -d "${TMPDIR:-/tmp}/hse-apa-build.XXXXXX")
+apa_build_dir=$(mktemp -d "${TMPDIR:-/tmp}/apa-build.XXXXXX")
 trap 'rm -rf -- "$apa_build_dir"' EXIT
 cp -- "$source_dir/$name.tex" "$source_dir/$bib" "$apa_build_dir/"
 cd -- "$apa_build_dir"

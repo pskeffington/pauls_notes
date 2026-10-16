@@ -1,7 +1,7 @@
-# Gene plots: source hse_stats_plots.R first.
+# Gene plots: source stats_plots.R first.
 # Plot log2 CPM for exploration; keep raw counts for statistical models.
 
-hse_gene_validate <- function(expr, genes = NULL) {
+validate_gene_matrix <- function(expr, genes = NULL) {
   if (!is.matrix(expr) || !is.numeric(expr) || any(!is.finite(expr)))
     stop("expr must be a finite numeric genes-by-samples matrix.")
   if (is.null(rownames(expr)) || is.null(colnames(expr)) ||
@@ -14,8 +14,8 @@ hse_gene_validate <- function(expr, genes = NULL) {
 }
 
 # Align metadata by sample ID; never assume that row order matches expression.
-hse_gene_meta <- function(expr, metadata, sample_col = "Sample") {
-  hse_check_cols(metadata, sample_col)
+align_gene_metadata <- function(expr, metadata, sample_col = "Sample") {
+  validate_columns(metadata, sample_col)
   if (anyNA(metadata[[sample_col]]) ||
       anyDuplicated(as.character(metadata[[sample_col]])))
     stop("Metadata sample identifiers must be unique and nonmissing.")
@@ -26,8 +26,8 @@ hse_gene_meta <- function(expr, metadata, sample_col = "Sample") {
 
 # Stable top-variable feature choice for plots; uses row variance directly.
 # Only use finite log-scale expression. Explicit gene lists take precedence.
-hse_gene_top_var <- function(expr, n = 50L) {
-  hse_gene_validate(expr)
+top_variable_genes <- function(expr, n = 50L) {
+  validate_gene_matrix(expr)
   if (length(n) != 1L || !is.finite(n) || n < 1 || n != as.integer(n))
     stop("n must be a positive integer.")
   if (ncol(expr) < 2L) stop("Variance needs at least two samples.")
@@ -39,10 +39,10 @@ hse_gene_top_var <- function(expr, n = 50L) {
 # Heatmap: select genes FIRST (avoids materializing a full long table).
 # center_rows=TRUE highlights within-gene sample differences. Z-scores
 # are not absolute gene abundance and should be labeled accordingly.
-hse_gene_heatmap <- function(expr, genes, center_rows = TRUE,
+plot_gene_heatmap <- function(expr, genes, center_rows = TRUE,
                              title = "Selected gene expression heatmap", fill_scale = NULL) {
-  hse_gene_validate(expr, genes)
-  hse_require_plot()
+  validate_gene_matrix(expr, genes)
+  require_plotting_packages()
   expression_matrix <- expr[genes, , drop = FALSE]
   if (center_rows) {
     gene_mean <- rowMeans(expression_matrix)
@@ -65,20 +65,20 @@ hse_gene_heatmap <- function(expr, genes, center_rows = TRUE,
                                   na.value = "#808080", name = "Row z-score") else
       ggplot2::scale_fill_viridis_c(na.value = "#808080", name = "log2 CPM")) +
     ggplot2::labs(title = title, x = "Sample", y = "Gene") +
-    hse_theme() + ggplot2::theme(axis.text.x =
+    theme_publication() + ggplot2::theme(axis.text.x =
                                   ggplot2::element_text(angle = 90, hjust = 1, vjust = .5))
 }
 
 # PCA: select top-variable genes, then center gene columns across samples.
 # Constant genes are discarded to avoid singular/undefined scaling.
 # PCA is descriptive; biological group differences are not hypothesis tests.
-hse_gene_pca <- function(expr, metadata, group, n_genes = 500L,
+plot_gene_pca <- function(expr, metadata, group, n_genes = 500L,
                          sample_col = "Sample") {
-  hse_gene_validate(expr)
-  hse_check_cols(metadata, c(sample_col, group))
-  hse_require_plot()
-  aligned_metadata <- hse_gene_meta(expr, metadata, sample_col)
-  genes <- hse_gene_top_var(expr, n_genes)
+  validate_gene_matrix(expr)
+  validate_columns(metadata, c(sample_col, group))
+  require_plotting_packages()
+  aligned_metadata <- align_gene_metadata(expr, metadata, sample_col)
+  genes <- top_variable_genes(expr, n_genes)
   expression_matrix <- t(expr[genes, , drop = FALSE])
   variable_genes <- apply(expression_matrix, 2L, stats::sd) > 0
   expression_matrix <- expression_matrix[, variable_genes, drop = FALSE]
@@ -94,34 +94,34 @@ hse_gene_pca <- function(expr, metadata, group, n_genes = 500L,
     ggplot2::labs(title = "Gene expression PCA",
                   x = sprintf("PC1 (%.1f%%)", explained_variance_pct[1]),
                   y = sprintf("PC2 (%.1f%%)", explained_variance_pct[2]), color = group) +
-    hse_theme()
+    theme_publication()
 }
 
 # Mean-variance diagnostic: vectorized rowMeans and optional matrixStats.
 # Interpret on the supplied scale (recommended: log2 CPM).
-hse_gene_mean_variance <- function(expr) {
-  hse_gene_validate(expr)
+plot_gene_mean_variance <- function(expr) {
+  validate_gene_matrix(expr)
   if (ncol(expr) < 2L) stop("At least two samples required.")
-  hse_require_plot()
+  require_plotting_packages()
   plot_data <- data.frame(mean = rowMeans(expr),
                   variance = if (requireNamespace("matrixStats", quietly = TRUE))
                     matrixStats::rowVars(expr) else apply(expr, 1L, stats::var))
   ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$mean, y = .data$variance)) +
     ggplot2::geom_point(alpha = .2, size = .8) +
     ggplot2::labs(title = "Gene-level mean-variance diagnostic",
-                  x = "Mean log2 CPM", y = "Variance of log2 CPM") + hse_theme()
+                  x = "Mean log2 CPM", y = "Variance of log2 CPM") + theme_publication()
 }
 
 # Volcano plot: input MUST contain model-derived logFC and adjusted p-values.
 # This never fits a model and does not infer significance from CPM values.
 # p=0 can arise from numeric underflow; floor only for display.
-hse_gene_volcano <- function(results, logfc = "logFC", fdr = "FDR",
+plot_gene_volcano <- function(results, logfc = "logFC", fdr = "FDR",
                              gene = NULL, fdr_cutoff = .05,
                              effect_cutoff = 1, color_scale = NULL) {
-  hse_check_cols(results, c(logfc, fdr, gene))
-  hse_numeric(results[[logfc]], logfc)
-  hse_numeric(results[[fdr]], fdr)
-  hse_require_plot()
+  validate_columns(results, c(logfc, fdr, gene))
+  validate_numeric(results[[logfc]], logfc)
+  validate_numeric(results[[fdr]], fdr)
+  require_plotting_packages()
   if (!is.finite(fdr_cutoff) || fdr_cutoff <= 0 || fdr_cutoff >= 1 ||
       !is.finite(effect_cutoff) || effect_cutoff < 0)
     stop("Invalid FDR or effect-size cutoff.")
@@ -148,5 +148,5 @@ hse_gene_volcano <- function(results, logfc = "logFC", fdr = "FDR",
       labels = c("FALSE" = "Other", "TRUE" = "Meets cutoffs"), name = "Threshold status") +
     ggplot2::labs(title = "Differential-expression volcano",
                   x = "Model log2 fold change", y = "-log10(adjusted p-value)") +
-    hse_theme()
+    theme_publication()
 }

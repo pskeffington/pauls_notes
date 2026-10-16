@@ -1,16 +1,16 @@
 # Biostatistics and faceted ggplot2 helpers.
-# Source hse_stats_plots.R and hse_one_call_plots.R first.
+# Source stats_plots.R and one_call_plots.R first.
 # Optional packages: pROC and survival.
 
-hse_panel <- function(plot, facet, column = NULL, ncol = 3L,
+facet_plot <- function(plot, facet, column = NULL, ncol = 3L,
                       scales = c("fixed", "free_y", "free_x", "free")) {
-  hse_require_plot()
+  require_plotting_packages()
   if (!inherits(plot, "ggplot")) stop("plot must be a ggplot object")
   scales <- match.arg(scales)
   if (!is.character(facet) || length(facet) != 1L || !nzchar(facet))
     stop("facet must be a single column name")
   # ggplot2 stores the source data in plot$data; validate both facet keys.
-  hse_check_cols(plot$data, c(facet, column))
+  validate_columns(plot$data, c(facet, column))
   if (is.null(column)) {
     if (!is.numeric(ncol) || length(ncol) != 1L ||
         !is.finite(ncol) || ncol < 1 || ncol != as.integer(ncol))
@@ -25,12 +25,12 @@ hse_panel <- function(plot, facet, column = NULL, ncol = 3L,
 
 # Single call: a boxplot with patient or subgroup facets.
 # Statistics belong to the underlying comparison; no pooled p-value is
-# recycled across panels. Use hse_plot_panel_wilcox for panelwise p-values.
-hse_plot_panel_box <- function(data, value, group, facet,
+# recycled across panels. Use plot_panel_wilcox for panelwise p-values.
+plot_panel_box <- function(data, value, group, facet,
                                scales = "fixed", ncol = 3L) {
-  hse_check_cols(data, c(value, group, facet))
-  hse_numeric(data[[value]], value)
-  hse_require_plot()
+  validate_columns(data, c(value, group, facet))
+  validate_numeric(data[[value]], value)
+  require_plotting_packages()
   d <- data.frame(Value = data[[value]],
                   Group = factor(data[[group]]),
                   Panel = factor(data[[facet]]))
@@ -39,18 +39,18 @@ hse_plot_panel_box <- function(data, value, group, facet,
     ggplot2::geom_point(position = ggplot2::position_jitter(
       width = .12, height = 0, seed = 711), alpha = .32, size = 1,
       na.rm = TRUE) + ggplot2::labs(x = group, y = value,
-                                   title = paste(value, "by", group)) + hse_theme()
-  hse_panel(p, "Panel", ncol = ncol, scales = scales)
+                                   title = paste(value, "by", group)) + theme_publication()
+  facet_plot(p, "Panel", ncol = ncol, scales = scales)
 }
 
 # Faceted pairwise Wilcoxon panels. Each facet is tested separately and
 # requires exactly two observed groups and >=1 valid sample in each.
 # P-values are BH-adjusted across all facet tests, not independently.
-hse_plot_panel_wilcox <- function(data, value, group, facet,
+plot_panel_wilcox <- function(data, value, group, facet,
                                   p_adjust = "BH", ncol = 3L) {
-  hse_check_cols(data, c(value, group, facet))
-  hse_numeric(data[[value]], value)
-  hse_require_plot()
+  validate_columns(data, c(value, group, facet))
+  validate_numeric(data[[value]], value)
+  require_plotting_packages()
   p_adjust <- match.arg(p_adjust, stats::p.adjust.methods)
   d <- data[stats::complete.cases(data[c(value, group, facet)]), , drop = FALSE]
   keys <- unique(as.character(d[[facet]]))
@@ -60,7 +60,7 @@ hse_plot_panel_wilcox <- function(data, value, group, facet,
     groups <- unique(as.character(z[[group]]))
     if (length(groups) != 2L)
       stop("Each facet must contain two observed groups: ", k)
-    tst <- hse_wilcox_independent(z, value, group)
+    tst <- wilcox_independent(z, value, group)
     data.frame(Panel = k, n = nrow(z), p = tst$p.value)
   })
   tab <- do.call(rbind, result)
@@ -78,52 +78,52 @@ hse_plot_panel_wilcox <- function(data, value, group, facet,
     ggplot2::facet_wrap(ggplot2::vars(.data$PanelLabel), ncol = ncol) +
     ggplot2::labs(x = group, y = value,
                   title = "Facet-wise Wilcoxon comparisons",
-                  subtitle = paste("P adjustment across facets:", p_adjust)) + hse_theme()
-  attr(p, "hse_tests") <- tab
+                  subtitle = paste("P adjustment across facets:", p_adjust)) + theme_publication()
+  attr(p, "statistical_tests") <- tab
   p
 }
 
 # Longitudinal patient trajectories: separate within-ID lines, never connect
 # observations from different subjects. Repeated time per ID is rejected.
-hse_plot_trajectory <- function(data, id, time, value, group = NULL) {
-  hse_check_cols(data, c(id, time, value, group))
-  hse_numeric(data[[value]], value)
-  hse_require_plot()
+plot_trajectory <- function(data, id, time, value, group = NULL) {
+  validate_columns(data, c(id, time, value, group))
+  validate_numeric(data[[value]], value)
+  require_plotting_packages()
   d <- data[stats::complete.cases(data[c(id, time, value, group)]), , drop = FALSE]
   if (anyDuplicated(paste(d[[id]], d[[time]], sep = "\r")))
     stop("Duplicate subject/time observations")
-  d$.hse_id <- factor(d[[id]])
-  d$.hse_time <- d[[time]]
-  d$.hse_value <- d[[value]]
-  p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$.hse_time,
-    y = .data$.hse_value, group = .data$.hse_id)) +
+  d$.plot_id <- factor(d[[id]])
+  d$.plot_time <- d[[time]]
+  d$.plot_value <- d[[value]]
+  p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$.plot_time,
+    y = .data$.plot_value, group = .data$.plot_id)) +
     ggplot2::geom_line(alpha = .3) + ggplot2::geom_point(alpha = .5, size = .9) +
     ggplot2::labs(x = time, y = value, title = "Individual longitudinal trajectories") +
-    hse_theme()
+    theme_publication()
   if (!is.null(group)) {
-    d$.hse_group <- factor(d[[group]])
-    p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$.hse_time,
-      y = .data$.hse_value, group = .data$.hse_id, color = .data$.hse_group)) +
+    d$.plot_group <- factor(d[[group]])
+    p <- ggplot2::ggplot(d, ggplot2::aes(x = .data$.plot_time,
+      y = .data$.plot_value, group = .data$.plot_id, color = .data$.plot_group)) +
       ggplot2::geom_line(alpha = .3) + ggplot2::geom_point(alpha = .55, size = .9) +
       ggplot2::labs(x = time, y = value, color = group,
-                    title = "Individual longitudinal trajectories") + hse_theme()
+                    title = "Individual longitudinal trajectories") + theme_publication()
   }
   p
 }
 
 # Group mean with a classical t-based 95% confidence interval at each time.
 # These are descriptive cross-sectional CIs, NOT repeated-measures model CIs.
-hse_plot_mean_ci <- function(data, time, value, group = NULL,
+plot_mean_ci <- function(data, time, value, group = NULL,
                              conf_level = .95) {
-  hse_check_cols(data, c(time, value, group))
-  hse_numeric(data[[value]], value)
-  hse_require_plot()
+  validate_columns(data, c(time, value, group))
+  validate_numeric(data[[value]], value)
+  require_plotting_packages()
   if (!is.numeric(conf_level) || length(conf_level) != 1L ||
       !is.finite(conf_level) || conf_level <= 0 || conf_level >= 1)
     stop("conf_level must be between 0 and 1")
   d <- data[stats::complete.cases(data[c(time, value, group)]), , drop = FALSE]
-  d$hse_group <- if (is.null(group)) "All" else as.character(d[[group]])
-  key <- interaction(d[[time]], d$hse_group, drop = TRUE)
+  d$.plot_group <- if (is.null(group)) "All" else as.character(d[[group]])
+  key <- interaction(d[[time]], d$.plot_group, drop = TRUE)
   idx <- split(seq_len(nrow(d)), key)
   tab <- do.call(rbind, lapply(idx, function(ii) {
     x <- d[[value]][ii]
@@ -131,7 +131,7 @@ hse_plot_mean_ci <- function(data, time, value, group = NULL,
     if (n < 2L) stop("Each time-by-group cell needs at least two observations")
     m <- mean(x); se <- stats::sd(x) / sqrt(n)
     half <- stats::qt((1 + conf_level)/2, df = n - 1) * se
-    data.frame(time = d[[time]][ii[1]], group = d$hse_group[ii[1]],
+    data.frame(time = d[[time]][ii[1]], group = d$.plot_group[ii[1]],
                n = n, mean = m, low = m-half, high = m+half)
   }))
   p <- ggplot2::ggplot(tab, ggplot2::aes(x = .data$time, y = .data$mean,
@@ -141,18 +141,18 @@ hse_plot_mean_ci <- function(data, time, value, group = NULL,
                             width = .1) +
     ggplot2::labs(x = time, y = paste("Mean", value),
                   title = sprintf("Group means with %.0f%% t confidence intervals",
-                                  100*conf_level), color = group) + hse_theme()
-  attr(p, "hse_summary") <- tab
+                                  100*conf_level), color = group) + theme_publication()
+  attr(p, "summary") <- tab
   p
 }
 
 # Forest plot for *already estimated* effects and compatible confidence limits.
 # A zero reference is used for additive/log effects; a one reference for ratios.
-hse_plot_forest <- function(data, label, estimate, lower, upper,
+plot_forest <- function(data, label, estimate, lower, upper,
                             reference = 0, x_label = "Estimated effect") {
-  hse_check_cols(data, c(label, estimate, lower, upper))
-  for (nm in c(estimate, lower, upper)) hse_numeric(data[[nm]], nm)
-  hse_require_plot()
+  validate_columns(data, c(label, estimate, lower, upper))
+  for (nm in c(estimate, lower, upper)) validate_numeric(data[[nm]], nm)
+  require_plotting_packages()
   d <- data.frame(term = as.character(data[[label]]),
                   estimate = data[[estimate]], low = data[[lower]],
                   high = data[[upper]])
@@ -167,14 +167,14 @@ hse_plot_forest <- function(data, label, estimate, lower, upper,
                                       xmax = .data$high), width = .18, orientation = "y") +
     ggplot2::geom_point(size = 2.1) +
     ggplot2::labs(x = x_label, y = NULL, title = "Effect estimates and intervals") +
-    hse_theme()
+    theme_publication()
 }
 
 # Diagnostic residual-versus-fitted plot and normal Q-Q panel from an
 # existing lm object. No refitting or inference is performed.
-hse_plot_lm_diagnostics <- function(model) {
+plot_lm_diagnostics <- function(model) {
   if (!inherits(model, "lm")) stop("model must be an lm object")
-  hse_require_plot()
+  require_plotting_packages()
   d <- data.frame(Fitted = stats::fitted(model), Residual = stats::residuals(model))
   q <- stats::qqnorm(d$Residual, plot.it = FALSE)
   d2 <- rbind(data.frame(X = d$Fitted, Y = d$Residual, Panel = "Residual vs fitted"),
@@ -184,16 +184,16 @@ hse_plot_lm_diagnostics <- function(model) {
     ggplot2::facet_wrap(ggplot2::vars(.data$Panel), scales = "free") +
     ggplot2::labs(title = "Linear model diagnostics",
                   x = "Fitted value or theoretical quantile",
-                  y = "Residual or sample quantile") + hse_theme()
+                  y = "Residual or sample quantile") + theme_publication()
 }
 
 # ROC curve from a binary observed outcome and numeric prediction score.
 # Specify the positive class explicitly; a higher score must mean
 # higher predicted probability/risk for the positive class.
-hse_plot_roc <- function(data, outcome, score, positive) {
-  hse_check_cols(data, c(outcome, score))
-  hse_numeric(data[[score]], score)
-  hse_require_plot()
+plot_roc <- function(data, outcome, score, positive) {
+  validate_columns(data, c(outcome, score))
+  validate_numeric(data[[score]], score)
+  require_plotting_packages()
   if (!requireNamespace("pROC", quietly = TRUE))
     stop("Install pROC before requesting an ROC plot")
   d <- data[stats::complete.cases(data[c(outcome, score)]), , drop = FALSE]
@@ -215,18 +215,18 @@ hse_plot_roc <- function(data, outcome, score, positive) {
                          color = "grey60") +
     ggplot2::coord_equal(xlim = c(0, 1), ylim = c(0, 1)) +
     ggplot2::labs(x = "1 - specificity", y = "Sensitivity",
-                  title = sprintf("ROC curve | AUC %.3f", auc)) + hse_theme()
-  attr(p, "hse_roc") <- roc
+                  title = sprintf("ROC curve | AUC %.3f", auc)) + theme_publication()
+  attr(p, "roc") <- roc
   p
 }
 
 # Kaplan-Meier plot using a real survival fit and censoring marks.
 # Time and event are explicit columns; event must be 0/1 (1=event).
-hse_plot_survival <- function(data, time, event, group) {
-  hse_check_cols(data, c(time, event, group))
-  hse_numeric(data[[time]], time)
-  hse_numeric(data[[event]], event)
-  hse_require_plot()
+plot_survival <- function(data, time, event, group) {
+  validate_columns(data, c(time, event, group))
+  validate_numeric(data[[time]], time)
+  validate_numeric(data[[event]], event)
+  require_plotting_packages()
   if (!requireNamespace("survival", quietly = TRUE))
     stop("Install survival to plot Kaplan-Meier curves")
   d <- data[stats::complete.cases(data[c(time,event,group)]), , drop = FALSE]
@@ -251,7 +251,7 @@ hse_plot_survival <- function(data, time, event, group) {
     ggplot2::coord_cartesian(ylim = c(0, 1)) +
     ggplot2::labs(x = time, y = "Estimated survival probability",
                   color = group, title = "Kaplan-Meier survival estimate") +
-    hse_theme()
-  attr(p, "hse_fit") <- fit
+    theme_publication()
+  attr(p, "fit") <- fit
   p
 }
