@@ -2,7 +2,7 @@
 
 [Paul's Notes](../README.md) · [Research workflow](research-workflow.md) · [Learning roadmap](learning-roadmap.md)
 
-Use this index when you know the task but are not sure which guide, example or evidence register to open. If you're new, start with the [four learning and research routes](../README.md#start-here).
+Use this index when you know the task but are not sure which guide, example or evidence register to open. If you're new, start with the [starting routes](../README.md#start-here).
 
 ## Learn the concepts
 
