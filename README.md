@@ -44,6 +44,8 @@ The [Phase 4 assay robustness gate](04_machine_learning/robustness-experiment.md
 
 Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.
 
+The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication protocol](04_machine_learning/replication-protocol.md) declares three new synthetic cohort draws before their assessment; its runner and results remain planned.
+
 ## Research templates
 
 - [Study protocol](templates/study-protocol.md) — Research question, study design, and analysis plan.

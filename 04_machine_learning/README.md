@@ -17,6 +17,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Fair model comparison | [Matched assay procedures](model-comparison.md) | Fixed all-feature baseline and tuned subset procedure assessed on the same excluded people |
 | Reading ML figures | [Plotting gallery](gallery/README.md) | Rebuild seven figures from saved splits, candidates, feature summaries and predictions |
 | Robustness and tuning budgets | [Phase 4 synthetic stress experiment](robustness-experiment.md) | Prespecified changes in allocation, missingness and correlation; equal-fit grid/random search, complete candidate histories and guarded validation |
+| Repeated-cohort replication | [Phase 4B protocol](replication-protocol.md) | Three declared new synthetic cohorts, 1,872-fit ceiling and explicit stability/denominator contracts; runner and assessment planned |
 | Rust model deployment | [Frozen assay inference in Rust](rust-deployment.md) | Compile a prediction CLI and check both fitted procedures against Python |
 | Rust ML research | [Five-year literature review](rust-ml-literature.md) | Appraise 11 publications/manuscripts and six pinned software sources; connect deployment, native training and single-cell methods to the book |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
@@ -29,7 +30,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
-The [learning roadmap](../docs/learning-roadmap.md) now includes an implemented fixed all-feature comparison and the seven-figure gallery; a broader stability experiment and a separate survival case remain planned. It distinguishes available practice from planned implementations.
+The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery and bounded Phase 4 robustness baseline. The [gate ledger](../docs/roadmap-gates.md) records their delivery evidence and the next dependencies. Repeated-cohort assessment, person-aware uncertainty and the separate survival case remain planned; the Phase 4B protocol is declared before its runner executes.
 
 ## Run the caret example
 
