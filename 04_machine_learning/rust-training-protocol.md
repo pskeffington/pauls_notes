@@ -1,0 +1,41 @@
+# Native Rust training: frozen numerical contract
+
+Authored by Paul Skeffington · Compiled with OpenAI
+
+[ML subjects](README.md) · [Gate ledger](../docs/roadmap-gates.md#g3-native-rust-training) · [Contract](evidence/rust-training-contract-v1.json) · [Preserved frozen inference](rust-deployment.md)
+
+Declared **2026-10-16, before generation or fitting of this assessment**. Commit this protocol and its JSON contract before executing the new cohort. Protocol edits after exposed outcomes require a new version and an exploratory label. Tiny analytical/numerical fixtures may be used to test implementation; they are not assessment people.
+
+## People, specimens and boundaries
+
+Use the existing paired synthetic generator, with **60 people, two specimens per person, 48 anonymous continuous features**, cohort seed **26102201** and GroupShuffleSplit seed **26102202**, test_size 0.25. Record all membership coordinates. The **15 reserved people are never passed to a fitting or prediction engine**. Remap the 90 development rows to a compact input, retaining original cohort row, specimen, person and category identities. Three deterministic GroupKFold partitions each hold out **15 people / 30 specimens**, with **30 people / 60 specimens** for training. Fit one additional final-development model per engine with **45 people / 90 specimens** and no assessment predictions. Enforce complete paired people, distinct row indices, exhaustive partitioning and no person overlap in both languages.
+
+This is a **fixed all-feature baseline**. There is no selection, tuning or assessment-driven stopping, so there is no inner search. The earlier selected-feature, grid and random procedures and their inference tests remain available, but are not refitted here. Compare Linfa, a direct Python objective/Hessian calculation using SciPy trust-exact, scikit-learn lbfgs with matched objective, and training prevalence. Four fits for each of three optimizers give **12 optimization attempts**. Prevalence requires no optimizer. Save all 90 outer-held-out development predictions and each final-development model. Descriptive person-mean Brier, ROC-AUC and average precision do not establish biological or clinical performance.
+
+## Objective and class identity
+
+For standardized training matrix X, category y in {0,1}, z=Xw+b, minimize
+
+\[
+J(w,b)=\sum_i[\log(1+\exp(z_i))-y_i z_i]+\tfrac{1}{2}\|w\|_2^2.
+\]
+
+Use stable softplus/logistic arithmetic. The **sum** loss has alpha=1, an **unpenalized intercept**, no sample/class weights, f64 and zero initialization. Gradient is Xᵀ(p−y)+w and sum(p−y); the direct oracle uses the analytical full Hessian. scikit-learn 1.8.0 lbfgs uses mean loss with L2 strength 1/(C*n); multiplying by n gives this objective at **C=1/alpha=1**, with no extra n factor in C.
+
+Source review: [Linfa loss/gradient and labels at immutable revision](https://github.com/rust-ml/linfa/blob/3b411a4c985cdf6b83430d9c44f11e338d300c50/algorithms/linfa-logistic/src/lib.rs) (SHA-256 `25bdd2b581e07419d10b78075ed222c124bad7bd473b76eec7599e08c86be141`), [hyperparameters](https://github.com/rust-ml/linfa/blob/3b411a4c985cdf6b83430d9c44f11e338d300c50/algorithms/linfa-logistic/src/hyperparams.rs) and [scikit-learn 1.8.0 penalty scaling](https://github.com/scikit-learn/scikit-learn/blob/1.8.0/sklearn/linear_model/_logistic.py). Pin linfa/linfa-logistic 0.8.1 and ndarray 0.16.1, preserve Cargo.lock and verify the installed logistic source against the reviewed bytes. Linfa's binary implementation determines its positive class using observed counts/encounter order; its documentation's label-order wording is not an adequate class contract. Read the fitted public labels and negate coefficients/intercept, or complement probabilities, when its positive class is 0. Save the original mapping and canonical category-1 parameters. Test reversed encounter order and unequal counts on small fixtures.
+
+## Training-only preparation and numerical acceptance
+
+Each engine's fitted preprocessing must use **only its training rows**: per-column median imputation, then imputed mean and population standard deviation (ddof=0). Use scale 1 for exactly constant columns. Reject an all-missing training column, nonfinite values other than explicitly missing cells, overflow, invalid labels or malformed partitions. Assessment values cannot influence medians, means, scales or fitted coefficients. Rust implements its own preparation; Python separately uses SimpleImputer/StandardScaler and compares all fitted quantities within **1e-12 absolute**. Test training invariance after modifying only assessment measurements.
+
+Linfa uses its L-BFGS/More-Thuente implementation, gradient tolerance **1e-8**, maximum **5,000** iterations. Its public fitted API does not expose iterations or termination reason and can return a model at the iteration cap. Do not label library return alone convergence. Recalculate J and its gradient in the wrapper and the separate Python audit; require finite parameters/objective/probabilities and **gradient infinity norm ≤1e-6** for every engine. SciPy trust-exact: gtol=1e-10, maxiter=1,000. sklearn lbfgs: tol=1e-10, max_iter=5,000, reject ConvergenceWarning. Preserve SciPy's success/message and sklearn iteration count; a SciPy precision-loss message is acceptable only if the explicit residual criterion passes. Record unavailable Linfa diagnostics as unavailable.
+
+Compare **every outer prediction** and final-development predictions on development rows as numerical probes (separately labeled, never held-out accuracy) with the direct oracle. Require maximum absolute probability error **≤1e-5**, objective error **≤1e-8** and the residual gate above. The probability tolerance allows distinct iterative optimizers and rounding while retaining five decimal places; it is deliberately looser than frozen-inference 1e-12, which evaluates the same saved coefficients. It is an engineering agreement threshold, not a clinical equivalence margin or a theorem from the stopping tolerance. Report actual errors and every failure, without relaxing frozen thresholds. Also compare sklearn to the same oracle. Repeat-run probability tolerance is **1e-10** within a verified environment; cross-environment replay uses the same bound and reports differences rather than promising bit identity.
+
+## Tests, provenance and evidence
+
+Before the full assessment, test analytical zero-feature/intercept and known-gradient/Hessian fixtures, finite-difference derivatives, extreme logits, constant and missing columns, flipped class order, ill-conditioned/correlated or separated data with L2, exhausted-budget rejection, bad schema/identity/partition/values and output-overwrite protection. Keep the existing frozen-model inference suite green as a separate executable baseline. No favorable Brier or speed result is required.
+
+Use Rust **1.90.0**, release defaults without target-cpu=native, no requested BLAS/GPU/fast-math; pinned Python requirements, one worker and OMP/OPENBLAS threads=1. Record compiler, target, dependency lock/source hashes, Python versions, CPU/OS, thread settings, elapsed time and process resource usage. Resource measurements describe this run; they are not a controlled language-speed comparison. Execution ceiling is **300 seconds**, excluding toolchain installation/builds. CI separately formats, lints, tests, builds, executes/audits the full comparison and archives successful or failed output.
+
+The full runner must verify unchanged protocol bytes from its freeze commit and clean computational sources. Keep substantial input/model/prediction/diagnostic outputs outside Git, with SHA-256 inventories, source identities, an attempt log and retained subprocess stdout/stderr. Exclusive output creation protects existing results. On failure retain partial evidence and a failure report. A second process audits complete membership, recomputed transformations/objectives/gradients, all predictions, fit counts and hashes; compare a downloaded CI replay with the accepted local bundle. Commit only compact findings and audit identities. G3 completion is synthetic numerical/software evidence, with no learner-mastery or clinical claim. G4 survival remains a separately gated endpoint and does not depend on Rust.
