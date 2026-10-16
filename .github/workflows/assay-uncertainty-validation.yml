@@ -1,0 +1,44 @@
+name: Phase 4C conditional uncertainty
+
+on:
+  pull_request:
+    paths: ["04_machine_learning/**", ".github/workflows/assay-uncertainty-validation.yml"]
+  push:
+    branches: [main, feat/phase4c-person-uncertainty]
+    paths: ["04_machine_learning/**", ".github/workflows/assay-uncertainty-validation.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conditional-ranges:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install pinned dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/uncertainty-env"
+          "$RUNNER_TEMP/uncertainty-env/bin/python" -m pip install -r 04_machine_learning/requirements-python.txt
+      - name: Numeric fixtures, SciPy reference and deliberate failures
+        run: |
+          "$RUNNER_TEMP/uncertainty-env/bin/python" 04_machine_learning/tests/test_breast_cancer_uncertainty.py
+      - name: Full frozen-prediction assessment with zero training fits
+        run: |
+          "$RUNNER_TEMP/uncertainty-env/bin/python" 04_machine_learning/examples/breast_cancer_uncertainty.py "$RUNNER_TEMP/assay-uncertainty" --mode full
+          "$RUNNER_TEMP/uncertainty-env/bin/python" 04_machine_learning/examples/breast_cancer_uncertainty.py "$RUNNER_TEMP/assay-uncertainty" --audit-only
+      - name: Preserve complete or failed uncertainty evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase4c-uncertainty
+          path: ${{ runner.temp }}/assay-uncertainty/
+          if-no-files-found: warn
+          retention-days: 90
