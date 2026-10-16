@@ -83,7 +83,7 @@ mod tests {
     #[test]
     fn known_logit_and_missingness() {
         let m = example();
-        let expected = 1.0 / (1.0 + (-2.0_f64).exp());
+        let expected = 1.0 / (1.0 + (-1.0_f64).exp());
         assert!((m.predict(&[None, Some(3.0)]).unwrap() - expected).abs() < 1e-15);
         assert_eq!(m.predict(&[None, None]).unwrap(), m.predict(&[Some(3.0), Some(4.0)]).unwrap());
     }
