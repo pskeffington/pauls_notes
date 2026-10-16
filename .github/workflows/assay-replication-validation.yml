@@ -1,0 +1,69 @@
+name: Phase 4B synthetic replication
+
+on:
+  pull_request:
+    paths: ["04_machine_learning/**", ".github/workflows/assay-replication-validation.yml"]
+  push:
+    branches: [main, feat/phase4b-repeated-cohort-replication]
+    paths: ["04_machine_learning/**", ".github/workflows/assay-replication-validation.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install pinned dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/replication-env"
+          "$RUNNER_TEMP/replication-env/bin/python" -m pip install -r 04_machine_learning/requirements-python.txt
+      - name: Legacy compatibility and failure fixtures only
+        run: |
+          "$RUNNER_TEMP/replication-env/bin/python" 04_machine_learning/tests/test_breast_cancer_replication.py
+          "$RUNNER_TEMP/replication-env/bin/python" 04_machine_learning/examples/breast_cancer_replication.py "$RUNNER_TEMP/replication-smoke"
+      - name: Preserve smoke evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase4b-smoke
+          path: ${{ runner.temp }}/replication-smoke/
+          if-no-files-found: warn
+          retention-days: 14
+
+  full:
+    if: github.event_name != 'pull_request'
+    needs: smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install pinned dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/replication-env"
+          "$RUNNER_TEMP/replication-env/bin/python" -m pip install -r 04_machine_learning/requirements-python.txt
+      - name: Execute and audit 12 cells within the frozen 1872-fit budget
+        run: |
+          "$RUNNER_TEMP/replication-env/bin/python" 04_machine_learning/examples/breast_cancer_replication.py "$RUNNER_TEMP/replication-full" --mode full
+          "$RUNNER_TEMP/replication-env/bin/python" 04_machine_learning/examples/breast_cancer_replication.py "$RUNNER_TEMP/replication-full" --audit-only
+      - name: Preserve full or failed evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase4b-full
+          path: ${{ runner.temp }}/replication-full/
+          if-no-files-found: warn
+          retention-days: 90
