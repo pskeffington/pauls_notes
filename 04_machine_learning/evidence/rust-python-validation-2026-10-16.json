@@ -1,0 +1,462 @@
+{
+  "started_utc": "2026-10-16T09:54:22.471690+00:00",
+  "scope": "ML corpus and repository-owned synthetic workflows; not study reproduction",
+  "registered_publications": 36,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "seeds": [
+    261016,
+    261017,
+    261018
+  ],
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.8"
+  },
+  "rscript_available": false,
+  "checks": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/check_ml_evidence.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.054,
+      "log": "command-1.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/tests/test_sklearn_methods.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.357,
+      "log": "command-2.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/tests/test_breast_cancer_feature_selection.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.867,
+      "log": "command-3.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/tests/test_validation_audit.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.077,
+      "log": "command-4.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/tests/test_breast_cancer_comparison.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 14.125,
+      "log": "command-5.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/tests/test_gallery_diagnostics.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.174,
+      "log": "command-6.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/tests/test_rust_export.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.638,
+      "log": "command-7.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/examples/sklearn_methods.py",
+        "/tmp/corpus-validation-tc7rp4mf/general"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.898,
+      "log": "command-8.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/examples/breast_cancer_feature_selection.py",
+        "/tmp/corpus-validation-tc7rp4mf/paired"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.4,
+      "log": "command-9.log"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "04_machine_learning/examples/breast_cancer_comparison.py",
+        "/tmp/corpus-validation-tc7rp4mf/comparison"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.572,
+      "log": "command-10.log"
+    }
+  ],
+  "saved_replay": {
+    "max_absolute_probability_difference": 0.0,
+    "hashes_match": true,
+    "distinct_feature_rows": 48
+  },
+  "comparison": {
+    "protocol_id": "paired-comparison-v1",
+    "cohort_seed": 26101602,
+    "split_seed": 26101603,
+    "pipeline_fits": {
+      "selected": 76,
+      "all_features": 4,
+      "total": 80
+    },
+    "replay_max_absolute_difference": {
+      "selected": 0.0,
+      "all_features": 0.0
+    },
+    "development_brier_difference": -0.031005331507872293,
+    "final_test": {
+      "selected": {
+        "prediction": [
+          0.4654998882857616,
+          0.9933278872355852,
+          0.20725866097518839,
+          0.9816489708710094,
+          0.7702800591581911,
+          0.9979834279386297,
+          0.05821123573129813,
+          0.8669811990051456,
+          0.8276181625406643,
+          0.9995685273829936,
+          0.07691959675689822,
+          0.99518202235822,
+          0.45976648021835825,
+          0.9885376315889226,
+          0.029564977521479675,
+          0.9919097202746496,
+          0.7346333582211885,
+          0.770677310799505,
+          0.5304064331391084,
+          0.9990273514224237,
+          0.8629505479764837,
+          0.6000330104616756,
+          0.08246555173855648,
+          0.7590589411910651,
+          0.4846394767103138,
+          0.8749474796479078,
+          0.8734419391529036,
+          0.7811050206234444,
+          0.7640609009272351,
+          0.8481655475724589
+        ],
+        "metrics": {
+          "roc_auc": 0.9111111111111111,
+          "average_precision": 0.9212581716529085,
+          "brier": 0.17630276997597197
+        }
+      },
+      "all_features": {
+        "prediction": [
+          0.5046104867179069,
+          0.9986319435582127,
+          0.15135645632258757,
+          0.9867206422872292,
+          0.6221172578824233,
+          0.9992699780877434,
+          0.0042658019549187175,
+          0.8412150107726011,
+          0.9746224742245816,
+          0.9998976242963313,
+          0.03812056708407796,
+          0.997611993524184,
+          0.9783248086437393,
+          0.9992343107620141,
+          0.18089825285959335,
+          0.9986128802766789,
+          0.9881531902651495,
+          0.5581362573843328,
+          0.30916601758239043,
+          0.9987591171766831,
+          0.8216286018421859,
+          0.4039523212173152,
+          0.014682595223777071,
+          0.8764282673993465,
+          0.24950373340725995,
+          0.6821203182930123,
+          0.5997814266240008,
+          0.8297653289058595,
+          0.8968910955821937,
+          0.48385411002324713
+        ],
+        "metrics": {
+          "roc_auc": 0.8177777777777777,
+          "average_precision": 0.8448823687442613,
+          "brier": 0.21890396093619346
+        }
+      },
+      "prevalence": {
+        "prediction": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "metrics": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        }
+      },
+      "brier_difference": -0.04260119096022154
+    },
+    "figure_files": [
+      "gallery/allocation-missingness.pdf",
+      "gallery/allocation-missingness.png",
+      "gallery/allocation-missingness.svg",
+      "gallery/brier-comparison.pdf",
+      "gallery/brier-comparison.png",
+      "gallery/brier-comparison.svg",
+      "gallery/calibration.pdf",
+      "gallery/calibration.png",
+      "gallery/calibration.svg",
+      "gallery/candidate-scores.pdf",
+      "gallery/candidate-scores.png",
+      "gallery/candidate-scores.svg",
+      "gallery/feature-contrasts.pdf",
+      "gallery/feature-contrasts.png",
+      "gallery/feature-contrasts.svg",
+      "gallery/person-errors.pdf",
+      "gallery/person-errors.png",
+      "gallery/person-errors.svg",
+      "gallery/plot-data.json",
+      "gallery/selection-frequency.pdf",
+      "gallery/selection-frequency.png",
+      "gallery/selection-frequency.svg"
+    ]
+  },
+  "synthetic_stress": [
+    {
+      "seed": 261016,
+      "development_people": 45,
+      "test_people": 15,
+      "nested_metrics": {
+        "roc_auc": 0.9382716049382716,
+        "average_precision": 0.9511019204351613,
+        "brier": 0.08559953138553318
+      },
+      "final_test_metrics": {
+        "roc_auc": 0.9555555555555556,
+        "average_precision": 0.9637566137566136,
+        "brier": 0.09076971809690546
+      },
+      "prevalence_baseline": {
+        "roc_auc": 0.5,
+        "average_precision": 0.5,
+        "brier": 0.25
+      },
+      "best_parameters": {
+        "model__C": 1.0,
+        "select__k": 5
+      },
+      "selected_features": [
+        "Feature001",
+        "Feature002",
+        "Feature003",
+        "Feature004",
+        "Feature005"
+      ],
+      "pipeline_fits": 76,
+      "reserved_value_invariance": true
+    },
+    {
+      "seed": 261017,
+      "development_people": 45,
+      "test_people": 15,
+      "nested_metrics": {
+        "roc_auc": 0.9303703703703703,
+        "average_precision": 0.9180434067452957,
+        "brier": 0.10138092136620623
+      },
+      "final_test_metrics": {
+        "roc_auc": 0.9600000000000001,
+        "average_precision": 0.9556505912388265,
+        "brier": 0.07366159549947875
+      },
+      "prevalence_baseline": {
+        "roc_auc": 0.5,
+        "average_precision": 0.5,
+        "brier": 0.25
+      },
+      "best_parameters": {
+        "model__C": 1.0,
+        "select__k": 5
+      },
+      "selected_features": [
+        "Feature001",
+        "Feature002",
+        "Feature003",
+        "Feature005",
+        "Feature043"
+      ],
+      "pipeline_fits": 76,
+      "reserved_value_invariance": null
+    },
+    {
+      "seed": 261018,
+      "development_people": 45,
+      "test_people": 15,
+      "nested_metrics": {
+        "roc_auc": 0.9288888888888889,
+        "average_precision": 0.9202983937374997,
+        "brier": 0.10103944781087339
+      },
+      "final_test_metrics": {
+        "roc_auc": 0.8444444444444444,
+        "average_precision": 0.856006320571538,
+        "brier": 0.15734769093178838
+      },
+      "prevalence_baseline": {
+        "roc_auc": 0.5,
+        "average_precision": 0.5,
+        "brier": 0.25
+      },
+      "best_parameters": {
+        "model__C": 1.0,
+        "select__k": 5
+      },
+      "selected_features": [
+        "Feature001",
+        "Feature002",
+        "Feature003",
+        "Feature005",
+        "Feature029"
+      ],
+      "pipeline_fits": 76,
+      "reserved_value_invariance": null
+    }
+  ],
+  "published_arithmetic": {
+    "praim": {
+      "screened": 463094,
+      "excluded": 1276,
+      "analyzed": 461818,
+      "source": "https://doi.org/10.1038/s41591-024-03408-6"
+    },
+    "masai_2025": {
+      "intervention_people": 53043,
+      "control_people": 52872,
+      "detected_cancers": [
+        338,
+        262
+      ],
+      "rates_per_1000": [
+        6.372188601700507,
+        4.9553638977152366
+      ],
+      "detection_rate_ratio": 1.2859173883553787,
+      "workload_reduction_percent": 44.163658243080626,
+      "source": "https://doi.org/10.1016/S2589-7500(24)00267-X"
+    },
+    "interpretation": "Published-count arithmetic only; confidence intervals, p-values, causal effects and model predictions were not reproduced."
+  },
+  "published_artifact": {
+    "source_url": "https://raw.githubusercontent.com/slds-lmu/paper_2023_survival_benchmark/37d04d15993cb1f3771dbb784ea7251e0b512b1d/results/production/scores.csv",
+    "commit": "37d04d15993cb1f3771dbb784ea7251e0b512b1d",
+    "rows": 24750,
+    "datasets": 34,
+    "learners": 21,
+    "duplicate_keys": 0,
+    "rows_flagged_error": 462,
+    "rows_flagged_warning": 2,
+    "metric_coverage": {
+      "harrell_c": {
+        "finite": 15750,
+        "missing_or_uncomputed": 9000
+      },
+      "uno_c": {
+        "finite": 15750,
+        "missing_or_uncomputed": 9000
+      },
+      "isbs": {
+        "finite": 12750,
+        "missing_or_uncomputed": 12000
+      },
+      "isll": {
+        "finite": 12750,
+        "missing_or_uncomputed": 12000
+      },
+      "dcalib": {
+        "finite": 12750,
+        "missing_or_uncomputed": 12000
+      },
+      "alpha_calib": {
+        "finite": 12750,
+        "missing_or_uncomputed": 12000
+      }
+    },
+    "sha256": "e2292668b46e9ba26f2bbb0372e8274a7731101a4bf3f983d133a8fd660776e6",
+    "interpretation": "Processed-output integrity only; NA may mean uncomputed. No refitting, p-value replication or independent clinical validation."
+  },
+  "status": "pass",
+  "source_sha256": {
+    "04_machine_learning/evidence/breast-cancer-studies.csv": "866939d7767a17db39080e7a13d659daf8347761bf8758bf766ad969412e288c",
+    "04_machine_learning/evidence/paper-review.csv": "ca1c3ae8c6fe4f52223ff85f16a8e88c51ef258271463a0df9e8c2d7ea2a0450",
+    "04_machine_learning/examples/breast_cancer_comparison.py": "f3aedca2168b010ae5eb22cdb241624159c8a487c54ad3b3100643087dc29182",
+    "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
+    "04_machine_learning/examples/export_rust_inference.py": "3e4ff2474bc0569a6d5d83cab560326ac30ee9965ba285cdce8f94e36a357acf",
+    "04_machine_learning/examples/gallery_diagnostics.py": "d912f93d4dd542e3f513ad1a703c1f5faab7598b567a963211b28aa3533c4569",
+    "04_machine_learning/examples/plot_comparison.py": "9957eb0247965fe1977fd77a5056a38793ed15d921f0cccb89fb069c9ba6466d",
+    "04_machine_learning/examples/sklearn_methods.py": "76ccc712b7c111b23c530d9fe3ed2f84adf7a40ff910fe8691ca0b3774a59042",
+    "04_machine_learning/tests/test_breast_cancer_comparison.py": "7f111e5a141e875e63f3e4ae125f145846f46ffac5a7ac72bcd3bf1eaddbcf35",
+    "04_machine_learning/tests/test_breast_cancer_feature_selection.py": "c5bdc87ad13a24cdb1733b4c5e96658cb68762f6deb3ed5b7e495139f400d32e",
+    "04_machine_learning/tests/test_gallery_diagnostics.py": "07aa1e2892d195a9d862a745beca0acebbf2e93a3d5f974bc06b8b4e3bce5a9c",
+    "04_machine_learning/tests/test_rust_export.py": "01ac611fb44dfea06cf5743b53ee7396d02a332a0e5a0ca5a33a21e1f7104041",
+    "04_machine_learning/tests/test_sklearn_methods.py": "c3ca8a0f92754da918e0a67b4fea2a5f778f9abf3f296c2ed05f57f16002aba0",
+    "04_machine_learning/tests/test_validation_audit.py": "8511dd3b04fda2c776e180034d254be72bc655de1cd290158bde2477aa087ee4",
+    "04_machine_learning/validation/run_validation.py": "f97e5347305cabbe9c6c21b18ad8f1bee11a0f81d27932b1771e4c54413db62f",
+    "scripts/check_ml_evidence.py": "a7230ea08606f89095b8d5c90706a3c9a1e7cd624a596808e3c494520066868d"
+  },
+  "finished_utc": "2026-10-16T09:55:16.449709+00:00"
+}

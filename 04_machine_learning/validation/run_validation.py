@@ -180,6 +180,7 @@ def run(output, scores_csv=None):
         ['04_machine_learning/tests/test_validation_audit.py'],
         ['04_machine_learning/tests/test_breast_cancer_comparison.py'],
         ['04_machine_learning/tests/test_gallery_diagnostics.py'],
+        ['04_machine_learning/tests/test_rust_export.py'],
         ['04_machine_learning/examples/sklearn_methods.py', str(stage / 'general')],
         ['04_machine_learning/examples/breast_cancer_feature_selection.py', str(stage / 'paired')],
         ['04_machine_learning/examples/breast_cancer_comparison.py', str(stage / 'comparison')],

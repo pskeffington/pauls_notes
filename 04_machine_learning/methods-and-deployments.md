@@ -11,6 +11,7 @@ In the [breast cancer narrative](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_
 | Binary prediction | Python logistic regression, random forests and histogram boosting | Family-disjoint outer and inner cross-validation; ROC AUC, average precision, Brier score and final holdout |
 | Numerical prediction | Python ridge regression and random forests | Same family partitions; nested out-of-fold predictions, RMSE, MAE, R-squared and mean baseline |
 | Representation and clustering | Python imputation, scaling, PCA and k-means | Development-fitted transforms; new-person projections, cluster assignments and descriptive silhouette |
+| Frozen assay prediction | Rust binary with exported median/selection/scaling/logistic parameters | Per-specimen parity with both fitted Python procedures; strict input checks and run hashes |
 | Time-to-event analysis | Direct R `survival::coxph` | Prespecified predictors; held-out concordance with explicit risk direction and training PH diagnostics |
 | Expression association | Direct R `limma::lmFit`, `eBayes`, `topTable` | Sample alignment; full-rank batch/group design; log2-expression contrast and BH adjustment |
 
@@ -36,6 +37,10 @@ The [project tuning guide](model-tuning.md) records exact candidate values, sele
 ## Paired specimens and training-only feature selection
 
 The [advanced breast cancer guide](advanced-breast-cancer-training.md#executable-example-selecting-columns-while-holding-people-apart) follows 60 invented people and two specimen categories per person. Its [Python deployment](examples/breast_cancer_feature_selection.py) performs nested, person-grouped selection of assay columns, then exports held-out predictions, the final selected subset, standardized coefficients, outer-fold selection counts and descriptive permutation diagnostics. The guide documents the full-cohort index convention and interpretation limits.
+
+## Rust: deploy the frozen assay pipelines
+
+The [Rust deployment guide](rust-deployment.md) exports the paired comparison's final development models into versioned numeric JSON and scores label-free CSVs with a compiled CLI. It checks all synthetic specimen probabilities and numerical probes against Python, without retraining or recalibration. The guide includes build/run commands, input semantics and native Rust package routes for later training experiments.
 
 ## R: survival and expression analysis
 

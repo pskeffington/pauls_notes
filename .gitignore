@@ -21,3 +21,6 @@ Rplots.pdf
 *.fls
 *.run.xml
 *.synctex.gz
+
+# Rust build artifacts
+04_machine_learning/rust/target/

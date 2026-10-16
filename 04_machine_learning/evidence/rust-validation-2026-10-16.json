@@ -1,0 +1,86 @@
+{
+  "started_utc": "2026-10-16T09:57:18.872031+00:00",
+  "scope": "Cross-language frozen-model software replay, not training or clinical validation",
+  "tolerance_absolute_probability": 1e-12,
+  "binary_sha256": "bc160c646d687f3e892e5576eb3d5484432fc323d4fc33f76cc3a14a31a6d05b",
+  "checks": {
+    "selected": {
+      "specimens": 125,
+      "max_absolute_probability_difference": 2.7755575615628914e-16,
+      "record_kinds": {
+        "development_fitted_replay": 90,
+        "numerical_probe": 5,
+        "reserved_test_replay": 30
+      },
+      "runtime": {
+        "architecture": "x86_64",
+        "build_target": "x86_64-unknown-linux-gnu",
+        "compiler": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+        "crate_version": "0.1.0",
+        "input_features": 48,
+        "input_sha256": "846afa6d80364e4b6229a04817877ff41ec68869d85f10f176ee90949a43c74c",
+        "interpretation": "Frozen-model software replay on assay measurements; not clinical validation",
+        "model_name": "selected",
+        "model_sha256": "166f407d9a7a6f5bc3a9f5d9b43e5be37a403c8f5bbc442164e46c7461262d23",
+        "os": "linux",
+        "positive_class": 1,
+        "predictions_sha256": "185bb059ce8a82d140848fbf4e61c77724fa49168f6f1b0159de7d8ca9f3e702",
+        "protocol_id": "paired-comparison-v1",
+        "schema_version": 1,
+        "selected_features": 20,
+        "specimens": 125,
+        "task": "synthetic_paired_specimen_category"
+      }
+    },
+    "all_features": {
+      "specimens": 125,
+      "max_absolute_probability_difference": 3.3306690738754696e-16,
+      "record_kinds": {
+        "development_fitted_replay": 90,
+        "numerical_probe": 5,
+        "reserved_test_replay": 30
+      },
+      "runtime": {
+        "architecture": "x86_64",
+        "build_target": "x86_64-unknown-linux-gnu",
+        "compiler": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+        "crate_version": "0.1.0",
+        "input_features": 48,
+        "input_sha256": "846afa6d80364e4b6229a04817877ff41ec68869d85f10f176ee90949a43c74c",
+        "interpretation": "Frozen-model software replay on assay measurements; not clinical validation",
+        "model_name": "all_features",
+        "model_sha256": "d141e2c2db1d8a34761bfc0842a4e8e555bf3c8e04a6e86e90b500c39f12c4a8",
+        "os": "linux",
+        "positive_class": 1,
+        "predictions_sha256": "a612c6076dd4f6677b8c2292f9349d95f3b875687e7d67bd827c027210cb3f4d",
+        "protocol_id": "paired-comparison-v1",
+        "schema_version": 1,
+        "selected_features": 48,
+        "specimens": 125,
+        "task": "synthetic_paired_specimen_category"
+      }
+    }
+  },
+  "rejected_cases": [
+    "reordered_features",
+    "duplicate_specimen",
+    "nonfinite_NaN",
+    "nonfinite_inf",
+    "zero_model_scale",
+    "existing_output",
+    "output_symlink",
+    "repository_output"
+  ],
+  "status": "pass",
+  "source_sha256": {
+    "04_machine_learning/validation/validate_rust_inference.py": "5d8fb05a8f9b1a41998c70ad5b962cc6dac7853ba84080b214aa7e2cd25bf9c7",
+    "04_machine_learning/examples/export_rust_inference.py": "3e4ff2474bc0569a6d5d83cab560326ac30ee9965ba285cdce8f94e36a357acf",
+    "04_machine_learning/rust/Cargo.toml": "73c2a8791b7aab641fc26ebd9fc0fe796b74b8e14cda92bde3e236a685d9f6f8",
+    "04_machine_learning/rust/Cargo.lock": "1a6806ded6066f0c95b3b54887e8c9cbf3e59f099e40df62eb3a9081ca895dc8",
+    "04_machine_learning/rust/rust-toolchain.toml": "c33d1f0b1b8fda448bea32d7dc867aa64947c87169fd9de7122ffccad1dd80f9",
+    "04_machine_learning/rust/build.rs": "7f1af1d729c34c7f7b138cfd911bd95363a8b1d42416b4b48bd188c68ba91c80",
+    "04_machine_learning/rust/src/lib.rs": "4efec388e11717f84d7e12fa106917f7cb140b096dc36e9484a2cd10415faebd",
+    "04_machine_learning/rust/src/main.rs": "f23f46a431d900b9bbe81002d9aaa256994bdbe3efe83df85d1db81075bdb9db"
+  },
+  "finished_utc": "2026-10-16T09:57:18.903412+00:00"
+}

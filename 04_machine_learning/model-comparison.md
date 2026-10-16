@@ -45,6 +45,8 @@ Choose a new output directory outside the repository whose parent exists. Existi
 
 The [plotting command](examples/plot_comparison.py) rebuilds figures from `report.json`, `predictions.csv` and `display-inputs.json`, without fitting a model or loading a model object. It rejects incomplete rows, broken pairs, incorrect fold labels, invalid probabilities, and disagreements between saved predictions and error summaries.
 
+The [Rust deployment](rust-deployment.md) exports the two final development models into numeric JSON and applies their frozen preprocessing and coefficients in a compiled CLI. Its per-specimen parity checks verify runtime equivalence; in-sample development replay remains separate from the outer-held-out assessment above.
+
 ## Read the version 1 result
 
 The [committed numeric example](gallery/example/report.json) and [specimen records](gallery/example/predictions.csv) produce the displayed gallery:

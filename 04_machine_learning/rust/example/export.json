@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "protocol_id": "paired-comparison-v1",
+  "model_names": [
+    "selected",
+    "all_features"
+  ],
+  "cohort_people": 60,
+  "cohort_specimens": 120,
+  "numerical_probes": 5,
+  "training_people": 45,
+  "reserved_test_people": 15,
+  "feature_count": 48,
+  "source_bundle_sha256": {
+    "models.joblib": "6800b42b7ff2d0c3653501165de238889c88d174d4ddc12a248da5aa2f229684",
+    "report.json": "aace90634b5bef7701a15d8df1e12363cbfb64eeee2aebe5509767c5232b0f87",
+    "synthetic_inputs.npz": "680be0041fa23fe294b94794c1419d1af8c83b8f11b3d281e1973140b5713ca7",
+    "versions.json": "0696ae2568c8f0f3545983f9f77b172124267b46e20ea192ffc373f3494c3229"
+  },
+  "training_source_sha256": {
+    "04_machine_learning/examples/breast_cancer_comparison.py": "f3aedca2168b010ae5eb22cdb241624159c8a487c54ad3b3100643087dc29182",
+    "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
+    "04_machine_learning/examples/plot_comparison.py": "9957eb0247965fe1977fd77a5056a38793ed15d921f0cccb89fb069c9ba6466d",
+    "04_machine_learning/examples/gallery_diagnostics.py": "d912f93d4dd542e3f513ad1a703c1f5faab7598b567a963211b28aa3533c4569",
+    "04_machine_learning/gallery/plotting-contract.md": "7b24b3207dc96dc5d2603c23a2cc4eec0c4e99bcdd1a5dfda071c815811a7e96",
+    "04_machine_learning/comparison-protocol.md": "141b0374337e5431aff5f69f4f8b811833b0979610efe802b9eeaf6564b8994c"
+  },
+  "deployment_source_sha256": {
+    "04_machine_learning/examples/export_rust_inference.py": "3e4ff2474bc0569a6d5d83cab560326ac30ee9965ba285cdce8f94e36a357acf",
+    "04_machine_learning/rust/src/lib.rs": "4efec388e11717f84d7e12fa106917f7cb140b096dc36e9484a2cd10415faebd",
+    "04_machine_learning/rust/src/main.rs": "f23f46a431d900b9bbe81002d9aaa256994bdbe3efe83df85d1db81075bdb9db",
+    "04_machine_learning/rust/Cargo.toml": "73c2a8791b7aab641fc26ebd9fc0fe796b74b8e14cda92bde3e236a685d9f6f8",
+    "04_machine_learning/rust/Cargo.lock": "1a6806ded6066f0c95b3b54887e8c9cbf3e59f099e40df62eb3a9081ca895dc8",
+    "04_machine_learning/rust/rust-toolchain.toml": "c33d1f0b1b8fda448bea32d7dc867aa64947c87169fd9de7122ffccad1dd80f9",
+    "04_machine_learning/rust/build.rs": "7f1af1d729c34c7f7b138cfd911bd95363a8b1d42416b4b48bd188c68ba91c80"
+  },
+  "modeling_versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.8",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+  },
+  "interpretation": "Frozen final-development models; development replay is in-sample, not the gallery outer-held-out predictions. Probes test arithmetic only."
+}

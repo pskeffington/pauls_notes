@@ -1,0 +1,13 @@
+[package]
+name = "assay-predict"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.90"
+description = "Replay frozen synthetic assay logistic pipelines in Rust"
+publish = false
+
+[dependencies]
+csv = "=1.4.0"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = { version = "=1.0.154", features = ["float_roundtrip"] }
+sha2 = "=0.10.9"

@@ -8,7 +8,7 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[1]
 BOOK = ROOT / '06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md'
 IGNORED_DIRS = {'.git', '.venv', 'venv', '__pycache__', 'node_modules',
-                'outputs', 'figures', '.cache', '.pytest_cache'}
+                'outputs', 'figures', '.cache', '.pytest_cache', 'target'}
 SOURCE_PATH = re.compile(
     r'(?<![\w/])(?:scripts|0[1-6]_[A-Za-z_]+)/[A-Za-z0-9_./-]+\.(?:py|R|sh|tex|bib)\b')
 

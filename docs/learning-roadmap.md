@@ -15,6 +15,7 @@ The shared narrative is **people → specimens → measurements → prediction �
 | Unix/Bash guides and seven biomedical computing subject guides | Runnable practice in files, records, joins, missingness, models, figures and packaging |
 | ML introduction, algorithms, visual data-flow guide and breast cancer narrative | A connected reading route from data meaning to prediction |
 | R caret, direct R and Python examples | Independently executable teaching mechanisms with stated input and partition contracts |
+| Rust frozen-model prediction | Compiled CLI with preserved preprocessing, typed inputs and cross-language parity; native Rust fitting remains an extension |
 | Paired-specimen selection with candidate traces | Training-only selection, grouped nested assessment and saved prediction replay on invented data |
 | 36-paper register and dated review | Traceable sources and limitations; three records remain abstract-limited |
 | Recorded validation | The earlier 14-test run remains archived; the [comparison guide](../04_machine_learning/model-comparison.md) adds a third Python deployment; the [gallery validation](../04_machine_learning/evidence/gallery-validation-2026-10-16.json) records 25 tests across five suites |
@@ -93,7 +94,7 @@ Write down the target table or metric, dataset subset, source commit, environmen
 
 ## Work order and completion record
 
-**Phase 2's comparator and Phase 3's seven-figure gallery are implemented. The next development priority is Phase 4's prespecified stability and tuning-budget experiment.** Phase 1 can be practiced now with the existing material. The remaining phases build on those results; adding literature alone does not complete them.
+**Phase 2's comparator and Phase 3's seven-figure gallery are implemented. The next development priority is Phase 4's prespecified stability and tuning-budget experiment.** Phase 1 can be practiced now with the existing material. The [Rust inference path](../04_machine_learning/rust-deployment.md) also delivers the current fitted models with a separate runtime-parity contract; it does not complete Phase 4's training experiment. The remaining phases build on those results; adding literature alone does not complete them.
 
 For each phase, record the question, code/document change, executed command, observed result, learner explanation and remaining limitation in the [analysis record](../templates/analysis-record.md). A failed hypothesis or unchanged predictive performance can be a valid learning result. Mark repository delivery and personal understanding separately.
 

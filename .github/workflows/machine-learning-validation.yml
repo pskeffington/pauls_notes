@@ -67,3 +67,34 @@ jobs:
           test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/selection-frequency.svg"
           test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/feature-contrasts.pdf"
           test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/calibration.svg"
+
+  rust-inference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      CARGO_TARGET_DIR: ${{ runner.temp }}/assay-rust-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust and Python dependencies
+        run: |
+          rustup toolchain install 1.90.0 --profile minimal --component rustfmt,clippy
+          python3 -m venv "$RUNNER_TEMP/rust-parity-env"
+          "$RUNNER_TEMP/rust-parity-env/bin/python" -m pip install -r 04_machine_learning/requirements-python.txt
+      - name: Check and compile Rust inference
+        run: |
+          cargo +1.90.0 fmt --manifest-path 04_machine_learning/rust/Cargo.toml -- --check
+          cargo +1.90.0 clippy --locked --manifest-path 04_machine_learning/rust/Cargo.toml --all-targets -- -D warnings
+          cargo +1.90.0 test --locked --manifest-path 04_machine_learning/rust/Cargo.toml
+          cargo +1.90.0 build --release --locked --manifest-path 04_machine_learning/rust/Cargo.toml
+      - name: Verify committed example and a fresh training export
+        run: |
+          "$RUNNER_TEMP/rust-parity-env/bin/python" 04_machine_learning/validation/validate_rust_inference.py 04_machine_learning/rust/example "$RUNNER_TEMP/rust-snapshot-validation" --binary "$CARGO_TARGET_DIR/release/assay-predict"
+          "$RUNNER_TEMP/rust-parity-env/bin/python" 04_machine_learning/examples/breast_cancer_comparison.py "$RUNNER_TEMP/rust-training-source"
+          "$RUNNER_TEMP/rust-parity-env/bin/python" 04_machine_learning/examples/export_rust_inference.py "$RUNNER_TEMP/rust-training-source" "$RUNNER_TEMP/rust-portable" --trusted-local-bundle
+          "$RUNNER_TEMP/rust-parity-env/bin/python" 04_machine_learning/validation/validate_rust_inference.py "$RUNNER_TEMP/rust-portable" "$RUNNER_TEMP/rust-fresh-validation" --binary "$CARGO_TARGET_DIR/release/assay-predict"
+          test -s "$RUNNER_TEMP/rust-fresh-validation/validation.json"

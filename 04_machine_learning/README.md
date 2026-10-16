@@ -16,6 +16,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Advanced training and informative variables | [Breast cancer training and feature selection](advanced-breast-cancer-training.md) | Select assay columns inside nested person-grouped folds; inspect coefficients, selection frequency and held-out importance |
 | Fair model comparison | [Matched assay procedures](model-comparison.md) | Fixed all-feature baseline and tuned subset procedure assessed on the same excluded people |
 | Reading ML figures | [Plotting gallery](gallery/README.md) | Rebuild seven figures from saved splits, candidates, feature summaries and predictions |
+| Rust model deployment | [Frozen assay inference in Rust](rust-deployment.md) | Compile a prediction CLI and check both fitted procedures against Python |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
 | Breast cancer evidence | [Study evidence and implementation](breast-cancer-evidence.md) | Screening trials, future risk, prognosis, response prediction, author-code mechanisms and review limits |
 | Methods from recent research | [Paper-to-code studies](recent-code-studies.md) | Connect 2025–2026 papers and a leakage reference to implementation decisions |
@@ -50,6 +51,10 @@ python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py
 ```
 
 Use the pinned Python dependencies and a new output directory outside the repository with an existing parent.
+
+## Run the Rust prediction deployment
+
+The [Rust guide](rust-deployment.md) adds a compiled prediction CLI for the same two fitted assay procedures, with saved preprocessing parameters and cross-language parity checks. Start with its committed synthetic example; prediction requires no Python runtime after compilation. Native Rust training packages are reviewed separately from this implemented inference path.
 
 ## Check the implementation
 
