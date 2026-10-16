@@ -387,9 +387,36 @@
   ],
   "next_gate": "G4: freeze separate survival endpoint/data dictionary/Cox assessment protocol before fitting",
   "evidence_bundle": {
-    "bytes": 5631918,
-    "sha256": "ea0cbb9df206c8dad9110fe5914b64408e28ff941a2fcf31cbdade730294bc6b",
-    "entries": 193,
+    "bytes": 8327399,
+    "sha256": "431cf6f063a0764ee8ad27566ea342a5ca8380837377e3ff3a2b9fa8282a6e08",
+    "entries": 194,
     "filename": "Pauls_Notes_G3_Rust_Evidence_2026-10-16.zip"
+  },
+  "delivery_archive_repair": {
+    "initial_construction_bytes": 5631918,
+    "initial_construction_sha256": "ea0cbb9df206c8dad9110fe5914b64408e28ff941a2fcf31cbdade730294bc6b",
+    "later_observed_bytes": 2705758,
+    "later_observed_sha256": "fa5bd3c98930157983e7455ff043f88fee9dda11cafa620d45f0acbe19af8049",
+    "later_observed_status": "truncated ZIP, no central directory; retained inside rebuilt bundle",
+    "cause": "not established",
+    "original_experimental_outputs_and_ci_zips": "unchanged and complete",
+    "repair": "rebuilt from complete originals, flushed and atomically published; replaced same delivered item",
+    "replacement_after_save_bytes_verified": true,
+    "replacement_after_save_sha256_verified": true,
+    "replacement_zip_crc_and_member_hashes_verified": true,
+    "numerical_results_changed": false
+  },
+  "evidence_revision_pr_checks": {
+    "head_sha": "5693972b19aeb52c045dce3544609465af0569af",
+    "all_passed": true,
+    "run_ids": [
+      38944808019,
+      38944808245,
+      38944808036,
+      38944808105,
+      38944808125,
+      38944808137,
+      38944808067
+    ]
   }
 }
