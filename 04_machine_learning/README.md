@@ -24,6 +24,8 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
+The [learning roadmap](../docs/learning-roadmap.md) prioritizes a fixed all-feature comparator, a generated plotting gallery, stability experiments, and a separate survival case. It distinguishes available practice from planned implementations.
+
 ## Run the caret example
 
 Requirements: R and the `caret`, `glmnet`, `ranger` and `pROC` packages. From the repository root:

@@ -36,6 +36,8 @@ A reference collection connecting biological questions with data preparation, st
 
 For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
 
+Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.
+
 ## Research templates
 
 - [Study protocol](templates/study-protocol.md) — Research question, study design, and analysis plan.
