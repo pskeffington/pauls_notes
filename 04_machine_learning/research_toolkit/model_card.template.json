@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "document_type": "research_model_card_template_not_a_validated_model",
+  "research_use_only": true,
+  "clinical_use_authorized": false,
+  "diagnostic_use_authorized": false,
+  "individual_prognosis_authorized": false,
+  "treatment_selection_authorized": false,
+  "reidentification_permitted": false,
+  "data_project": "TCGA-BRCA",
+  "gdc_data_access_requirement": "official_per_file_open_access_verification",
+  "controlled_access_permitted": false,
+  "direct_identifiers_permitted": false,
+  "patient_level_training_currently_admitted": false,
+  "current_runner_data": "internally_generated_synthetic_only",
+  "holdout_requirements": "person_grouped_nested_evaluation_with_training_only_preprocessing_and_selection",
+  "data_release_status": "requires_independent_review_before_public_model_or_predicted_row_release",
+  "result_status": "exploratory_not_clinically_validated",
+  "limitations": [
+    "No clinical utility demonstrated",
+    "No independent external validation implied",
+    "Real-data model weights and predictions require privacy review",
+    "Small classes and molecular measurements can create reidentification risk"
+  ],
+  "source": "https://gdc.cancer.gov/",
+  "tcga_citation": "https://www.cancer.gov/ccg/research/genome-sequencing/tcga/using-tcga-data/citing"
+}
