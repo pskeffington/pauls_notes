@@ -154,6 +154,11 @@ def registration_problem(path, allowed):
         return "unregistered structured data; requires public asset review"
     return None
 
+def redacted_failure(path, reason):
+    """Do not echo filenames that could contain participant identifiers."""
+    fingerprint = hashlib.sha256(path.encode("utf-8")).hexdigest()[:12]
+    return f"BLOCKED path_hash={fingerprint}: {reason}"
+
 def main(argv=None):
     cli = argparse.ArgumentParser(description=__doc__)
     selection = cli.add_mutually_exclusive_group(required=True)
@@ -175,8 +180,7 @@ def main(argv=None):
             failures.append((path, "registered structured asset missing from Git"))
     if failures:
         for path, reason in failures:
-            fingerprint = hashlib.sha256(path.encode("utf-8")).hexdigest()[:12]
-            print(f"BLOCKED path_hash={fingerprint}: {reason}", file=sys.stderr)
+            print(redacted_failure(path, reason), file=sys.stderr)
         print(f"Data boundary check FAILED: {len(failures)} issue(s).", file=sys.stderr)
         return 1
     print("Public repository data boundary check passed (heuristic; does not cover Git history).")
