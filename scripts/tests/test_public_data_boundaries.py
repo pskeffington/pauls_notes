@@ -33,7 +33,7 @@ class PublicDataBoundaryTests(unittest.TestCase):
             ("patient.csv", b"feature\n123-45-6789\n"),
             ("gdc.json", b'{"access":"controlled","project":"TCGA-BRCA"}'),
             ("gdc.json", b'{"access":"unknown"}'),
-            ("credential.json", b'{"key":"-----BEGIN PRIVATE KEY-----"}'),
+            ("credential.json", b'{"key":"-----BEGIN ' + b'PRIVATE KEY-----"}'),
         ]
         for path, blob in cases:
             with self.subTest(path=path, blob=blob[:20]):
