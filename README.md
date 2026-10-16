@@ -1,39 +1,35 @@
 # Paul's Notes
 
-## Biomedical research documentation and resource guide
+Biomedical research, computing, and reproducible analysis.
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-A working reference for planning biomedical studies, understanding molecular data, writing reproducible analysis code, and communicating results. Start with the research workflow or open a subject guide directly.
-
 ## Start here
 
-| Research task | Guide |
-| --- | --- |
-| Plan a study and organize its analysis | [Research workflow](docs/research-workflow.md) |
-| Find documentation, methods and reusable code | [Resource guide](docs/resource-guide.md) |
-| Practice the biomedical computing workflow | [Learning sections and runnable case](03_learning/README.md) |
-| Learn command-line research computing | [Unix and Bash](01_unix_bash/README.md) |
-| Connect biomedical literature to coding practice | [Biomedical coding and literature](02_biomedical_coding/README.md) |
-| Read the breast cancer book | [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) |
-| Look up gene functions, assays and evidence | [Genomics and gene atlas](06_RESOURCES/Genomics/README.md) |
-| Build plots and summarize data in R | [R tools](06_RESOURCES/R/README.md) |
-| Prepare a manuscript and bibliography | [Writing resources](06_RESOURCES/LaTeX/README.md) |
+- **[Learn biomedical computing](03_learning/README.md)** — Work through practical lessons on R, data preparation, statistics, and reproducible workflows.
+- **[Read the breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)** — Explore 12 chapters covering people, data, biology, and 60 genes.
+- **[Find a research resource](docs/resource-guide.md)** — Browse documentation, methods, and reusable tools by task.
 
-## Working materials
+## Plan and understand your research
 
-Use the [study protocol](templates/study-protocol.md), [data dictionary](templates/data-dictionary.md), and [analysis record](templates/analysis-record.md) to connect the research question, input definitions, analysis decisions and reported outputs.
+- [Research workflow](docs/research-workflow.md) — From a research question to a documented analysis.
+- [Biomedical methods and literature](02_biomedical_coding/README.md) — Publications, software documentation, and implementation guidance.
+- [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) — Jump directly to a gene's profile.
+- [Genomics guides](06_RESOURCES/Genomics/README.md) — Molecular measurements, pathways, and supporting references.
 
-The [resource collection](06_RESOURCES/README.md) brings together Bash, R, genomics, visualization, literature and manuscript tools. The literature section includes 71 publications and 36 documentation resources, with implementation checks and method-specific limits.
+## Find a practical tool
 
-## Run the checks
+- [Unix and Bash](01_unix_bash/README.md) — Files, commands, scripting, and metadata processing.
+- [R tools and plotting](06_RESOURCES/R/README.md) — Summaries, figures, and reusable functions.
+- [Manuscript and bibliography tools](06_RESOURCES/LaTeX/README.md) — Writing and reference examples.
+- [All resources](06_RESOURCES/README.md) — Browse the complete collection.
 
-From the repository root:
+## Start with a template
 
-```bash
-bash 01_unix_bash/tests/test_summarize_metadata.sh
-python3 02_biomedical_coding/tests/test_literature_matrix.py
-python3 scripts/check_documentation.py
-```
+- [Study protocol](templates/study-protocol.md) — Define the question, design, and analysis plan.
+- [Data dictionary](templates/data-dictionary.md) — Record fields, identifiers, units, and missing values.
+- [Analysis record](templates/analysis-record.md) — Capture inputs, decisions, commands, and results.
 
-For R prerequisites and individual checks, see [R tools](06_RESOURCES/R/README.md). Repository reuse terms are in [LICENSE](LICENSE).
+---
+
+[Practice checks and validation](03_learning/mastery-checks.md) · [License](LICENSE)
