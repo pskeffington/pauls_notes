@@ -18,6 +18,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Reading ML figures | [Plotting gallery](gallery/README.md) | Rebuild seven figures from saved splits, candidates, feature summaries and predictions |
 | Robustness and tuning budgets | [Phase 4 synthetic stress experiment](robustness-experiment.md) | Prespecified changes in allocation, missingness and correlation; equal-fit grid/random search, complete candidate histories and guarded validation |
 | Repeated-cohort replication | [Phase 4B runner and report](replication-experiment.md) · [Frozen protocol](replication-protocol.md) | Three declared new synthetic cohorts, 1,872-fit ceiling, explicit stability denominators and durable failed-run records |
+| Person-aware uncertainty | [Phase 4C calculation](uncertainty-assessment.md) · [Frozen protocol](uncertainty-protocol.md) | Whole-person paired resampling of saved predictions; conditional ranges distinguished from full-procedure uncertainty |
 | Rust model deployment | [Frozen assay inference in Rust](rust-deployment.md) | Compile a prediction CLI and check both fitted procedures against Python |
 | Rust ML research | [Five-year literature review](rust-ml-literature.md) | Appraise 11 publications/manuscripts and six pinned software sources; connect deployment, native training and single-cell methods to the book |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
@@ -30,7 +31,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
-The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded Phase 4 robustness baseline and Phase 4B repeated-cohort assessment. The [gate ledger](../docs/roadmap-gates.md) records their delivery evidence and dependencies. Person-aware uncertainty is next; the separate survival case follows G1/G2, while native Rust training remains an independent extension.
+The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded robustness baseline, repeated-cohort assessment and conditional whole-person uncertainty. G1/G2 close the defined synthetic Phase 4 milestone. The [gate ledger](../docs/roadmap-gates.md) keeps full-procedure uncertainty and clinical claims separate. Native Rust training needs its own objective contract; the survival case can now begin its separate endpoint protocol without waiting for Rust.
 
 ## Run the caret example
 
