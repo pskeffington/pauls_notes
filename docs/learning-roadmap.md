@@ -16,6 +16,7 @@ The shared narrative is **people → specimens → measurements → prediction �
 | ML introduction, algorithms, visual data-flow guide and breast cancer narrative | A connected reading route from data meaning to prediction |
 | R caret, direct R and Python examples | Independently executable teaching mechanisms with stated input and partition contracts |
 | Rust frozen-model prediction | Compiled CLI with preserved preprocessing, typed inputs and cross-language parity; native Rust fitting remains an extension |
+| Five-year Rust ML review | [11 publications/manuscripts and six pinned software inspections](../04_machine_learning/rust-ml-literature.md), with explicit project decisions; external studies remain unreplicated |
 | Paired-specimen selection with candidate traces | Training-only selection, grouped nested assessment and saved prediction replay on invented data |
 | 36-paper register and dated review | Traceable sources and limitations; three records remain abstract-limited |
 | Recorded validation | The earlier 14-test run remains archived; the [comparison guide](../04_machine_learning/model-comparison.md) adds a third Python deployment; the [gallery validation](../04_machine_learning/evidence/gallery-validation-2026-10-16.json) records 25 tests across five suites |
@@ -71,6 +72,8 @@ Read the [overtuning evidence](../04_machine_learning/recent-tuning-evidence.md#
 Record which settings were fixed, which were searched, failed trials, elapsed time, worker limits and complete candidate histories. Describe stability on repeated, overlapping development samples as descriptive evidence. Keep assessment-based importance out of subsequent feature selection unless that adaptation receives its own assessment boundary.
 
 Once the baseline is credible, compare one search extension against the current grid under a declared resource budget. Fixed-budget random search is a candidate first experiment; Bayesian or multi-fidelity search needs a cost or resource justification. Six transparent candidates may remain sufficient for this small teaching space.
+
+The [Rust review's implementation route](../04_machine_learning/rust-ml-literature.md#a-bounded-route-from-reading-to-implementation) adds a separate candidate: a native Linfa logistic baseline. Declare its loss, penalty, intercept, probability direction and convergence behavior before fitting the same grouped training partitions. Retain the current comparators and distinguish a new training procedure from a change of inference runtime. If runtime is studied, first establish equivalent calculations and record hardware, precision, workload, startup and end-to-end measurements. This experiment remains planned and does not complete the broader stability work.
 
 **Finish with:** one reproducible robustness report that retains unfavorable runs and explains whether the extra search earned its cost. Do not set a minimum AUC or require a preferred optimizer to win. Patient-level uncertainty needs a specified estimand and dependence-aware method; fold spread is not its substitute.
 

@@ -1,0 +1,865 @@
+{
+  "started_utc": "2026-10-16T10:31:19.955986+00:00",
+  "status": "pass",
+  "scope": "Literature provenance and repository integrity, with separate synthetic workflow verification; no external study replication",
+  "review_window": [
+    "2021-10-16",
+    "2026-10-16"
+  ],
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "scripts/check_rust_ml_evidence.py"
+      ],
+      "exit_code": 0,
+      "output": "PASS: Rust ML 11 publications and 6 software/documentation inspections; provenance, pins, cards and bibliography"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/tests/test_rust_ml_evidence.py"
+      ],
+      "exit_code": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.089s\n\nOK"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_ml_evidence.py"
+      ],
+      "exit_code": 0,
+      "output": "PASS: 36 ML evidence records; citation IDs, review states, dates, cards and local applications\nPASS: Rust ML 11 publications and 6 software/documentation inspections; provenance, pins, cards and bibliography"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/tests/test_ml_evidence.py"
+      ],
+      "exit_code": 0,
+      "output": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.096s\n\nOK"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_documentation.py"
+      ],
+      "exit_code": 0,
+      "output": "PASS: 78 Markdown pages, local links and anchors; 12 chapters; 60 gene profiles"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_repository.py"
+      ],
+      "exit_code": 0,
+      "output": "PASS: Python and Bash syntax in 33 source files"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/tests/test_documentation.py"
+      ],
+      "exit_code": 0,
+      "output": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_book_learning.py"
+      ],
+      "exit_code": 0,
+      "output": "PASS: book chapters, sixty profiles and identities, evidence scope, lookup, seven figures and learning routes"
+    },
+    {
+      "command": [
+        "python3",
+        "03_learning/tests/test_book_learning.py"
+      ],
+      "exit_code": 0,
+      "output": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.102s\n\nOK"
+    },
+    {
+      "command": [
+        "python3",
+        "02_biomedical_coding/tests/test_literature_matrix.py"
+      ],
+      "exit_code": 0,
+      "output": "PASS: 71 distinct publications over 15 domains, 36 documented provider resources, provenance and links"
+    }
+  ],
+  "source_counts": {
+    "paper": 11,
+    "software": 6
+  },
+  "publication_status_counts": {
+    "conference_paper": 4,
+    "journal_article": 6,
+    "preprint": 1
+  },
+  "review_scope_counts": {
+    "selected_fulltext": 11,
+    "selected_source": 5,
+    "selected_documentation": 1
+  },
+  "reviewed_bytes": [
+    {
+      "id": "RML-P01",
+      "review_url": "https://c.wsmoses.com/papers/EnzymeGPU.pdf",
+      "sha256": "a91a10676754f484e5c2b5958765c13316d18f64db13893d772ac1bbc5021b01",
+      "bytes": 697674,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P02",
+      "review_url": "https://arxiv.org/pdf/2201.07201v2",
+      "sha256": "583f0847973a22beda775fe4f343a129a8cd6f4f9a51f37b09dfa7d65926eeeb",
+      "bytes": 759660,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P03",
+      "review_url": "https://arxiv.org/pdf/2407.05466v1",
+      "sha256": "931cbe46aac555f291f6a8c0bc23c15afefebae5873cc9488d26a6501cec7a97",
+      "bytes": 981339,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P04",
+      "review_url": "https://www.nature.com/articles/s41592-023-02139-9.pdf",
+      "sha256": "f2662a1840ca4fff65802ae8a264f9778091dbd49bdda3fd83f68d97fa302968",
+      "bytes": 6038935,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P05",
+      "review_url": "https://link.springer.com/content/pdf/10.1186/s13059-024-03356-x.pdf",
+      "sha256": "f56c13d428ff27e98dde99c16495461c76b7fcc50dcacb48716dd4a5a88626c3",
+      "bytes": 3780585,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P06",
+      "review_url": "https://arxiv.org/pdf/2409.19432v3",
+      "sha256": "a4df23c66ca3af599f770ad089e744e76f40276d8706c8409ccb669aa2bfb5b3",
+      "bytes": 982617,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P07",
+      "review_url": "https://arxiv.org/pdf/2411.17011v2",
+      "sha256": "942058ea74b064c5fa7c5d634abeadb7279e774ba6dd7e99c3bc17fc5b2f08a5",
+      "bytes": 5041749,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P08",
+      "review_url": "https://arxiv.org/pdf/2504.15976v1",
+      "sha256": "61675b73b5ab36d0f56fdc81a53271c387fe7dab3092e6993810b87120efd03d",
+      "bytes": 663277,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P09",
+      "review_url": "https://arrow.tudublin.ie/cgi/viewcontent.cgi?article=1004&context=dfrhro",
+      "sha256": "20b328a480da8f8aa6c47724f5d47cd0ee223dd182af61e8476f851845f0983e",
+      "bytes": 1312313,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P10",
+      "review_url": "https://arxiv.org/pdf/2512.09800v2",
+      "sha256": "3c3b91a1ac4503790bdd8ae9f7c5b7f0cb898bc5c4a6ea6b90f718b2359426de",
+      "bytes": 320737,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-P11",
+      "review_url": "https://arxiv.org/pdf/2609.25008v1",
+      "sha256": "34756d91daf3b17958ccd5eee47b2ba0f6cc2e7e1956bfa74224b15a125d425e",
+      "bytes": 106286,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-S01",
+      "review_url": "https://raw.githubusercontent.com/rust-ml/linfa/3b411a4c985cdf6b83430d9c44f11e338d300c50/algorithms/linfa-logistic/src/lib.rs",
+      "sha256": "25bdd2b581e07419d10b78075ed222c124bad7bd473b76eec7599e08c86be141",
+      "bytes": 51373,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-S02",
+      "review_url": "https://raw.githubusercontent.com/smartcorelib/smartcore/3b62cfc969236253a8c14ad170ee36dc7904efbf/src/linear/logistic_regression.rs",
+      "sha256": "9a13261e5a888bd09d5e34acef2954d6bd85c17323d498c2baa7eeb10ec952d8",
+      "bytes": 34149,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-S03",
+      "review_url": "https://raw.githubusercontent.com/tracel-ai/burn/ba73ce30ea34a22606c2919c67271d56b28f1050/examples/mnist/src/training.rs",
+      "sha256": "a7f52ffe3f147dceaf08e2bbe85c7f45589fc6c9bc3e3a67ed6fb7455af78525",
+      "bytes": 8388,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-S04",
+      "review_url": "https://raw.githubusercontent.com/huggingface/candle/12bb5d1f6350f4ea9827d9086f213feec1f0af6a/candle-examples/examples/mnist-training/main.rs",
+      "sha256": "58a9f89a43b4c96ab9f84e7b397509613ae98a04ec5ba7cf736deee3abd5a13f",
+      "bytes": 8597,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-S05",
+      "review_url": "https://raw.githubusercontent.com/pykeio/ort/60cbb73dc911d02e42dd54bf0bda60b77d5f3602/src/session/mod.rs",
+      "sha256": "9391d6c32cf73eb7995bd3fa5a3463ce466a4344c01e101574fa9acc49b9918a",
+      "bytes": 33992,
+      "digest_matches_register": true
+    },
+    {
+      "id": "RML-S06",
+      "review_url": "https://raw.githubusercontent.com/rust-lang/rust/bf9448e42622eaba63ebc171bb4584cea22210b4/src/doc/unstable-book/src/compiler-flags/autodiff.md",
+      "sha256": "767e3c26233cbeb26041303b39b455cf4a24b8ac174f0745ca91d8482e4bd5ee",
+      "bytes": 1540,
+      "digest_matches_register": true
+    }
+  ],
+  "publication_identity_checks": [
+    {
+      "id": "RML-P01",
+      "doi": "10.1145/3458817.3476165",
+      "crossref_type": "proceedings-article",
+      "published_date_parts": [
+        2021,
+        11,
+        13
+      ],
+      "metadata_sha256": "80442575ff5dfa48f6219a18762424a98b1cfedfd458f7f303694d48f8be1812"
+    },
+    {
+      "id": "RML-P02",
+      "doi": "10.1007/s10664-024-10570-5",
+      "crossref_type": "journal-article",
+      "published_date_parts": [
+        2024,
+        10,
+        18
+      ],
+      "metadata_sha256": "b620cc46feabeffcdacea9aef8c68d9af203674ee4065d8f716a031573660ff6"
+    },
+    {
+      "id": "RML-P03",
+      "doi": "10.1145/3678168",
+      "crossref_type": "journal-article",
+      "published_date_parts": [
+        2024,
+        12,
+        28
+      ],
+      "metadata_sha256": "fca43ad509829b7978a5202d7b99d45950ed903ff7aa4215f24355e2db3d6716"
+    },
+    {
+      "id": "RML-P04",
+      "doi": "10.1038/s41592-023-02139-9",
+      "crossref_type": "journal-article",
+      "published_date_parts": [
+        2024,
+        1,
+        8
+      ],
+      "metadata_sha256": "738bc70b874cc415f75e85e2c882e713b9e80663600e771934aa902d1d1ab6e7"
+    },
+    {
+      "id": "RML-P05",
+      "doi": "10.1186/s13059-024-03356-x",
+      "crossref_type": "journal-article",
+      "published_date_parts": [
+        2024,
+        8,
+        16
+      ],
+      "metadata_sha256": "067a1f49bce3dbec1b86929ecd4c72ab9d15b0d9f70d6e4106b54a91679bce4d"
+    },
+    {
+      "id": "RML-P06",
+      "doi": "10.1016/j.iot.2025.101498",
+      "crossref_type": "journal-article",
+      "published_date_parts": [
+        2025,
+        3
+      ],
+      "metadata_sha256": "9aa9119a77b78ae8e5f6e0819be0161e0ae1f8217652273839e671af7e6ec8a8"
+    },
+    {
+      "id": "RML-P07",
+      "doi": "10.1063/5.0250837",
+      "crossref_type": "journal-article",
+      "published_date_parts": [
+        2025,
+        2,
+        28
+      ],
+      "metadata_sha256": "fe4633477b0b42a7deb0234e6152ed9f58597321af062891339a8dbe15f65198"
+    },
+    {
+      "id": "RML-P08",
+      "doi": "10.1109/iros60139.2025.11245908",
+      "crossref_type": "proceedings-article",
+      "published_date_parts": [
+        2025,
+        10,
+        19
+      ],
+      "metadata_sha256": "b886f85fca3dab45de57ac6ccc4fe8168064cb43236bc40c76e314419033f968"
+    },
+    {
+      "id": "RML-P09",
+      "doi": "10.1145/3731545.3736817",
+      "crossref_type": "proceedings-article",
+      "published_date_parts": [
+        2025,
+        7,
+        20
+      ],
+      "metadata_sha256": "37f4caac4417bcfddaad84c4ba171b94942076a01be4f756413c69cedcb970fc"
+    },
+    {
+      "id": "RML-P10",
+      "doi": "10.1109/dcoss-iot69657.2026.00111",
+      "crossref_type": "proceedings-article",
+      "published_date_parts": [
+        2026,
+        6
+      ],
+      "metadata_sha256": "fb60af56b2035058fa328b59c8efc1ee9a546db140890e02165ec9e7af2c3cb7"
+    }
+  ],
+  "external_execution_counts": {
+    "not_run": 17
+  },
+  "breast_cancer_validation_counts": {
+    "not_established": 17
+  },
+  "source_sha256": {
+    ".github/workflows/documentation-validation.yml": "1fb4661474c99d9f5f7d3528d112bfa2b0869222e8119b136a71d2c384ebc05d",
+    "04_machine_learning/README.md": "09a3de0d9835296cf8e4ba7d307618ddccd41bc9ea6cba1e707a620210d92ce5",
+    "04_machine_learning/evidence/rust-ml-references.bib": "2993fc5dc6c5a5aa0910267ec2bcba14f18a1b7de525990721404ba2da14d757",
+    "04_machine_learning/evidence/rust-ml-search-2026-10-16.md": "aff4e821c198169f7725f3debb97da6065343ae9a0fb93a76eff80685e3b3489",
+    "04_machine_learning/evidence/rust-ml-sources.csv": "52e589357deb9372b221554b826466496dc10e6fa9d41ba1947fce6fa8e92bb3",
+    "04_machine_learning/package-guide.md": "7228d794c64a213b696447991d7129d02ecd3d8be7cd8d7b095ca105b650d2f7",
+    "04_machine_learning/rust-deployment.md": "9568ea607052e205e634674a07b33d818778091034edcbef660ed630062c3b93",
+    "04_machine_learning/rust-ml-literature.md": "2960af11c2d338fd17676cd1370c7790f9314625359e177dc444add77b92ae63",
+    "04_machine_learning/validation/run_validation.py": "6585a5030622bbbfd6045e203215d12fb637d38f69869a5416e15216067cda46",
+    "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md": "03adbbd2cecc5d41d2ce4500c1d7a7c1867261f5fce70bab60b63401a636fa80",
+    "README.md": "12217b9741fb19c7150db3286d659d36aa0f31963e58b38d9a0487d98214a5dd",
+    "docs/learning-roadmap.md": "e2a2e5f6e300c893db247da3f1a32e6e1a79b3fb9bbda1d87c41a1a7e48dd2c0",
+    "scripts/check_ml_evidence.py": "834a467fc60f119a60259c1978a6f56b140fbbcacc0f102dd94f679d4317fdeb",
+    "scripts/check_rust_ml_evidence.py": "89f2635f3e624693cddc4b3aa459a94a7755ba2b64e19a9f81a6d58b0683a10d",
+    "scripts/tests/test_rust_ml_evidence.py": "b53ad22e84d72e9e179883556d7571546e286a58328dbc569834b38a5b1846f7"
+  },
+  "finished_utc": "2026-10-16T10:31:21.567799+00:00",
+  "synthetic_workflow_validation": {
+    "started_utc": "2026-10-16T10:30:41.600172+00:00",
+    "scope": "ML corpus and repository-owned synthetic workflows; not study reproduction",
+    "registered_publications": 36,
+    "rust_literature_sources": {
+      "paper": 11,
+      "software": 6
+    },
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "seeds": [
+      261016,
+      261017,
+      261018
+    ],
+    "dependencies": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "scikit-learn": "1.8.0",
+      "joblib": "1.5.3",
+      "matplotlib": "3.10.8"
+    },
+    "rscript_available": false,
+    "checks": [
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/check_ml_evidence.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.047,
+        "log": "command-1.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/tests/test_sklearn_methods.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 7.568,
+        "log": "command-2.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/tests/test_breast_cancer_feature_selection.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 4.08,
+        "log": "command-3.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/tests/test_validation_audit.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.066,
+        "log": "command-4.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/tests/test_breast_cancer_comparison.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 14.231,
+        "log": "command-5.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/tests/test_gallery_diagnostics.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.18,
+        "log": "command-6.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/tests/test_rust_export.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 8.169,
+        "log": "command-7.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/examples/sklearn_methods.py",
+          "/tmp/corpus-validation-h8_gv4os/general"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 3.314,
+        "log": "command-8.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/examples/breast_cancer_feature_selection.py",
+          "/tmp/corpus-validation-h8_gv4os/paired"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.993,
+        "log": "command-9.log"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "04_machine_learning/examples/breast_cancer_comparison.py",
+          "/tmp/corpus-validation-h8_gv4os/comparison"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 7.752,
+        "log": "command-10.log"
+      }
+    ],
+    "saved_replay": {
+      "max_absolute_probability_difference": 0.0,
+      "hashes_match": true,
+      "distinct_feature_rows": 48
+    },
+    "comparison": {
+      "protocol_id": "paired-comparison-v1",
+      "cohort_seed": 26101602,
+      "split_seed": 26101603,
+      "pipeline_fits": {
+        "selected": 76,
+        "all_features": 4,
+        "total": 80
+      },
+      "replay_max_absolute_difference": {
+        "selected": 0.0,
+        "all_features": 0.0
+      },
+      "development_brier_difference": -0.031005331507872293,
+      "final_test": {
+        "selected": {
+          "prediction": [
+            0.4654998882857616,
+            0.9933278872355852,
+            0.20725866097518839,
+            0.9816489708710094,
+            0.7702800591581911,
+            0.9979834279386297,
+            0.05821123573129813,
+            0.8669811990051456,
+            0.8276181625406643,
+            0.9995685273829936,
+            0.07691959675689822,
+            0.99518202235822,
+            0.45976648021835825,
+            0.9885376315889226,
+            0.029564977521479675,
+            0.9919097202746496,
+            0.7346333582211885,
+            0.770677310799505,
+            0.5304064331391084,
+            0.9990273514224237,
+            0.8629505479764837,
+            0.6000330104616756,
+            0.08246555173855648,
+            0.7590589411910651,
+            0.4846394767103138,
+            0.8749474796479078,
+            0.8734419391529036,
+            0.7811050206234444,
+            0.7640609009272351,
+            0.8481655475724589
+          ],
+          "metrics": {
+            "roc_auc": 0.9111111111111111,
+            "average_precision": 0.9212581716529085,
+            "brier": 0.17630276997597197
+          }
+        },
+        "all_features": {
+          "prediction": [
+            0.5046104867179069,
+            0.9986319435582127,
+            0.15135645632258757,
+            0.9867206422872292,
+            0.6221172578824233,
+            0.9992699780877434,
+            0.0042658019549187175,
+            0.8412150107726011,
+            0.9746224742245816,
+            0.9998976242963313,
+            0.03812056708407796,
+            0.997611993524184,
+            0.9783248086437393,
+            0.9992343107620141,
+            0.18089825285959335,
+            0.9986128802766789,
+            0.9881531902651495,
+            0.5581362573843328,
+            0.30916601758239043,
+            0.9987591171766831,
+            0.8216286018421859,
+            0.4039523212173152,
+            0.014682595223777071,
+            0.8764282673993465,
+            0.24950373340725995,
+            0.6821203182930123,
+            0.5997814266240008,
+            0.8297653289058595,
+            0.8968910955821937,
+            0.48385411002324713
+          ],
+          "metrics": {
+            "roc_auc": 0.8177777777777777,
+            "average_precision": 0.8448823687442613,
+            "brier": 0.21890396093619346
+          }
+        },
+        "prevalence": {
+          "prediction": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "metrics": {
+            "roc_auc": 0.5,
+            "average_precision": 0.5,
+            "brier": 0.25
+          }
+        },
+        "brier_difference": -0.04260119096022154
+      },
+      "figure_files": [
+        "gallery/allocation-missingness.pdf",
+        "gallery/allocation-missingness.png",
+        "gallery/allocation-missingness.svg",
+        "gallery/brier-comparison.pdf",
+        "gallery/brier-comparison.png",
+        "gallery/brier-comparison.svg",
+        "gallery/calibration.pdf",
+        "gallery/calibration.png",
+        "gallery/calibration.svg",
+        "gallery/candidate-scores.pdf",
+        "gallery/candidate-scores.png",
+        "gallery/candidate-scores.svg",
+        "gallery/feature-contrasts.pdf",
+        "gallery/feature-contrasts.png",
+        "gallery/feature-contrasts.svg",
+        "gallery/person-errors.pdf",
+        "gallery/person-errors.png",
+        "gallery/person-errors.svg",
+        "gallery/plot-data.json",
+        "gallery/selection-frequency.pdf",
+        "gallery/selection-frequency.png",
+        "gallery/selection-frequency.svg"
+      ]
+    },
+    "synthetic_stress": [
+      {
+        "seed": 261016,
+        "development_people": 45,
+        "test_people": 15,
+        "nested_metrics": {
+          "roc_auc": 0.9382716049382716,
+          "average_precision": 0.9511019204351613,
+          "brier": 0.08559953138553318
+        },
+        "final_test_metrics": {
+          "roc_auc": 0.9555555555555556,
+          "average_precision": 0.9637566137566136,
+          "brier": 0.09076971809690546
+        },
+        "prevalence_baseline": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        },
+        "best_parameters": {
+          "model__C": 1.0,
+          "select__k": 5
+        },
+        "selected_features": [
+          "Feature001",
+          "Feature002",
+          "Feature003",
+          "Feature004",
+          "Feature005"
+        ],
+        "pipeline_fits": 76,
+        "reserved_value_invariance": true
+      },
+      {
+        "seed": 261017,
+        "development_people": 45,
+        "test_people": 15,
+        "nested_metrics": {
+          "roc_auc": 0.9303703703703703,
+          "average_precision": 0.9180434067452957,
+          "brier": 0.10138092136620623
+        },
+        "final_test_metrics": {
+          "roc_auc": 0.9600000000000001,
+          "average_precision": 0.9556505912388265,
+          "brier": 0.07366159549947875
+        },
+        "prevalence_baseline": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        },
+        "best_parameters": {
+          "model__C": 1.0,
+          "select__k": 5
+        },
+        "selected_features": [
+          "Feature001",
+          "Feature002",
+          "Feature003",
+          "Feature005",
+          "Feature043"
+        ],
+        "pipeline_fits": 76,
+        "reserved_value_invariance": null
+      },
+      {
+        "seed": 261018,
+        "development_people": 45,
+        "test_people": 15,
+        "nested_metrics": {
+          "roc_auc": 0.9288888888888889,
+          "average_precision": 0.9202983937374997,
+          "brier": 0.10103944781087339
+        },
+        "final_test_metrics": {
+          "roc_auc": 0.8444444444444444,
+          "average_precision": 0.856006320571538,
+          "brier": 0.15734769093178838
+        },
+        "prevalence_baseline": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        },
+        "best_parameters": {
+          "model__C": 1.0,
+          "select__k": 5
+        },
+        "selected_features": [
+          "Feature001",
+          "Feature002",
+          "Feature003",
+          "Feature005",
+          "Feature029"
+        ],
+        "pipeline_fits": 76,
+        "reserved_value_invariance": null
+      }
+    ],
+    "published_arithmetic": {
+      "praim": {
+        "screened": 463094,
+        "excluded": 1276,
+        "analyzed": 461818,
+        "source": "https://doi.org/10.1038/s41591-024-03408-6"
+      },
+      "masai_2025": {
+        "intervention_people": 53043,
+        "control_people": 52872,
+        "detected_cancers": [
+          338,
+          262
+        ],
+        "rates_per_1000": [
+          6.372188601700507,
+          4.9553638977152366
+        ],
+        "detection_rate_ratio": 1.2859173883553787,
+        "workload_reduction_percent": 44.163658243080626,
+        "source": "https://doi.org/10.1016/S2589-7500(24)00267-X"
+      },
+      "interpretation": "Published-count arithmetic only; confidence intervals, p-values, causal effects and model predictions were not reproduced."
+    },
+    "published_artifact": {
+      "source_url": "https://raw.githubusercontent.com/slds-lmu/paper_2023_survival_benchmark/37d04d15993cb1f3771dbb784ea7251e0b512b1d/results/production/scores.csv",
+      "commit": "37d04d15993cb1f3771dbb784ea7251e0b512b1d",
+      "rows": 24750,
+      "datasets": 34,
+      "learners": 21,
+      "duplicate_keys": 0,
+      "rows_flagged_error": 462,
+      "rows_flagged_warning": 2,
+      "metric_coverage": {
+        "harrell_c": {
+          "finite": 15750,
+          "missing_or_uncomputed": 9000
+        },
+        "uno_c": {
+          "finite": 15750,
+          "missing_or_uncomputed": 9000
+        },
+        "isbs": {
+          "finite": 12750,
+          "missing_or_uncomputed": 12000
+        },
+        "isll": {
+          "finite": 12750,
+          "missing_or_uncomputed": 12000
+        },
+        "dcalib": {
+          "finite": 12750,
+          "missing_or_uncomputed": 12000
+        },
+        "alpha_calib": {
+          "finite": 12750,
+          "missing_or_uncomputed": 12000
+        }
+      },
+      "sha256": "e2292668b46e9ba26f2bbb0372e8274a7731101a4bf3f983d133a8fd660776e6",
+      "interpretation": "Processed-output integrity only; NA may mean uncomputed. No refitting, p-value replication or independent clinical validation."
+    },
+    "status": "pass",
+    "source_sha256": {
+      "04_machine_learning/evidence/breast-cancer-studies.csv": "866939d7767a17db39080e7a13d659daf8347761bf8758bf766ad969412e288c",
+      "04_machine_learning/evidence/paper-review.csv": "ca1c3ae8c6fe4f52223ff85f16a8e88c51ef258271463a0df9e8c2d7ea2a0450",
+      "04_machine_learning/evidence/rust-ml-references.bib": "2993fc5dc6c5a5aa0910267ec2bcba14f18a1b7de525990721404ba2da14d757",
+      "04_machine_learning/evidence/rust-ml-search-2026-10-16.md": "aff4e821c198169f7725f3debb97da6065343ae9a0fb93a76eff80685e3b3489",
+      "04_machine_learning/evidence/rust-ml-sources.csv": "52e589357deb9372b221554b826466496dc10e6fa9d41ba1947fce6fa8e92bb3",
+      "04_machine_learning/examples/breast_cancer_comparison.py": "f3aedca2168b010ae5eb22cdb241624159c8a487c54ad3b3100643087dc29182",
+      "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
+      "04_machine_learning/examples/export_rust_inference.py": "3e4ff2474bc0569a6d5d83cab560326ac30ee9965ba285cdce8f94e36a357acf",
+      "04_machine_learning/examples/gallery_diagnostics.py": "d912f93d4dd542e3f513ad1a703c1f5faab7598b567a963211b28aa3533c4569",
+      "04_machine_learning/examples/plot_comparison.py": "9957eb0247965fe1977fd77a5056a38793ed15d921f0cccb89fb069c9ba6466d",
+      "04_machine_learning/examples/sklearn_methods.py": "76ccc712b7c111b23c530d9fe3ed2f84adf7a40ff910fe8691ca0b3774a59042",
+      "04_machine_learning/rust-ml-literature.md": "2960af11c2d338fd17676cd1370c7790f9314625359e177dc444add77b92ae63",
+      "04_machine_learning/tests/test_breast_cancer_comparison.py": "7f111e5a141e875e63f3e4ae125f145846f46ffac5a7ac72bcd3bf1eaddbcf35",
+      "04_machine_learning/tests/test_breast_cancer_feature_selection.py": "c5bdc87ad13a24cdb1733b4c5e96658cb68762f6deb3ed5b7e495139f400d32e",
+      "04_machine_learning/tests/test_gallery_diagnostics.py": "07aa1e2892d195a9d862a745beca0acebbf2e93a3d5f974bc06b8b4e3bce5a9c",
+      "04_machine_learning/tests/test_rust_export.py": "01ac611fb44dfea06cf5743b53ee7396d02a332a0e5a0ca5a33a21e1f7104041",
+      "04_machine_learning/tests/test_sklearn_methods.py": "c3ca8a0f92754da918e0a67b4fea2a5f778f9abf3f296c2ed05f57f16002aba0",
+      "04_machine_learning/tests/test_validation_audit.py": "8511dd3b04fda2c776e180034d254be72bc655de1cd290158bde2477aa087ee4",
+      "04_machine_learning/validation/run_validation.py": "6585a5030622bbbfd6045e203215d12fb637d38f69869a5416e15216067cda46",
+      "scripts/check_ml_evidence.py": "834a467fc60f119a60259c1978a6f56b140fbbcacc0f102dd94f679d4317fdeb",
+      "scripts/check_rust_ml_evidence.py": "89f2635f3e624693cddc4b3aa459a94a7755ba2b64e19a9f81a6d58b0683a10d",
+      "scripts/tests/test_rust_ml_evidence.py": "b53ad22e84d72e9e179883556d7571546e286a58328dbc569834b38a5b1846f7"
+    },
+    "finished_utc": "2026-10-16T10:31:33.522178+00:00"
+  },
+  "synthetic_test_suites": [
+    {
+      "suite": "04_machine_learning/tests/test_sklearn_methods.py",
+      "tests": 5,
+      "exit_code": 0
+    },
+    {
+      "suite": "04_machine_learning/tests/test_breast_cancer_feature_selection.py",
+      "tests": 6,
+      "exit_code": 0
+    },
+    {
+      "suite": "04_machine_learning/tests/test_validation_audit.py",
+      "tests": 3,
+      "exit_code": 0
+    },
+    {
+      "suite": "04_machine_learning/tests/test_breast_cancer_comparison.py",
+      "tests": 5,
+      "exit_code": 0
+    },
+    {
+      "suite": "04_machine_learning/tests/test_gallery_diagnostics.py",
+      "tests": 6,
+      "exit_code": 0
+    },
+    {
+      "suite": "04_machine_learning/tests/test_rust_export.py",
+      "tests": 4,
+      "exit_code": 0
+    }
+  ],
+  "interpretation": "All 17 retrieved-source byte digests match the register. Literature metadata checks and 29 existing synthetic ML tests passed. External papers and inspected Rust frameworks were not executed or clinically validated. R workflows and fresh Rust builds are verified separately by CI."
+}

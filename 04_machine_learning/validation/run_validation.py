@@ -164,9 +164,12 @@ def run(output, scores_csv=None):
     stage = Path(tempfile.mkdtemp(prefix='corpus-validation-', dir=output.parent))
     with (ROOT / '04_machine_learning/evidence/breast-cancer-studies.csv').open(newline='') as stream:
         registered = list(csv.DictReader(stream))
+    with (ROOT / '04_machine_learning/evidence/rust-ml-sources.csv').open(newline='') as stream:
+        rust_sources = list(csv.DictReader(stream))
     report = dict(started_utc=datetime.now(timezone.utc).isoformat(),
         scope='ML corpus and repository-owned synthetic workflows; not study reproduction',
         registered_publications=len(registered),
+        rust_literature_sources=dict(Counter(row['source_kind'] for row in rust_sources)),
         python=sys.version, platform=platform.platform(), seeds=list(SEEDS),
         dependencies={p: importlib.metadata.version(p)
                       for p in ('numpy', 'scipy', 'scikit-learn', 'joblib', 'matplotlib')},
@@ -252,7 +255,12 @@ def run(output, scores_csv=None):
         set(ROOT.glob('04_machine_learning/examples/*.py')) |
         set(ROOT.glob('04_machine_learning/tests/test_*.py')) | {Path(__file__).resolve(),
         ROOT / '04_machine_learning/evidence/breast-cancer-studies.csv',
-        ROOT / '04_machine_learning/evidence/paper-review.csv', ROOT / 'scripts/check_ml_evidence.py'})}
+        ROOT / '04_machine_learning/evidence/paper-review.csv', ROOT / 'scripts/check_ml_evidence.py',
+        ROOT / '04_machine_learning/evidence/rust-ml-sources.csv',
+        ROOT / '04_machine_learning/evidence/rust-ml-references.bib',
+        ROOT / '04_machine_learning/evidence/rust-ml-search-2026-10-16.md',
+        ROOT / '04_machine_learning/rust-ml-literature.md',
+        ROOT / 'scripts/check_rust_ml_evidence.py', ROOT / 'scripts/tests/test_rust_ml_evidence.py'})}
     report['finished_utc'] = datetime.now(timezone.utc).isoformat()
     (stage / 'validation.json').write_text(json.dumps(report, indent=2, allow_nan=False))
     if output.exists() or output.is_symlink():

@@ -90,6 +90,12 @@ The [recorded Rust validation](evidence/rust-validation-2026-10-16.json) records
 
 Matching probabilities demonstrates implementation equivalence within this contract. It supplies no new accuracy, speed, stability, calibration, clinical utility or external-site evidence. Benchmark speed only with a declared workload, build profile, platform and comparison runtime; no speedup is claimed here.
 
+## Evidence behind the next choices
+
+The [five-year Rust ML review](rust-ml-literature.md) separates 11 publications/manuscripts from six pinned software inspections. Binding studies motivate version control and probability checks; single-cell papers inform a future cell/specimen/donor contract; differentiation and device studies concern separate workloads. Their results do not establish a speedup or clinical validation for this assay CLI.
+
+For the next native-training comparison, the inspected [Linfa source](rust-ml-literature.md#rml-s01) exposes probabilities and a regularized logistic loss. Derive its relationship to the Python objective before matching settings, preserve training-only transforms and person-grouped splits, and retain convergence and fit-budget records. The [implementation route](rust-ml-literature.md#a-bounded-route-from-reading-to-implementation) keeps this proposed comparison separate from the completed frozen-model replay.
+
 ## Native Rust packages and next extensions
 
 Reviewed on 2026-10-16 against upstream documentation. These package routes are **references**, with no training or inference benchmark in this repository yet.

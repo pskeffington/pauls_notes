@@ -34,6 +34,8 @@ Choose packages along the [breast cancer book's workflow](../06_RESOURCES/Genomi
 | [renv](https://rstudio.github.io/renv/) | R dependency capture and reconstruction | Restore in a clean environment; a lock does not preserve datasets or hardware | Reference |
 | [targets](https://docs.ropensci.org/targets/) | Dependency-aware execution and caching | Every dependency/configuration affecting a result belongs in the graph | Reference |
 
+The [Rust ML literature review](rust-ml-literature.md) appraises 11 publications/manuscripts and inspects six upstream source files at immutable commits. It explains why probability interfaces, loss definitions, validation boundaries and native runtime versions matter for these package choices. Those inspections do not change the reference packages into executed deployments.
+
 The runnable workflows use CPU dependencies. The Python direct dependencies have a [version specification](requirements-python.txt); R runs record their session environment. Install GPU frameworks and foundation-model environments separately. A package citation, a valid installation, and a completed benchmark are different forms of evidence.
 
 ## Pair a package with a deployment record

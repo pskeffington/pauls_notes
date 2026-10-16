@@ -36,7 +36,7 @@ A reference collection connecting biological questions with data preparation, st
 
 The [assay comparison](04_machine_learning/model-comparison.md) adds a fixed all-feature baseline on matched people; its [plotting gallery](04_machine_learning/gallery/README.md) follows data allocation, missingness, tuning, feature summaries, probability errors and calibration through seven reproducible figures.
 
-The [Rust deployment](04_machine_learning/rust-deployment.md) runs both frozen assay models as a compiled prediction CLI, carrying over learned preprocessing and checking probabilities against Python.
+The [Rust deployment](04_machine_learning/rust-deployment.md) runs both frozen assay models as a compiled prediction CLI, carrying over learned preprocessing and checking probabilities against Python. The [five-year Rust ML review](04_machine_learning/rust-ml-literature.md) connects 11 publications/manuscripts and six software inspections to the breast cancer workflow and the next native-training experiment.
 
 For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
 

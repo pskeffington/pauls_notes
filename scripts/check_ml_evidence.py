@@ -127,9 +127,14 @@ def main():
     with REVIEW.open(newline='', encoding='utf-8') as stream:
         reviews = list(csv.DictReader(stream))
     errors += inspect_review(rows, reviews)
+    import check_rust_ml_evidence as rust_evidence
+    rust_rows = rust_evidence.read_rows()
+    errors += rust_evidence.inspect(rust_rows, rust_evidence.GUIDE.read_text(encoding='utf-8'),
+                                   ROOT, rust_evidence.BIBLIOGRAPHY.read_text(encoding='utf-8'))
     if errors:
         raise SystemExit('\n'.join(errors))
     print(f'PASS: {len(rows)} ML evidence records; citation IDs, review states, dates, cards and local applications')
+    print(f'PASS: Rust ML {rust_evidence.summary(rust_rows)}; provenance, pins, cards and bibliography')
 
 
 if __name__ == '__main__':
