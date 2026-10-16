@@ -85,7 +85,19 @@ def run(config):
             if pred.shape != (len(test), 2) or not np.isfinite(pred).all():
                 raise ValueError("Invalid probabilities")
             records.append({"fold": fold, "model": model_name, "train_people": int(len(np.unique(groups[train]))), "test_people": int(len(np.unique(groups[test]))), "test_rows": int(len(test)), "balanced_accuracy": float(balanced_accuracy_score(y[test], pred.argmax(axis=1))), "accuracy": float(accuracy_score(y[test], pred.argmax(axis=1))), "log_loss": float(log_loss(y[test], pred, labels=[0, 1])), "selected_parameters": selected, "test_group_ids": groups[test].astype(int).tolist(), "test_row_indices": test.astype(int).tolist(), "labels": y[test].astype(int).tolist(), "probability_class_1": pred[:, 1].tolist()})
-    return {"status": "synthetic_validation_only", "training_data": "internally_generated", "clinical_claim": False, "observations": len(X), "groups": people, "features": X.shape[1], "records": records}
+    return {"status": "synthetic_validation_only", "training_data": "internally_generated",
+            "clinical_claim": False, "observations": len(X), "groups": people,
+            "features": X.shape[1], "records": records,
+            "model_use": {
+                "status": "research_education_only_not_clinically_validated",
+                "clinical_use_authorized": False,
+                "patient_level_training_authorized": False,
+                "data_access": "internally_generated_synthetic_only",
+                "tcga_case_data_processed": False,
+                "reidentification_permitted": False,
+                "disclaimer": "NOT FOR CLINICAL USE: not a diagnostic, prognostic, treatment-selection or medical decision tool.",
+                "policy_path": "04_machine_learning/research_toolkit/MODEL_USE_POLICY.md"
+            }}
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
@@ -96,6 +108,8 @@ def main(argv=None):
     config = json.loads(raw)
     validate(config)
     target = args.output.resolve()
+    if target.is_relative_to(Path(__file__).resolve().parents[2]):
+        raise ValueError("Output must be outside the public source repository")
     if target.exists():
         raise ValueError("Output already exists; never overwrite research runs")
     if not target.parent.is_dir():
@@ -109,6 +123,7 @@ def main(argv=None):
         json.dump(result, output, indent=2, allow_nan=False)
         output.write("\n")
     print(f"Validated {len(result['records'])} synthetic fold/model assessments in {target}")
+    print("SYNTHETIC RESEARCH ONLY; NOT FOR CLINICAL USE.")
 
 if __name__ == "__main__":
     main()
