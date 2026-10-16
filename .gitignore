@@ -24,3 +24,57 @@ Rplots.pdf
 
 # Rust build artifacts
 04_machine_learning/rust/target/
+
+# TCGA/GDC data must remain local, even if designated open access.
+# Ignored files can still be added forcibly: CI tracked-file scanning is mandatory.
+/raw_data/
+/controlled_data/
+/restricted_data/
+/patient_data/
+/external_data/
+/datasets/
+/research_runs/
+/model_outputs/
+**/raw_data/
+**/controlled_data/
+**/restricted_data/
+**/patient_data/
+**/external_data/
+**/gdc_downloads/
+**/research_runs/
+**/model_outputs/
+04_machine_learning/research_toolkit/inputs/
+04_machine_learning/research_toolkit/outputs/
+clinical.project-tcga-*.tar.gz
+biospecimen.project-tcga-*.tar.gz
+*.bam
+*.bai
+*.cram
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.vcf
+*.vcf.gz
+*.maf
+*.maf.gz
+*.svs
+*.dcm
+*.parquet
+*.feather
+*.h5ad
+*.rds
+*.rdata
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.pem
+*.p12
+*.key
+.env
+.env.*
+*gdc-token*
+*dbgap-token*
