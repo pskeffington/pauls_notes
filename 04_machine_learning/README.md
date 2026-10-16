@@ -20,6 +20,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Repeated-cohort replication | [Phase 4B runner and report](replication-experiment.md) · [Frozen protocol](replication-protocol.md) | Three declared new synthetic cohorts, 1,872-fit ceiling, explicit stability denominators and durable failed-run records |
 | Person-aware uncertainty | [Phase 4C calculation](uncertainty-assessment.md) · [Frozen protocol](uncertainty-protocol.md) | Whole-person paired resampling of saved predictions; conditional ranges distinguished from full-procedure uncertainty |
 | Rust model deployment | [Frozen assay inference in Rust](rust-deployment.md) | Compile a prediction CLI and check both fitted procedures against Python |
+| Native Rust training | [Linfa baseline and numerical validation](rust-native-training.md) · [Frozen objective](rust-training-protocol.md) | Training-only preparation, person-disjoint folds, matched objective, explicit convergence checks and preserved failures |
 | Rust ML research | [Five-year literature review](rust-ml-literature.md) | Appraise 11 publications/manuscripts and six pinned software sources; connect deployment, native training and single-cell methods to the book |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
 | Breast cancer evidence | [Study evidence and implementation](breast-cancer-evidence.md) | Screening trials, future risk, prognosis, response prediction, author-code mechanisms and review limits |
@@ -31,7 +32,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
-The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded robustness baseline, repeated-cohort assessment and conditional whole-person uncertainty. G1/G2 close the defined synthetic Phase 4 milestone. The [gate ledger](../docs/roadmap-gates.md) keeps full-procedure uncertainty and clinical claims separate. Native Rust training needs its own objective contract; the survival case can now begin its separate endpoint protocol without waiting for Rust.
+The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded robustness baseline, repeated-cohort assessment and conditional whole-person uncertainty. G1/G2 close the defined synthetic Phase 4 milestone. The [gate ledger](../docs/roadmap-gates.md) keeps full-procedure uncertainty and clinical claims separate. The [native Rust baseline](rust-native-training.md) now checks a separately frozen objective and numerical contract. The survival case is next, beginning with its own endpoint protocol.
 
 ## Run the caret example
 
@@ -58,7 +59,7 @@ Use the pinned Python dependencies and a new output directory outside the reposi
 
 ## Run the Rust prediction deployment
 
-The [Rust guide](rust-deployment.md) adds a compiled prediction CLI for the same two fitted assay procedures, with saved preprocessing parameters and cross-language parity checks. Start with its committed synthetic example; prediction requires no Python runtime after compilation. Native Rust training packages are reviewed separately from this implemented inference path.
+The [Rust guide](rust-deployment.md) adds a compiled prediction CLI for the same two fitted assay procedures, with saved preprocessing parameters and cross-language parity checks. Start with its committed synthetic example; prediction requires no Python runtime after compilation. The [native training extension](rust-native-training.md) is opt-in and separately validated; the frozen inference baseline retains its own CI path.
 
 ## Check the implementation
 

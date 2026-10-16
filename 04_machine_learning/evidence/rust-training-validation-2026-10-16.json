@@ -1,0 +1,395 @@
+{
+  "gate": "G3",
+  "date": "2026-10-16",
+  "status": "complete_within_frozen_synthetic_numerical_scope",
+  "pr": "https://github.com/pskeffington/pauls_notes/pull/5",
+  "protocol_freeze_commit": "1b0d8eda2498136d495ad2a97cf24015d6d34fb1",
+  "source_addendum_commit": "7b512c0fbccae3a54c5d0089527032c5f0358e78",
+  "first_execution_commit": "df8e62501aad7733bdf1f369c1581aa99b539dfd",
+  "accepted_execution_commit": "aeb0e5271534c224114beb39607eac3eb7375600",
+  "source_tree": "b57eea40fd04d3af30aa3ee4de43ee951d1e4862",
+  "exact_commands": [
+    "CARGO_HOME=/tmp/pauls-g3-cargo RUSTUP_HOME=/tmp/pauls-g3-rustup CARGO_TARGET_DIR=/tmp/pauls-g3-build /tmp/pauls-g3-cargo/bin/cargo +1.90.0 fmt --manifest-path 04_machine_learning/rust/Cargo.toml -- --check",
+    "CARGO_HOME=/tmp/pauls-g3-cargo RUSTUP_HOME=/tmp/pauls-g3-rustup CARGO_TARGET_DIR=/tmp/pauls-g3-build /tmp/pauls-g3-cargo/bin/cargo +1.90.0 clippy --locked --manifest-path 04_machine_learning/rust/Cargo.toml --all-features --all-targets -- -D warnings",
+    "CARGO_HOME=/tmp/pauls-g3-cargo RUSTUP_HOME=/tmp/pauls-g3-rustup CARGO_TARGET_DIR=/tmp/pauls-g3-build /tmp/pauls-g3-cargo/bin/cargo +1.90.0 test --locked --manifest-path 04_machine_learning/rust/Cargo.toml --all-features",
+    "CARGO_HOME=/tmp/pauls-g3-cargo RUSTUP_HOME=/tmp/pauls-g3-rustup CARGO_TARGET_DIR=/tmp/pauls-g3-build /tmp/pauls-g3-cargo/bin/cargo +1.90.0 build --release --locked --manifest-path 04_machine_learning/rust/Cargo.toml --all-features",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 ASSAY_TRAIN_BINARY=/tmp/pauls-g3-build/release/assay-train python3 04_machine_learning/tests/test_breast_cancer_rust_training.py",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CARGO_HOME=/tmp/pauls-g3-cargo python3 04_machine_learning/examples/breast_cancer_rust_training.py /tmp/pauls-notes-g3-assessment-20261016 --binary /tmp/pauls-g3-build/release/assay-train",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/examples/breast_cancer_rust_training.py /tmp/pauls-notes-g3-assessment-20261016 --audit-only",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/validation/validate_rust_inference.py 04_machine_learning/rust/example /tmp/pauls-g3-preserved-inference --binary /tmp/pauls-g3-build/release/assay-predict",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/tests/test_rust_export.py",
+    "python3 scripts/check_documentation.py",
+    "python3 scripts/check_repository.py",
+    "python3 scripts/tests/test_documentation.py",
+    "python3 scripts/check_ml_evidence.py",
+    "python3 scripts/tests/test_ml_evidence.py",
+    "python3 scripts/check_rust_ml_evidence.py",
+    "python3 scripts/tests/test_rust_ml_evidence.py",
+    "git diff --check"
+  ],
+  "tests": {
+    "rust_training_new": 9,
+    "rust_inference_preserved": 6,
+    "python_native": 12,
+    "python_export_preserved": 4,
+    "documentation": 2,
+    "ml_evidence": 9,
+    "rust_evidence": 6,
+    "all_passed": true
+  },
+  "numerical": {
+    "comparisons": [
+      {
+        "plan": "outer_0",
+        "training_people": 30,
+        "assessment_people": 15,
+        "models": {
+          "linfa": {
+            "max_probability_error": 7.530878420869414e-09,
+            "objective_error": 2.6645352591003757e-15,
+            "gradient_inf": 3.4205875180937095e-08,
+            "objective": 7.326506501484873,
+            "coefficient_max_difference": 1.2206229152433856e-08
+          },
+          "scipy_newton": {
+            "max_probability_error": 0.0,
+            "objective_error": 0.0,
+            "gradient_inf": 9.371392550860946e-13,
+            "objective": 7.326506501484871,
+            "coefficient_max_difference": 0.0
+          },
+          "sklearn_lbfgs": {
+            "max_probability_error": 2.0479362045078275e-07,
+            "objective_error": 1.6431300764452317e-13,
+            "gradient_inf": 4.6159900501940854e-07,
+            "objective": 7.326506501485035,
+            "coefficient_max_difference": 2.071604610076605e-07
+          }
+        },
+        "preprocessing_error": {
+          "linfa": 0.0,
+          "scipy_newton": 0.0,
+          "sklearn_lbfgs": 0.0
+        }
+      },
+      {
+        "plan": "outer_1",
+        "training_people": 30,
+        "assessment_people": 15,
+        "models": {
+          "linfa": {
+            "max_probability_error": 2.327816717162534e-09,
+            "objective_error": 1.7763568394002505e-15,
+            "gradient_inf": 7.25786544752971e-09,
+            "objective": 7.2349776247582,
+            "coefficient_max_difference": 5.278390835528057e-09
+          },
+          "scipy_newton": {
+            "max_probability_error": 0.0,
+            "objective_error": 0.0,
+            "gradient_inf": 4.268793651895919e-12,
+            "objective": 7.234977624758198,
+            "coefficient_max_difference": 0.0
+          },
+          "sklearn_lbfgs": {
+            "max_probability_error": 2.076334199019314e-07,
+            "objective_error": 1.270095140171179e-13,
+            "gradient_inf": 2.284723608081407e-07,
+            "objective": 7.234977624758325,
+            "coefficient_max_difference": 1.4465212982983644e-07
+          }
+        },
+        "preprocessing_error": {
+          "linfa": 0.0,
+          "scipy_newton": 0.0,
+          "sklearn_lbfgs": 0.0
+        }
+      },
+      {
+        "plan": "outer_2",
+        "training_people": 30,
+        "assessment_people": 15,
+        "models": {
+          "linfa": {
+            "max_probability_error": 2.7622649168002056e-09,
+            "objective_error": 1.7763568394002505e-15,
+            "gradient_inf": 5.123884523269839e-09,
+            "objective": 7.471874500493286,
+            "coefficient_max_difference": 2.182414027274149e-09
+          },
+          "scipy_newton": {
+            "max_probability_error": 0.0,
+            "objective_error": 0.0,
+            "gradient_inf": 1.1681766665105897e-12,
+            "objective": 7.471874500493287,
+            "coefficient_max_difference": 0.0
+          },
+          "sklearn_lbfgs": {
+            "max_probability_error": 3.4936641424287984e-07,
+            "objective_error": 3.5793590313915047e-13,
+            "gradient_inf": 2.821251075535436e-07,
+            "objective": 7.471874500493645,
+            "coefficient_max_difference": 2.0763940850737628e-07
+          }
+        },
+        "preprocessing_error": {
+          "linfa": 0.0,
+          "scipy_newton": 0.0,
+          "sklearn_lbfgs": 0.0
+        }
+      },
+      {
+        "plan": "final_development",
+        "training_people": 45,
+        "assessment_people": 0,
+        "models": {
+          "linfa": {
+            "max_probability_error": 1.1239758984649129e-08,
+            "objective_error": 0.0,
+            "gradient_inf": 8.852277197032854e-08,
+            "objective": 10.577349439316183,
+            "coefficient_max_difference": 1.984212966155141e-08
+          },
+          "scipy_newton": {
+            "max_probability_error": 0.0,
+            "objective_error": 0.0,
+            "gradient_inf": 3.9428077469594314e-10,
+            "objective": 10.577349439316183,
+            "coefficient_max_difference": 0.0
+          },
+          "sklearn_lbfgs": {
+            "max_probability_error": 8.387440908474986e-08,
+            "objective_error": 1.120881165661558e-12,
+            "gradient_inf": 8.111933264692839e-07,
+            "objective": 10.577349439317304,
+            "coefficient_max_difference": 5.455554663580386e-07
+          }
+        },
+        "preprocessing_error": {
+          "linfa": 0.0,
+          "scipy_newton": 0.0,
+          "sklearn_lbfgs": 0.0
+        }
+      }
+    ],
+    "metrics": {
+      "linfa": {
+        "roc_auc": 0.9318518518518518,
+        "average_precision": 0.9251066700078707,
+        "brier": 0.10164836989502908,
+        "person_mean_brier": 0.10164836989502908
+      },
+      "scipy_newton": {
+        "roc_auc": 0.9318518518518518,
+        "average_precision": 0.9251066700078707,
+        "brier": 0.10164837000231024,
+        "person_mean_brier": 0.10164837000231024
+      },
+      "sklearn_lbfgs": {
+        "roc_auc": 0.9318518518518518,
+        "average_precision": 0.9251066700078707,
+        "brier": 0.10164837420172504,
+        "person_mean_brier": 0.10164837420172501
+      },
+      "training_prevalence": {
+        "roc_auc": 0.5,
+        "average_precision": 0.5,
+        "brier": 0.25,
+        "person_mean_brier": 0.25
+      }
+    },
+    "optimizer_fits": 12,
+    "failed_fits": 0,
+    "development_people": 45,
+    "development_predictions": 90,
+    "final_development_probe_predictions_per_engine": 90,
+    "reserved_predictions": 0,
+    "max_native_probability_error": 1.1239758984649129e-08,
+    "max_native_gradient_inf": 8.852277197032854e-08
+  },
+  "local": {
+    "elapsed_seconds": 0.21934117799992237,
+    "native_subprocess_seconds": 0.01630077199979496,
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "worker_count": 1,
+    "build_profile": "release defaults; no target-cpu=native, BLAS, GPU or fast-math requested",
+    "self_usage": {
+      "user_seconds": 1.650112,
+      "system_seconds": 0.29766899999999996,
+      "max_rss_kib": 130128
+    },
+    "children_usage": {
+      "user_seconds": 0.016308,
+      "system_seconds": 0.146127,
+      "max_rss_kib": 130128
+    },
+    "binary_sha256": "ba17d6622689fb3b96a458f9327d37126c2eda1c5e9e7819e35e04aa4cff2daa"
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.8"
+  },
+  "computational_source_sha256": {
+    ".github/workflows/native-rust-training.yml": "c5bee94795ac176305b3cca0c853e55eff45005651348e7befcd24ecdded6c49",
+    "04_machine_learning/evidence/rust-training-contract-v1.json": "5fe249b79bfb19a30e2d22f61acca5be1b095a0a866f5921a5052435225a2a1b",
+    "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
+    "04_machine_learning/examples/breast_cancer_rust_training.py": "0425b517edf8d3814deb28b986830d541d1cf90c0221804caefa22a7371a7ec2",
+    "04_machine_learning/requirements-python.txt": "5308eb66a44ede78c952156d288e79ba0ecd0df2da71ef60b0e897ebf1c7f358",
+    "04_machine_learning/rust/Cargo.lock": "debced475de2e86a556d3aa984bb9f9c5d4762b9cea83b3f60072bea279eabd6",
+    "04_machine_learning/rust/Cargo.toml": "07215aa4f2930e6d704d353383a12842fc64ba3a24f4ed131aa5e061c8009a94",
+    "04_machine_learning/rust/build.rs": "c243bd957d9e958e00c220ebfc0f1f55311bea6d8ef581019ff16d050198ed35",
+    "04_machine_learning/rust/rust-toolchain.toml": "c33d1f0b1b8fda448bea32d7dc867aa64947c87169fd9de7122ffccad1dd80f9",
+    "04_machine_learning/rust/src/bin/assay-train.rs": "e5b3202f948cd42c7ca5ba30304e61bddf35fc926af9aec90bc21a0fdfcf0c5c",
+    "04_machine_learning/rust/src/lib.rs": "5b054762b58aca19339282c2f904c87b410bc1cec1653fa922b58eaeefd5422a",
+    "04_machine_learning/rust/src/main.rs": "f23f46a431d900b9bbe81002d9aaa256994bdbe3efe83df85d1db81075bdb9db",
+    "04_machine_learning/rust/src/training.rs": "6eae981669d45700ed257447f6dd04c1b720f45603d2a5985a2718078a27fee4",
+    "04_machine_learning/rust-training-protocol.md": "99c3a3c9ee2136284563581a87a1541a08e345756822f537a356ef754251b726",
+    "04_machine_learning/rust-training-source-addendum.md": "a9460eb5a2db900247767d0ea82d9bebb340964c5733aa2f734e504ffbcfd65c",
+    "04_machine_learning/tests/test_breast_cancer_rust_training.py": "44246ae6be57425e86cf36dbab762da42a334563a174a46271a3df7a47b161b1"
+  },
+  "local_payload_manifest_sha256": "3d95024f3f91b78382a5572f9e24ef30be3c958ce0466a9120c3df6415945d8f",
+  "oracle_non_success_diagnostics": [
+    {
+      "plan": "final_development",
+      "message": "A bad approximation caused failure to predict improvement.",
+      "iterations": 7,
+      "gradient_inf": 3.9428077469594314e-10,
+      "accepted_by_frozen_residual_gate": true
+    }
+  ],
+  "initial_workflow_failure": {
+    "run_id": 38943672977,
+    "error": "Line 21: Unrecognized named-value: runner in job env",
+    "executed_native_fits": 0,
+    "correction": "workflow-only valid fixed CARGO_TARGET_DIR; unchanged numerical source/criteria"
+  },
+  "manual_audit_corruption_probes": [
+    {
+      "probe": "manifest",
+      "status": "rejected",
+      "message": "Artifact manifest mismatch"
+    },
+    {
+      "probe": "objective",
+      "status": "rejected",
+      "message": "objective recalculation mismatch"
+    },
+    {
+      "probe": "prediction_identity",
+      "status": "rejected",
+      "message": "Prediction record identity/value mismatch"
+    },
+    {
+      "probe": "source_hash",
+      "status": "rejected",
+      "message": "Status/source mismatch"
+    }
+  ],
+  "local_first_vs_repeat": "exact numerical summary and probabilities; two executions of one cohort, 24 optimization attempts",
+  "replay": {
+    "status": "pass",
+    "probability_absolute_tolerance": 1e-10,
+    "replays": {
+      "ci_pr": {
+        "max_probability_differences": {
+          "linfa": 0,
+          "scipy_newton": 0,
+          "sklearn_lbfgs": 0
+        },
+        "runtime_seconds": 0.0784584989999928,
+        "source_commit": "23a517f892e0f018fd0723a6ef7efc54dfb72d9e"
+      },
+      "ci_push": {
+        "max_probability_differences": {
+          "linfa": 0,
+          "scipy_newton": 0,
+          "sklearn_lbfgs": 0
+        },
+        "runtime_seconds": 0.07452026499998965,
+        "source_commit": "aeb0e5271534c224114beb39607eac3eb7375600"
+      }
+    }
+  },
+  "ci_artifacts": [
+    {
+      "event": "push",
+      "run_id": 38943944644,
+      "artifact_id": 12065045242,
+      "archive_sha256": "2472d89f0fb817b520d9fe8086440449e5320672276efcd6db672cf14c779aef",
+      "expires_at": "2027-01-14T17:59:58Z",
+      "source_commit": "aeb0e5271534c224114beb39607eac3eb7375600",
+      "downloaded_and_audited": true
+    },
+    {
+      "event": "pull_request",
+      "run_id": 38943952801,
+      "artifact_id": 12064600949,
+      "archive_sha256": "be5091212bcf0a13c34051133acbc3acce7c5879d5a5675ca769d1262f494ccd",
+      "expires_at": "2027-01-14T18:00:02Z",
+      "source_commit": "23a517f892e0f018fd0723a6ef7efc54dfb72d9e",
+      "source_tree_equals_head": true,
+      "downloaded_and_audited": true
+    }
+  ],
+  "code_head_pr_workflows": [
+    {
+      "name": "Documentation navigation",
+      "run_id": 38943952548,
+      "conclusion": "success"
+    },
+    {
+      "name": "Phase 4 assay robustness",
+      "run_id": 38943952439,
+      "conclusion": "success"
+    },
+    {
+      "name": "Phase 4B synthetic replication",
+      "run_id": 38943952443,
+      "conclusion": "success"
+    },
+    {
+      "name": "Phase 4C conditional uncertainty",
+      "run_id": 38943952696,
+      "conclusion": "success"
+    },
+    {
+      "name": "Native Rust numerical training",
+      "run_id": 38943952801,
+      "conclusion": "success"
+    },
+    {
+      "name": "Machine learning deployment",
+      "run_id": 38943952403,
+      "conclusion": "success"
+    }
+  ],
+  "preserved_local_inference_max_probability_errors": {
+    "selected": 2.7755575615628914e-16,
+    "all_features": 3.3306690738754696e-16
+  },
+  "scope_limits": [
+    "One fixed f64 L2 objective, one synthetic draw; no feature selection or tuning port",
+    "15 reserved people remain unscored",
+    "Native public API does not expose iteration count or termination reason",
+    "One SciPy non-success is accepted by the prespecified residual gate and retained",
+    "Resource fields include orchestration/inherited memory; no language speed/memory advantage established",
+    "No new clinical validity, full-procedure uncertainty or learner-mastery evidence",
+    "CI archives expire; complete downloaded bundles preserved separately"
+  ],
+  "next_gate": "G4: freeze separate survival endpoint/data dictionary/Cox assessment protocol before fitting",
+  "evidence_bundle": {
+    "bytes": 5631918,
+    "sha256": "ea0cbb9df206c8dad9110fe5914b64408e28ff941a2fcf31cbdade730294bc6b",
+    "entries": 193,
+    "filename": "Pauls_Notes_G3_Rust_Evidence_2026-10-16.zip"
+  }
+}

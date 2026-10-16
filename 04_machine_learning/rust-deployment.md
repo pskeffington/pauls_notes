@@ -94,20 +94,20 @@ Matching probabilities demonstrates implementation equivalence within this contr
 
 The [five-year Rust ML review](rust-ml-literature.md) separates 11 publications/manuscripts from six pinned software inspections. Binding studies motivate version control and probability checks; single-cell papers inform a future cell/specimen/donor contract; differentiation and device studies concern separate workloads. Their results do not establish a speedup or clinical validation for this assay CLI.
 
-For the next native-training comparison, the inspected [Linfa source](rust-ml-literature.md#rml-s01) exposes probabilities and a regularized logistic loss. Derive its relationship to the Python objective before matching settings, preserve training-only transforms and person-grouped splits, and retain convergence and fit-budget records. The [implementation route](rust-ml-literature.md#a-bounded-route-from-reading-to-implementation) keeps this proposed comparison separate from the completed frozen-model replay.
+The [native training baseline](rust-native-training.md) now implements a separately frozen all-feature Linfa/Python comparison with training-only preparation, person-disjoint folds and explicit numerical acceptance. Its [source addendum](rust-training-source-addendum.md) distinguishes the published 0.8.1 crate from the newer revision in the literature review. This frozen-model inference path and its CI remain separate.
 
 ## Native Rust packages and next extensions
 
-Reviewed on 2026-10-16 against upstream documentation. These package routes are **references**, with no training or inference benchmark in this repository yet.
+Reviewed on 2026-10-16 against upstream documentation. Linfa now has a [scoped native training implementation](rust-native-training.md); the other routes remain references without executed project benchmarks.
 
 | Rust route | Appropriate extension to investigate | Required project work |
 | --- | --- | --- |
-| [Linfa / linfa-logistic 0.8.1](https://docs.rs/linfa-logistic/0.8.1/linfa_logistic/) | Native Rust classical-model fitting; binary/multinomial logistic models | Carry over person-grouped folds, training-only transforms, declared penalty/objective, tuning budget and saved prediction replay |
+| [Linfa / linfa-logistic 0.8.1](https://docs.rs/linfa-logistic/0.8.1/linfa_logistic/) | Native Rust classical-model fitting; binary/multinomial logistic models | Implemented fixed all-feature comparison; tuning, other objectives and model families need new contracts |
 | [SmartCore 0.6.15](https://docs.rs/smartcore/0.6.15/smartcore/) | Native classical models including trees, forests and linear methods | Verify the chosen learner's probability interface, grouping, preprocessing and serialization for the pinned release |
 | [Burn](https://burn.dev/) | Rust neural-network training and deployment | Declare an architecture, CPU/GPU backend, loss, stopping rule and grouped assessment before expanding the assay task |
 | [Candle](https://github.com/huggingface/candle) | Rust tensor/model execution with CPU and supported accelerators | Check model operations, precision, backend, weight terms and actual deployment behavior |
 | [ort](https://docs.rs/ort/latest/ort/) | Execute compatible exported graphs through ONNX Runtime's Rust binding | Validate conversion of the complete preprocessing graph, operator/runtime support, class mapping and per-row parity |
 
-A sensible next native-training experiment would fit a declared Linfa logistic baseline on the same grouped development partitions. Its regularization objective and defaults require their own contract; a parameter with a similar name does not ensure the same optimization problem. Keep any training-method comparison separate from this frozen-runtime replay, and assess it on people excluded from its own selection.
+The native experiment fits a fixed all-feature objective without search. Adding feature selection or tuning requires a new grouped assessment contract; matching a similarly named parameter is still insufficient. Its numerical comparison provides no clinical or language-speed result.
 
 Implementation references: [StandardScaler's saved mean/scale](https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html), [binary logistic coefficients/classes](https://scikit-learn.org/1.8/modules/generated/sklearn.linear_model.LogisticRegression.html), and [Cargo manifests and lockfiles](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html). The [locked dependency graph](rust/Cargo.lock) and toolchain file make the executed dependency choices explicit.
