@@ -9,6 +9,7 @@ Build a prediction workflow around the observation unit, input measurements, and
 | Subject | Resource | Practical purpose |
 | --- | --- | --- |
 | Understanding the subject | [What is machine learning?](what-is-machine-learning.md) | Features, targets, learning, assessment and interpretation in plain language |
+| Seeing the data flow | [Visual data guide](visual-data-guide.md) | Follow rows through splitting, training, validation, preprocessing and nested evaluation |
 | Choosing a method | [Basic algorithm guide](basic-algorithms.md) | Regression, classification, trees, kernels, clustering, PCA and survival |
 | Independent frameworks and research methods | [Methods and deployments](methods-and-deployments.md) | Python nested workflows, direct R survival analysis and limma expression contrasts |
 | Resampling, preprocessing and tuning | [Caret deployment](caret-deployment.md) | Fit elastic-net and random-forest classifiers with a protected test partition |

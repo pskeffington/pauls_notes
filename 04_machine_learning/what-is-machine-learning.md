@@ -6,6 +6,8 @@ Machine learning uses observations to estimate a rule or representation. A resea
 
 Imagine measuring several molecular features in tissue specimens. We might ask the computer to estimate a recorded tissue category from those measurements. We provide examples containing both measurements and known categories, fit a rule on some people, and assess its predictions on different people. The important test is whether the rule works on the observations we intended to predict, rather than whether it can describe the examples it already saw.
 
+Follow the rows and fitting steps in the [visual data guide](visual-data-guide.md), then return here for the vocabulary.
+
 ## Learn the vocabulary through that example
 
 | Term | Meaning in the tissue example |

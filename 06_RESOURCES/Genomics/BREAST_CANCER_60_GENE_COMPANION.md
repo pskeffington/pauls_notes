@@ -1125,6 +1125,8 @@ Machine learning offers a way to estimate a relationship from examples and apply
 
 Our six invented pairs cannot establish a useful predictor. Their values were chosen for arithmetic, and several measurements belong to each pair. The executable deployments elsewhere in these notes also use synthetic fixtures. No participant-level breast cancer data have been analyzed by these examples. The narrative below explains how to design an analysis if appropriately permitted study records and outcome definitions are assembled.
 
+For a picture of what happens to the records, follow the [visual guide to splitting and training](../../04_machine_learning/visual-data-guide.md). It shows which people each fit can see, how preprocessing stays inside training folds, and where the final test is held apart.
+
 #### Start with a question that the records can answer
 
 Suppose we want to distinguish a recorded tumor specimen from a comparator specimen using expression. That is a **classification** problem about tissue labels. It does not automatically answer whether a person has cancer in a screening population: the specimen collection and comparator definition differ from that intended use. Tumor-adjacent tissue is not interchangeable with an unaffected donor's tissue.

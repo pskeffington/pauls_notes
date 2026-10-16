@@ -30,6 +30,8 @@ A reference collection connecting biological questions with data preparation, st
 - [Run independent R and Python methods](04_machine_learning/methods-and-deployments.md) — Explore classification, regression, clustering, survival, and expression analysis.
 - [Check understanding and implementation](03_learning/mastery-checks.md) — Inspect expected results, failure cases, and interpretation tasks.
 
+For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
+
 ## Research templates
 
 - [Study protocol](templates/study-protocol.md) — Research question, study design, and analysis plan.
