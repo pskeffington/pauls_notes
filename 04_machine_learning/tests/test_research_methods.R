@@ -37,3 +37,15 @@ check_export <- function() {
 }
 check_export()
 cat("PASS: Cox censoring/event contracts and replay; limma sample alignment, contrasts, confounding and export\n")
+
+# A dangling symlink is an occupied output path, not a new destination.
+check_dangling_output <- function() {
+  link <- tempfile("dangling-output-")
+  target <- tempfile("absent-target-")
+  on.exit(unlink(link), add=TRUE)
+  if (.Platform$OS.type == "unix" && file.symlink(target, link)) {
+    stopifnot(inherits(try(export_research_methods(link), silent=TRUE), "try-error"),
+              identical(Sys.readlink(link), target), !file.exists(target))
+  }
+}
+check_dangling_output()

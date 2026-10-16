@@ -38,4 +38,4 @@ A reference collection connecting biological questions with data preparation, st
 
 ---
 
-[Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) · [All resources](06_RESOURCES/README.md) · [License](LICENSE)
+[Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) · [All resources](06_RESOURCES/README.md) · [Contributing](CONTRIBUTING.md) · [License](LICENSE)

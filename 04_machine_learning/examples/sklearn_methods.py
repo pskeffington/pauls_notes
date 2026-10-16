@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import sys
 import importlib.metadata
 import json
 from pathlib import Path
@@ -41,13 +43,13 @@ def make_cohort(seed=260419, families=60):
 
 def validate_cohort(data):
     x = np.asarray(data["x"])
-    if x.ndim != 2 or x.shape[1] != 5 or len(x) < 60 or not np.issubdtype(x.dtype, np.number):
+    if x.ndim != 2 or x.shape[1] != 5 or len(x) < 60 or x.dtype.kind not in "fiu":
         raise ValueError("Expected at least 60 people and five numeric predictors")
     if np.isinf(x).any() or np.isnan(x).all(axis=0).any():
         raise ValueError("Infinite or entirely unavailable predictor")
     for key in ("classification", "regression", "groups", "person_id"):
         values = np.asarray(data[key])
-        if values.shape != (len(x),) or not np.isfinite(values).all():
+        if values.shape != (len(x),) or values.dtype.kind not in "fiu" or not np.isfinite(values).all():
             raise ValueError(f"Invalid aligned field: {key}")
     if len(np.unique(data["person_id"])) != len(x):
         raise ValueError("Person identifiers must be unique")
@@ -177,10 +179,10 @@ def fit_unsupervised(data, train, test):
 
 def run(output):
     output = Path(output).absolute()
-    root = Path.cwd().resolve()
+    root = Path(__file__).resolve().parents[2]
     parent = output.parent.resolve(strict=True)
     output = parent / output.name
-    if output.exists() or output == root or root in output.parents:
+    if output.exists() or output.is_symlink() or output == root or root in output.parents:
         raise ValueError("Choose a new output directory outside the repository")
     stage = Path(tempfile.mkdtemp(prefix="methods-stage-", dir=parent))
     try:
@@ -194,12 +196,17 @@ def run(output):
         (stage / "metrics.json").write_text(json.dumps(report, indent=2, allow_nan=False))
         (stage / "splits.json").write_text(json.dumps(dict(development=train.tolist(), test=test.tolist(),
             person_id=data["person_id"].tolist(), family_id=data["groups"].tolist()), indent=2))
-        (stage / "versions.json").write_text(json.dumps({p: importlib.metadata.version(p)
-            for p in ("numpy", "scipy", "scikit-learn", "joblib")}, indent=2))
+        versions = {p: importlib.metadata.version(p)
+                    for p in ("numpy", "scipy", "scikit-learn", "joblib")}
+        versions["python"] = sys.version
+        (stage / "versions.json").write_text(json.dumps(versions, indent=2))
         (stage / "README.txt").write_text("Synthetic methods checks only. Family-disjoint nested CV; no clinical claims.\n"
             "Do not choose the winning model from the final test scores.\n"
             "Clustering and silhouette are exploratory, not phenotype validation.\n")
-        if output.exists():
+        manifest = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in sorted(stage.iterdir()) if p.is_file()}
+        (stage / "sha256.json").write_text(json.dumps(manifest, indent=2))
+        if output.exists() or output.is_symlink():
             raise FileExistsError(output)
         stage.rename(output)
     finally:

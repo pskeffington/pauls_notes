@@ -46,6 +46,16 @@ if (!requireNamespace("ggplot2",quietly=TRUE)) {
     s <- data.frame(time=seq_len(40),event=rep(c(1,0),20),
                     group=rep(c("A","B"),each=20))
     stopifnot(inherits(plot_survival(s,"time","event","group"),"ggplot"))
+    # A single stratum, a censor-only time, and a completely censored cohort.
+    single <- data.frame(time=c(1, 2, 3), event=c(1, 0, 1), group="A")
+    curve <- plot_survival(single, "time", "event", "group")$data
+    stopifnot(any(curve$time == 0 & curve$surv == 1),
+              any(curve$time == 2 & curve$censored & abs(curve$surv - 2/3) < 1e-12))
+    single$event <- 0
+    censored <- plot_survival(single, "time", "event", "group")$data
+    stopifnot(all(censored$surv == 1), sum(censored$censored) == 3L)
+    multiple <- plot_survival(s, "time", "event", "group")$data
+    stopifnot(sum(multiple$time == 0 & multiple$surv == 1) == 2L)
   }
   cat("PASS: biostatistics panel smoke tests (installed optional modules)\n")
 }

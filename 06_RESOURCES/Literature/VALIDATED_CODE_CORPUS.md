@@ -40,7 +40,7 @@ Never mark a source REPRODUCED from a successful installation, copied screenshot
 6. Compare numerical results against an independent analytic calculation or second trusted implementation; record tolerances.
 7. Test missingness, zero counts, class imbalance, invalid units, duplicate IDs, data leakage and malformed inputs as applicable.
 8. Capture command, runtime, environment digest, logs, artifacts, checksums and reviewer decision.
-9. Run CI and originality/source-file guard on every proposed change; guard should reject protected source artifacts, not independently authored work.
+9. Run the available CI checks on every proposed change and review source permissions manually; automated checks do not establish originality or reuse rights.
 10. Publish only after review; failed candidates remain visible as candidates, never as validated code.
 
 ## Initial acceptance gates

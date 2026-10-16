@@ -14,4 +14,6 @@ The bibliography examples contain fictional practice records. Replace them with 
 bash 06_RESOURCES/LaTeX/compile_manuscript.sh --output-dir /tmp/pauls-notes-manuscript
 ```
 
-The separate reference-catalogue source is not included; build the manuscript with the default command above.
+Choose a new output directory outside the repository, with an existing parent. The builder refuses to reuse a destination and publishes the PDF only after the LaTeX and Biber passes succeed. Temporary build files are cleaned automatically.
+
+The entry catalogue is a bibliography reference, without a separate manuscript build. This template uses APA-style references; adapt the manuscript layout to the target journal or reporting requirements.

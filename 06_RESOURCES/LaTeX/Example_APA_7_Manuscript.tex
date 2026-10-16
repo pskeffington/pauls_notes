@@ -1,10 +1,9 @@
 % Example APA 7 Manuscript
-% Header note: This file is known to compile safely.
 \documentclass[12pt,letterpaper]{article}
-% APA 7 student manuscript example. Edit the metadata and bracketed content.
+% APA-style research manuscript example. Edit the metadata and bracketed content.
 % Ready to build: Example_References.bib is connected below.
-% Run ./compile_manuscript.sh or PDFLaTeX/Biber/PDFLaTeX/PDFLaTeX.
-% This file configures a standard article class explicitly for student papers.
+% Run compile_manuscript.sh --output-dir /tmp/new-manuscript-output.
+% Adapt the article layout to the target publication requirements.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{mathptmx} % 12-point Times-family text; PDFLaTeX-compatible.
@@ -25,7 +24,7 @@
 \usepackage[hidelinks]{hyperref}
 \urlstyle{same}
 
-% Student-paper header: page number at upper right.
+% Manuscript header: page number at upper right.
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[R]{\thepage}
@@ -51,14 +50,11 @@
   showstringspaces=false,frame=none,aboveskip=0.5\baselineskip,
   belowskip=0.5\baselineskip}
 
-% Student and course details.
+% Author and report details.
 \newcommand{\papertitle}{Example APA 7 Manuscript}
-\newcommand{\studentname}{[Student Name]}
-\newcommand{\affiliation}{Paul Skeffington}
-\newcommand{\coursename}{[Course Name]}
-\newcommand{\instructorname}{[Instructor Name]}
-\newcommand{\duedate}{[Month Day, Year]}
-% Abstracts are not normally required for student papers unless assigned.
+\newcommand{\authorname}{[Author Name]}
+\newcommand{\reportdate}{[Month Day, Year]}
+% Include an abstract when required by the target publication.
 \newif\ifincludeabstract
 \includeabstractfalse % Change to \includeabstracttrue if required.
 
@@ -69,26 +65,22 @@
 \vspace*{2\baselineskip}
 \textbf{\papertitle}\par
 \vspace{\baselineskip}
-\studentname\par
-\affiliation\par
-\coursename\par
-\instructorname\par
-\duedate\par
+\authorname\par
+\reportdate\par
 \end{center}
 \newpage
 
 \ifincludeabstract
 \section*{Abstract}
 \noindent [Write one unindented paragraph summarizing the purpose, design,
-data, methods, principal results, and conclusion. Use the word limit assigned
-by the instructor. Replace this instruction only after verifying the results.]
+data, methods, principal results, and conclusion. Use the target publication's word limit. Replace this instruction only after verifying the results.]
 \par\noindent\textit{Keywords:} [term one], [term two], [term three]
 \newpage
 \fi
 
 % Begin the text under the repeated paper title.
 \section*{\papertitle}
-This template organizes a student manuscript around an independently chosen
+This template organizes a research manuscript around an independently chosen
 research question and permitted data. Replace the bracketed guidance
 with your question, methods, verified results, and interpretation. The
 Dr. Seuss references illustrate narrative citation, \textcite{seuss1957cat},
@@ -104,8 +96,7 @@ select records using a documented rule, and verify the resulting files.]
 \subsection{Design and Data Source}
 [Describe an independently selected study or demonstration dataset. Identify
 its public source or your right to use it, its unit of observation, field
-schema, collection process, and limitations. Do not insert restricted course
-datasets or original assignment requirements into a public template.]
+schema, collection process, and limitations.]
 
 [Report acquisition date, inclusion criteria, sample size, and relevant
 permissions. For an empirical study, describe the sampling design and ethics
@@ -118,8 +109,7 @@ from measurements. State the source of definitions rather than inventing units.]
 
 \subsection{Procedure}
 [Document the steps used to validate a permitted source file, inspect its
-schema, apply justified inclusion rules, and check outputs. Use independently
-written examples rather than reproduced classroom commands or solutions.]
+schema, apply justified inclusion rules, and check outputs.]
 
 [Describe the exact software versions, commands or functions, file locations,
 validation checks, and deviations from the planned procedure. Simple AWK and
@@ -215,15 +205,14 @@ results or making claims beyond the study design.]
 \section*{Appendix}
 \section*{Reproducible Command Example}
 These generic inspection commands assume a separately supplied, permitted
-sample file under the ignored \texttt{data/} directory. They neither execute
-nor reproduce coursework.
+sample file outside this repository. Replace the placeholder path before running them.
 
 \begin{singlespace}
 \begin{lstlisting}
 # Independently prepared example commands (adapt locally).
 # The CSV is a user-supplied, permitted input outside this repository.
-head -n 5 data/example_table.csv
-wc -l data/example_table.csv
+head -n 5 /path/to/permitted/example_table.csv
+wc -l /path/to/permitted/example_table.csv
 # Document any filtering or validation separately in your private workspace.
 \end{lstlisting}
 \end{singlespace}

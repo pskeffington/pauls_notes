@@ -96,9 +96,10 @@ No graph should acquire a p-value, false-discovery rate or confidence interval m
 Run existing review checks from the repository root:
 
 ~~~bash
-python3 06_RESOURCES/Presentation/check_navigation.py
-python3 06_RESOURCES/Presentation/build_reading_editions.py --check
-python3 scripts/validate_visualization_gallery.py --output-dir /tmp/pauls-gallery-check
+python3 scripts/check_documentation.py
+python3 scripts/check_book_learning.py
+Rscript --vanilla 06_RESOURCES/tests/test_biostat_panels.R
+Rscript --vanilla 06_RESOURCES/tests/test_specialist_visuals.R
 ~~~
 
 The gallery validator requires Rscript and relevant R packages; an environment without them cannot certify V3 or V4.

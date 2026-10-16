@@ -2,6 +2,8 @@
 import copy
 import importlib.util
 import json
+import hashlib
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -32,6 +34,31 @@ class MethodsTests(unittest.TestCase):
         # Complete row partition, but related people are deliberately separated.
         with self.assertRaises(ValueError):
             METHODS.check_partition(np.arange(0, 120, 2), np.arange(1, 120, 2), self.data["groups"])
+
+    def test_output_boundaries_and_numeric_types(self):
+        data = copy.deepcopy(self.data)
+        data["x"] = data["x"].astype(complex)
+        with self.assertRaises(ValueError):
+            METHODS.validate_cohort(data)
+        data = copy.deepcopy(self.data)
+        data["groups"] = data["groups"].astype(str)
+        with self.assertRaises(ValueError):
+            METHODS.validate_cohort(data)
+        with tempfile.TemporaryDirectory() as folder:
+            link = Path(folder) / "dangling"
+            link.symlink_to(Path(folder) / "absent")
+            with self.assertRaises(ValueError):
+                METHODS.run(link)
+            self.assertTrue(link.is_symlink())
+            # Repository protection must hold when launched from another cwd.
+            root = Path(METHODS.__file__).resolve().parents[2]
+            before = Path.cwd()
+            try:
+                os.chdir(folder)
+                with self.assertRaises(ValueError):
+                    METHODS.run(root / "forbidden-test-output")
+            finally:
+                os.chdir(before)
 
     def test_nested_predictions_and_leakage(self):
         result, saved = METHODS.fit_supervised(self.data, self.train, self.test, "classification")
@@ -75,6 +102,10 @@ class MethodsTests(unittest.TestCase):
             METHODS.run(output)
             with self.assertRaises(ValueError):
                 METHODS.run(output)
+            checksums = json.loads((output / "sha256.json").read_text())
+            for name, digest in checksums.items():
+                self.assertEqual(hashlib.sha256((output / name).read_bytes()).hexdigest(), digest)
+            self.assertIn("python", json.loads((output / "versions.json").read_text()))
             report = json.loads((output / "metrics.json").read_text())
             model = joblib.load(output / "models.joblib")
             for task in ("classification", "regression"):

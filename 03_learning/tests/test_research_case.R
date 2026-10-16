@@ -49,3 +49,15 @@ stopifnot(rejects(write_case(output)))
 stopifnot(identical(before, tools::md5sum(file.path(output, "analysis_bundle.rds"))))
 unlink(workspace, recursive = TRUE)
 cat("PASS: known counts and paired change; keys, joins, missingness, scaling, intervals, CLI artifacts and overwrite rejection\n")
+
+# A dangling symlink is an occupied output path, not a new destination.
+check_dangling_output <- function() {
+  link <- tempfile("dangling-output-")
+  target <- tempfile("absent-target-")
+  on.exit(unlink(link), add=TRUE)
+  if (.Platform$OS.type == "unix" && file.symlink(target, link)) {
+    stopifnot(inherits(try(write_case(link), silent=TRUE), "try-error"),
+              identical(Sys.readlink(link), target), !file.exists(target))
+  }
+}
+check_dangling_output()

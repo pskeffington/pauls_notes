@@ -5,6 +5,8 @@ on:
     paths:
       - "01_unix_bash/**"
       - "06_RESOURCES/Bash/**"
+      - "06_RESOURCES/LaTeX/**"
+      - "06_RESOURCES/tests/test_manuscript_builder.sh"
       - "06_RESOURCES/tests/test_bash_helpers.sh"
       - ".github/workflows/unix-bash-validation.yml"
       - "README.md"
@@ -14,6 +16,8 @@ on:
     paths:
       - "01_unix_bash/**"
       - "06_RESOURCES/Bash/**"
+      - "06_RESOURCES/LaTeX/**"
+      - "06_RESOURCES/tests/test_manuscript_builder.sh"
       - "06_RESOURCES/tests/test_bash_helpers.sh"
       - ".github/workflows/unix-bash-validation.yml"
       - "README.md"
@@ -39,3 +43,21 @@ jobs:
           bash -n 06_RESOURCES/Bash/bash_functions.sh
           bash -n 06_RESOURCES/tests/test_bash_helpers.sh
           bash 06_RESOURCES/tests/test_bash_helpers.sh
+          bash 06_RESOURCES/tests/test_manuscript_builder.sh
+
+  build-manuscript:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout read-only source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install manuscript toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-latex-extra texlive-fonts-recommended texlive-bibtex-extra biber
+      - name: Compile manuscript with resolved references
+        run: |
+          bash 06_RESOURCES/LaTeX/compile_manuscript.sh --output-dir "$RUNNER_TEMP/manuscript"
+          test -s "$RUNNER_TEMP/manuscript/Example_APA_7_Manuscript.pdf"

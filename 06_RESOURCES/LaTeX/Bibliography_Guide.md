@@ -61,7 +61,7 @@ The template already contains `\printbibliography[heading=none]` under its Refer
 
 `Example_Entry_Types.bib` contains fictional examples of reference categories. Adapt their structure, then replace the metadata with accurate records. The included build script supports the manuscript source described in the [writing guide](README.md).
 
-## Fields students commonly need
+## Fields for research references
 
 | Situation | What to enter |
 | --- | --- |

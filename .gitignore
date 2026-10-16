@@ -1,0 +1,23 @@
+# Local runtimes and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.Rhistory
+.RData
+Rplots.pdf
+
+# Default local output folders; tracked Genomics/FIGURES remains source.
+/outputs/
+/figures/
+
+# TeX intermediates
+*.aux
+*.bcf
+*.blg
+*.bbl
+*.fdb_latexmk
+*.fls
+*.run.xml
+*.synctex.gz

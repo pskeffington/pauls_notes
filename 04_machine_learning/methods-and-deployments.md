@@ -23,7 +23,7 @@ python3 04_machine_learning/examples/sklearn_methods.py /tmp/biomedical-python-m
 
 The fixture has 120 people in 60 invented two-person families, five numeric predictors, and separate binary and numerical targets. Family membership is a grouping variable, not a predictor. A group split reserves families before fitting. Each of three outer development folds contains its own three-fold grouped parameter search. Imputation and scaling are inside `Pipeline` at both levels. Every development person receives one outer-held-out prediction per model family.
 
-`metrics.json` records nested development scores, final test scores, parameter choices, predictions and inner/outer membership in development-local row coordinates. `splits.json` maps these to full-cohort person/family indices. `models.joblib`, `synthetic_cohort.npz` and `versions.json` support local replay. Load only trusted model bundles.
+`metrics.json` records nested development scores, final test scores, parameter choices, predictions and inner/outer membership in development-local row coordinates. `splits.json` maps these to full-cohort person/family indices. `models.joblib`, `synthetic_cohort.npz` and `versions.json` support local replay. The version record includes Python; `sha256.json` records file checksums for integrity checks. Load only trusted model bundles.
 
 Final test scores are for the prespecified model families; the runner does not select a winning family from them. Nested estimates have sampling uncertainty and correlated family observations; the example supplies no uncertainty intervals or external-site validation. Nested cross-validation assesses hyperparameter search within each family, not a later choice among families made from those scores.
 

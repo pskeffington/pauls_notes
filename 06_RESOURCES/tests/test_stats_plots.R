@@ -40,3 +40,16 @@ if (requireNamespace("edgeR", quietly=TRUE)) {
   stopifnot(identical(dim(logcpm), dim(counts)), all(is.finite(logcpm)))
 }
 cat("PASS: base statistical, sample-alignment and available optional package smoke tests\n")
+
+# Missing labels must never merge with a literal label of the same spelling.
+missing_groups <- describe_measurements(data.frame(value=c(1, 9),
+  group=c(NA_character_, "(Missing group)")), "value", "group")
+stopifnot(nrow(missing_groups) == 2L, all(missing_groups$n == 1L),
+          is.na(missing_groups$group[1]), identical(missing_groups$mean, c(1, 9)))
+bad_names <- d
+names(bad_names)[2] <- "id"
+stopifnot(inherits(try(validate_columns(bad_names, "id"), silent=TRUE), "try-error"),
+          inherits(try(validate_columns(d, NA_character_), silent=TRUE), "try-error"),
+          inherits(try(validate_numeric(matrix(1:4, 2)), silent=TRUE), "try-error"),
+          inherits(try(correlation_summary(data.frame(x=rep(1, 5), y=1:5),
+            "x", "y"), silent=TRUE), "try-error"))

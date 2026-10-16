@@ -68,3 +68,20 @@ check_export <- function() {
 }
 check_export()
 cat("PASS: patient partitions, fold integrity, leakage challenge, two caret engines, probability metrics and replayed exports\n")
+
+# Held-out assessment must reject malformed schemas before model prediction.
+bad_test <- data.frame(person_id="unseen")
+stopifnot(inherits(try(assess_ml_models(list(training_ids=character()), bad_test),
+                      silent=TRUE), "try-error"))
+
+# A dangling symlink is an occupied output path, not a new destination.
+check_dangling_output <- function() {
+  link <- tempfile("dangling-output-")
+  target <- tempfile("absent-target-")
+  on.exit(unlink(link), add=TRUE)
+  if (.Platform$OS.type == "unix" && file.symlink(target, link)) {
+    stopifnot(inherits(try(export_ml_case(link), silent=TRUE), "try-error"),
+              identical(Sys.readlink(link), target), !file.exists(target))
+  }
+}
+check_dangling_output()

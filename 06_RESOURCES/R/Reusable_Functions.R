@@ -5,15 +5,34 @@
 # Pass column names as strings: plt_hist(my_data, "measurement").
 # .data[[variable]] selects a named column inside ggplot2 mappings.
 
+# Standalone checks: this beginner helper file has no source-order dependency.
+.validate_plot_columns <- function(data, columns, numeric_columns) {
+  if (!is.data.frame(data) || anyDuplicated(names(data)) ||
+      anyNA(names(data)) || any(!nzchar(trimws(names(data)))))
+    stop("data must have unique nonblank column names.")
+  if (!is.character(columns) || anyNA(columns) || any(!nzchar(trimws(columns))) ||
+      !all(columns %in% names(data))) stop("Supply existing column names as strings.")
+  for (column in numeric_columns) {
+    x <- data[[column]]
+    if (!is.numeric(x) || !is.null(dim(x)) || any(is.infinite(x)))
+      stop("Plot measurements must be numeric vectors without infinite values.")
+  }
+  if (!requireNamespace("ggplot2", quietly=TRUE)) stop("Install ggplot2 before plotting.")
+  invisible(TRUE)
+}
+
 # Generic numerical summary for a numeric vector.
 summary_cov <- function(cov) {
-  if (!is.numeric(cov)) stop("cov must be a numeric vector.")
+  if (!is.numeric(cov) || !is.null(dim(cov)) || any(is.infinite(cov))) stop("cov must be a numeric vector.")
   summary(cov)
 }
 
 # Generic histogram builder with user-defined bins.
 plt_hist <- function(data, variable, bins = 10, fill_color = "darkgreen",
                      label = variable, title = paste("Distribution of", label)) {
+  .validate_plot_columns(data, variable, variable)
+  if (!is.numeric(bins) || length(bins) != 1L || !is.finite(bins) ||
+      bins < 1 || bins != floor(bins)) stop("bins must be a positive integer.")
   ggplot2::ggplot(data, ggplot2::aes(x = .data[[variable]])) +
     ggplot2::geom_histogram(bins = bins, fill = fill_color,
                            color = "white", alpha = 0.7) +
@@ -25,6 +44,7 @@ plt_hist <- function(data, variable, bins = 10, fill_color = "darkgreen",
 plt_box <- function(data, group, variable, fill_colors = NULL,
                     jitter = TRUE, label = variable,
                     title = paste(label, "by", group)) {
+  .validate_plot_columns(data, c(group, variable), variable)
   box_plot <- ggplot2::ggplot(
     data, ggplot2::aes(x = .data[[group]], y = .data[[variable]],
                       fill = .data[[group]])
@@ -34,8 +54,9 @@ plt_box <- function(data, group, variable, fill_colors = NULL,
     ggplot2::labs(title = title, x = group, y = label, fill = group) +
     ggplot2::theme_minimal()
   if (jitter) {
-    box_plot <- box_plot + ggplot2::geom_jitter(
-      width = 0.15, height = 0, size = 1.5, alpha = 0.5
+    box_plot <- box_plot + ggplot2::geom_point(
+      position = ggplot2::position_jitter(width = 0.15, height = 0, seed = 711),
+      size = 1.5, alpha = 0.5
     )
   }
   if (!is.null(fill_colors)) {
@@ -50,6 +71,7 @@ plt_scatter <- function(data, x_var, y_var, color_var = NULL,
                         shape_values = NULL, fit = FALSE,
                         x_label = x_var, y_label = y_var,
                         title = paste(y_label, "vs", x_label)) {
+  .validate_plot_columns(data, c(x_var, y_var, color_var, shape_var), c(x_var, y_var))
   scatter_plot <- ggplot2::ggplot(
     data, ggplot2::aes(x = .data[[x_var]], y = .data[[y_var]])
   )

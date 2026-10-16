@@ -34,7 +34,7 @@ names(health_data)
 Install `ggplot2` once with `install.packages("ggplot2")` in the Console if needed. Then:
 
 ```r
-source("06_RESOURCES/R/Week_3_Reusable_Functions.R")
+source("06_RESOURCES/R/Reusable_Functions.R")
 summary_cov(health_data$Creatinine)
 ```
 

@@ -69,7 +69,7 @@ fit_expression_example <- function(expression, metadata, scale) {
 }
 
 export_research_methods <- function(output_dir) {
-  if (length(output_dir) != 1 || !nzchar(output_dir) || file.exists(output_dir) ||
+  if (length(output_dir) != 1 || !nzchar(output_dir) || file.exists(output_dir) || (!is.na(Sys.readlink(output_dir)) && nzchar(Sys.readlink(output_dir))) ||
       !dir.exists(dirname(output_dir))) stop("Choose a new output directory with an existing parent")
   parent <- normalizePath(dirname(output_dir), mustWork = TRUE)
   destination <- file.path(parent, basename(output_dir)); root <- normalizePath(".")
@@ -94,7 +94,7 @@ export_research_methods <- function(output_dir) {
     "Cox score is relative log hazard, not an event probability.",
     "Concordance is descriptive; no censoring-adjusted horizon calibration is supplied.",
     "Limma estimates adjusted expression associations; it does not validate a classifier."), file.path(stage, "README.txt"))
-  if (file.exists(destination) || !file.rename(stage, destination)) stop("Could not publish output")
+  if (file.exists(destination) || (!is.na(Sys.readlink(destination)) && nzchar(Sys.readlink(destination))) || !file.rename(stage, destination)) stop("Could not publish output")
   invisible(destination)
 }
 

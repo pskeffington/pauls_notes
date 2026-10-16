@@ -138,7 +138,7 @@ analyse_case <- function(case) {
 
 write_case <- function(output) {
   assert(length(output) == 1L && nzchar(output), "Expected one output directory")
-  assert(!file.exists(output) && !dir.exists(output), "Output already exists; use a new path")
+  assert(!file.exists(output) && !dir.exists(output) && !(!is.na(Sys.readlink(output)) && nzchar(Sys.readlink(output))), "Output already exists; use a new path")
   parent <- dirname(output)
   assert(dir.exists(parent), "Output parent must exist")
   stage <- tempfile(pattern = ".research-case-", tmpdir = parent)
@@ -193,7 +193,7 @@ write_case <- function(output) {
   }, finally = grDevices::dev.off())
   files <- sort(list.files(stage, full.names = TRUE))
   csv(data.frame(file = basename(files), md5 = unname(tools::md5sum(files))), "output_checksums.csv")
-  assert(!file.exists(output) && !dir.exists(output), "Output appeared while processing")
+  assert(!file.exists(output) && !dir.exists(output) && !(!is.na(Sys.readlink(output)) && nzchar(Sys.readlink(output))), "Output appeared while processing")
   assert(file.rename(stage, output), "Could not publish staged outputs")
   invisible(result$ledger)
 }

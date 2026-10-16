@@ -4,6 +4,12 @@
 # Validate an input data.frame and a list of column names before plotting.
 validate_columns <- function(data, cols) {
   if (!is.data.frame(data)) stop("data must be a data.frame.", call. = FALSE)
+  if (anyNA(names(data)) || any(!nzchar(trimws(names(data)))) ||
+      anyDuplicated(names(data)))
+    stop("Column names must be unique and nonblank.", call. = FALSE)
+  if (!is.character(cols) || !length(cols) || anyNA(cols) ||
+      any(!nzchar(trimws(cols))))
+    stop("Supply nonblank column names as strings.", call. = FALSE)
   missing <- setdiff(cols, names(data))
   if (length(missing)) {
     stop("Missing columns: ", paste(missing, collapse = ", "), call. = FALSE)
@@ -14,7 +20,8 @@ validate_columns <- function(data, cols) {
 # Validate numeric observations; missing values are permitted but are removed
 # explicitly by summary/test functions. Infinite values are not permitted.
 validate_numeric <- function(x, label = "x") {
-  if (!is.numeric(x)) stop(label, " must be numeric.", call. = FALSE)
+  if (!is.numeric(x) || !is.null(dim(x)))
+    stop(label, " must be a numeric vector.", call. = FALSE)
   if (any(is.infinite(x))) stop(label, " contains infinite values.", call. = FALSE)
   invisible(TRUE)
 }
@@ -33,9 +40,7 @@ describe_measurements <- function(data, value, group = NULL, digits = 3L) {
     stop("group and value must be different columns")
   # Missing grouping labels remain visible as their own category.
   groups <- if (is.null(group)) rep("All", nrow(data)) else {
-    g <- as.character(data[[group]])
-    g[is.na(g)] <- "(Missing group)"
-    g
+    as.character(data[[group]])
   }
   levels <- unique(groups)
   # Return stable column types even for completely empty data.
@@ -47,7 +52,8 @@ describe_measurements <- function(data, value, group = NULL, digits = 3L) {
     p05=numeric(), p95=numeric(), stringsAsFactors=FALSE)
   if (!length(levels)) return(schema)
   output <- lapply(levels, function(level) {
-    raw <- data[[value]][groups == level]
+    selected <- if (is.na(level)) is.na(groups) else !is.na(groups) & groups == level
+    raw <- data[[value]][selected]
     x <- raw[!is.na(raw)]
     n <- length(x); total <- length(raw)
     quant <- function(prob) if (n) as.numeric(stats::quantile(
@@ -88,7 +94,7 @@ describe_summary <- function(summary, value, unit = NULL, digits = 2L) {
   unit_label <- if (is.null(unit)) "" else paste0(" ",unit)
   vapply(seq_len(nrow(summary)), function(i) {
     s <- summary[i,,drop=FALSE]
-    prefix <- paste0(value, " [", s$group, "]: ")
+    prefix <- paste0(value, " [", if (is.na(s$group)) "Missing group" else s$group, "]: ")
     if (s$n == 0L) return(paste0(prefix,"no observed measurements (",
       s$n_missing," of ",s$n_total," missing)."))
     spread <- paste0("Median ",fmt(s$median),unit_label,
@@ -167,6 +173,8 @@ correlation_summary <- function(data, x, y, method = "spearman") {
   method <- match.arg(method, c("spearman", "pearson", "kendall"))
   ok <- stats::complete.cases(data[c(x, y)])
   if (sum(ok) < 3L) stop("At least three complete observations required.")
+  if (length(unique(data[[x]][ok])) < 2L || length(unique(data[[y]][ok])) < 2L)
+    stop("Correlation requires variation in both variables.")
   result <- stats::cor.test(data[[x]][ok], data[[y]][ok],
                             method = method, exact = FALSE)
   list(n = sum(ok), test = result)

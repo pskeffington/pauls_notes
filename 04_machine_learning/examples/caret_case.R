@@ -17,7 +17,7 @@ make_ml_cohort <- function(n = 160L, seed = 260416L) {
     marker_a = marker_a, marker_b = marker_b, age_years = age, noise = rnorm(n))
 }
 
-validate_ml_cohort <- function(data) {
+validate_ml_cohort <- function(data, min_per_class = 8L) {
   required <- c("person_id", "outcome", ml_predictors)
   if (!is.data.frame(data) || !identical(names(data), required))
     stop("Expected the documented person/outcome/predictor schema, in order")
@@ -25,8 +25,8 @@ validate_ml_cohort <- function(data) {
       any(!nzchar(trimws(data$person_id))) || anyDuplicated(data$person_id))
     stop("person_id must be unique and nonmissing; repeated records need a different design")
   if (!is.factor(data$outcome) || !identical(levels(data$outcome), c("case", "control")) ||
-      anyNA(data$outcome) || any(table(data$outcome) < 8L))
-    stop("Both outcome classes need at least eight people; case is the positive class")
+      anyNA(data$outcome) || any(table(data$outcome) < min_per_class))
+    stop("Both outcome classes need at least ", min_per_class, " people; case is the positive class")
   for (name in ml_predictors) {
     x <- data[[name]]
     if (!is.numeric(x) || any(is.infinite(x)) || all(is.na(x)))
@@ -160,6 +160,7 @@ binary_ml_metrics <- function(truth, probability, threshold = 0.5) {
 }
 
 assess_ml_models <- function(fitted, test) {
+  validate_ml_cohort(test, min_per_class = 1L)
   if (!is.data.frame(test) || anyDuplicated(test$person_id) ||
       any(test$person_id %in% fitted$training_ids)) stop("Test people must be distinct and unseen")
   scores <- lapply(fitted$models, function(model)
@@ -184,7 +185,7 @@ assess_ml_models <- function(fitted, test) {
 }
 
 export_ml_case <- function(output_dir) {
-  if (length(output_dir) != 1L || !nzchar(output_dir) || file.exists(output_dir) ||
+  if (length(output_dir) != 1L || !nzchar(output_dir) || file.exists(output_dir) || (!is.na(Sys.readlink(output_dir)) && nzchar(Sys.readlink(output_dir))) ||
       !dir.exists(dirname(output_dir))) stop("Choose a new output directory with an existing parent")
   parent <- normalizePath(dirname(output_dir), mustWork = TRUE)
   destination <- file.path(parent, basename(output_dir))
@@ -234,7 +235,7 @@ export_ml_case <- function(output_dir) {
   files <- list.files(stage, full.names = TRUE)
   write.csv(data.frame(file = basename(files), md5 = unname(tools::md5sum(files))),
     file.path(stage, "file_inventory.csv"), row.names = FALSE)
-  if (file.exists(destination) || !file.rename(stage, destination)) stop("Could not publish output")
+  if (file.exists(destination) || (!is.na(Sys.readlink(destination)) && nzchar(Sys.readlink(destination))) || !file.rename(stage, destination)) stop("Could not publish output")
   invisible(destination)
 }
 

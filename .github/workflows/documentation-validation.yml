@@ -18,4 +18,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Check links and book structure
-        run: python3 scripts/check_documentation.py
+        run: |
+          python3 scripts/check_documentation.py
+          python3 scripts/check_repository.py
+          python3 scripts/tests/test_documentation.py

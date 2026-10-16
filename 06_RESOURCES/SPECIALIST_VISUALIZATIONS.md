@@ -187,9 +187,9 @@ for (name in names(plots)) {
 }
 ```
 
-The installed R packages are `plotly` and `htmlwidgets` (from CRAN); the HTML export uses **local JavaScript dependencies** via `selfcontained = FALSE`, so always retain the adjacent `*_files` folder alongside each HTML. The six-widget CI artifact packages complete offline pages and a browsable index. [Plotly's ggplot2 interoperability](https://plotly.com/ggplot2/getting-started/) and [htmlwidgets export contract](https://search.r-project.org/CRAN/refmans/htmlwidgets/html/saveWidget.html) provide upstream reference.
+The installed R packages are `plotly` and `htmlwidgets` (from CRAN); the HTML export uses **local JavaScript dependencies** via `selfcontained = FALSE`, so always retain the adjacent `*_files` folder alongside each HTML. [Plotly's ggplot2 interoperability](https://plotly.com/ggplot2/getting-started/) and [htmlwidgets export contract](https://search.r-project.org/CRAN/refmans/htmlwidgets/html/saveWidget.html) provide upstream reference.
 
-**Privacy release gate:** An interactive HTML includes underlying plot values (and may expose identifiers through hover/embedded data). Only synthetic public demonstrations are exported by CI. Do not post participant-level, clinical, restricted or sensitive records without de-identification, release authorization and explicit verification of embedded HTML data. Static PDF/PNG files and Plotly HTML are separate outputs, not interchangeable evidence.
+**Privacy release gate:** An interactive HTML includes underlying plot values (and may expose identifiers through hover/embedded data). The tests use synthetic demonstrations. Do not post participant-level, clinical, restricted or sensitive records without de-identification, release authorization and explicit verification of embedded HTML data. Static PDF/PNG files and Plotly HTML are separate outputs, not interchangeable evidence.
 
 ## Quality gates and release
 
@@ -200,22 +200,23 @@ The installed R packages are `plotly` and `htmlwidgets` (from CRAN); the HTML ex
 | Q19 calibration admission | Held-out partition label, binary observed outcomes, finite risk in [0, 1], recorded horizon | `test_specialist_visuals.R`; operator audits prediction origin |
 | Q20 sampling transparency | Fixed seed, retained extremes, N versus plotted n, preserved full distribution | `test_specialist_visuals.R` |
 | Publication | All four plot labels, six raster/vector figure pairs, annotation sidecars | `save_figure()`; test suite and visual review |
-| Interactive delivery | Six Plotly widgets, independent offline dependency folders, hover/zoom checks and HTML gallery | `plotly_view()`, `save_plotly()` and CI HTML artifact |
+| Interactive delivery | Plotly widgets with adjacent dependency folders; manual hover and zoom review | `plotly_view()`, `save_plotly()` and local export inspection |
 | Privacy/security | No confidential datasets or identifiers embedded in released HTML | Manual embedded-data audit before publishing non-synthetic plots |
 
 Run from the repository root:
 
 ```bash
 Rscript --vanilla 06_RESOURCES/tests/test_specialist_visuals.R
-python3 06_RESOURCES/Presentation/check_navigation.py
-python3 06_RESOURCES/Presentation/build_reading_editions.py --check
+python3 scripts/check_documentation.py
+python3 scripts/check_book_learning.py
 ```
 
-For independent visual review, the **Scientific visualization validation** GitHub Actions run publishes a downloadable **specialist-visual-review** artifact with six synthetic PNG previews, six vector PDFs, six interactive Plotly HTML pages with local dependencies, annotation sidecars, and an offline HTML figure index. Inspect each image for clipping, legibility, captions, point visibility, contrast and intended palette semantics. The automated PNG geometry/PDF signature checks cannot certify these perceptual properties. Reproduce locally with an output directory outside Git:
+The **Learning case validation** workflow runs the retained R resource tests. It does not publish a figure gallery. Generate synthetic previews locally for visual review, keeping the output outside the repository:
 
 ```bash
 SPECIALIST_FIGURE_DIR=/tmp/specialist-preview Rscript --vanilla 06_RESOURCES/tests/test_specialist_visuals.R
-python3 scripts/audit_specialist_preview.py --directory /tmp/specialist-preview
 ```
+
+With the optional plotting packages installed, this test exports PNG, PDF and Plotly HTML examples. Retain each HTML dependency folder. Inspect clipping, legibility, captions, point visibility, contrast, palette meaning, and interactive behavior before sharing figures. Passing automated tests does not establish visual quality or clinical validity.
 
 The full [literature matrix](Literature/BIOSTAT_R_VISUALIZATION_EVIDENCE_MATRIX.md) explains the methodology and limitations. Production clinical results still require separate provenance and inference authorization.

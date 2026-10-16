@@ -2,7 +2,7 @@ name: Biomedical learning case
 
 on:
   push:
-    branches: [main, work/biomedical-learning, work/learning-check-coverage]
+    branches: [main]
     paths:
       - "03_learning/**"
       - "06_RESOURCES/R/**"

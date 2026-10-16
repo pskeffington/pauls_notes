@@ -2,9 +2,12 @@
 # Plot log2 CPM for exploration; keep raw counts for statistical models.
 
 validate_gene_matrix <- function(expr, genes = NULL) {
-  if (!is.matrix(expr) || !is.numeric(expr) || any(!is.finite(expr)))
+  if (!is.matrix(expr) || !is.numeric(expr) || any(dim(expr) == 0L) ||
+      any(!is.finite(expr)))
     stop("expr must be a finite numeric genes-by-samples matrix.")
   if (is.null(rownames(expr)) || is.null(colnames(expr)) ||
+      anyNA(rownames(expr)) || anyNA(colnames(expr)) ||
+      any(!nzchar(trimws(rownames(expr)))) || any(!nzchar(trimws(colnames(expr)))) ||
       anyDuplicated(rownames(expr)) || anyDuplicated(colnames(expr)))
     stop("Gene and sample names must exist and be unique.")
   if (!is.null(genes) && (!length(genes) || anyDuplicated(genes) ||
@@ -15,7 +18,11 @@ validate_gene_matrix <- function(expr, genes = NULL) {
 
 # Align metadata by sample ID; never assume that row order matches expression.
 align_gene_metadata <- function(expr, metadata, sample_col = "Sample") {
+  validate_gene_matrix(expr)
   validate_columns(metadata, sample_col)
+  if (anyNA(metadata[[sample_col]]) ||
+      any(!nzchar(trimws(as.character(metadata[[sample_col]])))))
+    stop("Metadata sample identifiers must be nonblank and nonmissing.")
   if (anyNA(metadata[[sample_col]]) ||
       anyDuplicated(as.character(metadata[[sample_col]])))
     stop("Metadata sample identifiers must be unique and nonmissing.")

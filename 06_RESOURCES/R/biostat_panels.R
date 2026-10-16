@@ -237,11 +237,18 @@ plot_survival <- function(data, time, event, group) {
   d$.group <- factor(d[[group]])
   if (nlevels(d$.group) < 1L) stop("At least one group required")
   fit <- survival::survfit(survival::Surv(.time, .event) ~ .group, data = d)
-  sm <- summary(fit)
+  # Retain censor-only times; summary() otherwise drops their marks.
+  sm <- summary(fit, censored = TRUE)
+  strata <- if (is.null(sm$strata)) rep(levels(d$.group)[1L], length(sm$time)) else
+    sub("^\\.group=", "", as.character(sm$strata))
   curve <- data.frame(time = sm$time, surv = sm$surv,
-                      n_risk = sm$n.risk,
-                      stratum = as.character(sm$strata),
+                      n_risk = sm$n.risk, stratum = strata,
                       censored = sm$n.censor > 0)
+  origin <- data.frame(time = 0, surv = 1,
+                       n_risk = as.integer(table(d$.group)),
+                       stratum = levels(d$.group), censored = FALSE)
+  curve <- rbind(origin, curve)
+  curve <- curve[order(curve$stratum, curve$time), , drop = FALSE]
   p <- ggplot2::ggplot(curve, ggplot2::aes(x = .data$time,
                 y = .data$surv, color = .data$stratum,
                 group = .data$stratum)) +

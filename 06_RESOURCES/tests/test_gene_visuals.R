@@ -21,3 +21,9 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
   stopifnot(inherits(plot_gene_volcano(de), "ggplot"))
 }
 cat("PASS: synthetic genomics visualizations and validation smoke tests\n")
+
+blank <- m
+colnames(blank)[1] <- " "
+stopifnot(inherits(try(validate_gene_matrix(blank), silent=TRUE), "try-error"),
+          inherits(try(align_gene_metadata(blank, meta), silent=TRUE), "try-error"),
+          inherits(try(validate_gene_matrix(m[FALSE, , drop=FALSE]), silent=TRUE), "try-error"))
