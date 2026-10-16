@@ -169,7 +169,7 @@ def run(output, scores_csv=None):
         registered_publications=len(registered),
         python=sys.version, platform=platform.platform(), seeds=list(SEEDS),
         dependencies={p: importlib.metadata.version(p)
-                      for p in ('numpy', 'scipy', 'scikit-learn', 'joblib')},
+                      for p in ('numpy', 'scipy', 'scikit-learn', 'joblib', 'matplotlib')},
         rscript_available=shutil.which('Rscript') is not None, checks=[])
     env = dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1')
     os.environ.update(OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1')
@@ -178,8 +178,10 @@ def run(output, scores_csv=None):
         ['04_machine_learning/tests/test_sklearn_methods.py'],
         ['04_machine_learning/tests/test_breast_cancer_feature_selection.py'],
         ['04_machine_learning/tests/test_validation_audit.py'],
+        ['04_machine_learning/tests/test_breast_cancer_comparison.py'],
         ['04_machine_learning/examples/sklearn_methods.py', str(stage / 'general')],
         ['04_machine_learning/examples/breast_cancer_feature_selection.py', str(stage / 'paired')],
+        ['04_machine_learning/examples/breast_cancer_comparison.py', str(stage / 'comparison')],
     ]
     try:
         for i, command in enumerate(commands):
@@ -211,6 +213,27 @@ def run(output, scores_csv=None):
             raise ValueError('Feature review has missing or repeated measurements')
         report['saved_replay'] = dict(max_absolute_probability_difference=difference,
                                       hashes_match=True, distinct_feature_rows=48)
+        comparison = stage / 'comparison'
+        comparison_report = json.loads((comparison / 'report.json').read_text())
+        comparison_models = joblib.load(comparison / 'models.joblib')
+        replay = {}
+        with np.load(comparison / 'synthetic_inputs.npz', allow_pickle=False) as inputs:
+            test = comparison_report['selected']['test']
+            for name, fitted in comparison_models.items():
+                predicted = fitted.predict_proba(inputs['x'][test])[:, list(fitted.classes_).index(1)]
+                delta = float(np.max(np.abs(predicted - comparison_report['final_test'][name]['prediction'])))
+                if delta > 1e-12:
+                    raise ValueError(f'Comparison replay mismatch: {name}')
+                replay[name] = delta
+        for name, expected in json.loads((comparison / 'sha256.json').read_text()).items():
+            if digest(comparison / name) != expected:
+                raise ValueError(f'Comparison digest mismatch: {name}')
+        report['comparison'] = dict(protocol_id=comparison_report['protocol_id'],
+            cohort_seed=comparison_report['cohort_seed'], split_seed=comparison_report['split_seed'],
+            pipeline_fits=comparison_report['pipeline_fits'], replay_max_absolute_difference=replay,
+            development_brier_difference=comparison_report['development_brier_difference'],
+            final_test=comparison_report['final_test'],
+            figure_files=sorted(str(p.relative_to(comparison)) for p in (comparison / 'gallery').glob('*')))
         report['synthetic_stress'] = synthetic_stress()
         report['published_arithmetic'] = published_arithmetic()
         if scores_csv is not None:

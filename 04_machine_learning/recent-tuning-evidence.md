@@ -89,7 +89,7 @@ Publication year identifies the paper, not the current software release. The [co
 
 **Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
-**Breast cancer application:** Prespecify a fixed baseline before asking whether our feature/regularization search earns its 76 fits. Do not transfer the benchmark’s random-row split or missing-value exclusions into paired assays: our example needs person grouping and training-only imputation, and selects by Brier error. General benchmark defaults are candidates for evaluation, not clinically established assay settings. The current runner has a prevalence baseline; an all-feature model with fixed C is a future comparator, not an existing result.
+**Breast cancer application:** Prespecify a fixed baseline before asking whether our feature/regularization search earns its 76 fits. Do not transfer the benchmark’s random-row split or missing-value exclusions into paired assays: our example needs person grouping and training-only imputation, and selects by Brier error. General benchmark defaults are candidates for evaluation, not clinically established assay settings. The original runner retains a prevalence baseline. The [comparison deployment](model-comparison.md) now adds a fixed-C all-feature comparator under a separately declared synthetic protocol; the contrast includes both selection and tuning.
 
 **Artifact pointer:** [Author software](https://github.com/dholzmueller/pytabkit); not installed or source-reviewed.
 

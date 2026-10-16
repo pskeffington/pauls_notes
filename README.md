@@ -34,6 +34,8 @@ A reference collection connecting biological questions with data preparation, st
 - [Run independent R and Python methods](04_machine_learning/methods-and-deployments.md) — Explore classification, regression, clustering, survival, and expression analysis.
 - [Check understanding and implementation](03_learning/mastery-checks.md) — Inspect expected results, failure cases, and interpretation tasks.
 
+The [assay comparison](04_machine_learning/model-comparison.md) adds a fixed all-feature baseline on matched people; its [plotting gallery](04_machine_learning/gallery/README.md) explains the saved probability errors and person-level differences.
+
 For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
 
 Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.

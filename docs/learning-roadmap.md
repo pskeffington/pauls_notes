@@ -17,17 +17,17 @@ The shared narrative is **people → specimens → measurements → prediction �
 | R caret, direct R and Python examples | Independently executable teaching mechanisms with stated input and partition contracts |
 | Paired-specimen selection with candidate traces | Training-only selection, grouped nested assessment and saved prediction replay on invented data |
 | 36-paper register and dated review | Traceable sources and limitations; three records remain abstract-limited |
-| Latest recorded validation | 14 Python tests, both Python deployments, three synthetic stress cases and a published processed-output audit; R workflows passed separately in CI |
+| Recorded validation | The earlier 14-test run remains archived; the [comparison guide](../04_machine_learning/model-comparison.md) adds five tests and a third Python deployment, checked by the current validation command |
 
-These are repository capabilities. Your understanding has not been assessed by CI. The 60-gene book remains a teaching catalog, and the synthetic features are not those genes. Existing figure helpers and diagrams are available; a dedicated, generated ML plotting gallery is still a planned deliverable.
+These are repository capabilities. Your understanding has not been assessed by CI. The 60-gene book remains a teaching catalog, and the synthetic features are not those genes. The [ML gallery](../04_machine_learning/gallery/README.md) now has two generated comparison figures with saved numeric inputs; the remaining training, stability and calibration displays are planned.
 
 ## Next phases
 
 | Phase | Learner question | Repository work | Completion evidence | Status |
 | --- | --- | --- | --- | --- |
 | 1. Data meaning and training boundaries | What exactly does each row and prediction represent? | Use the existing guides and outputs | Annotated data dictionary, hand-traced split and explanation of one deliberate input failure | Ready for practice |
-| 2. Fair baseline comparisons | Does selecting fewer assay measurements improve the declared objective? | Add a fixed all-feature comparator under the same assessment plan | Matched outer predictions and documented comparison; no gain is required to pass | Next implementation priority |
-| 3. Visual interpretation | Can I see where data went and why predictions differ? | Build a reproducible ML plotting gallery | Labeled figures rebuilt from saved outputs, with denominators and interpretation prompts | Planned after comparison outputs |
+| 2. Fair baseline comparisons | How does the tuned subset procedure compare with a fixed all-feature model? | Inspect the implemented fixed all-feature comparator under the same assessment plan | Matched outer predictions and documented comparison; no gain is required to pass | Implemented; ready for practice |
+| 3. Visual interpretation | Can I see where data went and why predictions differ? | Build a reproducible ML plotting gallery | Labeled figures rebuilt from saved outputs, with denominators and interpretation prompts | Two comparison figures available; remaining displays planned |
 | 4. Stability and tuning budgets | Which choices survive changes in development people or search budget? | Add a bounded robustness experiment and one justified search extension | Trial history, fit/time budget, descriptive panel stability and assessed comparison | Planned after baseline and figure contracts |
 | 5. New endpoints and R methods | What changes when the question becomes recurrence or treatment response? | Introduce a separate survival learning case and compare R/Python contracts | Correct time/event schema, censoring-aware assessment and a declared Cox baseline | Planned; requires a new endpoint contract |
 | 6. Paper-to-code capstone | Can I reproduce a precisely defined research result and explain its limits? | Reproduce a bounded published component, then package a complete teaching analysis | Pinned artifact, explicit result target, reproduction record and independent replay | Planned after the relevant method checks |
@@ -40,9 +40,9 @@ For the paired-specimen example, explain 60 people, 120 specimens and 48 measure
 
 **Finish with:** a filled [data dictionary](../templates/data-dictionary.md), an annotated split sketch, and a short explanation of why a duplicate identity or broken pair must fail. Explain why specimen category, future diagnosis and recurrence are different targets. These explanations are learner work; a passing script alone does not complete the phase.
 
-## Phase 2: establish what selection adds
+## Phase 2: compare the declared training procedures
 
-The [review](../04_machine_learning/corpus-review.md#executed-project-validation) identifies the immediate gap: the selection runner has a prevalence baseline but no fixed all-feature comparator. Read the [tuning contract](../04_machine_learning/model-tuning.md#our-concrete-tuning-contract) and [strong-default evidence](../04_machine_learning/recent-tuning-evidence.md#bc-m16) before expanding the search.
+The [review](../04_machine_learning/corpus-review.md#executed-project-validation) identifies the immediate gap: the original selection runner had a prevalence baseline but no fixed all-feature comparator. The [comparison case](../04_machine_learning/model-comparison.md) now implements that comparator under its own declared protocol. The contrast includes regularization tuning and does not isolate a feature-selection-only effect. Read the [tuning contract](../04_machine_learning/model-tuning.md#our-concrete-tuning-contract) and [strong-default evidence](../04_machine_learning/recent-tuning-evidence.md#bc-m16) before expanding the search.
 
 Build the comparator with the same imputation/scaling boundary, an independently declared regularization setting, the same person partitions and the same primary probability loss. Keep the tuned selection procedure and fixed comparator distinct. Retain every held-out prediction, candidate trace and fit count. If model-family selection is added, include that choice inside the procedure being assessed.
 
@@ -50,7 +50,7 @@ Build the comparator with the same imputation/scaling boundary, an independently
 
 ## Phase 3: build the plotting gallery from real run outputs
 
-Use [figures and feature matrices](../03_learning/figures-and-features.md), [models and uncertainty](../03_learning/models-and-uncertainty.md), and the [candidate-trace fields](../04_machine_learning/model-tuning.md#read-every-candidate-not-just-the-winner) as the starting material. The gallery should be generated by checked plotting code, with a text explanation for each figure.
+Use [figures and feature matrices](../03_learning/figures-and-features.md), [models and uncertainty](../03_learning/models-and-uncertainty.md), and the [candidate-trace fields](../04_machine_learning/model-tuning.md#read-every-candidate-not-just-the-winner) as the starting material. The [initial gallery](../04_machine_learning/gallery/README.md) now includes checked code, saved inputs and explanations for two comparison figures. The following additional views remain part of the phase.
 
 | Planned display | What the learner should explain |
 | --- | --- |
@@ -93,7 +93,7 @@ Write down the target table or metric, dataset subset, source commit, environmen
 
 ## Work order and completion record
 
-**The next development pass should implement Phase 2’s fixed comparator, then produce Phase 3’s first comparison figures.** Phase 1 can be practiced now with the existing material. The remaining phases build on those results; adding literature alone does not complete them.
+**Phase 2’s comparator and Phase 3’s initial comparison figures are implemented. The next development priority is the remaining training-allocation and candidate-score displays, followed by stability experiments.** Phase 1 can be practiced now with the existing material. The remaining phases build on those results; adding literature alone does not complete them.
 
 For each phase, record the question, code/document change, executed command, observed result, learner explanation and remaining limitation in the [analysis record](../templates/analysis-record.md). A failed hypothesis or unchanged predictive performance can be a valid learning result. Mark repository delivery and personal understanding separately.
 

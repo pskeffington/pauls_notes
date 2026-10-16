@@ -60,3 +60,5 @@ jobs:
           test -s "$RUNNER_TEMP/corpus-validation/validation.json"
           test -s "$RUNNER_TEMP/corpus-validation/general/models.joblib"
           test -s "$RUNNER_TEMP/corpus-validation/paired/report.json"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/brier-comparison.svg"
+          test -s "$RUNNER_TEMP/corpus-validation/comparison/gallery/person-errors.pdf"
