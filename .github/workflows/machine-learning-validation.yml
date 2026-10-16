@@ -1,0 +1,37 @@
+name: Machine learning deployment
+
+on:
+  push:
+    branches: [main]
+    paths: ["04_machine_learning/**", ".github/workflows/machine-learning-validation.yml"]
+  pull_request:
+    paths: ["04_machine_learning/**", ".github/workflows/machine-learning-validation.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  caret-workflow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install R modeling dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-caret r-cran-glmnet r-cran-ranger r-cran-proc
+      - name: Check code, partitions, leakage and saved predictions
+        run: |
+          python3 scripts/check_documentation.py
+          Rscript --vanilla 04_machine_learning/tests/test_caret_case.R
+      - name: Run the documented command
+        run: |
+          Rscript --vanilla 04_machine_learning/examples/caret_case.R "$RUNNER_TEMP/caret analysis"
+          test -s "$RUNNER_TEMP/caret analysis/model_bundle.rds"
+          test -s "$RUNNER_TEMP/caret analysis/test_metrics.csv"

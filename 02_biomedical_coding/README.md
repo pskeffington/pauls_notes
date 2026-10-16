@@ -20,7 +20,7 @@ This section connects influential biomedical computing, statistics, genomics, an
 
 Start with the [computing subject guides](../03_learning/README.md). They cover R objects, checked joins, reshaping, missingness, paired comparisons, exploratory models, visualization, simulation and a complete local Bash-to-R deployment. The case uses base R; optional examples show dplyr, tidyr and survey interfaces.
 
-Use the [Unix and Bash guide](../01_unix_bash/README.md) for shell foundations, and the [R tools](../06_RESOURCES/R/README.md) for additional plotting helpers. Advanced resampling with caret, full RNA-seq workflows and predictive-model deployments remain reference topics without a complete executable example here; the literature matrix supplies planning references for those areas.
+Use the [Unix and Bash guide](../01_unix_bash/README.md) for shell foundations, and the [R tools](../06_RESOURCES/R/README.md) for additional plotting helpers. The [machine-learning section](../04_machine_learning/README.md) adds a runnable caret deployment with elastic-net and random-forest classifiers, a [package guide](../04_machine_learning/package-guide.md), and [recent paper-to-code studies](../04_machine_learning/recent-code-studies.md). Full RNA-seq classification and nested evaluation remain reference or implementation-planning topics.
 
 ## Boundaries
 

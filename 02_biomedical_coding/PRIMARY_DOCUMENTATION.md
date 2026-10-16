@@ -8,6 +8,7 @@ Foundational papers describe methods and historical software. Before implementin
 | --- | --- | --- |
 | R language and stats | [R manuals](https://cran.r-project.org/manuals.html) | Base types, mathematical notation, model formulae |
 | caret | [CRAN caret](https://cran.r-project.org/package=caret) | Resampling and tuning; verify the current package status/API |
+| Caret implementation | [Local deployment guide](../04_machine_learning/caret-deployment.md) and [package contracts](../04_machine_learning/package-guide.md) | Executable elastic-net and forest workflow; versions captured per run |
 | Modern R modeling | [tidymodels](https://www.tidymodels.org/) | Current modeling and recipe/resampling approaches |
 | lme4 | [CRAN lme4](https://cran.r-project.org/package=lme4) | Mixed-effects model formulation and diagnostics |
 | Bioconductor | [Bioconductor](https://bioconductor.org/) | Matching R/Bioconductor versions and scientific containers |

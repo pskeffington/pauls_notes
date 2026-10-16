@@ -50,7 +50,7 @@ python3 scripts/check_documentation.py
 Rscript --vanilla 03_learning/tests/test_research_case.R
 ```
 
-Generated analysis outputs belong in a chosen working directory. Commit reusable source and documentation; do not commit local runs, participant records or credentials. For molecular context, read the [breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md).
+Generated analysis outputs belong in a chosen working directory. Commit reusable source and documentation; do not commit local runs, participant records or credentials. For molecular context, read the [breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md). For predictive modeling, see the [caret deployment and package guide](../04_machine_learning/README.md).
 
 ## Principles covered
 
