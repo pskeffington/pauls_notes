@@ -8,6 +8,8 @@ Each card separates **reported evidence**, **review extent**, and **our implemen
 
 The [recent tuning update](recent-tuning-evidence.md) contains cards BC-M11–BC-M19 for 2021–2025 primary methods papers, alongside the existing 2023 review (BC-M10). The [selection and validation update](recent-selection-validation.md) adds BC-M20–BC-M28, including 2026 survival benchmarking. The structured register covers all three guides; methodological benchmarks remain separate from breast cancer application evidence.
 
+The [2026-10-16 corpus review and validation run](corpus-review.md) covers every record, with 33 selected full-text reviews and three abstract-limited records. It separates published-output checks from our executed synthetic software verification.
+
 ## Begin with the endpoint
 
 | Book question | Evidence cards | What the assessment must preserve |
@@ -26,7 +28,9 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** German prospective observational implementation across 12 sites. The paper reports detection of 6.7 versus 5.7 cancers per 1,000 screened women, a model-based relative difference of 17.6% (95% CI 5.7–30.8%). Readers chose whether to use the AI viewer; this was not randomized.
 
-**Review extent:** Abstract plus [author code archive v1.3.0](https://doi.org/10.5281/zenodo.13952914) and [Dryad documentation](https://doi.org/10.5061/dryad.zs7h44jgn), without downloading or running the analysis package. The archive describes propensity scores and overlap weighting. The paper's overall 463,094 participants and the deposit's 461,818 analysis rows are different stated denominators; reconcile inclusion/exclusion rules before reproducing a table.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
+
+Figure 1 now resolves the cohort flow: 463,094 screened minus 1,276 exclusions equals 461,818 analyzed. The exclusions are 214 technical issues, 610 cancellations, 451 unfinished processes and one safety-net/reporting inconsistency.
 
 **Our implementation decision:** Retain a cohort-flow ledger and distinguish adjusted estimates from raw rates. A reader/site identifier and an AI-viewer exposure are analysis/design variables, not interchangeable with a diagnostic target. A public outcomes table is not a mammography training-image release. This workflow evaluation cannot validate our synthetic tissue classifier.
 
@@ -36,7 +40,7 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** Randomized Swedish screening study; 105,934 women assigned, with 19 excluded from analysis. AI-supported screening detected 6.4 cancers per 1,000 versus 5.0 with standard double reading (ratio 1.29, 95% CI 1.09–1.51). Screen-reading workload decreased by 44.2%. The intervention combined triage and radiologist support using Transpara 1.7.0.
 
-**Review extent:** Abstract and registration linkage, not raw trial data, full software, or a replication. These are protocol-defined secondary outcomes from [NCT04838756](https://clinicaltrials.gov/study/NCT04838756).
+**Review extent:** Structured abstract and publication metadata; full-text access remains incomplete. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Record the intervention version, decision workflow, endpoint hierarchy and human involvement. More screen-detected cancers does not by itself establish reduced mortality. Continue to the follow-up report below rather than substituting a detection endpoint for an interval-cancer endpoint.
 
@@ -46,7 +50,7 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** The same randomized trial reported interval cancers at 1.55 versus 1.76 per 1,000 participants; ratio 0.88 (95% CI 0.65–1.18). This met the prespecified 20% non-inferiority margin. The confidence interval includes a ratio of one, so the numerical decrease is not evidence of demonstrated superiority for this endpoint. Sensitivity was 80.5% versus 73.8%; specificity was 98.5% in both groups.
 
-**Review extent:** Author-hosted publication abstract and bibliographic record, not full trial reanalysis. Family identifier in the register: `MASAI-NCT04838756`, shared with BC-02.
+**Review extent:** Structured abstract and publication metadata; full-text access remains incomplete. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Encode the estimand, margin, follow-up and uncertainty alongside the point estimate. Link reports from the same trial to avoid double-counting. Keep a screening safety or workflow claim separate from a mortality claim and from evidence about a new model trained in these notes.
 
@@ -56,7 +60,7 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** Evaluation included 128,793 mammograms from 62,185 patients at seven sites. The endpoint was diagnosis one to five years after the mammogram. Reported site-specific Uno concordance indices ranged from 0.75 to 0.84; the paper supplies site-specific uncertainty rather than one pooled accuracy figure.
 
-**Review extent:** Abstract and figure-description material; model training source, weights and a reproducible environment were not audited in this pass. The paper appeared online in 2021 and in a 2022 journal issue; the register uses the issue year.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Count people separately from examinations. Keep all relevant examinations linked to their person, freeze the horizon and outcome source, and inspect site-specific results and calibration before considering transport. Multi-site discrimination does not establish a benefit from changing screening intervals. This is a future-risk task, unlike our paired tissue-category demonstration.
 
@@ -66,7 +70,7 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** The study used 8,161 patients across 15 cohorts; 3,502 patients in five cohorts were reserved for external evaluation. It combines Kestrel pathology representations with clinical variables for time-to-event prediction. Reported disease-free-interval C-index: 0.71 (95% CI 0.68–0.75).
 
-**Review extent:** Abstract, selected cohort/method sections and data/code availability statement. The full model codebase is proprietary; selected access may be considered under agreements. No released model or training procedure was executed here.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Retain separate pathology and clinical schemas, modality-ablation comparisons, event/censoring definitions and a pretraining-overlap audit. A numerically higher comparison score is not automatically a proven superiority claim. Prognosis under observed care does not establish differential benefit from competing treatments. Public libraries cited by a proprietary model do not make the full predictor openly reproducible.
 
@@ -74,9 +78,9 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Multi-omic neoadjuvant response — Sammut et al., 2022.** [Primary abstract](https://pubmed.ncbi.nlm.nih.gov/34875674/) · [Article](https://doi.org/10.1038/s41586-021-04278-5)
 
-**Reported evidence:** Pretreatment clinical, pathology, genomic and transcriptomic profiling covered 168 patients. The abstract reports pathological complete-response prediction with AUROC 0.87 in an external cohort of 75. The article describes a smaller complete-data modeling subset; do not treat all profiled patients as the fitting denominator. This paper appeared online in 2021 and in a 2022 issue.
+**Reported evidence:** Pretreatment clinical, pathology, genomic and transcriptomic profiling covered 168 patients. The abstract reports pathological complete-response prediction with AUROC 0.87 in an external cohort of 75. The paper identifies 147 complete molecular/digital-pathology cases; do not treat all 168 profiled patients as the complete-data fitting denominator. This paper appeared online in 2021 and in a 2022 issue.
 
-**Review extent:** Abstract/indexed cohort description, [analysis README](https://github.com/cclab-brca/neoadjuvant-therapy-response-predictor/tree/405041d583baea6f8709d2e7dd43387b36cc7581), and selected [NAT-ML source](https://github.com/micrisor/NAT-ML/blob/94ce67a936b1e66410fb0be42e5516fe1d4086cf/training_code/classification_models.py). No study inputs or model files loaded.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Trace modality completeness and training-only selection. Separate external evaluation from internal scores after tuning. The response observed under a received regimen is not the counterfactual benefit of choosing another regimen. See the code mechanism notes below for the inspected implementation and environment limitations.
 
@@ -86,7 +90,7 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** Retrospective modeling used 1,035 patients from four centers, comparing tissue regions and integrating a histology score with clinical predictors. Pooled validation AUROC for the integrated model was 0.780 (95% CI 0.726–0.833), compared with 0.706 (0.645–0.768) for the clinical comparator. The separate immune-information comparison, 0.831 versus 0.822, had p=0.183; that increment is not established by that comparison.
 
-**Review extent:** Selected methods/results and availability sections, plus the linked [TS-Score README at a pinned commit](https://github.com/YongQuanYang/TS-Score/tree/21beba298c4b7d609480e59d87ee08f90cb39a51). The README describes an earlier paper and legacy segmentation/scoring components. Full coverage of the 2025 integrated model remains unverified; study data are described as available on request.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Track which code release implements which stage and which paper. Preserve patient-level partitions before making image patches. Verify prediction-time availability of every clinical input. Feature ranks and tissue-region explanations need evidence beyond a performance plot.
 
@@ -96,7 +100,9 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Reported evidence:** Posted 2 October 2026. The authors describe learning expression from histology, followed by response prediction from inferred expression and clinical variables. Reported downstream development: 1,080 patients in five cohorts; evaluation: 1,412 in nine cohorts; pooled AUROC 0.79 (95% CI 0.73–0.85).
 
-**Review extent:** Versioned preprint abstract only. No peer-reviewed version was verified in this pass. Source code, cohort overlap, inferred-expression accuracy and complete modeling details were not audited. No checkpoint executed.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
+
+The methods use source-held-out development tuning/calibration. The component-count sweep on evaluation cohorts is explicitly post hoc, so those sensitivity results are exploratory rather than an untouched confirmation.
 
 **Our implementation decision:** Keep measured and inferred expression distinct in the data dictionary. Before adaptation, audit representation-pretraining overlap and preserve external cohorts through both stages. Compare clinical-only, image-only and fused procedures under the same patient split. This is a recent research lead, not established treatment-selection evidence or a verification upgrade for the book's gene cards.
 
@@ -104,7 +110,7 @@ AUROC, a survival C-index, detection per 1,000 screens, and a workload reduction
 
 **Selection bias control — Ambroise and McLachlan, 2002.** [Primary abstract](https://pubmed.ncbi.nlm.nih.gov/11983868/) · [Article](https://doi.org/10.1073/pnas.102102699)
 
-The paper explains why evaluating a classifier after selecting genes using the same assessment observations can underestimate prediction error. Its worked cancer datasets concern colon cancer and leukemia, not breast cancer. This is general methodological evidence applied to our breast cancer workflow, not a breast cancer performance study. Review extent: abstract and indexed description; no reanalysis.
+The paper explains why evaluating a classifier after selecting genes using the same assessment observations can underestimate prediction error. Its worked cancer datasets concern colon cancer and leukemia, not breast cancer. This is general methodological evidence applied to our breast cancer workflow, not a breast cancer performance study. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Repeat supervised ranking and subset-size tuning inside resampling. Our [paired-specimen selection case](advanced-breast-cancer-training.md) tests that boundary using synthetic data. It does not replicate this paper or establish clinical gene-panel performance.
 
@@ -112,7 +118,7 @@ The paper explains why evaluating a classifier after selecting genes using the s
 
 **Transparent reporting — Collins et al., TRIPOD+AI, 2024.** [Primary abstract](https://pubmed.ncbi.nlm.nih.gov/38626948/) · [Statement](https://doi.org/10.1136/bmj-2023-078378)
 
-TRIPOD+AI addresses reporting of prediction-model development and evaluation using regression or machine learning. Review extent: publication abstract/statement description, not a completed item-by-item assessment of these studies.
+TRIPOD+AI addresses reporting of prediction-model development and evaluation using regression or machine learning. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Record intended use, data provenance, target and predictor timing, missingness, partition design, model specification, performance and uncertainty. Use the full published checklist when writing a study report. Reporting completeness does not establish low risk of bias, and adding this citation does not make our teaching examples TRIPOD+AI compliant.
 
@@ -120,7 +126,7 @@ TRIPOD+AI addresses reporting of prediction-model development and evaluation usi
 
 **Quality and bias appraisal — Moons et al., PROBAST+AI, 2025.** [Primary abstract](https://pubmed.ncbi.nlm.nih.gov/40127903/) · [Tool description](https://doi.org/10.1136/bmj-2024-082505)
 
-PROBAST+AI separates appraisal of model development from model evaluation, addressing participants/data sources, predictors, outcome and analysis. Review extent: abstract/tool-development description; no formal ratings assigned to the studies above.
+PROBAST+AI separates appraisal of model development from model evaluation, addressing participants/data sources, predictors, outcome and analysis. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Appraise whether the data and assessment design fit the breast cancer use case independently of how well the paper reports them. A repository badge, large patient count, or high discrimination score is not a substitute for this appraisal. Link completed, study-specific assessments if they are performed later.
 
@@ -128,7 +134,7 @@ PROBAST+AI separates appraisal of model development from model evaluation, addre
 
 **Nested tuning evidence — Varma and Simon, 2006.** [Primary article](https://doi.org/10.1186/1471-2105-7-91)
 
-The simulation study examines using cross-validation both to optimize a classifier and to report its error. It shows optimistic error estimates from that reuse and assesses an inner-tuning/outer-evaluation procedure. Review extent: abstract and selected introductory methods; no experiments reproduced.
+The simulation study examines using cross-validation both to optimize a classifier and to report its error. It shows optimistic error estimates from that reuse and assesses an inner-tuning/outer-evaluation procedure. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Assess the complete assay-selection and model-tuning procedure on outer-held-out people. Do not describe the winning inner score as independently validated performance. The [project tuning guide](model-tuning.md) maps this distinction to our saved candidate and prediction records.
 
@@ -136,7 +142,7 @@ The simulation study examines using cross-validation both to optimize a classifi
 
 **Overfitting the selection criterion — Cawley and Talbot, 2010.** [Primary JMLR record](https://jmlr.org/papers/v11/cawley10a.html)
 
-The paper analyzes how optimizing a noisy finite-sample selection criterion can itself overfit and bias performance assessment. Review extent: publication abstract; not a full paper audit or reanalysis.
+The paper analyzes how optimizing a noisy finite-sample selection criterion can itself overfit and bias performance assessment. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Count the candidate budget and any subsequent human or model-family choices as part of development. A longer assay-model search does not add independent people or guarantee a better transported predictor. Keep the final test outside those choices.
 
@@ -144,7 +150,7 @@ The paper analyzes how optimizing a noisy finite-sample selection criterion can 
 
 **Budgeted random search — Bergstra and Bengio, 2012.** [Primary JMLR record](https://jmlr.org/papers/v13/bergstra12a.html)
 
-The paper compares random and grid search and studies why allocating trials across a broader space can help when only some settings strongly affect performance. Its experiments are not breast cancer clinical evidence. Review extent: publication abstract; search experiments not reproduced.
+The paper compares random and grid search and studies why allocating trials across a broader space can help when only some settings strongly affect performance. Its experiments are not breast cancer clinical evidence. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** For a future large assay/pathology space, compare a prespecified random-search budget with an appropriate baseline using the same assessment design. Our current six-candidate grid is executed; random search remains a reference extension, not a demonstrated improvement here.
 
@@ -152,7 +158,7 @@ The paper compares random and grid search and studies why allocating trials acro
 
 **Sequential Bayesian search — Snoek, Larochelle and Adams, 2012.** [Primary proceedings abstract](https://papers.nips.cc/paper_files/paper/2012/hash/05311655a15b75fab86956663e1819cd-Abstract.html)
 
-The work models the tuning objective with a Gaussian process and considers sequential experiment choice, including varying experiment costs. Review extent: proceedings abstract; no optimizer or benchmark executed.
+The work models the tuning objective with a Gaussian process and considers sequential experiment choice, including varying experiment costs. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** A future expensive breast pathology/fusion workflow could use sequential search under a fixed patient split and budget. Preserve the objective and complete trial history. It cannot learn from the final test or be assumed superior to the small existing grid without a relevant comparison.
 
@@ -160,7 +166,7 @@ The work models the tuning objective with a Gaussian process and considers seque
 
 **Multi-fidelity allocation — Li et al., Hyperband, 2018.** [Primary JMLR record](https://jmlr.org/papers/v18/16-558.html)
 
-Hyperband allocates resources across configurations and uses early stopping within a bandit-based search framework. Review extent: publication abstract; no Hyperband execution or breast cancer benchmark here.
+Hyperband allocates resources across configurations and uses early stopping within a bandit-based search framework. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Define a valid training resource and stopping rule before considering adaptive allocation. Randomly removing specimens may split patients or change class composition. A low-resource winner need not be the best full-resource assay model. This is a reference mechanism; our current runner completes every grid candidate.
 
@@ -168,7 +174,7 @@ Hyperband allocates resources across configurations and uses early stopping with
 
 **CV uncertainty — Bengio and Grandvalet, 2004.** [Primary JMLR record](https://www.jmlr.org/papers/v5/grandvalet04a.html)
 
-The paper establishes that there is no universal unbiased variance estimator for k-fold cross-validation and discusses correlations induced by overlapping samples. Review extent: publication abstract; no variance study replicated.
+The paper establishes that there is no universal unbiased variance estimator for k-fold cross-validation and discusses correlations induced by overlapping samples. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Label inner fold scores and their spread as descriptive. Three outer fits, repeated splits or model-selection frequencies are not independent cohorts. A patient-level uncertainty analysis needs its own documented estimand and procedure; fold standard deviation alone is not a clinical confidence interval.
 
@@ -176,7 +182,7 @@ The paper establishes that there is no universal unbiased variance estimator for
 
 **HPO practice synthesis — Bischl et al., 2023.** [Published review](https://doi.org/10.1002/widm.1484)
 
-This methodological review covers hyperparameter optimization foundations, search algorithms, practical considerations and open challenges. Review extent: indexed publisher abstract/record; full text was not available through this pass. It is not breast cancer application evidence or an executed method comparison.
+This methodological review covers hyperparameter optimization foundations, search algorithms, practical considerations and open challenges. Review extent: Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Our implementation decision:** Maintain a project-specific tuning contract containing the search space, objective, resampling, budget, failure handling and refit rule. The [tuning guide](model-tuning.md) and candidate trace make those choices inspectable; they do not establish a globally optimal model.
 

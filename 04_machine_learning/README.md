@@ -17,6 +17,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
 | Breast cancer evidence | [Study evidence and implementation](breast-cancer-evidence.md) | Screening trials, future risk, prognosis, response prediction, author-code mechanisms and review limits |
 | Methods from recent research | [Paper-to-code studies](recent-code-studies.md) | Connect 2025–2026 papers and a leakage reference to implementation decisions |
+| Corpus review and validation | [Dated appraisal and executed run](corpus-review.md) | Review all 36 records, inspect access limits and reproduce synthetic verification |
 | Recent tuning research | [2021–2025 evidence corpus](recent-tuning-evidence.md) | Nine new primary methods papers tied to assay prediction, budgets, defaults and overtuning |
 | Selection and validation research | [2021–2026 evidence corpus](recent-selection-validation.md) | Gene-panel stability, validation precision, leakage, tabular models and survival comparisons |
 | Model tuning evidence and practice | [Project tuning guide](model-tuning.md) | Actual search grids, metrics, candidate traces, fit budgets, selection bias and advanced search references |

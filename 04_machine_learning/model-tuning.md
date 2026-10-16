@@ -112,6 +112,8 @@ Start with overtuning before increasing the six-candidate grid; read strong defa
 
 The [selection and validation corpus](recent-selection-validation.md) adds nine 2021–2026 publications, connecting tuning to gene-panel stability, validation-cohort precision, leakage audits and survival objectives. Read these before interpreting a selected configuration as a useful assay or prognosis model.
 
+The [dated corpus review and validation run](corpus-review.md) audits all 36 records and exercises the project’s training boundaries and saved predictions. It includes a processed-output audit of the 2026 survival benchmark; neither that audit nor a passing synthetic run reproduces the papers’ model training.
+
 ## Before extending the real study
 
 Write a tuning plan stating the target and intended population, feature availability, group/time/site split, primary objective, candidate ranges and their rationale, search budget, seeds, worker limits, failure policy, refit rule, and the evidence that will decide whether the extension helped. Add calibration and clinical utility only under their own fitting and assessment rules; do not label a Brier-optimized tissue classifier a treatment decision tool.

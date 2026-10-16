@@ -16,6 +16,8 @@ class EvidenceTests(unittest.TestCase):
         with checker.REGISTER.open(newline='', encoding='utf-8') as stream:
             cls.rows = list(csv.DictReader(stream))
         cls.guide = checker.read_guides()
+        with checker.REVIEW.open(newline='', encoding='utf-8') as stream:
+            cls.reviews = list(csv.DictReader(stream))
 
     def errors(self, rows, guide=None):
         return checker.inspect(rows, self.guide if guide is None else guide,
@@ -35,17 +37,28 @@ class EvidenceTests(unittest.TestCase):
         self.assertTrue(all(row['local_application'] == '04_machine_learning/model-tuning.md'
                             for row in tuning))
 
-    def test_recent_cards_and_honest_review_states(self):
+    def test_recent_card_coverage_and_years(self):
         recent_ids = {f'BC-M{number}' for number in range(11, 20)}
         recent = [row for row in self.rows if row['id'] in recent_ids]
         self.assertEqual({row['id'] for row in recent}, recent_ids)
         for row in recent:
             self.assertTrue(2021 <= int(row['year']) <= 2025)
-            self.assertEqual(row['artifact_status'], 'not_reviewed')
             self.assertEqual(row['local_reproduction'], 'not_run')
         missing = self.guide.replace('## BC-M19\n', '## Removed\n')
         self.assertTrue(any('missing evidence card' in error
                             for error in self.errors(self.rows, missing)))
+
+    def test_review_coverage_and_unbacked_replication(self):
+        self.assertEqual(checker.inspect_review(self.rows, self.reviews), [])
+        incomplete = self.reviews[:-1]
+        self.assertTrue(any('exactly' in error for error in checker.inspect_review(self.rows, incomplete)))
+        changed = copy.deepcopy(self.reviews)
+        changed[0]['identifier'] = changed[1]['identifier']
+        changed[1]['paper_reproduction'] = 'replicated'
+        changed[2]['source_sha256'] = 'not-a-digest'
+        errors = checker.inspect_review(self.rows, changed)
+        for text in ('mismatched', 'reproduction', 'digest'):
+            self.assertTrue(any(text in error for error in errors), text)
 
     def test_omitting_any_guide_leaves_uncovered_records(self):
         for omitted in checker.GUIDES:

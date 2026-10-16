@@ -10,6 +10,7 @@ from check_documentation import anchors
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTER = ROOT / '04_machine_learning/evidence/breast-cancer-studies.csv'
+REVIEW = ROOT / '04_machine_learning/evidence/paper-review.csv'
 GUIDE = ROOT / '04_machine_learning/breast-cancer-evidence.md'
 GUIDES = (GUIDE, ROOT / '04_machine_learning/recent-tuning-evidence.md',
           ROOT / '04_machine_learning/recent-selection-validation.md')
@@ -28,6 +29,39 @@ DESIGNS = {'prospective_observational', 'randomized_secondary_report', 'randomiz
 
 def read_guides():
     return '\n'.join(path.read_text(encoding='utf-8') for path in GUIDES)
+
+
+def inspect_review(rows, reviews, today=None):
+    """A dated review must cover exactly the register, with no replication upgrade."""
+    today = today or date.today()
+    errors, seen = [], set()
+    by_id = {row['id']: row['identifier'] for row in rows}
+    for review in reviews:
+        label = review.get('id', '')
+        required = ('id', 'identifier', 'reviewed_on', 'review_scope', 'review_source_url',
+                    'sections_checked', 'finding', 'limitation', 'project_action', 'paper_reproduction')
+        if any(not review.get(key, '').strip() for key in required):
+            errors.append(f'{label}: incomplete paper review')
+        if label in seen or review.get('identifier') != by_id.get(label):
+            errors.append(f'{label}: duplicate or mismatched paper review')
+        seen.add(label)
+        if review.get('review_scope') not in {'selected_fulltext', 'abstract_only'}:
+            errors.append(f'{label}: undeclared review scope')
+        try:
+            if date.fromisoformat(review['reviewed_on']) > today:
+                raise ValueError
+        except (ValueError, KeyError):
+            errors.append(f'{label}: invalid paper review date')
+        source = urlparse(review.get('review_source_url', ''))
+        if source.scheme != 'https' or not source.netloc:
+            errors.append(f'{label}: review source requires HTTPS')
+        if review.get('source_sha256') and not re.fullmatch(r'[a-f0-9]{64}', review['source_sha256']):
+            errors.append(f'{label}: invalid source digest')
+        if review.get('paper_reproduction') != 'not_run':
+            errors.append(f'{label}: paper reproduction requires its own validated contract')
+    if seen != set(by_id):
+        errors.append('Paper review must cover exactly the registered publications')
+    return errors
 
 
 def inspect(rows, guide, root, today=None):
@@ -90,6 +124,9 @@ def main():
             raise SystemExit('Unexpected evidence register header')
         rows = list(reader)
     errors = inspect(rows, read_guides(), ROOT)
+    with REVIEW.open(newline='', encoding='utf-8') as stream:
+        reviews = list(csv.DictReader(stream))
+    errors += inspect_review(rows, reviews)
     if errors:
         raise SystemExit('\n'.join(errors))
     print(f'PASS: {len(rows)} ML evidence records; citation IDs, review states, dates, cards and local applications')

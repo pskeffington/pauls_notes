@@ -54,15 +54,9 @@ jobs:
         run: |
           python3 -m venv "$RUNNER_TEMP/ml-env"
           "$RUNNER_TEMP/ml-env/bin/python" -m pip install -r 04_machine_learning/requirements-python.txt
-      - name: Check nested group boundaries, transforms and replay
+      - name: Run corpus validation, deployment tests, replay and synthetic stress checks
         run: |
-          "$RUNNER_TEMP/ml-env/bin/python" 04_machine_learning/tests/test_sklearn_methods.py
-          "$RUNNER_TEMP/ml-env/bin/python" 04_machine_learning/tests/test_breast_cancer_feature_selection.py
-      - name: Run the documented command
-        run: |
-          "$RUNNER_TEMP/ml-env/bin/python" 04_machine_learning/examples/sklearn_methods.py "$RUNNER_TEMP/python methods"
-          test -s "$RUNNER_TEMP/python methods/models.joblib"
-          test -s "$RUNNER_TEMP/python methods/metrics.json"
-          "$RUNNER_TEMP/ml-env/bin/python" 04_machine_learning/examples/breast_cancer_feature_selection.py "$RUNNER_TEMP/breast cancer selection"
-          test -s "$RUNNER_TEMP/breast cancer selection/feature_review.csv"
-          test -s "$RUNNER_TEMP/breast cancer selection/report.json"
+          "$RUNNER_TEMP/ml-env/bin/python" 04_machine_learning/validation/run_validation.py "$RUNNER_TEMP/corpus-validation"
+          test -s "$RUNNER_TEMP/corpus-validation/validation.json"
+          test -s "$RUNNER_TEMP/corpus-validation/general/models.joblib"
+          test -s "$RUNNER_TEMP/corpus-validation/paired/report.json"

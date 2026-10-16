@@ -16,7 +16,7 @@ The thread remains the book’s people → specimens → measurements → predic
 | Which model families deserve comparison? | [Trees and networks](#bc-m26), [TabPFN](#bc-m27) | General benchmark findings motivate comparators; they do not validate an assay predictor |
 | How should prognosis models be tuned? | [2026 survival benchmark](#bc-m28) | Risk ranking, probability prediction and calibration require distinct assessment |
 
-Each card distinguishes reported findings from our proposed application. Abstract-only review remains explicitly marked; selected methods do not imply a full source-code audit. All nine register entries retain `local_reproduction=not_run` and `artifact_status=not_reviewed`. No packages, weights or patient datasets were added by this literature pass.
+Each card distinguishes reported findings from our proposed application. Abstract-only review remains explicitly marked; selected methods do not imply a full source-code audit. All nine entries retain `local_reproduction=not_run`. The later [corpus review](corpus-review.md) records selected source inspection for BC-M20 and BC-M28, and a processed-output audit for BC-M28; none is a training reproduction. No packages, weights or patient datasets were added by this literature pass.
 
 ## BC-M20
 
@@ -24,11 +24,11 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** The benchmark compares 14 feature filters on 11 gene-expression survival datasets, including BRCA. It evaluates prediction, runtime, panel size and selection stability. Simple variance filtering performed strongly in this particular comparison.
 
-**Review extent:** Abstract and selected experiment descriptions: nested resampling, package roles and the BRCA dataset. Journal issue year is 2022; online publication was September 2021. The linked R source was not inspected.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** For a future breast cancer prognosis task, compare a simple filter with supervised or embedded selection inside the training procedure. Do not replace our binary tissue-category F-score selector solely because variance filtering ranked well on censored survival data. Check panel stability separately from predictive error; neither establishes a causal gene mechanism. Our current selection frequencies describe three overlapping outer training sets, not independent biological replications.
 
-**Artifact pointer:** [Author-linked research artifact](https://github.com/bommert/survival-filter-benchmark); not source-reviewed or executed.
+**Artifact inspection:** [Pinned experiment source](https://github.com/bommert/survival-filter-benchmark/blob/c1528632a225b522a427169e8027e6bd381137b3/Experiments/fbs_experiments.R) read; not executed.
 
 ## BC-M21
 
@@ -36,7 +36,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** The authors compare seven feature-subset algorithms using cancer transcriptome datasets with training and external-validation sets. Their evaluation includes predictive performance, selected-set size, diversity and gene stability, with a reported breast cancer example.
 
-**Review extent:** Indexed primary abstract and author-institution publication metadata only; full methods, cohort independence and code availability were not established.
+**Review extent:** Structured abstract and publication metadata; full-text access remains incomplete. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** When asking whether a smaller breast cancer panel is useful, declare both the prediction objective and how panel burden is measured. Select the final tradeoff within development; do not pick a panel from external-test results. Compare gene identities and prediction stability across resamples because correlated measurements can substitute for one another. The reported panel is not a validated replacement for the book’s 60-gene catalog, and a low column count alone does not establish assay feasibility.
 
@@ -46,7 +46,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** This methodological paper sizes binary-outcome validation studies for precision in calibration, discrimination and net benefit. Required inputs include anticipated event frequency, model predictions and calibration, desired uncertainty, and any decision thresholds.
 
-**Review extent:** Publisher abstract only; formulas, supplied software and worked-example calculations were not reproduced.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** A future patient-level breast cancer endpoint needs a validation cohort justified for that endpoint and population. Our 15 synthetic final-test people were chosen for a software example, not by a clinical precision calculation. Two specimens per person cannot simply be counted as two independent patients. A protocol with clustered specimens needs methods addressing that dependence; these participant-level calculations do not automatically cover our paired-specimen assessment. Keep recruitment requirements separate from tuning budgets.
 
@@ -56,7 +56,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** The paper extends external-validation sample-size planning to time-to-event prediction, using simulation with assumptions about the model’s linear predictor and event/censoring distributions.
 
-**Review extent:** Indexed primary abstract only. Journal issue year is 2022; the article appeared online in December 2021. No simulation code was run.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** For a recurrence or disease-free follow-up question, specify time zero, event definition, prediction horizon and censoring before estimating validation needs. People without an observed event by last contact cannot all be coded as event-free at a later horizon. Our current binary tissue classifier has neither survival predictions nor follow-up and therefore supplies no evidence about recurrence. The binary and survival sizing papers are related methodological work, not independent clinical confirmations.
 
@@ -66,7 +66,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** The authors review obstacles in medical-imaging research, linking data limitations, assessment choices and research incentives to the gap between benchmark progress and clinical usefulness.
 
-**Review extent:** Author-institution abstract and indexed published abstract only; the associated analysis repository was not reviewed.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** If extending the book to pathology or mammography, define the decision and eligible population before choosing an available dataset. A tissue-category model, screening detector and treatment-response model need different denominators and outcomes. Compare errors by relevant acquisition context and held-out site, and retain uncertainty alongside score differences. Site-based validation is a future study requirement, not something demonstrated by our synthetic person-grouped folds.
 
@@ -78,7 +78,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** The paper surveys leakage in ML-based science, proposes a taxonomy of failure modes and model information sheets, and uses a civil-war prediction case study to investigate misleading model comparisons.
 
-**Review extent:** Published/indexed abstract and author citation metadata only; no independent reanalysis of the case study.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** For breast cancer assays, document when each predictor became available and where each transformation was fitted. Audit cohort construction, duplicate people, outcome-derived feature lists, batch correction and analyst choices as well as the final train/test split. A group-aware splitter does not by itself prove an entire upstream dataset is leakage-free. The civil-war example informs an audit approach; it does not measure leakage prevalence in breast cancer research.
 
@@ -88,7 +88,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** This benchmark compares tree methods and neural networks while accounting for hyperparameter search. Its results on medium-sized tabular datasets motivate attention to irrelevant features, data representation and the functions each learner can capture.
 
-**Review extent:** Primary NeurIPS abstract only; no benchmark code or individual dataset was audited.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** Before adding a neural assay predictor, compare it against a fixed logistic model and appropriately tuned forest or boosting procedures on the same excluded people. Include preprocessing and search costs in the comparison. The benchmark’s roughly ten-thousand-row scale is different from our 45 development people, and its aggregate ranking is not a reason to promise a tree model will win on molecular measurements. Family selection must remain part of the assessed development procedure.
 
@@ -98,7 +98,7 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** TabPFN uses a pretrained tabular model for classification and regression and reports strong benchmark results on small-to-medium datasets, including comparisons against tuned conventional methods.
 
-**Review extent:** Indexed primary abstract and publication metadata only; paper-era weights, package API, license and current releases were not inspected.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** A pretrained learner could become a research comparator, but every held-out person must remain outside the labeled context supplied to it. Keep preprocessing training-only, record the exact checkpoint and inference configuration, and investigate any overlap between evaluation cohorts and model-development data. In-context prediction is a different fitting mechanism, not permission to expose test labels. No TabPFN package or weights are deployed here; benchmark speed or accuracy does not establish a breast cancer benefit.
 
@@ -108,11 +108,11 @@ Each card distinguishes reported findings from our proposed application. Abstrac
 
 **Reported evidence:** The 2026 benchmark compares 21 models on 34 low-dimensional, right-censored datasets. It tunes discrimination and survival probability error separately. No learner significantly outperformed Cox across the stated comparisons; this is not an equivalence finding.
 
-**Review extent:** Abstract and selected study-design, preprocessing and resampling descriptions: mlr3 pipelines, training-only transformations and three-inner/three-outer nested resampling. The published archive is a pointer, not a reviewed or executed artifact.
+**Review extent:** Selected full-text methods/results and limitations; not an exhaustive supplementary-material audit. See the [dated paper-review ledger](evidence/paper-review.csv) for the source, sections, findings and remaining limits. No study training was reproduced.
 
 **Breast cancer application:** Retain Cox as a declared baseline for a future breast cancer prognosis comparison and ask whether the model supplies risk rankings or survival probabilities. A C-index objective cannot substitute for probability calibration at a specified horizon. Carry the pipeline boundary into our design, while adding person/site/time separation as appropriate. Low-dimensional benchmark findings do not settle a high-dimensional gene-panel question; connect this reading to the survival filter study rather than treating them as interchangeable evidence.
 
-**Artifact pointer:** [Author-linked research artifact](https://doi.org/10.5281/zenodo.19075310); not source-reviewed or executed.
+**Artifact inspection:** [Pinned benchmark setup](https://github.com/slds-lmu/paper_2023_survival_benchmark/blob/37d04d15993cb1f3771dbb784ea7251e0b512b1d/batchmark.R) and README read; [processed-output audit](corpus-review.md#published-output-check) completed separately. Models were not retrained.
 
 ## From paper mechanisms to a project plan
 
