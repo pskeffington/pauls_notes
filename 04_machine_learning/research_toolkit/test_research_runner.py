@@ -1,0 +1,55 @@
+"""Regression checks for configuration-only synthetic grouped ML."""
+import copy
+import importlib.util
+import json
+import tempfile
+import unittest
+from pathlib import Path
+
+SOURCE = Path(__file__).with_name("research_runner.py")
+spec = importlib.util.spec_from_file_location("research_runner", SOURCE)
+runner = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(runner)
+CONFIG = json.loads(Path(__file__).with_name("synthetic_brca_config.json").read_text())
+
+class ResearchRunnerTests(unittest.TestCase):
+    def test_seed_replays_identically(self):
+        first, second = runner.run(CONFIG), runner.run(CONFIG)
+        self.assertEqual(first, second)
+        self.assertEqual(len(first["records"]), 6)
+        for row in first["records"]:
+            self.assertEqual(len(row["probability_class_1"]), row["test_rows"])
+            self.assertEqual(len(row["test_group_ids"]), row["test_rows"])
+            self.assertEqual(len(set(row["test_group_ids"])), row["test_people"])
+
+    def test_research_and_external_training_refused(self):
+        for stage in ["patient-prediction", "frozen-descriptive", "research-training"]:
+            item = copy.deepcopy(CONFIG)
+            item["stage"] = stage
+            with self.assertRaisesRegex(ValueError, "NOT admitted"):
+                runner.validate(item)
+        item = copy.deepcopy(CONFIG)
+        item["data"]["path"] = "/private/TCGA.csv"
+        with self.assertRaises(ValueError):
+            runner.validate(item)
+
+    def test_bad_configuration_rejected(self):
+        for section, field, value in [("data", "missing_fraction", .8), ("data", "features", 0), ("design", "outer_folds", 1), ("design", "feature_counts", [1000]), ("design", "regularization_C", [-1.0])]:
+            item = copy.deepcopy(CONFIG)
+            item[section][field] = value
+            with self.subTest(section=section, field=field), self.assertRaises(ValueError):
+                runner.validate(item)
+
+    def test_output_is_exclusive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            config = Path(tmp) / "config.json"
+            config.write_text(json.dumps(CONFIG))
+            output = Path(tmp) / "output"
+            runner.main(["--config", str(config), "--output", str(output)])
+            original = (output / "report.json").read_bytes()
+            with self.assertRaisesRegex(ValueError, "already exists"):
+                runner.main(["--config", str(config), "--output", str(output)])
+            self.assertEqual(original, (output / "report.json").read_bytes())
+
+if __name__ == "__main__":
+    unittest.main()
