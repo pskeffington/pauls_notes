@@ -14,10 +14,12 @@ The shared narrative is **people → specimens → measurements → data prepara
 | --- | --- | --- | --- | --- |
 | G0 | Close current Phase 4 software baseline | Existing PR #1 | Complete within bounded synthetic software scope | Not assessed |
 | G1 | Phase 4B repeated-cohort robustness | G0; protocol freeze before assessment | Complete within declared synthetic scope; full archived assessment and replay reviewed | Not assessed |
-| G2 | Phase 4C uncertainty and reliability | G1 saved predictions; new estimand freeze | Planned | Not assessed |
+| G2 | Phase 4C uncertainty and reliability | G1 saved predictions; new estimand freeze | Complete within frozen-prediction conditional scope | Not assessed |
 | G3 | Native Rust training and numerical validation | Own objective and numerical contract; independent of G1/G2 | Planned; frozen-model inference already exists separately | Not assessed |
 | G4 | Phase 5 survival learning case | G1 and G2; separate endpoint protocol | Planned | Not assessed |
 | G5 | Phase 6 published-result reproduction | Relevant validated method and reproduction contract | Planned | Not assessed |
+
+**Phase 4's defined synthetic scientific-software milestone is complete through G1/G2.** Its uncertainty assessment holds predictions fixed; a full-procedure refitting experiment, external clinical validation and learner mastery are not established. G3 remains an engineering extension. G4's G1/G2 dependency is now satisfied, but its own endpoint/protocol gates remain open.
 
 ## G0: Phase 4 software baseline
 
@@ -30,8 +32,8 @@ The shared narrative is **people → specimens → measurements → data prepara
 | Execution | Commands and exact local environment below; GitHub executes the workflow's own environment at the merge SHA |
 | Evidence | [Compact verification record](../04_machine_learning/evidence/phase4-baseline-validation-2026-10-16.json), seven robustness tests, complete 624-fit replay, 360 development prediction rows, full membership/history/hash audit; navigation and corpus checks pass |
 | Scientific review | Original protocol discloses inspected development runs; paired specimen category only; 15 reserved people per scenario remain unscored; overlapping scenarios are not independent studies |
-| Remaining risks | Failed baseline runs discard staged artifacts; G1 must preserve failed-run histories. Broader replication and uncertainty remain open. CI artifacts expire; identities and digests do not ensure permanent availability |
-| Next dependency | Implement G1 against its committed protocol, preserving the baseline and complete failed-run histories |
+| Remaining risks | The original baseline discards staged artifacts on failure; G1's separate runner now preserves them. G1/G2 provide broader synthetic replication and conditional uncertainty, without full-procedure or clinical coverage. CI archives expire; identities/digests do not guarantee permanent availability |
+| Next dependency | Preserve this baseline while proceeding through G3's objective contract and G4's separate endpoint design |
 
 The PR changed only eight intended files: the robustness workflow, runner, tests, protocol and guide, the root/ML indexes and learning roadmap. No book or source-corpus file changed. Merge and reviewed-head trees both equal `7cfe06bee50cc19c9b1e82a69b81511cb276645d`; local code replay therefore applies to the identical merged source tree. Review included split exclusion, training-only transformations, six-candidate histories and the chosen-setting rule, comparator accounting, recorded inner failure tests, output protection and source/output digests. Review here is a recorded code/evidence review, not a claim of an independent clinical or human PR approval.
 
@@ -82,8 +84,8 @@ The merge robustness run preserved artifact **12054712479**, `phase4-robustness`
 | Execution | [Exact commands and environment](../04_machine_learning/evidence/replication-validation-2026-10-16.json): one worker, 12 cells, 1,872 fits, 1,080 development prediction rows, zero failed fits; 12.004 seconds locally against a 2,700-second ceiling |
 | Evidence | [Full report and interpretation](../04_machine_learning/replication-experiment.md); 10 new + 7 baseline + 17 documentation/evidence tests pass; legacy parity/invariance; complete partitions, candidate/fitting histories, ranks/signs/frequencies, retained failures, output/input hashes and downloaded CI replay |
 | Scientific review | Random search improves Brier in 4 cells and worsens it in 8. New seeded draws from the same generator are internal synthetic replication. Scenarios overlap; ranking scores retain within-person dependence. No performance threshold, biological discovery or interval claim was used |
-| Remaining risks | An initial local report/manifest discrepancy remains unexplained; that bundle was rejected and preserved, then unchanged-source local and CI replays passed. All three executions and their 5,616 attempts are disclosed. CI archives expire; complete downloadable evidence is also preserved. G2 uncertainty remains open |
-| Next dependency | Freeze G2's equal-person paired contrast estimand, whole-person conditional bootstrap seeds/repetitions/method and numeric fixtures before interval computation; G1 alone does not close broader Phase 4 |
+| Remaining risks | An initial local report/manifest discrepancy remains unexplained; that bundle was rejected and preserved, then unchanged-source local and CI replays passed. All three executions and their 5,616 attempts are disclosed. CI archives expire; complete downloadable evidence is also preserved. G2 now supplies conditional ranges; full-procedure uncertainty is still unestimated |
+| Next dependency | G2 is complete within its declared conditional scope; proceed to G3/G4 with their own frozen protocols |
 
 The [accepted full CI run](https://github.com/pskeffington/pauls_notes/actions/runs/38936820625) archived `phase4b-full`, artifact **12062065184**, with verified SHA-256 `e13edef4d52ea60439f0e5704b7add03f843050645a90777c7e47a88875c766a`, expiring **2027-01-14T17:04:09Z**. The downloaded bundle passed a separate local audit and differed from the accepted local probabilities by at most `8.731904088676856e-14`. The report preserves all 12 results and separates outer/all-fit/final-panel denominators; source protocol bytes were not amended after outcomes.
 
@@ -93,13 +95,15 @@ The [accepted full CI run](https://github.com/pskeffington/pauls_notes/actions/r
 | --- | --- |
 | Milestone | G2, person-aware uncertainty; depends on G1 |
 | Objective | Quantify paired error-contrast uncertainty without treating a person's specimens as independent observations |
-| Status | Planned |
-| Source | No implementation PR or execution commit yet; forthcoming versioned estimand and resampling protocol required |
-| Execution | Not executed; freeze person aggregation, paired whole-person resampling, repetitions, seeds, interval method and failure handling first |
-| Evidence | Required: reference numeric fixtures, malformed-cluster tests, input manifest, interval artifacts and replay evidence |
-| Scientific review | Bootstrap of saved out-of-fold predictions is conditional on those predictions. Complete-procedure uncertainty requires repeated preprocessing, selection, tuning and fitting in a separately budgeted experiment |
-| Remaining risks | Small person counts, overlapping training fits, censoring not relevant to this classification endpoint; fold standard deviations are not patient-level confidence intervals |
-| Next dependency | Obtain audited G1 predictions; do not redesign panels from assessment outcomes; only G1 plus G2 can close the broader synthetic Phase 4 milestone |
+| Status | Complete within prespecified fixed-prediction conditional scope; [assessment and interpretation](../04_machine_learning/uncertainty-assessment.md) |
+| Source | [PR #4](https://github.com/pskeffington/pauls_notes/pull/4); unchanged [protocol](../04_machine_learning/uncertainty-protocol.md), [contract](../04_machine_learning/evidence/uncertainty-contract-v1.json) and compact G1 input frozen at `d440b82b9af696f3717e302b6e276cb10ad39255`; implementation/assessment at `da9ecc5d8263466a3c803e31275b516899fa58b3` |
+| Execution | [Exact commands/environment](../04_machine_learning/evidence/uncertainty-validation-2026-10-16.json); 45 people/90 specimens per cell, 10,000 draws per cell, root seed 26102101 with cohort/scenario streams, linear 0.025/0.975 endpoints; 12 cells, 36 ranges, 120,000 person-index resamples, 360,000 means and zero new model fits |
+| Evidence | 13 uncertainty + 17 documentation/evidence tests pass; exact numeric enumeration and SciPy paired reference; malformed cluster/value/identity rejection; complete saved arrays and hashes; local/CI second-process audits and exact cross-environment array/endpoint agreement |
+| Scientific review | Eight of twelve random-versus-grid ranges include zero, without equivalence/winner claims. Resampling is paired at person level and conditional on frozen predictions. Shared-training dependence, complete-procedure uncertainty and independent variance components are not estimated; no assessment-based redesign occurs |
+| Remaining risks | Nominal pointwise ranges have no demonstrated clinical/population or simultaneous coverage. G1 outcomes were known before this descriptive follow-up. Full-procedure uncertainty needs a separate refitting/resampling experiment. CI archive expiry is explicit; complete downloadable evidence and a compact offline input snapshot are preserved |
+| Next dependency | G1/G2 close defined synthetic Phase 4. Next engineering milestone: G3 objective/numerical contract. G4 may proceed with its own survival endpoint protocol; G3 does not block it |
+
+The [G2 CI replay](https://github.com/pskeffington/pauls_notes/actions/runs/38939809441) archived artifact **12062851000**, SHA-256 `d89db0fe2cdd282dd56dee11273785febf5b00480461452da13e54517a40d1a5`, expiring **2027-01-14T17:27:21Z**. Downloaded bytes and all internal outputs were verified; local and CI person/loss/draw/replicate arrays, endpoints and reliability descriptions agree exactly. The report includes common-person reallocation counts of **32, 34 and 34** and preserves candidate/stability evidence without an unsupported variance decomposition.
 
 ## G3: native Rust training
 

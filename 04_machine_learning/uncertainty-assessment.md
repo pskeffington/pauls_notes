@@ -43,4 +43,51 @@ The [protocol's primary references](uncertainty-protocol.md#primary-method-refer
 
 ## Recorded results
 
-The implementation and numeric fixtures precede the recorded full assessment. Results, verified replay identity, limitations and the G2 completion review will be added after executing committed sources against the unchanged frozen input.
+Recorded execution used committed source `da9ecc5d8263466a3c803e31275b516899fa58b3`, after freeze `d440b82b9af696f3717e302b6e276cb10ad39255`. [PR #4](https://github.com/pskeffington/pauls_notes/pull/4) delivers the calculation and review. The [compact verification record](evidence/uncertainty-validation-2026-10-16.json) contains all **36 ranges**, exact denominators, per-cell seeds, version/source identities, reliability summaries, output hashes and replay evidence. Thirteen uncertainty tests and 17 documentation/evidence tests passed: **30 local tests**. Navigation preserves 85 Markdown pages, 12 book chapters and 60 gene profiles.
+
+### Random minus grid: every declared cell
+
+Each row has **45 people and 90 specimens**. Values are rounded to six decimals. The limits are the declared 2.5th and 97.5th percentiles of 10,000 paired person-resampled mean differences, conditional on the saved predictions.
+
+| Cohort | Scenario | Point contrast | Conditional lower | Conditional upper |
+| --- | --- | --- | --- | --- |
+| A | Reference | -0.019573 | -0.046128 | +0.005716 |
+| A | Extra missingness | +0.008034 | -0.016546 | +0.031286 |
+| A | Correlated measurement | -0.033726 | -0.065420 | -0.005532 |
+| A | Reallocated people | +0.011134 | -0.005826 | +0.029113 |
+| B | Reference | -0.002223 | -0.017857 | +0.013180 |
+| B | Extra missingness | +0.012270 | -0.006338 | +0.030404 |
+| B | Correlated measurement | +0.015611 | +0.003646 | +0.028461 |
+| B | Reallocated people | -0.010773 | -0.033513 | +0.010426 |
+| C | Reference | +0.021717 | +0.004258 | +0.040879 |
+| C | Extra missingness | +0.028144 | -0.004648 | +0.060090 |
+| C | Correlated measurement | +0.022902 | +0.006706 | +0.039507 |
+| C | Reallocated people | +0.014090 | -0.003884 | +0.033592 |
+
+**Eight of twelve** random-versus-grid ranges include zero; one is entirely below zero and three entirely above. Eleven of twelve all-feature-versus-grid ranges include zero; one is entirely above. All twelve prevalence-versus-grid ranges lie above zero. These counts describe this conditional resampling output; they are neither tests of equivalence nor adjusted discoveries or evidence of universal optimizer superiority. The point estimates retain the G1 result: random search is lower in four cells and higher in eight.
+
+The accepted local assessment completed **120,000 person-index resamples and 360,000 contrast replicate means**, with **zero new model fits**, in **2.544 seconds** against a 300-second budget. The original fitted models and panels remain fixed for every draw.
+
+### Reliability: changes in people, measurements and choices
+
+Missingness and correlation probes retain all 45 reference development people. Extra missingness raises each fitted procedure's mean loss in all three cohorts, while correlation changes do not move every method in the same direction. These are the declared probes' observed outcomes, with the same interpretation limits as G1.
+
+Reallocation changes the eligible development people. The following descriptive comparisons use only people present in both scenarios; all four methods' changes remain in the machine-readable record.
+
+| Cohort | Common people | Reference only | Reallocation only | Common-person grid loss change | Common-person random loss change |
+| --- | --- | --- | --- | --- | --- |
+| A | 32 | 13 | 13 | +0.011729 | +0.031419 |
+| B | 34 | 11 | 11 | +0.018833 | +0.020027 |
+| C | 34 | 11 | 11 | +0.007544 | -0.009268 |
+
+For cohort C, random search's overall reallocation loss rises by approximately **0.008262**, while its mean change among the 34 common people is **-0.009268**. Changes in membership and in the fitted models/folds can therefore lead to different descriptive comparisons. Neither calculation isolates a causal allocation effect.
+
+Candidate choice also changes under the probes: G1 selected grid `C=1, k=5` in six of nine reference outer refits and four of nine missingness outer refits. The [G1 stability report](replication-experiment.md#panels-and-fitting-cost) retains panel overlap, rank summaries and sign changes, with their overlapping-fit denominators. Those records show procedure instability; this follow-up does not separate the effects of feature correlation, missingness, training people and candidate choice. **Fitting variability at fixed inputs remains unidentified**, because no models were refitted. A full-procedure or variance-component investigation requires another prespecified experiment.
+
+### Independent replay and acceptance
+
+The [CI replay](https://github.com/pskeffington/pauls_notes/actions/runs/38939809441) passed numeric tests, all 36 calculations and a second-process audit at the same source revision. Artifact **12062851000**, `phase4c-uncertainty`, was downloaded and checked against SHA-256 `d89db0fe2cdd282dd56dee11273785febf5b00480461452da13e54517a40d1a5`. Its complete bundle was then audited locally: **every person/loss/draw/replicate-mean array and every endpoint and reliability summary exactly matches** the local assessment. CI runtime was **1.301 seconds**. The CI archive expires **2027-01-14T17:27:21Z**.
+
+The saved **Pauls_Notes_Phase4C_Evidence_2026-10-16.zip** preserves local/verified-CI bundles, the original CI ZIP, and a root checksum inventory. Its SHA-256 is `5e195aeda902cdc575b90b3cd54b2c519e74807c56b35c7af3c19219933e6588`. Substantial draw arrays remain outside Git. The frozen compact prediction snapshot enables future replay without needing the expiring G1 archive.
+
+G2's estimand, paired dependence boundary, reference fixtures, hostile-input tests, complete resampling record, independent replay and scientific-scope review pass. **G1/G2 close the defined Phase 4 synthetic scientific-software milestone.** This does not establish learner mastery, full-procedure uncertainty or clinical validity. G3 native Rust fitting still needs its own objective/numerical contract; G4 may now begin its separate breast cancer survival endpoint protocol without waiting for G3.
