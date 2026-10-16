@@ -10,7 +10,7 @@ Source check: 2026-10-16. Four 2025–2026 studies and one 2024 leakage referenc
 | ML-2025-02 | Kedzierska, Crawford, Amini and Lu (2025), [Zero-shot evaluation reveals limitations of single-cell foundation models](https://doi.org/10.1186/s13059-025-03574-x) | [Evaluation repository](https://github.com/microsoft/zero-shot-scfoundation); [archive](https://doi.org/10.5281/zenodo.15123462) | Methods, code-availability section and repository documentation; no execution |
 | ML-2025-03 | Kalfon et al. (2025), [scPRINT: pre-training on 50 million cells allows robust gene network predictions](https://doi.org/10.1038/s41467-025-58699-1) | [scPRINT repository](https://github.com/cantinilab/scPRINT); [versioned release archive](https://doi.org/10.5281/zenodo.15490696) | Publication summary and repository usage/input documentation; no execution |
 | ML-2026-01 | Wang, Danek, Yang, Chen and Sun (2026), [Making large language models reliable data science programming copilots for biomedical research](https://doi.org/10.1038/s41551-025-01587-2) | [Original benchmark landing repository](https://github.com/RyanWangZf/BioDSBench); [maintained successor](https://github.com/RyanWangZf/BioDSA) | Publication abstract/code linkage and current repository organization; no execution |
-| ML-2024-01 | Rosenblatt et al. (2024), [Data leakage inflates prediction performance in connectome-based machine learning models](https://doi.org/10.1038/s41467-024-46150-w) | [Leakage analysis repository](https://github.com/mattrosenblatt7/leakage_neuroimaging) | Publication methods summary and repository file/dependency documentation; no execution |
+| ML-2024-01 | Rosenblatt et al. (2024), [Data leakage inflates prediction performance in connectome-based machine learning models](https://doi.org/10.1038/s41467-024-46150-w) | [Leakage analysis repository](https://github.com/mattrosenblatt7/leakage_neuroimaging) | Publication methods summary, repository documentation and selected `run_leakage.py` blocks; no execution |
 
 ## Tabular prediction and frozen releases
 
@@ -47,6 +47,8 @@ Source check: 2026-10-16. Four 2025–2026 studies and one 2024 leakage referenc
 ## Leakage as a deliberate negative control
 
 **Observed mechanism:** The neuroimaging study contrasts pipelines that differ in feature, covariate and subject leakage. Its code separates `run_leakage.py`, sample-size analysis and plotting. The repository describes academic/noncommercial use constraints; inspect the applicable terms before reuse.
+
+In the inspected [analysis script](https://github.com/mattrosenblatt7/leakage_neuroimaging/blob/main/run_leakage.py), family identifiers determine outer membership, covariate coefficients learned on training data are applied to test data, and `GridSearchCV` tunes ridge/SVR candidates. When adapting this pattern, place learned transformations inside every relevant inner training fold too.
 
 **Adaptation:** Challenge a pipeline by altering assessment predictors while keeping training rows fixed. Fitted preprocessing and tuning must remain unchanged.
 
