@@ -4,6 +4,16 @@ use std::{env, process::Command};
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
+    for (name, key) in [
+        ("ASSAY_BUILD_PROFILE", "PROFILE"),
+        ("ASSAY_OPT_LEVEL", "OPT_LEVEL"),
+        ("ASSAY_RUSTFLAGS", "CARGO_ENCODED_RUSTFLAGS"),
+    ] {
+        println!(
+            "cargo:rustc-env={name}={}",
+            env::var(key).unwrap_or_default()
+        );
+    }
     let output = Command::new(env::var_os("RUSTC").expect("Cargo supplies RUSTC"))
         .arg("--version")
         .output()

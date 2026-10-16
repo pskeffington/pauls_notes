@@ -11,3 +11,24 @@ csv = "=1.4.0"
 serde = { version = "=1.0.229", features = ["derive"] }
 serde_json = { version = "=1.0.154", features = ["float_roundtrip"] }
 sha2 = "=0.10.9"
+
+[features]
+native-training = ["dep:linfa", "dep:linfa-logistic", "dep:ndarray"]
+
+[dependencies.linfa]
+version = "=0.8.1"
+default-features = false
+optional = true
+
+[dependencies.linfa-logistic]
+version = "=0.8.1"
+optional = true
+
+[dependencies.ndarray]
+version = "=0.16.1"
+optional = true
+
+[[bin]]
+name = "assay-train"
+path = "src/bin/assay-train.rs"
+required-features = ["native-training"]
