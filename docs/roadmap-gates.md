@@ -78,7 +78,7 @@ The merge robustness run preserved artifact **12054712479**, `phase4-robustness`
 | Milestone | G1, independent synthetic draws and stability; depends on G0 |
 | Objective | Measure robustness of the four fixed procedures across three declared new generator draws and four scenarios each |
 | Status | Planned. [Protocol](../04_machine_learning/replication-protocol.md) and [JSON contract](../04_machine_learning/evidence/replication-contract-v1.json) declared; no runner or replication assessment delivered in this pass |
-| Source | Protocol-freeze commit is the first commit containing those two files; execution must record its exact SHA and hashes before assessment |
+| Source | [PR #2](https://github.com/pskeffington/pauls_notes/pull/2); protocol-freeze commit `65a0b8776a876c0a845e6f9f57c067adb30f713e`. Execution must record that SHA, protocol/config hashes and its own implementation revision before assessment |
 | Execution | Not executed; full plan: one worker, 12 cells, 1,872 fits, 1,080 development prediction rows, 2,700 seconds maximum |
 | Evidence | Protocol arithmetic/configuration and navigation reviewed; no new-cohort prediction or performance evidence exists |
 | Scientific review | New seeded draws from the same generator are internal synthetic replication. Scenarios within a cohort overlap; specimen ranking scores retain within-person dependence |
