@@ -2,11 +2,11 @@
 
 [Breast cancer book, Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) · [Advanced training](advanced-breast-cancer-training.md) · [Structured register](evidence/breast-cancer-studies.csv) · [Broader paper mechanisms](recent-code-studies.md)
 
-Source check: **2026-10-16**. This targeted corpus connects eight breast cancer application reports and nineteen methodological references to the book's people → specimens → measurements → prediction → interpretation narrative. It is a selective reading register, not a systematic review, meta-analysis, clinical recommendation, or reproduction of the studies. The two MASAI reports concern the same trial; reports are not independent cohorts. Other studies can also share public cohorts, so distinct publication identifiers do not establish independent patient evidence.
+Source check: **2026-10-16**. This targeted corpus connects eight breast cancer application reports and twenty-eight methodological references to the book's people → specimens → measurements → prediction → interpretation narrative. It is a selective reading register, not a systematic review, meta-analysis, clinical recommendation, or reproduction of the studies. The two MASAI reports concern the same trial; reports are not independent cohorts. Other studies can also share public cohorts, so distinct publication identifiers do not establish independent patient evidence.
 
 Each card separates **reported evidence**, **review extent**, and **our implementation decision**. Reading selected methods or source code does not certify the whole study. No participant datasets, external model objects, weights, figures, or third-party source trees are copied here. The book's individual gene accounts retain their existing `ABSTRACT_ONLY` status.
 
-The [recent tuning update](recent-tuning-evidence.md) contains cards BC-M11–BC-M19 for 2021–2025 primary methods papers, alongside the existing 2023 review (BC-M10). The structured register covers both guides; methodological benchmarks remain separate from breast cancer application evidence.
+The [recent tuning update](recent-tuning-evidence.md) contains cards BC-M11–BC-M19 for 2021–2025 primary methods papers, alongside the existing 2023 review (BC-M10). The [selection and validation update](recent-selection-validation.md) adds BC-M20–BC-M28, including 2026 survival benchmarking. The structured register covers all three guides; methodological benchmarks remain separate from breast cancer application evidence.
 
 ## Begin with the endpoint
 

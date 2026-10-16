@@ -110,6 +110,8 @@ The [2021–2025 tuning corpus](recent-tuning-evidence.md) adds nine primary pap
 
 Start with overtuning before increasing the six-candidate grid; read strong defaults before claiming a benefit over a fixed model; use the budget and benchmark papers when designing an expensive pathology or multi-omic extension. These are reference mechanisms rather than additional executed deployments.
 
+The [selection and validation corpus](recent-selection-validation.md) adds nine 2021–2026 publications, connecting tuning to gene-panel stability, validation-cohort precision, leakage audits and survival objectives. Read these before interpreting a selected configuration as a useful assay or prognosis model.
+
 ## Before extending the real study
 
 Write a tuning plan stating the target and intended population, feature availability, group/time/site split, primary objective, candidate ranges and their rationale, search budget, seeds, worker limits, failure policy, refit rule, and the evidence that will decide whether the extension helped. Add calibration and clinical utility only under their own fitting and assessment rules; do not label a Brier-optimized tissue classifier a treatment decision tool.

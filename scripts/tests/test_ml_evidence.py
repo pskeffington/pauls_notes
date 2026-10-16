@@ -47,6 +47,14 @@ class EvidenceTests(unittest.TestCase):
         self.assertTrue(any('missing evidence card' in error
                             for error in self.errors(self.rows, missing)))
 
+    def test_omitting_any_guide_leaves_uncovered_records(self):
+        for omitted in checker.GUIDES:
+            with self.subTest(guide=omitted.name):
+                incomplete = '\n'.join(path.read_text(encoding='utf-8')
+                                       for path in checker.GUIDES if path != omitted)
+                self.assertTrue(any('missing evidence card' in error
+                                    for error in self.errors(self.rows, incomplete)))
+
     def test_duplicate_card_across_guides(self):
         errors = self.errors(self.rows, self.guide + '\n## BC-M11\n')
         self.assertTrue(any('Duplicate evidence card' in error for error in errors))

@@ -6,6 +6,8 @@ Reviewed through **2026-10-16**. This selective update covers **2021–2025 publ
 
 The organizing question is the book's own: **can assay measurements distinguish the recorded specimen category for people excluded from training?** Our current example uses invented paired specimens, not participant records or the book's named genes. General tabular benchmarks can suggest a search mechanism or an evaluation question; they cannot establish its performance on breast cancer assays, pathology, future risk or treatment response.
 
+Continue with the [2021–2026 selection and validation evidence](recent-selection-validation.md) for nine additional papers on gene panels, validation precision, leakage and model-family comparisons. Together the two reading sets contain nineteen recent sources, including the existing Bischl review.
+
 ## Read by the decision you need to make
 
 | Project decision | Recent evidence | What to carry into our work |

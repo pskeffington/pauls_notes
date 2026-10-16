@@ -11,7 +11,8 @@ from check_documentation import anchors
 ROOT = Path(__file__).resolve().parents[1]
 REGISTER = ROOT / '04_machine_learning/evidence/breast-cancer-studies.csv'
 GUIDE = ROOT / '04_machine_learning/breast-cancer-evidence.md'
-GUIDES = (GUIDE, ROOT / '04_machine_learning/recent-tuning-evidence.md')
+GUIDES = (GUIDE, ROOT / '04_machine_learning/recent-tuning-evidence.md',
+          ROOT / '04_machine_learning/recent-selection-validation.md')
 
 FIELDS = ['id', 'year', 'citation', 'identifier', 'source_url', 'evidence_type', 'task',
           'study_family', 'review_level', 'artifact_status', 'artifact_url', 'artifact_version',
