@@ -22,3 +22,5 @@ jobs:
           python3 scripts/check_documentation.py
           python3 scripts/check_repository.py
           python3 scripts/tests/test_documentation.py
+          python3 scripts/check_ml_evidence.py
+          python3 scripts/tests/test_ml_evidence.py

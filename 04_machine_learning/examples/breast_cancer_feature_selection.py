@@ -105,6 +105,19 @@ def _fit_search(x, y, groups):
     return search, folds
 
 
+def summarize_search(search):
+    """Record every candidate's held-out fold error, without calling it a test score."""
+    result = search.cv_results_
+    candidates = []
+    for i, parameters in enumerate(result["params"]):
+        candidates.append(dict(parameters=parameters,
+            fold_brier=[float(-result[f"split{fold}_test_score"][i])
+                        for fold in range(search.n_splits_)],
+            mean_brier=float(-result["mean_test_score"][i]),
+            rank=int(result["rank_test_score"][i]), chosen=bool(i == search.best_index_)))
+    return candidates
+
+
 def probabilities(model, x):
     return model.predict_proba(x)[:, list(model.classes_).index(1)]
 
@@ -136,7 +149,7 @@ def fit_development(data, development, test):
         importance_values.append(diagnostic.importances_mean)
         memberships.append(dict(analysis=development[analysis].tolist(),
             assessment=development[assessment].tolist(), best_parameters=model.best_params_,
-            selected_features=selected_features(model),
+            selected_features=selected_features(model), search_candidates=summarize_search(model),
             inner=[dict(analysis=development[analysis[a]].tolist(),
                         assessment=development[analysis[b]].tolist()) for a, b in inner]))
     if not np.isfinite(oof).all():
@@ -147,9 +160,18 @@ def fit_development(data, development, test):
         outer=memberships, final_inner=[dict(analysis=development[a].tolist(),
             assessment=development[b].tolist()) for a, b in inner],
         best_parameters=final.best_params_, selected_features=selected_features(final),
+        final_search_candidates=summarize_search(final),
         outer_predictions=oof.tolist(), nested_development=scores(y, oof))
     report["mean_outer_permutation_brier_increase"] = np.mean(importance_values, axis=0).tolist()
     report["development_prevalence"] = float(np.mean(y))
+    searches = len(memberships) + 1
+    candidates = len(final.cv_results_["params"])
+    report["tuning_contract"] = dict(selection_metric="neg_brier_score", selection_direction="maximize",
+        reported_error="brier", reported_error_direction="minimize", candidates_per_search=candidates,
+        inner_folds=final.n_splits_, outer_folds=len(memberships), searches=searches,
+        candidate_pipeline_fits=searches * candidates * final.n_splits_,
+        refit_pipeline_fits=searches, total_pipeline_fits=searches * (candidates * final.n_splits_ + 1),
+        final_test_used_for_selection=False)
     return final, report
 
 
@@ -203,6 +225,7 @@ def run(output):
             "Synthetic paired-specimen tissue-category demonstration; no clinical or named-gene claims.\n"
             "0=comparator; 1=tumor-labeled specimen. Both specimens stay with their person.\n"
             "All split indices are zero-based full-cohort row positions.\n"
+            "Candidate fold scores are inner validation Brier errors, not independent test scores.\n"
             "F-scores screen variables only; their p-values are not gene-discovery evidence.\n"
             "Permutation diagnostics use row-wise shuffles on outer assessment specimens.\n"
             "They do not preserve within-person feature dependence or provide confidence intervals.\n"

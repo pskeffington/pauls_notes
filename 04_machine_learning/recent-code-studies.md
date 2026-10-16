@@ -12,9 +12,13 @@ Source check: 2026-10-16. Four 2025–2026 studies and one 2024 leakage referenc
 | ML-2026-01 | Wang, Danek, Yang, Chen and Sun (2026), [Making large language models reliable data science programming copilots for biomedical research](https://doi.org/10.1038/s41551-025-01587-2) | [Original benchmark landing repository](https://github.com/RyanWangZf/BioDSBench); [maintained successor](https://github.com/RyanWangZf/BioDSA) | Publication abstract/code linkage and current repository organization; no execution |
 | ML-2024-01 | Rosenblatt et al. (2024), [Data leakage inflates prediction performance in connectome-based machine learning models](https://doi.org/10.1038/s41467-024-46150-w) | [Leakage analysis repository](https://github.com/mattrosenblatt7/leakage_neuroimaging) | Publication methods summary, repository documentation and selected `run_leakage.py` blocks; no execution |
 
+For task-specific evidence, read the [breast cancer study register](breast-cancer-evidence.md), which adds screening trial reports, external risk/prognosis studies, pretreatment response studies, and methodological references. It keeps clinical findings separate from our proposed code adaptations.
+
 ## Read these mechanisms through the breast cancer question
 
 Use the [book's specimen-to-prediction narrative](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) as the adaptation question: could a frozen tabular model improve a justified assay baseline, could a cell representation transfer across donors, and which patient boundaries would test that claim? These papers span research settings; their inclusion does not imply breast cancer validation. The [advanced guide](advanced-breast-cancer-training.md) distinguishes executable variable-selection mechanics from transfer-learning and multimodal extensions that remain reference patterns.
+
+For tuning-specific evidence, continue with the [project tuning corpus](model-tuning.md), which connects the actual grids to selection-bias research, random/Bayesian search, multi-fidelity allocation, and CV uncertainty.
 
 ## Tabular prediction and frozen releases
 

@@ -128,6 +128,32 @@ class FeatureSelectionTests(unittest.TestCase):
         self.assertEqual(len(self.report["outer_predictions"]), len(self.development))
         self.assertTrue(np.isfinite(list(self.report["nested_development"].values())).all())
 
+    def test_candidate_traces_metric_direction_and_budget(self):
+        traces = [fold["search_candidates"] for fold in self.report["outer"]]
+        traces.append(self.report["final_search_candidates"])
+        for candidates in traces:
+            self.assertEqual(len(candidates), 6)
+            chosen = [candidate for candidate in candidates if candidate["chosen"]]
+            self.assertEqual(len(chosen), 1)
+            self.assertEqual(chosen[0]["rank"], 1)
+            self.assertAlmostEqual(chosen[0]["mean_brier"],
+                                   min(candidate["mean_brier"] for candidate in candidates))
+            for candidate in candidates:
+                self.assertEqual(len(candidate["fold_brier"]), 3)
+                self.assertTrue(all(0 <= value <= 1 for value in candidate["fold_brier"]))
+                self.assertAlmostEqual(candidate["mean_brier"], np.mean(candidate["fold_brier"]))
+        # Replay exported scores against the actual GridSearchCV result arrays.
+        x, y = self.data["x"][self.development], self.data["y"][self.development]
+        search, _ = METHODS._fit_search(x, y, self.data["person_id"][self.development])
+        self.assertEqual(self.report["final_search_candidates"], METHODS.summarize_search(search))
+        contract = self.report["tuning_contract"]
+        self.assertEqual(contract["candidate_pipeline_fits"], 72)
+        self.assertEqual(contract["refit_pipeline_fits"], 4)
+        self.assertEqual(contract["total_pipeline_fits"], 76)
+        self.assertFalse(contract["final_test_used_for_selection"])
+        self.assertEqual(contract["selection_direction"], "maximize")
+        self.assertEqual(contract["reported_error_direction"], "minimize")
+
     def test_export_integrity_replay_and_output_protection(self):
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder) / "paired feature run"

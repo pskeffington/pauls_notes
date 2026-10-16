@@ -16,6 +16,7 @@ Run commands below from the repository root. Python checks use the standard libr
 | Python and Bash syntax | `python3 scripts/check_repository.py` |
 | Navigation regression tests | `python3 scripts/tests/test_documentation.py` |
 | Book structure and examples | `python3 scripts/check_book_learning.py` and `python3 03_learning/tests/test_book_learning.py` |
+| Breast cancer ML evidence integrity | `python3 scripts/check_ml_evidence.py` and `python3 scripts/tests/test_ml_evidence.py` |
 | Literature register integrity | `python3 02_biomedical_coding/tests/test_literature_matrix.py` |
 | Shell examples | `bash 01_unix_bash/tests/test_summarize_metadata.sh` and `bash 06_RESOURCES/tests/test_bash_helpers.sh` |
 | Manuscript builder contract | `bash 06_RESOURCES/tests/test_manuscript_builder.sh` |

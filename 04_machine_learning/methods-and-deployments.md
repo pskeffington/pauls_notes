@@ -31,6 +31,8 @@ Final test scores are for the prespecified model families; the runner does not s
 
 PCA and k-means use development predictors only, without targets. Three clusters and two components are fixed illustration settings. Test silhouette is a descriptive geometry score, not a disease-label validation. The code handles undefined silhouette when the assigned labels cannot support it.
 
+The [project tuning guide](model-tuning.md) records exact candidate values, selection objectives, evidence references and remaining evaluation boundaries for both Python and R workflows.
+
 ## Paired specimens and training-only feature selection
 
 The [advanced breast cancer guide](advanced-breast-cancer-training.md#executable-example-selecting-columns-while-holding-people-apart) follows 60 invented people and two specimen categories per person. Its [Python deployment](examples/breast_cancer_feature_selection.py) performs nested, person-grouped selection of assay columns, then exports held-out predictions, the final selected subset, standardized coefficients, outer-fold selection counts and descriptive permutation diagnostics. The guide documents the full-cohort index convention and interpretation limits.

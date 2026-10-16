@@ -10,6 +10,8 @@ The [runnable case](examples/caret_case.R) predicts an invented binary outcome f
 
 The generator creates 160 independent synthetic people and some missing marker values. A stratified split reserves approximately one quarter of each class for the final assessment. Four stratified folds inside development data supply tuning scores. Counts are exported rather than assumed, since class counts determine rounding.
 
+For source-backed decisions about these grids and scores, use the [project model-tuning guide](model-tuning.md). It distinguishes this runner's ROC-based development tuning from the probability-error objective and nested evaluation in the paired-specimen case.
+
 ## Keep each operation inside its proper partition
 
 | Operation | Where it learns | What is retained |

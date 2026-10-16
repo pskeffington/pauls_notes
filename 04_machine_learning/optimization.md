@@ -16,6 +16,8 @@ For the [breast cancer research question](../06_RESOURCES/Genomics/BREAST_CANCER
 
 The workflow records elapsed time rather than asserting that a particular engine is fastest. This case is too small to establish a general performance ranking. Repeated timing under controlled hardware and fresh processes is needed for benchmarking.
 
+For the full search-space and assessment rationale, read the [project tuning guide](model-tuning.md). It maps seven tuning references to the executed grids and the paired-specimen runner's candidate-level records. Computational speed and selection validity need to be considered together.
+
 ## High-dimensional assays
 
 Separate assay QC from supervised selection. Any learned imputation, normalization, PCA, feature ranking or batch correction that can use information across people needs a training-only fit consistent with the prediction goal. Document transformations that instead use an external frozen reference. Test patient/sample alignment before coercing sparse matrices into dense representations; budget memory before expanding gene matrices.
@@ -27,7 +29,7 @@ Use regularized linear and simple baseline methods before escalating to expensiv
 The [independent Python workflow](methods-and-deployments.md#python-pipelines-and-nested-evaluation) now implements grouped inner/outer evaluation, classification, numerical regression and development-fitted PCA/clustering. The [direct R workflow](methods-and-deployments.md#r-survival-and-expression-analysis) adds censoring-aware survival analysis and expression inference. The following items remain separate extensions:
 
 - Add nested outer evaluation to the caret runner; the Python runner already nests tuning within each prespecified family. A later family-selection procedure needs its own evaluation boundary.
-- Add group/time/site-aware fixtures before admitting repeated visits or multi-site forecasting.
+- The paired-specimen selection runner now executes person-grouped nested folds. Add time/site-aware fixtures before claiming future-period or multi-site forecasting.
 - Add a clean `renv` restore and package-version compatibility checks before promising environment restoration.
 - Add uncertainty, subgroup and calibration assessments sized for the study before interpreting probabilities as transportable risks.
 - Benchmark any parallel backend with explicit worker seeds, thread limits and peak memory; avoid parallelizing both folds and each learner without a resource budget.

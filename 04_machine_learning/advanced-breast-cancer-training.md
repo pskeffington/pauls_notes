@@ -92,6 +92,8 @@ The permutation diagnostic uses five row-wise shuffles per feature on each outer
 
 The fixture gives each person the same two specimen categories. This balances those labels by construction and supports a paired tissue-category illustration. It does not represent the prevalence, eligibility, or case mix of a breast cancer screening population. Performance metrics here weight specimens equally; because every person has exactly two specimens, each person also contributes the same total weight. Unequal specimen counts would require an explicit weighting or aggregation decision. No patient-level uncertainty intervals or clinical performance targets are supplied.
 
+The [model-tuning corpus](model-tuning.md) expands the six-candidate search into a full project contract: candidate ranges, metric direction, inner-versus-outer interpretation, computational budget, and the evidence behind alternative search strategies. `report.json` now retains every candidate's inner-fold Brier errors and rank for each outer search and the final development search.
+
 ## Advanced training methods: what each adds to this research question
 
 | Method | How it changes training | Breast cancer narrative and required assessment | Status here |
@@ -106,6 +108,10 @@ The fixture gives each person the same two specimen categories. This balances th
 | Penalized survival learning | Fit censored event outcomes with regularization rather than collapsing follow-up to a binary label | For recurrence questions, define time origin, event, censoring and horizon first | Direct Cox example exists; penalized high-dimensional survival tuning is an extension |
 
 Choose an extension because it answers an unresolved part of the study question. A small number of independent people limits what an extensive search can establish. Hold sites or future time periods apart when transport to those settings is the goal; the synthetic person split does not test those claims.
+
+## Connect the procedure to published breast cancer evidence
+
+The [breast cancer evidence corpus](breast-cancer-evidence.md) supplies specific studies rather than treating algorithm capability as evidence of clinical usefulness. Its [Sammut/NAT-ML card](breast-cancer-evidence.md#bc-06) connects multimodal response prediction with inspected pipeline-based variable selection; its [Li card](breast-cancer-evidence.md#bc-07) distinguishes a publication's integrated model from an older linked scoring repository. The [selection-bias reference](breast-cancer-evidence.md#bc-m01) explains why gene ranking must be repeated within resampling. Our synthetic deployment demonstrates that boundary; it reproduces none of those studies.
 
 ## Bring the result back into the book
 
