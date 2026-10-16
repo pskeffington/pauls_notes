@@ -15,11 +15,11 @@ The shared narrative is **people → specimens → measurements → data prepara
 | G0 | Close current Phase 4 software baseline | Existing PR #1 | Complete within bounded synthetic software scope | Not assessed |
 | G1 | Phase 4B repeated-cohort robustness | G0; protocol freeze before assessment | Complete within declared synthetic scope; full archived assessment and replay reviewed | Not assessed |
 | G2 | Phase 4C uncertainty and reliability | G1 saved predictions; new estimand freeze | Complete within frozen-prediction conditional scope | Not assessed |
-| G3 | Native Rust training and numerical validation | Own objective and numerical contract; independent of G1/G2 | Planned; frozen-model inference already exists separately | Not assessed |
+| G3 | Native Rust training and numerical validation | Own objective and numerical contract; independent of G1/G2 | Complete within fixed-objective synthetic numerical scope; frozen inference remains separately tested | Not assessed |
 | G4 | Phase 5 survival learning case | G1 and G2; separate endpoint protocol | Planned | Not assessed |
 | G5 | Phase 6 published-result reproduction | Relevant validated method and reproduction contract | Planned | Not assessed |
 
-**Phase 4's defined synthetic scientific-software milestone is complete through G1/G2.** Its uncertainty assessment holds predictions fixed; a full-procedure refitting experiment, external clinical validation and learner mastery are not established. G3 remains an engineering extension. G4's G1/G2 dependency is now satisfied, but its own endpoint/protocol gates remain open.
+**Phase 4's defined synthetic scientific-software milestone is complete through G1/G2.** Its uncertainty assessment holds predictions fixed; a full-procedure refitting experiment, external clinical validation and learner mastery are not established. G3 now completes its fixed-objective engineering extension. G4's G1/G2 dependency is now satisfied, but its own endpoint/protocol gates remain open.
 
 ## G0: Phase 4 software baseline
 
@@ -111,13 +111,15 @@ The [G2 CI replay](https://github.com/pskeffington/pauls_notes/actions/runs/3893
 | --- | --- |
 | Milestone | G3, native logistic fitting; engineering extension independent of Phase 5 progression |
 | Objective | Verify a native Rust training procedure's objective, preprocessing, probability convention and numerical behavior |
-| Status | Planned; existing Rust inference remains a separate tested capability |
-| Source | Existing [Rust review](../04_machine_learning/rust-ml-literature.md) and [inference baseline](../04_machine_learning/rust-deployment.md); no native-training implementation PR yet |
-| Execution | Not executed; first freeze loss normalization, penalty, intercept treatment, class direction, stopping criteria and matched Python calculation; investigate pinned Linfa |
-| Evidence | Required: person-disjoint partitions, training-only preprocessing, convergence/numerical failure fixtures, justified probability tolerances and preserved inference CI |
-| Scientific review | Similar library names or regularization parameters do not establish equivalent objectives; coefficients are comparable only after conventions match |
-| Remaining risks | Library/version compatibility, optimization failure, objective scaling, hardware/precision/compilation effects; no measured Rust speed advantage exists |
-| Next dependency | Own reviewed objective and numerical contract; does not block G4 once G1/G2 pass |
+| Status | Complete within the declared fixed-objective synthetic numerical/software scope; [baseline and interpretation](../04_machine_learning/rust-native-training.md) |
+| Source | [PR #5](https://github.com/pskeffington/pauls_notes/pull/5); protocol/config frozen at `1b0d8eda2498136d495ad2a97cf24015d6d34fb1`, published-release addendum at `7b512c0fbccae3a54c5d0089527032c5f0358e78`, accepted execution at `aeb0e5271534c224114beb39607eac3eb7375600` |
+| Execution | [Commands/environment/complete findings](../04_machine_learning/evidence/rust-training-validation-2026-10-16.json); three person-disjoint outer folds plus final development, four fits each for Linfa, direct Python objective and matched sklearn: 12 attempts, 90 held-out development prediction records, zero acceptance failures, zero reserved predictions |
+| Evidence | 9 new Rust training + 6 inference tests, 12 Python native + 4 exporter + 17 documentation/evidence tests pass; analytical/finite-difference, class mapping, leakage, numerical edge and deliberate-failure fixtures; four payload-corruption rejections; complete artifact audit and exact local/CI probability replay; inference CI remains green |
+| Scientific review | Sum logistic loss plus alpha/2 coefficient penalty, alpha=1/C=1, unpenalized intercept, category-1 mapping and f64 verified. Native/oracle max probability difference 1.12398e-8; all-engine residuals pass 1e-6. One SciPy non-success message is retained and accepted by the frozen residual rule; Linfa iterations/termination are unavailable |
+| Remaining risks | One fixed all-feature objective and synthetic draw; selection/tuning not ported. Published release differs from newer literature-review source, resolved before assessment. Initial invalid CI environment expression was fixed without numerical changes; both local runs retained. A later truncated delivery ZIP was rebuilt from unchanged complete originals and verified after saving; its cause is unestablished. No language-speed/memory, clinical, full-procedure uncertainty or learner-mastery claim; CI archives expire |
+| Next dependency | G4's separate survival endpoint, data dictionary and Cox assessment protocol before fitting; G3 adds no survival requirement |
+
+The [native push CI run](https://github.com/pskeffington/pauls_notes/actions/runs/38943944644) archived artifact **12065045242**, SHA-256 `2472d89f0fb817b520d9fe8086440449e5320672276efcd6db672cf14c779aef`, expiring **2027-01-14T17:59:58Z**. The [PR replay](https://github.com/pskeffington/pauls_notes/actions/runs/38943952801) archived artifact **12064600949**, SHA-256 `be5091212bcf0a13c34051133acbc3acce7c5879d5a5675ca769d1262f494ccd`, expiring **2027-01-14T18:00:02Z**. Both downloaded payloads passed separate local audits; all three engines' four-fit probability arrays match the accepted local run exactly. Six execution-head PR workflows passed, including preserved frozen inference. The final PR revision is checked before merge. Full bundles and the initial passing local run are preserved outside Git; replays do not create additional independent synthetic cohorts.
 
 ## G4: Phase 5 survival learning case
 

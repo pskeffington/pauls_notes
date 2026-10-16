@@ -36,7 +36,7 @@ A reference collection connecting biological questions with data preparation, st
 
 The [assay comparison](04_machine_learning/model-comparison.md) adds a fixed all-feature baseline on matched people; its [plotting gallery](04_machine_learning/gallery/README.md) follows data allocation, missingness, tuning, feature summaries, probability errors and calibration through seven reproducible figures.
 
-The [Rust deployment](04_machine_learning/rust-deployment.md) runs both frozen assay models as a compiled prediction CLI, carrying over learned preprocessing and checking probabilities against Python. The [five-year Rust ML review](04_machine_learning/rust-ml-literature.md) connects 11 publications/manuscripts and six software inspections to the breast cancer workflow and the next native-training experiment.
+The [Rust deployment](04_machine_learning/rust-deployment.md) runs both frozen assay models as a compiled prediction CLI, carrying over learned preprocessing and checking probabilities against Python. The [five-year Rust ML review](04_machine_learning/rust-ml-literature.md) connects 11 publications/manuscripts and six software inspections to the breast cancer workflow. The [native Rust training baseline](04_machine_learning/rust-native-training.md) now fits a declared logistic objective with training-only preparation and matched Python numerical checks.
 
 For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
 
@@ -44,7 +44,7 @@ The [Phase 4 assay robustness gate](04_machine_learning/robustness-experiment.md
 
 Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.
 
-The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication](04_machine_learning/replication-experiment.md) assesses three prespecified synthetic cohort draws across 12 cells. The [Phase 4C uncertainty assessment](04_machine_learning/uncertainty-assessment.md) adds whole-person conditional ranges on their saved predictions, with complete draw records and verified replay. The defined synthetic Phase 4 milestone is complete; native Rust training and a separate survival case remain next.
+The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication](04_machine_learning/replication-experiment.md) assesses three prespecified synthetic cohort draws across 12 cells. The [Phase 4C uncertainty assessment](04_machine_learning/uncertainty-assessment.md) adds whole-person conditional ranges on their saved predictions, with complete draw records and verified replay. The defined synthetic Phase 4 milestone is complete. Native Rust fitting adds scoped numerical validation; a separate survival endpoint and Cox assessment protocol are next.
 
 ## Research templates
 
