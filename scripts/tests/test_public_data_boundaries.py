@@ -39,6 +39,12 @@ class PublicDataBoundaryTests(unittest.TestCase):
             with self.subTest(path=path, blob=blob[:20]):
                 self.assertTrue(guard.inspect(path, blob))
 
+    def test_failure_logs_hide_identifying_filenames(self):
+        secret_path = "records/" + "TCGA-" + "XX-1234.csv"
+        line = guard.redacted_failure(secret_path, "unregistered structured data")
+        self.assertNotIn(secret_path, line)
+        self.assertIn("path_hash=", line)
+
     def test_new_unregistered_tabular_file_is_blocked(self):
         registered = guard.registered_assets(staged=False)
         self.assertIsNone(guard.registration_problem(
