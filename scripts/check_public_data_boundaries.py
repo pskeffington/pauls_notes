@@ -124,16 +124,54 @@ def paths_and_reader(staged):
             path = encoded.decode("utf-8")
             yield path, reader(path)
 
+def registered_assets(staged):
+    """Consult a reviewed exact-path registry; read index bytes for staged safety."""
+    raw = (git_output("show", ":scripts/public_data_assets.json") if staged
+           else (ROOT / "scripts/public_data_assets.json").read_bytes())
+    policy = json.loads(raw)
+    if not isinstance(policy, dict) or policy.get("schema_version") != 1 or not isinstance(policy.get("assets"), list):
+        raise ValueError("Missing or malformed public structured-file registration")
+    entries = policy["assets"]
+    allowed = {}
+    for entry in entries:
+        if not isinstance(entry, dict) or set(entry) != {"path", "kind"}:
+            raise ValueError("Invalid asset registry entry")
+        path, kind = entry["path"], entry["kind"]
+        if not isinstance(path, str) or not isinstance(kind, str) or not kind:
+            raise ValueError("Invalid registered asset")
+        if PurePosixPath(path).is_absolute() or ".." in PurePosixPath(path).parts or path in allowed:
+            raise ValueError("Duplicate/invalid registered asset path")
+        if not path.lower().endswith(DATA_ENDINGS):
+            raise ValueError("Registered asset must be structured data")
+        allowed[path] = kind
+    if "scripts/public_data_assets.json" not in allowed:
+        raise ValueError("Asset registry must register itself")
+    return allowed
+
+def registration_problem(path, allowed):
+    if path.lower().endswith(DATA_ENDINGS) and path not in allowed:
+        return "unregistered structured data; requires public asset review"
+    return None
+
 def main(argv=None):
     cli = argparse.ArgumentParser(description=__doc__)
     selection = cli.add_mutually_exclusive_group(required=True)
     selection.add_argument("--tracked", action="store_true")
     selection.add_argument("--staged", action="store_true")
     args = cli.parse_args(argv)
+    approved = registered_assets(args.staged)
     failures = []
+    paths_seen = set()
     for path, blob in paths_and_reader(args.staged):
+        paths_seen.add(path)
+        reason = registration_problem(path, approved)
+        if reason:
+            failures.append((path, reason))
         for reason in inspect(path, blob):
             failures.append((path, reason))
+    if not args.staged:
+        for path in sorted(set(approved) - paths_seen):
+            failures.append((path, "registered structured asset missing from Git"))
     if failures:
         for path, reason in failures:
             print(f"BLOCKED {path}: {reason}", file=sys.stderr)
