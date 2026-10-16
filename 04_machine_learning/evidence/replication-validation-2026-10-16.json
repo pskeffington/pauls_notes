@@ -1,0 +1,1122 @@
+{
+  "gate": "G1",
+  "status": "pass",
+  "scope": "internal synthetic replication; specimen-category classification only",
+  "protocol_id": "paired-assay-replication-v1",
+  "protocol_freeze_commit": "65a0b8776a876c0a845e6f9f57c067adb30f713e",
+  "execution_commit": "3cef4b52b1124e988eedd0c7811cc7fa9de4d3dd",
+  "pull_request": 3,
+  "commands": [
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/tests/test_breast_cancer_replication.py",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/tests/test_breast_cancer_robustness.py",
+    "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/examples/breast_cancer_replication.py /tmp/pauls-notes-g1-replay-20261016 --mode full",
+    "python3 04_machine_learning/examples/breast_cancer_replication.py /tmp/pauls-notes-g1-replay-20261016 --audit-only"
+  ],
+  "local_tests": {
+    "replication": 10,
+    "legacy_robustness": 7,
+    "documentation": 2,
+    "ml_evidence": 9,
+    "rust_ml_evidence": 6,
+    "all_passed": true
+  },
+  "assessment": {
+    "started_utc": "2026-10-16T17:06:03.522286+00:00",
+    "finished_utc": "2026-10-16T17:06:15.523524+00:00",
+    "actual_fits": 1872,
+    "failed_fits": 0,
+    "elapsed_seconds": 12.003843147999987,
+    "fitting_seconds": 10.485685496000656,
+    "audit": {
+      "status": "pass",
+      "cells": 12,
+      "fits": 1872,
+      "prediction_rows": 1080,
+      "reserved_predictions": 0,
+      "person_disjoint": true
+    },
+    "cost_by_procedure": {
+      "grid": {
+        "attempts": 912,
+        "failures": 0,
+        "seconds": 5.168604212000446
+      },
+      "random": {
+        "attempts": 912,
+        "failures": 0,
+        "seconds": 5.058832863000248
+      },
+      "all_feature": {
+        "attempts": 48,
+        "failures": 0,
+        "seconds": 0.25824842099996204
+      },
+      "prevalence": {
+        "attempts": 0,
+        "failures": 0,
+        "seconds": 0
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 9,
+    "versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "scikit-learn": "1.8.0",
+      "joblib": "1.5.3"
+    },
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "command": [
+      "04_machine_learning/examples/breast_cancer_replication.py",
+      "/tmp/pauls-notes-g1-replay-20261016",
+      "--mode",
+      "full"
+    ]
+  },
+  "source_sha256": {
+    "04_machine_learning/examples/breast_cancer_replication.py": "daa011e04b10a4768b8fe60826f34a8d33a3684a5f374dc507e749bacc84a9a2",
+    "04_machine_learning/examples/breast_cancer_robustness.py": "96d6785eb3e7731bae829e33eabbc926a000fe9c2b51c8f3630e64728d6add99",
+    "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
+    "04_machine_learning/examples/breast_cancer_comparison.py": "f3aedca2168b010ae5eb22cdb241624159c8a487c54ad3b3100643087dc29182",
+    "04_machine_learning/requirements-python.txt": "5308eb66a44ede78c952156d288e79ba0ecd0df2da71ef60b0e897ebf1c7f358",
+    "04_machine_learning/replication-protocol.md": "27dd779d24314ca6e067a935478fc6ad3c57b2738c1fee5b53ee2f2933e98d3c",
+    "04_machine_learning/evidence/replication-contract-v1.json": "1359cd2103c151cd8b5fb9a9ac3509e5cfd1e45db739a43f1324476595cff6cf"
+  },
+  "output_sha256": {
+    "contract.json": "1359cd2103c151cd8b5fb9a9ac3509e5cfd1e45db739a43f1324476595cff6cf",
+    "environment.json": "0833952cb28cec9cef21ef0c778c2d60625531ce4df10c2facb546e552561273",
+    "fit-events.jsonl": "78800b455ff491adf61103e4054bd5e207fbb14726e97212eaae9d3b40e65acb",
+    "fits.json": "65eecb215f116eb44889f27660f3fc0d290a44b51d99b31c0dfdf901639f7958",
+    "inputs-replicate_a-correlated_measurement.npz": "22bb1148e51a007c871595a21c4b1fbbbe96c200ab73811d232c45626db27e6b",
+    "inputs-replicate_a-extra_missingness.npz": "d6e253fd707ccbe60792f5f494542649d52c8fb95a6a0f7dee1c24f2e24f8fe9",
+    "inputs-replicate_a-reallocated_people.npz": "c65af1e8a9c472f2d32f5b49e3ca3231e6f32cc09d43e1a0171b94d2da5ef919",
+    "inputs-replicate_a-reference.npz": "c65af1e8a9c472f2d32f5b49e3ca3231e6f32cc09d43e1a0171b94d2da5ef919",
+    "inputs-replicate_b-correlated_measurement.npz": "c221652e8ca7cafd833e7d37fe4dbfffcba12a7854b0f55cac4aa7944a46e656",
+    "inputs-replicate_b-extra_missingness.npz": "8dc4ec95049f0b69c6ed825aaa18c214352076ec7f4dfe1f18009dc828c5f42e",
+    "inputs-replicate_b-reallocated_people.npz": "4748730ae1a8aaf1e1f67ed7c778f150d71c3f44e04817d16698e3e09d7bca02",
+    "inputs-replicate_b-reference.npz": "4748730ae1a8aaf1e1f67ed7c778f150d71c3f44e04817d16698e3e09d7bca02",
+    "inputs-replicate_c-correlated_measurement.npz": "ca340de9884d5214a570b09fb36fb2d888674754d2afd5135d7196c261dc6cd4",
+    "inputs-replicate_c-extra_missingness.npz": "b6ad3600fb0719763398743c8a59a8f29b8824ee8994defdf3a9a41411bf1719",
+    "inputs-replicate_c-reallocated_people.npz": "86b037723e89304fc48cefe6a764ba6bbefb042777aeb049fb80c490f18827a0",
+    "inputs-replicate_c-reference.npz": "86b037723e89304fc48cefe6a764ba6bbefb042777aeb049fb80c490f18827a0",
+    "predictions.json": "406aec1015f16f2c4c70ff57a97bd53f8bcd1fca0bf77d645147739be3c82dd2",
+    "protocol.md": "27dd779d24314ca6e067a935478fc6ad3c57b2738c1fee5b53ee2f2933e98d3c",
+    "report.json": "76f2b0035b5dbca11c321d6c18c1031a2a1c35762fd7bf96aa68e439229559d0",
+    "stability.json": "0c490ca84a2a26f2695bbef418d616490407091bb89096f81b01a25bda46b983"
+  },
+  "manifest_sha256": "e3a3f37644904048fdc9521b4f2b7ed3317daaea943c94b90e61134ff751e460",
+  "cells": [
+    {
+      "cohort_id": "replicate_a",
+      "scenario": "reference",
+      "config": {
+        "name": "reference",
+        "cohort_seed": 26101801,
+        "split_seed": 26101802,
+        "perturbation_seed": null,
+        "initial_development_missing_fraction": 0.029166666666666667,
+        "final_development_missing_fraction": 0.029166666666666667,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.9091358024691357,
+          "average_precision": 0.9291681967545694,
+          "brier": 0.12130614943675369,
+          "person_brier": 0.1213061494367537,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.9437037037037037,
+          "average_precision": 0.949775218393684,
+          "brier": 0.10173351265375928,
+          "person_brier": 0.10173351265375928,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.9051851851851851,
+          "average_precision": 0.9154906606196295,
+          "brier": 0.12785133901756188,
+          "person_brier": 0.1278513390175619,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": -0.01957263678299441,
+        "all_feature": 0.006545189580808227,
+        "prevalence": 0.12869385056324628
+      },
+      "attempted_fits": 156,
+      "input_sha256": "c65af1e8a9c472f2d32f5b49e3ca3231e6f32cc09d43e1a0171b94d2da5ef919"
+    },
+    {
+      "cohort_id": "replicate_a",
+      "scenario": "extra_missingness",
+      "config": {
+        "name": "extra_missingness",
+        "cohort_seed": 26101801,
+        "split_seed": 26101802,
+        "perturbation_seed": 26101804,
+        "initial_development_missing_fraction": 0.029166666666666667,
+        "final_development_missing_fraction": 0.16157407407407406,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.8493827160493828,
+          "average_precision": 0.8828001917107355,
+          "brier": 0.15568177318969792,
+          "person_brier": 0.15568177318969795,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8479012345679012,
+          "average_precision": 0.8682282941157417,
+          "brier": 0.16371616966281166,
+          "person_brier": 0.16371616966281166,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.8064197530864198,
+          "average_precision": 0.8275019886743964,
+          "brier": 0.2003258973572241,
+          "person_brier": 0.2003258973572241,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.008034396473113721,
+        "all_feature": 0.04464412416752615,
+        "prevalence": 0.09431822681030207
+      },
+      "attempted_fits": 156,
+      "input_sha256": "d6e253fd707ccbe60792f5f494542649d52c8fb95a6a0f7dee1c24f2e24f8fe9"
+    },
+    {
+      "cohort_id": "replicate_a",
+      "scenario": "correlated_measurement",
+      "config": {
+        "name": "correlated_measurement",
+        "cohort_seed": 26101801,
+        "split_seed": 26101802,
+        "perturbation_seed": 26101804,
+        "initial_development_missing_fraction": 0.029166666666666667,
+        "final_development_missing_fraction": 0.029861111111111113,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.917037037037037,
+          "average_precision": 0.9330767090920318,
+          "brier": 0.11688519438598788,
+          "person_brier": 0.11688519438598786,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.9639506172839506,
+          "average_precision": 0.9672429544084917,
+          "brier": 0.08315921851426152,
+          "person_brier": 0.08315921851426154,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.9160493827160494,
+          "average_precision": 0.9258312865837779,
+          "brier": 0.12177355311759526,
+          "person_brier": 0.12177355311759523,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": -0.033725975871726335,
+        "all_feature": 0.004888358731607367,
+        "prevalence": 0.13311480561401215
+      },
+      "attempted_fits": 156,
+      "input_sha256": "22bb1148e51a007c871595a21c4b1fbbbe96c200ab73811d232c45626db27e6b"
+    },
+    {
+      "cohort_id": "replicate_a",
+      "scenario": "reallocated_people",
+      "config": {
+        "name": "reallocated_people",
+        "cohort_seed": 26101801,
+        "split_seed": 26101803,
+        "perturbation_seed": null,
+        "initial_development_missing_fraction": 0.029166666666666667,
+        "final_development_missing_fraction": 0.029166666666666667,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.8918518518518518,
+          "average_precision": 0.8769780301363859,
+          "brier": 0.134439427818902,
+          "person_brier": 0.134439427818902,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8785185185185185,
+          "average_precision": 0.8583789174305105,
+          "brier": 0.1455736163519248,
+          "person_brier": 0.1455736163519248,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.8395061728395062,
+          "average_precision": 0.8277437813690556,
+          "brier": 0.17921218856105708,
+          "person_brier": 0.17921218856105708,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.011134188533022843,
+        "all_feature": 0.04477276074215509,
+        "prevalence": 0.11556057218109801
+      },
+      "attempted_fits": 156,
+      "input_sha256": "c65af1e8a9c472f2d32f5b49e3ca3231e6f32cc09d43e1a0171b94d2da5ef919"
+    },
+    {
+      "cohort_id": "replicate_b",
+      "scenario": "reference",
+      "config": {
+        "name": "reference",
+        "cohort_seed": 26101901,
+        "split_seed": 26101902,
+        "perturbation_seed": null,
+        "initial_development_missing_fraction": 0.02962962962962963,
+        "final_development_missing_fraction": 0.02962962962962963,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.8725925925925926,
+          "average_precision": 0.859365568696006,
+          "brier": 0.14768966887801052,
+          "person_brier": 0.1476896688780105,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8740740740740741,
+          "average_precision": 0.8726945889018102,
+          "brier": 0.1454666719745343,
+          "person_brier": 0.1454666719745343,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.8666666666666667,
+          "average_precision": 0.8440784980782648,
+          "brier": 0.16051112473647927,
+          "person_brier": 0.16051112473647927,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": -0.0022229969034761893,
+        "all_feature": 0.012821455858468785,
+        "prevalence": 0.10231033112198952
+      },
+      "attempted_fits": 156,
+      "input_sha256": "4748730ae1a8aaf1e1f67ed7c778f150d71c3f44e04817d16698e3e09d7bca02"
+    },
+    {
+      "cohort_id": "replicate_b",
+      "scenario": "extra_missingness",
+      "config": {
+        "name": "extra_missingness",
+        "cohort_seed": 26101901,
+        "split_seed": 26101902,
+        "perturbation_seed": 26101904,
+        "initial_development_missing_fraction": 0.02962962962962963,
+        "final_development_missing_fraction": 0.17754629629629629,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.8483950617283951,
+          "average_precision": 0.8397459542801025,
+          "brier": 0.15964041847091873,
+          "person_brier": 0.15964041847091875,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8227160493827161,
+          "average_precision": 0.8180249399298453,
+          "brier": 0.17191018147187626,
+          "person_brier": 0.1719101814718763,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.8232098765432099,
+          "average_precision": 0.8274019247667518,
+          "brier": 0.18758265063128274,
+          "person_brier": 0.18758265063128274,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.012269763000957525,
+        "all_feature": 0.027942232160363987,
+        "prevalence": 0.09035958152908125
+      },
+      "attempted_fits": 156,
+      "input_sha256": "8dc4ec95049f0b69c6ed825aaa18c214352076ec7f4dfe1f18009dc828c5f42e"
+    },
+    {
+      "cohort_id": "replicate_b",
+      "scenario": "correlated_measurement",
+      "config": {
+        "name": "correlated_measurement",
+        "cohort_seed": 26101901,
+        "split_seed": 26101902,
+        "perturbation_seed": 26101904,
+        "initial_development_missing_fraction": 0.02962962962962963,
+        "final_development_missing_fraction": 0.030787037037037036,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.8671604938271605,
+          "average_precision": 0.8507701569847037,
+          "brier": 0.15279187258478658,
+          "person_brier": 0.1527918725847866,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8375308641975308,
+          "average_precision": 0.8303627558898093,
+          "brier": 0.16840293991429664,
+          "person_brier": 0.1684029399142966,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.8375308641975309,
+          "average_precision": 0.8202886749218967,
+          "brier": 0.18234187112920017,
+          "person_brier": 0.18234187112920017,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.015611067329510068,
+        "all_feature": 0.029549998544413578,
+        "prevalence": 0.09720812741521342
+      },
+      "attempted_fits": 156,
+      "input_sha256": "c221652e8ca7cafd833e7d37fe4dbfffcba12a7854b0f55cac4aa7944a46e656"
+    },
+    {
+      "cohort_id": "replicate_b",
+      "scenario": "reallocated_people",
+      "config": {
+        "name": "reallocated_people",
+        "cohort_seed": 26101901,
+        "split_seed": 26101903,
+        "perturbation_seed": null,
+        "initial_development_missing_fraction": 0.03009259259259259,
+        "final_development_missing_fraction": 0.03009259259259259,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.8128395061728395,
+          "average_precision": 0.8166628848075874,
+          "brier": 0.1845233192417633,
+          "person_brier": 0.1845233192417633,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8281481481481481,
+          "average_precision": 0.8219909384807502,
+          "brier": 0.1737507368805857,
+          "person_brier": 0.1737507368805857,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.7995061728395062,
+          "average_precision": 0.7992503081955886,
+          "brier": 0.20666396002108584,
+          "person_brier": 0.20666396002108584,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": -0.010772582361177589,
+        "all_feature": 0.022140640779322537,
+        "prevalence": 0.06547668075823669
+      },
+      "attempted_fits": 156,
+      "input_sha256": "4748730ae1a8aaf1e1f67ed7c778f150d71c3f44e04817d16698e3e09d7bca02"
+    },
+    {
+      "cohort_id": "replicate_c",
+      "scenario": "reference",
+      "config": {
+        "name": "reference",
+        "cohort_seed": 26102001,
+        "split_seed": 26102002,
+        "perturbation_seed": null,
+        "initial_development_missing_fraction": 0.030787037037037036,
+        "final_development_missing_fraction": 0.030787037037037036,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.9417283950617285,
+          "average_precision": 0.9433439367507666,
+          "brier": 0.09488950525538835,
+          "person_brier": 0.09488950525538835,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.9150617283950616,
+          "average_precision": 0.9115499820729251,
+          "brier": 0.11660648384036566,
+          "person_brier": 0.1166064838403657,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.9288888888888889,
+          "average_precision": 0.9384822320278221,
+          "brier": 0.09825401404076335,
+          "person_brier": 0.09825401404076335,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.02171697858497732,
+        "all_feature": 0.003364508785375024,
+        "prevalence": 0.15511049474461164
+      },
+      "attempted_fits": 156,
+      "input_sha256": "86b037723e89304fc48cefe6a764ba6bbefb042777aeb049fb80c490f18827a0"
+    },
+    {
+      "cohort_id": "replicate_c",
+      "scenario": "extra_missingness",
+      "config": {
+        "name": "extra_missingness",
+        "cohort_seed": 26102001,
+        "split_seed": 26102002,
+        "perturbation_seed": 26102004,
+        "initial_development_missing_fraction": 0.030787037037037036,
+        "final_development_missing_fraction": 0.17824074074074073,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.9471604938271605,
+          "average_precision": 0.9574032499330432,
+          "brier": 0.09763652193312046,
+          "person_brier": 0.09763652193312042,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.914567901234568,
+          "average_precision": 0.9325632383525728,
+          "brier": 0.1257809989666553,
+          "person_brier": 0.1257809989666553,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.9209876543209877,
+          "average_precision": 0.9196726997658378,
+          "brier": 0.11135714993431998,
+          "person_brier": 0.11135714993432001,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.02814447703353488,
+        "all_feature": 0.01372062800119958,
+        "prevalence": 0.1523634780668796
+      },
+      "attempted_fits": 156,
+      "input_sha256": "b6ad3600fb0719763398743c8a59a8f29b8824ee8994defdf3a9a41411bf1719"
+    },
+    {
+      "cohort_id": "replicate_c",
+      "scenario": "correlated_measurement",
+      "config": {
+        "name": "correlated_measurement",
+        "cohort_seed": 26102001,
+        "split_seed": 26102002,
+        "perturbation_seed": 26102004,
+        "initial_development_missing_fraction": 0.030787037037037036,
+        "final_development_missing_fraction": 0.03217592592592593,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.9397530864197531,
+          "average_precision": 0.9438300145127655,
+          "brier": 0.0941103915761834,
+          "person_brier": 0.09411039157618338,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.9116049382716049,
+          "average_precision": 0.9074021766055802,
+          "brier": 0.11701254576922714,
+          "person_brier": 0.11701254576922712,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.9269135802469135,
+          "average_precision": 0.9381031793702719,
+          "brier": 0.10265001693753428,
+          "person_brier": 0.10265001693753426,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.02290215419304374,
+        "all_feature": 0.008539625361350915,
+        "prevalence": 0.15588960842381666
+      },
+      "attempted_fits": 156,
+      "input_sha256": "ca340de9884d5214a570b09fb36fb2d888674754d2afd5135d7196c261dc6cd4"
+    },
+    {
+      "cohort_id": "replicate_c",
+      "scenario": "reallocated_people",
+      "config": {
+        "name": "reallocated_people",
+        "cohort_seed": 26102001,
+        "split_seed": 26102003,
+        "perturbation_seed": null,
+        "initial_development_missing_fraction": 0.03356481481481482,
+        "final_development_missing_fraction": 0.03356481481481482,
+        "development_people": 45,
+        "reserved_people": 15
+      },
+      "metrics": {
+        "grid": {
+          "roc_auc": 0.9096296296296297,
+          "average_precision": 0.8957830843193928,
+          "brier": 0.11077892677591618,
+          "person_brier": 0.11077892677591618,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "random": {
+          "roc_auc": 0.8958024691358024,
+          "average_precision": 0.8825231744661304,
+          "brier": 0.12486846652186119,
+          "person_brier": 0.12486846652186116,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "all_feature": {
+          "roc_auc": 0.8316049382716049,
+          "average_precision": 0.839016767547667,
+          "brier": 0.17948174736889075,
+          "person_brier": 0.17948174736889075,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25,
+          "person_brier": 0.25,
+          "people": 45,
+          "specimens": 90,
+          "positive": 45,
+          "negative": 45
+        }
+      },
+      "other_minus_grid": {
+        "random": 0.014089539745944993,
+        "all_feature": 0.06870282059297458,
+        "prevalence": 0.1392210732240838
+      },
+      "attempted_fits": 156,
+      "input_sha256": "86b037723e89304fc48cefe6a764ba6bbefb042777aeb049fb80c490f18827a0"
+    }
+  ],
+  "stability_summary": {
+    "reference": {
+      "grid": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.5104016354016354,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0, \"select__k\": 5}": 6,
+          "{\"model__C\": 0.1, \"select__k\": 10}": 1,
+          "{\"model__C\": 0.1, \"select__k\": 5}": 1,
+          "{\"model__C\": 1.0, \"select__k\": 10}": 1
+        },
+        "sign_changing_features": 2
+      },
+      "random": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.6333333333333333,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 0.1, \"select__k\": 3}": 3,
+          "{\"model__C\": 10.0, \"select__k\": 5}": 6
+        },
+        "sign_changing_features": 2
+      },
+      "all_feature": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 1.0,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0}": 9
+        },
+        "sign_changing_features": 43
+      }
+    },
+    "extra_missingness": {
+      "grid": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.3243085618085618,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0, \"select__k\": 5}": 4,
+          "{\"model__C\": 0.1, \"select__k\": 10}": 3,
+          "{\"model__C\": 1.0, \"select__k\": 20}": 1,
+          "{\"model__C\": 1.0, \"select__k\": 10}": 1
+        },
+        "sign_changing_features": 3
+      },
+      "random": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.40444008904374756,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 0.1, \"select__k\": 3}": 4,
+          "{\"model__C\": 10.0, \"select__k\": 5}": 3,
+          "{\"model__C\": 0.1, \"select__k\": 40}": 1,
+          "{\"model__C\": 0.1, \"select__k\": 20}": 1
+        },
+        "sign_changing_features": 10
+      },
+      "all_feature": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 1.0,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0}": 9
+        },
+        "sign_changing_features": 42
+      }
+    },
+    "correlated_measurement": {
+      "grid": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.5776515151515151,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0, \"select__k\": 5}": 7,
+          "{\"model__C\": 0.1, \"select__k\": 10}": 1,
+          "{\"model__C\": 0.1, \"select__k\": 5}": 1
+        },
+        "sign_changing_features": 1
+      },
+      "random": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.4363456687584594,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0, \"select__k\": 40}": 1,
+          "{\"model__C\": 10.0, \"select__k\": 5}": 5,
+          "{\"model__C\": 0.1, \"select__k\": 20}": 1,
+          "{\"model__C\": 0.1, \"select__k\": 3}": 2
+        },
+        "sign_changing_features": 11
+      },
+      "all_feature": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 1.0,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0}": 9
+        },
+        "sign_changing_features": 43
+      }
+    },
+    "reallocated_people": {
+      "grid": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.4385051341573081,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0, \"select__k\": 5}": 6,
+          "{\"model__C\": 0.1, \"select__k\": 10}": 1,
+          "{\"model__C\": 1.0, \"select__k\": 20}": 1,
+          "{\"model__C\": 1.0, \"select__k\": 10}": 1
+        },
+        "sign_changing_features": 4
+      },
+      "random": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 0.47015230704255095,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 0.1, \"select__k\": 3}": 3,
+          "{\"model__C\": 10.0, \"select__k\": 5}": 4,
+          "{\"model__C\": 0.1, \"select__k\": 20}": 1,
+          "{\"model__C\": 0.1, \"select__k\": 40}": 1
+        },
+        "sign_changing_features": 10
+      },
+      "all_feature": {
+        "outer_fits": 9,
+        "panel_pairs": 36,
+        "mean_outer_jaccard": 1.0,
+        "final_panel_pairs": 3,
+        "outer_candidate_frequency": {
+          "{\"model__C\": 1.0}": 9
+        },
+        "sign_changing_features": 42
+      }
+    }
+  },
+  "findings": {
+    "random_lower_brier_cells": 4,
+    "random_higher_brier_cells": 8,
+    "no_performance_threshold_used": true
+  },
+  "ci_replay": {
+    "run_id": 38936820625,
+    "url": "https://github.com/pskeffington/pauls_notes/actions/runs/38936820625",
+    "conclusion": "success",
+    "artifact_id": 12062065184,
+    "artifact_name": "phase4b-full",
+    "archive_sha256": "e13edef4d52ea60439f0e5704b7add03f843050645a90777c7e47a88875c766a",
+    "expires_at": "2027-01-14T17:04:09Z",
+    "download_digest_verified": true,
+    "downloaded_bundle_audit": "pass",
+    "max_local_probability_difference": 8.731904088676856e-14,
+    "comparison_tolerance": 1e-12,
+    "report_sha256": "f7de98de00a54d81fd828cf94d880e1bd03efa9bdc5d502eb33ef372025e80a3",
+    "environment_sha256": "845cc645c3d0604feafa4dc54fec7448e3a2f41af24e769fdcf4ac2a6f26d505"
+  },
+  "rejected_first_local_execution": {
+    "path": "/workspace/scratch/2f9cb88229e2/g1-replication-first-assessment",
+    "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/examples/breast_cancer_replication.py /workspace/scratch/2f9cb88229e2/g1-replication-first-assessment --mode full",
+    "source_revision": "3cef4b52b1124e988eedd0c7811cc7fa9de4d3dd",
+    "attempted_fits": 1872,
+    "failed_fits_in_retained_ledger": 0,
+    "acceptance_status": "rejected artifact integrity; never counted as accepted",
+    "reason": "A subsequent audit found retained report.json in running state with a SHA-256 different from its original manifest. The first in-process audit had passed. Cause not established.",
+    "expected_report_sha256": "1d8ed525dcb42b8c2593d55524d76f04f389da0eb40f236cc66d07924d46eac2",
+    "observed_report_sha256": "2e699854ff0a539d117944b6b4cac544dcd2728c250cc76d53ec1edae8167af6",
+    "prediction_bytes_equal_accepted_replay": true,
+    "retained_bytes_preserved_in_evidence_bundle": true
+  },
+  "recorded_full_execution_cost": {
+    "local_first_rejected_attempts": 1872,
+    "local_unchanged_source_replay_attempts": 1872,
+    "ci_replay_attempts": 1872,
+    "total_attempts_across_these_three_executions": 5616,
+    "ceiling_applies_per_execution": true,
+    "settings_changed_between_executions": false,
+    "later_CI_replays_separate_from_new_scientific_cohorts": true
+  },
+  "evidence_bundle": {
+    "filename": "Pauls_Notes_Phase4B_Evidence_2026-10-16.zip",
+    "sha256": "9e561dc1952b8ea737b1259be4513e1c324d37909a812dd35b515f0190c5a6a4",
+    "contains": [
+      "rejected-first-local",
+      "accepted-local-replay",
+      "verified-ci",
+      "original-ci-archive.zip",
+      "bundle-manifest.json"
+    ]
+  },
+  "review": {
+    "partitions_and_candidate_history_audited": true,
+    "every_development_row_predicted_once": true,
+    "reserved_rows_unscored": true,
+    "failure_and_unfavorable_outcomes_retained": true,
+    "feature_frequency_jaccard_ranks_signs_separated": true,
+    "local_and_downloaded_ci_replay_agree": true,
+    "learner_mastery": "not_assessed",
+    "review_type": "code, artifact, numerical and scientific-scope review; not independent clinical review"
+  },
+  "limitations": [
+    "Same engineered generator across three new cohort draws; not external clinical validation.",
+    "Scenarios overlap; reallocation changes development membership.",
+    "No confidence intervals, treatment-response or prognosis evidence.",
+    "Fixed all-feature Jaccard is one by construction, not evidence of predictive robustness.",
+    "Original local artifact mismatch remains unexplained; rejected bytes and unchanged-code replays are preserved.",
+    "CI archive retention expires; separate downloadable evidence bundle is provided."
+  ],
+  "repository_checks": [
+    {
+      "command": "python3 scripts/check_documentation.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/check_repository.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/tests/test_documentation.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/check_ml_evidence.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/tests/test_ml_evidence.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/tests/test_rust_ml_evidence.py",
+      "exit_code": 0
+    }
+  ]
+}

@@ -48,4 +48,50 @@ Missingness and correlation perturb development measurements only. Reallocation 
 
 ## Recorded assessment
 
-Implementation and legacy-only tests are ready; the first full assessment follows the committed implementation. Its numerical results, complete-run archive identity and review are recorded here and in the ledger after execution. G1 remains open until those artifacts and all acceptance checks are reviewed.
+The full assessment used committed implementation `3cef4b52b1124e988eedd0c7811cc7fa9de4d3dd`, after the protocol freeze. The [compact verification record](evidence/replication-validation-2026-10-16.json) retains exact commands, versions, source/input/output digests, all 12 cells' Brier/ROC-AUC/AP values, denominators, stability summaries and the rejected-artifact history. [PR #3](https://github.com/pskeffington/pauls_notes/pull/3) delivers the implementation and review record. Ten new tests plus seven baseline tests passed; documentation/evidence suites add 17 passing tests, **34 local tests total**.
+
+### All twelve cells
+
+These are equal-person Brier errors, rounded for display. Each cell contains 45 people, 90 development specimens and 156 fits; the prevalence Brier is 0.25 in every cell. Negative **random minus grid** favors random search.
+
+| Cohort | Scenario | Grid | Random | All-feature | Random minus grid |
+| --- | --- | --- | --- | --- | --- |
+| A | Reference | 0.121306 | 0.101734 | 0.127851 | -0.019573 |
+| A | Extra missingness | 0.155682 | 0.163716 | 0.200326 | +0.008034 |
+| A | Correlated measurement | 0.116885 | 0.083159 | 0.121774 | -0.033726 |
+| A | Reallocated people | 0.134439 | 0.145574 | 0.179212 | +0.011134 |
+| B | Reference | 0.147690 | 0.145467 | 0.160511 | -0.002223 |
+| B | Extra missingness | 0.159640 | 0.171910 | 0.187583 | +0.012270 |
+| B | Correlated measurement | 0.152792 | 0.168403 | 0.182342 | +0.015611 |
+| B | Reallocated people | 0.184523 | 0.173751 | 0.206664 | -0.010773 |
+| C | Reference | 0.094890 | 0.116606 | 0.098254 | +0.021717 |
+| C | Extra missingness | 0.097637 | 0.125781 | 0.111357 | +0.028144 |
+| C | Correlated measurement | 0.094110 | 0.117013 | 0.102650 | +0.022902 |
+| C | Reallocated people | 0.110779 | 0.124868 | 0.179482 | +0.014090 |
+
+Random search improves error in **four cells and worsens it in eight**. The original single-cohort experiment had favored the grid in every cell; the new draws demonstrate why that result did not establish universal optimizer superiority. Extra missingness raises all three fitted procedures' Brier error relative to reference in each of the three cohorts. This describes the declared probes, not an estimated population effect or a selection rule for a new panel.
+
+### Panels and fitting cost
+
+The following Jaccard means use all **36 panel pairs among nine chosen outer refits per method/scenario**. The pair identities and separate within-cohort results remain in `stability.json`. Sign-change counts identify anonymous features observed with both positive and negative coefficients among selected outer fits; selection denominators differ by feature.
+
+| Scenario | Grid mean Jaccard | Random mean Jaccard | Grid sign-changing features | Random sign-changing features |
+| --- | --- | --- | --- | --- |
+| Reference | 0.510402 | 0.633333 | 2 | 2 |
+| Extra missingness | 0.324309 | 0.404440 | 3 | 10 |
+| Correlated measurement | 0.577652 | 0.436346 | 1 | 11 |
+| Reallocated people | 0.438505 | 0.470152 | 4 | 10 |
+
+The missingness probe has lower mean panel overlap than reference for both search methods. A more stable panel need not have lower error, and the fixed all-feature panel's Jaccard of one is true by construction. Ranks, coefficient signs and candidate frequencies are descriptive fitting behavior; they are not evidence for the book's named genes.
+
+Each accepted full execution records **912 grid fits, 912 random fits and 48 all-feature fits**, zero failed fits and no reserved-person predictions. The accepted local replay took **12.004 seconds**, of which **10.486 seconds** were recorded fit/diagnostic time; the independent CI run took **14.314 seconds**. These are environment-specific costs, not a speed comparison. Each run stayed within the 1,872-fit and 2,700-second ceilings.
+
+### Archive verification and rejected first output
+
+The [full CI run](https://github.com/pskeffington/pauls_notes/actions/runs/38936820625) passed smoke, execution and a second bundle audit at the same source commit. Its downloaded artifact **12062065184**, `phase4b-full`, was independently checked against archive SHA-256 `e13edef4d52ea60439f0e5704b7add03f843050645a90777c7e47a88875c766a`, then its full manifest, coordinates, candidate histories, metrics, person losses, input identities and stability summaries were replayed locally. Its probabilities agree with the accepted local replay to a maximum absolute difference of **8.731904088676856e-14**, inside `1e-12`. The CI archive expires **2027-01-14T17:04:09Z**.
+
+The first local execution completed 1,872 fits and initially passed its in-process audit. A subsequent audit rejected the retained `report.json`: it was in a stale `running` state and no longer matched the original manifest. The cause was not established. That bundle is **rejected**, with its retained bytes and mismatch digests preserved. No scores, seeds or modeling settings were changed. A fresh local execution of the same committed source passed both audits, and its prediction file is byte-identical to the rejected first output's prediction file. CI independently supplied the accepted complete archive above.
+
+The downloadable **Pauls_Notes_Phase4B_Evidence_2026-10-16.zip** preserves all three bundles, the original CI ZIP, an explanatory record and a root SHA-256 inventory; its digest is `9e561dc1952b8ea737b1259be4513e1c324d37909a812dd35b515f0190c5a6a4`. It deliberately retains the invalid manifest/report pair inside the rejected sub-bundle. The three recorded full executions cost **5,616 attempted fits in total**, each limited to 1,872; they are audit/replay executions, not nine new scientific cohorts. Subsequent CI replays remain separately identified workflow runs.
+
+G1's implementation, numeric checks, failure retention, complete assessment and scientific-scope review are complete **within the declared synthetic scope**. Learner mastery and clinical validity are not established. G2 remains open: freeze its equal-person paired loss-contrast estimand and whole-person conditional bootstrap protocol before implementing or computing intervals. Full-training-procedure uncertainty needs its own experiment and fitting budget.

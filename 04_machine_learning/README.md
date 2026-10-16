@@ -30,7 +30,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
-The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery and bounded Phase 4 robustness baseline. The [gate ledger](../docs/roadmap-gates.md) records their delivery evidence and the next dependencies. Repeated-cohort assessment, person-aware uncertainty and the separate survival case remain planned; the Phase 4B protocol is declared before its runner executes.
+The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded Phase 4 robustness baseline and Phase 4B repeated-cohort assessment. The [gate ledger](../docs/roadmap-gates.md) records their delivery evidence and dependencies. Person-aware uncertainty is next; the separate survival case follows G1/G2, while native Rust training remains an independent extension.
 
 ## Run the caret example
 
