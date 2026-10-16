@@ -35,14 +35,27 @@ impl FrozenModel {
             || self.plan_name != "final_development"
             || self.positive_class != 1
             || n == 0
-            || [self.medians.len(), self.means.len(), self.scales.len(),
-                self.coefficients_class_1.len()].iter().any(|&len| len != n)
-            || self.feature_names.iter().any(|s| s.is_empty() || s.trim() != s
-                || s.chars().any(char::is_control))
+            || [
+                self.medians.len(),
+                self.means.len(),
+                self.scales.len(),
+                self.coefficients_class_1.len(),
+            ]
+            .iter()
+            .any(|&len| len != n)
+            || self
+                .feature_names
+                .iter()
+                .any(|s| s.is_empty() || s.trim() != s || s.chars().any(char::is_control))
             || self.feature_names.iter().collect::<HashSet<_>>().len() != n
             || !self.intercept_class_1.is_finite()
-            || self.medians.iter().chain(&self.means).chain(&self.scales)
-                .chain(&self.coefficients_class_1).any(|v| !v.is_finite())
+            || self
+                .medians
+                .iter()
+                .chain(&self.means)
+                .chain(&self.scales)
+                .chain(&self.coefficients_class_1)
+                .any(|v| !v.is_finite())
             || self.scales.iter().any(|&v| v <= 0.0)
         {
             return Err("Invalid native frozen model contract".into());
@@ -53,19 +66,28 @@ impl FrozenModel {
     pub fn predict(&self, values: &[Option<f64>]) -> Result<f64> {
         self.validate()?;
         if values.len() != self.feature_names.len()
-            || values.iter().flatten().any(|v| !v.is_finite()) {
+            || values.iter().flatten().any(|v| !v.is_finite())
+        {
             return Err("Invalid feature count or nonfinite measurement".into());
         }
         let mut logit = self.intercept_class_1;
         for (j, value) in values.iter().enumerate() {
             let imputed = value.unwrap_or(self.medians[j]);
             let standardized = (imputed - self.means[j]) / self.scales[j];
-            if !standardized.is_finite() { return Err("Preprocessing overflow".into()); }
+            if !standardized.is_finite() {
+                return Err("Preprocessing overflow".into());
+            }
             logit += standardized * self.coefficients_class_1[j];
         }
-        if !logit.is_finite() { return Err("Prediction overflow".into()); }
-        Ok(if logit >= 0.0 { 1.0 / (1.0 + (-logit).exp()) }
-           else { let exp = logit.exp(); exp / (1.0 + exp) })
+        if !logit.is_finite() {
+            return Err("Prediction overflow".into());
+        }
+        Ok(if logit >= 0.0 {
+            1.0 / (1.0 + (-logit).exp())
+        } else {
+            let exp = logit.exp();
+            exp / (1.0 + exp)
+        })
     }
 }
 
@@ -73,25 +95,41 @@ impl FrozenModel {
 mod tests {
     use super::*;
     fn example() -> FrozenModel {
-        FrozenModel { schema_version: 1, task: "synthetic_paired_specimen_category".into(),
+        FrozenModel {
+            schema_version: 1,
+            task: "synthetic_paired_specimen_category".into(),
             protocol_id: "paired-assay-native-rust-v1".into(),
-            plan_name: "final_development".into(), positive_class: 1,
+            plan_name: "final_development".into(),
+            positive_class: 1,
             feature_names: vec!["Feature001".into(), "Feature002".into()],
-            medians: vec![3.0, 4.0], means: vec![1.0, 2.0], scales: vec![2.0, 2.0],
-            coefficients_class_1: vec![1.0, 2.0], intercept_class_1: -1.0 }
+            medians: vec![3.0, 4.0],
+            means: vec![1.0, 2.0],
+            scales: vec![2.0, 2.0],
+            coefficients_class_1: vec![1.0, 2.0],
+            intercept_class_1: -1.0,
+        }
     }
     #[test]
     fn known_logit_and_missingness() {
         let m = example();
         let expected = 1.0 / (1.0 + (-1.0_f64).exp());
         assert!((m.predict(&[None, Some(3.0)]).unwrap() - expected).abs() < 1e-15);
-        assert_eq!(m.predict(&[None, None]).unwrap(), m.predict(&[Some(3.0), Some(4.0)]).unwrap());
+        assert_eq!(
+            m.predict(&[None, None]).unwrap(),
+            m.predict(&[Some(3.0), Some(4.0)]).unwrap()
+        );
     }
     #[test]
     fn rejects_invalid_contract_and_inputs() {
-        let mut m = example(); m.scales[0] = 0.0; assert!(m.validate().is_err());
-        let mut m = example(); m.positive_class = 0; assert!(m.validate().is_err());
-        let mut m = example(); m.feature_names[1] = "Feature001".into(); assert!(m.validate().is_err());
+        let mut m = example();
+        m.scales[0] = 0.0;
+        assert!(m.validate().is_err());
+        let mut m = example();
+        m.positive_class = 0;
+        assert!(m.validate().is_err());
+        let mut m = example();
+        m.feature_names[1] = "Feature001".into();
+        assert!(m.validate().is_err());
         let m = example();
         assert!(m.predict(&[Some(f64::NAN), None]).is_err());
         assert!(m.predict(&[None]).is_err());
