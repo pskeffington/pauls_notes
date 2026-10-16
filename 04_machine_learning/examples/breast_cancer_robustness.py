@@ -70,13 +70,15 @@ def make_pipeline(k, c):
     ])
 
 
-def make_scenario(name):
+def make_scenario(name, *, cohort_seed=COHORT_SEED, split_seed=SPLIT_SEED,
+                  alternate_split_seed=ALTERNATE_SPLIT_SEED,
+                  perturbation_seed=PERTURBATION_SEED):
     """Change only development inputs; keep the reserved cohort boundary intact."""
     if name not in SCENARIOS:
         raise ValueError(f'Unknown scenario: {name}')
-    data = selection.make_cohort(seed=COHORT_SEED)
+    data = selection.make_cohort(seed=cohort_seed)
     selection.validate_cohort(data)
-    split_seed = ALTERNATE_SPLIT_SEED if name == 'reallocated_people' else SPLIT_SEED
+    split_seed = alternate_split_seed if name == 'reallocated_people' else split_seed
     development, reserved = next(GroupShuffleSplit(n_splits=1, test_size=0.25,
         random_state=split_seed).split(np.zeros(len(data['person_id'])),
                                      groups=data['person_id']))
@@ -84,13 +86,13 @@ def make_scenario(name):
     original_reserved = data['x'][reserved].copy()
     original_rate = float(np.isnan(data['x'][development]).mean())
     if name == 'extra_missingness':
-        rng = np.random.default_rng(PERTURBATION_SEED)
+        rng = np.random.default_rng(perturbation_seed)
         dropout = rng.random(data['x'][development].shape) < 0.15
         changed = data['x'][development].copy()
         changed[dropout] = np.nan
         data['x'][development] = changed
     elif name == 'correlated_measurement':
-        rng = np.random.default_rng(PERTURBATION_SEED)
+        rng = np.random.default_rng(perturbation_seed)
         changed = data['x'][development].copy()
         # Feature005 is already correlated with Feature001 in the generator.
         # Increase that relationship without editing labels or held-out people.
@@ -101,8 +103,8 @@ def make_scenario(name):
     if not np.array_equal(data['x'][reserved], original_reserved, equal_nan=True):
         raise ValueError('Scenario modified reserved measurements')
     selection.validate_cohort(data)
-    return data, development, reserved, dict(name=name, cohort_seed=COHORT_SEED,
-        split_seed=split_seed, perturbation_seed=PERTURBATION_SEED if name in
+    return data, development, reserved, dict(name=name, cohort_seed=cohort_seed,
+        split_seed=split_seed, perturbation_seed=perturbation_seed if name in
         ('extra_missingness', 'correlated_measurement') else None,
         initial_development_missing_fraction=original_rate,
         final_development_missing_fraction=float(np.isnan(data['x'][development]).mean()),

@@ -44,7 +44,7 @@ The [Phase 4 assay robustness gate](04_machine_learning/robustness-experiment.md
 
 Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.
 
-The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication protocol](04_machine_learning/replication-protocol.md) declares three new synthetic cohort draws before their assessment; its runner and results remain planned.
+The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication report](04_machine_learning/replication-experiment.md) assesses three prespecified synthetic cohort draws across 12 cells, with 1,872 fits, complete feature-stability records and verified replay artifacts. Person-aware uncertainty is the next open gate.
 
 ## Research templates
 

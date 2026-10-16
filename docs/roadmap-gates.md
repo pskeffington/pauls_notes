@@ -13,7 +13,7 @@ The shared narrative is **people → specimens → measurements → data prepara
 | Gate | Milestone | Dependency | Repository status | Learner mastery |
 | --- | --- | --- | --- | --- |
 | G0 | Close current Phase 4 software baseline | Existing PR #1 | Complete within bounded synthetic software scope | Not assessed |
-| G1 | Phase 4B repeated-cohort robustness | G0; protocol freeze before assessment | Planned; protocol/config declared, runner not implemented | Not assessed |
+| G1 | Phase 4B repeated-cohort robustness | G0; protocol freeze before assessment | Complete within declared synthetic scope; full archived assessment and replay reviewed | Not assessed |
 | G2 | Phase 4C uncertainty and reliability | G1 saved predictions; new estimand freeze | Planned | Not assessed |
 | G3 | Native Rust training and numerical validation | Own objective and numerical contract; independent of G1/G2 | Planned; frozen-model inference already exists separately | Not assessed |
 | G4 | Phase 5 survival learning case | G1 and G2; separate endpoint protocol | Planned | Not assessed |
@@ -77,13 +77,15 @@ The merge robustness run preserved artifact **12054712479**, `phase4-robustness`
 | --- | --- |
 | Milestone | G1, independent synthetic draws and stability; depends on G0 |
 | Objective | Measure robustness of the four fixed procedures across three declared new generator draws and four scenarios each |
-| Status | Planned. [Protocol](../04_machine_learning/replication-protocol.md) and [JSON contract](../04_machine_learning/evidence/replication-contract-v1.json) declared; no runner or replication assessment delivered in this pass |
-| Source | [PR #2](https://github.com/pskeffington/pauls_notes/pull/2); protocol-freeze commit `65a0b8776a876c0a845e6f9f57c067adb30f713e`. Execution must record that SHA, protocol/config hashes and its own implementation revision before assessment |
-| Execution | Not executed; full plan: one worker, 12 cells, 1,872 fits, 1,080 development prediction rows, 2,700 seconds maximum |
-| Evidence | Protocol arithmetic/configuration and navigation reviewed; no new-cohort prediction or performance evidence exists |
-| Scientific review | New seeded draws from the same generator are internal synthetic replication. Scenarios within a cohort overlap; specimen ranking scores retain within-person dependence |
-| Remaining risks | Runner, legacy parity test, failure-artifact retention, stability/rank/sign outputs, smoke/full CI separation and full archived report remain to implement |
-| Next dependency | Commit protocol/config before assessment; implement against that freeze, retain unfavorable outcomes, audit full results and review interpretation before G1 completion |
+| Status | Complete within the declared internal synthetic scope: implementation, tests, full assessment, archived replay and scientific-scope review; delivery in [PR #3](https://github.com/pskeffington/pauls_notes/pull/3) |
+| Source | [PR #2](https://github.com/pskeffington/pauls_notes/pull/2) froze the unchanged protocol/config at `65a0b8776a876c0a845e6f9f57c067adb30f713e`; implementation/recorded execution at `3cef4b52b1124e988eedd0c7811cc7fa9de4d3dd` in PR #3 |
+| Execution | [Exact commands and environment](../04_machine_learning/evidence/replication-validation-2026-10-16.json): one worker, 12 cells, 1,872 fits, 1,080 development prediction rows, zero failed fits; 12.004 seconds locally against a 2,700-second ceiling |
+| Evidence | [Full report and interpretation](../04_machine_learning/replication-experiment.md); 10 new + 7 baseline + 17 documentation/evidence tests pass; legacy parity/invariance; complete partitions, candidate/fitting histories, ranks/signs/frequencies, retained failures, output/input hashes and downloaded CI replay |
+| Scientific review | Random search improves Brier in 4 cells and worsens it in 8. New seeded draws from the same generator are internal synthetic replication. Scenarios overlap; ranking scores retain within-person dependence. No performance threshold, biological discovery or interval claim was used |
+| Remaining risks | An initial local report/manifest discrepancy remains unexplained; that bundle was rejected and preserved, then unchanged-source local and CI replays passed. All three executions and their 5,616 attempts are disclosed. CI archives expire; complete downloadable evidence is also preserved. G2 uncertainty remains open |
+| Next dependency | Freeze G2's equal-person paired contrast estimand, whole-person conditional bootstrap seeds/repetitions/method and numeric fixtures before interval computation; G1 alone does not close broader Phase 4 |
+
+The [accepted full CI run](https://github.com/pskeffington/pauls_notes/actions/runs/38936820625) archived `phase4b-full`, artifact **12062065184**, with verified SHA-256 `e13edef4d52ea60439f0e5704b7add03f843050645a90777c7e47a88875c766a`, expiring **2027-01-14T17:04:09Z**. The downloaded bundle passed a separate local audit and differed from the accepted local probabilities by at most `8.731904088676856e-14`. The report preserves all 12 results and separates outer/all-fit/final-panel denominators; source protocol bytes were not amended after outcomes.
 
 ## G2: Phase 4C uncertainty and reliability
 
