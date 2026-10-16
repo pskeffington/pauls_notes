@@ -5,6 +5,7 @@ Heuristic defense in depth: cannot certify absence of all PII/PHI, nor scan Git 
 Never prints sensitive matched values.
 """
 import argparse
+import hashlib
 import csv
 import io
 import json
@@ -174,7 +175,8 @@ def main(argv=None):
             failures.append((path, "registered structured asset missing from Git"))
     if failures:
         for path, reason in failures:
-            print(f"BLOCKED {path}: {reason}", file=sys.stderr)
+            fingerprint = hashlib.sha256(path.encode("utf-8")).hexdigest()[:12]
+            print(f"BLOCKED path_hash={fingerprint}: {reason}", file=sys.stderr)
         print(f"Data boundary check FAILED: {len(failures)} issue(s).", file=sys.stderr)
         return 1
     print("Public repository data boundary check passed (heuristic; does not cover Git history).")
