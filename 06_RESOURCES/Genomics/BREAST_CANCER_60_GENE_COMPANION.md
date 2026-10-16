@@ -23,6 +23,8 @@ Read continuously below, or choose a route into this same guide. Every numerical
 11. [Working Through a Research Question](#chapter-11-working-through-a-research-question)
 12. [Research Practice, References and Next Steps](#chapter-12-research-practice-references-and-next-steps)
 
+For a prediction-focused reading, jump to [Applying machine learning to breast cancer data](#applying-machine-learning-to-breast-cancer-data) within Chapter 11, supported by [What is machine learning?](../../04_machine_learning/what-is-machine-learning.md) and the [basic algorithm guide](../../04_machine_learning/basic-algorithms.md).
+
 ## Guided learning routes
 
 - **Beginner:** [The People Behind the Numbers](#chapter-1-the-people-behind-the-numbers) → [Understanding the Breast Cancer Dataset](#chapter-2-understanding-the-breast-cancer-dataset) → [How Researchers Measure Genes](#chapter-3-how-researchers-measure-genes) → [The Biology Behind the 60 Genes](#chapter-5-the-biology-behind-the-60-genes) → [Working Through a Research Question](#chapter-11-working-through-a-research-question).
@@ -1117,6 +1119,58 @@ To distinguish a finding from a hypothesis, write what was actually observed, in
 
 Reproduce these calculations with [the original R walkthrough](FIGURES/gene_companion_walkthrough.R). It accepts no private inputs and writes no outputs. After checking arithmetic, study [statistical reasoning](#chapter-8-from-measurements-to-scientific-evidence) and the [research limitations](#chapter-10-what-the-data-cannot-tell-us) before replacing fictional values with authorized research data.
 
+### Applying machine learning to breast cancer data
+
+Machine learning offers a way to estimate a relationship from examples and apply it to other observations. In this book's setting, those examples might connect expression measurements with a recorded tissue category, a numerical measurement, or an event observed during follow-up. The research question determines which relationship is meaningful. Choosing a sophisticated algorithm comes later.
+
+Our six invented pairs cannot establish a useful predictor. Their values were chosen for arithmetic, and several measurements belong to each pair. The executable deployments elsewhere in these notes also use synthetic fixtures. No participant-level breast cancer data have been analyzed by these examples. The narrative below explains how to design an analysis if appropriately permitted study records and outcome definitions are assembled.
+
+#### Start with a question that the records can answer
+
+Suppose we want to distinguish a recorded tumor specimen from a comparator specimen using expression. That is a **classification** problem about tissue labels. It does not automatically answer whether a person has cancer in a screening population: the specimen collection and comparator definition differ from that intended use. Tumor-adjacent tissue is not interchangeable with an unaffected donor's tissue.
+
+If instead we want to estimate a continuous laboratory measurement, the task is **regression**, and prediction errors need the measurement's units. If we ask about recurrence over time, we need a defined event, time origin, follow-up and censoring. Someone whose follow-up ended without a recorded recurrence cannot simply be labeled recurrence-free forever. **Survival analysis** retains this distinction. If no suitable outcome labels exist, we may explore expression with PCA or clustering, but cannot describe that exploration as validated outcome prediction.
+
+#### Build a table whose rows retain their meaning
+
+Begin with the person-to-specimen-to-assay links from Chapter 2. A molecular matrix often stores genes in rows and samples in columns; many modeling interfaces instead expect observations in rows and features in columns. Transposing the matrix does not create independent people. Match every assay column to metadata before transposing, and verify the resulting identity order.
+
+| Record element | Why it belongs in the analysis plan |
+| --- | --- |
+| Person identifier | Keeps related specimens together during splitting; excluded from predictors |
+| Specimen identifier and collection time | Defines tissue source, duplicates and predictor availability |
+| Assay and processing version | Identifies the measurement scale and any upstream transformations |
+| Gene identifiers and expression scale | Keeps symbol mappings and count/log distinctions explicit |
+| Target definition and source | Explains what is being predicted and whether labels were independently established |
+| Batch, site and other design variables | Makes technical/collection structure available for assessment |
+| Follow-up and event definition, when relevant | Preserves censoring and the time-to-event question |
+
+For a first patient-level predictor, specify a scientifically justified rule for choosing or summarizing specimens. For a paired tissue-label question, keep both specimens from a person in the same partition and account for their dependence in assessment. Neither retaining only one specimen nor averaging several is a universally correct rule; the choice follows the target and intended prediction setting.
+
+#### Protect new people before choosing genes or settings
+
+Reserve assessment people before any study-dependent feature ranking or fitted preprocessing. If two specimens from one person appear on opposite sides, the model may recognize person-specific information rather than generalize. Site, collection time, family relationships and assay batches can impose further split constraints. A random split is not a substitute for a new-site or future-time evaluation when that is the question.
+
+Within development data, fit missing-value handling, scaling, dimension reduction and supervised selection using only each training fold. Repeat these operations inside inner tuning folds when using nested evaluation. A differential-expression result computed across the entire cohort must not choose genes for a classifier whose assessment includes those same people. The [Python workflow](../../04_machine_learning/methods-and-deployments.md) demonstrates group-separated inner and outer evaluation; the [caret workflow](../../04_machine_learning/caret-deployment.md) demonstrates development tuning plus a separate holdout.
+
+The 60 genes in this book form a teaching catalog. Their inclusion is not evidence that they constitute a prognostic signature or the best predictor set. Any prespecified panel needs a documented rationale, and any data-driven panel needs training-only selection plus independent assessment. Predicting an expression-derived subtype from the same expression signal also requires care: reproducing that label can be circular and does not establish an independent clinical endpoint.
+
+#### Choose a baseline before a more flexible algorithm
+
+A regularized logistic model can provide a useful first comparison for a binary target; a forest or boosted tree can then test whether a more flexible relationship helps under the same evaluation design. For a numerical target, compare with a training-mean predictor and a linear or ridge model. Complexity should earn its place through appropriate assessment, computational cost and reproducibility, not through its name.
+
+PCA can help inspect dominant variation, and k-means can suggest groups to investigate. Examine whether those groups track technical batches or cell composition before assigning biological meaning. For adjusted expression differences, the [limma example](../../04_machine_learning/methods-and-deployments.md#r-survival-and-expression-analysis) illustrates a contrast-based analysis; it is not a prediction benchmark. For time-to-event questions, the direct Cox example retains censoring, but its relative hazard score is not an absolute recurrence probability.
+
+#### Read the result in the language of the original question
+
+For classification, inspect discrimination and probability error alongside the relevant outcome frequency and threshold. A ranking score can be strong while probabilities are poorly calibrated. Report who was excluded, what data were available at prediction time, and how the assessment people differ from the development people. For survival, retain censoring-aware evaluation and assess modeling assumptions. For clustering, describe patterns as exploratory rather than verified disease classes.
+
+If one model looks best on the final test and we then tune it again using that result, that test has become part of development. A further independent assessment is needed. Small numbers of independent people also limit precision, even when the feature matrix contains thousands of genes or many specimen files. Uncertainty and external assessment remain necessary before any claim of transportability.
+
+Finally, return to the people represented by the records. A molecular predictor can reflect sampling, tissue composition or care pathways as well as biology. Feature importance does not establish a mechanism; predictive association does not show that changing a gene or treatment will improve outcomes. Write the finding, its population and its limitations before proposing any next experiment or use.
+
+**Continue reading:** [Machine-learning introduction](../../04_machine_learning/what-is-machine-learning.md), [basic algorithms](../../04_machine_learning/basic-algorithms.md), [package choices](../../04_machine_learning/package-guide.md), and [independent R/Python deployments](../../04_machine_learning/methods-and-deployments.md). Source guidance: [cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [nested evaluation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), [survival methods](https://cran.r-project.org/package=survival), [limma design matrices](https://bioconductor.org/packages/release/workflows/vignettes/RNAseq123/inst/doc/designmatrices.html), and [prediction-model reporting](https://www.tripod-statement.org/).
+
 [Previous chapter](#chapter-10-what-the-data-cannot-tell-us) · [Return to contents](#contents) · [Next chapter](#chapter-12-research-practice-references-and-next-steps)
 
 ## Chapter 12: Research Practice, References and Next Steps
@@ -1137,7 +1191,7 @@ Before interpreting a result, ask:
 
 **Advanced exercise:** compare the opposing MALAT1 studies or PTEN RNA/protein context. Tabulate intervention, model, endpoint and review extent. Propose a prospective analysis with defined inclusion rules, contrasts, multiplicity control and independent validation; do not present an unperformed experiment as evidence.
 
-The [annotation register](REFERENCES/ANNOTATION_SOURCE_REGISTER.md), [literature evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md) and [selection rubric](REFERENCES/SELECTION_RUBRIC.md) retain identity, evidence state and selection scope. All literature accounts in this edition remain `ABSTRACT_ONLY`; no deeper audit or replication is claimed. Continue with [R resources](../R/README.md), [follow-along computing](../../docs/research-workflow.md), [research planning](../../docs/research-workflow.md) and [literature methods](../Literature/README.md). Record versions, assumptions and reproducible scripts before interpreting real measurements.
+The [annotation register](REFERENCES/ANNOTATION_SOURCE_REGISTER.md), [literature evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md) and [selection rubric](REFERENCES/SELECTION_RUBRIC.md) retain identity, evidence state and selection scope. All sixty gene literature accounts in this edition remain `ABSTRACT_ONLY`; no deeper gene-study audit or replication is claimed. Continue with [R resources](../R/README.md), [follow-along computing](../../docs/research-workflow.md), [research planning](../../docs/research-workflow.md) and [literature methods](../Literature/README.md). Record versions, assumptions and reproducible scripts before interpreting real measurements.
 
 ### Reproduce and validate
 

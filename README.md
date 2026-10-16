@@ -17,7 +17,7 @@ Authored by Paul Skeffington · Compiled with OpenAI
 | Unix and Bash | [Files and navigation](01_unix_bash/filesystem.md) · [Text tools](01_unix_bash/streams-and-text.md) · [Scripting](01_unix_bash/bash-scripting.md) |
 | R and data preparation | [Objects and types](03_learning/objects-and-meaning.md) · [Keys, joins, and reshaping](03_learning/keys-and-reshaping.md) |
 | Statistics and study design | [Missingness and comparisons](03_learning/missingness-and-comparisons.md) · [Models and uncertainty](03_learning/models-and-uncertainty.md) · [Probability and design](03_learning/probability-and-design.md) |
-| Machine learning | [Caret deployment](04_machine_learning/caret-deployment.md) · [Package guide](04_machine_learning/package-guide.md) · [Recent paper-to-code studies](04_machine_learning/recent-code-studies.md) |
+| Machine learning | [Reader's introduction](04_machine_learning/what-is-machine-learning.md) · [Basic algorithms](04_machine_learning/basic-algorithms.md) · [R and Python methods](04_machine_learning/methods-and-deployments.md) |
 | Scientific visualization | [Figures and feature matrices](03_learning/figures-and-features.md) · [Reading plots](06_RESOURCES/READING_PLOTS.md) |
 | Genomics and cancer biology | [Biological processes](06_RESOURCES/Genomics/GENE_BIOLOGY_LEARNING_GUIDE.md) · [Expression interpretation](06_RESOURCES/Genomics/GENE_EXPRESSION_INTERPRETATION.md) |
 | Reproducible computing | [Run and package an analysis](03_learning/run-and-package.md) · [Research code quality](06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md) |

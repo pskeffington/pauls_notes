@@ -13,6 +13,7 @@ Read the [complete breast cancer book](BREAST_CANCER_60_GENE_COMPANION.md): 12 c
 | Understand molecular measurements | [Expression interpretation](GENE_EXPRESSION_INTERPRETATION.md) |
 | Connect genes to systems | [Biology guide](GENE_BIOLOGY_LEARNING_GUIDE.md) and [pathway overview](GENE_PATHWAY_OVERVIEW.md) |
 | Understand dataset context | [People, cases, specimens and assays](BREAST_CANCER_60_GENE_COMPANION.md#chapter-2-understanding-the-breast-cancer-dataset) |
+| Apply machine learning | [Narrative within the book](BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data), [reader's introduction](../../04_machine_learning/what-is-machine-learning.md) and [basic algorithms](../../04_machine_learning/basic-algorithms.md) |
 | Inspect figures and calculations | [Figure explanations](FIGURES/README.md) and [synthetic R walkthrough](FIGURES/gene_companion_walkthrough.R) |
 | Check gene identity and evidence | [Annotation register](REFERENCES/ANNOTATION_SOURCE_REGISTER.md), [evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md), [selection rubric](REFERENCES/SELECTION_RUBRIC.md) |
 

@@ -22,12 +22,14 @@ Separate assay QC from supervised selection. Any learned imputation, normalizati
 
 Use regularized linear and simple baseline methods before escalating to expensive embeddings. For single-cell data, avoid interpreting the number of cells as the number of independent donors. For tissue images, split people before generating patches. A representation trained on evaluation samples can change the evaluation setting even when target labels are hidden.
 
-## Next executable gates
+## Broader methods and remaining gates
 
-- Add nested outer evaluation before using resampling results to compare tuned workflow families.
+The [independent Python workflow](methods-and-deployments.md#python-pipelines-and-nested-evaluation) now implements grouped inner/outer evaluation, classification, numerical regression and development-fitted PCA/clustering. The [direct R workflow](methods-and-deployments.md#r-survival-and-expression-analysis) adds censoring-aware survival analysis and expression inference. The following items remain separate extensions:
+
+- Add nested outer evaluation to the caret runner; the Python runner already nests tuning within each prespecified family. A later family-selection procedure needs its own evaluation boundary.
 - Add group/time/site-aware fixtures before admitting repeated visits or multi-site forecasting.
 - Add a clean `renv` restore and package-version compatibility checks before promising environment restoration.
 - Add uncertainty, subgroup and calibration assessments sized for the study before interpreting probabilities as transportable risks.
 - Benchmark any parallel backend with explicit worker seeds, thread limits and peak memory; avoid parallelizing both folds and each learner without a resource budget.
 
-These are pending implementation gates. They are not capabilities of the current synthetic runner.
+These remaining gates are not implied by the existing synthetic deployments.

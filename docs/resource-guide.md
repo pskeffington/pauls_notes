@@ -7,7 +7,7 @@
 | Biomedical computing | [Subject guides](../03_learning/README.md) | Objects, linkage, repeated measures, models, figures, simulation and execution |
 | Shell and filesystem | [Unix and Bash](../01_unix_bash/README.md) | Paths, streams, quoting, exit status and synthetic metadata processing |
 | Research software | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, dependency records and acceptance checks |
-| Machine learning | [Caret and biomedical packages](../04_machine_learning/README.md) | Resampling, train-only preprocessing, saved models, probability assessment and recent code studies |
+| Machine learning | [Reader's introduction and methods](../04_machine_learning/README.md) | Basic algorithms, independent R/Python deployments, nested assessment, survival and expression analysis |
 | Biomedical methods | [Publication matrix](../02_biomedical_coding/BIOMEDICAL_CODING_LITERATURE_MATRIX.md) | Papers, coding implications, test expectations and failure modes |
 | Software documentation | [Methods register](../02_biomedical_coding/OFFICIAL_METHODS_REGISTER.md) | Provider manuals and specifications with version requirements |
 | Breast cancer | [Complete book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) | People, datasets, measurements, biology, 60 gene profiles and worked examples |
