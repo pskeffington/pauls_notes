@@ -40,6 +40,23 @@ class ResearchRunnerTests(unittest.TestCase):
             with self.subTest(section=section, field=field), self.assertRaises(ValueError):
                 runner.validate(item)
 
+    def test_output_stays_outside_public_repository(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "config.json"
+            source.write_text(json.dumps(CONFIG))
+            forbidden = SOURCE.parent / "should-not-create-private-output"
+            self.assertFalse(forbidden.exists())
+            with self.assertRaisesRegex(ValueError, "outside the public source repository"):
+                runner.main(["--config", str(source), "--output", str(forbidden)])
+            self.assertFalse(forbidden.exists())
+
+    def test_disclaimer_embedded_in_every_report(self):
+        model_use = runner.run(CONFIG)["model_use"]
+        self.assertFalse(model_use["clinical_use_authorized"])
+        self.assertFalse(model_use["patient_level_training_authorized"])
+        self.assertFalse(model_use["tcga_case_data_processed"])
+        self.assertIn("NOT FOR CLINICAL USE", model_use["disclaimer"])
+
     def test_output_is_exclusive(self):
         with tempfile.TemporaryDirectory() as tmp:
             config = Path(tmp) / "config.json"
