@@ -11,6 +11,8 @@ from check_documentation import anchors
 ROOT = Path(__file__).resolve().parents[1]
 REGISTER = ROOT / '04_machine_learning/evidence/breast-cancer-studies.csv'
 GUIDE = ROOT / '04_machine_learning/breast-cancer-evidence.md'
+GUIDES = (GUIDE, ROOT / '04_machine_learning/recent-tuning-evidence.md')
+
 FIELDS = ['id', 'year', 'citation', 'identifier', 'source_url', 'evidence_type', 'task',
           'study_family', 'review_level', 'artifact_status', 'artifact_url', 'artifact_version',
           'local_reproduction', 'local_application', 'checked_on']
@@ -21,6 +23,10 @@ ARTIFACTS = {'archive_docs_read', 'commercial_not_reviewed', 'not_reviewed',
 DESIGNS = {'prospective_observational', 'randomized_secondary_report', 'randomized_primary_report',
            'external_validation', 'retrospective_external_validation', 'preprint_external_report',
            'methodological', 'methodological_review', 'reporting_guidance', 'appraisal_guidance'}
+
+
+def read_guides():
+    return '\n'.join(path.read_text(encoding='utf-8') for path in GUIDES)
 
 
 def inspect(rows, guide, root, today=None):
@@ -41,7 +47,7 @@ def inspect(rows, guide, root, today=None):
             errors.append(f'{label}: invalid or duplicate ID')
         seen_ids.add(row['id'])
         identifier = row['identifier'].lower()
-        if identifier in seen_citations or not re.fullmatch(r'(?:10\.\d{4,9}/\S+|arxiv:\d{4}\.\d{4,5}v\d+|jmlr:\d+/[a-z0-9-]+)', identifier):
+        if identifier in seen_citations or not re.fullmatch(r'(?:10\.\d{4,9}/\S+|arxiv:\d{4}\.\d{4,5}v\d+|(?:jmlr|pmlr):\d+/[a-z0-9-]+)', identifier):
             errors.append(f'{label}: invalid or duplicate publication identifier')
         seen_citations.add(identifier)
         try:
@@ -82,7 +88,7 @@ def main():
         if reader.fieldnames != FIELDS:
             raise SystemExit('Unexpected evidence register header')
         rows = list(reader)
-    errors = inspect(rows, GUIDE.read_text(encoding='utf-8'), ROOT)
+    errors = inspect(rows, read_guides(), ROOT)
     if errors:
         raise SystemExit('\n'.join(errors))
     print(f'PASS: {len(rows)} ML evidence records; citation IDs, review states, dates, cards and local applications')

@@ -104,6 +104,12 @@ These are general methodological sources, not breast cancer clinical trials. The
 
 Random search, Bayesian optimization and Hyperband are not currently deployed in this repository. A model's learning-rate or early-stopping settings would need a separate development stopping partition consistent with person/site grouping. Reducing a resource by selecting arbitrary specimens can change class balance and split paired people. More sophisticated search does not repair that design error.
 
+## Recent tuning evidence: what to read next
+
+The [2021–2025 tuning corpus](recent-tuning-evidence.md) adds nine primary papers on reproducible benchmarks, DEHB, YAHPO Gym, SMAC3, PriorBand, strong defaults, TabRepo, overtuning and TabArena. Together with the 2023 review above, these supply ten recent sources, reviewed through 2026-10-16. Each card distinguishes reported findings, review extent, artifact status and a specific application to our paired-specimen task.
+
+Start with overtuning before increasing the six-candidate grid; read strong defaults before claiming a benefit over a fixed model; use the budget and benchmark papers when designing an expensive pathology or multi-omic extension. These are reference mechanisms rather than additional executed deployments.
+
 ## Before extending the real study
 
 Write a tuning plan stating the target and intended population, feature availability, group/time/site split, primary objective, candidate ranges and their rationale, search budget, seeds, worker limits, failure policy, refit rule, and the evidence that will decide whether the extension helped. Add calibration and clinical utility only under their own fitting and assessment rules; do not label a Brier-optimized tissue classifier a treatment decision tool.
