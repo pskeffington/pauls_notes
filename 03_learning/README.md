@@ -1,14 +1,14 @@
-# Biomedical computing learning sections
+# Biomedical computing by subject
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
 [Paul's Notes](../README.md) · [Research workflow](../docs/research-workflow.md)
 
-Learn by building an analysis artifact, then inspect the computing and statistical decisions that produced it. Each section explains a research task, gives a runnable example, names the expected result, and asks you to change one assumption. The topics can be studied separately; the deployment combines them.
+Choose the subject that matches your research question. Each guide explains a practical task, gives a runnable example, names the expected result, and asks you to change one assumption. Read any subject on its own, use the related-topic links for context, or combine the methods in the complete analysis example.
 
-## Choose a task
+## Browse subjects
 
-| Task | Learning section | Practical result |
+| Research task | Subject guide | Practical result |
 | --- | --- | --- |
 | Represent a specimen or participant correctly | [Objects, types and meaning](objects-and-meaning.md) | Typed records, aligned matrices and checked functions |
 | Combine and reorganize observations | [Keys, joins and reshaping](keys-and-reshaping.md) | Row-preserving linkage and wide/long reconstruction |
@@ -18,7 +18,7 @@ Learn by building an analysis artifact, then inspect the computing and statistic
 | Investigate assumptions using simulation | [Probability and study design](probability-and-design.md) | Reproducible probability experiments and survey-design distinctions |
 | Execute and package a complete analysis | [Run and package](run-and-package.md) | A Bash-to-R deployment with 15 output files |
 
-## First run
+## Run the combined example
 
 Requirements: Bash and R with its standard packages. The main case uses no downloaded data or additional R packages. Optional examples explicitly name their additional packages.
 
@@ -30,7 +30,7 @@ bash 03_learning/examples/run_case.sh /tmp/biomedical-learning-run
 
 The invented fixture has eight people, sixteen person-visits, fourteen observed measurements, six complete pairs and seven people in the baseline model. The complete-pair mean change is **1.5 invented arbitrary units**. These constants are arithmetic teaching expectations, not research findings.
 
-## Practice across the sections
+## Explore the combined example
 
 1. Predict the counts before running the case.
 2. Open `observation_counts.csv`, `complete_pairs.csv` and `diagnostics.pdf`.

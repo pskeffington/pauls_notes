@@ -42,7 +42,7 @@ head -n 3 sample.tsv
 
 ## Text formats have contracts
 
-The example in this module intentionally accepts only three **tab-separated** fields, a fixed header, two exact groups, and a limited numeric representation. This makes simple `awk` splitting auditable. It is **not a general CSV parser**: quoted delimiters, embedded newlines, escapes, locale-dependent decimal marks, and arbitrary field names require a format-aware parser such as Python's `csv` module or R's documented import tools.
+The example in this guide intentionally accepts only three **tab-separated** fields, a fixed header, two exact groups, and a limited numeric representation. This makes simple `awk` splitting auditable. It is **not a general CSV parser**: quoted delimiters, embedded newlines, escapes, locale-dependent decimal marks, and arbitrary field names require a format-aware parser such as Python's `csv` module or R's documented import tools.
 
 Pipelines can conceal upstream failures when only the last exit status is used. In Bash, `set -o pipefail` makes the pipeline return a failure when any component fails, but `set -e` still has conditional and pipeline exceptions. Handle anticipated statuses explicitly and verify the **contents** of the produced output.
 

@@ -1,6 +1,6 @@
 # Figures and feature matrices
 
-[Learning sections](README.md) · [Next: study design](probability-and-design.md)
+[Computing subjects](README.md) · [Related: study design](probability-and-design.md)
 
 ## Start with the comparison and observation unit
 

@@ -1,6 +1,6 @@
 # Run and package an analysis
 
-[Learning sections](README.md) · [Unix and Bash](../01_unix_bash/README.md)
+[Computing subjects](README.md) · [Unix and Bash](../01_unix_bash/README.md)
 
 ## Deploy a complete local workflow
 

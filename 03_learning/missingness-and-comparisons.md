@@ -1,6 +1,6 @@
 # Missingness and comparisons
 
-[Learning sections](README.md) · [Next: models](models-and-uncertainty.md)
+[Computing subjects](README.md) · [Related: models](models-and-uncertainty.md)
 
 ## Report the denominator attached to the question
 

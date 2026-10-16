@@ -4,7 +4,7 @@
 
 Unix-like operating systems provide files, processes, streams, and command-line utilities. Bash supplies an interactive shell and a scripting language that can combine those tools into documented, repeatable operations.
 
-## Reading path
+## Browse subjects
 
 | Topic | Outcome |
 | --- | --- |
@@ -49,4 +49,4 @@ The test uses its own temporary directory, checks exact tabular output, confirms
 - [ ] I can run the tests, predict a rejected input, and describe why the output is withheld.
 - [ ] I can identify which parts of the toy TSV reader would be unsafe for real-world CSV or regulated data.
 
-**Authorship:** Paul Skeffington · Prepared with OpenAI. Independently written for this repository. External technical standards are linked, not reproduced.
+Authored by Paul Skeffington · Compiled with OpenAI

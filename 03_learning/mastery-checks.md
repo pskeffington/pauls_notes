@@ -1,6 +1,6 @@
 # Learning checks and completion evidence
 
-[Learning sections](README.md)
+[Computing subjects](README.md)
 
 Use the checks to test a skill on new inputs. A passing program checks computational behavior; explain the observation unit, units, assumptions and limitation yourself before marking a learning task complete.
 

@@ -1,8 +1,17 @@
-# Focused biological-domain lessons
+# Biological processes and gene function
 
 [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md) · [Index](BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas)
 
 These 12 category exercises supplement the continuous guide; begin with its [three learning routes](BREAST_CANCER_60_GENE_COMPANION.md#guided-learning-routes) and [connected biology chapter](BREAST_CANCER_60_GENE_COMPANION.md#chapter-5-the-biology-behind-the-60-genes). Categories overlap and do not establish direct interactions. All examples below are conceptual or invented.
+
+Browse a process below. Each section connects normal function, cancer measurements, relevant genes, and interpretation checks.
+
+| Signaling and regulation | Cell behavior | Tissue context |
+| --- | --- | --- |
+| [Hormone signaling](#hormone-signaling) | [Proliferation](#proliferation) | [Basal epithelial biology](#basal-epithelial-biology) |
+| [Growth-factor signaling](#growth-factor-signaling) | [DNA repair](#dna-repair) | [Cell adhesion](#cell-adhesion) |
+| [Transcriptional regulation](#transcriptional-regulation) | [Tumor suppression](#tumor-suppression) | [Invasion and extracellular matrix](#invasion-and-extracellular-matrix) |
+| [Metabolism and stress](#metabolism-and-stress) | [Other emerging biology](#other-emerging-biology) | [Immune microenvironment](#immune-microenvironment) |
 
 <a id="hormone"></a>
 

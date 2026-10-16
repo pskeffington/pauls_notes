@@ -36,7 +36,7 @@ flowchart TD
   class H,E,C,T,G,HER,S,B concept;
 ```
 
-**Figure 2 caption.** Conceptual, simplified epithelial signaling framework. These are process-level links, not a complete wiring diagram or evidence that every receptor signals identically in every tumor. Ligand, receptor partners, protein activation and cell context matter. **Inputs:** original schematic from the [hormone and growth lessons](../GENE_BIOLOGY_LEARNING_GUIDE.md); no numerical units. **Sources:** [FOXA1 functional study](https://pubmed.ncbi.nlm.nih.gov/21151129/) and the NCBI records on [ERBB2](../BREAST_CANCER_60_GENE_COMPANION.md#erbb2), [PIK3CA](../BREAST_CANCER_60_GENE_COMPANION.md#pik3ca), [AKT1](../BREAST_CANCER_60_GENE_COMPANION.md#akt1) and [MTOR](../BREAST_CANCER_60_GENE_COMPANION.md#mtor).
+**Figure 2 caption.** Conceptual, simplified epithelial signaling framework. These are process-level links, not a complete wiring diagram or evidence that every receptor signals identically in every tumor. Ligand, receptor partners, protein activation and cell context matter. **Inputs:** original schematic from the [hormone and growth-factor guides](../GENE_BIOLOGY_LEARNING_GUIDE.md); no numerical units. **Sources:** [FOXA1 functional study](https://pubmed.ncbi.nlm.nih.gov/21151129/) and the NCBI records on [ERBB2](../BREAST_CANCER_60_GENE_COMPANION.md#erbb2), [PIK3CA](../BREAST_CANCER_60_GENE_COMPANION.md#pik3ca), [AKT1](../BREAST_CANCER_60_GENE_COMPANION.md#akt1) and [MTOR](../BREAST_CANCER_60_GENE_COMPANION.md#mtor).
 
 **Text equivalent:** Hormone context and FOXA1/chromatin context feed receptor response and transcription. A separate growth-factor branch connects HER-family receptors to PI3K/AKT/mTOR and growth/nutrient responses; this is a process framework.
 

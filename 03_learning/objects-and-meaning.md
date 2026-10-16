@@ -1,6 +1,6 @@
 # Objects, types and scientific meaning
 
-[Learning sections](README.md) · [Next: keys and reshaping](keys-and-reshaping.md)
+[Computing subjects](README.md) · [Related: keys and reshaping](keys-and-reshaping.md)
 
 ## Begin with the observation unit
 

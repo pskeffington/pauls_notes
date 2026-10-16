@@ -28,7 +28,7 @@ for name in "${names[@]}"; do
 done
 ~~~
 
-Bash arrays and `[[ ... ]]` are Bash-specific; do not label this code portable `/bin/sh`. This module avoids associative arrays and newer conveniences so its examples fit Bash 3.2 syntax.
+Bash arrays and `[[ ... ]]` are Bash-specific; do not label this code portable `/bin/sh`. This guide avoids associative arrays and newer conveniences so its examples fit Bash 3.2 syntax.
 
 ## The limits of strict mode
 

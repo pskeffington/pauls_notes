@@ -16,11 +16,11 @@ This section connects influential biomedical computing, statistics, genomics, an
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
-## Learn and run
+## Explore computing subjects
 
-Start with the [task-based learning sections](../03_learning/README.md). They cover R objects, checked joins, reshaping, missingness, paired comparisons, exploratory models, visualization, simulation and a complete local Bash-to-R deployment. The case uses base R; optional examples show dplyr, tidyr and survey interfaces.
+Start with the [computing subject guides](../03_learning/README.md). They cover R objects, checked joins, reshaping, missingness, paired comparisons, exploratory models, visualization, simulation and a complete local Bash-to-R deployment. The case uses base R; optional examples show dplyr, tidyr and survey interfaces.
 
-Use the [Unix and Bash guide](../01_unix_bash/README.md) for shell foundations, and the [R tools](../06_RESOURCES/R/README.md) for additional plotting helpers. Advanced resampling with caret, full RNA-seq workflows and predictive-model deployments remain topics for later executable sections; the literature matrix supplies planning references for those areas.
+Use the [Unix and Bash guide](../01_unix_bash/README.md) for shell foundations, and the [R tools](../06_RESOURCES/R/README.md) for additional plotting helpers. Advanced resampling with caret, full RNA-seq workflows and predictive-model deployments remain reference topics without a complete executable example here; the literature matrix supplies planning references for those areas.
 
 ## Boundaries
 

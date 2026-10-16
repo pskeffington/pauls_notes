@@ -1,6 +1,6 @@
 # Probability and study design
 
-[Learning sections](README.md) · [Next: execution](run-and-package.md)
+[Computing subjects](README.md) · [Related: execution](run-and-package.md)
 
 ## A reproducible simulation has a declared purpose
 

@@ -1,6 +1,6 @@
 # Keys, joins and reshaping
 
-[Learning sections](README.md) · [Next: missingness](missingness-and-comparisons.md)
+[Computing subjects](README.md) · [Related: missingness](missingness-and-comparisons.md)
 
 ## State what uniquely identifies a row
 

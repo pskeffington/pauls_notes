@@ -2,7 +2,7 @@
 
 [General coding practices](README.md) · [Resources](../README.md) · [R resources](../R/README.md) · [Bash resources](../Bash/README.md)
 
-**Reviewed:** 2026-10-10. This is an independently written, selective guide to public documentation and reporting standards. It is **not** a systematic review, a clinical practice guideline, a claim of copyright clearance, or a validation of any particular analysis. The explanations and examples are student-authored.
+**Reviewed:** 2026-10-10. A selective guide to public documentation and reporting standards, with method explanations and synthetic examples. Use it to plan implementation and review assumptions. It is not a systematic review, a clinical practice guideline, or validation of a particular analysis.
 
 ## Research-computing reference matrix
 
@@ -32,7 +32,7 @@
 | Fit differential-expression models | BIO-06–08 | Input count scale, design, contrasts, normalization, dispersion or weighting method | Model specification, fitting diagnostics, multiple-testing method, reproducible environment |
 | Report observational research | BIO-10, BIO-11 | Design, sample restrictions, measurement sources, missingness, selection | Transparent methods, documented assumptions, disclosure of limitations |
 | Study prediction-model reporting | BIO-12 | Intended population, target outcome, leakage controls, train/validation boundaries | Evaluation design and uncertainty, avoiding claims beyond observed performance |
-| Publish a reproducible student example | BIO-13, BIO-14 | Synthetic/license status, software version, input schema, seed | Re-run instructions, independent source links, output checks |
+| Publish a reproducible research example | BIO-13, BIO-14 | Synthetic/license status, software version, input schema, seed | Re-run instructions, independent source links, output checks |
 
 ## Reusable evidence checklist
 
@@ -46,4 +46,4 @@
 
 ## Maintenance boundary
 
-This page summarizes generally available public sources. It contains student-authored method explanations and synthetic examples rather than patient-level records or a validated genomic model. Use the upstream manuals and their release-specific guides for exact software contracts. Review external URLs periodically; inaccessible links must be noted, not silently replaced with unrelated sites.
+This page summarizes public sources using method explanations and synthetic examples. It contains no patient-level records or validated genomic model. Use the upstream manuals and their release-specific guides for exact software contracts. Review external URLs periodically; inaccessible links must be noted, not silently replaced with unrelated sites.

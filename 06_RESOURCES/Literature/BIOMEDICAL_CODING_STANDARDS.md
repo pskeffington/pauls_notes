@@ -2,7 +2,7 @@
 
 [Biomedical literature matrix](BIOMEDICAL_CODING_METHODS.md) · [General coding references](README.md) · [Resources](../README.md)
 
-**Scope:** independently authored, public-reference guidance for research computing, biostatistics, biomedical data engineering and future course projects. This is a **recommended project convention**, not a universal standard, clinical software qualification, or certification of copyright clearance. Adapt to a published schema (e.g., OMOP), course requirements or existing interoperable data contracts rather than silently renaming external interfaces.
+**Scope:** Reference guidance for research computing, biostatistics, and biomedical data engineering. These are **recommended project conventions**. Adapt them to the published schema (e.g., OMOP), study protocol, and existing data contracts. Preserve external interface names and assess clinical software requirements separately.
 
 ## A. Decision hierarchy
 
@@ -101,11 +101,11 @@ A **failed gate stays failed**; do not substitute a green CI status, a successfu
 
 Never assert a statistical effect is *true* merely because a test reproduces the same code result.
 
-## H. Future-course profiles
+## H. Research domain profiles
 
-| Course theme | Adopt this baseline | Additional discipline-specific requirements |
+| Research domain | Adopt this baseline | Additional discipline-specific requirements |
 | --- | --- | --- |
-| Introductory R/data science | Names, types, missingness, imports, descriptive graphics, tests | Base R semantics, tidyverse syntax when taught |
+| Introductory R/data science | Names, types, missingness, imports, descriptive graphics, tests | Base R semantics, tidyverse syntax where used |
 | Biostatistics | Data dictionary, analysis population, estimand, diagnostics | Sampling, confidence intervals, multiplicity, model assumptions |
 | Epidemiology and public health | Participant/visit identifiers, survey and observational design | Survey weights, strata, PSU, confounding, eligibility, selection |
 | Clinical informatics / longitudinal EHR | Event timestamps, person/visit/measurement relationships | OMOP schema version, concepts, unit mapping, encounter linkage |
@@ -113,7 +113,7 @@ Never assert a statistical effect is *true* merely because a test reproduces the
 | AI/ML ethics and clinical AI | Reproducibility, privacy, subgroup reporting and provenance | Leakage checks, dataset shift, bias evaluation, intended-use limits, monitoring |
 | Manuscript and research methods | Reproducible report, transparent exclusions and provenance | STROBE/RECORD/TRIPOD where appropriate, journal-specific reporting |
 
-The profiles are student-authored method checklists, intended for the documented scope of each research task.
+The profiles are method checklists, intended for the documented scope of each research task.
 
 ## I. Public evidence matrix: naming, data standards and quality
 
@@ -136,13 +136,13 @@ The profiles are student-authored method checklists, intended for the documented
 | STD-15 | [STROBE Statement](https://www.strobe-statement.org/) | Reporting guideline | Record selection, bias, variables and analysis decisions | Reporting quality is not causal validity |
 | STD-16 | [RECORD reporting guideline](https://www.equator-network.org/reporting-guidelines/record/) | Reporting guideline | Transparent codes, linkage and routinely collected health data | Not a substitute for permission or privacy review |
 | STD-17 | [TRIPOD reporting guideline](https://www.equator-network.org/reporting-guidelines/tripod-statement/) | Prediction reporting guideline | Document predictors, modeling, validation and performance | Select the applicable reporting extension/version |
-| STD-18 | [FDA Good Machine Learning Practice](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) | Regulatory guidance | Intended use, representative datasets, human-AI team, monitoring | Medical-device context; not blanket regulation of student code |
+| STD-18 | [FDA Good Machine Learning Practice](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) | Regulatory guidance | Intended use, representative datasets, human-AI team, monitoring | Medical-device context; applicability depends on the software's intended use |
 | STD-19 | [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) | Voluntary risk framework | Document AI risk, testing, monitoring, transparency and governance | Not a substitute for domain-specific clinical validation |
 | STD-20 | [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html) | Primary manual | Quote variables, use explicit failures and safe file operations | Bash version/platform portability differs |
 
 ## J. Default pre-project template
 
-When starting a new course, document:
+When starting a research project, document:
 
 - **Dataset and rights:** source, permission class, schema version, observation unit.
 - **Problem:** objective, population, explanatory variables, outcomes and limits.
@@ -153,8 +153,8 @@ When starting a new course, document:
 - **Output:** labeled figures/tables, provenance, limitations and replication instructions.
 - **Change record:** documented deviations from the framework and why they are appropriate.
 
-**Change control:** this is a baseline to refine as courses progress; do not bulk-rename existing datasets, overwrite validated research outputs, or claim that adopting the convention retroactively validates research.
+**Change control:** refine this baseline as research methods and project needs change; do not bulk-rename existing datasets, overwrite validated research outputs, or claim that adopting the convention retroactively validates research.
 
 ## Evidence/rights disclaimer
 
-References are linked as public sources of general methods. The matrix is a selective narrative synthesis, not exhaustive research or a substitute for discipline-specific professional judgment. All examples and conventions here are independent; the teaching examples are student-authored.
+References are linked as public sources of general methods. The matrix is a selective narrative synthesis, not exhaustive research or a substitute for discipline-specific professional judgment. Worked examples illustrate the conventions; assess their fit to the study design before reuse.

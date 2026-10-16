@@ -2,7 +2,7 @@
 
 [Biomedical coding conventions](BIOMEDICAL_CODING_STANDARDS.md) · [Biomedical methods](BIOMEDICAL_CODING_METHODS.md) · [General reference matrix](README.md) · [Resource index](../README.md)
 
-**Reviewed:** 2026-10-10. This is an independently written, selective synthesis of publicly available research-computing standards and technical guidance. The quality gates are recommendations for student-authored research projects. They do not confer clinical or regulatory compliance; the commentary and examples are student-authored.
+**Reviewed:** 2026-10-10. This selective synthesis links publicly available research-computing standards and technical guidance to recommended quality gates. Their applicability depends on the research design and intended use; gate completion does not confer clinical or regulatory compliance.
 
 ## Source quality and decision policy
 
@@ -14,20 +14,20 @@ Prefer versioned primary manuals or domain-specific specifications for exact mac
 | --- | --- | --- | --- | --- | --- |
 | QA-01 | [NIH Data Management](https://www.grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/dms/data-management) | Federal research guidance | Inventory data sources, types, permitted use, transformations, storage and future access | Written manifest and input/output provenance | Data availability does not imply redistributable person-level records |
 | QA-02 | [NIH DMS Plan guidance](https://www.grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/dms/writing-dms-plan) | Federal policy implementation | Describe data management, appropriate access and preservation before release | Plan names data categories, constraints, preservation and sharing strategy | Apply the current plan format only when the project is in policy scope |
-| QA-03 | [NIH Notice NOT-OD-26-046](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-046.html) | Dated NIH policy notice | Use currently effective requirements rather than copied older DMS templates | Document the effective notice/date used for an applicable grant | The new format has a defined applicability date; not a universal student-project requirement |
+| QA-03 | [NIH Notice NOT-OD-26-046](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-046.html) | Dated NIH policy notice | Use currently effective requirements rather than copied older DMS templates | Document the effective notice/date used for an applicable grant | The new format has a defined applicability date; applicability depends on the project and effective date |
 | QA-04 | [NCBI GEO high-throughput submissions](https://www.ncbi.nlm.nih.gov/geo/info/seq.html) | Federal repository instructions | Retain biological sample, protocol and processed-data metadata; use safe, uniquely identified filenames | Unique sample and file inventory, protocol descriptions, identity checks | Requirements apply to GEO sequencing submissions, not every dataset |
-| QA-05 | [FDA Study Data Technical Conformance Guide (June 2026)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/study-data-technical-conformance-guide-technical-specifications-document) | Regulatory technical guidance | Preserve analysis-data traceability, datasets, controlled terms and reviewer documentation | Trace a reported result to its originating dataset, derivation and analysis | Nonbinding guidance focused on covered submissions; do not imply all student work must use CDISC |
+| QA-05 | [FDA Study Data Technical Conformance Guide (June 2026)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/study-data-technical-conformance-guide-technical-specifications-document) | Regulatory technical guidance | Preserve analysis-data traceability, datasets, controlled terms and reviewer documentation | Trace a reported result to its originating dataset, derivation and analysis | Nonbinding guidance focused on covered submissions; do not imply all research projects must use CDISC |
 | QA-06 | [CDISC SDTM](https://www.cdisc.org/standards/foundational/sdtm) | Domain exchange standard | Keep source observations distinct from standardized clinical trial tabulations | Explicit source-to-target mapping and schema version when SDTM applies | Never impose SDTM on unrelated public-health exploratory datasets |
 | QA-07 | [CDISC ADaM](https://www.cdisc.org/standards/foundational/adam) | Analysis data standard | Document derivations and traceability from source to analysis datasets | Dataset spec distinguishes analysis variables and derivations | Applies to compatible clinical study analysis workflows |
 | QA-08 | [R packages manual](https://cran.r-project.org/doc/manuals/r-release/R-exts.html) | Primary development manual | Document functions, input contracts and dependencies in reusable R software | Rebuild or check the package in an isolated supported session | Package-check success is not statistical truth |
 | QA-09 | [testthat reference](https://testthat.r-lib.org/) | Testing framework | Test valid, missing, duplicate, and invalid-input cases; state what is asserted | A failure fixture rejects an invalid join or wrong unit | Assertions reproduce specified contracts only |
 | QA-10 | [renv](https://rstudio.github.io/renv/) | Dependency-management documentation | Snapshot package versions and document restoration | Clean environment can restore declared package dependencies | Lockfiles do not freeze external APIs, OS or source data |
-| QA-11 | [Bioconductor developer contributions](https://contributions.bioconductor.org/) | Research-software engineering guidance | Define assay/sample structures and maintain code/documentation quality | Sample IDs align with assay columns and metadata rows | Package-submission guidance is not automatically required for a course script |
+| QA-11 | [Bioconductor developer contributions](https://contributions.bioconductor.org/) | Research-software engineering guidance | Define assay/sample structures and maintain code/documentation quality | Sample IDs align with assay columns and metadata rows | Package-submission guidance applies to package submissions; assess research-script requirements separately |
 | QA-12 | [FAIR principles (Wilkinson et al., 2016)](https://doi.org/10.1038/sdata.2016.18) | Peer-reviewed data stewardship | Give datasets stable identifiers, useful dictionaries and provenance | Analysis can identify variable origin, units and version | FAIR does not override participant privacy or licensing |
 | QA-13 | [Ten Simple Rules for Reproducible Computational Research](https://doi.org/10.1371/journal.pcbi.1003285) | Peer-reviewed methodological guidance | Preserve input versions, parameters, code and intermediate decisions | Independent rerun with documented inputs yields comparable outputs | Reproducibility is distinct from causal validity |
 | QA-14 | [STROBE Statement](https://www.strobe-statement.org/) | Observational reporting framework | Document design, eligibility, exclusion, missingness, assumptions and limitations | Transparent methods and analysis population summary | Reporting checklist completion does not validate inference |
 | QA-15 | [RECORD guideline](https://www.equator-network.org/reporting-guidelines/record/) | Routinely collected health-data reporting guideline | Explain variable coding, linkage and source-data provenance | Data lineage and linkage logic disclosed when permissible | Access restrictions and privacy remain independent gates |
-| QA-16 | [FDA Good Machine Learning Practice principles](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) | Medical-device AI guidance | Define intended use, representative evaluation and postdeployment considerations | Intended-use statement, leakage checks, evaluation plan | Medical-device context; not blanket approval of student ML |
+| QA-16 | [FDA Good Machine Learning Practice principles](https://www.fda.gov/medical-devices/artificial-intelligence-enabled-medical-devices/good-machine-learning-practice-medical-device-development-guiding-principles) | Medical-device AI guidance | Define intended use, representative evaluation and postdeployment considerations | Intended-use statement, leakage checks, evaluation plan | Medical-device context; not blanket approval of research ML |
 
 ## Recommended gate acceptance for new biomedical coding work
 
@@ -52,7 +52,7 @@ Use lower-case `snake_case` for new internal R functions and normalized analysis
 
 For biomedical measurements, the quantity, sampling context and units matter more than superficial style. Never silently equate `participant_id` with an encounter or specimen identifier, or a model output in natural-log units with `log2_fold_change`.
 
-## Expandable future-course evidence record
+## Method evidence record
 
 Use this lightweight schema when evaluating a newly introduced technique:
 
@@ -65,9 +65,9 @@ Use this lightweight schema when evaluating a newly introduced technique:
 | `testable_acceptance` | An observable check, including at least one invalid case |
 | `limits` | Cases where the method or source should not be applied |
 | `review_status` | One of the five gate states with evidence reference |
-| `next_review` | Review trigger: new course, software version or source update |
+| `next_review` | Review trigger: new method, software version or source update |
 
-The objective is a portable quality system that supports further student-authored modules and research examples. External citations and reusable materials retain their own licenses.
+The objective is a portable quality system that supports additional methods and research examples. External citations and reusable materials retain their own licenses.
 
 ## Scope and provenance
 

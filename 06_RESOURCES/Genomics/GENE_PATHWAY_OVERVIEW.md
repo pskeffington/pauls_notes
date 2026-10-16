@@ -2,7 +2,7 @@
 
 Focused supporting reference for the [Breast Cancer Research Guide — People, Data, Biology and 60 Genes](BREAST_CANCER_60_GENE_COMPANION.md).
 
-[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Domain lessons](GENE_BIOLOGY_LEARNING_GUIDE.md) · [Gene index](BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas)
+[Companion](BREAST_CANCER_60_GENE_COMPANION.md) · [Biological processes](GENE_BIOLOGY_LEARNING_GUIDE.md) · [Gene index](BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas)
 
 A cell coordinates information, growth, repair and survival while interacting with its surroundings. The 12 domains are a teaching map of that coordination. They are not mutually exclusive modules or a reconstructed molecular interaction network. Gene-specific normal-function records are linked on the cards; the [category network figure](FIGURES/README.md#category-network) illustrates membership rather than binding.
 

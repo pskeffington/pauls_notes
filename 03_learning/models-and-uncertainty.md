@@ -1,6 +1,6 @@
 # Models and uncertainty
 
-[Learning sections](README.md) · [Next: figures](figures-and-features.md)
+[Computing subjects](README.md) · [Related: figures](figures-and-features.md)
 
 ## A formula specifies required fields
 

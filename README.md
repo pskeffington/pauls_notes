@@ -6,9 +6,20 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 ## Start here
 
-- **[Learn biomedical computing](03_learning/README.md)** — Work through practical lessons on R, data preparation, statistics, and reproducible workflows.
+- **[Browse computing subjects](03_learning/README.md)** — R, data preparation, statistics, and reproducible workflows, with worked examples and practice checks.
 - **[Read the breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)** — Explore 12 chapters covering people, data, biology, and 60 genes.
 - **[Find a research resource](docs/resource-guide.md)** — Browse documentation, methods, and reusable tools by task.
+
+## Browse by subject
+
+| Subject | Explore |
+| --- | --- |
+| Unix and Bash | [Files and navigation](01_unix_bash/filesystem.md) · [Text tools](01_unix_bash/streams-and-text.md) · [Scripting](01_unix_bash/bash-scripting.md) |
+| R and data preparation | [Objects and types](03_learning/objects-and-meaning.md) · [Keys, joins, and reshaping](03_learning/keys-and-reshaping.md) |
+| Statistics and study design | [Missingness and comparisons](03_learning/missingness-and-comparisons.md) · [Models and uncertainty](03_learning/models-and-uncertainty.md) · [Probability and design](03_learning/probability-and-design.md) |
+| Scientific visualization | [Figures and feature matrices](03_learning/figures-and-features.md) · [Reading plots](06_RESOURCES/READING_PLOTS.md) |
+| Genomics and cancer biology | [Biological processes](06_RESOURCES/Genomics/GENE_BIOLOGY_LEARNING_GUIDE.md) · [Expression interpretation](06_RESOURCES/Genomics/GENE_EXPRESSION_INTERPRETATION.md) |
+| Reproducible computing | [Run and package an analysis](03_learning/run-and-package.md) · [Research code quality](06_RESOURCES/Literature/RESEARCH_CODE_QUALITY_MATRIX.md) |
 
 ## Plan and understand your research
 

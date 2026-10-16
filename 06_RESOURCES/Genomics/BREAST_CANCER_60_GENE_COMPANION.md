@@ -143,7 +143,7 @@ A bulk specimen includes epithelial, immune and stromal cells. Higher CD8A can r
 
 ## Chapter 5: The Biology Behind the 60 Genes
 
-Cells maintain identity, respond to signals, divide, repair damage and interact with neighboring cells. The ten connected lessons below follow those tasks. Their gene links point to profiles within this guide. Shared processes can motivate an experiment; they do not establish direct molecular interactions in a particular tumor.
+Cells maintain identity, respond to signals, divide, repair damage and interact with neighboring cells. The ten biological topics below explore those tasks. Their gene links point to profiles within this guide. Shared processes can motivate an experiment; they do not establish direct molecular interactions in a particular tumor.
 
 ### Cellular identity and differentiation
 
@@ -219,7 +219,7 @@ flowchart TD
   class H,E,C,T,G,HER,S,B concept;
 ```
 
-**Figure 2 caption.** Conceptual, simplified epithelial signaling framework. These are process-level links, not a complete wiring diagram or evidence that every receptor signals identically in every tumor. Ligand, receptor partners, protein activation and cell context matter. **Inputs:** original schematic from the [hormone and growth lessons](GENE_BIOLOGY_LEARNING_GUIDE.md); no numerical units. **Sources:** [FOXA1 functional study](https://pubmed.ncbi.nlm.nih.gov/21151129/) and the NCBI records on [ERBB2](BREAST_CANCER_60_GENE_COMPANION.md#erbb2), [PIK3CA](BREAST_CANCER_60_GENE_COMPANION.md#pik3ca), [AKT1](BREAST_CANCER_60_GENE_COMPANION.md#akt1) and [MTOR](BREAST_CANCER_60_GENE_COMPANION.md#mtor).
+**Figure 2 caption.** Conceptual, simplified epithelial signaling framework. These are process-level links, not a complete wiring diagram or evidence that every receptor signals identically in every tumor. Ligand, receptor partners, protein activation and cell context matter. **Inputs:** original schematic from the [hormone and growth-factor guides](GENE_BIOLOGY_LEARNING_GUIDE.md); no numerical units. **Sources:** [FOXA1 functional study](https://pubmed.ncbi.nlm.nih.gov/21151129/) and the NCBI records on [ERBB2](BREAST_CANCER_60_GENE_COMPANION.md#erbb2), [PIK3CA](BREAST_CANCER_60_GENE_COMPANION.md#pik3ca), [AKT1](BREAST_CANCER_60_GENE_COMPANION.md#akt1) and [MTOR](BREAST_CANCER_60_GENE_COMPANION.md#mtor).
 
 **Text equivalent:** Hormone context and FOXA1/chromatin context feed receptor response and transcription. A separate growth-factor branch connects HER-family receptors to PI3K/AKT/mTOR and growth/nutrient responses; this is a process framework.
 
@@ -1150,6 +1150,6 @@ Rscript --vanilla 06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R
 
 The [figure explanations](FIGURES/README.md), [gene cards](BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and source registers are maintained as Markdown in this repository. Offline checks do not constitute fresh annotation or deeper literature review.
 
-This is an educational guide, not clinical advice, a diagnostic assay or a validated research signature. Its limits are part of the scientific lesson. Careful definitions and reproducible analysis help researchers ask better questions, while the purpose remains better understanding and evidence that can eventually serve patients and public health.
+This is an educational guide, not clinical advice, a diagnostic assay or a validated research signature. Its limits are part of scientific interpretation. Careful definitions and reproducible analysis help researchers ask better questions, while the purpose remains better understanding and evidence that can eventually serve patients and public health.
 
 [Previous chapter](#chapter-11-working-through-a-research-question) · [Return to contents](#contents)

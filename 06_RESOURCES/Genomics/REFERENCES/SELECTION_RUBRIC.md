@@ -12,7 +12,7 @@ unpublished experiment.
 
 ## Prospective teaching criteria
 
-1. Retain the existing 21 genes so published lessons remain connected.
+1. Retain the existing 21 genes to preserve continuity with the gene reference examples.
 2. Cover all twelve requested domains, including tissue composition, immune
    cells and a noncoding transcript; do not focus only on tumor-cell drivers.
 3. Choose genes that illustrate distinct measurements: DNA sequence, copy
