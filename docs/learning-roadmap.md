@@ -6,7 +6,7 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 Updated **2026-10-16**, following the [corpus review and validation run](../04_machine_learning/corpus-review.md). This is a progression through research competencies and repository development, organized by subject and evidence of understanding. Move forward when you can explain and demonstrate the completion check; there is no weekly schedule.
 
-The shared narrative is **people → specimens → measurements → prediction → assessment → biological interpretation**. The present executable assay example predicts a recorded specimen category for previously unseen people. Every later method must retain that question or explicitly define a new endpoint.
+The shared narrative is **people → specimens → measurements → data preparation → training → validation → prediction → biological interpretation**. The present executable assay example predicts a recorded specimen category for previously unseen people. Every later method must retain that question or explicitly define a new endpoint. The [milestone gate ledger](roadmap-gates.md) records repository implementation, execution evidence, scientific limits and dependencies separately from learner mastery.
 
 ## Starting position
 
@@ -69,6 +69,8 @@ Use [figures and feature matrices](../03_learning/figures-and-features.md), [mod
 
 Read the [overtuning evidence](../04_machine_learning/recent-tuning-evidence.md#bc-m18), [panel-stability evidence](../04_machine_learning/recent-selection-validation.md#bc-m21), and [budget accounting](../04_machine_learning/model-tuning.md#count-the-fitting-budget). The [prespecified Phase 4 protocol](../04_machine_learning/robustness-protocol.md) now varies development people, missingness, and correlated measurements without touching reserved-test fitting boundaries. Run the [software gate](../04_machine_learning/robustness-experiment.md) before designing an independent replication.
 
+[PR #1](https://github.com/pskeffington/pauls_notes/pull/1) merged the bounded baseline as `06cdc2c9de2e42de4852ce07dd8d4d52ae26216c`. The [G0 record](roadmap-gates.md#g0-phase-4-software-baseline) retains the 624-fit/360-prediction replay, unfavorable random-search outcomes and merge-CI evidence. [Phase 4B's declared protocol](../04_machine_learning/replication-protocol.md) fixes three new cohort seeds and a 1,872-fit ceiling before its assessment. Its runner and full report remain planned (G1); person-aware uncertainty is a separate following gate (G2). Both are required before the broader synthetic Phase 4 milestone can close.
+
 Record which settings were fixed, which were searched, failed trials, elapsed time, worker limits and complete candidate histories. Describe stability on repeated, overlapping development samples as descriptive evidence. Keep assessment-based importance out of subsequent feature selection unless that adaptation receives its own assessment boundary.
 
 Once the baseline is credible, compare one search extension against the current grid under a declared resource budget. Fixed-budget random search is a candidate first experiment; Bayesian or multi-fidelity search needs a cost or resource justification. Six transparent candidates may remain sufficient for this small teaching space.
@@ -97,7 +99,7 @@ Write down the target table or metric, dataset subset, source commit, environmen
 
 ## Work order and completion record
 
-**Phase 2's comparator, Phase 3's seven-figure gallery, and Phase 4's bounded software robustness gate are implemented. The next development priority is independent Phase 4 robustness replication, scientifically justified person-level uncertainty, and then Phase 5 endpoint design.** Phase 1 can be practiced now with the existing material. The [Rust inference path](../04_machine_learning/rust-deployment.md) also delivers the current fitted models with a separate runtime-parity contract; it does not complete Phase 4's training experiment. The remaining phases build on those results; adding literature alone does not complete them.
+**Phase 2's comparator, Phase 3's seven-figure gallery, and Phase 4's bounded software robustness gate are implemented. The next executable development priority is the already declared Phase 4B replication runner and full assessment, followed by scientifically justified person-level uncertainty and Phase 5 endpoint design.** See [G0–G5](roadmap-gates.md) for exact status and dependencies. Phase 1 can be practiced now with the existing material. The [Rust inference path](../04_machine_learning/rust-deployment.md) delivers the current fitted models with a separate runtime-parity contract; native Rust training is G3, independent of survival progression. The remaining phases build on those results; adding literature alone does not complete them.
 
 For each phase, record the question, code/document change, executed command, observed result, learner explanation and remaining limitation in the [analysis record](../templates/analysis-record.md). A failed hypothesis or unchanged predictive performance can be a valid learning result. Mark repository delivery and personal understanding separately.
 

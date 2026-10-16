@@ -1,0 +1,408 @@
+{
+  "work_order_date": "2026-10-16",
+  "verified_at_utc": "2026-10-16T15:23:17.311196+00:00",
+  "gate": "G0",
+  "status": "pass",
+  "scope": "bounded Phase 4 synthetic software baseline; no clinical validation or learner assessment",
+  "pr": 1,
+  "reviewed_head_sha": "51a10cb49a3f85bb79230a791028d0fc046d1273",
+  "merge_sha": "06cdc2c9de2e42de4852ce07dd8d4d52ae26216c",
+  "source_tree_sha": "7cfe06bee50cc19c9b1e82a69b81511cb276645d",
+  "reviewed_head_tree_equals_merge_tree": true,
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "dependencies": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "scikit-learn": "1.8.0",
+      "joblib": "1.5.3",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    },
+    "matplotlib": "3.10.8",
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
+  },
+  "executed_commands": [
+    {
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/tests/test_breast_cancer_robustness.py",
+      "exit_code": 0,
+      "tests_passed": 7
+    },
+    {
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 04_machine_learning/examples/breast_cancer_robustness.py /workspace/scratch/2f9cb88229e2/g0-robustness-replay",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/check_documentation.py",
+      "exit_code": 0,
+      "markdown_pages": 80,
+      "book_chapters": 12,
+      "gene_profiles": 60
+    },
+    {
+      "command": "python3 scripts/check_repository.py",
+      "exit_code": 0,
+      "source_files": 35
+    },
+    {
+      "command": "python3 scripts/tests/test_documentation.py",
+      "exit_code": 0,
+      "tests_passed": 2
+    },
+    {
+      "command": "python3 scripts/check_ml_evidence.py",
+      "exit_code": 0,
+      "ml_records": 36,
+      "rust_publications": 11,
+      "rust_software_records": 6
+    },
+    {
+      "command": "python3 scripts/tests/test_ml_evidence.py",
+      "exit_code": 0,
+      "tests_passed": 9
+    },
+    {
+      "command": "python3 scripts/tests/test_rust_ml_evidence.py",
+      "exit_code": 0,
+      "tests_passed": 6
+    }
+  ],
+  "post_run_audit": {
+    "all_four_scenario_partitions_checked": true,
+    "all_outer_memberships_checked": true,
+    "all_inner_memberships_checked": true,
+    "complete_six_candidate_histories_checked": true,
+    "candidate_winner_rule_checked_by_regression_tests": true,
+    "prediction_rows": 360,
+    "probabilities_per_row": 4,
+    "reserved_predictions": 0,
+    "person_count_per_cell": 45,
+    "specimen_count_per_cell": 90,
+    "fit_attempts": 624,
+    "failed_trials": 0,
+    "source_hashes_verified": true,
+    "output_hashes_verified": true
+  },
+  "budget": {
+    "max_fits": 624,
+    "planned_fits": 624,
+    "actual_fits": 624,
+    "max_seconds": 900,
+    "observed_seconds": 1.817,
+    "worker_count": 1
+  },
+  "scenario_findings": [
+    {
+      "name": "reference",
+      "cohort_seed": 26101711,
+      "split_seed": 26101712,
+      "perturbation_seed": null,
+      "development_people": 45,
+      "reserved_people": 15,
+      "fit_budget": {
+        "maximum": 156,
+        "attempted": 156,
+        "failed": 0,
+        "worker_count": 1
+      },
+      "development_metrics": {
+        "grid": {
+          "roc_auc": 0.922962962962963,
+          "average_precision": 0.9199499064900429,
+          "brier": 0.11053462818358385
+        },
+        "random": {
+          "roc_auc": 0.9046913580246914,
+          "average_precision": 0.9048632908839607,
+          "brier": 0.12442626755585391
+        },
+        "all_feature": {
+          "roc_auc": 0.9150617283950617,
+          "average_precision": 0.9005602110712936,
+          "brier": 0.11954869450434161
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        }
+      },
+      "comparison_vs_grid_brier": {
+        "random": 0.013891639372270038,
+        "all_feature": 0.009014066320757748,
+        "prevalence": 0.13946537181641613
+      },
+      "stability": {
+        "grid": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.6666666666666666,
+            0.6666666666666666,
+            0.42857142857142855
+          ],
+          "mean_pairwise_jaccard": 0.5873015873015873
+        },
+        "random": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.6,
+            0.6,
+            0.42857142857142855
+          ],
+          "mean_pairwise_jaccard": 0.5428571428571428
+        }
+      }
+    },
+    {
+      "name": "extra_missingness",
+      "cohort_seed": 26101711,
+      "split_seed": 26101712,
+      "perturbation_seed": 26101714,
+      "development_people": 45,
+      "reserved_people": 15,
+      "fit_budget": {
+        "maximum": 156,
+        "attempted": 156,
+        "failed": 0,
+        "worker_count": 1
+      },
+      "development_metrics": {
+        "grid": {
+          "roc_auc": 0.899753086419753,
+          "average_precision": 0.9005835566243714,
+          "brier": 0.12873151286560666
+        },
+        "random": {
+          "roc_auc": 0.8474074074074074,
+          "average_precision": 0.8300651250745668,
+          "brier": 0.1567206324673632
+        },
+        "all_feature": {
+          "roc_auc": 0.8523456790123457,
+          "average_precision": 0.8370335617072135,
+          "brier": 0.17073993662704887
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        }
+      },
+      "comparison_vs_grid_brier": {
+        "random": 0.02798911960175653,
+        "all_feature": 0.04200842376144219,
+        "prevalence": 0.12126848713439331
+      },
+      "stability": {
+        "grid": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.6666666666666666,
+            0.42857142857142855,
+            0.42857142857142855
+          ],
+          "mean_pairwise_jaccard": 0.5079365079365079
+        },
+        "random": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.6,
+            0.125,
+            0.075
+          ],
+          "mean_pairwise_jaccard": 0.26666666666666666
+        }
+      }
+    },
+    {
+      "name": "correlated_measurement",
+      "cohort_seed": 26101711,
+      "split_seed": 26101712,
+      "perturbation_seed": 26101714,
+      "development_people": 45,
+      "reserved_people": 15,
+      "fit_budget": {
+        "maximum": 156,
+        "attempted": 156,
+        "failed": 0,
+        "worker_count": 1
+      },
+      "development_metrics": {
+        "grid": {
+          "roc_auc": 0.9219753086419753,
+          "average_precision": 0.9180377291706487,
+          "brier": 0.11249472244967777
+        },
+        "random": {
+          "roc_auc": 0.9150617283950617,
+          "average_precision": 0.9040508066225615,
+          "brier": 0.11670600851927841
+        },
+        "all_feature": {
+          "roc_auc": 0.9051851851851852,
+          "average_precision": 0.8900669339893916,
+          "brier": 0.12642275899929867
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        }
+      },
+      "comparison_vs_grid_brier": {
+        "random": 0.004211286069600643,
+        "all_feature": 0.013928036549620914,
+        "prevalence": 0.13750527755032224
+      },
+      "stability": {
+        "grid": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.6666666666666666,
+            0.6666666666666666,
+            0.42857142857142855
+          ],
+          "mean_pairwise_jaccard": 0.5873015873015873
+        },
+        "random": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.6666666666666666,
+            0.6666666666666666,
+            0.42857142857142855
+          ],
+          "mean_pairwise_jaccard": 0.5873015873015873
+        }
+      }
+    },
+    {
+      "name": "reallocated_people",
+      "cohort_seed": 26101711,
+      "split_seed": 26101713,
+      "perturbation_seed": null,
+      "development_people": 45,
+      "reserved_people": 15,
+      "fit_budget": {
+        "maximum": 156,
+        "attempted": 156,
+        "failed": 0,
+        "worker_count": 1
+      },
+      "development_metrics": {
+        "grid": {
+          "roc_auc": 0.8651851851851852,
+          "average_precision": 0.8733660531741693,
+          "brier": 0.1510068977368667
+        },
+        "random": {
+          "roc_auc": 0.857283950617284,
+          "average_precision": 0.872367213829794,
+          "brier": 0.15620550756525092
+        },
+        "all_feature": {
+          "roc_auc": 0.8281481481481482,
+          "average_precision": 0.7898621730607772,
+          "brier": 0.17469941375264672
+        },
+        "prevalence": {
+          "roc_auc": 0.5,
+          "average_precision": 0.5,
+          "brier": 0.25
+        }
+      },
+      "comparison_vs_grid_brier": {
+        "random": 0.0051986098283842335,
+        "all_feature": 0.02369251601577999,
+        "prevalence": 0.0989931022631333
+      },
+      "stability": {
+        "grid": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.42857142857142855,
+            0.6666666666666666,
+            0.42857142857142855
+          ],
+          "mean_pairwise_jaccard": 0.5079365079365079
+        },
+        "random": {
+          "outer_fits": 3,
+          "pairwise_jaccard": [
+            0.19047619047619047,
+            0.6666666666666666,
+            0.25
+          ],
+          "mean_pairwise_jaccard": 0.36904761904761907
+        }
+      }
+    }
+  ],
+  "source_sha256": {
+    "04_machine_learning/examples/breast_cancer_robustness.py": "bdab0a17f0f9afdb7101984e73d73661b2f1f88f1be32b3a4675f0af25348550",
+    "04_machine_learning/examples/breast_cancer_feature_selection.py": "43116849ff6d5090ad294dce5f305a7852d0ec389f6a36e9321eaf1aef1934a9",
+    "04_machine_learning/examples/breast_cancer_comparison.py": "f3aedca2168b010ae5eb22cdb241624159c8a487c54ad3b3100643087dc29182",
+    "04_machine_learning/robustness-protocol.md": "2f7c77f9f6f1980c726b2f966dcb3d9a426a10d87a4d1b1b9f6809f72fef7916"
+  },
+  "local_output_sha256": {
+    "README.txt": "a28f260b810a18a315a478cca6b04c4f7635747e7cdf00ba244c6d68b4d945d1",
+    "development_predictions.csv": "192a60e548826f57e4fd4eed678345257cbc4423ff304a268092b9e3bd4b7300",
+    "report.json": "688ed356538eb12f600b878621dc7ecd422a4b0d02b5335b68a23576056d7f38",
+    "versions.json": "70d800387a1508600fae9638cafdc40ae6adb39bab0b19fc78ab2882359f74ba"
+  },
+  "local_manifest_sha256": "50cb73eb4cdf1220981501ea24ef9cd187ef5454908d43d2a149d0406ac72574",
+  "merge_commit_workflow_runs": [
+    {
+      "id": 38922612242,
+      "name": "Machine learning deployment",
+      "head_sha": "06cdc2c9de2e42de4852ce07dd8d4d52ae26216c",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/pskeffington/pauls_notes/actions/runs/38922612242"
+    },
+    {
+      "id": 38922611708,
+      "name": "Unix and Bash validation",
+      "head_sha": "06cdc2c9de2e42de4852ce07dd8d4d52ae26216c",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/pskeffington/pauls_notes/actions/runs/38922611708"
+    },
+    {
+      "id": 38922611591,
+      "name": "Phase 4 assay robustness",
+      "head_sha": "06cdc2c9de2e42de4852ce07dd8d4d52ae26216c",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/pskeffington/pauls_notes/actions/runs/38922611591"
+    },
+    {
+      "id": 38922611741,
+      "name": "Documentation navigation",
+      "head_sha": "06cdc2c9de2e42de4852ce07dd8d4d52ae26216c",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/pskeffington/pauls_notes/actions/runs/38922611741"
+    }
+  ],
+  "ci_artifact": {
+    "id": 12054712479,
+    "name": "phase4-robustness",
+    "run_id": 38922611591,
+    "sha256": "f4fe45f31cc32e6830b3f1aee55706c41de87f2755ffe4bc7c0446278262ae46",
+    "expires_at": "2026-10-30T15:17:08Z",
+    "availability": "expiring GitHub Actions archive; full output not committed"
+  },
+  "limitations": [
+    "All four scenarios reuse one engineered cohort; reallocation changes development membership.",
+    "The original protocol disclosed locally inspected synthetic outcomes.",
+    "Local R execution and Rust builds were not repeated; GitHub merge-commit jobs provide that evidence.",
+    "The baseline discards staged outputs on aborted runs; durable failed-run artifacts are required by G1.",
+    "No person-aware intervals, repeated new-cohort assessment or independent clinical validation is established."
+  ]
+}
