@@ -1,0 +1,58 @@
+name: Phase 4 assay robustness
+
+on:
+  push:
+    branches: [main]
+    paths: ["04_machine_learning/**", ".github/workflows/assay-robustness-validation.yml"]
+  pull_request:
+    paths: ["04_machine_learning/**", ".github/workflows/assay-robustness-validation.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  phase4-robustness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/phase4-env"
+          "$RUNNER_TEMP/phase4-env/bin/python" -m pip install -r 04_machine_learning/requirements-python.txt
+      - name: Run Phase 4 gate tests
+        run: |
+          "$RUNNER_TEMP/phase4-env/bin/python" 04_machine_learning/tests/test_breast_cancer_robustness.py
+      - name: Execute complete 624-fit robustness protocol
+        run: |
+          "$RUNNER_TEMP/phase4-env/bin/python" 04_machine_learning/examples/breast_cancer_robustness.py "$RUNNER_TEMP/phase4-assay-robustness"
+          "$RUNNER_TEMP/phase4-env/bin/python" - <<'PY'
+          import csv, hashlib, json, os
+          from pathlib import Path
+          folder = Path(os.environ['RUNNER_TEMP']) / 'phase4-assay-robustness'
+          report = json.loads((folder / 'report.json').read_text())
+          assert report['status'] == 'software_pass'
+          assert report['budget']['actual_fits'] == 624
+          assert len(report['scenario_results']) == 4
+          assert not report['selection_contract']['test_predictions_generated']
+          with (folder / 'development_predictions.csv').open(newline='') as handle:
+              rows = list(csv.DictReader(handle))
+          assert len(rows) == 360
+          for name, digest in json.loads((folder / 'sha256.json').read_text()).items():
+              assert hashlib.sha256((folder / name).read_bytes()).hexdigest() == digest
+          print('PASS: 624 fits, 360 outer-held-out development predictions, 4 scenarios')
+          PY
+      - name: Preserve synthetic gate artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase4-robustness
+          path: ${{ runner.temp }}/phase4-assay-robustness/
+          if-no-files-found: warn
+          retention-days: 14
