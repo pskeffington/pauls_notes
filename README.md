@@ -1,57 +1,74 @@
 # Paul's Notes
 
-**Biomedical research, scientific computing, and reproducible analysis**
+**Biomedical research · scientific computing · reproducible machine learning**
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-A reference collection connecting biological questions with data preparation, statistical reasoning, machine learning, and research software.
+A practical research notebook for moving from a biological question to a documented, tested analysis. The breast cancer examples connect **people, specimens, molecular measurements, model development, validation, and interpretation**. Read a guide, run a synthetic example, or inspect the evidence behind a method.
+
+**Quick navigation:** [Start here](#start-here) · [Research workflow](#follow-a-research-question) · [Run an example](#put-the-methods-to-work) · [Browse subjects](#explore-the-collection) · [Progress and limitations](#research-progress-and-boundaries)
 
 ## Start here
 
-- **[Breast cancer research guide](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)** — Twelve chapters connecting people, specimens, molecular measurements, biological processes, and 60 gene profiles.
-- **[Computing and statistics](03_learning/README.md)** — Subject guides with worked examples for R, data preparation, study design, models, and figures.
-- **[Machine learning](04_machine_learning/README.md)** — A reader's introduction, basic algorithms, package guidance, and runnable R and Python workflows.
+Choose the route that matches what you need; no weekly sequence is required.
 
-## Explore the collection
-
-| Area | Guide | Coverage |
+| I want to… | Start with | Then explore |
 | --- | --- | --- |
-| Unix and Bash | [Command-line computing](01_unix_bash/README.md) | Files, text processing, scripting, and automation |
-| Research methods | [Biomedical coding and literature](02_biomedical_coding/README.md) | Publications, package documentation, and implementation requirements |
-| Genomics | [Molecular research resources](06_RESOURCES/Genomics/README.md) | Gene function, expression interpretation, pathways, and evidence |
-| Visualization | [R tools and plotting](06_RESOURCES/R/README.md) | Summaries, statistical graphics, annotations, and reusable functions |
-| Scientific writing | [Manuscript and bibliography tools](06_RESOURCES/LaTeX/README.md) | Manuscript preparation and reference management |
-| Resource directory | [Browse by research task](docs/resource-guide.md) | Documentation, methods, and supporting tools across the collection |
+| **Understand the biology** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
+| **Learn research computing** | [Computing by subject](03_learning/README.md) — R, data structure, joins, missingness and statistics | [Worked analysis](03_learning/README.md#run-the-combined-example) |
+| **See how ML actually trains** | [Visual ML data-flow guide](04_machine_learning/visual-data-guide.md) — splits, preprocessing and held-out predictions | [ML methods](04_machine_learning/README.md) and [plotting gallery](04_machine_learning/gallery/README.md) |
+| **Run and review an experiment** | [Paired-specimen ML walkthrough](04_machine_learning/advanced-breast-cancer-training.md) | [Comparison](04_machine_learning/model-comparison.md), [tuning](04_machine_learning/model-tuning.md) and [validation evidence](04_machine_learning/corpus-review.md) |
+| **Design reproducible research** | [Research workflow](docs/research-workflow.md) — scope, inputs, checks and reporting | [Roadmap](docs/learning-roadmap.md) and [gate evidence](docs/roadmap-gates.md) |
+
+## Follow a research question
+
+The recurring teaching question is: **Can assay measurements distinguish a recorded specimen category for people who were not used to train the model?** It is not a clinical diagnostic or prognosis task.
+
+**People → specimens → measurements → preparation → training → validation → predictions → interpretation**
+
+1. **Know the unit of analysis.** Read [the breast cancer research narrative](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) and [data identifiers and joins](03_learning/keys-and-reshaping.md). Specimens from the same person must stay together in evaluation splits.
+2. **Prepare measurements without leakage.** Use the [visual data-flow guide](04_machine_learning/visual-data-guide.md) to understand training-only imputation, scaling and feature selection.
+3. **Compare methods fairly.** Follow the [paired assay comparison](04_machine_learning/model-comparison.md) and [model-tuning guide](04_machine_learning/model-tuning.md) before interpreting scores.
+4. **Explain and reproduce the result.** Inspect the [seven-figure gallery](04_machine_learning/gallery/README.md), [evidence review](04_machine_learning/corpus-review.md) and [analysis record template](templates/analysis-record.md).
 
 ## Put the methods to work
 
-- [Plan a research workflow](docs/research-workflow.md) — Define the question, document inputs, and organize a reproducible analysis.
-- [Apply machine learning to breast cancer data](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) — Connect specimen identity, gene measurements, model choices, and evaluation.
-- [Read the breast cancer ML evidence](04_machine_learning/breast-cancer-evidence.md) — Connect specific screening, risk, prognosis, and treatment-response studies to implementation choices.
-- [Inspect the corpus review and validation run](04_machine_learning/corpus-review.md) — Review paper-level findings, unresolved access, published-output checks, and synthetic verification.
-- [Understand model tuning](04_machine_learning/model-tuning.md) — Inspect this project's search grids, candidate scores, training budget, and evidence for sound assessment, with recent evidence on [tuning](04_machine_learning/recent-tuning-evidence.md) and [selection and validation](04_machine_learning/recent-selection-validation.md).
-- [Train with selected assay measurements](04_machine_learning/advanced-breast-cancer-training.md) — Follow the breast cancer narrative through nested training, smaller feature sets, and careful interpretation of variable importance.
-- [Run independent R and Python methods](04_machine_learning/methods-and-deployments.md) — Explore classification, regression, clustering, survival, and expression analysis.
-- [Check understanding and implementation](03_learning/mastery-checks.md) — Inspect expected results, failure cases, and interpretation tasks.
+Run the existing **synthetic paired-specimen example** from the repository root. Use Python and the [pinned modeling requirements](04_machine_learning/requirements-python.txt):
 
-The [assay comparison](04_machine_learning/model-comparison.md) adds a fixed all-feature baseline on matched people; its [plotting gallery](04_machine_learning/gallery/README.md) follows data allocation, missingness, tuning, feature summaries, probability errors and calibration through seven reproducible figures.
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r 04_machine_learning/requirements-python.txt
+.venv/bin/python 04_machine_learning/examples/breast_cancer_feature_selection.py /tmp/pauls-notes-assay-example
+```
 
-The [Rust deployment](04_machine_learning/rust-deployment.md) runs both frozen assay models as a compiled prediction CLI, carrying over learned preprocessing and checking probabilities against Python. The [five-year Rust ML review](04_machine_learning/rust-ml-literature.md) connects 11 publications/manuscripts and six software inspections to the breast cancer workflow. The [native Rust training baseline](04_machine_learning/rust-native-training.md) now fits a declared logistic objective with training-only preparation and matched Python numerical checks.
+This creates a new directory with a fitted pipeline, held-out assessment, feature-review table, environment versions and SHA-256 manifest. **The output path must be new and outside the repository**; choose another path if it already exists. The 60 people and 48 anonymous features in this example are invented teaching data, **not TCGA patient records or the book's 60 named genes**.
 
-For a visual introduction, [follow data through machine learning](04_machine_learning/visual-data-guide.md): see the training slices, validation folds, grouped records, and protected final test.
+Prefer a lighter introduction? Start with the [computing walkthrough](03_learning/README.md#run-the-combined-example). Want an additional programming language? See [Rust inference](04_machine_learning/rust-deployment.md), [native Rust training](04_machine_learning/rust-native-training.md) and the [R/Python methods guide](04_machine_learning/methods-and-deployments.md). Each guide states what has actually been executed.
 
-The [Phase 4 assay robustness gate](04_machine_learning/robustness-experiment.md) adds four prespecified synthetic stress scenarios, paired development-only assessment and a bounded six-candidate randomized tuning comparison; it does not establish clinical or independent validation.
+## Explore the collection
 
-Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: data meaning, fair comparisons, visual interpretation, robustness, survival methods and a reproducible capstone.
+| Area | Go to | What you'll find |
+| --- | --- | --- |
+| Biology and genomics | [Genomics resources](06_RESOURCES/Genomics/README.md) | The book, gene biology, annotations and pathway context |
+| Computing foundations | [Unix and Bash](01_unix_bash/README.md) · [Computing subjects](03_learning/README.md) | Shell scripts, data types, reshaping, missingness and statistics |
+| Machine learning | [ML home](04_machine_learning/README.md) | Algorithms, feature selection, comparisons, validation, Python, R and Rust |
+| Visualization | [R plotting tools](06_RESOURCES/R/README.md) · [ML figure gallery](04_machine_learning/gallery/README.md) | Reusable plots, annotation and interpretation |
+| Research evidence | [Biomedical coding](02_biomedical_coding/README.md) · [Literature resources](06_RESOURCES/Literature/README.md) | Source matrices, methods, assumptions and quality checks |
+| Writing and reproducibility | [LaTeX and bibliography](06_RESOURCES/LaTeX/README.md) · [Research workflow](docs/research-workflow.md) | Manuscripts, citations, provenance and execution records |
 
-The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication](04_machine_learning/replication-experiment.md) assesses three prespecified synthetic cohort draws across 12 cells. The [Phase 4C uncertainty assessment](04_machine_learning/uncertainty-assessment.md) adds whole-person conditional ranges on their saved predictions, with complete draw records and verified replay. The defined synthetic Phase 4 milestone is complete. Native Rust fitting adds scoped numerical validation; a separate survival endpoint and Cox assessment protocol are next.
+For a task-by-task index, use the [research resource guide](docs/resource-guide.md) or [complete resource directory](06_RESOURCES/README.md).
+
+## Research progress and boundaries
+
+- **Established in this repository:** synthetic software demonstrations for person-grouped model comparison, tuning, plotting, robustness, repeated-cohort assessment, conditional uncertainty, and a matched-objective Rust training check. See the [roadmap gate ledger](docs/roadmap-gates.md) for what each test established and what it did not.
+- **Still separate work:** a new survival endpoint and published-result reproduction require their own protocols. Consult the [learning roadmap](docs/learning-roadmap.md) rather than treating a passing test as evidence of clinical validity.
+- **TCGA-BRCA and privacy:** TCGA contains both open- and controlled-access files. Verify GDC access classification and permitted use **for each file** before any future real-data analysis. Keep credentials, direct identifiers and participant-level data out of this public repository. See [input/access requirements](docs/research-workflow.md#2-specify-input-and-access-contracts).
+- **Model use:** examples are **research and education only**. They are not validated for cancer diagnosis, treatment choice or individualized prognosis. Synthetic predictive scores are not breast cancer findings.
 
 ## Research templates
 
-- [Study protocol](templates/study-protocol.md) — Research question, study design, and analysis plan.
-- [Data dictionary](templates/data-dictionary.md) — Identifiers, field definitions, units, and missing values.
-- [Analysis record](templates/analysis-record.md) — Inputs, decisions, execution, and results.
+Use the [study protocol](templates/study-protocol.md) to plan a study, the [data dictionary](templates/data-dictionary.md) to define records and measurements, and the [analysis record](templates/analysis-record.md) to document each execution.
 
 ---
 
-[Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) · [All resources](06_RESOURCES/README.md) · [Contributing](CONTRIBUTING.md) · [License](LICENSE)
+[All resources](06_RESOURCES/README.md) · [Contributing and validation](CONTRIBUTING.md) · [License](LICENSE)
