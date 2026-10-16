@@ -46,6 +46,10 @@ Follow the [learning roadmap](docs/learning-roadmap.md) for the next phases: dat
 
 The [milestone gate ledger](docs/roadmap-gates.md) records delivery evidence and open dependencies. The [Phase 4B replication](04_machine_learning/replication-experiment.md) assesses three prespecified synthetic cohort draws across 12 cells. The [Phase 4C uncertainty assessment](04_machine_learning/uncertainty-assessment.md) adds whole-person conditional ranges on their saved predictions, with complete draw records and verified replay. The defined synthetic Phase 4 milestone is complete. Native Rust fitting adds scoped numerical validation; a separate survival endpoint and Cox assessment protocol are next.
 
+## TCGA-BRCA data protection and model use
+
+The [research privacy and model-use policy](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md) requires per-file GDC open-access verification for future TCGA-BRCA work, prohibits direct identifiers and controlled-access files, keeps participant records and predictions out of Git, and disclaims diagnostic, prognostic or treatment use. The [repository data guard](scripts/check_public_data_boundaries.py) runs in a dedicated pull-request workflow. The [configuration-driven ML toolkit](04_machine_learning/research_toolkit/README.md) is currently synthetic-only; official GDC metadata access checking is a separate read-only preflight.
+
 ## Research templates
 
 - [Study protocol](templates/study-protocol.md) — Research question, study design, and analysis plan.
