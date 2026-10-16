@@ -39,6 +39,16 @@ class PublicDataBoundaryTests(unittest.TestCase):
             with self.subTest(path=path, blob=blob[:20]):
                 self.assertTrue(guard.inspect(path, blob))
 
+    def test_new_unregistered_tabular_file_is_blocked(self):
+        registered = guard.registered_assets(staged=False)
+        self.assertIsNone(guard.registration_problem(
+            "04_machine_learning/rust/example/specimens.csv", registered))
+        self.assertIsNotNone(guard.registration_problem(
+            "new/hidden_patient_data.csv", registered))
+        self.assertIsNotNone(guard.registration_problem(
+            "new/unreviewed_metadata.json", registered))
+        self.assertIn("scripts/public_data_assets.json", registered)
+
     def test_public_metadata_only_is_not_direct_person_data(self):
         self.assertEqual(guard.inspect("metadata.json",
             b'{"project":"TCGA-BRCA","access":"open","file_count":20}'), [])
