@@ -4,6 +4,8 @@
 
 An algorithm is a procedure for fitting or applying a rule. The same research task can often be approached by several algorithms. Start with the measurement scale, target and evaluation design; then choose a procedure whose assumptions and computational cost fit the study.
 
+For the [breast cancer narrative](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data), start with tissue-category prediction from assay measurements. Change to censoring-aware survival methods when the question becomes recurrence timing, and to exploratory methods when suitable outcomes are unavailable. The [advanced guide](advanced-breast-cancer-training.md) then explains how variable selection, stacking, and other extensions fit those questions.
+
 ## Supervised methods
 
 | Method | Plain-language mechanism | Useful question | Important limitation | Executable example here |

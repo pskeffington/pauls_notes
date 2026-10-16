@@ -4,7 +4,7 @@
 
 Machine learning uses observations to estimate a rule or representation. A researcher supplies the question, measurements, learning procedure and evaluation design. The computer adjusts parameters to reduce a specified error or organize patterns. It does not decide whether the observations represent the population, whether the labels are meaningful, or whether the result helps patients.
 
-Imagine measuring several molecular features in tissue specimens. We might ask the computer to estimate a recorded tissue category from those measurements. We provide examples containing both measurements and known categories, fit a rule on some people, and assess its predictions on different people. The important test is whether the rule works on the observations we intended to predict, rather than whether it can describe the examples it already saw.
+In the [breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data), imagine measuring several molecular features in tissue specimens. We might ask the computer to estimate a recorded tissue category from those measurements. We provide examples containing both measurements and known categories, fit a rule on some people, and assess its predictions on different people. The important test is whether the rule works on the observations we intended to predict, rather than whether it can describe the examples it already saw.
 
 Follow the rows and fitting steps in the [visual data guide](visual-data-guide.md), then return here for the vocabulary.
 
@@ -42,6 +42,10 @@ Reserve assessment people before learning preprocessing or selecting features. I
 A classifier can rank cases well while giving poorly calibrated probabilities. Accuracy depends on the decision threshold and outcome frequency; a majority-class guess can appear accurate in an imbalanced sample. For numerical predictions, errors need units and a simple baseline. For survival, evaluation must account for censoring. For clusters, a geometric score is not biological confirmation.
 
 A useful report states the target, observation unit, predictor availability, partition design, comparison baseline, metric definition, uncertainty and limitations. An association or feature importance does not establish causation. A model predicting a historical label does not by itself establish clinical benefit.
+
+## Continue the breast cancer narrative
+
+After tracing the [data slices](visual-data-guide.md), ask which expression measurements should remain in the predictor. The [advanced training guide](advanced-breast-cancer-training.md) shows how to rank and select columns inside training, keep paired specimens together, and distinguish a useful predictor from a biological explanation. Its synthetic paired-specimen deployment is separate from the book's gene evidence.
 
 ## Put the ideas into practice
 

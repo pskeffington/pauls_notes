@@ -4,6 +4,8 @@
 
 The workflows below are independent implementations. The Python and direct R methods do not import or call caret. All inputs are synthetic; choose a new output directory outside the repository.
 
+In the [breast cancer narrative](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data), classification addresses a defined specimen label, numerical regression a continuous measurement, survival an event over follow-up, and expression inference an adjusted assay contrast. These are different questions. The generic fixtures below teach their mechanisms; the [paired-specimen selection example](advanced-breast-cancer-training.md) adds an explicit synthetic tissue-category task.
+
 | Research task | Implementation | Assessment and output |
 | --- | --- | --- |
 | Binary prediction | Python logistic regression, random forests and histogram boosting | Family-disjoint outer and inner cross-validation; ROC AUC, average precision, Brier score and final holdout |
@@ -28,6 +30,10 @@ The fixture has 120 people in 60 invented two-person families, five numeric pred
 Final test scores are for the prespecified model families; the runner does not select a winning family from them. Nested estimates have sampling uncertainty and correlated family observations; the example supplies no uncertainty intervals or external-site validation. Nested cross-validation assesses hyperparameter search within each family, not a later choice among families made from those scores.
 
 PCA and k-means use development predictors only, without targets. Three clusters and two components are fixed illustration settings. Test silhouette is a descriptive geometry score, not a disease-label validation. The code handles undefined silhouette when the assigned labels cannot support it.
+
+## Paired specimens and training-only feature selection
+
+The [advanced breast cancer guide](advanced-breast-cancer-training.md#executable-example-selecting-columns-while-holding-people-apart) follows 60 invented people and two specimen categories per person. Its [Python deployment](examples/breast_cancer_feature_selection.py) performs nested, person-grouped selection of assay columns, then exports held-out predictions, the final selected subset, standardized coefficients, outer-fold selection counts and descriptive permutation diagnostics. The guide documents the full-cohort index convention and interpretation limits.
 
 ## R: survival and expression analysis
 

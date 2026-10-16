@@ -27,6 +27,7 @@ A reference collection connecting biological questions with data preparation, st
 
 - [Plan a research workflow](docs/research-workflow.md) — Define the question, document inputs, and organize a reproducible analysis.
 - [Apply machine learning to breast cancer data](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) — Connect specimen identity, gene measurements, model choices, and evaluation.
+- [Train with selected assay measurements](04_machine_learning/advanced-breast-cancer-training.md) — Follow the breast cancer narrative through nested training, smaller feature sets, and careful interpretation of variable importance.
 - [Run independent R and Python methods](04_machine_learning/methods-and-deployments.md) — Explore classification, regression, clustering, survival, and expression analysis.
 - [Check understanding and implementation](03_learning/mastery-checks.md) — Inspect expected results, failure cases, and interpretation tasks.
 

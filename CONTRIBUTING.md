@@ -2,7 +2,7 @@
 
 [Home](README.md)
 
-Keep material organized by subject. Introduce the research question, define unfamiliar terms, explain the method's assumptions, and connect the example to an interpretation. Distinguish executed examples, reference patterns, and proposed work. Mark synthetic data and unverified findings clearly.
+Keep material organized by subject. Tie machine-learning additions to the breast cancer book's people, specimens, measurements, research question, and interpretation. Preserve the distinction between generic teaching fixtures and analyses of real breast cancer data. Introduce the research question, define unfamiliar terms, explain the method's assumptions, and connect the example to an interpretation. Distinguish executed examples, reference patterns, and proposed work. Mark synthetic data and unverified findings clearly.
 
 Use descriptive `snake_case` names for R and Python functions. Validate schemas, identifiers, types, and missingness before analysis. Keep source files free of work on import where practical. Use explicit seeds for stochastic examples, preserve independent units during resampling, and fit preprocessing within the training partition.
 
@@ -19,7 +19,7 @@ Run commands below from the repository root. Python checks use the standard libr
 | Literature register integrity | `python3 02_biomedical_coding/tests/test_literature_matrix.py` |
 | Shell examples | `bash 01_unix_bash/tests/test_summarize_metadata.sh` and `bash 06_RESOURCES/tests/test_bash_helpers.sh` |
 | Manuscript builder contract | `bash 06_RESOURCES/tests/test_manuscript_builder.sh` |
-| Python machine learning | `python3 04_machine_learning/tests/test_sklearn_methods.py` |
+| Python machine learning | `python3 04_machine_learning/tests/test_sklearn_methods.py` and `python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py` |
 | R resources | `for test_file in 06_RESOURCES/tests/test_*.R; do Rscript --vanilla "$test_file" || exit; done` |
 
 The manuscript contract test uses stub tools to check arguments, failed builds, and output protection. A real PDF build needs the TeX distribution and Biber listed in the [manuscript guide](06_RESOURCES/LaTeX/README.md); inspect its rendered pages separately.

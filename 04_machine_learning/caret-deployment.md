@@ -2,6 +2,8 @@
 
 [Machine learning](README.md) · [Package guide](package-guide.md) · [Optimization](optimization.md)
 
+**Connection to the book:** This general binary fixture teaches preprocessing, tuning, and replay that could support a defined breast cancer prediction study. Its invented markers are not measured genes or a cancer outcome. Continue with the [paired-specimen feature-selection deployment](advanced-breast-cancer-training.md) to see the book's tissue-category question and person grouping made explicit; return to [Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) for the specimen and biological interpretation.
+
 ## Define the prediction problem
 
 The [runnable case](examples/caret_case.R) predicts an invented binary outcome from four numeric predictors. The schema is `person_id`, `outcome`, `marker_a`, `marker_b`, `age_years`, and `noise`. Markers have arbitrary units; age is in years. `outcome` is a factor with levels `c("case", "control")`; **case is the positive event**. Identifiers and outcomes are excluded from the predictor matrix by an explicit allowlist.

@@ -2,7 +2,7 @@
 
 [Machine learning](README.md) · [Caret deployment](caret-deployment.md) · [Paper-to-code studies](recent-code-studies.md)
 
-Optimize measured bottlenecks after the prediction task and independent unit are fixed. Preserve assessment design while comparing runtime, memory, and output behavior.
+For the [breast cancer research question](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data), optimize the cost of fitting an assay predictor while preserving person and specimen boundaries. The [advanced guide](advanced-breast-cancer-training.md) explains how smaller feature sets and bounded searches fit that narrative. Optimize measured bottlenecks after the prediction task and independent unit are fixed. Preserve assessment design while comparing runtime, memory, and output behavior.
 
 | Mechanism | Implementation in the current case | What to measure before changing it |
 | --- | --- | --- |

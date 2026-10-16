@@ -4,6 +4,8 @@
 
 Reviewed for this guide: 2026-10-16. Documentation links are entry points; installation versions and scientific suitability must be checked for the actual study. **Executable** means wired into the synthetic runner and CI; **reference** means documentation supplied without a local deployment here.
 
+Choose packages along the [breast cancer book's workflow](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data): align assay/specimen identities, define a tissue or follow-up target, train on development people, and interpret held-out results. The [advanced training guide](advanced-breast-cancer-training.md) links feature selection and importance to this sequence. Package capability alone is not evidence that a breast cancer model has been validated.
+
 | Package or stack | Research task and deployment mechanism | Input/assessment contract | Local status |
 | --- | --- | --- | --- |
 | [caret](https://topepo.github.io/caret/) | Resampling orchestration through `train`, `trainControl`, `predict.train` | Explicit partitions; all learned transforms inside resampling | Executable |
@@ -19,7 +21,7 @@ Reviewed for this guide: 2026-10-16. Documentation links are entry points; insta
 | [edgeR](https://bioconductor.org/packages/edgeR/) | Sequencing count models | Retain counts and library structure; do not replace with arbitrary transformed values | Reference for ML; existing plotting resources have separate checks |
 | [DESeq2](https://bioconductor.org/packages/DESeq2/) | Count-based differential expression | Biological replicates and identifiable design; inference is not classifier validation | Reference |
 | [SummarizedExperiment](https://bioconductor.org/packages/SummarizedExperiment/) | Aligned assay, row and sample metadata containers | Stable identifiers and compatible dimensions | Reference |
-| [scikit-learn](https://scikit-learn.org/stable/modules/compose.html) | Classification, regression, PCA and k-means pipelines | Family-disjoint nested CV and training-only transforms; temporal assessment needs a different design | [Executable Python methods](methods-and-deployments.md#python-pipelines-and-nested-evaluation) |
+| [scikit-learn](https://scikit-learn.org/stable/modules/compose.html) | Classification, regression, PCA, k-means and nested assay-column selection pipelines | Family-disjoint nested CV and training-only transforms; temporal assessment needs a different design | [Executable Python methods](methods-and-deployments.md#python-pipelines-and-nested-evaluation) |
 | [NumPy](https://numpy.org/doc/stable/) | Numeric arrays, synthetic generation and NPZ inputs | Aligned observation axis; finite-target and shape checks | Executable Python methods |
 | [SciPy](https://docs.scipy.org/doc/scipy/) | Numerical dependency supporting the Python estimators | Record installed version and compatible binary environment | Executed dependency; no standalone SciPy method here |
 | [joblib](https://joblib.readthedocs.io/) | Save and reload fitted Python pipelines | Trusted artifacts and compatible runtime; verify replayed predictions | Executable Python methods |

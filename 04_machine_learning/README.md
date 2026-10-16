@@ -4,7 +4,7 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 [Paul's Notes](../README.md) · [Computing subjects](../03_learning/README.md) · [Research workflow](../docs/research-workflow.md)
 
-Build a prediction workflow around the observation unit, input measurements, and evaluation design. Choose a subject or run the synthetic deployment.
+Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) from people and specimens to measurements, predictions, and interpretation. The guides below explain reusable methods through that narrative. Existing general-purpose R/Python fixtures teach individual mechanisms; the paired-specimen feature-selection example explicitly connects them to a synthetic tissue-category task.
 
 | Subject | Resource | Practical purpose |
 | --- | --- | --- |
@@ -13,6 +13,7 @@ Build a prediction workflow around the observation unit, input measurements, and
 | Choosing a method | [Basic algorithm guide](basic-algorithms.md) | Regression, classification, trees, kernels, clustering, PCA and survival |
 | Independent frameworks and research methods | [Methods and deployments](methods-and-deployments.md) | Python nested workflows, direct R survival analysis and limma expression contrasts |
 | Resampling, preprocessing and tuning | [Caret deployment](caret-deployment.md) | Fit elastic-net and random-forest classifiers with a protected test partition |
+| Advanced training and informative variables | [Breast cancer training and feature selection](advanced-breast-cancer-training.md) | Select assay columns inside nested person-grouped folds; inspect coefficients, selection frequency and held-out importance |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
 | Methods from recent research | [Paper-to-code studies](recent-code-studies.md) | Connect 2025–2026 papers and a leakage reference to implementation decisions |
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
@@ -29,6 +30,17 @@ Rscript --vanilla 04_machine_learning/examples/caret_case.R /tmp/biomedical-care
 Choose a new output directory outside the repository whose parent exists. The command creates synthetic data, saves patient assignments and fold membership, tunes two model families, evaluates their probabilities alongside a development-prevalence baseline, and saves models, metrics and execution records. It refuses to overwrite an existing directory.
 
 The example has one row per independent person. Repeated visits, related participants, multiple specimens per donor, survival outcomes, and external-site validation require different split and model contracts. The runner rejects duplicate person identifiers.
+
+## Follow the paired-specimen example
+
+The [advanced guide](advanced-breast-cancer-training.md) adds a synthetic assay-column selection deployment: 60 people, two specimen categories per person, 48 arbitrary features, nested tuning of subset size and regularization, and a protected final test. It connects each decision to Chapter 11 of the book. It does not fit the 60-gene catalog or analyze participant records.
+
+```bash
+python3 04_machine_learning/examples/breast_cancer_feature_selection.py /tmp/breast-cancer-feature-selection
+python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py
+```
+
+Use the pinned Python dependencies and a new output directory outside the repository with an existing parent.
 
 ## Check the implementation
 

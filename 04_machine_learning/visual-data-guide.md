@@ -4,6 +4,8 @@
 
 We give a learning procedure examples, let it fit a relationship, and ask it to predict observations it did not fit. **Slicing the data determines what counts as unseen.** This guide follows the rows, measurements, and outcomes through that process.
 
+Read these slices as the computational companion to the [breast cancer book's tissue-category question](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data). After following the rows, continue with [advanced training and selecting measurement columns](advanced-breast-cancer-training.md).
+
 The small tables and 100-person split below are invented teaching examples. The final sections map them to the repository's executable synthetic workflows. No figure here reports breast cancer findings.
 
 ## 1. Identify the inputs, the answer, and the owner of each row

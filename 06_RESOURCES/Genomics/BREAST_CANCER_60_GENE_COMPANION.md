@@ -1163,6 +1163,38 @@ A regularized logistic model can provide a useful first comparison for a binary 
 
 PCA can help inspect dominant variation, and k-means can suggest groups to investigate. Examine whether those groups track technical batches or cell composition before assigning biological meaning. For adjusted expression differences, the [limma example](../../04_machine_learning/methods-and-deployments.md#r-survival-and-expression-analysis) illustrates a contrast-based analysis; it is not a prediction benchmark. For time-to-event questions, the direct Cox example retains censoring, but its relative hazard score is not an absolute recurrence probability.
 
+#### Select informative measurements without looking at the final test
+
+Suppose the tissue-category question begins with many expression columns. We may want a smaller predictor for computational efficiency, measurement cost, or interpretability. This means selecting **columns**, while the person-based split selects **rows**. A gene must earn its place using the current training people; assessment people cannot participate in the ranking.
+
+Within each inner training fold, learn missing-value handling, rank the candidate measurements, retain a candidate subset, scale it, and fit the predictor. Use the inner validation predictions to choose the subset size and model settings. An outer held-out group assesses that complete search. Repeat the process across outer groups, then search and refit on all development people before opening the final test. Different training groups may select different measurements; that variation is part of the result.
+
+| Question about a feature | Evidence to inspect | Meaning in this book |
+| --- | --- | --- |
+| Did the final predictor retain it? | Saved feature names and column order | Membership in this development-fitted panel |
+| Did other training groups retain it? | Selection count across outer fits | Descriptive sensitivity to the people used for fitting |
+| Does its standardized coefficient have a large magnitude? | Scaling, regularization, correlated inputs and coefficient direction | Contribution to this fitted linear score, conditional on the other selected inputs |
+| Does prediction worsen when it is shuffled? | Held-out permutation score change, shuffle design and assessment population | This model's reliance on the input under that perturbation |
+| Does it establish a breast cancer mechanism? | Independent biological evidence and suitable experiments | A prediction rank alone cannot answer this question |
+
+For example, an apparently useful ESR1-related measurement might direct us back to receptor biology, while CD8A or COL1A1 would prompt questions about immune or stromal composition. These are interpretive routes through the gene cards, not fitted importance results for these named genes. Correlated measurements can substitute for one another, and a useful signal can also reflect batch, sampling or care pathways.
+
+The [advanced training and variable-selection guide](../../04_machine_learning/advanced-breast-cancer-training.md) supplies the full visual explanation and a [runnable synthetic deployment](../../04_machine_learning/examples/breast_cancer_feature_selection.py). It constructs 60 invented people with two specimen categories each and 48 arbitrary assay features. Paired specimens stay together in nested folds; the runner exports a selected-column list, coefficients, selection counts, held-out permutation diagnostics, split membership and prediction records. These simulated features are not the book's 60 genes, and the runner neither discovers a cancer signature nor fits participant data. The screen is a ranking heuristic; its univariate p-values are not interpreted as paired gene-discovery evidence.
+
+#### Add advanced training only when the research question needs it
+
+A smaller panel and more complex training answer different questions. Before adding complexity, state which part of the tissue-category or follow-up problem remains unresolved and how it will be assessed on people excluded from that decision.
+
+| Extension | A question it could address | Boundary to preserve |
+| --- | --- | --- |
+| Repeated grouped tuning | Does the selected assay panel change when development people change? | Repeat selection within training; repeated splits do not supply new independent cohorts |
+| Stacking and multimodal fusion | Could molecular measurements and available clinical or image information complement each other? | Train the combiner on correctly generated out-of-fold predictions; keep patient links and prediction-time availability intact |
+| Transfer learning | Could an externally trained representation help a small study? | Audit pretraining overlap, assay compatibility and adaptation; evaluate the entire adapted procedure |
+| Calibration and threshold fitting | Do probabilities agree with observed outcomes, and how would a decision rule be chosen? | Fit corrections and thresholds within development; assess probabilities and any proposed utility separately |
+| High-dimensional survival learning | Could measurements help predict recurrence over a defined follow-up horizon? | Preserve event timing and censoring; evaluate a survival procedure instead of treating censored records as permanent negatives |
+
+The [advanced guide](../../04_machine_learning/advanced-breast-cancer-training.md#advanced-training-methods-what-each-adds-to-this-research-question) distinguishes implemented mechanisms from reference patterns. The current selection deployment executes nested grouped tuning and feature review. It does not execute stacking, neural transfer, multimodal fusion, fitted calibration, or penalized survival tuning. Return to the original patient/specimen question whenever a new method changes the target, population or available information.
+
 #### Read the result in the language of the original question
 
 For classification, inspect discrimination and probability error alongside the relevant outcome frequency and threshold. A ranking score can be strong while probabilities are poorly calibrated. Report who was excluded, what data were available at prediction time, and how the assessment people differ from the development people. For survival, retain censoring-aware evaluation and assess modeling assumptions. For clustering, describe patterns as exploratory rather than verified disease classes.
@@ -1171,7 +1203,7 @@ If one model looks best on the final test and we then tune it again using that r
 
 Finally, return to the people represented by the records. A molecular predictor can reflect sampling, tissue composition or care pathways as well as biology. Feature importance does not establish a mechanism; predictive association does not show that changing a gene or treatment will improve outcomes. Write the finding, its population and its limitations before proposing any next experiment or use.
 
-**Continue reading:** [Machine-learning introduction](../../04_machine_learning/what-is-machine-learning.md), [basic algorithms](../../04_machine_learning/basic-algorithms.md), [package choices](../../04_machine_learning/package-guide.md), and [independent R/Python deployments](../../04_machine_learning/methods-and-deployments.md). Source guidance: [cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [nested evaluation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), [survival methods](https://cran.r-project.org/package=survival), [limma design matrices](https://bioconductor.org/packages/release/workflows/vignettes/RNAseq123/inst/doc/designmatrices.html), and [prediction-model reporting](https://www.tripod-statement.org/).
+**Continue reading:** [Advanced training and informative variables](../../04_machine_learning/advanced-breast-cancer-training.md), [machine-learning introduction](../../04_machine_learning/what-is-machine-learning.md), [basic algorithms](../../04_machine_learning/basic-algorithms.md), [package choices](../../04_machine_learning/package-guide.md), and [independent R/Python deployments](../../04_machine_learning/methods-and-deployments.md). Source guidance: [cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), [nested evaluation](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html), [survival methods](https://cran.r-project.org/package=survival), [limma design matrices](https://bioconductor.org/packages/release/workflows/vignettes/RNAseq123/inst/doc/designmatrices.html), and [prediction-model reporting](https://www.tripod-statement.org/).
 
 [Previous chapter](#chapter-10-what-the-data-cannot-tell-us) · [Return to contents](#contents) · [Next chapter](#chapter-12-research-practice-references-and-next-steps)
 
@@ -1192,6 +1224,8 @@ Before interpreting a result, ask:
 **Intermediate exercise:** compare ESR1, CD8A and COL1A1. Specify a producing-cell hypothesis, an assay that addresses it, and a bulk-RNA alternative explanation. Use each card's source and measurement limit.
 
 **Advanced exercise:** compare the opposing MALAT1 studies or PTEN RNA/protein context. Tabulate intervention, model, endpoint and review extent. Propose a prospective analysis with defined inclusion rules, contrasts, multiplicity control and independent validation; do not present an unperformed experiment as evidence.
+
+**Computational extension:** run the [synthetic feature-selection case](../../04_machine_learning/advanced-breast-cancer-training.md). Trace one person's specimens through the saved folds, distinguish a coefficient from permutation importance, and explain why neither result establishes a gene mechanism. Propose an independent assessment for a panel chosen after reviewing these outputs.
 
 The [annotation register](REFERENCES/ANNOTATION_SOURCE_REGISTER.md), [literature evidence matrix](REFERENCES/GENE_EVIDENCE_MATRIX.md) and [selection rubric](REFERENCES/SELECTION_RUBRIC.md) retain identity, evidence state and selection scope. All sixty gene literature accounts in this edition remain `ABSTRACT_ONLY`; no deeper gene-study audit or replication is claimed. Continue with [R resources](../R/README.md), [follow-along computing](../../docs/research-workflow.md), [research planning](../../docs/research-workflow.md) and [literature methods](../Literature/README.md). Record versions, assumptions and reproducible scripts before interpreting real measurements.
 
