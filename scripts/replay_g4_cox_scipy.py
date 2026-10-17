@@ -63,6 +63,10 @@ def replay(folder,coefficient_tol=2e-4,survival_tol=3e-4):
     data=read(folder/"development_cohort.csv")
     pred=read(folder/"oof_predictions.csv")
     alloc=read(folder/"allocation.csv")
+    coefficients=read(folder/"cox_coefficients.csv")
+    declared={int(v["fold"]):v for v in coefficients}
+    if set(declared)!={1,2,3} or len(coefficients)!=3:
+        raise ValueError("Missing or duplicate coefficient record")
     if len(data)!=180 or len(pred)!=180 or len(alloc)!=240:
         raise ValueError("Unexpected cohort cardinality")
     rows={r["person_id"]:r for r in data}
@@ -78,6 +82,9 @@ def replay(folder,coefficient_tol=2e-4,survival_tol=3e-4):
         held={r["person_id"] for r in test}
         training=[r for r in data if r["person_id"] not in held]
         beta,center,h0=fit_cox(training)
+        expected=np.array([float(declared[fold]["age_years"]),float(declared[fold]["marker"])])
+        if not np.isfinite(expected).all() or np.max(np.abs(beta-expected))>coefficient_tol:
+            raise ValueError(f"Fold {fold} independently fitted coefficient mismatch")
         maxerr=0.0
         for p in test:
             raw=rows[p["person_id"]]
