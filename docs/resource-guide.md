@@ -30,6 +30,7 @@ Use this index when you know the task but are not sure which guide, example or e
 | --- | --- |
 | Find primary studies and coding implications | [Biomedical coding literature matrix](../02_biomedical_coding/BIOMEDICAL_CODING_LITERATURE_MATRIX.md) |
 | Inspect package/API guidance and source versions | [Official methods register](../02_biomedical_coding/OFFICIAL_METHODS_REGISTER.md) |
+| Write and audit Rust research code | [Rust coding source corpus](../02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) and [Rust ML application review](../04_machine_learning/rust-ml-literature.md) |
 | Check gene identity and supporting annotation | [Gene annotation register](../06_RESOURCES/Genomics/REFERENCES/ANNOTATION_SOURCE_REGISTER.md) · [Evidence matrix](../06_RESOURCES/Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md) |
 | Compare executed work with planned milestones | [Roadmap gates](roadmap-gates.md) and [ML corpus validation](../04_machine_learning/corpus-review.md) |
 | Record results and limitations | [Analysis record template](../templates/analysis-record.md) · [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) |
