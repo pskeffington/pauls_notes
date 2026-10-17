@@ -27,7 +27,8 @@ class GdcPreflightTests(unittest.TestCase):
     def test_fail_closed_on_controlled_or_wrong_source(self):
         for variant in ({"access": "controlled"}, {"access": None},
                         {"project": "TCGA-LUAD"}, {"project": None},
-                        {"data_type": "Aligned Reads"}, {"file_id": B}):
+                        {"data_type": "Aligned Reads"}, {"file_id": B},
+                        {"project": "TCGA-COAD"}):
             with self.subTest(variant=variant), self.assertRaises(ValueError):
                 gate.validate_metadata(record(**variant), A)
 
