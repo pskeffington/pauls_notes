@@ -19,6 +19,7 @@ BLOCKED_DIRS = frozenset({
     "raw_data", "controlled_data", "controlled_access", "restricted_data",
     "patient_data", "participant_data", "external_data", "gdc_downloads",
     "private_data", "research_runs", "model_outputs", "datasets",
+    "medical_images", "clinical_images", "patient_images", "restricted_cohorts",
 })
 BLOCKED_ENDINGS = (
     ".bam", ".bai", ".cram", ".fastq", ".fastq.gz", ".fq", ".fq.gz",
