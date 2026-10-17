@@ -44,6 +44,17 @@ jobs:
         run: |
           "$RUNNER_TEMP/native-env/bin/python" 04_machine_learning/examples/breast_cancer_rust_training.py "$RUNNER_TEMP/native-comparison" --binary "$CARGO_TARGET_DIR/release/assay-train"
           "$RUNNER_TEMP/native-env/bin/python" 04_machine_learning/examples/breast_cancer_rust_training.py "$RUNNER_TEMP/native-comparison" --audit-only
+      - name: Build standalone frozen inference without native-training feature
+        run: |
+          cargo +1.90.0 build --release --locked --manifest-path 04_machine_learning/rust/Cargo.toml --bin assay-native-predict --no-default-features
+      - name: Audit G3 frozen exporter, Rust CLI and independent Python parity
+        env:
+          ASSAY_NATIVE_PREDICT_BINARY: ${{ env.CARGO_TARGET_DIR }}/release/assay-native-predict
+        run: |
+          "$RUNNER_TEMP/native-env/bin/python" -m unittest discover -s 04_machine_learning/tests -p test_native_frozen_inference.py -v
+          "$RUNNER_TEMP/native-env/bin/python" 04_machine_learning/validation/validate_native_frozen_inference.py "$RUNNER_TEMP/native-comparison" "$ASSAY_NATIVE_PREDICT_BINARY" "$RUNNER_TEMP/g3-frozen-parity"
+      # The parity bundle includes synthetic row-level model/prediction files.
+      # Do not add this directory to upload-artifact: retain only CI summary.
       - name: Preserve complete or failed native training evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
