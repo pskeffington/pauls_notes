@@ -6,6 +6,8 @@ Keep material organized by subject. Tie machine-learning additions to the breast
 
 Use descriptive `snake_case` names for R and Python functions. Validate schemas, identifiers, types, and missingness before analysis. Keep source files free of work on import where practical. Use explicit seeds for stochastic examples, preserve independent units during resampling, and fit preprocessing within the training partition.
 
+For Rust code, use the [source-backed best-practices checklist](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md): preserve the frozen native-training contract, pinned toolchain/dependencies, safe-Rust boundary and independent numerical validation. New Rust feature claims require their own execution and review evidence.
+
 Write generated results to a new directory outside the repository. Record software versions, input provenance, partition membership, and the commands needed to reproduce an analysis. Keep participant data and credentials out of source and shared outputs. Inspect embedded values before sharing interactive figures.
 
 Run commands below from the repository root. Python checks use the standard library except for the machine learning suite, which requires the pinned packages in [its requirements file](04_machine_learning/requirements-python.txt). R dependencies and example execution commands are documented in the [learning guide](03_learning/README.md) and [machine learning guide](04_machine_learning/README.md).
