@@ -62,9 +62,9 @@ class PublicDataBoundaryTests(unittest.TestCase):
         for mode in (b"120000", b"160000"):
             def git_fake(*args):
                 if args == ("ls-files", "--stage", "-z"):
-                    return mode + b" " + (b"0" * 40) + b" 0\\tlink.csv\\0"
+                    return mode + b" " + (b"0" * 40) + b" 0\tlink.csv\0"
                 if args == ("diff", "--cached", "--name-only", "--diff-filter=ACMR", "-z"):
-                    return b"link.csv\\0"
+                    return b"link.csv\0"
                 raise AssertionError("A nonregular file must never be resolved")
             with self.subTest(mode=mode), mock.patch.object(guard, "git_output", side_effect=git_fake):
                 entries = list(guard.paths_and_reader(staged=True))
