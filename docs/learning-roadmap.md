@@ -16,6 +16,8 @@ The shared narrative is **people → specimens → measurements → data prepara
 | ML introduction, algorithms, visual data-flow guide and breast cancer narrative | A connected reading route from data meaning to prediction |
 | R caret, direct R and Python examples | Independently executable teaching mechanisms with stated input and partition contracts |
 | Rust frozen-model prediction | Compiled CLI with preserved preprocessing, typed inputs and cross-language parity; [native fitting](../04_machine_learning/rust-native-training.md) adds a separately frozen all-feature objective comparison |
+| Beginner-to-engineering Rust sequence | [Seven-stage foundations course](../03_learning/rust/README.md), [pinned Cargo lab](../03_learning/rust/lab/Cargo.toml) and [book-linked handbook](../02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md); code tests passed, learner mastery still needs demonstration |
+| Source-graded Rust coding evidence | [34-source coding corpus](../02_biomedical_coding/rust_coding_best_practices_sources.csv), [eight-paper bibliography](../02_biomedical_coding/rust_coding_references.bib) and [gate review](roadmap-gates.md#r1-rust-literature-and-coding-quality-corpus); source checks are not security/clinical validation |
 | Five-year Rust ML review | [11 publications/manuscripts and six pinned software inspections](../04_machine_learning/rust-ml-literature.md), with explicit project decisions; external studies remain unreplicated |
 | Paired-specimen selection with candidate traces | Training-only selection, grouped nested assessment and saved prediction replay on invented data |
 | 36-paper register and dated review | Traceable sources and limitations; three records remain abstract-limited |
