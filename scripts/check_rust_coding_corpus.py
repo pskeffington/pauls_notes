@@ -125,12 +125,12 @@ def inspect(rows, guide, root=ROOT, today=None):
 def inspect_bibliography(rows, bibliography):
     """Verify this deliberately simple BibTeX register against publication identities."""
     errors = []
-    matches = re.findall(r"^@(article|inproceedings|misc)\\{(RCP\\d{2}),\\n(.*?)^\\}", bibliography, re.M | re.S)
+    matches = re.findall(r"^@(article|inproceedings|misc)\{(RCP\d{2}),\n(.*?)^\}", bibliography, re.M | re.S)
     entries = {}
     for kind, key, body in matches:
         if key in entries:
             errors.append(f"{key}: duplicate bibliography entry")
-        fields = dict(re.findall(r"^\\s+([a-z]+)=\\{([^}\\n]*)\\},?$", body, re.M))
+        fields = dict(re.findall(r"^\s+([a-z]+)=\{([^}\n]*)\},?$", body, re.M))
         entries[key] = (kind, fields)
     papers = {row["id"].replace("-", ""): row for row in rows if row.get("kind") in {"paper", "preprint"}}
     if set(entries) != set(papers):
