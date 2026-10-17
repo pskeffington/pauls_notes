@@ -23,7 +23,8 @@ fn beginner_math_to_research_contract() {
     let prepared = MedianPreparation::fit(&train).unwrap();
     assert_eq!(prepared.transform(&test).unwrap()[0], 15.0);
     let pair = Pair::new(train[0].clone(), train[1].clone()).unwrap();
-    assert_eq!(pair.log2_change().unwrap(), Some(1.0));
+    let observed_change = pair.log2_change().unwrap().unwrap();
+    assert!((observed_change - 1.0).abs() < 1e-12);
 
     let annotation = GeneAnnotation::new("CD8A", "immune marker context").unwrap();
     let displays = describe_many(&[&test[0], &annotation]);
