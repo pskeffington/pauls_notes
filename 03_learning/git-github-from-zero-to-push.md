@@ -31,6 +31,7 @@ For HTTPS repositories, use a supported Git credential helper, the GitHub CLI, o
 ```bash
 gh auth login
 gh auth status
+gh auth setup-git    # configure Git to use the GitHub CLI credential helper
 ```
 
 Follow the interactive prompts. The GitHub CLI can configure Git HTTPS authentication. SSH is an alternative: create and register an SSH public key with GitHub before using an `git@github.com:OWNER/REPO.git` URL. Never paste tokens, private SSH keys, credentials, participant data, or research records into commits.
@@ -67,7 +68,7 @@ git remote add origin https://github.com/OWNER/my-first-repo.git
 git push -u origin main
 ```
 
-This is the shortest complete first-push path. `-u` records the remote tracking branch, so later `git push` is usually enough. If the remote already contains a commit, **do not force push**; clone it or reconcile history instead.
+In Windows PowerShell, replace the Unix `printf` line with `Set-Content -Path README.md -Value "# My first repository"`. All other Git commands in this block are supported in PowerShell.\n\nThis is the shortest complete first-push path. `-u` records the remote tracking branch, so later `git push` is usually enough. If the remote already contains a commit, **do not force push**; clone it or reconcile history instead.
 
 ## 4. The everyday change → commit → push workflow
 
@@ -142,7 +143,7 @@ If you must amend a shared branch, coordinate before rewriting history. Never fo
 
 Before `git add`, inspect `git status` and `git diff`. Keep `.env`, credentials, private keys, virtual environments, generated archives, large analysis outputs, controlled data, patient-linked records, and any source without publication permission **out of Git**. Use a reviewed `.gitignore` but remember that ignoring a file does not untrack files already committed. For Paul's Notes, use **synthetic, nonclinical examples only** unless independent dataset admission and privacy gates authorize a different workflow. Running `git push` publishes to the remote according to that repository's visibility and access controls.
 
-**Practice challenge:** Clone a repository you can write to, create a `docs/practice` branch, change one harmless sentence in a README, run `git status` and `git diff`, stage the README only, commit, push the branch, and open a PR. Show that you can explain where each change lives: working tree → staging area → local commit → remote branch → reviewed merge.
+**Visual model:** Your edited file is in the *working tree*; `git add` moves a snapshot into the *staging area*; `git commit` records it in *local history*; `git push` uploads commits to a *remote branch*. A pull request proposes integrating that branch into another branch.\n\n**Practice challenge:** Clone a repository you can write to, create a `docs/practice` branch, change one harmless sentence in a README, run `git status` and `git diff`, stage the README only, commit, push the branch, and open a PR. Show that you can explain where each change lives: working tree → staging area → local commit → remote branch → reviewed merge.
 
 **Completion check:** You can reproduce the workflow without copying a token into code, distinguish commit from push and push from PR merge, and recover safely from an uncommitted change or rejected push.
 
