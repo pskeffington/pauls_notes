@@ -1,0 +1,37 @@
+name: Rust book teaching example
+
+on:
+  pull_request:
+    paths:
+      - "02_biomedical_coding/**"
+      - ".github/workflows/rust-book-handbook-validation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "02_biomedical_coding/**"
+      - ".github/workflows/rust-book-handbook-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  book-synthetic-example:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install book's pinned Rust toolchain
+        run: rustup toolchain install 1.90.0 --profile minimal --component rustfmt
+      - name: Check independently runnable Rust teaching source
+        run: |
+          rustfmt +1.90.0 --check --edition 2021 02_biomedical_coding/examples/book_paired_specimens.rs
+          rustc +1.90.0 --edition=2021 --test 02_biomedical_coding/examples/book_paired_specimens.rs -o "$RUNNER_TEMP/book-paired-tests"
+          "$RUNNER_TEMP/book-paired-tests"
+          rustc +1.90.0 --edition=2021 02_biomedical_coding/examples/book_paired_specimens.rs -o "$RUNNER_TEMP/book-paired-demo"
+          "$RUNNER_TEMP/book-paired-demo" > "$RUNNER_TEMP/book-example-output.txt"
+          grep -F "pairs=6 | mean_log2=0.500 | leave_one_out=[0.200,0.800]" "$RUNNER_TEMP/book-example-output.txt"
+          grep -F "Research teaching only; no TCGA data, clinical model or inference." "$RUNNER_TEMP/book-example-output.txt"
