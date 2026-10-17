@@ -5,7 +5,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from audit_branch_retention import (
-    branch_link_counts, classify, REPOSITORY_RE,
+    branch_link_counts, classify, valid_repository, REPOSITORY_RE,
 )
 
 REPO = "pskeffington/pauls_notes"
@@ -124,10 +124,12 @@ class BranchRetentionAuditTests(unittest.TestCase):
 
     def test_repository_slug_validation(self):
         self.assertIsNotNone(REPOSITORY_RE.fullmatch(REPO))
+        self.assertTrue(valid_repository(REPO))
         for bad in ("https://api.github.com/evil", "../../private",
-                    "owner/one/two", "owner name/repo"):
+                    "owner/one/two", "owner name/repo",
+                    "../private", "owner/..", "./repo"):
             with self.subTest(bad=bad):
-                self.assertIsNone(REPOSITORY_RE.fullmatch(bad))
+                self.assertFalse(valid_repository(bad))
 
 
 if __name__ == "__main__":
