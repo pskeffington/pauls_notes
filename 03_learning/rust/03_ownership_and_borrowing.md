@@ -1,5 +1,7 @@
 # 3. Ownership and borrowing without jargon
 
+**Scope:** All identifiers and measurements in these examples are invented or synthetic; no participant data are used.
+
 [← Collections](02_collections_and_control.md) · [Course contents](README.md) · [Next: structs and traits](04_structs_traits_and_composition.md)
 
 Rust does not depend on a garbage collector for most memory management. Instead, the compiler enforces ownership and borrowing rules. Learning these rules helps with efficient software and also makes it easier to see **when a function can modify the study data**.
