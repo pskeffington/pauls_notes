@@ -21,6 +21,7 @@ class PublicDataBoundaryTests(unittest.TestCase):
                      "04_machine_learning/gdc_downloads/data.txt", "data/case.vcf",
                      "model_weights.onnx", "sample.fastq.gz", "clinical.project-tcga-brca.tar.gz",
                      "other_tumor_slide.ndpi", "brain_tumor.nii.gz", "unknown_scan.nrrd",
+                     "medical_images/scan.png", "patient_images/tile.jpg",
                      "local/gdc-token-2026.txt"):
             with self.subTest(path=path):
                 self.assertTrue(guard.inspect(path, b"file contents"))
