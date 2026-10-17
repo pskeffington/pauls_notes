@@ -24,6 +24,7 @@ REQUIRED_FIELDS = {
     "real_patient_training_authorized",
 }
 STATES = {"complete_bounded", "in_review", "planned", "blocked"}
+TRACKS = {"scientific_software", "rust_education", "rust_engineering", "data_governance"}
 STATE_LABEL = {
     "complete_bounded": "**Complete (bounded)**",
     "in_review": "**In review",
@@ -79,9 +80,11 @@ def inspect(snapshot, roadmap, root=ROOT):
         if set(gate) != REQUIRED_FIELDS:
             errors.append(f"{ident}: unexpected/missing contract fields")
             continue
-        for key in ("title", "track", "exit_criteria", "limitations", "next_action"):
+        for key in ("title", "exit_criteria", "limitations", "next_action"):
             if not isinstance(gate[key], str) or len(gate[key].strip()) < 24:
                 errors.append(f"{ident}: missing substantive {key}")
+        if gate["track"] not in TRACKS:
+            errors.append(f"{ident}: unknown scientific/engineering/governance track")
         if gate["status"] not in STATES:
             errors.append(f"{ident}: invalid delivery state")
             continue
@@ -129,9 +132,8 @@ def inspect(snapshot, roadmap, root=ROOT):
                 errors.append(f"{ident}: a planned or blocked milestone has no accepted execution evidence")
             if safe_path(gate["source_path"]) and not (root / gate["source_path"]).is_file():
                 errors.append(f"{ident}: planned/blocked source reference missing")
-        row = next((line for line in roadmap.splitlines()
-                    if line.startswith(f"| {ident} |")), None)
-        if row is None or STATE_LABEL[state] not in row:
+        rows = [line for line in roadmap.splitlines() if line.startswith(f"| {ident} |")]
+        if not any(STATE_LABEL[state] in row for row in rows):
             errors.append(f"{ident}: published summary is missing or has an inconsistent status")
         if pr and f"https://github.com/{OWNER}/pull/{pr}" not in roadmap:
             errors.append(f"{ident}: recorded PR must appear in the human-readable ledger")
