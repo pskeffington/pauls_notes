@@ -118,7 +118,7 @@ def branch_link_counts(texts, repository, names):
     repo = re.escape(repository)
     patterns = (
         re.compile(r"https://github\.com/" + repo +
-                   r"/(?:blob|tree)/([^\s<>)\]]+)", re.I),
+                   r"/(?:blob|tree|raw)/([^\s<>)\]]+)", re.I),
         re.compile(r"https://raw\.githubusercontent\.com/" + repo +
                    r"/([^\s<>)\]]+)", re.I),
     )
@@ -188,6 +188,8 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
             "decision": decision,
             "pull_requests": sorted(p["number"] for p in associated),
             "merged_prs": sorted(p["number"] for p in merged_prs),
+            "merged_commit_shas": sorted(p["merge_commit_sha"] for p in merged_prs
+                                        if p.get("merge_commit_sha")),
             "branch_qualified_links_in_default_tree": source_links[name],
             "branch_qualified_links_in_pr_bodies": pr_links[name],
         })
