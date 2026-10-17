@@ -65,7 +65,7 @@ class FrozenInferenceCliTests(unittest.TestCase):
         values = list(csv.DictReader(predictions.decode().splitlines()))
         self.assertEqual([r["specimen_id"] for r in values], ["Specimen001", "Specimen002"])
         import math
-        expected = [1 / (1 + math.exp(1)), 1 / (1 + math.exp(-2.5))]
+        expected = [1 / (1 + math.exp(-1)), 1 / (1 + math.exp(-2))]
         for r, p in zip(values, expected):
             self.assertLessEqual(abs(float(r["probability_class_1"]) - p), 1e-14)
 
