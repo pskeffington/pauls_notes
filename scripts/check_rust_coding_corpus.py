@@ -19,6 +19,8 @@ MANIFEST = ROOT / "04_machine_learning/rust/Cargo.toml"
 TOOLCHAIN = ROOT / "04_machine_learning/rust/rust-toolchain.toml"
 LOCK = ROOT / "04_machine_learning/rust/Cargo.lock"
 LIBRARY = ROOT / "04_machine_learning/rust/src/lib.rs"
+BOOK = ROOT / "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md"
+BOOK_EXAMPLE = ROOT / "02_biomedical_coding/examples/book_paired_specimens.rs"
 
 FIELDS = (
     "id", "kind", "year", "title", "authors_or_owner", "venue_or_document",
@@ -178,14 +180,45 @@ def inspect_rust_baseline(root=ROOT):
     return errors
 
 
+def inspect_book_alignment(guide, book, rust_source):
+    """Prevent a generic Rust style guide from losing its biological context."""
+    errors = []
+    path = "../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-"
+    for number in range(1, 13):
+        if not re.search(re.escape(path) + str(number) + r"-[a-z0-9-]+", guide):
+            errors.append(f"Missing Rust-to-book Chapter {number} crosswalk link")
+    expected = (
+        "SYNTHETIC", "six invented pairs", "0.5 log2 units",
+        "0.2 to 0.8", "60 invented people", "48 anonymous",
+        "training", "assessment", "clinical",
+        "f64::total_cmp", "Result", "Cargo.lock",
+    )
+    for needle in expected:
+        if needle not in guide:
+            errors.append(f"Missing handbook concept: {needle}")
+    if "Rust coding handbook" not in book or "examples/book_paired_specimens.rs" not in book:
+        errors.append("Breast cancer book Chapter 11 must link back to Rust handbook/example")
+    for needle in ("#![forbid(unsafe_code)]", "const BOOK_ROWS: [Measurement; 12]",
+                   "fn complete_pairs(", "fn validate_person_partition(",
+                   "fn log2_contrasts(", "fn leave_one_out_range("):
+        if needle not in rust_source:
+            errors.append(f"Missing standalone Rust book exercise contract: {needle}")
+    if "https://api.gdc.cancer.gov/data/" in rust_source or "reqwest" in rust_source:
+        errors.append("Book arithmetic exercise must not fetch patient/remote data")
+    return errors
+
+
 def main():
     rows = read_rows()
     errors = (inspect(rows, GUIDE.read_text(encoding="utf-8"))
               + inspect_bibliography(rows, BIBLIOGRAPHY.read_text(encoding="utf-8"))
-              + inspect_rust_baseline())
+              + inspect_rust_baseline()
+              + inspect_book_alignment(GUIDE.read_text(encoding="utf-8"),
+                                       BOOK.read_text(encoding="utf-8"),
+                                       BOOK_EXAMPLE.read_text(encoding="utf-8")))
     if errors:
         raise SystemExit("\n".join(errors))
-    print("PASS: Rust coding corpus 34 sources; classifications, reviewed claims, source cards and pinned Rust baseline")
+    print("PASS: Rust coding corpus 34 sources; chapter-by-chapter breast cancer handbook, tested example linkage and pinned Rust baseline")
 
 
 if __name__ == "__main__":

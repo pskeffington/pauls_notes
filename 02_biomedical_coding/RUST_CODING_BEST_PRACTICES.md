@@ -1,8 +1,10 @@
-# Rust coding best practices: verified sources and research-workflow checks
+# Rust engineering handbook: best practices for breast cancer research
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
 [Biomedical coding](README.md) · [Machine-learning methods](../04_machine_learning/README.md) · [Rust ML literature](../04_machine_learning/rust-ml-literature.md) · [Native Rust training](../04_machine_learning/rust-native-training.md) · [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) · [Structured source register](rust_coding_best_practices_sources.csv) · [Publication bibliography](rust_coding_references.bib)
+
+**Read first:** [Book chapter crosswalk](#1-chapter-by-chapter-crosswalk-what-rust-must-preserve) · [Run the six-pair Rust exercise](#2-example-first-workflow-reproduce-the-books-six-pairs) · [Types and input contracts](#3-types-should-rule-out-scientific-category-errors-rg-01--rg-02) · [ML leakage prevention](#5-separate-partitioning-preprocessing-fitting-and-evaluation-rg-01--rg-05) · [Pull-request checklist](#9-small-actionable-pull-request-review-checklist) · [Source appraisals](#source-by-source-coding-decisions)
 
 **Evidence checked on 2026-10-17.** This targeted coding-focused corpus contains **34 distinct sources: 6 peer-reviewed papers, 2 preprints, 17 primary Rust documentation pages, and 9 tool/framework references**. It complements—not replaces—the separate [Rust machine-learning review](../04_machine_learning/rust-ml-literature.md) of native training, deployment, bindings, and single-cell methods.
 
@@ -59,6 +61,187 @@ The native training experiment additionally requires the independent [frozen pro
 | Rust performance comparison | Using differing optimizer criteria, target CPU flags or thread counts | Match inputs and mathematical objective; report precision, compiler, machine, repetitions and actual numerical differences |
 
 **Privacy and model-use disclaimer:** All current executable assay data referenced by this guide are **synthetic teaching data**. No biological or clinical accuracy is established by these sources or Rust's language guarantees. Any future use of GDC open data requires separately approved inputs and scientific methods. Models are **research/education only**, never for diagnosis, treatment decisions or individualized prognosis; do not attempt patient reidentification.
+
+
+## Practical Rust handbook: from the book to defensible code
+
+This is the **operational engineering guide** for the [breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md), not a claim that a literature paper validates a cancer model. The source cards below remain the research trace. Follow the implementation order here: **observation meaning → type/schema → partition → transformation → fit → evaluation → interpretation → safe release**. Use the book's own terminology and do not silently broaden a specimen-category classifier into screening, survival, a subtype assay or therapeutic prediction.
+
+### 1. Chapter-by-chapter crosswalk: what Rust must preserve
+
+| Book chapter | Scientific meaning | Rust responsibility | Failure to test |
+| --- | --- | --- | --- |
+| [1 — People](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-1-the-people-behind-the-numbers) | Human participants, not rows or file counts | A stable `PersonId` / case mapping never used as a predictor | Double-counting specimens as independent people |
+| [2 — Dataset](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-2-understanding-the-breast-cancer-dataset) | Person → case → tissue → sample → assay file | Different identifier types; unique mapping and duplicate checks | Joining expression columns to the wrong specimen |
+| [3 — Measurement](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-3-how-researchers-measure-genes) | Counts, normalized measurements and log units differ | Declare `MeasurementScale`, gene ID/version and missingness semantics | Treating TPM/log TPM as raw RNA-seq counts |
+| [4 — Subtypes](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-4-why-tumors-behave-differently) | Expression category and clinical receptor findings are different labels | Typed `TargetDefinition` plus independent label provenance | Training/evaluating on circular expression-derived subtypes |
+| [5 — Gene biology](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-5-the-biology-behind-the-60-genes) · [6 — Gene atlas](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas) · [7 — Pathways](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-7-from-genes-to-biological-pathways) | Curated functions and pathway membership, not trained signatures | Immutable feature identities and an external source/annotation register | Mistaking a category network for molecular binding |
+| [8 — Evidence and pairing](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-8-from-measurements-to-scientific-evidence) | One person may contribute two dependent specimens | Group-exclusive train/assessment and complete pair checks | Cross-person leakage, mistaken sample-size denominators |
+| [9 — Figures](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-9-reading-the-scientific-figures) | Charts must disclose units, populations and denominators | Export aggregate plot data with versioned calculation provenance | A calibration plot with unreported sparse bins |
+| [10 — Limits](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-10-what-the-data-cannot-tell-us) | Associations are not mechanistic or clinical evidence | Explicit model-card restrictions and research-purpose type | A performance number promoted into a clinical claim |
+| [11 — Research question](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-11-working-through-a-research-question) | Six-pair arithmetic and synthetic tissue classification are separate exercises | Test the literal arithmetic and the independent ML objective separately | Replacing a six-pair sensitivity analysis with a confidence interval |
+| [12 — Reporting](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-12-research-practice-references-and-next-steps) | Findings need an auditable design and limitations | Preserve source/config/lock hashes, versions, errors and run status | Publishing unrepeatable or privacy-sensitive outputs |
+
+**Two distinct teaching datasets must stay distinct.** The book's Chapter 11 arithmetic uses **six invented pairs with a single comparable measurement**. The compiled [standalone Rust exercise](examples/book_paired_specimens.rs) reproduces it. The existing [G3 Rust native-training study](../04_machine_learning/rust-training-protocol.md) uses **60 invented people, two specimens per person and 48 anonymous continuous features**; it is a logistic software comparison with its own frozen loss. **Neither uses the book's 60 named genes as fitted predictors**, and neither establishes a TCGA-derived result.
+
+### 2. Example-first workflow: reproduce the book's six pairs
+
+**SYNTHETIC TEACHING EXERCISE — NO PARTICIPANT DATA.** The executable file [`examples/book_paired_specimens.rs`](examples/book_paired_specimens.rs) uses only the Rust standard library, no external dataset, no package installation and no access token. Compile it with the pinned **Rust 1.90.0** toolchain. Commands are run from repository root and write binaries only to `/tmp`, outside Git:
+
+~~~bash
+rustup toolchain install 1.90.0 --profile minimal --component rustfmt
+rustfmt +1.90.0 --check --edition 2021 02_biomedical_coding/examples/book_paired_specimens.rs
+rustc +1.90.0 --edition=2021 --test 02_biomedical_coding/examples/book_paired_specimens.rs -o /tmp/book-paired-tests
+/tmp/book-paired-tests
+rustc +1.90.0 --edition=2021 02_biomedical_coding/examples/book_paired_specimens.rs -o /tmp/book-paired-demo
+/tmp/book-paired-demo
+~~~
+
+The six invented log2(tumor/comparator) contrasts are **+1, +2, 0, −1, +1, 0**. The aggregate mean is **0.5 log2 units** and the one-person-omitted means range from **0.2 to 0.8**. These are exact educational expectations, not confidence limits. The file checks complete pairs, duplicate tissues, nonpositive/nonfinite measurements, extreme numerical ratios, person overlap, and exhaustive partitions. The unit of statistical independence is **six invented people**, not twelve independent specimens.
+
+**Why this code pattern?** `Tissue` is an enum instead of a Boolean; `Measurement` and `CompletePair` capture the identity and value contract; `BTreeMap` makes grouping and deterministic order explicit; `Result` propagates malformed inputs rather than silently dropping a specimen; `f64::is_finite` rejects NaN and infinity. Logarithms are subtracted after checking positive inputs, avoiding intermediate ratio overflow. `leave_one_out_range` removes one **whole person** at a time, consistent with Chapter 8.
+
+The example intentionally does **not** normalize actual RNA-seq counts, estimate a population effect, fit a model, claim group differences, read TCGA cases, or implement survival analysis. Changing the arithmetic input to a real molecular table is a **new study**, not merely a different constant.
+
+### 3. Types should rule out scientific category errors (RG-01 / RG-02)
+
+Prefer small, validated domain types over loosely related integers and strings. `PersonId`, `SpecimenId`, `AssayId`, `GeneId`, `ObservationUnit` and `TargetDefinition` are **conceptual design types** for a future adapter; not all are implemented in the current crate. In a new module, give validated types private fields and checked constructors:
+
+~~~rust
+#[derive(Clone, Debug, Eq, PartialEq, Hash)]
+pub struct PersonId(String);
+
+impl TryFrom<String> for PersonId {
+    type Error = &'static str;
+
+    fn try_from(raw: String) -> Result<Self, Self::Error> {
+        if raw.is_empty() || raw.trim() != raw || raw.chars().any(char::is_control) {
+            return Err("Invalid participant identifier");
+        }
+        Ok(Self(raw))
+    }
+}
+~~~
+
+This *illustrates* Rust's newtype pattern; it is not a commitment to store real TCGA barcodes or print them in logs. Keep personal/linkable IDs in an authorized local data adapter only. Use `enum` for a closed class/measurement scale, `struct` for named fields, `Option<f64>` for truly missing numeric inputs (not zero), `Result<T,E>` for invalid input, and iterators/slices when copies are unnecessary. Reserve `unwrap`/`expect` for fixtures or previously proved invariants rather than boundary-facing production code. See [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/checklist.html) ([RC-D03](#rc-d03)) and [error handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ([RC-D01](#rc-d01)).
+
+Use ownership deliberately: immutable borrows `&[T]` for read-only feature and split data; owned `Vec<T>` when the procedure must retain or transform it; avoid unnecessary cloning inside folds. Preserve deterministic iteration order when serializing evidence. Do not replace a checked type or explicit error with a panic merely because Rust would prevent a dangling reference.
+
+### 4. Parse → validate → admit; never deserialize directly into trust (RG-03 / RG-10)
+
+**Four different gates must all pass:**
+
+1. **Storage/access:** A file's membership in TCGA-BRCA is not proof that it is GDC open access. Confirm authoritative per-file `access=open` and the approved project, then review local handling, small groups and restrictions. This guide does not authorize any real-data training.
+2. **Schema:** Whitelist required fields and reject unknown or omitted keys (`#[serde(deny_unknown_fields)]`). Verify version, protocol, class definitions and feature ordering.
+3. **Biological record:** Check person-to-specimen/sample relations, complete or declared missing pairs, duplicate keys, tissue label direction, batch/time meaning and assay units. A matrix's shape is not its meaning.
+4. **Algorithm:** Check nonempty training sets, per-feature finite observed values, no duplicate indices or group overlap, and no assessment-only knowledge embedded in fitted preprocessing.
+
+In the existing [Rust `Input::validate`](../04_machine_learning/rust/src/training.rs), the schema has `person_id`, `specimen_id`, `cohort_row`, `label` and `values: Vec<Option<f64>>`. The fixture requires exactly two tissue-category labels per fictional person; a real cohort could legitimately have a different sampling design, so **a new protocol** must define the permissible counts rather than bypassing the check. Preserve feature names *and* order when transposing an expression matrix; an assay feature reorder can yield plausible-looking but wrong predictions.
+
+**Never** log or commit direct identifiers, participant barcodes, raw downloaded files, controlled-access GDC data, fitted real-person models or row-level predictions into this public corpus. General `serde` syntax is not a privacy filter. The separate [TCGA/privacy toolkit proposal (draft PR #7)](https://github.com/pskeffington/pauls_notes/pull/7) includes more safeguards but is **not a merged permission change**. See the [research access contract](../docs/research-workflow.md#2-specify-input-and-access-contracts).
+
+### 5. Separate partitioning, preprocessing, fitting and evaluation (RG-01 / RG-05)
+
+The [actual native-training implementation](../04_machine_learning/rust/src/training.rs) separates `Input::validate`, `Preparation::fit`, `Preparation::transform`, `objective_gradient`, and `fit`. The design is more important than the choice of crate:
+
+- **Split by people**, not by rows, tissue specimens, sequencing libraries or individual cells. Development, inner assessment, outer assessment and final reserved people are separate obligations. Keep any related donor/family/site hierarchy consistent with the study question.
+- **Fit transformations on current training people only.** Median imputation, scaling, supervised gene ranking/selection, calibration and dimensionality reduction all become part of the fitted procedure. Inner validation never learns medians or selected features from its held-out people.
+- **Respect the label's origin.** Synthetic tissue category 0/1 is not a clinically verified receptor, PAM50, recurrence, survival or treatment-response endpoint. An expression-derived subtype is especially vulnerable to circular assessment if the predictors overlap the labeling algorithm.
+- **Freeze the search** before evaluating it. Inner scores choose parameters; outer-held-out predictions assess the entire search; a reserved final cohort must not be used to debug or select settings.
+- **Do not fit models using the book's genes because they look biologically persuasive.** The curated 60-gene atlas is a learning map. ESR1, ERBB2 and MKI67 lead to hormone/growth/proliferation biology, while CD8A and COL1A1 invite immune/stromal-composition questions. They are **not measured feature rankings in the current synthetic model**.
+
+Test that changing a held-out row cannot alter the fitted training medians, scaling, coefficients or feature selection. The existing G3 suite includes `assessment_mutation_cannot_change_training`. A high AUC does not detect this class of leakage, and duplicate biological units may produce persuasive but invalid precision.
+
+### 6. Treat floating-point results as part of the scientific contract (RG-05)
+
+A Rust program that compiles can still return a biologically meaningless or numerically invalid estimate. In the [frozen G3 study](../04_machine_learning/rust-training-protocol.md), the objective is a **specific regularized logistic loss** using canonical **category-1** labels, penalty `0.5 * sum(w_j²)` and an unpenalized intercept; the exact loss normalization, optimizer and termination checks matter. The code uses:
+
+- `f64` values with explicit finite checks before and after preprocessing, loss evaluation and prediction; positive scales and nonempty training columns.
+- `f64::total_cmp` **only after nonfinite observations are screened** when sorting training values for medians. `total_cmp` defines an order even for NaNs; this does *not* make NaNs acceptable measurements.
+- Stable sigmoid and softplus calculations rather than unchecked `exp(z) / (1 + exp(z))` on extreme logits.
+- A separately calculated loss/gradient; the frozen G3 accepts the fit only when the gradient infinity norm is at most `1e-6`. It also compares canonical Rust probabilities with the library's encoded class probabilities to absolute difference at most `1e-12`.
+- Independent Python comparisons, fixed cohort/split seeds, exact input and source provenance, and explicit optimizer failures.
+
+The thresholds above are **specific to frozen G3**: do not relax them after viewing failing results or copy them into a new model as universal standards. For a new model, declare a new numeric tolerance and comparator *before* inspecting assessment outcomes. Never silently reinterpret coefficients with the opposite positive class. Favor checked matrix shapes and failure on an all-missing training column, nonfinite gradient, exhausted iteration budget, or invalid model weights. See [`f64` documentation](https://doc.rust-lang.org/std/primitive.f64.html) ([RC-D10](#rc-d10)) and [pinned Linfa docs](https://docs.rs/linfa-logistic/0.8.1/linfa_logistic/) ([RC-T07](#rc-t07)).
+
+### 7. Test a scientific contract, not just the implementation (RG-04 / RG-09)
+
+| Test layer | Expected signal | Deliberate negative control | Repository action |
+| --- | --- | --- | --- |
+| Tiny arithmetic oracle | Six invented pairs produce 0.5, leave-one-out 0.2–0.8 | Missing/duplicate pair, zero or infinite measurement | [Rust book example](examples/book_paired_specimens.rs) |
+| Schema/property | Unique IDs, finite values and exact feature order | Swap feature columns, duplicate row, add unknown JSON field | [Rust `Model` tests](../04_machine_learning/rust/src/lib.rs) |
+| Statistical design | Train and assessment people disjoint | Reassign one person across sides; mutate held-out values | [Native Rust training tests](../04_machine_learning/rust/src/training.rs) |
+| Numerical algorithm | Known gradients, sign mapping, stable probabilities | Reversed label, saturated logit, no convergence | [G3 validation](../04_machine_learning/rust-native-training.md) |
+| Cross-runtime parity | Rowwise predicted probabilities match declared tolerance | Change normalization, class polarity or a coefficient | [Rust/Python validation](../04_machine_learning/validation/validate_rust_inference.py) |
+| Malicious data | No unsafe export, panic or unbounded allocation on untrusted bytes | Oversized CSV/JSON, malformed UTF-8, unknown keys and duplicate IDs | **Fuzzing/resource quotas proposed, not yet audited** |
+| Independent study | New-site, new-person performance and biological relevance | Reusing discovery subjects in assessment | **Not established for any clinical TCGA endpoint** |
+
+[Recent empirical studies](#rc-p01) motivate adversarial cases; [RULF](#rc-p02) motivates API-aware fuzzing. Tools such as [cargo-fuzz](#rc-t04), [Kani](#rc-p07), [Verus](#rc-p04) and [RefinedRust](#rc-p05) can complement testing for bounded properties. **They are optional research candidates here, not installed/executed security proofs**. Model-checker completeness is limited by its harness, assumptions, bounds and unsupported features.
+
+### 8. Structure the crate for review and reproducible execution (RG-02 / RG-06 / RG-07)
+
+Keep **library code** small and testable, and **CLI code** limited to argument handling, validated input reading, output management and a recorded exit status. Keep training and inference artifacts distinct; a previously fitted model should not carry training labels or silently refit. A practical module boundary for future code is:
+
+~~~text
+domain/       person, specimen, assay and target types (validated)
+ingest/       local authorized file admission; mapping and schema
+splits/       deterministic person-level memberships
+prepare/      fit/transform with training-only parameters
+models/       declared objective and class mappings
+evaluate/     held-out metrics, error and uncertainty records
+artifacts/    non-overwriting external outputs, hash/provenance
+cli/          flags, errors and exit status; no scientific decisions
+~~~
+
+**This is a proposed module organization, not the present crate tree.** The existing crate deliberately keeps its frozen synthetic objective in `src/training.rs` and frozen inference in `src/lib.rs`; adding modules is a separate change requiring parity checks.
+
+| Guard | Required practice | What it does **not** prove |
+| --- | --- | --- |
+| Pinned toolchain | Rust `1.90.0`, edition `2021`, `rustfmt`, Clippy; review any migration | Identical machine code or independent experiment |
+| Dependency resolution | Commit `Cargo.lock` and use `cargo --locked` | No vulnerable transitive crate |
+| Unsafe scope | `#![forbid(unsafe_code)]` in first-party modules; inspect dependencies/FFI separately | All dependencies are written in safe Rust |
+| IO discipline | Validate first; write to a new output directory outside Git; `OpenOptions::create_new(true)` | Atomic whole-run transaction or privacy deidentification |
+| Provenance | Input/config/lock/source hashes, features, seeds, versions, CPU/flags and class mapping | Scientific validity of the chosen endpoint |
+| Supply-chain review | Pilot RustSec, cargo-deny and cargo-vet under pinned policy and documented reviewers | An absence of undiscovered vulnerabilities |
+| Performance | Profile separate read/prepare/fit/score phases; controlled warmup and repetitions | Faster Rust necessarily improves clinical utility |
+
+Rust's API guidelines [recommend meaningful errors and validation](https://rust-lang.github.io/api-guidelines/dependability.html); the [Cargo Book](https://doc.rust-lang.org/cargo/commands/cargo-test.html) explains `--locked`. The [Rustonomicon](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) documents the additional invariant burden of unsafe code; the source-catalog [Rudra study](#rc-p01) motivates scrutiny of ecosystem memory-safety bugs, even with safe application code. Do not add a third-party dependency solely to replace a three-line checked standard-library operation.
+
+### 9. Small, actionable pull-request review checklist
+
+Use this table when an AI or contributor modifies the Rust section. **Failing a required check blocks promotion**; a new scientific target requires a new frozen protocol rather than a relaxed check.
+
+| Review question | Acceptance evidence |
+| --- | --- |
+| What is being estimated, on which people and specimens? | Question, target, unit/denominator and data provenance documented |
+| Do the types carry the distinctions we need? | Schema/type definitions, unit handling and explicit category-1 identity |
+| Could any held-out data reach fitted preparation? | Train/assessment IDs and mutation/leakage tests |
+| Is the algorithm mathematically the same as the reference? | Objective/penalty/intercept definition and independent numerical oracle |
+| Are exceptional values and unexpected input rejected? | Negative tests for NaN, infinity, missing/duplicate IDs, shape and unknown fields |
+| Does execution replay exactly the intended build? | Toolchain, Cargo.lock, enabled features, source/config hashes, seed and command |
+| Are dependencies, unsafe blocks and output permissions reviewed? | Advisory/license review status, refusal to overwrite and no protected data in Git |
+| Does the claim match the evidence? | Synthetic/real-data distinction, uncertainty/limitations and no clinical promotion |
+| Did the checks actually run? | Commit-specific green CI, attached sanitized logs and a separate reviewed decision |
+
+### 10. AI-assisted variable-only research workflow
+
+An AI may edit **allowed synthetic variables** (people, paired specimens, feature count, missingness, seed, fold count, search candidates) in a separate configuration-driven runner, then execute and evaluate its **explicitly synthetic** protocol. The [configuration-driven toolkit draft](https://github.com/pskeffington/pauls_notes/pull/7) is tracked separately from the stable, frozen G3 crate. A config change must **never** change: observational unit, positive-class meaning, privileged file access, assessment reservations, numerical reference or consent without a new approved protocol. Record which settings were changed and which experiments were rerun.
+
+A real TCGA-BRCA adapter will require **new** patient/specimen data-use and scientific-admission checks, verified per-file GDC `open` status, no public PII/PHI or controlled assets, donor-grouped evaluation, source-dependent normalization, audited labels and approved outputs. This guide and Rust type safety alone cannot authorize that transition. All code, figures and models here are **research and educational only; not for diagnosis, clinical screening, treatment selection or patient-level prognosis**.
+
+### 11. Worked exercises from the book
+
+1. **Beginner (Chapter 11):** Run the six-pair example unchanged; explain why the mean is 0.5, why six rather than twelve is the independent-unit count, and why 0.2–0.8 is *not* a confidence interval. Change one fictional tumor value only on a new exercise branch and update its expected test; do not change a frozen G3 input.
+2. **Intermediate (Chapters 2, 3 and 8):** Add a *synthetic* mismatch fixture to `complete_pairs` (missing sample, duplicate tumor, reversed unit) and show it fails closed. Explain why a raw count matrix cannot be substituted into the simple ratio example or logistic preprocessing.
+3. **Advanced (Chapters 6, 10 and 11):** Trace one anonymous G3 feature through the saved feature order, median, scale, class-1 logit and Python parity. Separately consult ESR1, CD8A and COL1A1 gene cards to propose biological *questions* about hormone, immune and stromal contributions; **never present the anonymous feature as one of these genes**.
+4. **Research-engineering (Chapters 8 and 12):** Write a new protocol for a future approved person-grouped experiment with missingness/selection inside each inner fold, a held-out evaluation, clean source hashes, uncertainty plan and model card. Keep the original book figures and synthetic baselines unchanged.
+
+### 12. Implementation status and next code gates
+
+- **In main:** frozen synthetic Rust inference, separate native Linfa training baseline, numerical checks, literature/citation corpus and now a **standalone book arithmetic + grouping reference with source tests**. No first-party unsafe code is introduced.
+- **Not established by this guide:** fuzzing coverage, property-testing coverage beyond the documented fixtures, formal verification, systematic supply-chain audit, multiclass/subtype and survival training, protected TCGA input, private Dartmouth approval, generalizable disease prediction or clinical utility.
+- **Next engineering gate:** independent code review of any future numeric parser/adaptor; bounded input sizes, checked file staging, leakage negative controls, source/lock/license review and end-to-end parity on a prespecified **synthetic** fixture *before* any new study-specific data permission.
+
 
 ## Literature appraisal: recent research (8 records)
 

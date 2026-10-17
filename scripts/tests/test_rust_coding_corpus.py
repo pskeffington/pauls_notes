@@ -66,6 +66,28 @@ class RustCodingCorpusTests(unittest.TestCase):
         self.assertTrue(any("versioned" in s for s in self.problems(rows)))
         self.assertTrue(any("review date" in s for s in self.problems(today=date(2026, 10, 16))))
 
+    def test_book_chapters_and_compiled_teaching_example_are_linked(self):
+        book = check.BOOK.read_text(encoding="utf-8")
+        example = check.BOOK_EXAMPLE.read_text(encoding="utf-8")
+        self.assertEqual(check.inspect_book_alignment(self.guide, book, example), [])
+
+    def test_book_link_and_contract_regressions_fail(self):
+        book = check.BOOK.read_text(encoding="utf-8")
+        example = check.BOOK_EXAMPLE.read_text(encoding="utf-8")
+        changed_guide = self.guide.replace(
+            "#chapter-8-from-measurements-to-scientific-evidence", "#broken-chapter-8"
+        )
+        self.assertTrue(check.inspect_book_alignment(changed_guide, book, example))
+        self.assertTrue(check.inspect_book_alignment(
+            self.guide, book.replace("Rust coding handbook", "Generic notes"), example
+        ))
+        self.assertTrue(check.inspect_book_alignment(
+            self.guide, book, example.replace("fn complete_pairs(", "fn unchecked_pairs(")
+        ))
+        self.assertTrue(check.inspect_book_alignment(
+            self.guide, book, example + "\n// reqwest must not appear in this exercise\n"
+        ))
+
     def test_pinned_manifest_changes_fail(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
