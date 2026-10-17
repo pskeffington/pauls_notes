@@ -8,6 +8,8 @@ This section connects influential biomedical computing, statistics, genomics, an
 
 ## Start here
 
+- [Rust coding best practices and primary-source corpus](RUST_CODING_BEST_PRACTICES.md) — 2021–2026 verification and defect studies plus official Rust/Cargo/Clippy guidance, with code checks for the breast-cancer ML runner and a [machine-readable source register](rust_coding_best_practices_sources.csv).
+
 - [Biomedical coding literature matrix](BIOMEDICAL_CODING_LITERATURE_MATRIX.md) — 71 primary-source-linked publications organized by methodological area, research contributors, and coding implications.
 - [Machine-readable literature register](biomedical_coding_literature_matrix.csv) — stable IDs, article metadata, software, quality checks and failure modes.
 - [Evidence-to-code acceptance gates](IMPLEMENTATION_GATES.md) — enforceable study and engineering requirements.
