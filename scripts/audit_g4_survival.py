@@ -121,7 +121,7 @@ def run(folder):
         ("km_IPCW_Brier_24", km),
         ("paired_cox_minus_km", cox - km),
     ):
-        match = re.search(r"\\b" + re.escape(key) + r"\\s*=\\s*([-+0-9.eE]+)", report)
+        match = re.search(r"\b" + re.escape(key) + r"\s*=\s*([-+0-9.eE]+)", report)
         if match is None or abs(num(match.group(1)) - expected_value) > 1e-9:
             fail(f"reported metric mismatch: {key}")
     print(f"PASS independent G4 replay: n=180, Cox={cox:.12f}, KM={km:.12f}, difference={cox-km:.12f}")
