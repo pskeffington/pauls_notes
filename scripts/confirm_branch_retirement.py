@@ -6,6 +6,8 @@ execute a single Git push with an exact-SHA force-with-lease after validation.
 Not a privacy scan, evidence purge, or authorization to edit research gates.
 """
 import argparse
+import os
+from urllib.request import Request, urlopen
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -45,9 +47,54 @@ ALLOWLIST = {
 }
 SHA_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 
+APPROVAL_ISSUE = 22
+
+
+def approval_phrase(branch, sha):
+    return "APPROVE BRANCH RETIREMENT " + branch + " " + sha
+
+
+def issue_approvals(token):
+    """Read only Issue #22 comments; do not publish tokens or body text."""
+    found = []
+    for page in range(1, 21):
+        endpoint = (f"https://api.github.com/repos/{REPOSITORY}/issues/"
+                    f"{APPROVAL_ISSUE}/comments?per_page=100&page={page}")
+        request = Request(endpoint, headers={
+            "Authorization": "Bearer " + token,
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "pauls-notes-branch-retirement",
+            "X-GitHub-Api-Version": "2022-11-28",
+        })
+        with urlopen(request, timeout=20) as response:
+            rows = json.load(response)
+        if not isinstance(rows, list):
+            raise ValueError("Issue approval response was not a list")
+        found.extend(rows)
+        if len(rows) < 100:
+            return found
+    raise ValueError("Issue approval pagination incomplete; fail closed")
+
+
+def find_owner_approval(comments, branch, sha):
+    phrase = approval_phrase(branch, sha)
+    valid = [
+        comment.get("html_url")
+        for comment in comments
+        if (isinstance(comment, dict)
+            and (comment.get("user") or {}).get("login") == OWNER
+            and (comment.get("body") or "").strip() == phrase
+            and comment.get("html_url", "").startswith(
+                f"https://github.com/{REPOSITORY}/issues/{APPROVAL_ISSUE}#"))
+    ]
+    if not valid:
+        raise ValueError("No exact owner-approved branch/SHA comment in Issue #22")
+    return valid[-1]
+
+
 
 def validate(report, branch, sha, confirmation, external_refs_reviewed,
-             actor, repository, now=None):
+             actor, repository, issue_comments, now=None):
     """Return a non-sensitive, reviewable intent receipt; fail closed."""
     if actor != OWNER:
         raise ValueError("Only repository owner may dispatch retirement")
@@ -66,6 +113,7 @@ def validate(report, branch, sha, confirmation, external_refs_reviewed,
         raise ValueError("Exact confirmation must be DELETE followed by branch")
     if external_refs_reviewed != "true":
         raise ValueError("External link/evidence review was not acknowledged")
+    approval_url = find_owner_approval(issue_comments, branch, sha)
 
     if report.get("scanned_default_tree") is not True:
         raise ValueError("Default-branch source scan not complete")
@@ -118,7 +166,8 @@ def validate(report, branch, sha, confirmation, external_refs_reviewed,
         "observed_utc": timestamp,
         "acknowledged_external_links_review": True,
         "lease_required": True,
-        "issue": 22,
+        "issue": APPROVAL_ISSUE,
+        "approval_comment_url": approval_url,
     }
 
 
@@ -134,8 +183,12 @@ def main():
     parser.add_argument("--receipt", type=Path, required=True)
     a = parser.parse_args()
     report = json.loads(a.report.read_text(encoding="utf-8"))
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        parser.error("GITHUB_TOKEN with issues:read permission is required")
+    comments = issue_approvals(token)
     receipt = validate(report, a.branch, a.expected_sha, a.confirmation,
-                       a.external_refs_reviewed, a.actor, a.repository)
+                       a.external_refs_reviewed, a.actor, a.repository, comments)
     if a.receipt.exists():
         parser.error("Refusing to overwrite an existing receipt")
     a.receipt.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n",
