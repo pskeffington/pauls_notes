@@ -14,6 +14,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "02_biomedical_coding/rust_coding_best_practices_sources.csv"
 GUIDE = ROOT / "02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md"
+BIBLIOGRAPHY = ROOT / "02_biomedical_coding/rust_coding_references.bib"
 MANIFEST = ROOT / "04_machine_learning/rust/Cargo.toml"
 TOOLCHAIN = ROOT / "04_machine_learning/rust/rust-toolchain.toml"
 LOCK = ROOT / "04_machine_learning/rust/Cargo.lock"
@@ -121,6 +122,32 @@ def inspect(rows, guide, root=ROOT, today=None):
     return errors
 
 
+def inspect_bibliography(rows, bibliography):
+    """Verify this deliberately simple BibTeX register against publication identities."""
+    errors = []
+    matches = re.findall(r"^@(article|inproceedings|misc)\\{(RCP\\d{2}),\\n(.*?)^\\}", bibliography, re.M | re.S)
+    entries = {}
+    for kind, key, body in matches:
+        if key in entries:
+            errors.append(f"{key}: duplicate bibliography entry")
+        fields = dict(re.findall(r"^\\s+([a-z]+)=\\{([^}\\n]*)\\},?$", body, re.M))
+        entries[key] = (kind, fields)
+    papers = {row["id"].replace("-", ""): row for row in rows if row.get("kind") in {"paper", "preprint"}}
+    if set(entries) != set(papers):
+        errors.append("Bibliography must cover exactly the peer-reviewed and preprint records")
+    for key, row in papers.items():
+        typ, fields = entries.get(key, ("", {}))
+        expected = "misc" if row["kind"] == "preprint" else ("article" if key in {"RCP03", "RCP04", "RCP05"} else "inproceedings")
+        if typ != expected or fields.get("year") != row["year"] or any(not fields.get(k) for k in ("title", "author", "url")):
+            errors.append(f"{key}: inconsistent or incomplete bibliography")
+        if row["kind"] == "preprint":
+            if fields.get("eprint") != row["identifier"].split(":", 1)[-1] or fields.get("url") != row["source_url"]:
+                errors.append(f"{key}: preprint version mismatch")
+        elif fields.get("doi", "").lower() != row["identifier"].lower():
+            errors.append(f"{key}: DOI mismatch")
+    return errors
+
+
 def inspect_rust_baseline(root=ROOT):
     """Static pin check only, not compilation or a dependency audit."""
     errors = []
@@ -152,7 +179,10 @@ def inspect_rust_baseline(root=ROOT):
 
 
 def main():
-    errors = inspect(read_rows(), GUIDE.read_text(encoding="utf-8")) + inspect_rust_baseline()
+    rows = read_rows()
+    errors = (inspect(rows, GUIDE.read_text(encoding="utf-8"))
+              + inspect_bibliography(rows, BIBLIOGRAPHY.read_text(encoding="utf-8"))
+              + inspect_rust_baseline())
     if errors:
         raise SystemExit("\n".join(errors))
     print("PASS: Rust coding corpus 34 sources; classifications, reviewed claims, source cards and pinned Rust baseline")
