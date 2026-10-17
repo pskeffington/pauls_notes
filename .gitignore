@@ -24,6 +24,7 @@ Rplots.pdf
 
 # Rust build artifacts
 04_machine_learning/rust/target/
+03_learning/rust/lab/target/
 
 # TCGA/GDC data must remain local, even if designated open access.
 # Ignored files can still be added forcibly: CI tracked-file scanning is mandatory.
@@ -39,6 +40,9 @@ Rplots.pdf
 **/controlled_data/
 **/restricted_data/
 **/patient_data/
+**/participant_data/
+**/private_data/
+**/controlled_access/
 **/external_data/
 **/gdc_downloads/
 **/research_runs/

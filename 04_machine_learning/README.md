@@ -8,6 +8,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 
 | Subject | Resource | Practical purpose |
 | --- | --- | --- |
+| Learn Rust before implementing a model | [Rust foundations and object-oriented engineering](../03_learning/rust/README.md) | Variables, collections, ownership, structs, methods, traits, tests and a small synthetic research lab |
 | Understanding the subject | [What is machine learning?](what-is-machine-learning.md) | Features, targets, learning, assessment and interpretation in plain language |
 | Seeing the data flow | [Visual data guide](visual-data-guide.md) | Follow rows through splitting, training, validation, preprocessing and nested evaluation |
 | Choosing a method | [Basic algorithm guide](basic-algorithms.md) | Regression, classification, trees, kernels, clustering, PCA and survival |
@@ -21,6 +22,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Person-aware uncertainty | [Phase 4C calculation](uncertainty-assessment.md) · [Frozen protocol](uncertainty-protocol.md) | Whole-person paired resampling of saved predictions; conditional ranges distinguished from full-procedure uncertainty |
 | Rust model deployment | [Frozen assay inference in Rust](rust-deployment.md) | Compile a prediction CLI and check both fitted procedures against Python |
 | Native Rust training | [Linfa baseline and numerical validation](rust-native-training.md) · [Frozen objective](rust-training-protocol.md) | Training-only preparation, person-disjoint folds, matched objective, explicit convergence checks and preserved failures |
+| Rust coding and verification practices | [Book-aligned Rust engineering handbook](../02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) | Primary coding guidance, recent fuzzing/verification studies, reproducible-build checks and numerical correctness gates |
 | Rust ML research | [Five-year literature review](rust-ml-literature.md) | Appraise 11 publications/manuscripts and six pinned software sources; connect deployment, native training and single-cell methods to the book |
 | Package selection | [Biomedical package guide](package-guide.md) | Match software to tabular, survival, expression and single-cell tasks |
 | Breast cancer evidence | [Study evidence and implementation](breast-cancer-evidence.md) | Screening trials, future risk, prognosis, response prediction, author-code mechanisms and review limits |
@@ -57,9 +59,9 @@ python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py
 
 Use the pinned Python dependencies and a new output directory outside the repository with an existing parent.
 
-## Configuration-driven ML research toolkit
+## Configuration-driven synthetic ML research toolkit
 
-The [Dartmouth-aligned synthetic research toolkit](research_toolkit/README.md) provides a variable-only JSON workflow for grouped nested validation, fold-local imputation/scaling/feature selection, baseline comparisons, reproducible metrics and model selection without admitting patient-level training. The private Dartmouth R18F/R19 admission gates remain unchanged.
+The [synthetic configuration runner](research_toolkit/README.md) uses an editable JSON plan for person-grouped nested validation, fold-local preparation and feature selection, a baseline comparison, reproducible metrics and explicit nonclinical notices. The [GDC metadata-only preflight](research_toolkit/gdc_open_access_preflight.py) separately checks declared GDC file access; **neither accepts patient data for fitting**. [Model-use and privacy policy](research_toolkit/MODEL_USE_POLICY.md) applies to any future research extension.
 
 ## Run the Rust prediction deployment
 

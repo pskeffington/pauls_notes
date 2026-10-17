@@ -1,0 +1,280 @@
+# Snapshot taken 2026-10-17 from verified GitHub PR, file and workflow metadata.
+# Historical acceptance references remain in docs/roadmap-gates.md.
+# This file is a ledger, not a live workflow status API or permission grant.
+schema_version = 1
+as_of_date = "2026-10-17"
+repository = "pskeffington/pauls_notes"
+status_semantics = "complete_bounded: merged, scoped evidence; in_review: branch-only code; planned: contract not executed; blocked: scientific/access prerequisites missing"
+
+[[gates]]
+id = "G0"
+track = "scientific_software"
+title = "Phase 4 fixed synthetic software baseline"
+status = "complete_bounded"
+delivery = "main"
+depends_on = []
+primary_pr = 1
+merge_commit = "06cdc2c9de2e42de4852ce07dd8d4d52ae26216c"
+reviewed_head = "51a10cb49a3f85bb79230a791028d0fc046d1273"
+ci_run_id = 38922611591
+ci_workflow = "Phase 4 assay robustness"
+source_path = "04_machine_learning/robustness-experiment.md"
+evidence_path = "04_machine_learning/evidence/phase4-baseline-validation-2026-10-16.json"
+exit_criteria = "Baseline four-scenario synthetic fit, candidate history, grouped splits, source hashes and replay audited."
+limitations = "Development cohort only; 15 reserved people untouched; neither an independent cohort nor a clinical finding."
+next_action = "Preserve frozen G0 while maintaining G1-G3 regression checks."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "G1"
+track = "scientific_software"
+title = "Phase 4B synthetic repeated-cohort robustness"
+status = "complete_bounded"
+delivery = "main"
+depends_on = ["G0"]
+primary_pr = 3
+merge_commit = "544f6ad27d339deb1ada92d05f86999f60c38b0e"
+reviewed_head = "cc5a208147fd59143b44c1711f07bacbbecd4517"
+ci_run_id = 38936820625
+ci_workflow = "Phase 4B synthetic replication"
+source_path = "04_machine_learning/replication-experiment.md"
+evidence_path = "04_machine_learning/evidence/replication-validation-2026-10-16.json"
+exit_criteria = "Three prespecified generator draws and twelve cells have audited outputs and complete replay."
+limitations = "Replicates the synthetic generator, not independent real cohorts; scenarios have shared people."
+next_action = "Retain failed attempts and dependence accounting in future comparative work."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "G2"
+track = "scientific_software"
+title = "Phase 4C conditional person-aware uncertainty"
+status = "complete_bounded"
+delivery = "main"
+depends_on = ["G1"]
+primary_pr = 4
+merge_commit = "16443089342a1a8e19bc5a2a15ed3d431c6203a4"
+reviewed_head = "daa6650537d259d87e4c3b6f396b1fe08bfa173c"
+ci_run_id = 38939809441
+ci_workflow = "Phase 4C conditional uncertainty"
+source_path = "04_machine_learning/uncertainty-assessment.md"
+evidence_path = "04_machine_learning/evidence/uncertainty-validation-2026-10-16.json"
+exit_criteria = "Prespecified paired-person bootstrap draws and endpoints independently replayed and audited."
+limitations = "Conditional on frozen predictions; no entire-training-procedure or clinical uncertainty."
+next_action = "New prospective refitting protocol needed for full-procedure uncertainty."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "G3"
+track = "scientific_software"
+title = "Native Rust fixed-objective logistic training"
+status = "complete_bounded"
+delivery = "main"
+depends_on = ["G0"]
+primary_pr = 5
+merge_commit = "aaec3aaaa247760539eb2b7b74133e1a0b6c00a4"
+reviewed_head = "9b468ebec1043df81d91465f0816e40c27bc48f8"
+ci_run_id = 38943944644
+ci_workflow = "Native Rust numerical training"
+source_path = "04_machine_learning/rust-native-training.md"
+evidence_path = "04_machine_learning/evidence/rust-training-validation-2026-10-16.json"
+exit_criteria = "Frozen logistic objective, category-one mapping, train-only transforms and Rust/Python numerical oracle accepted."
+limitations = "Synthetic fixed all-feature objective only; no Rust tuning/feature-selection port, no clinical relevance."
+next_action = "Do not change frozen G3 contract; add new protocol for any different learner or research objective."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "G4"
+track = "scientific_software"
+title = "Phase 5 separately defined synthetic survival learning case"
+status = "planned"
+delivery = "not_implemented"
+depends_on = ["G1", "G2"]
+primary_pr = 0
+merge_commit = ""
+reviewed_head = ""
+ci_run_id = 0
+ci_workflow = ""
+source_path = "04_machine_learning/methods-and-deployments.md"
+evidence_path = ""
+exit_criteria = "Freeze time origin, event, censoring, prediction horizon, Cox baseline and grouped assessment before execution."
+limitations = "Existing generic R survival examples are not an endpoint-specific validated learning-case implementation."
+next_action = "Write synthetic survival protocol/data dictionary; review censoring design; then implement without inspecting reserved outcomes."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "G5"
+track = "scientific_software"
+title = "Phase 6 bounded published-result reproduction"
+status = "planned"
+delivery = "not_implemented"
+depends_on = []
+primary_pr = 0
+merge_commit = ""
+reviewed_head = ""
+ci_run_id = 0
+ci_workflow = ""
+source_path = "04_machine_learning/corpus-review.md"
+evidence_path = ""
+exit_criteria = "Freeze one published target, source/version, permitted input, numeric tolerance and clean replay before running."
+limitations = "Processed-output inspection is not model refitting or published paper reproduction."
+next_action = "Select permitted target and verify method/data rights and reproducibility budget."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "R0"
+track = "rust_education"
+title = "Beginner Rust foundations to research-engineering course"
+status = "complete_bounded"
+delivery = "main"
+depends_on = []
+primary_pr = 12
+merge_commit = "f02fe1e020e0f44c118b3c554724fe5101e643b9"
+reviewed_head = "8bdd548f4588eda076acee41e22994b5fc6ae99a"
+ci_run_id = 39009076932
+ci_workflow = "Rust foundations learning"
+source_path = "03_learning/rust/README.md"
+evidence_path = "03_learning/rust/lab/tests/research_workflow.rs"
+exit_criteria = "Seven-stage lesson sequence, pinned Cargo lab, ten Rust unit tests and one integration test pass."
+limitations = "Passing software exercises never proves learner mastery; fixtures are invented and not patient data."
+next_action = "Learners complete reasoning questions and negative exercises; extend skills only through a new reviewed lab."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "R1"
+track = "rust_education"
+title = "Source-graded Rust coding best-practices literature corpus"
+status = "complete_bounded"
+delivery = "main"
+depends_on = []
+primary_pr = 10
+merge_commit = "86e6d919f7a5c9f2b0b2b8382e1926ab5c0dcb7e"
+reviewed_head = "e0eaa27d8489e5a12e3d1cf5c9bc6b3b3a262632"
+ci_run_id = 39006571252
+ci_workflow = "Biomedical literature integrity"
+source_path = "02_biomedical_coding/rust_coding_best_practices_sources.csv"
+evidence_path = "scripts/tests/test_rust_coding_corpus.py"
+exit_criteria = "Thirty-four classified sources, eight publication references, limits and project actions pass offline integrity checks."
+limitations = "Literature/citation validation is not a full-text systematic review or a third-party security audit."
+next_action = "Maintain source versions and paper-versus-documentation classification."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "R2"
+track = "rust_education"
+title = "Book-aligned Rust engineering handbook and Chapter 11 exercise"
+status = "complete_bounded"
+delivery = "main"
+depends_on = ["R1"]
+primary_pr = 11
+merge_commit = "e68ab849c6bf3ba7182acbdfebabcef88b196c66"
+reviewed_head = "bfabde1fe22ac3e58aaf07fcf8a6a2c8e12acc1e"
+ci_run_id = 39007666795
+ci_workflow = "Rust book teaching example"
+source_path = "02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md"
+evidence_path = "02_biomedical_coding/examples/book_paired_specimens.rs"
+exit_criteria = "All twelve book chapters crosslinked and the six synthetic pairs compile, pass tests and match declared arithmetic."
+limitations = "Invented six-pair mathematics is neither G3 model fitting nor a biological discovery or confidence interval."
+next_action = "Keep teachable patterns distinct from any future authorized real-data adapter."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "R3"
+track = "rust_engineering"
+title = "Standalone native-fit Rust frozen inference extension"
+status = "in_review"
+delivery = "draft_pr_only"
+depends_on = ["G3"]
+primary_pr = 6
+merge_commit = ""
+reviewed_head = "31f925a04c81e37127e16b0417380fb1d6b3feef"
+ci_run_id = 38955192728
+ci_workflow = "Machine learning deployment"
+source_path = "04_machine_learning/rust/src/frozen.rs"
+evidence_path = "04_machine_learning/rust-native-deployment-next.md"
+exit_criteria = "Rebase conflict-free, complete independent G3 parity and privacy review, pass required CI, review and merge."
+limitations = "Code and branch checks exist, but PR is draft and not merged; neither patient inference nor release approval."
+next_action = "Resolve PR #6 conflict, verify audited model exporter/lineage and independent numerical parity before merge."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "R4"
+track = "rust_engineering"
+title = "Configuration-driven grouped synthetic machine-learning toolkit"
+status = "in_review"
+delivery = "draft_pr_only"
+depends_on = []
+primary_pr = 7
+merge_commit = ""
+reviewed_head = "438d0c261ff732d15df311aa4a100fb5330e3b2b"
+ci_run_id = 38960168519
+ci_workflow = "Configurable synthetic ML toolkit"
+source_path = "04_machine_learning/research_toolkit/research_runner.py"
+evidence_path = "04_machine_learning/research_toolkit/test_research_runner.py"
+exit_criteria = "Reconcile latest main, retain frozen science boundaries, pass configuration and leakage tests, human review and merge."
+limitations = "Runner is synthetic-only and Python; not a native-Rust variable-only TCGA training route."
+next_action = "Refresh PR #7 and declare independent Rust backend interface only after the current synthetic contract is accepted."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "D0"
+track = "data_governance"
+title = "Public TCGA-BRCA repository privacy and open-access safeguards"
+status = "in_review"
+delivery = "draft_pr_only"
+depends_on = []
+primary_pr = 7
+merge_commit = ""
+reviewed_head = "438d0c261ff732d15df311aa4a100fb5330e3b2b"
+ci_run_id = 38960168517
+ci_workflow = "Public repository data safety"
+source_path = "04_machine_learning/research_toolkit/gdc_open_access_preflight.py"
+evidence_path = "scripts/check_public_data_boundaries.py"
+exit_criteria = "Sync branch with main, register new public source assets, require safety CI/branch rules, perform secret/history review and merge."
+limitations = "Metadata-only and heuristic checks: cannot certify all PII/PHI absent, prove deidentification, or authorize training."
+next_action = "Reconcile the public asset registry with merged Rust course/corpus; confirm main protection, scan history separately."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false
+
+[[gates]]
+id = "D1"
+track = "data_governance"
+title = "Real TCGA-BRCA research data scientific admission"
+status = "blocked"
+delivery = "not_implemented"
+depends_on = ["D0"]
+primary_pr = 0
+merge_commit = ""
+reviewed_head = ""
+ci_run_id = 0
+ci_workflow = ""
+source_path = "docs/research-workflow.md"
+evidence_path = ""
+exit_criteria = "Approve specific open-access GDC files, consent/use terms, case-level linkage, endpoint, preprocessing and grouped study protocol."
+limitations = "Public TCGA project label does not imply open access for each file; the current code is not approved patient-level training."
+next_action = "Keep model fits synthetic; obtain independent research protocol, access/privacy review and documented release authority."
+learner_mastery = "not_assessed"
+clinical_use_authorized = false
+real_patient_training_authorized = false

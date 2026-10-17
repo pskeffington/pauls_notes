@@ -9,6 +9,7 @@ Use this index when you know the task but are not sure which guide, example or e
 | Your question | Start here | Continue with |
 | --- | --- | --- |
 | How do tumor and normal specimens relate to people and genes? | [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) | [Gene atlas](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas) and [pathways](../06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
+| How do I learn Rust from zero and build research objects? | [Rust foundations course](../03_learning/rust/README.md) | [Object-oriented Rust](../03_learning/rust/04_structs_traits_and_composition.md) then [research engineering](../03_learning/rust/06_breast_cancer_engineering.md) |
 | How do I work with tables, joins and missing data? | [Computing by subject](../03_learning/README.md) | [Keys and reshaping](../03_learning/keys-and-reshaping.md) and [missingness](../03_learning/missingness-and-comparisons.md) |
 | How does a model train and why do data splits matter? | [ML data-flow guide](../04_machine_learning/visual-data-guide.md) | [ML home](../04_machine_learning/README.md) and [nested comparison](../04_machine_learning/model-comparison.md) |
 | How do I script a reproducible run? | [Unix and Bash](../01_unix_bash/README.md) | [Research workflow](research-workflow.md) |
@@ -30,8 +31,9 @@ Use this index when you know the task but are not sure which guide, example or e
 | --- | --- |
 | Find primary studies and coding implications | [Biomedical coding literature matrix](../02_biomedical_coding/BIOMEDICAL_CODING_LITERATURE_MATRIX.md) |
 | Inspect package/API guidance and source versions | [Official methods register](../02_biomedical_coding/OFFICIAL_METHODS_REGISTER.md) |
+| Write and audit Rust research code | [Rust engineering handbook](../02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) and [Rust ML application review](../04_machine_learning/rust-ml-literature.md) |
 | Check gene identity and supporting annotation | [Gene annotation register](../06_RESOURCES/Genomics/REFERENCES/ANNOTATION_SOURCE_REGISTER.md) · [Evidence matrix](../06_RESOURCES/Genomics/REFERENCES/GENE_EVIDENCE_MATRIX.md) |
-| Compare executed work with planned milestones | [Roadmap gates](roadmap-gates.md) and [ML corpus validation](../04_machine_learning/corpus-review.md) |
+| Compare executed work with planned milestones | [Dated gate dashboard](roadmap-gates.md#delivery-and-admission-snapshot-2026-10-17), [machine-readable evidence record](milestone-evidence.toml) and [ML corpus validation](../04_machine_learning/corpus-review.md) |
 | Record results and limitations | [Analysis record template](../templates/analysis-record.md) · [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) |
 
 ## Choose a source for the question

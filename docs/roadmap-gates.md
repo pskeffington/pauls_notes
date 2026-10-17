@@ -4,7 +4,7 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 [Learning roadmap](learning-roadmap.md) · [Machine learning](../04_machine_learning/README.md) · [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
 
-Work-order date: **2026-10-16**. This ledger separates repository delivery from scientific interpretation and learner mastery. Status values are **Planned / Implemented / Tested / Reviewed / Complete / Blocked**. A commit, passing script or favorable score alone cannot close a gate. All current experimental evidence is synthetic software evidence; CI does not assess a learner's understanding.
+Original work-order date: **2026-10-16**. Status reconciliation: **2026-10-17**. The [machine-readable evidence ledger](milestone-evidence.toml) records scope, PRs, reviewed heads, merge commits, CI run IDs, sources, prerequisites and limitations for every milestone. Its validator is [check_milestone_evidence.py](../scripts/check_milestone_evidence.py). The ledger is a dated snapshot, **not** a substitute for live GitHub checks or human study approval. This ledger separates repository delivery from scientific interpretation and learner mastery. Status values are **Planned / Implemented / Tested / Reviewed / Complete / Blocked**. A commit, passing script or favorable score alone cannot close a gate. All current experimental evidence is synthetic software evidence; CI does not assess a learner's understanding.
 
 G0–G5 here identify **roadmap milestones**. They do not replace the separately scoped G0–G10 requirements in the [biomedical implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md).
 
@@ -20,6 +20,38 @@ The shared narrative is **people → specimens → measurements → data prepara
 | G5 | Phase 6 published-result reproduction | Relevant validated method and reproduction contract | Planned | Not assessed |
 
 **Phase 4's defined synthetic scientific-software milestone is complete through G1/G2.** Its uncertainty assessment holds predictions fixed; a full-procedure refitting experiment, external clinical validation and learner mastery are not established. G3 now completes its fixed-objective engineering extension. G4's G1/G2 dependency is now satisfied, but its own endpoint/protocol gates remain open.
+
+## Delivery and admission snapshot (2026-10-17)
+
+Two tracks prevent a common category mistake: **scientific experiment milestone delivery (G0–G5)** is distinct from **Rust teaching/software delivery (R0–R4)** and **participant-data governance (D0–D1)**. A passing branch workflow is not a merged feature; a merged synthetic training tool is not authorization to train on real TCGA patients. *All learner-mastery states remain unassessed.*
+
+| ID | Gate and exit requirement | Delivery status | Evidence / next dependency |
+| --- | --- | --- | --- |
+| G0 | Four-scenario synthetic model baseline, fixed assessment and replay | **Complete (bounded)** | [G0 evidence](#g0-phase-4-software-baseline) |
+| G1 | Prespecified repeated-cohort synthetic robustness and full replay | **Complete (bounded)** | [G1 evidence](#g1-phase-4b-repeated-cohort-robustness) |
+| G2 | Person-resampled conditional uncertainty on frozen predictions | **Complete (bounded)** | [G2 evidence](#g2-phase-4c-uncertainty-and-reliability) |
+| G3 | Frozen native Rust logistic objective, class mapping and independent numerical checks | **Complete (bounded)** | [G3 evidence](#g3-native-rust-training) |
+| G4 | Approved time/event/censoring/endpoint protocol and synthetic survival evaluation | **Planned** | [G4 gate](#g4-phase-5-survival-learning-case); no endpoint-specific fits |
+| G5 | Predeclared target and permitted source, then independent reproducible refitting | **Planned** | [G5 gate](#g5-phase-6-published-result-reproduction) |
+| R0 | Rust syntax→ownership→structs/traits→research engineering, locked Cargo lab/tests | **Complete (bounded)** | [R0 evidence](#r0-rust-foundations-and-object-oriented-learning) |
+| R1 | Source-graded Rust coding corpus, exact references and offline integrity checks | **Complete (bounded)** | [R1 evidence](#r1-rust-literature-and-coding-quality-corpus) |
+| R2 | Twelve-chapter book-aligned Rust handbook and standalone six-pair arithmetic example | **Complete (bounded)** | [R2 evidence](#r2-breast-cancer-book-aligned-rust-engineering) |
+| R3 | Reviewed, independently audited frozen-model export and standalone Rust predictor | **In review — draft PR** | [PR #6](https://github.com/pskeffington/pauls_notes/pull/6); not in `main` |
+| R4 | Variable-only grouped synthetic ML runner with fold-local tuning and audit | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); no real TCGA fitting |
+| D0 | Enforce public Git boundaries, file-level GDC access preflight and nonclinical warnings | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); not enforced on `main` yet |
+| D1 | Independent approval of real TCGA-BRCA cohort, permitted data and study protocol | **Blocked** | [Data access and methods contract](research-workflow.md#2-specify-input-and-access-contracts) |
+
+**Gate vocabulary.** `Complete (bounded)` means a merged, specific software or documentation result supported by recorded acceptance checks, **not** an unrestricted scientific conclusion. `In review` means working code on a draft PR with branch-specific checks only; a green CI workflow never changes this status by itself. `Planned` requires a new frozen implementation protocol. `Blocked` forbids the data operation until independent access, privacy, study and scientific acceptance. The separate [biomedical implementation requirements](../02_biomedical_coding/IMPLEMENTATION_GATES.md) retain their own G0–G10 names.
+
+### Evidence precedence and what a gate requires
+
+1. **Source identity:** link the exact reviewed PR, head, merged commit (if merged), versioned protocol, and relevant file. A README claim without code/protocol is not an executed result.
+2. **Executable verification:** capture exact command/toolchain, named test, CI run on the correct revision, negative controls, outputs and failed attempts. A link to a current green badge is not enough to reproduce old code.
+3. **Data provenance and access:** record whether observations are invented, locally permitted open-access TCGA, or controlled. Group by the correct person/sample unit and keep raw people/identifiers out of public Git.
+4. **Scientific inference:** state the target, cohort, denominator, selection boundary, uncertainty and effect of prior inspections. Synthetic arithmetic or software parity cannot justify a biological, prognostic or clinical assertion.
+5. **Independent review and release:** document limitations, approved use, and human signoff where required. **CI does not certify learner mastery, privacy compliance, or clinical deployment.**
+
+The [TOML registry](milestone-evidence.toml) makes those labels testable; it is intentionally not a live status poll. Review exact PR status and required protections again before changing a pending gate to complete.
 
 ## G0: Phase 4 software baseline
 
@@ -148,6 +180,60 @@ The [native push CI run](https://github.com/pskeffington/pauls_notes/actions/run
 | Scientific review | Published-count arithmetic and processed-output integrity audits already exist; they do not constitute model refitting or complete paper reproduction |
 | Remaining risks | Data access/licensing, original environment restoration, resource costs and target comparability; an accessible processed table does not grant rights to its underlying study data |
 | Next dependency | Verify the selected component's methodological prerequisites and artifact permissions before execution; state partial/full reproduction scope accurately |
+
+## R0: Rust foundations and object-oriented learning
+
+| Evidence field | Record |
+| --- | --- |
+| Status and scope | **Complete within synthetic educational software scope**; learner mastery **not assessed** |
+| Delivered | [Seven-stage beginner course](../03_learning/rust/README.md), [pinned Cargo learning lab](../03_learning/rust/lab/Cargo.toml), [source/unit/integration tests](../03_learning/rust/lab/tests/research_workflow.rs) |
+| Source | [Merged PR #12](https://github.com/pskeffington/pauls_notes/pull/12); accepted head `8bdd548f4588eda076acee41e22994b5fc6ae99a`, merged as `f02fe1e020e0f44c118b3c554724fe5101e643b9` |
+| Execution evidence | [Merged-`main` Rust foundations CI](https://github.com/pskeffington/pauls_notes/actions/runs/39009076932); on PR acceptance: formatting, strict Clippy, 10 unit tests, 1 integration test, release build and known synthetic console output all passed |
+| Contract | Starts from `fn main`/types and progresses through collections, ownership, borrowing, structs/methods/traits, Cargo and a person-exclusive training-only median fixture |
+| Limit | Only invented sample measurements and documentation; green tests do not demonstrate clinical model validity or learner competency |
+| Exit and next stage | Software delivery closed. Each learner must independently explain record/unit meaning and deliberate-failure behavior before advancing to the Rust handbook |
+
+## R1: Rust literature and coding-quality corpus
+
+| Evidence field | Record |
+| --- | --- |
+| Status and scope | **Complete within bibliographic and code-review guidance scope** |
+| Delivered | [34-source coding register](../02_biomedical_coding/rust_coding_best_practices_sources.csv), [eight-publication bibliography](../02_biomedical_coding/rust_coding_references.bib) and [validator](../scripts/check_rust_coding_corpus.py) |
+| Source | [Merged PR #10](https://github.com/pskeffington/pauls_notes/pull/10); accepted head `e0eaa27d8489e5a12e3d1cf5c9bc6b3b3a262632`, merged as `86e6d919f7a5c9f2b0b2b8382e1926ab5c0dcb7e` |
+| Execution evidence | [Biomedical literature CI](https://github.com/pskeffington/pauls_notes/actions/runs/39006571252), [documentation CI](https://github.com/pskeffington/pauls_notes/actions/runs/39006571239): source classes, citation identities, reviews/limits, preprint versions, Cargo pin and deliberate-invalid tests passed |
+| Scientific boundary | Six peer-reviewed papers, two preprints and 26 primary docs/tools are separately classified. **No full-text systematic review, third-party vulnerability proof or patient-outcome reproduction was performed** |
+| Exit and next stage | Bibliographic organization closed; attach implementation-specific testing evidence to future Rust code, rather than upgrading the paper-review grade |
+
+## R2: Breast-cancer book-aligned Rust engineering
+
+| Evidence field | Record |
+| --- | --- |
+| Status and scope | **Complete within invented six-pair educational software scope** |
+| Delivered | [Rust engineering handbook](../02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md), [six-pair source/test exercise](../02_biomedical_coding/examples/book_paired_specimens.rs) and links back to all twelve [breast-cancer book chapters](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) |
+| Source | [Merged PR #11](https://github.com/pskeffington/pauls_notes/pull/11); accepted head `bfabde1fe22ac3e58aaf07fcf8a6a2c8e12acc1e`, merged as `e68ab849c6bf3ba7182acbdfebabcef88b196c66` |
+| Execution evidence | [Merged-`main` Rust book exercise CI](https://github.com/pskeffington/pauls_notes/actions/runs/39007666795): pinned Rust 1.90.0, formatting, tests and known synthetic Chapter 11 ratios/mean/sensitivity output passed |
+| Expected arithmetic | Six fictional tumor/comparator contrasts: `1, 2, 0, -1, 1, 0`; mean `0.5`; omit-one-person means `0.2–0.8`. The range is **not** a confidence interval |
+| Scientific boundary | Six pairs are not the 60-person/48-anonymous-feature G3 training cohort; the book's 60 named genes were not used as fitted model features |
+| Exit and next stage | Handbook/documentation reviewed and tested. Any actual model/backend extension requires its own source, numerical oracle, budget, privacy and PR gate |
+
+## R3–R4 and D0: drafted extensions, not released
+
+| Gate | Source and executed branch check | Why it remains open |
+| --- | --- | --- |
+| R3 — frozen native Rust inference | [Draft PR #6](https://github.com/pskeffington/pauls_notes/pull/6), head `31f925a04c81e37127e16b0417380fb1d6b3feef`; [branch ML deployment CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/38955192728) | Not merged; resolve merge conflict and independently audit frozen final-development export and Rust/Python parity before review/merge |
+| R4 — JSON-configured grouped synthetic model development | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7), head `438d0c261ff732d15df311aa4a100fb5330e3b2b`; [branch runner CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/38960168519) | Not merged; rebase to current book/Rust course/README, recheck full split and transform contracts. Python-only prototype, **not** native-Rust configuration training |
+| D0 — public repository privacy controls | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7); [branch data-safety CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/38960168517) | Not merged: missing required `main` branch protection/secret history review and up-to-date registered CSV assets. Read-only GDC preflight is not data admission |
+| D1 — real TCGA-BRCA experiment | No admitted patient-level model runner or validated cohort on `main` | **Blocked.** Requires file-by-file official GDC `open` classification, use-rights/privacy review, identity linkage, endpoint/fold design, normalization, reviewable protocol and independent permission |
+
+**Source-status caveat:** Recorded success belongs to each named PR head and CI run, not automatically to future rebases or the current `main` tree. A branch check is useful engineering evidence but is **not** a published code path until merged and separately reviewed. [Issue #8](https://github.com/pskeffington/pauls_notes/issues/8) tracks required branch/data-safety governance.
+
+## Next phased acceptance sequence
+
+1. **Documentation and learning:** keep R0–R2 as bounded completed deliverables, maintain the 34-source corpus, and require learner explanation rather than a CI badge for mastery.
+2. **Privacy first:** reconcile D0/PR #7 against latest `main` and verify its registered assets; obtain appropriate branch protection, secret/history checks and reviewer signoff. Do not infer privacy from a successful heuristic scan alone.
+3. **Synthetic parameterized research:** close R4 only after a new reviewed PR with replayed config/split/feature-selection tests and clean hashes. No hidden real-data mode is allowed.
+4. **Rust predictor parity:** close R3 separately after resolving PR #6 and independently verifying audited final-development export, class-1 probability agreement and fail-closed model validation.
+5. **New science:** G4 requires a frozen synthetic time-to-event protocol; G5 requires declared source and reproduction target. D1 stays blocked until a separate approved real-data protocol. These are not automatically completed by R3/R4.
 
 ## Completion discipline
 

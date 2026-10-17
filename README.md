@@ -15,6 +15,7 @@ Choose the route that matches what you need; no weekly sequence is required.
 | I want to… | Start with | Then explore |
 | --- | --- | --- |
 | **Understand the biology** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
+| **Learn Rust from zero** | [Rust foundations course](03_learning/rust/README.md) — variables, borrowing, object-oriented patterns, Cargo and tests | [Research-oriented Rust engineering](03_learning/rust/06_breast_cancer_engineering.md) and [source-backed practices](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) |
 | **Learn research computing** | [Computing by subject](03_learning/README.md) — R, data structure, joins, missingness and statistics | [Worked analysis](03_learning/README.md#run-the-combined-example) |
 | **See how ML actually trains** | [Visual ML data-flow guide](04_machine_learning/visual-data-guide.md) — splits, preprocessing and held-out predictions | [ML methods](04_machine_learning/README.md) and [plotting gallery](04_machine_learning/gallery/README.md) |
 | **Run and review an experiment** | [Paired-specimen ML walkthrough](04_machine_learning/advanced-breast-cancer-training.md) | [Comparison](04_machine_learning/model-comparison.md), [tuning](04_machine_learning/model-tuning.md) and [validation evidence](04_machine_learning/corpus-review.md) |
@@ -43,7 +44,7 @@ python3 -m venv .venv
 
 This creates a new directory with a fitted pipeline, held-out assessment, feature-review table, environment versions and SHA-256 manifest. **The output path must be new and outside the repository**; choose another path if it already exists. The 60 people and 48 anonymous features in this example are invented teaching data, **not TCGA patient records or the book's 60 named genes**.
 
-For variable-only experiments, see the [configuration-driven synthetic ML toolkit](04_machine_learning/research_toolkit/README.md). Its editable JSON controls the synthetic cohort, grouping, search and evaluation; it does **not** authorize patient-level training.
+For variable-only **synthetic** experiments, see the [configuration-driven research toolkit](04_machine_learning/research_toolkit/README.md) and its [model-use and privacy restrictions](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md). Configuration cannot admit patient-level data or clinical model use.
 
 Prefer a lighter introduction? Start with the [computing walkthrough](03_learning/README.md#run-the-combined-example). Want an additional programming language? See [Rust inference](04_machine_learning/rust-deployment.md), [native Rust training](04_machine_learning/rust-native-training.md) and the [R/Python methods guide](04_machine_learning/methods-and-deployments.md). Each guide states what has actually been executed.
 
@@ -55,16 +56,17 @@ Prefer a lighter introduction? Start with the [computing walkthrough](03_learnin
 | Computing foundations | [Unix and Bash](01_unix_bash/README.md) · [Computing subjects](03_learning/README.md) | Shell scripts, data types, reshaping, missingness and statistics |
 | Machine learning | [ML home](04_machine_learning/README.md) | Algorithms, feature selection, comparisons, validation, Python, R and Rust |
 | Visualization | [R plotting tools](06_RESOURCES/R/README.md) · [ML figure gallery](04_machine_learning/gallery/README.md) | Reusable plots, annotation and interpretation |
-| Research evidence | [Biomedical coding](02_biomedical_coding/README.md) · [Literature resources](06_RESOURCES/Literature/README.md) | Source matrices, methods, assumptions and quality checks |
+| Research evidence | [Biomedical coding](02_biomedical_coding/README.md) · [Rust engineering handbook](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) · [Literature resources](06_RESOURCES/Literature/README.md) | Source matrices, programming and verification rules, methods and quality checks |
 | Writing and reproducibility | [LaTeX and bibliography](06_RESOURCES/LaTeX/README.md) · [Research workflow](docs/research-workflow.md) | Manuscripts, citations, provenance and execution records |
 
 For a task-by-task index, use the [research resource guide](docs/resource-guide.md) or [complete resource directory](06_RESOURCES/README.md).
 
 ## Research progress and boundaries
 
+- **Milestones and evidence:** [Dated status dashboard](docs/roadmap-gates.md#delivery-and-admission-snapshot-2026-10-17) and [machine-readable gate record](docs/milestone-evidence.toml) distinguish delivered software, draft code, data-access blockers, test evidence and scientific limits. Rust foundations and the source-backed handbook are delivered; configuration/privacy extensions are still under review.
 - **Established in this repository:** synthetic software demonstrations for person-grouped model comparison, tuning, plotting, robustness, repeated-cohort assessment, conditional uncertainty, and a matched-objective Rust training check. See the [roadmap gate ledger](docs/roadmap-gates.md) for what each test established and what it did not.
 - **Still separate work:** a new survival endpoint and published-result reproduction require their own protocols. Consult the [learning roadmap](docs/learning-roadmap.md) rather than treating a passing test as evidence of clinical validity.
-- **TCGA-BRCA and privacy:** Some GDC files are controlled-access. The [privacy and model-use policy](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md) requires per-file open-access verification, no direct identifiers or protected data in Git, and independent review before real-data modeling. The [GDC metadata preflight](04_machine_learning/research_toolkit/README.md#tcga-open-access-privacy-and-model-use-policy) is read-only and **does not** download data or authorize training.
+- **TCGA-BRCA and privacy:** Some GDC files are controlled-access. The [data/privacy and model-use policy](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md) requires per-file official `access=open` verification and separate scientific permission before real-data processing. [Metadata preflight](04_machine_learning/research_toolkit/README.md#tcga-open-access-privacy-and-model-use-policy) is read-only and does not download data or authorize fitting. Do not commit protected data, participant identifiers, row-level predictions or trained patient models. See [research data-access contract](docs/research-workflow.md#2-specify-input-and-access-contracts).
 - **Model use:** examples are **research and education only**. They are not validated for cancer diagnosis, treatment choice or individualized prognosis. Synthetic predictive scores are not breast cancer findings.
 
 ## Research templates
