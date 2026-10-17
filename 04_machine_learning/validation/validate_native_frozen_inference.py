@@ -104,6 +104,9 @@ def independent_validation(source, binary, output):
     if (manifest.get("positive_class") != 1
         or manifest.get("training_performed") is not False
         or manifest.get("rows") != len(records)
+        or manifest.get("model_use", {}).get("clinical_use_authorized") is not False
+        or manifest.get("model_use", {}).get("tcga_case_data_processed") is not False
+        or "NOT FOR CLINICAL USE" not in manifest.get("model_use", {}).get("disclaimer", "")
         or manifest.get("model_sha256") != fingerprint(model_path)
         or manifest.get("input_sha256") != fingerprint(sample_path)
         or manifest.get("predictions_sha256") != fingerprint(report_path)):
