@@ -112,3 +112,27 @@ The first automatic read-only audit was executed on `main` at `e74257220f180d80b
 The legacy `work/biomedical-learning` branch is also contained in `main` but remains on `legacy_work_hold`; its lack of an associated merged PR and external-reference review prevents automatic clearance. **No branch has been deleted.** GitHub issue/PR comments, archived workflows, other repositories, bookmarks, and external sites are outside the audit's URL-scan boundary; an operator must review those and recheck exact remote SHA before deleting any branch.
 
 **Scientific and privacy boundary:** This classifier is not a D0 access/secret scan, not a D1 admission check, and does not accept G4 survival or release any participant-level information. Data and scientific gate counts are unchanged by branch housekeeping.
+
+
+## Single-branch retirement after explicit approval
+
+A separate [Guarded historical branch retirement](../.github/workflows/guarded-branch-retirement.yml) GitHub Actions workflow can delete **one historical branch per manual dispatch**. It cannot run on pull requests or ordinary pushes. It is restricted to the `pskeffington` actor on `main`, and it has a fixed reviewed allowlist of only the five branch/SHA pairs in the preceding table. Do not add the frozen G4 protocol, D0/G4 draft heads or divergent/legacy branches to this allowlist without a separately reviewed evidence record.
+
+A maintainer must complete all of the following before dispatch:
+
+1. Review external websites, bookmarks, related issue comments, archived run dependencies and other repositories for links that still depend on the exact historical branch. The read-only auditor checks only its documented repository and PR-body scope.
+2. Record **one exact owner-authored comment** on [Issue #22](https://github.com/pskeffington/pauls_notes/issues/22) in this format (replace both placeholders with the approved branch and its full 40-character SHA):
+
+   ```text
+   APPROVE BRANCH RETIREMENT <branch> <40-character-sha>
+   ```
+
+   This is a separate authorization, not a comment the workflow creates automatically. The preflight reads Issue #22, verifies the author's GitHub username and exact branch/SHA approval text, and rejects missing or altered approvals.
+3. Open **Actions → Guarded historical branch retirement → Run workflow**, select `main`, select the approved branch, and paste its full reviewed SHA. For the confirmation field, type exactly `DELETE ` followed by the chosen branch name. Check **external_refs_reviewed** only once that review is complete.
+4. The workflow reruns all branch-retention tests and the complete GitHub read-only audit against the current `main`; it refuses stale inventories, missing/skipped source checks, changed branch heads, links, divergent ancestry, unexpected PR associations, and unapproved branch/SHA combinations.
+5. Only after all checks pass does a single `git push --force-with-lease` request remove the selected remote ref. The lease makes deletion fail if its SHA changed. GitHub's own branch protection and repository permissions also apply. The workflow checks that the remote branch is absent afterwards and retains a success/failure receipt for 90 days. Never treat a preflight receipt alone as deletion evidence.
+6. Update Issue #22 with the workflow run URL, the removed ref, prior branch SHA, retained merged-PR SHA and post-deletion verification. Re-run the **Read-only branch retention audit** on `main` and confirm the remaining branch set. Repeat for another approved branch only after independently reviewing its evidence.
+
+The workflow uses `contents: write` **only in the manual retirement job**, with `pull-requests: read` and `issues: read` for verification. It never force-pushes `main`, rewrites history, alters models, removes tagged/merged commits, or runs unattended. The audit may not find every off-repository link, so manual approval is substantive, not a formality. Failure to establish sufficient evidence means **keep the branch**.
+
+**No branch is deleted merely by merging this workflow.** Scientific/privacy milestones G4, D0 and D1 are not affected by branch-retention operations.
