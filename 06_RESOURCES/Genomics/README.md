@@ -4,6 +4,8 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 [Paul's Notes](../../README.md) · [Resources](../README.md)
 
+This genomics section currently emphasizes **breast cancer as an educational case** inside a [repository serving all cancer research](../../docs/cancer-research-scope.md). Methods for another cancer require independent biological annotation, data and study validation; do not assume the 60-gene teaching atlas transfers unchanged.
+
 Read the [complete breast cancer book](BREAST_CANCER_60_GENE_COMPANION.md): 12 chapters connecting people, datasets, measurements, biological pathways, 60 gene profiles, seven conceptual or synthetic figures, and a worked research question.
 
 | Reading task | Resource |

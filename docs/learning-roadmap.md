@@ -4,6 +4,8 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 [Paul’s Notes](../README.md) · [Computing subjects](../03_learning/README.md) · [Machine learning](../04_machine_learning/README.md) · [Breast cancer book, Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data)
 
+**Scope note:** This learning roadmap follows the **current breast-cancer worked example**, not the limit of Paul's Notes. The overall repository supports [research across all cancer types](cancer-research-scope.md); other cancers, imaging/omics sources or clinical endpoints should start with their own study contract rather than inheriting the TCGA-BRCA labels.
+
 Updated **2026-10-16**, following the [corpus review and validation run](../04_machine_learning/corpus-review.md). This is a progression through research competencies and repository development, organized by subject and evidence of understanding. Move forward when you can explain and demonstrate the completion check; there is no weekly schedule.
 
 The shared narrative is **people → specimens → measurements → data preparation → training → validation → prediction → biological interpretation**. The present executable assay example predicts a recorded specimen category for previously unseen people. Every later method must retain that question or explicitly define a new endpoint. The [milestone gate ledger](roadmap-gates.md) records repository implementation, execution evidence, scientific limits and dependencies separately from learner mastery.
@@ -46,7 +48,7 @@ The [dated milestone ledger](roadmap-gates.md#delivery-and-admission-snapshot-20
 - **R4 and D0: in review.** [PR #7](https://github.com/pskeffington/pauls_notes/pull/7) was reconciled with the merged Rust course and literature, registered the new bibliographic CSV, added staged symlink guards and fixed synthetic generator labels. Its [public-data safety check passed](https://github.com/pskeffington/pauls_notes/actions/runs/39050178249), but **branch protection, history/secret scan and human privacy review remain unresolved**, so D0 is not active or complete on `main`.
 - **D1: blocked.** No real TCGA-BRCA patient-level model is authorized by the teaching software, TCGA project membership, or metadata-only open-access checks. Independently review each requested input, use terms, participant linkage, endpoint, protocol and privacy controls before a separate study.
 
-These are **parallel engineering/governance tracks**, not prerequisites for the already frozen G0–G3 synthetic records. They do not move G4 survival or G5 reproduction from Planned to Complete.
+These are **current-case engineering/governance tracks**, not a universal gate numbering scheme for every future cancer study, and not prerequisites for the already frozen G0–G3 synthetic records. They do not move G4 survival or G5 reproduction from Planned to Complete.
 
 ## Phase 1: explain the current data before changing the model
 

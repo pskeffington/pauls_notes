@@ -1,12 +1,12 @@
 # Paul's Notes
 
-**Biomedical research · scientific computing · reproducible machine learning**
+**Cancer research · biomedical computing · reproducible machine learning**
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-A practical research notebook for moving from a biological question to a documented, tested analysis. The breast cancer examples connect **people, specimens, molecular measurements, model development, validation, and interpretation**. Read a guide, run a synthetic example, or inspect the evidence behind a method.
+An open, methods-focused notebook for **research across all cancer types**, including molecular oncology, pathology/imaging, cancer epidemiology, computational biology and translational research. The **current worked case** uses a breast cancer teaching book and synthetic paired-specimen ML, with **TCGA-BRCA as the current data-source example under consideration**. Neither TCGA nor breast cancer limits this repository's research scope. Start with a research question, then build a documented, reproducibly checked analysis.
 
-**Quick navigation:** [Start here](#start-here) · [Research workflow](#follow-a-research-question) · [Run an example](#put-the-methods-to-work) · [Browse subjects](#explore-the-collection) · [Progress and limitations](#research-progress-and-boundaries)
+**Quick navigation:** [Research scope](docs/cancer-research-scope.md) · [Start here](#start-here) · [Research workflow](#follow-a-research-question) · [Run the current example](#put-the-methods-to-work) · [Browse subjects](#explore-the-collection) · [Progress and limitations](#research-progress-and-boundaries)
 
 ## Start here
 
@@ -14,7 +14,8 @@ Choose the route that matches what you need; no weekly sequence is required.
 
 | I want to… | Start with | Then explore |
 | --- | --- | --- |
-| **Understand the biology** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
+| **Choose a cancer research question** | [Cancer research scope](docs/cancer-research-scope.md) — all cancer types, data modalities and study designs | [Independent study/data-access contract](docs/research-workflow.md) and [protocol template](templates/study-protocol.md) |
+| **Understand the current breast cancer example** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
 | **Learn Rust from zero** | [Rust foundations course](03_learning/rust/README.md) — variables, borrowing, object-oriented patterns, Cargo and tests | [Research-oriented Rust engineering](03_learning/rust/06_breast_cancer_engineering.md) and [source-backed practices](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) |
 | **Learn research computing** | [Computing by subject](03_learning/README.md) — R, data structure, joins, missingness and statistics | [Worked analysis](03_learning/README.md#run-the-combined-example) |
 | **See how ML actually trains** | [Visual ML data-flow guide](04_machine_learning/visual-data-guide.md) — splits, preprocessing and held-out predictions | [ML methods](04_machine_learning/README.md) and [plotting gallery](04_machine_learning/gallery/README.md) |
@@ -23,11 +24,11 @@ Choose the route that matches what you need; no weekly sequence is required.
 
 ## Follow a research question
 
-The recurring teaching question is: **Can assay measurements distinguish a recorded specimen category for people who were not used to train the model?** It is not a clinical diagnostic or prognosis task.
+**Current worked-case question:** Can invented assay measurements distinguish a recorded specimen category for people who were not used to train the model? This illustrates one oncology research workflow, not the only supported question. A different cancer, data modality or endpoint requires a separately defined study and evaluation protocol. This is not a clinical diagnostic or prognosis task.
 
 **People → specimens → measurements → preparation → training → validation → predictions → interpretation**
 
-1. **Know the unit of analysis.** Read [the breast cancer research narrative](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) and [data identifiers and joins](03_learning/keys-and-reshaping.md). Specimens from the same person must stay together in evaluation splits.
+1. **Know the unit of analysis.** For the current example, read [the breast cancer research narrative](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) and [data identifiers and joins](03_learning/keys-and-reshaping.md). Specimens from the same person must stay together in evaluation splits.
 2. **Prepare measurements without leakage.** Use the [visual data-flow guide](04_machine_learning/visual-data-guide.md) to understand training-only imputation, scaling and feature selection.
 3. **Compare methods fairly.** Follow the [paired assay comparison](04_machine_learning/model-comparison.md) and [model-tuning guide](04_machine_learning/model-tuning.md) before interpreting scores.
 4. **Explain and reproduce the result.** Inspect the [seven-figure gallery](04_machine_learning/gallery/README.md), [evidence review](04_machine_learning/corpus-review.md) and [analysis record template](templates/analysis-record.md).
@@ -64,8 +65,8 @@ For a task-by-task index, use the [research resource guide](docs/resource-guide.
 - **Milestones and evidence:** [Dated status dashboard](docs/roadmap-gates.md#delivery-and-admission-snapshot-2026-10-17) and [machine-readable gate record](docs/milestone-evidence.toml) distinguish delivered software, draft code, data-access blockers, test evidence and scientific limits. Rust foundations, the book-aligned handbook and audited standalone G3 inference parity (R3) are delivered in synthetic scope; configuration/privacy extensions remain under review.
 - **Established in this repository:** synthetic software demonstrations for person-grouped model comparison, tuning, plotting, robustness, repeated-cohort assessment, conditional uncertainty, and a matched-objective Rust training check. See the [roadmap gate ledger](docs/roadmap-gates.md) for what each test established and what it did not.
 - **Still separate work:** a new survival endpoint and published-result reproduction require their own protocols. Consult the [learning roadmap](docs/learning-roadmap.md) rather than treating a passing test as evidence of clinical validity.
-- **TCGA-BRCA and privacy:** TCGA contains both open- and controlled-access files. Verify GDC access classification and permitted use **for each file** before any future real-data analysis. Keep credentials, direct identifiers and participant-level data out of this public repository. See [input/access requirements](docs/research-workflow.md#2-specify-input-and-access-contracts).
-- **Model use:** examples are **research and education only**. They are not validated for cancer diagnosis, treatment choice or individualized prognosis. Synthetic predictive scores are not breast cancer findings.
+- **Cancer data and privacy:** Source, file-level access, licensing/consent, privacy and publication review are **study-specific for every cancer dataset**. The TCGA-BRCA example uses the GDC's open/controlled distinction; its metadata-only adapter does not authorize that dataset or other providers. Keep participant-linked records, controlled data and credentials out of this public repository. See [cancer research scope](docs/cancer-research-scope.md#dataset-agnostic-privacy-with-source-specific-adapters) and [data/access contract](docs/research-workflow.md#2-specify-input-and-access-contracts).
+- **Model use:** current examples are **research and education only**, not validated for any cancer diagnosis, screening, therapy selection, prognosis or clinical decision support. Synthetic classification results are not findings about human tumors.
 
 ## Research templates
 

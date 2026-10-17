@@ -4,11 +4,12 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 [Paul's Notes](../README.md) · [Computing subjects](../03_learning/README.md) · [Research workflow](../docs/research-workflow.md)
 
-Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) from people and specimens to measurements, predictions, and interpretation. The guides below explain reusable methods through that narrative. Existing general-purpose R/Python fixtures teach individual mechanisms; the paired-specimen feature-selection example explicitly connects them to a synthetic tissue-category task.
+**Methods for any cancer research question.** Study design, leakage controls, preprocessing, algorithms, tuning, evidence and validation in this section can be applied to multiple oncology settings **when independently checked against that study's observation units, endpoints and data rights**. Our [current worked example](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) follows synthetic paired breast-specimen classification; it does not make every guide a TCGA model, a tumor-specific result or a validated predictor for other cancers. See the [full research scope](../docs/cancer-research-scope.md).
 
 | Subject | Resource | Practical purpose |
 | --- | --- | --- |
 | Learn Rust before implementing a model | [Rust foundations and object-oriented engineering](../03_learning/rust/README.md) | Variables, collections, ownership, structs, methods, traits, tests and a small synthetic research lab |
+| Plan a new cancer model or modality | [Cancer-wide scope and study contract](../docs/cancer-research-scope.md) | Choose a new tumor context/source, unit, endpoint and independent authorization before reusing workflows |
 | Understanding the subject | [What is machine learning?](what-is-machine-learning.md) | Features, targets, learning, assessment and interpretation in plain language |
 | Seeing the data flow | [Visual data guide](visual-data-guide.md) | Follow rows through splitting, training, validation, preprocessing and nested evaluation |
 | Choosing a method | [Basic algorithm guide](basic-algorithms.md) | Regression, classification, trees, kernels, clustering, PCA and survival |
@@ -34,7 +35,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 | Computational efficiency | [Optimization and evaluation](optimization.md) | Measure runtime and reduce redundant fitting without changing the evaluation question |
 | Scientific software requirements | [Implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) | Input contracts, study design, permissions and release evidence |
 
-The [learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded robustness baseline, repeated-cohort assessment and conditional whole-person uncertainty. G1/G2 close the defined synthetic Phase 4 milestone. The [gate ledger](../docs/roadmap-gates.md) keeps full-procedure uncertainty and clinical claims separate. The [native Rust baseline](rust-native-training.md) now checks a separately frozen objective and numerical contract. The survival case is next, beginning with its own endpoint protocol.
+The [current breast-cancer learning roadmap](../docs/learning-roadmap.md) includes the fixed all-feature comparison, seven-figure gallery, bounded robustness baseline, repeated-cohort assessment and conditional whole-person uncertainty. G1/G2 close the defined synthetic Phase 4 milestone. The [gate ledger](../docs/roadmap-gates.md) keeps full-procedure uncertainty and clinical claims separate. The [native Rust baseline](rust-native-training.md) now checks a separately frozen objective and numerical contract. The survival case is next **within the current teaching sequence**, beginning with its own endpoint protocol. Unrelated cancer questions may follow independent protocols without changing this frozen sequence.
 
 ## Run the caret example
 

@@ -1,6 +1,6 @@
 # Research resources
 
-[Paul's Notes](../README.md) · [Resource guide](../docs/resource-guide.md)
+[Paul's Notes](../README.md) · [Cancer-wide research scope](../docs/cancer-research-scope.md) · [Resource guide](../docs/resource-guide.md)
 
 | Collection | Contents |
 | --- | --- |

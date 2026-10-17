@@ -6,7 +6,7 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 Original work-order date: **2026-10-16**. Status reconciliation: **2026-10-17**. The [machine-readable evidence ledger](milestone-evidence.toml) records scope, PRs, reviewed heads, merge commits, CI run IDs, sources, prerequisites and limitations for every milestone. Its validator is [check_milestone_evidence.py](../scripts/check_milestone_evidence.py). The ledger is a dated snapshot, **not** a substitute for live GitHub checks or human study approval. This ledger separates repository delivery from scientific interpretation and learner mastery. Status values are **Planned / Implemented / Tested / Reviewed / Complete / Blocked**. A commit, passing script or favorable score alone cannot close a gate. All current experimental evidence is synthetic software evidence; CI does not assess a learner's understanding.
 
-G0–G5 here identify **roadmap milestones**. They do not replace the separately scoped G0–G10 requirements in the [biomedical implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md).
+G0–G5 here identify **milestones for the currently documented breast-cancer synthetic research sequence**, not the scope of Paul's Notes as a whole. The repository supports [any cancer research area](cancer-research-scope.md), with separate protocols and milestones for new studies. These milestones do not replace the separately scoped G0–G10 requirements in the [biomedical implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md).
 
 The shared narrative is **people → specimens → measurements → data preparation → training → validation → prediction → biological interpretation**. Preserve the 12-chapter, 60-gene book and its source corpus. No restricted data or participant records are admitted by this work order.
 
@@ -23,7 +23,7 @@ The shared narrative is **people → specimens → measurements → data prepara
 
 ## Delivery and admission snapshot (2026-10-17)
 
-Two tracks prevent a common category mistake: **scientific experiment milestone delivery (G0–G5)** is distinct from **Rust teaching/software delivery (R0–R4)** and **participant-data governance (D0–D1)**. A passing branch workflow is not a merged feature; a merged synthetic training tool is not authorization to train on real TCGA patients. *All learner-mastery states remain unassessed.*
+These recorded tracks distinguish **current-case scientific experiment milestones (G0–G5)**, **Rust teaching/software delivery (R0–R4)** and **public repository controls plus the proposed TCGA-BRCA data-admission case (D0–D1)**. A new cancer study will need its **own** admission and endpoint contract. A passing branch workflow is not a merged feature; a merged synthetic training tool is not authorization to train on real TCGA patients. *All learner-mastery states remain unassessed.*
 
 | ID | Gate and exit requirement | Delivery status | Evidence / next dependency |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ Two tracks prevent a common category mistake: **scientific experiment milestone 
 | R3 | Audited final-development native-fit frozen Rust inference; independent probability and identity parity | **Complete (bounded)** | [R3 evidence](#r3-audited-native-fit-frozen-rust-inference) |
 | R4 | Variable-only grouped synthetic ML runner with fold-local tuning and audit | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); no real TCGA fitting |
 | D0 | Enforce public Git boundaries, file-level GDC access preflight and nonclinical warnings | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); not enforced on `main` yet |
-| D1 | Independent approval of real TCGA-BRCA cohort, permitted data and study protocol | **Blocked** | [Data access and methods contract](research-workflow.md#2-specify-input-and-access-contracts) |
+| D1 | Independent approval of the **current real TCGA-BRCA proposal** (not a block on every cancer topic) | **Blocked** | [Data access and methods contract](research-workflow.md#2-specify-input-and-access-contracts) |
 
 **Gate vocabulary.** `Complete (bounded)` means a merged, specific software or documentation result supported by recorded acceptance checks, **not** an unrestricted scientific conclusion. `In review` means working code on a draft PR with branch-specific checks only; a green CI workflow never changes this status by itself. `Planned` requires a new frozen implementation protocol. `Blocked` forbids the data operation until independent access, privacy, study and scientific acceptance. The separate [biomedical implementation requirements](../02_biomedical_coding/IMPLEMENTATION_GATES.md) retain their own G0–G10 names.
 
@@ -47,7 +47,7 @@ Two tracks prevent a common category mistake: **scientific experiment milestone 
 
 1. **Source identity:** link the exact reviewed PR, head, merged commit (if merged), versioned protocol, and relevant file. A README claim without code/protocol is not an executed result.
 2. **Executable verification:** capture exact command/toolchain, named test, CI run on the correct revision, negative controls, outputs and failed attempts. A link to a current green badge is not enough to reproduce old code.
-3. **Data provenance and access:** record whether observations are invented, locally permitted open-access TCGA, or controlled. Group by the correct person/sample unit and keep raw people/identifiers out of public Git.
+3. **Data provenance and access:** record whether observations are invented, provider-verified and separately approved open-access cancer research inputs, or access-restricted/unclear. Group by the correct person/sample unit and keep raw people/identifiers out of public Git.
 4. **Scientific inference:** state the target, cohort, denominator, selection boundary, uncertainty and effect of prior inspections. Synthetic arithmetic or software parity cannot justify a biological, prognostic or clinical assertion.
 5. **Independent review and release:** document limitations, approved use, and human signoff where required. **CI does not certify learner mastery, privacy compliance, or clinical deployment.**
 
