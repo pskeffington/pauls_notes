@@ -22,7 +22,10 @@ fn complete_people(rows: &[Specimen]) -> Result<BTreeSet<&str>, &'static str> {
 }
 
 /// Splits must preserve person groups. This example requires complete fictional pairs.
-pub fn validate_person_split(train: &[Specimen], assessment: &[Specimen]) -> Result<(), &'static str> {
+pub fn validate_person_split(
+    train: &[Specimen],
+    assessment: &[Specimen],
+) -> Result<(), &'static str> {
     let training_people = complete_people(train)?;
     let assessment_people = complete_people(assessment)?;
     if !training_people.is_disjoint(&assessment_people) {
@@ -132,7 +135,10 @@ mod tests {
         assert!((prepared.median() - 15.0).abs() < 1e-12);
         assert_eq!(prepared.transform(&original).unwrap()[0], 15.0);
         assert_eq!(prepared.transform(&changed).unwrap()[0], 15.0);
-        assert_eq!(prepared.median(), MedianPreparation::fit(&train).unwrap().median());
+        assert_eq!(
+            prepared.median(),
+            MedianPreparation::fit(&train).unwrap().median()
+        );
     }
 
     #[test]
