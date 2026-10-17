@@ -1,0 +1,9 @@
+[package]
+name = "breast-cancer-rust-lab"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.90"
+publish = false
+description = "Dependency-free synthetic Rust foundations and breast cancer research concepts"
+
+[dependencies]
