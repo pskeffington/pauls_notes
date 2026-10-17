@@ -25,6 +25,12 @@ TEXT_SUFFIXES = frozenset({
 REPOSITORY_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 
 
+def valid_repository(repository):
+    return (isinstance(repository, str)
+            and REPOSITORY_RE.fullmatch(repository) is not None
+            and all(part not in (".", "..") for part in repository.split("/")))
+
+
 def github_get(path, token):
     request = Request(
         "https://api.github.com" + path,
@@ -53,7 +59,7 @@ def github_pages(path, token):
 
 
 def live_snapshot(repository, token):
-    if not REPOSITORY_RE.fullmatch(repository):
+    if not valid_repository(repository):
         raise ValueError("Expected repository OWNER/NAME")
     prefix = "/repos/" + repository
     info = github_get(prefix, token)
@@ -138,7 +144,7 @@ def branch_link_counts(texts, repository, names):
 def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
     repository = snapshot["repository"]
     default = snapshot["default_branch"]
-    if not REPOSITORY_RE.fullmatch(repository):
+    if not valid_repository(repository):
         raise ValueError("Invalid repository in inventory")
     branches = snapshot["branches"]
     if len({b["name"] for b in branches}) != len(branches):
