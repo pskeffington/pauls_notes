@@ -23,7 +23,7 @@ The shared narrative is **people → specimens → measurements → data prepara
 
 ## Delivery and admission snapshot (2026-10-17)
 
-These recorded tracks distinguish **current-case scientific experiment milestones (G0–G5)**, **Rust teaching/software delivery (R0–R4)** and **public repository controls plus the proposed TCGA-BRCA data-admission case (D0–D1)**. A new cancer study will need its **own** admission and endpoint contract. A passing branch workflow is not a merged feature; a merged synthetic training tool is not authorization to train on real TCGA patients. *All learner-mastery states remain unassessed.*
+These recorded tracks distinguish **current-case scientific experiment milestones (G0–G5)**, **Rust learning/inference delivery (R0–R3), configurable synthetic Python ML (R4)** and **public repository controls plus the proposed TCGA-BRCA data-admission case (D0–D1)**. A new cancer study will need its **own** admission and endpoint contract. A passing branch workflow is not a merged feature; a merged synthetic training tool is not authorization to train on real TCGA patients. *All learner-mastery states remain unassessed.*
 
 | ID | Gate and exit requirement | Delivery status | Evidence / next dependency |
 | --- | --- | --- | --- |
@@ -37,8 +37,8 @@ These recorded tracks distinguish **current-case scientific experiment milestone
 | R1 | Source-graded Rust coding corpus, exact references and offline integrity checks | **Complete (bounded)** | [R1 evidence](#r1-rust-literature-and-coding-quality-corpus) |
 | R2 | Twelve-chapter book-aligned Rust handbook and standalone six-pair arithmetic example | **Complete (bounded)** | [R2 evidence](#r2-breast-cancer-book-aligned-rust-engineering) |
 | R3 | Audited final-development native-fit frozen Rust inference; independent probability and identity parity | **Complete (bounded)** | [R3 evidence](#r3-audited-native-fit-frozen-rust-inference) |
-| R4 | Variable-only grouped synthetic ML runner with fold-local tuning and audit | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); no real TCGA fitting |
-| D0 | Enforce public Git boundaries, file-level GDC access preflight and nonclinical warnings | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); not enforced on `main` yet |
+| R4 | Configurable synthetic oncology ML (Python), person-grouped tuning and full candidate/feature audit | **Complete (bounded)** | [R4 evidence](#r4-configuration-driven-synthetic-oncology-ml) |
+| D0 | Public Git safety across cancer providers and TCGA-BRCA-only GDC preflight | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); not enforced on `main` yet |
 | D1 | Independent approval of the **current real TCGA-BRCA proposal** (not a block on every cancer topic) | **Blocked** | [Data access and methods contract](research-workflow.md#2-specify-input-and-access-contracts) |
 
 **Gate vocabulary.** `Complete (bounded)` means a merged, specific software or documentation result supported by recorded acceptance checks, **not** an unrestricted scientific conclusion. `In review` means working code on a draft PR with branch-specific checks only; a green CI workflow never changes this status by itself. `Planned` requires a new frozen implementation protocol. `Blocked` forbids the data operation until independent access, privacy, study and scientific acceptance. The separate [biomedical implementation requirements](../02_biomedical_coding/IMPLEMENTATION_GATES.md) retain their own G0–G10 names.
@@ -229,23 +229,35 @@ The [native push CI run](https://github.com/pskeffington/pauls_notes/actions/run
 | Boundary | Final-development values are **in-sample numerical probes**, not new held-out accuracy, external validation, clinical utility, prevalence inference, subtype performance or survival predictions |
 | Next action | Keep the frozen G3 objective/seed unchanged, retain negative tests and require a new study protocol for any model/data expansion |
 
-## R4 and D0: drafted work, not released
+## R4: configuration-driven synthetic oncology ML
+
+| Evidence field | Reviewed record |
+| --- | --- |
+| Status | **Complete (bounded)** for a synthetic Python scientific-software experiment; not a real-data adapter, Rust training backend or clinical predictor |
+| Merged source | [PR #16](https://github.com/pskeffington/pauls_notes/pull/16) reviewed head `232a2f5ab01dd070034786b18ffc803f8e52f160`, squash commit `714dbfa8d4d166b3df56451289411457afb92051` |
+| Executable files | [Synthetic runner](../04_machine_learning/research_toolkit/research_runner.py), [bounded JSON configuration](../04_machine_learning/research_toolkit/synthetic_brca_config.json), [nine unit tests](../04_machine_learning/research_toolkit/test_research_runner.py), [complete guide](../04_machine_learning/research_toolkit/README.md) |
+| Accepted CI | [Configurable synthetic ML workflow](https://github.com/pskeffington/pauls_notes/actions/runs/39053492819) passed **nine tests and a command-line smoke run**; seven other PR-head workflows passed, including Rust numerical training, model deployment, robustness, replication, uncertainty, manuscript and documentation |
+| Audit records | Source/config SHA-256 and seed; exact person-exclusion split lists and separate nested inner candidates, balanced-accuracy mean/std/rank, selected settings, selected anonymous feature indices/standardized coefficients, outer metrics and five descriptive calibration bins with counts |
+| Controls | Only internally generated measurements and labels; no external data path or real-data stage; fold-local imputation/scaling/selection, validated class-1 meaning, no out-of-repository overwrite; **NOT FOR CLINICAL USE** output |
+| Evidence limit | Synthetic paired-specimen labels have no real biological or clinical meaning; descriptive bins lack warranted confidence intervals; no independent cancer cohort, patient-level TCGA training or generic Rust variable-only backend has been validated |
+| Next work | Keep the synthetic program frozen for audit; propose a separate Rust/other cancer study interface only after source-specific input/target/validation and privacy review |
+
+## D0 and D1: privacy and real-data admission remain open
 
 | Gate | Source and executed branch check | Why it remains open |
 | --- | --- | --- |
-| R4 — JSON-configured grouped synthetic model development | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7), reviewed head `ecbd6d477c6866184fdfd9688253147bcf92f8fe`; [synthetic runner CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/39050178217) | Reconciled to current `main` as of the review, but **not merged**; synthetic feature-target coupling and positive-class contracts were corrected and tested. Confirm current `main` again if it advances; this is Python, **not** a Rust training backend |
-| D0 — repository privacy controls | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7); [public-data safety CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/39050178249) | **Not on main**; registered merged Rust literature CSV, scanner rejects nonregular Git entries. A required status check, human privacy review, secret/history scan and branch ruleset remain unverified; connected app could not access branch-protection administration |
-| D1 — real TCGA-BRCA study | No approved patient-level model runner or validated cohort on `main` | **Blocked.** Requires authoritative file-level GDC `open` evidence, use-rights/privacy review, cohort linkage, endpoint/normalization, person-grouped study protocol and independent release permission |
+| D0 — provider-neutral public Git controls and source-specific GDC example | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7), reviewed head `bb18d902f5f69f1e4faf5950f6259b45bb301875`; [public-data safety CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/39052793655) | **Not merged or enforced on `main` yet**; must re-synchronize after R4, configure required safety check and protected-policy review, complete Git history/secret scan, independently inspect privacy limitations and obtain signoff |
+| D1 — current proposed real TCGA-BRCA study | No approved patient-level case cohort, model runner or verified study authorization in this public repository | **Blocked.** Requires authoritative file-level GDC open status, use/consent/privacy rights, patient/specimen linkage, endpoint and normalization, grouping, independent science and release authorization; **not** a blanket ban on other cancer research |
 
-**Source-status caveat:** Recorded branch success applies only to the named PR head and CI run, not to future rebases or the current `main` tree. [Issue #8](https://github.com/pskeffington/pauls_notes/issues/8) tracks policy enforcement and history/secret review; a metadata-only GDC preflight is not data admission.
+**D0 is not enforced on `main` yet.** The presence of a workflow does not make it a required protected-branch check. **Evidence boundary:** PR #7's passing *branch* checks do not establish protected `main` controls; recorded evidence is tied to the named head, not future rebases. [Issue #8](https://github.com/pskeffington/pauls_notes/issues/8) tracks required administration and historic secret review. There is no general patient-data training admission in R4.
 
 ## Next phased acceptance sequence
 
-1. **Documentation and learning:** keep R0–R3 as bounded completed deliverables, maintain the 34-source corpus, and require learner explanation rather than a CI badge for mastery.
+1. **Documentation and learning:** keep R0–R4 as bounded completed deliverables, maintain the 34-source corpus, and require learner explanation rather than a CI badge for mastery.
 2. **Privacy first:** reconcile D0/PR #7 against latest `main` and verify its registered assets; obtain appropriate branch protection, secret/history checks and reviewer signoff. Do not infer privacy from a successful heuristic scan alone.
-3. **Synthetic parameterized research:** close R4 only after a new reviewed PR with replayed config/split/feature-selection tests and clean hashes. No hidden real-data mode is allowed.
+3. **Synthetic parameterized research:** R4 is delivered by PR #16, with grouped nested tuning, full candidate/feature traces and descriptive calibration-count audits. Preserve the synthetic-only contract. A different tumor dataset or native Rust variable-driven learner requires a **new** study and numerical-review gate.
 4. **Rust predictor parity:** R3 is closed within the frozen synthetic final-development numerical replay. Maintain the 90-row parity reference, explicit category-1 meaning, stored hashes and nonclinical restrictions; require a separately approved protocol for new methods or real data.
-5. **New science:** G4 requires a frozen synthetic time-to-event protocol; G5 requires declared source and reproduction target. D1 stays blocked until a separate approved real-data protocol. These are not automatically completed by R3/R4.
+5. **New science:** G4 requires a frozen synthetic time-to-event protocol; G5 requires declared source and reproduction target. The current D1/TCGA-BRCA proposal stays blocked until its separate authorized real-data protocol. These are not automatically completed by R3/R4.
 
 ## Completion discipline
 
