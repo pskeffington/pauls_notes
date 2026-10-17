@@ -113,7 +113,7 @@ cox_at <- function(fit,newdata,tau=24) {
   if(length(value)!=nrow(newdata)) stop("Cox prediction cardinality mismatch")
   value
 }
-pred <- list(); diagnostics <- list()
+pred <- list(); diagnostics <- list(); coefficient_records <- list()
 tryCatch({
   for(j in seq_len(3)) {
     te <- dat[match(folds[[j]],dat$person_id),,drop=FALSE]
@@ -131,6 +131,7 @@ tryCatch({
     kp <- rep(km_at(km,24),nrow(te))
     lc <- ipcw_loss(te$time_months,te$event,cp,censor)
     lk <- ipcw_loss(te$time_months,te$event,kp,censor)
+    coefficient_records[[j]] <- data.frame(fold=j,age_years=unname(coef(fit)[["age_years"]]),marker=unname(coef(fit)[["marker"]]))
     ph <- cox.zph(fit)
     pred[[j]] <- data.frame(person_id=te$person_id,fold=j,time_months=te$time_months,
       event=te$event,cox_survival_24=cp,km_survival_24=kp,
@@ -143,6 +144,7 @@ tryCatch({
   all <- do.call(rbind,pred)
   if (nrow(all)!=180L||anyDuplicated(all$person_id)||!setequal(all$person_id,development)) stop("OOF membership invalid")
   write.csv(all,file.path(out,"oof_predictions.csv"),row.names=FALSE)
+  write.csv(do.call(rbind,coefficient_records),file.path(out,"cox_coefficients.csv"),row.names=FALSE)
   dput(diagnostics,file=file.path(out,"fold_diagnostics.R"))
   cut_bins <- cut(all$cox_survival_24,breaks=c(0,.33,.66,1),
                   include.lowest=TRUE,right=FALSE)
