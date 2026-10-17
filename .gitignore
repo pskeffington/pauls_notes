@@ -26,7 +26,8 @@ Rplots.pdf
 04_machine_learning/rust/target/
 03_learning/rust/lab/target/
 
-# TCGA/GDC data must remain local, even if designated open access.
+# Participant-level cancer research data from ANY provider must stay outside public Git.
+# TCGA/GDC names below are additional current-case examples, not global scope limits.
 # Ignored files can still be added forcibly: CI tracked-file scanning is mandatory.
 /raw_data/
 /controlled_data/
@@ -43,6 +44,10 @@ Rplots.pdf
 **/participant_data/
 **/private_data/
 **/controlled_access/
+**/medical_images/
+**/clinical_images/
+**/patient_images/
+**/restricted_cohorts/
 **/external_data/
 **/gdc_downloads/
 **/research_runs/
@@ -63,6 +68,12 @@ biospecimen.project-tcga-*.tar.gz
 *.maf
 *.maf.gz
 *.svs
+*.ndpi
+*.mrxs
+*.nrrd
+*.nii
+*.nii.gz
+*.ome.tiff
 *.dcm
 *.parquet
 *.feather
