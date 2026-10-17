@@ -1,0 +1,64 @@
+name: Consolidate five merged ancestor branches
+
+# Single-purpose migration. Adding this workflow to main triggers its sole
+# execution. The fixed SHA list cannot delete protected, active or divergent
+# branches. Re-running after the refs disappear fails closed.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/consolidate-merged-ancestors.yml"
+
+permissions: {}
+concurrency:
+  group: historical-ancestor-cleanup
+  cancel-in-progress: false
+
+jobs:
+  consolidate:
+    if: github.repository == 'pskeffington/pauls_notes' && github.actor == 'pskeffington' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
+    steps:
+      - name: Checkout full Git ancestry of main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Run read-only guards and negative tests
+        run: |
+          python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_branch_retirement.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_retire_five_ancestors.py' -v
+          python3 scripts/check_repository_artifacts.py
+      - name: Build fresh full-inventory review against exact main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/audit_branch_retention.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --scan-root . \
+            --output "$RUNNER_TEMP/ancestor-consolidation-audit.json"
+      - name: Retire five owner-approved contained branches with individual SHA leases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/retire_five_ancestors.py \
+            --audit "$RUNNER_TEMP/ancestor-consolidation-audit.json" \
+            --output "$RUNNER_TEMP/ancestor-consolidation-receipt.json" \
+            --execute
+      - name: Preserve exact-commit and deletion evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: merged-ancestor-consolidation-evidence
+          path: |
+            ${{ runner.temp }}/ancestor-consolidation-audit.json
+            ${{ runner.temp }}/ancestor-consolidation-receipt.json
+          retention-days: 90
+          if-no-files-found: warn
