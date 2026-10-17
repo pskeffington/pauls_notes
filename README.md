@@ -61,6 +61,7 @@ For a task-by-task index, use the [research resource guide](docs/resource-guide.
 
 ## Research progress and boundaries
 
+- **Milestones and evidence:** [Dated status dashboard](docs/roadmap-gates.md#delivery-and-admission-snapshot-2026-10-17) and [machine-readable gate record](docs/milestone-evidence.toml) distinguish delivered software, draft code, data-access blockers, test evidence and scientific limits. Rust foundations and the source-backed handbook are delivered; configuration/privacy extensions are still under review.
 - **Established in this repository:** synthetic software demonstrations for person-grouped model comparison, tuning, plotting, robustness, repeated-cohort assessment, conditional uncertainty, and a matched-objective Rust training check. See the [roadmap gate ledger](docs/roadmap-gates.md) for what each test established and what it did not.
 - **Still separate work:** a new survival endpoint and published-result reproduction require their own protocols. Consult the [learning roadmap](docs/learning-roadmap.md) rather than treating a passing test as evidence of clinical validity.
 - **TCGA-BRCA and privacy:** TCGA contains both open- and controlled-access files. Verify GDC access classification and permitted use **for each file** before any future real-data analysis. Keep credentials, direct identifiers and participant-level data out of this public repository. See [input/access requirements](docs/research-workflow.md#2-specify-input-and-access-contracts).
