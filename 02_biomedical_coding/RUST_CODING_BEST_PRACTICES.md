@@ -113,7 +113,7 @@ Every note records **what the source supports**, **what it cannot support**, and
 
 #### RC-P05
 
-**RefinedRust: A Type System for High-Assurance Verification of Rust Programs** · Gaeh er; Sammler; Jung; Krebbers; Dreyer · PACMPL PLDI 2024 · 2024 · [primary record](https://doi.org/10.1145/3656422) · `abstract_and_selected_publisher_sections` · RG-09
+**RefinedRust: A Type System for High-Assurance Verification of Rust Programs** · Gäher; Sammler; Jung; Krebbers; Dreyer · PACMPL PLDI 2024 · 2024 · [primary record](https://doi.org/10.1145/3656422) · `abstract_and_selected_publisher_sections` · RG-09
 
 - **Supported:** Machine-checked refined ownership proofs can cover selected safe and unsafe Rust.
 - **Limit:** Prototype and Vec case study do not generalize to all numerical ML pipelines.
@@ -121,7 +121,7 @@ Every note records **what the source supports**, **what it cannot support**, and
 
 #### RC-P06
 
-**Beyond Memory Safety: an Empirical Study on Bugs and Fixes of Rust Programs** · Authors as indexed by IEEE · IEEE QRS 2024 · 2024 · [primary record](https://ieeexplore.ieee.org/abstract/document/10684674) · `abstract_metadata` · RG-04
+**Beyond Memory Safety: an Empirical Study on Bugs and Fixes of Rust Programs** · Zhang; Feng; Zhang; Dai; Xu · IEEE QRS 2024 · 2024 · [primary record](https://ieeexplore.ieee.org/abstract/document/10684674) · `abstract_metadata` · RG-04
 
 - **Supported:** Study characterizes non-memory defects and failures including panics in Rust projects.
 - **Limit:** Observational code sample is not a measured defect rate for this repository.
@@ -139,7 +139,7 @@ Every note records **what the source supports**, **what it cannot support**, and
 
 #### RC-P08
 
-**Targeted Fuzzing for Unsafe Rust Code: Leveraging Selective Instrumentation** · Paassen; Giesen; Davi · arXiv 2025 · 2025 · [primary record](https://arxiv.org/abs/2505.02464v1) · `abstract_metadata` · RG-04
+**Targeted Fuzzing for Unsafe Rust Code: Leveraging Selective Instrumentation** · Paaßen; Giesen; Davi · arXiv 2025 · 2025 · [primary record](https://arxiv.org/abs/2505.02464v1) · `abstract_metadata` · RG-04
 
 - **Supported:** Selective instrumentation targets unsafe code in reported fuzzing research.
 - **Limit:** Preprint does not establish benefit for our safe first-party logistic pipeline.
