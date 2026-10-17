@@ -23,6 +23,8 @@ jobs:
           python3 scripts/check_cancer_research_scope.py
           python3 -m unittest discover -s scripts/tests -p 'test_cancer_research_scope.py' -v
           python3 scripts/check_repository.py
+          python3 scripts/check_repository_artifacts.py
+          python3 -m unittest discover -s scripts/tests -p 'test_repository_artifacts.py' -v
           python3 scripts/tests/test_documentation.py
           python3 scripts/check_ml_evidence.py
           python3 scripts/tests/test_ml_evidence.py
