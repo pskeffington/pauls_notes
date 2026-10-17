@@ -16,6 +16,8 @@ The shared narrative is **people → specimens → measurements → data prepara
 | ML introduction, algorithms, visual data-flow guide and breast cancer narrative | A connected reading route from data meaning to prediction |
 | R caret, direct R and Python examples | Independently executable teaching mechanisms with stated input and partition contracts |
 | Rust frozen-model prediction | Compiled CLI with preserved preprocessing, typed inputs and cross-language parity; [native fitting](../04_machine_learning/rust-native-training.md) adds a separately frozen all-feature objective comparison |
+| Beginner-to-engineering Rust sequence | [Seven-stage foundations course](../03_learning/rust/README.md), [pinned Cargo lab](../03_learning/rust/lab/Cargo.toml) and [book-linked handbook](../02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md); code tests passed, learner mastery still needs demonstration |
+| Source-graded Rust coding evidence | [34-source coding corpus](../02_biomedical_coding/rust_coding_best_practices_sources.csv), [eight-paper bibliography](../02_biomedical_coding/rust_coding_references.bib) and [gate review](roadmap-gates.md#r1-rust-literature-and-coding-quality-corpus); source checks are not security/clinical validation |
 | Five-year Rust ML review | [11 publications/manuscripts and six pinned software inspections](../04_machine_learning/rust-ml-literature.md), with explicit project decisions; external studies remain unreplicated |
 | Paired-specimen selection with candidate traces | Training-only selection, grouped nested assessment and saved prediction replay on invented data |
 | 36-paper register and dated review | Traceable sources and limitations; three records remain abstract-limited |
@@ -34,6 +36,17 @@ These are repository capabilities. Your understanding has not been assessed by C
 | 4. Stability and tuning budgets | Which choices survive changes in development people or search budget? | [Replication](../04_machine_learning/replication-experiment.md) and [conditional person-level uncertainty](../04_machine_learning/uncertainty-assessment.md) | Complete histories, repeated-cohort results, panel/rank/sign summaries, 36 conditional ranges and verified replay | Defined synthetic milestone complete through G1/G2; learner mastery and full-procedure uncertainty remain unestablished |
 | 5. New endpoints and R methods | What changes when the question becomes recurrence or treatment response? | Introduce a separate survival learning case and compare R/Python contracts | Correct time/event schema, censoring-aware assessment and a declared Cox baseline | Planned; requires a new endpoint contract |
 | 6. Paper-to-code capstone | Can I reproduce a precisely defined research result and explain its limits? | Reproduce a bounded published component, then package a complete teaching analysis | Pinned artifact, explicit result target, reproduction record and independent replay | Planned after the relevant method checks |
+
+## Parallel Rust engineering and data-admission gates
+
+The [dated milestone ledger](roadmap-gates.md#delivery-and-admission-snapshot-2026-10-17) tracks what is actually on `main` separately from learner comprehension and draft work. Its [machine-readable snapshot](milestone-evidence.toml) records source commits and CI runs; the [offline validator](../scripts/check_milestone_evidence.py) prevents a draft-only feature from being marked delivered.
+
+- **R0–R2: delivered and tested.** The Rust fundamentals course, source-graded coding corpus and 12-chapter breast cancer handbook are merged; assignments and learner reasoning remain unassessed.
+- **R3: in review.** [PR #6](https://github.com/pskeffington/pauls_notes/pull/6) contains standalone frozen Rust inference; independent exporter/parity acceptance and merge remain separate from the completed fixed-objective G3 fit.
+- **R4 and D0: in review.** [PR #7](https://github.com/pskeffington/pauls_notes/pull/7) contains a **synthetic-only** parameterized runner and proposed public Git/GDC metadata checks. Passing branch CI does not make those protections active on `main`; reconcile new literature/Cargo assets first.
+- **D1: blocked.** No real TCGA-BRCA patient-level model is authorized by the teaching software, TCGA project membership, or metadata-only open-access checks. Independently review each requested input, use terms, participant linkage, endpoint, protocol and privacy controls before a separate study.
+
+These are **parallel engineering/governance tracks**, not prerequisites for the already frozen G0–G3 synthetic records. They do not move G4 survival or G5 reproduction from Planned to Complete.
 
 ## Phase 1: explain the current data before changing the model
 
@@ -100,7 +113,7 @@ Write down the target table or metric, dataset subset, source commit, environmen
 
 ## Work order and completion record
 
-**Phase 4's defined synthetic scientific-software milestone is complete through G1/G2. G3 now adds native Rust training and matched-objective numerical validation. Next new-method priority: freeze G4's separate survival endpoint, data dictionary and Cox assessment protocol; its G1/G2 dependency is satisfied.** See [G0–G5](roadmap-gates.md) for exact status. Phase 1 can be practiced now with existing material. The [Rust inference path](../04_machine_learning/rust-deployment.md) remains separately tested; native Rust fitting remains separate from survival progression. Learner mastery, full-procedure uncertainty and clinical validity remain unestablished. Adding literature alone does not complete the remaining implementations.
+**Phase 4's defined synthetic scientific-software milestone is complete through G1/G2. G3 now adds native Rust training and matched-objective numerical validation. R0–R2 (Rust foundations, coding corpus and book-aligned engineering) are also merged and tested; R3–R4/D0 remain draft-only, and D1 real-data modeling remains blocked. Next new-method priority: freeze G4's separate survival endpoint, data dictionary and Cox assessment protocol; its G1/G2 dependency is satisfied.** See [G0–G5](roadmap-gates.md) for exact status. Phase 1 can be practiced now with existing material. The [Rust inference path](../04_machine_learning/rust-deployment.md) remains separately tested; native Rust fitting remains separate from survival progression. Learner mastery, full-procedure uncertainty and clinical validity remain unestablished. Adding literature alone does not complete the remaining implementations.
 
 For each phase, record the question, code/document change, executed command, observed result, learner explanation and remaining limitation in the [analysis record](../templates/analysis-record.md). A failed hypothesis or unchanged predictive performance can be a valid learning result. Mark repository delivery and personal understanding separately.
 

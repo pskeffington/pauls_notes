@@ -12,6 +12,7 @@ Use the [learning roadmap](../docs/learning-roadmap.md) to connect these subject
 
 | Research task | Subject guide | Practical result |
 | --- | --- | --- |
+| Learn Rust from first principles to object-oriented research code | [Rust foundations and engineering course](rust/README.md) | Variables, collections, ownership, structs, traits, Cargo and a tested synthetic paired-specimen lab |
 | Represent a specimen or participant correctly | [Objects, types and meaning](objects-and-meaning.md) | Typed records, aligned matrices and checked functions |
 | Combine and reorganize observations | [Keys, joins and reshaping](keys-and-reshaping.md) | Row-preserving linkage and wide/long reconstruction |
 | Account for unavailable observations | [Missingness and comparisons](missingness-and-comparisons.md) | Explicit denominators and a six-pair comparison |

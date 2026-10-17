@@ -24,4 +24,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Offline source integrity checks
-        run: python3 02_biomedical_coding/tests/test_literature_matrix.py
+        run: |
+          python3 02_biomedical_coding/tests/test_literature_matrix.py
+          python3 scripts/check_rust_coding_corpus.py
+          python3 scripts/tests/test_rust_coding_corpus.py
