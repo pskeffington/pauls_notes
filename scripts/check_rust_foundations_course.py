@@ -101,11 +101,11 @@ def check_course(root=ROOT):
     for phrase in ("ownership", "borrowing", "trait", "composition", "Cargo.lock", "TCGA", "60", "48", "research"):
         if not re.search(re.escape(phrase), all_text, re.I):
             errors.append(f"Missing foundational/book link concept: {phrase}")
-    readme = (root / "README.md").read_text()
-    book = (root / "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md").read_text()
-    if "03_learning/rust/README.md" not in readme:
+    front = root / "README.md"
+    book_path = root / "06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md"
+    if not front.is_file() or "03_learning/rust/README.md" not in front.read_text():
         errors.append("Root README must link beginner Rust route")
-    if "03_learning/rust/README.md" not in book:
+    if not book_path.is_file() or "03_learning/rust/README.md" not in book_path.read_text():
         errors.append("Breast cancer book must link beginning Rust route")
     return errors
 
