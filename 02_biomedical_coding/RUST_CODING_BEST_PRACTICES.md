@@ -86,7 +86,7 @@ This is the **operational engineering guide** for the [breast cancer book](../06
 
 ### 2. Example-first workflow: reproduce the book's six pairs
 
-The executable file [`examples/book_paired_specimens.rs`](examples/book_paired_specimens.rs) uses only the Rust standard library, no external dataset, no package installation and no access token. Compile it with the pinned **Rust 1.90.0** toolchain. Commands are run from repository root and write binaries only to `/tmp`, outside Git:
+**SYNTHETIC TEACHING EXERCISE — NO PARTICIPANT DATA.** The executable file [`examples/book_paired_specimens.rs`](examples/book_paired_specimens.rs) uses only the Rust standard library, no external dataset, no package installation and no access token. Compile it with the pinned **Rust 1.90.0** toolchain. Commands are run from repository root and write binaries only to `/tmp`, outside Git:
 
 ~~~bash
 rustup toolchain install 1.90.0 --profile minimal --component rustfmt
