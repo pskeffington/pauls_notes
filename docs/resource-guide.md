@@ -2,12 +2,13 @@
 
 [Paul's Notes](../README.md) · [Research workflow](research-workflow.md) · [Learning roadmap](learning-roadmap.md)
 
-Use this index when you know the task but are not sure which guide, example or evidence register to open. If you're new, start with the [starting routes](../README.md#start-here).
+Use this index to navigate methods for **research across cancer types**. The TCGA-BRCA/breast cancer material is today's worked case, not a source or endpoint requirement for unrelated research. If you're new, start with [project scope](cancer-research-scope.md) and the [starting routes](../README.md#start-here).
 
 ## Learn the concepts
 
 | Your question | Start here | Continue with |
 | --- | --- | --- |
+| How do I start a new cancer type or data source? | [Cancer research scope](cancer-research-scope.md) | [Independent study protocol](../templates/study-protocol.md), [data/access workflow](research-workflow.md) and [data dictionary](../templates/data-dictionary.md) |
 | How do tumor and normal specimens relate to people and genes? | [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) | [Gene atlas](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#chapter-6-the-integrated-60-gene-atlas) and [pathways](../06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
 | How do I learn Rust from zero and build research objects? | [Rust foundations course](../03_learning/rust/README.md) | [Object-oriented Rust](../03_learning/rust/04_structs_traits_and_composition.md) then [research engineering](../03_learning/rust/06_breast_cancer_engineering.md) |
 | How do I work with tables, joins and missing data? | [Computing by subject](../03_learning/README.md) | [Keys and reshaping](../03_learning/keys-and-reshaping.md) and [missingness](../03_learning/missingness-and-comparisons.md) |
@@ -44,4 +45,4 @@ Use language manuals for syntax, package vignettes for API behavior, primary pap
 
 For each adopted method, record its citation, source version, study assumption, proposed implementation, expected output, failure case and validation result. Keep candidate methods separate from methods actually executed. Source registers document bibliographic and structural checks; the execution record belongs to the individual analysis.
 
-**Data and model boundary:** Published sample-level TCGA records are not bundled here; future real-data work must verify each GDC file's access class. The runnable examples in this repository use synthetic inputs and are not validated clinical tools. [Start at the research data-access contract](research-workflow.md#2-specify-input-and-access-contracts) before building a new adapter.
+**Data and model boundary:** No participant-level cancer datasets from TCGA **or any other source** are bundled here. Future real-data studies require **provider-specific** access, privacy and scientific admission. Existing executable examples are synthetic and not validated clinical tools. [Start at the research data-access contract](research-workflow.md#2-specify-input-and-access-contracts) before building a new adapter.

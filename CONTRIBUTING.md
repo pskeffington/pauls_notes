@@ -2,7 +2,7 @@
 
 [Home](README.md)
 
-Keep material organized by subject. Tie machine-learning additions to the breast cancer book's people, specimens, measurements, research question, and interpretation. Preserve the distinction between generic teaching fixtures and analyses of real breast cancer data. Introduce the research question, define unfamiliar terms, explain the method's assumptions, and connect the example to an interpretation. Distinguish executed examples, reference patterns, and proposed work. Mark synthetic data and unverified findings clearly.
+Keep material organized by subject across **any cancer type**. Start each new oncology example with its own cancer context, biological question, observation unit, data source, endpoint, access status, methods and interpretation. **The existing breast cancer book and TCGA-BRCA plan are current worked cases, not requirements for every new method or tumor type.** Link additions to the book when they actually extend that case; for another cancer or modality, link a separately reviewed study protocol and evidence corpus. Preserve the distinction between generic synthetic teaching fixtures and analyses of real participant data. Distinguish executed examples, reference patterns, and proposed work. Mark synthetic data and unverified claims clearly. See the [repository-wide scope and case-specific rules](docs/cancer-research-scope.md).
 
 Use descriptive `snake_case` names for R and Python functions. Validate schemas, identifiers, types, and missingness before analysis. Keep source files free of work on import where practical. Use explicit seeds for stochastic examples, preserve independent units during resampling, and fit preprocessing within the training partition.
 
@@ -12,7 +12,7 @@ For a roadmap milestone update, edit the [human gate ledger](docs/roadmap-gates.
 
 For Rust code, use the [book-aligned engineering handbook and review checklist](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md): preserve the frozen native-training contract, pinned toolchain/dependencies, safe-Rust boundary and independent numerical validation. New Rust feature claims require their own execution and review evidence.
 
-Write generated results to a new directory outside the repository. Record software versions, input provenance, partition membership, and the commands needed to reproduce an analysis. Keep participant data and credentials out of source and shared outputs. Inspect embedded values before sharing interactive figures.
+Apply access and privacy restrictions **regardless of cancer site or provider**; neither a GDC open flag nor a public download automatically approves participant-level publication or fitting. New data-source adapters require their own provider-specific access review; do not broaden the TCGA-BRCA preflight by removing its project checks. Write generated results to a new directory outside the repository. Record software versions, input provenance, partition membership, and the commands needed to reproduce an analysis. Keep participant data and credentials out of source and shared outputs. Inspect embedded values before sharing interactive figures.
 
 Run commands below from the repository root. Python checks use the standard library except for the machine learning suite, which requires the pinned packages in [its requirements file](04_machine_learning/requirements-python.txt). R dependencies and example execution commands are documented in the [learning guide](03_learning/README.md) and [machine learning guide](04_machine_learning/README.md).
 
