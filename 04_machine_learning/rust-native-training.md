@@ -1,5 +1,7 @@
 # Rust Native Training Baseline and Numerical Validation
 
+**Model-use and data source boundary:** This published Rust research code runs invented teaching measurements; it does not process real cancer participants or establish clinical performance. The [provider-neutral privacy and model-use policy](research_toolkit/MODEL_USE_POLICY.md) applies to all cancer sources, and the current GDC metadata example is specific to TCGA-BRCA. Protected/linkable records, identifiers, outputs and derived weights must remain outside this public repository.
+
 Authored by Paul Skeffington · Compiled with OpenAI
 
 [ML subjects](README.md) · [Frozen protocol](rust-training-protocol.md) · [Release-source addendum](rust-training-source-addendum.md) · [Contract](evidence/rust-training-contract-v1.json) · [Compact verification record](evidence/rust-training-validation-2026-10-16.json) · [G3 ledger](../docs/roadmap-gates.md#g3-native-rust-training) · [Preserved inference](rust-deployment.md)

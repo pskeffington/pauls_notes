@@ -64,6 +64,8 @@ Use the pinned Python dependencies and a new output directory outside the reposi
 
 Use the [variable-only synthetic ML toolkit](research_toolkit/README.md) to change bounded settings for sample/person counts, anonymous features, missingness, grouped inner/outer folds and a candidate search. It saves all inner candidate scores, selected features and coefficients, person-disjoint outer predictions, and **descriptive** calibration counts. The current study example is invented paired breast-specimen classification; **no real cancer dataset is accepted**, including TCGA-BRCA. A separate study protocol and provider-specific access review are required for any new real-data research.
 
+**Cancer-wide privacy boundary:** The [model/data-use policy](research_toolkit/MODEL_USE_POLICY.md) and [public-data guard](../scripts/check_public_data_boundaries.py) cover every provider. The [GDC metadata preflight](research_toolkit/gdc_open_access_preflight.py) is intentionally restricted to TCGA-BRCA and does not download or admit any real data.
+
 ## Run the Rust prediction deployment
 
 The [Rust guide](rust-deployment.md) adds a compiled prediction CLI for the same two fitted assay procedures, with saved preprocessing parameters and cross-language parity checks. Start with its committed synthetic example; prediction requires no Python runtime after compilation. The [native training extension](rust-native-training.md) is opt-in and separately validated; the frozen inference baseline retains its own CI path.

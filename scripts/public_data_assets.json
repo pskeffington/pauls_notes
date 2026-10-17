@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "purpose": "Explicit nonparticipant structured-file allowlist for the public repository; register any new CSV/JSON before committing it, with independent privacy review.",
+  "assets": [
+    {
+      "path": "02_biomedical_coding/biomedical_coding_literature_matrix.csv",
+      "kind": "methods_reference"
+    },
+    {
+      "path": "02_biomedical_coding/official_methods_register.csv",
+      "kind": "methods_reference"
+    },
+    {
+      "path": "02_biomedical_coding/rust_coding_best_practices_sources.csv",
+      "kind": "literature"
+    },
+    {
+      "path": "04_machine_learning/evidence/breast-cancer-studies.csv",
+      "kind": "literature"
+    },
+    {
+      "path": "04_machine_learning/evidence/comparison-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/gallery-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/paper-review.csv",
+      "kind": "literature"
+    },
+    {
+      "path": "04_machine_learning/evidence/phase4-baseline-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/replication-contract-v1.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/replication-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/rust-literature-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/rust-ml-sources.csv",
+      "kind": "literature"
+    },
+    {
+      "path": "04_machine_learning/evidence/rust-python-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/rust-training-contract-v1.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/rust-training-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/rust-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/uncertainty-contract-v1.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/uncertainty-input-v1.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/uncertainty-validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/evidence/validation-2026-10-16.json",
+      "kind": "synthetic_validation_record"
+    },
+    {
+      "path": "04_machine_learning/gallery/example/display-inputs.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/gallery/example/manifest.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/gallery/example/plot-data.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/gallery/example/predictions.csv",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/gallery/example/report.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/gallery/example/versions.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/research_toolkit/model_card.template.json",
+      "kind": "configuration_or_policy"
+    },
+    {
+      "path": "04_machine_learning/research_toolkit/synthetic_brca_config.json",
+      "kind": "configuration_or_policy"
+    },
+    {
+      "path": "04_machine_learning/rust/example/all_features.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/rust/example/export.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/rust/example/reference-probabilities.csv",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/rust/example/selected.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/rust/example/sha256.json",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "04_machine_learning/rust/example/specimens.csv",
+      "kind": "synthetic_fixture"
+    },
+    {
+      "path": "scripts/public_data_assets.json",
+      "kind": "policy_registry"
+    }
+  ]
+}
