@@ -7,8 +7,10 @@ use breast_cancer_rust_lab::{
 
 #[test]
 fn beginner_math_to_research_contract() {
-    assert_eq!(direction(log2_change(20.0, 10.0).unwrap()).unwrap(),
-               "higher in invented tumor measurement");
+    assert_eq!(
+        direction(log2_change(20.0, 10.0).unwrap()).unwrap(),
+        "higher in invented tumor measurement"
+    );
     let train = vec![
         Specimen::new("Invented1", Tissue::Comparator, Some(10.0)).unwrap(),
         Specimen::new("Invented1", Tissue::Tumor, Some(20.0)).unwrap(),
