@@ -15,6 +15,7 @@ class RustCodingCorpusTests(unittest.TestCase):
     def setUpClass(cls):
         cls.rows = check.read_rows()
         cls.guide = check.GUIDE.read_text(encoding="utf-8")
+        cls.bibliography = check.BIBLIOGRAPHY.read_text(encoding="utf-8")
 
     def problems(self, rows=None, guide=None, today=date(2026, 10, 17)):
         return check.inspect(
@@ -26,6 +27,7 @@ class RustCodingCorpusTests(unittest.TestCase):
     def test_current_corpus_and_pinned_rust_baseline(self):
         self.assertEqual(self.problems(), [])
         self.assertEqual(check.inspect_rust_baseline(), [])
+        self.assertEqual(check.inspect_bibliography(self.rows, self.bibliography), [])
         self.assertGreaterEqual(len(self.rows), 30)
 
     def test_duplicate_paper_or_malformed_publication_is_rejected(self):
@@ -51,6 +53,11 @@ class RustCodingCorpusTests(unittest.TestCase):
         row["kind"] = "paper"
         self.assertTrue(self.problems(rows))
         self.assertTrue(self.problems(guide=self.guide.replace("#### RC-P01\n", "")))
+
+    def test_missing_bib_record_and_wrong_doi_are_rejected(self):
+        self.assertTrue(check.inspect_bibliography(self.rows, self.bibliography.replace("RCP01,", "RCP99,")))
+        corrupted = self.bibliography.replace("10.1145/3586037", "10.1145/9999999")
+        self.assertTrue(any("DOI mismatch" in s for s in check.inspect_bibliography(self.rows, corrupted)))
 
     def test_preprint_version_and_dates(self):
         rows = copy.deepcopy(self.rows)
