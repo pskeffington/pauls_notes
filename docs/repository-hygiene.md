@@ -60,3 +60,35 @@ This is an additional audit against `main` at `dd479979730ab34bc9f1acc87919657a3
 - **Tracked-build hygiene:** `scripts/check_repository_artifacts.py` and its positive/negative controls reject accidentally tracked editor files and build/runtime directories. Curated figures, book materials, pinned lockfiles, example reports and evidence artifacts are intentionally preserved. This **does not** detect participant-linked data, credentials, privacy breaches or licensing issues: D0 must still pass separately.
 
 **Deletion disposition:** `work/biomedical-learning` is content-obsolete; `work/learning-check-coverage` is content-reconciled but has five non-ancestor commits and needs final historical/link review before remote deletion. The frozen G4 protocol remains anchored at merged PR #18 commit `d53de90837342d661e5528e8d7c15995e5bccd01`; its branch is **not** a deletion candidate until PR #18 branch-qualified links and ongoing G4 implementation references are reconciled. **No remote refs were deleted by this pass.**
+
+
+## Branch retention review instrument — 2026-10-17 pass
+
+At the latest pre-change GitHub inventory, there were **24 remote heads**: `main` (1), **19** historical heads of already merged PRs (#1–#6, #9–#18, #20–#21, #23), active drafts [D0 #7](https://github.com/pskeffington/pauls_notes/pull/7) and [G4 #19](https://github.com/pskeffington/pauls_notes/pull/19) (2), and two `work/` legacy branches. This is a dated snapshot; the new `chore/` branch used for this change adds another temporary head during review.
+
+The descriptions of the merged PRs were inspected for branch-dependent file links. Previously identified links in PRs #6, #15 and #18 now refer to immutable merged commits; the reviewed merged-PR bodies no longer have known GitHub `blob/` or `tree/` links tied to those original heads. **This does not establish that external sites, comments, issue text, forks, other refs, or old workflow logs contain no branch links.** G4's initial protocol still retains an explicit hold even though its first merged freeze commit is recorded.
+
+### Run the read-only branch classifier
+
+From a checkout **exactly at the current `main` HEAD**, with GitHub read access via a local token:
+
+```bash
+python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
+GITHUB_TOKEN="$(gh auth token)" python3 scripts/audit_branch_retention.py --repository pskeffington/pauls_notes --scan-root . --output /tmp/branch-retention-review.json
+```
+
+Alternatively, open **GitHub Actions → Read-only branch retention audit → Run workflow** after this change merges. Its report artifact is `branch-retention-review` with 14-day retention. The workflow has read-only GitHub permissions and **no delete/update-ref operation**. The resulting JSON includes branch head SHAs, associated PR numbers, immutable merged SHAs, known branch-qualified link counts and an explicit disposition; it does **not** include PR-body text or any research dataset.
+
+| Report decision | Interpretation |
+| --- | --- |
+| `default_hold` / `protected_hold` | Keep integration/protected branch |
+| `active_pr_hold` | Keep open PR head, including D0/G4 |
+| `frozen_protocol_hold` | Keep G4 protocol branch until explicit freeze/reference review |
+| `legacy_work_hold` | Keep reviewed-but-not-deletion-approved `work/` branch |
+| `referenced_hold` | Known direct GitHub branch URL still present in scanned text/PR bodies |
+| `merged_manual_review` | One merged same-repository PR; **candidate for a human link/evidence review only** |
+| `unresolved_hold` | Missing/ambiguous/unmerged PR association; no deletion without investigation |
+
+Classification fails if a supplied checkout does not equal the exact current default-branch SHA, or if inventory branch names duplicate. Its reference scan checks supported tracked text up to 2 MB per file and PR **bodies**; it cannot prove that no references remain outside those boundaries. The audit does not delete anything, does not approve deletion, and never rewrites history. When a candidate is explicitly cleared, verify that its remote branch head still matches the recorded SHA, confirm no essential links/evidence are lost, then use GitHub's branch-management control and record the change in [Issue #22](https://github.com/pskeffington/pauls_notes/issues/22).
+
+**Scientific and privacy boundary:** This classifier is not a D0 access/secret scan, not a D1 admission check, and does not accept G4 survival or release any participant-level information. Data and scientific gate counts are unchanged by branch housekeeping.
