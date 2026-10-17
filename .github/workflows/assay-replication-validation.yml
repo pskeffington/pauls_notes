@@ -4,7 +4,7 @@ on:
   pull_request:
     paths: ["04_machine_learning/**", ".github/workflows/assay-replication-validation.yml"]
   push:
-    branches: [main, feat/phase4b-repeated-cohort-replication]
+    branches: [main]
     paths: ["04_machine_learning/**", ".github/workflows/assay-replication-validation.yml"]
   workflow_dispatch:
 
