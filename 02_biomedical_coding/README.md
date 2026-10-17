@@ -8,6 +8,7 @@ This section connects influential biomedical computing, statistics, genomics, an
 
 ## Start here
 
+- **New to Rust?** Start with [Rust from the first variable through object-oriented programming and scientific engineering](../03_learning/rust/README.md), including a tested, dependency-free lab.
 - [Rust engineering handbook aligned with the 12-chapter breast cancer book](RUST_CODING_BEST_PRACTICES.md) — 2021–2026 verification and defect studies plus official Rust/Cargo/Clippy guidance, with code checks for the breast-cancer ML runner and a [machine-readable source register](rust_coding_best_practices_sources.csv) and [eight-paper bibliography](rust_coding_references.bib).
 
 - [Biomedical coding literature matrix](BIOMEDICAL_CODING_LITERATURE_MATRIX.md) — 71 primary-source-linked publications organized by methodological area, research contributors, and coding implications.
