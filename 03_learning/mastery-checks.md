@@ -18,6 +18,8 @@ Rscript --vanilla 03_learning/tests/test_resource_contracts.R
 
 The shell suite runs its R bridge checks when Rscript is available. Continuous integration requires R and executes both. Tests create and clean their own temporary directories; no study inputs are needed.
 
+For the parallel Rust learning route, start with [foundations to research engineering](rust/README.md) and use its [Rust mastery checks](rust/07_practice_and_mastery.md). These checks are separate from the R curriculum, and the Rust lab handles only synthetic teaching data.
+
 ## R operations and data meaning
 
 The `LC` labels identify executable groups in [test_mastery.R](tests/test_mastery.R).
