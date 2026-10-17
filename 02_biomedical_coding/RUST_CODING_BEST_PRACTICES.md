@@ -70,8 +70,8 @@ The native training experiment additionally requires the independent [frozen pro
 | [RC-P04](#rc-p04) | [Verus: Verifying Rust Programs using Linear Ghost Types](https://2023.splashcon.org/details/splash-2023-oopsla/11/Verus-Verifying-Rust-Programs-using-Linear-Ghost-Types) (2023; paper) | SMT-backed proof specifications can establish properties beyond borrowing checks. | Formal proof demonstrations do not verify Linfa optimization or current native training. |
 | [RC-P05](#rc-p05) | [RefinedRust: A Type System for High-Assurance Verification of Rust Programs](https://doi.org/10.1145/3656422) (2024; paper) | Machine-checked refined ownership proofs can cover selected safe and unsafe Rust. | Prototype and Vec case study do not generalize to all numerical ML pipelines. |
 | [RC-P06](#rc-p06) | [Beyond Memory Safety: an Empirical Study on Bugs and Fixes of Rust Programs](https://ieeexplore.ieee.org/abstract/document/10684674) (2024; paper) | Study characterizes non-memory defects and failures including panics in Rust projects. | Observational code sample is not a measured defect rate for this repository. |
-| [RC-P07](#rc-p07) | [Kani: A Model Checker for Rust](https://arxiv.org/abs/2607.01504) (2026; preprint) | Kani combines bounded checking and proof contracts for safety and correctness properties. | Preprint methods and case studies require review before adoption; not automatically peer reviewed. |
-| [RC-P08](#rc-p08) | [Targeted Fuzzing for Unsafe Rust Code: Leveraging Selective Instrumentation](https://arxiv.org/abs/2505.02464) (2025; preprint) | Selective instrumentation targets unsafe code in reported fuzzing research. | Preprint does not establish benefit for our safe first-party logistic pipeline. |
+| [RC-P07](#rc-p07) | [Kani: A Model Checker for Rust](https://arxiv.org/abs/2607.01504v1) (2026; preprint) | Kani combines bounded checking and proof contracts for safety and correctness properties. | Preprint methods and case studies require review before adoption; not automatically peer reviewed. |
+| [RC-P08](#rc-p08) | [Targeted Fuzzing for Unsafe Rust Code: Leveraging Selective Instrumentation](https://arxiv.org/abs/2505.02464v1) (2025; preprint) | Selective instrumentation targets unsafe code in reported fuzzing research. | Preprint does not establish benefit for our safe first-party logistic pipeline. |
 
 ## Source-by-source coding decisions
 
@@ -131,7 +131,7 @@ Every note records **what the source supports**, **what it cannot support**, and
 
 #### RC-P07
 
-**Kani: A Model Checker for Rust** · Delmas et al. · arXiv 2026 · 2026 · [primary record](https://arxiv.org/abs/2607.01504) · `abstract_metadata` · RG-09
+**Kani: A Model Checker for Rust** · Delmas et al. · arXiv 2026 · 2026 · [primary record](https://arxiv.org/abs/2607.01504v1) · `abstract_metadata` · RG-09
 
 - **Supported:** Kani combines bounded checking and proof contracts for safety and correctness properties.
 - **Limit:** Preprint methods and case studies require review before adoption; not automatically peer reviewed.
@@ -139,7 +139,7 @@ Every note records **what the source supports**, **what it cannot support**, and
 
 #### RC-P08
 
-**Targeted Fuzzing for Unsafe Rust Code: Leveraging Selective Instrumentation** · Paassen; Giesen; Davi · arXiv 2025 · 2025 · [primary record](https://arxiv.org/abs/2505.02464) · `abstract_metadata` · RG-04
+**Targeted Fuzzing for Unsafe Rust Code: Leveraging Selective Instrumentation** · Paassen; Giesen; Davi · arXiv 2025 · 2025 · [primary record](https://arxiv.org/abs/2505.02464v1) · `abstract_metadata` · RG-04
 
 - **Supported:** Selective instrumentation targets unsafe code in reported fuzzing research.
 - **Limit:** Preprint does not establish benefit for our safe first-party logistic pipeline.
