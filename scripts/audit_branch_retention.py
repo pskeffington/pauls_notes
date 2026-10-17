@@ -120,6 +120,54 @@ def scan_tracked_text(root):
     return texts, sha, skipped
 
 
+
+def git_branch_reachability(root, snapshot):
+    """Check branch ancestry against exact default HEAD using local Git objects.
+
+    This is distinct from a PR merged flag: squash-merged branches often
+    contain commits not reachable from the integration branch. Missing Git
+    objects, invalid SHAs, or unexpected Git errors fail closed.
+    """
+    root = root.resolve(strict=True)
+    default = snapshot["default_branch"]
+    branches = {b["name"]: b for b in snapshot["branches"]}
+    default_sha = branches[default]["sha"]
+    checkout = subprocess.run(
+        ["git", "-C", str(root), "rev-parse", "HEAD"],
+        capture_output=True, text=True, check=True,
+    ).stdout.strip()
+    if checkout != default_sha:
+        raise ValueError("Repository scan must use exact current default-branch HEAD")
+    results = {}
+    for branch in snapshot["branches"]:
+        name, sha = branch["name"], branch["sha"]
+        if name == default:
+            results[name] = "contained"
+            continue
+        if not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{40,64}", sha):
+            results[name] = "unverified"
+            continue
+        exists = subprocess.run(
+            ["git", "-C", str(root), "cat-file", "-e", sha + "^{commit}"],
+            capture_output=True,
+        )
+        if exists.returncode:
+            results[name] = "unverified"
+            continue
+        check = subprocess.run(
+            ["git", "-C", str(root), "merge-base", "--is-ancestor",
+             sha, default_sha],
+            capture_output=True,
+        )
+        if check.returncode == 0:
+            results[name] = "contained"
+        elif check.returncode == 1:
+            results[name] = "diverged"
+        else:
+            results[name] = "unverified"
+    return results
+
+
 def branch_link_counts(texts, repository, names):
     """Count branch-qualified blob/tree/raw URLs, never bare branch-name mentions."""
     repo = re.escape(repository)
@@ -179,6 +227,7 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
             and merged_prs[0]["head_sha"] == b["sha"]
         )
         link_count = source_links[name] + pr_links[name]
+        history = snapshot.get("git_ancestry", {}).get(name, "unverified")
 
         if name == default:
             decision = "default_hold"
@@ -199,8 +248,12 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
                 decision = "unscanned_source_hold"
             elif skipped:
                 decision = "incomplete_text_scan_hold"
-            else:
+            elif history == "contained":
                 decision = "merged_manual_review"
+            elif history == "diverged":
+                decision = "diverged_history_hold"
+            else:
+                decision = "history_unverified_hold"
         else:
             decision = "unresolved_hold"
 
@@ -211,6 +264,7 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
             "pull_requests": sorted(p["number"] for p in associated),
             "merged_prs": sorted(p["number"] for p in merged_prs),
             "matches_sole_merged_pr_head": exact_merged_head,
+            "history_relative_to_default": history,
             "merged_commit_shas": sorted(p["merge_commit_sha"] for p in merged_prs
                                         if p.get("merge_commit_sha")),
             "branch_qualified_links_in_default_tree": source_links[name],
@@ -250,6 +304,7 @@ def main():
     texts, sha, skipped = ([], None, 0)
     if args.scan_root:
         texts, sha, skipped = scan_tracked_text(args.scan_root)
+        snapshot["git_ancestry"] = git_branch_reachability(args.scan_root, snapshot)
     report = classify(snapshot, texts, sha, skipped)
     rendered = json.dumps(report, sort_keys=True, indent=2) + "\n"
     if args.output:

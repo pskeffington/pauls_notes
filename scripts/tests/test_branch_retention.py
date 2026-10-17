@@ -1,11 +1,13 @@
 """Read-only branch audit regression tests; no network, Git writes, or data."""
 import sys
 from pathlib import Path
+import subprocess
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from audit_branch_retention import (
-    branch_link_counts, classify, valid_repository, REPOSITORY_RE,
+    branch_link_counts, classify, git_branch_reachability, valid_repository, REPOSITORY_RE,
 )
 
 REPO = "pskeffington/pauls_notes"
@@ -48,6 +50,7 @@ def fixture():
         "observed_utc": "2026-10-17T00:00:00+00:00",
         "branches": branches,
         "pull_requests": prs,
+        "git_ancestry": {name: "contained" for name in names},
     }
 
 
@@ -175,6 +178,62 @@ class BranchRetentionAuditTests(unittest.TestCase):
         row = next(r for r in report["branches"]
                    if r["branch"] == "docs/merged-clean")
         self.assertEqual(row["decision"], "unresolved_hold")
+
+    def test_squash_merged_diverged_branch_never_becomes_candidate(self):
+        snap = fixture()
+        snap["git_ancestry"]["docs/merged-clean"] = "diverged"
+        result = classify(snap, [], snap["branches"][0]["sha"])
+        row = next(r for r in result["branches"]
+                   if r["branch"] == "docs/merged-clean")
+        self.assertTrue(row["matches_sole_merged_pr_head"])
+        self.assertEqual(row["history_relative_to_default"], "diverged")
+        self.assertEqual(row["decision"], "diverged_history_hold")
+
+    def test_unverified_ancestry_always_held(self):
+        for setting in ("unverified", None):
+            snap = fixture()
+            if setting is None:
+                del snap["git_ancestry"]["docs/merged-clean"]
+            else:
+                snap["git_ancestry"]["docs/merged-clean"] = setting
+            result = classify(snap, [], snap["branches"][0]["sha"])
+            row = next(r for r in result["branches"]
+                       if r["branch"] == "docs/merged-clean")
+            self.assertEqual(row["decision"], "history_unverified_hold")
+
+    def test_git_reachability_discriminates_ancestor_and_diverged(self):
+        snap = fixture()
+        mainsha = snap["branches"][0]["sha"]
+        ancestorsha = snap["branches"][5]["sha"]
+        missing = snap["branches"][7]["sha"]
+
+        def fake_git(cmd, **kwargs):
+            if "rev-parse" in cmd:
+                return subprocess.CompletedProcess(cmd, 0, stdout=mainsha)
+            if "cat-file" in cmd:
+                sha = cmd[-1].split("^", 1)[0]
+                return subprocess.CompletedProcess(cmd, 1 if sha == missing else 0)
+            if "merge-base" in cmd:
+                sha = cmd[-2]
+                return subprocess.CompletedProcess(
+                    cmd, 0 if sha == ancestorsha else 1
+                )
+            raise AssertionError("Unknown command in fake Git")
+
+        with patch("audit_branch_retention.subprocess.run", side_effect=fake_git):
+            result = git_branch_reachability(Path("."), snap)
+        self.assertEqual(result["main"], "contained")
+        self.assertEqual(result["docs/merged-clean"], "contained")
+        self.assertEqual(result["docs/merged-reference"], "diverged")
+        self.assertEqual(result["docs/unreviewed"], "unverified")
+
+    def test_history_refuses_stale_default_checkout(self):
+        snap = fixture()
+        def fake_git(cmd, **kwargs):
+            return subprocess.CompletedProcess(cmd, 0, stdout="f"*40)
+        with patch("audit_branch_retention.subprocess.run", side_effect=fake_git):
+            with self.assertRaisesRegex(ValueError, "exact current default-branch"):
+                git_branch_reachability(Path("."), snap)
 
     def test_repository_slug_validation(self):
         self.assertIsNotNone(REPOSITORY_RE.fullmatch(REPO))
