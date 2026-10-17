@@ -1,6 +1,7 @@
 """Tests for blocked commits and false-positive-resistant public examples."""
 import importlib.util
 import unittest
+from unittest import mock
 from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1] / "check_public_data_boundaries.py"
@@ -54,6 +55,31 @@ class PublicDataBoundaryTests(unittest.TestCase):
         self.assertIsNotNone(guard.registration_problem(
             "new/unreviewed_metadata.json", registered))
         self.assertIn("scripts/public_data_assets.json", registered)
+
+    def test_git_staging_never_follows_symlinks_or_submodules(self):
+        # Staging a symlink can bypass file-content inspection unless index mode
+        # is read directly. No real participant filenames/data enter the fixture.
+        for mode in (b"120000", b"160000"):
+            def git_fake(*args):
+                if args == ("ls-files", "--stage", "-z"):
+                    return mode + b" " + (b"0" * 40) + b" 0\\tlink.csv\\0"
+                if args == ("diff", "--cached", "--name-only", "--diff-filter=ACMR", "-z"):
+                    return b"link.csv\\0"
+                raise AssertionError("A nonregular file must never be resolved")
+            with self.subTest(mode=mode), mock.patch.object(guard, "git_output", side_effect=git_fake):
+                entries = list(guard.paths_and_reader(staged=True))
+                self.assertEqual(entries, [("link.csv", b"", mode)])
+                self.assertFalse(guard.safe_git_mode(entries[0][2]))
+        self.assertTrue(guard.safe_git_mode(b"100644"))
+        self.assertTrue(guard.safe_git_mode(b"100755"))
+        self.assertFalse(guard.safe_git_mode(None))
+
+    def test_merged_coding_reference_is_registered(self):
+        registered = guard.registered_assets(staged=False)
+        self.assertEqual(
+            registered["02_biomedical_coding/rust_coding_best_practices_sources.csv"],
+            "literature",
+        )
 
     def test_public_metadata_only_is_not_direct_person_data(self):
         self.assertEqual(guard.inspect("metadata.json",
