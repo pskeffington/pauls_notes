@@ -8,6 +8,8 @@ Use descriptive `snake_case` names for R and Python functions. Validate schemas,
 
 If new to Rust, work through the [seven-stage foundations-to-engineering route](03_learning/rust/README.md) and pass its pinned Cargo tests before adding new modules. Its example has no patient data and does not change G3's frozen training protocol.
 
+For a roadmap milestone update, edit the [human gate ledger](docs/roadmap-gates.md) **and** [machine evidence snapshot](docs/milestone-evidence.toml) together; preserve the exact PR/head/merge SHA, CI run, evidence files, scientific boundary and next unfulfilled prerequisite. Run `python3 scripts/check_milestone_evidence.py` and `python3 -m unittest discover -s scripts/tests -p test_milestone_evidence.py -v`. Do not mark a draft feature complete or claim learner mastery/clinical validation because CI passed.
+
 For Rust code, use the [book-aligned engineering handbook and review checklist](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md): preserve the frozen native-training contract, pinned toolchain/dependencies, safe-Rust boundary and independent numerical validation. New Rust feature claims require their own execution and review evidence.
 
 Write generated results to a new directory outside the repository. Record software versions, input provenance, partition membership, and the commands needed to reproduce an analysis. Keep participant data and credentials out of source and shared outputs. Inspect embedded values before sharing interactive figures.
