@@ -31,7 +31,7 @@ These recorded tracks distinguish **current-case scientific experiment milestone
 | G1 | Prespecified repeated-cohort synthetic robustness and full replay | **Complete (bounded)** | [G1 evidence](#g1-phase-4b-repeated-cohort-robustness) |
 | G2 | Person-resampled conditional uncertainty on frozen predictions | **Complete (bounded)** | [G2 evidence](#g2-phase-4c-uncertainty-and-reliability) |
 | G3 | Frozen native Rust logistic objective, class mapping and independent numerical checks | **Complete (bounded)** | [G3 evidence](#g3-native-rust-training) |
-| G4 | Approved time/event/censoring/endpoint protocol and synthetic survival evaluation | **Planned** | [G4 gate](#g4-phase-5-survival-learning-case); no endpoint-specific fits |
+| G4 | Frozen synthetic event/time/censoring protocol; separate Cox/KM execution and IPCW replay outstanding | **Planned** | [G4 frozen protocol](../04_machine_learning/survival-protocol.md); no endpoint-specific fit |
 | G5 | Predeclared target and permitted source, then independent reproducible refitting | **Planned** | [G5 gate](#g5-phase-6-published-result-reproduction) |
 | R0 | Rust syntax→ownership→structs/traits→research engineering, locked Cargo lab/tests | **Complete (bounded)** | [R0 evidence](#r0-rust-foundations-and-object-oriented-learning) |
 | R1 | Source-graded Rust coding corpus, exact references and offline integrity checks | **Complete (bounded)** | [R1 evidence](#r1-rust-literature-and-coding-quality-corpus) |
@@ -159,13 +159,13 @@ The [native push CI run](https://github.com/pskeffington/pauls_notes/actions/run
 | --- | --- |
 | Milestone | G4, separate breast cancer time-to-event case; depends on G1/G2 |
 | Objective | Teach prognosis with a declared event, time origin, follow-up, prediction horizon and censoring mechanism |
-| Status | Planned |
-| Source | Existing direct-R survival mechanism in [methods](../04_machine_learning/methods-and-deployments.md); no endpoint-specific learning-case implementation PR yet |
-| Execution | Not executed; new synthetic person-level data dictionary/protocol, then R survival Cox baseline; Python follows compatible quantities and assumptions |
-| Evidence | Required: invalid/contradictory outcome tests, person-separated partitions, saved predictions/environment, censoring-aware discrimination and time-dependent calibration assessment |
+| Status | **Planned (G4 protocol declared and frozen; no model fitted)** |
+| Source | [Frozen G4 protocol](../04_machine_learning/survival-protocol.md), [data dictionary](../04_machine_learning/survival-data-dictionary.md), [versioned contract](../04_machine_learning/evidence/survival-contract-v1.json), [offline guard](../scripts/check_survival_protocol.py). Separate generic R mechanism remains in [methods](../04_machine_learning/methods-and-deployments.md) and is not this experiment |
+| Execution | **No G4 records generated or Cox/KM model fitted**; future implementation must replay 240 invented people, 180 development, 60 protected reserve and three person-disjoint outer folds on the frozen R seeds |
+| Evidence | Required: negative censoring/event tests; training-only Cox, KM and reverse-KM censoring; held-out 24-month IPCW Brier on 180 development people, descriptive calibration with denominators, absolute probability and score-direction checks, exact source/protocol hashes and independent replay |
 | Scientific review | Specimen category is not recurrence. Hazard ratios, survival probabilities and treatment response have different meanings; censoring assumptions and proportional hazards need assessment |
 | Remaining risks | Invalid outcome coding, unsupported censoring models, horizon support and misaligned cross-language estimands |
-| Next dependency | G1/G2 complete; new endpoint protocol frozen before fitting; G3 not required |
+| Next dependency | G1/G2 complete and G4 endpoint/censoring/metric specification **frozen before any fitting**; next reviewed PR must implement, run and audit it. G3 is not required |
 
 ## G5: Phase 6 published-result reproduction
 
