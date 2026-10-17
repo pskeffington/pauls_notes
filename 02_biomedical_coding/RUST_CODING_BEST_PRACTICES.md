@@ -2,7 +2,7 @@
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-[Biomedical coding](README.md) · [Machine-learning methods](../04_machine_learning/README.md) · [Rust ML literature](../04_machine_learning/rust-ml-literature.md) · [Native Rust training](../04_machine_learning/rust-native-training.md) · [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) · [Structured source register](rust_coding_best_practices_sources.csv) · [Publication bibliography](rust_coding_references.bib)
+[Beginner Rust learning path](../03_learning/rust/README.md) · [Biomedical coding](README.md) · [Machine-learning methods](../04_machine_learning/README.md) · [Rust ML literature](../04_machine_learning/rust-ml-literature.md) · [Native Rust training](../04_machine_learning/rust-native-training.md) · [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) · [Structured source register](rust_coding_best_practices_sources.csv) · [Publication bibliography](rust_coding_references.bib)
 
 **Read first:** [Book chapter crosswalk](#1-chapter-by-chapter-crosswalk-what-rust-must-preserve) · [Run the six-pair Rust exercise](#2-example-first-workflow-reproduce-the-books-six-pairs) · [Types and input contracts](#3-types-should-rule-out-scientific-category-errors-rg-01--rg-02) · [ML leakage prevention](#5-separate-partitioning-preprocessing-fitting-and-evaluation-rg-01--rg-05) · [Pull-request checklist](#9-small-actionable-pull-request-review-checklist) · [Source appraisals](#source-by-source-coding-decisions)
 
