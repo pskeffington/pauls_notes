@@ -33,18 +33,66 @@ struct CompletePair {
 
 // The book's Chapter 11 values: six fictional people, one measurement per tissue.
 const BOOK_ROWS: [Measurement; 12] = [
-    Measurement { person: "DemoPair1", tissue: Tissue::Comparator, units: 10.0 },
-    Measurement { person: "DemoPair1", tissue: Tissue::Tumor, units: 20.0 },
-    Measurement { person: "DemoPair2", tissue: Tissue::Comparator, units: 10.0 },
-    Measurement { person: "DemoPair2", tissue: Tissue::Tumor, units: 40.0 },
-    Measurement { person: "DemoPair3", tissue: Tissue::Comparator, units: 10.0 },
-    Measurement { person: "DemoPair3", tissue: Tissue::Tumor, units: 10.0 },
-    Measurement { person: "DemoPair4", tissue: Tissue::Comparator, units: 10.0 },
-    Measurement { person: "DemoPair4", tissue: Tissue::Tumor, units: 5.0 },
-    Measurement { person: "DemoPair5", tissue: Tissue::Comparator, units: 10.0 },
-    Measurement { person: "DemoPair5", tissue: Tissue::Tumor, units: 20.0 },
-    Measurement { person: "DemoPair6", tissue: Tissue::Comparator, units: 10.0 },
-    Measurement { person: "DemoPair6", tissue: Tissue::Tumor, units: 10.0 },
+    Measurement {
+        person: "DemoPair1",
+        tissue: Tissue::Comparator,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair1",
+        tissue: Tissue::Tumor,
+        units: 20.0,
+    },
+    Measurement {
+        person: "DemoPair2",
+        tissue: Tissue::Comparator,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair2",
+        tissue: Tissue::Tumor,
+        units: 40.0,
+    },
+    Measurement {
+        person: "DemoPair3",
+        tissue: Tissue::Comparator,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair3",
+        tissue: Tissue::Tumor,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair4",
+        tissue: Tissue::Comparator,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair4",
+        tissue: Tissue::Tumor,
+        units: 5.0,
+    },
+    Measurement {
+        person: "DemoPair5",
+        tissue: Tissue::Comparator,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair5",
+        tissue: Tissue::Tumor,
+        units: 20.0,
+    },
+    Measurement {
+        person: "DemoPair6",
+        tissue: Tissue::Comparator,
+        units: 10.0,
+    },
+    Measurement {
+        person: "DemoPair6",
+        tissue: Tissue::Tumor,
+        units: 10.0,
+    },
 ];
 
 /// Fail closed on duplicate specimens, missing partners or invalid measurements.
@@ -231,22 +279,38 @@ mod tests {
             &pairs,
             &["DemoPair1", "DemoPair2", "DemoPair3", "DemoPair4"],
             &["DemoPair5", "DemoPair6"]
-        ).is_ok());
+        )
+        .is_ok());
         assert!(validate_person_partition(
             &pairs,
-            &["DemoPair1", "DemoPair2", "DemoPair3", "DemoPair4", "DemoPair5"],
+            &[
+                "DemoPair1",
+                "DemoPair2",
+                "DemoPair3",
+                "DemoPair4",
+                "DemoPair5"
+            ],
             &["DemoPair5", "DemoPair6"]
-        ).is_err());
+        )
+        .is_err());
         assert!(validate_person_partition(
             &pairs,
             &["DemoPair1", "DemoPair2", "DemoPair3", "DemoPair4"],
             &["DemoPair6"]
-        ).is_err());
+        )
+        .is_err());
         assert!(validate_person_partition(
             &pairs,
-            &["DemoPair1", "DemoPair1", "DemoPair2", "DemoPair3", "DemoPair4"],
+            &[
+                "DemoPair1",
+                "DemoPair1",
+                "DemoPair2",
+                "DemoPair3",
+                "DemoPair4"
+            ],
             &["DemoPair5", "DemoPair6"]
-        ).is_err());
+        )
+        .is_err());
     }
 
     #[test]
