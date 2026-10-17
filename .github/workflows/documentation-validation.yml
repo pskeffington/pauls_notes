@@ -28,6 +28,8 @@ jobs:
           python3 scripts/tests/test_ml_evidence.py
           python3 scripts/tests/test_rust_ml_evidence.py
           python3 scripts/check_milestone_evidence.py
+          python3 scripts/check_survival_protocol.py
+          python3 -m unittest discover -s scripts/tests -p 'test_survival_protocol.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_milestone_evidence.py' -v
           python3 scripts/check_rust_coding_corpus.py
           python3 scripts/tests/test_rust_coding_corpus.py

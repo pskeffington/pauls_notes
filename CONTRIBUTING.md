@@ -8,6 +8,8 @@ Use descriptive `snake_case` names for R and Python functions. Validate schemas,
 
 If new to Rust, work through the [seven-stage foundations-to-engineering route](03_learning/rust/README.md) and pass its pinned Cargo tests before adding new modules. Its example has no patient data and does not change G3's frozen training protocol.
 
+For G4 time-to-event work, keep the [frozen synthetic survival protocol](04_machine_learning/survival-protocol.md) and its [data dictionary](04_machine_learning/survival-data-dictionary.md) immutable during the first execution; any new endpoint, seed, censor model, horizon or time origin is a **new exploratory protocol version**, not a silent fix to obtain favorable output. G4 survival is not the prior specimen-label task and no real cancer participant data are admitted.
+
 For a new synthetic ML teaching experiment, reuse the [parameterized oncology lab](04_machine_learning/research_toolkit/README.md) with only its reviewed JSON numeric settings. Verify grouping, inner candidates, selected features and report denominators; avoid linking actual patient records or suggesting clinical validity. New cancer cohorts, sites, imaging and endpoints require a distinct study protocol and source-specific data review.
 
 For a roadmap milestone update, edit the [human gate ledger](docs/roadmap-gates.md) **and** [machine evidence snapshot](docs/milestone-evidence.toml) together; preserve the exact PR/head/merge SHA, CI run, evidence files, scientific boundary and next unfulfilled prerequisite. Run `python3 scripts/check_milestone_evidence.py` and `python3 -m unittest discover -s scripts/tests -p test_milestone_evidence.py -v`. Do not mark a draft feature complete or claim learner mastery/clinical validation because CI passed.

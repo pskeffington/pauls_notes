@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "protocol_id": "oncology-synthetic-survival-g4-v1",
+  "declaration_date": "2026-10-17",
+  "lifecycle": "protocol_only_not_executed",
+  "scope": "person-level fictional oncology time-to-event methods lesson, applicable as teaching methods to cancer research broadly; current breast-cancer book provides narrative only",
+  "data_source": "internally_generated_synthetic_only",
+  "synthetic_only": true,
+  "clinical_use_authorized": false,
+  "real_cancer_data_admitted": false,
+  "no_individual_prognosis": true,
+  "scientific_question": "Under an invented right-censored event process, how does a fixed Cox model compare with a training-only Kaplan-Meier null prediction for 24-month event-free survival?",
+  "unit_of_analysis": "one independent invented person, one baseline row, no paired specimen categories",
+  "generator": {
+    "engine": "R base random generators",
+    "rng_kind": [
+      "Mersenne-Twister",
+      "Inversion",
+      "Rejection"
+    ],
+    "generator_seed": 26102401,
+    "people": 240,
+    "age_years": {
+      "distribution": "uniform",
+      "min": 30,
+      "max": 75
+    },
+    "marker": {
+      "distribution": "normal",
+      "mean": 0,
+      "sd": 1
+    },
+    "baseline_hazard_per_month": 0.022,
+    "age_center": 50,
+    "age_log_hazard_per_year": 0.025,
+    "marker_log_hazard": 0.5,
+    "event_time_rule": "-log(U_event)/(0.022 * exp(0.025 * (age_years - 50) + 0.50 * marker)); U_event uniform(0,1)",
+    "censor_time": {
+      "distribution": "uniform",
+      "min_months": 12,
+      "max_months": 60,
+      "independent_of": [
+        "event_time",
+        "age_years",
+        "marker"
+      ]
+    },
+    "observed_time_rule": "pmin(event_time, censor_time)",
+    "event_rule": "as.integer(event_time <= censor_time)",
+    "ties_rule": "event_if_equal",
+    "missingness": "none",
+    "repeated_person_records": false,
+    "competing_events": false,
+    "delayed_entry": false
+  },
+  "observation_schema": [
+    {
+      "name": "person_id",
+      "type": "synthetic_unique_id",
+      "missing": "prohibited",
+      "validation": "unique, nonempty, generated S001..S240; no real barcodes or personal identifiers"
+    },
+    {
+      "name": "age_years",
+      "type": "finite_numeric",
+      "missing": "prohibited",
+      "validation": "30 <= age_years <= 75; invented variable"
+    },
+    {
+      "name": "marker",
+      "type": "finite_numeric",
+      "missing": "prohibited",
+      "validation": "invented standard-normal assay-like score; not a named gene"
+    },
+    {
+      "name": "time_months",
+      "type": "finite_positive_numeric",
+      "missing": "prohibited",
+      "validation": "observed time > 0, <= 60, single origin; no latent times in model input"
+    },
+    {
+      "name": "event",
+      "type": "integer_binary",
+      "missing": "prohibited",
+      "validation": "1 observed fictional event, 0 right censored; never specimen category"
+    }
+  ],
+  "endpoint": {
+    "fictional_event": "first invented recurrence-like event; not verified clinical recurrence or death",
+    "time_origin": "invented baseline observation at month zero",
+    "unit": "months",
+    "event_code": 1,
+    "censored_code": 0,
+    "horizon_months": 24,
+    "no_competing_risk": true,
+    "no_left_truncation": true
+  },
+  "partition": {
+    "reserve_seed": 26102402,
+    "fold_seed": 26102403,
+    "split_algorithm": "R sample.int(240) with reserve_seed; first 60 person IDs reserved, 180 remaining development; all IDs explicit and sorted within sets",
+    "development_people": 180,
+    "reserved_people": 60,
+    "outer_folds": 3,
+    "outer_people_per_fold": 60,
+    "outer_algorithm": "R sample.int(180) on sorted development people with fold_seed; assign consecutive blocks of 60, each person one held-out outer fold",
+    "reserved_policy": "never used for fitting, diagnostics, censor-weight estimation, predictions, selection or model comparisons in this G4 run"
+  },
+  "estimators": {
+    "cox": {
+      "model": "survival::coxph",
+      "formula": "Surv(time_months, event) ~ age_years + marker",
+      "ties": "efron",
+      "learning": "training fold only; fixed unpenalized formula; no search or stepwise feature selection",
+      "prediction": "survival::survfit(fitted_cox, newdata=test_rows) survival at 24 months",
+      "train_diagnostic": "cox.zph on training fold only; report without acceptance-driven refitting"
+    },
+    "null": {
+      "model": "survival::survfit",
+      "formula": "Surv(time_months, event) ~ 1",
+      "prediction": "training-fold Kaplan-Meier event-free survival at 24 months for every held-out person"
+    },
+    "censor": {
+      "model": "survival::survfit",
+      "formula": "Surv(time_months, 1 - event) ~ 1",
+      "train_only": true,
+      "assumption": "unconditional independent censoring by design",
+      "positivity_threshold_at_horizon": 0.2,
+      "no_weight_clipping": true
+    }
+  },
+  "evaluation": {
+    "primary": "person-equal out-of-fold IPCW Brier at month 24 for Cox and Kaplan-Meier null; also Cox minus null (negative favors Cox)",
+    "outcome_indicator": "I(observed event-free beyond month 24), observed when event at/before 24 or measured time >24",
+    "event_term": "I(time <= 24 and event == 1) * survival_probability_24^2 / Ghat(time-)",
+    "event_free_term": "I(time > 24) * (1-survival_probability_24)^2 / Ghat(24)",
+    "censored_early": "time <= 24 and event == 0 contributes zero weight, not a negative event label",
+    "weight_denominator": "number of held-out people, not sum of weights; sum contributions across 180 outer-held-out development people then divide by 180",
+    "censor_weight_fit": "each outer training fold only; Ghat is reverse Kaplan-Meier and Ghat(time-) uses left limit at an observed event",
+    "support_fail_condition": "reject Ghat(24) < 0.20 or any nonfinite/nonpositive required Ghat, no extrapolation",
+    "secondary": "held-out Harrell concordance of Cox linear risk score, higher means higher event hazard; censoring bias noted; no threshold-based selection",
+    "calibration": {
+      "style": "descriptive fixed probability bins for predicted event-free survival",
+      "bin_edges": [
+        0,
+        0.33,
+        0.66,
+        1
+      ],
+      "observed": "Kaplan-Meier survival at month 24 within each out-of-fold bin",
+      "min_people": 15,
+      "min_observed_events": 5,
+      "insufficient_policy": "mark bin unavailable with denominator, do not tune bins or claim CI"
+    },
+    "diagnostics": "report observed event/censor count by development/test fold and horizon, censor-survival support, Cox coefficients, cox.zph train-only values and warnings",
+    "no_hypothesis_significance_threshold": true,
+    "no_secondary_endpoint_switching": true
+  },
+  "quality_gates": {
+    "minimum_outer_train_events": 15,
+    "minimum_outer_test_events": 5,
+    "minimum_outer_test_events_by_horizon": 3,
+    "infeasible_protocol": "fail closed and preserve failure record; do not search for a favorable seed or change horizon",
+    "check_leakage": "disjoint person IDs across reserved and all fold splits; each development person tested in exactly one outer fold",
+    "negative_cases": [
+      "duplicate person_id",
+      "missing or nonfinite field",
+      "event outside 0/1",
+      "zero/negative/over-60 time",
+      "incorrect time origin or units",
+      "reserved person exposed",
+      "overlapping person folds",
+      "censoring survival unsupported at 24",
+      "event flag used as predictor",
+      "censored-before-horizon mislabeled as event-free",
+      "Cox score confused with absolute survival probability",
+      "unavailable 24-month calibration bin claimed valid"
+    ],
+    "frozen_outputs": [
+      "protocol_file_sha256",
+      "contract_file_sha256",
+      "generator_and_split_seeds",
+      "script_sha256",
+      "R_version_and_survival_version",
+      "synthetic_data_sha256",
+      "person_allocation",
+      "outer_fold_fit_diagnostics",
+      "outer_predictions",
+      "censor_weight_support",
+      "IPCW_Brier_and_null_contrast",
+      "calibration_availability",
+      "failure_records"
+    ],
+    "output_storage": "new directory outside public Git; no CI artifacts containing rows, model objects or predictions"
+  },
+  "reporting": {
+    "guidelines": [
+      "TRIPOD+AI 2024 reporting recommendations as an educational benchmark; not a clinical report",
+      "Graf et al. 1999 survival prediction score",
+      "Prince et al. 2025 IPCW censor estimation considerations"
+    ],
+    "disclaimer": "SYNTHETIC RESEARCH AND EDUCATIONAL USE ONLY. NOT FOR CLINICAL USE. No diagnosis, treatment, patient prognosis, or biological discovery.",
+    "limitations": "Internal cross-fitted teaching case, one observation per invented person; censoring assumed independent, no full procedure uncertainty or external/clinical validity.",
+    "admission_note": "D0 remains draft; D1 real TCGA-BRCA study blocked, and any other real oncology dataset requires independent source-specific admission."
+  }
+}
