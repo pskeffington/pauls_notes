@@ -6,6 +6,7 @@ args <- commandArgs(trailingOnly=TRUE)
 if (length(args)!=2L || !grepl("^([0-9a-f]{40})$", args[2])) stop("Usage: Rscript scripts/run_g4_survival.R /absolute/new/output 40-char-merged-freeze-SHA")
 out <- args[1]; freeze <- args[2]
 if (!grepl("^/", out)) stop("Output must be an absolute path outside repository")
+if (!nzchar(Sys.which("git"))) stop("Git required for frozen-protocol verification")
 repo <- normalizePath(getwd(), mustWork=TRUE)
 parent <- normalizePath(dirname(out), mustWork=TRUE)
 if (startsWith(paste0(parent, "/"), paste0(repo, "/")) || parent==repo) stop("Outputs must stay outside Git checkout")
@@ -25,6 +26,17 @@ hash_file <- function(path) {
 protocol <- "04_machine_learning/survival-protocol.md"
 contract <- "04_machine_learning/evidence/survival-contract-v1.json"
 src <- "scripts/run_g4_survival.R"
+verify_frozen <- function(path) {
+  frozen <- suppressWarnings(system2("git",c("show",paste0(freeze,":",path)),stdout=TRUE,stderr=TRUE))
+  status <- attr(frozen,"status")
+  if (!is.null(status) && status!=0) failure(paste("Frozen file inaccessible:",path))
+  tmp <- tempfile(); on.exit(unlink(tmp)); writeLines(frozen,tmp,useBytes=TRUE)
+  # Git show via stdout may normalize line endings; compare actual byte streams by git blob ID.
+  old <- suppressWarnings(system2("git",c("rev-parse",paste0(freeze,":",path)),stdout=TRUE,stderr=TRUE))
+  current <- suppressWarnings(system2("git",c("hash-object",path),stdout=TRUE,stderr=TRUE))
+  if(length(old)!=1L||length(current)!=1L||!identical(old,current)) failure(paste("Frozen contract mismatch:",path))
+}
+verify_frozen(protocol); verify_frozen(contract)
 provenance <- list(freeze_commit=freeze, protocol_sha256=hash_file(protocol),
   contract_sha256=hash_file(contract), runner_sha256=hash_file(src),
   R_version=R.version.string, survival_version=as.character(packageVersion("survival")),
@@ -61,6 +73,10 @@ alloc <- data.frame(person_id=id,allocation=ifelse(id %in% reserved,"reserve","d
   },integer(1))))
 write.csv(alloc,file.path(out,"allocation.csv"),row.names=FALSE,na="")
 write.csv(dat,file.path(out,"synthetic_cohort.csv"),row.names=FALSE)
+# Reserved observations are not exported: audit only development records and ID allocation.
+# The frozen reserve is protected from evaluation and prediction, including generated output.
+write.csv(dat[dat$person_id %in% development,,drop=FALSE],file.path(out,"development_cohort.csv"),row.names=FALSE)
+unlink(file.path(out,"synthetic_cohort.csv"))
 # KM right-continuous at tau, left-continuous before an observed event.
 km_at <- function(fit,t,left=FALSE) {
   idx <- which(if(left) fit$time<t else fit$time<=t)
@@ -68,6 +84,7 @@ km_at <- function(fit,t,left=FALSE) {
 }
 ipcw_loss <- function(t,d,p,gfit,tau=24) {
   if (length(t)!=length(d)||length(d)!=length(p)) stop("IPCW length mismatch")
+  if (any(!is.finite(t))||any(!d %in% 0:1)) stop("Invalid held-out outcomes")
   if (any(!is.finite(p)|p<0|p>1)) stop("Invalid survival probability")
   g24 <- km_at(gfit,tau)
   if (!is.finite(g24)||g24<0.20) stop("Censor support < 0.20 at 24")
