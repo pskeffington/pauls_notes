@@ -37,6 +37,17 @@ These are repository capabilities. Your understanding has not been assessed by C
 | 5. New endpoints and R methods | What changes when the question becomes recurrence or treatment response? | Introduce a separate survival learning case and compare R/Python contracts | Correct time/event schema, censoring-aware assessment and a declared Cox baseline | Planned; requires a new endpoint contract |
 | 6. Paper-to-code capstone | Can I reproduce a precisely defined research result and explain its limits? | Reproduce a bounded published component, then package a complete teaching analysis | Pinned artifact, explicit result target, reproduction record and independent replay | Planned after the relevant method checks |
 
+## Parallel Rust engineering and data-admission gates
+
+The [dated milestone ledger](roadmap-gates.md#delivery-and-admission-snapshot-2026-10-17) tracks what is actually on `main` separately from learner comprehension and draft work. Its [machine-readable snapshot](milestone-evidence.toml) records source commits and CI runs; the [offline validator](../scripts/check_milestone_evidence.py) prevents a draft-only feature from being marked delivered.
+
+- **R0–R2: delivered and tested.** The Rust fundamentals course, source-graded coding corpus and 12-chapter breast cancer handbook are merged; assignments and learner reasoning remain unassessed.
+- **R3: in review.** [PR #6](https://github.com/pskeffington/pauls_notes/pull/6) contains standalone frozen Rust inference; independent exporter/parity acceptance and merge remain separate from the completed fixed-objective G3 fit.
+- **R4 and D0: in review.** [PR #7](https://github.com/pskeffington/pauls_notes/pull/7) contains a **synthetic-only** parameterized runner and proposed public Git/GDC metadata checks. Passing branch CI does not make those protections active on `main`; reconcile new literature/Cargo assets first.
+- **D1: blocked.** No real TCGA-BRCA patient-level model is authorized by the teaching software, TCGA project membership, or metadata-only open-access checks. Independently review each requested input, use terms, participant linkage, endpoint, protocol and privacy controls before a separate study.
+
+These are **parallel engineering/governance tracks**, not prerequisites for the already frozen G0–G3 synthetic records. They do not move G4 survival or G5 reproduction from Planned to Complete.
+
 ## Phase 1: explain the current data before changing the model
 
 Read [objects and meaning](../03_learning/objects-and-meaning.md), [keys and reshaping](../03_learning/keys-and-reshaping.md), [missingness](../03_learning/missingness-and-comparisons.md), [what ML does](../04_machine_learning/what-is-machine-learning.md), and the [visual data-flow guide](../04_machine_learning/visual-data-guide.md). Use the existing [mastery checks](../03_learning/mastery-checks.md) to practice failures as well as successful outputs.
