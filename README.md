@@ -17,7 +17,7 @@ Choose the route that matches what you need; no weekly sequence is required.
 | **Choose a cancer research question** | [Cancer research scope](docs/cancer-research-scope.md) — all cancer types, data modalities and study designs | [Independent study/data-access contract](docs/research-workflow.md) and [protocol template](templates/study-protocol.md) |
 | **Understand the current breast cancer example** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
 | **Learn Rust from zero** | [Rust foundations course](03_learning/rust/README.md) — variables, borrowing, object-oriented patterns, Cargo and tests | [Research-oriented Rust engineering](03_learning/rust/06_breast_cancer_engineering.md) and [source-backed practices](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) |
-| **Learn Git/GitHub from zero** | [Zero-to-push Git and GitHub tutorial](03_learning/git-github-from-zero-to-push.md) — setup, authentication, essential commands and safe first push | Branches, pull requests, errors and research repository safety |
+| **Learn Git/GitHub from zero** | [Zero-to-push Git and GitHub tutorial](03_learning/git-github-from-zero-to-push.md) — setup, sign-in, essential commands and safe first push | Branches, pull requests, errors and research repository safety |
 | **Learn research computing** | [Computing by subject](03_learning/README.md) — R, data structure, joins, missingness and statistics | [Worked analysis](03_learning/README.md#run-the-combined-example) |
 | **See how ML actually trains** | [Visual ML data-flow guide](04_machine_learning/visual-data-guide.md) — splits, preprocessing and held-out predictions | [ML methods](04_machine_learning/README.md) and [plotting gallery](04_machine_learning/gallery/README.md) |
 | **Run and review an experiment** | [Paired-specimen ML walkthrough](04_machine_learning/advanced-breast-cancer-training.md) | [Comparison](04_machine_learning/model-comparison.md), [tuning](04_machine_learning/model-tuning.md) and [validation evidence](04_machine_learning/corpus-review.md) |
@@ -25,7 +25,7 @@ Choose the route that matches what you need; no weekly sequence is required.
 
 ## Git and GitHub: from zero to your first push
 
-New to version control? [Follow the complete command-line guide](03_learning/git-github-from-zero-to-push.md) to install Git, authenticate to GitHub, clone a repository or create your own, and upload your first changes. The basic cycle is:
+New to version control? [Follow the complete command-line guide](03_learning/git-github-from-zero-to-push.md) to install Git, sign in to GitHub, clone a repository or create your own, and upload your first changes. The basic cycle is:
 
 ```bash
 git status
