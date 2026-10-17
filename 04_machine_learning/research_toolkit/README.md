@@ -1,53 +1,76 @@
-# Configuration-driven machine-learning research toolkit
+# Configurable synthetic oncology machine-learning lab
 
-Authored by Paul Skeffington · Compiled with OpenAI
+[Machine learning](../README.md) · [Cancer-wide scope](../../docs/cancer-research-scope.md) · [Current breast cancer book](../../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) · [Research workflow](../../docs/research-workflow.md)
 
-This reusable configuration-driven toolkit is intended to support **methods for any cancer type**, subject to a separate protocol for each new cohort, tumor context, modality and endpoint. The current runnable configuration is **synthetic paired-specimen breast cancer teaching data**; the [public cancer research scope](../../docs/cancer-research-scope.md) is wider than that example. The code does **not** download, inspect or fit private Dartmouth data, GDC participants or any other real patients. In the separate Dartmouth.HSE study, R18F/R19 gates still prohibit patient-level training; those private-study limits are not a requirement that unrelated cancer projects use the same dataset or endpoint.
+**Purpose:** Change validated numeric experiment variables and rerun a complete **synthetic-only** machine-learning research example. The same educational principles apply across oncology, but this code is **not** a clinical tool or a general real-data ingestion service. Its current fixture illustrates a *fictional paired breast-specimen category*, **not** an analysis of TCGA-BRCA or another cancer dataset.
 
-## Cancer-wide privacy and source-specific admission
+This teaching lab was extracted from the [draft public-data/privacy PR #7](https://github.com/pskeffington/pauls_notes/pull/7) so **R4 scientific software delivery can be reviewed independently of D0 repository administration**. It contains no GDC API adapter, no patient-data reader and no permission to fit real cancer data. The draft GDC metadata preflight still applies only to the TCGA-BRCA example and remains separate.
 
-Read the [cancer-wide model-use/privacy policy](MODEL_USE_POLICY.md) and [generic research model-card template](model_card.template.json). Dataset rights, access and permitted publication differ among providers: **every real cancer dataset requires its own reviewed study contract**. Participant-linked clinical/genomic/imaging records, predictions, model weights and secrets from **any source** must stay outside public Git, unrestricted AI tools and telemetry. The [repository scanner](../../scripts/check_public_data_boundaries.py) covers the public code tree regardless of cancer site and can run as a local staged hook. New public CSV/JSON content requires independent review and registration in [the public-asset ledger](../../scripts/public_data_assets.json); this does not prove the data are anonymous.
+## Configure and execute
 
-### Current TCGA-BRCA/GDC metadata example
+Edit the [JSON file](synthetic_brca_config.json). There is deliberately **no data path, input-file flag, remote provider or real-data stage**. The permitted keys are:
 
-For the present breast-cancer source example, **TCGA-BRCA does not imply that every GDC file is open access**. This project-specific checker is one adapter, not the admissibility rule for all oncology research.
+| JSON field | Meaning and current limits |
+| --- | --- |
+| `schema_version`, `stage` | Exactly `1` and `synthetic-validation`; other modes rejected |
+| `data.people` | Number of **invented independent persons**, 20–1,000 |
+| `data.specimens_per_person` | 1–5 simulated observations per person, grouped together in splits |
+| `data.features`, `data.informative` | 4–500 anonymous measurements; 2–`features` informative measurements |
+| `data.missing_fraction` | Simulated missing measurements, 0–0.4 |
+| `design.outer_folds`, `design.inner_folds` | Person-grouped folds, 2–5 each with feasibility constraints |
+| `design.feature_counts`, `design.regularization_C` | Candidate feature counts and positive L2 inverse strengths; no more than 30 grid combinations |
+| `models`, `seed` | Fixed baseline and logistic model allowlist; nonnegative integer random seed |
 
-The [read-only GDC preflight](gdc_open_access_preflight.py) queries the authoritative official GDC `files` endpoint by **file UUID**, checks `access=open`, project `TCGA-BRCA`, allowed data types and metadata checksums, and records only aggregate metadata outside the repository. It performs **zero downloads and zero fits**. Example (the UUID list must come from the public GDC Data Portal; no patient identifiers):
+Use pinned [Python requirements](../requirements-python.txt). From the repository root:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r 04_machine_learning/requirements-python.txt
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python \
+  04_machine_learning/research_toolkit/research_runner.py \
+  --config 04_machine_learning/research_toolkit/synthetic_brca_config.json \
+  --output /tmp/new-unique-synthetic-oncology-run
+```
+
+The output directory **must not exist** and **must be outside** the source repository. Do not commit any generated run directory or row-level artifacts. For a second experiment, change only the accepted JSON numeric values and choose a **new** output location; record the change as a different synthetic experiment, never as an existing study's frozen validation.
+
+## What the report demonstrates
+
+Each `report.json` contains the seed, configuration/source SHA-256 hashes, runtime metadata, group/row counts and, for each outer fold and candidate learner:
+
+- **Allocation:** unique train-person IDs and test-person IDs; all dependent specimens from a person stay on one side of the outer split. No held-out person may appear in the inner tuning folds.
+- **Training-only preparation:** median imputation, scaling, univariate feature selection and logistic fitting inside the scikit-learn pipeline, refitted in each inner cross-validation fold.
+- **Inner candidate audit:** every tried feature-count/C pair, inner balanced accuracy mean/std and rank, followed by the chosen settings; selected anonymous feature indices and standardized model coefficients for comparison.
+- **Outer assessment:** balanced accuracy, accuracy, log loss, class-1 probabilities and raw **invented** labels, kept separate from inner candidates.
+- **Descriptive calibration counts:** five prespecified probability bins containing observation counts, positive-label counts and mean class-1 probability. Empty bins have a null mean; these descriptive bins are **not** calibration confidence intervals or proof of external reliability.
+
+The majority-class predictor is a comparison baseline. The generator returns its own fictional labels together with its feature matrix; they must **not** be randomly reassigned afterward. Every outer fold is a *development experiment*, not an independent hospital/site validation. Class 1 means the generator's invented positive category, **not cancer diagnosis, a molecular subtype, a survival event or a treatment outcome**.
+
+The report contains explicit `clinical_use_authorized=false`, `patient_level_training_authorized=false`, `real_cancer_data_processed=false` and the **NOT FOR CLINICAL USE** disclaimer. There is **no independent clinical validation**, and no evidence is asserted for a different cancer cohort.
+
+## Cancer-wide public-data safeguards and the current GDC example
+
+**Methods for any cancer type** can use the teaching patterns here, but a new real-data provider or endpoint requires its own independently approved protocol. The [provider-neutral model-use/privacy policy](MODEL_USE_POLICY.md) and [model-card template](model_card.template.json) prohibit participant-linked data and clinical-use claims from this public repository. The [public Git guard](../../scripts/check_public_data_boundaries.py) and [explicit structured-asset register](../../scripts/public_data_assets.json) add reviewed boundaries for files from **any oncology source**; heuristic scans are not deidentification.
+
+The **TCGA-BRCA-only** [read-only GDC metadata preflight](gdc_open_access_preflight.py) checks official file UUIDs against explicit `access=open`, case project `TCGA-BRCA`, approved data types and checksums. It makes **no download, model fit, clinical claim or approval for another cancer study**. To check a reviewed list of *GDC file UUIDs only*:
 
 ```bash
 python3 04_machine_learning/research_toolkit/gdc_open_access_preflight.py \
   --ids /tmp/gdc-public-file-ids.txt \
-  --output /tmp/new-gdc-preflight
+  --output /tmp/new-gdc-metadata-review
 ```
 
-The synthetic runner remains independent of the GDC metadata checker. It cannot be switched to **any real cancer data source** by changing JSON. Different cancer projects require independently reviewed adapters and study-specific data/use permissions. Dartmouth HSE R18F/R19 restrictions continue to govern **that private study**, not the repository's entire scientific subject matter.
+The PR branch's guards still require human privacy review, Git history/secret inspection and required-status protection on `main` before [D0 can close](../../docs/roadmap-gates.md#d0-and-d1-privacy-and-real-data-admission-remain-open). Source-specific metadata checks never unlock patient data through the synthetic runner.
 
-## Variable-only execution
-
-Edit `synthetic_brca_config.json`, changing the people/specimens count, feature dimensions, missing fraction, outer/inner folds, feature counts, L2 strengths and seed. Run from the repository root:
+## Verify and extend safely
 
 ```bash
-python3 04_machine_learning/research_toolkit/research_runner.py \
-  --config 04_machine_learning/research_toolkit/synthetic_brca_config.json \
-  --output /tmp/new-synthetic-brca-run
-python3 -m unittest discover -s 04_machine_learning/research_toolkit -p 'test_*.py' -v
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 -m unittest discover \
+  -s 04_machine_learning/research_toolkit -p 'test_research_runner.py' -v
 ```
 
-The output directory must not already exist **and must be outside the public source repository**. Every report contains an explicit `model_use` restriction block (research-only, no clinical use, no patient-level training) so the warning follows the output. Each report contains row-level held-out predictions and identities, selected inner search settings, per-fold group counts, balanced accuracy, accuracy and log loss; numerical evidence is descriptive synthetic software evidence. The exact config/source SHA-256 and runtime details are recorded. **Changing the JSON cannot enable research/patient training:** the only admissible stage is `synthetic-validation`, the only input is internally invented data, and arbitrary file paths or model names are rejected. Missing values are inserted by the synthetic generator; imputation, scaling and univariate feature selection are all inside the training pipeline and are re-fitted inside each inner fold. StratifiedGroupKFold prevents the same person from appearing in two folds.
+The [unit tests](test_research_runner.py) exercise determinism, exact person-group exclusivity, candidate-history counts, feature-selection consistency, calibration denominators, intentional generator signal, forbidden real-data config keys, output containment and no-overwrite behavior. The [automated CI](../../.github/workflows/configurable-ml-toolkit.yml) runs those checks and a command-line smoke execution on every relevant PR.
 
-The labels are invented binary specimen categories, **not** survival, subtype accuracy or patient outcomes. Generated data is deliberately simple; its held-out performance has no biological meaning. `majority` is an untouched baseline. `logistic` compares a bounded C×k grid using inner balanced accuracy. Outer folds are used only for evaluation; no reported outer score is used to select inner hyperparameters.
+**To extend this beyond the current invented binary classification task:** write a **separate** study protocol and source-specific adapter with a declared cancer context, biological units, labels/endpoints, time horizon, measurement normalization, privacy/access review, grouping, split map, baseline, tuning budget, uncertainty and software/numerical evidence. Other cancer datasets, including other GDC projects, are **not** admitted by editing this JSON. Real participant-derived data and trained weights belong outside this public repository.
 
-## Research integration design and admission boundary
-
-For a future independently **authorized cancer study**, separately implement and review a provider-specific input adapter with cohort/sample provenance, data dictionary, source rights, target definition, correct observation unit, frozen feature universe, grouped nested assessment, outcome timing, calibration/uncertainty plan, independent audit and resource policy. If the adapter is for Dartmouth.HSE, its own R18F/R19 science gates are additionally required. **Never** import real participant files into the synthetic runner or loosen the stage allowlist to bypass study-specific admission. Keep data and model artifacts outside this public repository.
-
-Proposed future Rust integration: export a reviewed schema-only plan/metadata and pass fold-local numerical matrices to native Rust training after admission; Rust and Python should share identities, split maps and preprocessing checks but should not silently assume objectives, loss scaling or class encoding agree. The existing G3 fixed-objective Rust comparison remains a distinct synthetic protocol.
-
-## Next validation gates
-
-1. Parameterized input contract and synthetic nested-group smoke — **implemented; local unit checks run**.
-2. Independent held-out metric and split-contract audit, source commit pinning and CI replay — **partially implemented, pending review**.
-3. Real-data adapter for a separately authorized cancer cohort — **blocked, not implemented**; current TCGA-BRCA/Dartmouth R18F admission remains a specific outstanding case.
-4. Multi-class, survival/time-dependent, calibrated and externally replicated workflows — **separate prospective protocols required**.
-
-Change configuration to test **synthetic engineering scenarios**, not scientific admission status, cancer subtype truth, or real-data permissions.
+**Mandatory limitation:** RESEARCH AND EDUCATIONAL USE ONLY. NOT FOR CLINICAL USE. These lessons do not authorize screening, diagnosis, individual prognosis, treatment selection, or publication of participant-linked predictions.

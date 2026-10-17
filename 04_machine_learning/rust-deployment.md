@@ -1,8 +1,8 @@
 # Deploy the assay models in Rust
 
-[Machine learning](README.md) · [Comparison case](model-comparison.md) · [Rust source](rust/src/lib.rs) · [Breast cancer book, Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data)
+**Model-use and data source boundary:** This published Rust research code runs invented teaching measurements; it does not process real cancer participants or establish clinical performance. The [provider-neutral privacy and model-use policy](research_toolkit/MODEL_USE_POLICY.md) applies to all cancer sources, and the current GDC metadata example is specific to TCGA-BRCA. Protected/linkable records, identifiers, outputs and derived weights must remain outside this public repository.
 
-**Model-use limitation:** This software uses invented teaching specimens, not TCGA patient training or clinical validation. It is not a diagnostic, treatment-selection or prognosis tool. Before any real-data research, verify GDC file-level access and complete the independent [privacy and model-use requirements](research_toolkit/MODEL_USE_POLICY.md). Do not publish participant-linked predictions or fitted weights without review.
+[Machine learning](README.md) · [Comparison case](model-comparison.md) · [Rust source](rust/src/lib.rs) · [Breast cancer book, Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data)
 
 Rust can run machine-learning predictions and train models through suitable libraries. This first deployment carries the book's existing assay question into a compiled **Rust prediction CLI**. Python retains the person-grouped training, tuning and assessment. Rust applies the frozen imputation, selected-column order, scaling and logistic coefficients from each final development fit. It produces probabilities for the recorded synthetic specimen category.
 

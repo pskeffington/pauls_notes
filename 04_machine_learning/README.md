@@ -60,9 +60,11 @@ python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py
 
 Use the pinned Python dependencies and a new output directory outside the repository with an existing parent.
 
-## Configuration-driven synthetic cancer ML toolkit
+## Configure a synthetic oncology ML run
 
-The [JSON-configured synthetic ML research toolkit](research_toolkit/README.md) demonstrates grouped, nested assessment with fold-local preparation, feature selection and explicit nonclinical outputs. The **current fixture** is a synthetic breast-specimen category task; the reusable **methods** can guide future studies in other cancers only with independently reviewed data, endpoints and grouping. The [cancer-wide data/model policy](research_toolkit/MODEL_USE_POLICY.md) covers all providers, while [TCGA-BRCA GDC preflight](research_toolkit/gdc_open_access_preflight.py) is limited to that one metadata source and downloads or trains on no patient records.
+Use the [variable-only synthetic ML toolkit](research_toolkit/README.md) to change bounded settings for sample/person counts, anonymous features, missingness, grouped inner/outer folds and a candidate search. It saves all inner candidate scores, selected features and coefficients, person-disjoint outer predictions, and **descriptive** calibration counts. The current study example is invented paired breast-specimen classification; **no real cancer dataset is accepted**, including TCGA-BRCA. A separate study protocol and provider-specific access review are required for any new real-data research.
+
+**Cancer-wide privacy boundary:** The [model/data-use policy](research_toolkit/MODEL_USE_POLICY.md) and [public-data guard](../scripts/check_public_data_boundaries.py) cover every provider. The [GDC metadata preflight](research_toolkit/gdc_open_access_preflight.py) is intentionally restricted to TCGA-BRCA and does not download or admit any real data.
 
 ## Run the Rust prediction deployment
 

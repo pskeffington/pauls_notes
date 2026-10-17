@@ -31,11 +31,11 @@ class MilestoneEvidenceTests(unittest.TestCase):
         counts = {}
         for gate in self.snapshot["gates"]:
             counts[gate["status"]] = counts.get(gate["status"], 0) + 1
-        self.assertEqual(counts, {"complete_bounded": 8, "in_review": 2, "planned": 2, "blocked": 1})
+        self.assertEqual(counts, {"complete_bounded": 9, "in_review": 1, "planned": 2, "blocked": 1})
 
     def test_draft_pr_cannot_be_promoted_by_editing_status(self):
         snapshot = copy.deepcopy(self.snapshot)
-        self.gate(snapshot, "R4")["status"] = "complete_bounded"
+        self.gate(snapshot, "D0")["status"] = "complete_bounded"
         problems = self.inspect(snapshot)
         self.assertTrue(any("delivery scope" in issue or "merge commit" in issue for issue in problems))
 

@@ -1,10 +1,10 @@
 # Rust Native Training Baseline and Numerical Validation
 
+**Model-use and data source boundary:** This published Rust research code runs invented teaching measurements; it does not process real cancer participants or establish clinical performance. The [provider-neutral privacy and model-use policy](research_toolkit/MODEL_USE_POLICY.md) applies to all cancer sources, and the current GDC metadata example is specific to TCGA-BRCA. Protected/linkable records, identifiers, outputs and derived weights must remain outside this public repository.
+
 Authored by Paul Skeffington · Compiled with OpenAI
 
 [ML subjects](README.md) · [Frozen protocol](rust-training-protocol.md) · [Release-source addendum](rust-training-source-addendum.md) · [Contract](evidence/rust-training-contract-v1.json) · [Compact verification record](evidence/rust-training-validation-2026-10-16.json) · [G3 ledger](../docs/roadmap-gates.md#g3-native-rust-training) · [Preserved inference](rust-deployment.md)
-
-**Model-use limitation:** This software uses invented teaching specimens, not TCGA patient training or clinical validation. It is not a diagnostic, treatment-selection or prognosis tool. Before any real-data research, verify GDC file-level access and complete the independent [privacy and model-use requirements](research_toolkit/MODEL_USE_POLICY.md). Do not publish participant-linked predictions or fitted weights without review.
 
 **G3 adds a working native Linfa logistic fit and numerical comparison on synthetic data.** It follows people → specimens → measurements → preparation → training → validation → prediction → interpretation. The task remains recorded specimen category, not recurrence, future diagnosis or treatment benefit. The 48 anonymous features are not the book's 60 named genes.
 
