@@ -4,13 +4,14 @@ This code is **not an accepted G4 result**. It is an executable candidate under 
 
 ## Controlled local execution
 
-Requirements: R with the `survival` package, Git, sha256sum (Linux coreutils), Python 3, and an output directory **outside** the Git checkout. No TCGA data, identifiers, external datasets, credentials, network downloads, or participant records are inputs.
+Requirements: R with the `survival` package, Git, sha256sum (Linux coreutils), Python 3 with NumPy and SciPy for independently fitted Cox parity, and an output directory **outside** the Git checkout. No TCGA data, identifiers, external datasets, credentials, network downloads, or participant records are inputs.
 
 ```sh
 python3 -m unittest scripts/tests/test_g4_survival_audit.py
 Rscript scripts/tests/g4_survival_oracles.R
 Rscript scripts/run_g4_survival.R /tmp/g4-survival-unique-run FROZEN_MERGE_SHA
 python3 scripts/audit_g4_survival.py /tmp/g4-survival-unique-run
+python3 scripts/replay_g4_cox_scipy.py /tmp/g4-survival-unique-run
 ```
 
 The runner refuses an existing output directory; its input is internally generated only. A failure is retained in `FAILURE.txt`. The second-process auditor recomputes censor KM and scores from development outcomes, rather than reading the first process's fitted censor weights. Reserved outcomes are not exported.
@@ -23,6 +24,6 @@ The runner refuses an existing output directory; its input is internally generat
 4. Independently replay on a second environment with the **same pinned runtime**; compare row identities, allocations, data hashes, predictions and metrics, and retain signed/hashed manifests.
 5. Review any statistical failure and exception before merge. Even a numerical pass establishes only bounded synthetic software correctness, not full-procedure statistical uncertainty or clinical validity.
 
-**Current limitations:** The runner and audit have not been executed in the available environment; their R API behavior, oracle consistency and model fitting must be verified. The auditor checks prediction/loss arithmetic but does **not yet independently reproduce Cox coefficients or absolute survival probabilities**. A second fitter or independent reference predictions must close that gap. Do not mark G4 Complete or change D0/D1 in this branch.
+**Current limitations:** The runner and audit have not been executed in the available environment; their R API behavior, oracle consistency and model fitting must be verified. A separate SciPy reference **now implements** independent Cox fitting, coefficients and absolute survival cross-checks, rejecting event-time ties rather than silently equating Efron and Breslow. This reference still requires execution, review of optimizer tolerances, and verified R parity before any gate promotion. Do not mark G4 Complete or change D0/D1 in this branch.
 
 SYNTHETIC RESEARCH AND EDUCATIONAL USE ONLY — NOT FOR CLINICAL USE.
