@@ -159,7 +159,7 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
         associated = [
             p for p in prs
             if p.get("head_ref") == name
-            and p.get("head_repository", "").lower() == repository.lower()
+            and (p.get("head_repository") or "").lower() == repository.lower()
         ]
         open_prs = [p for p in associated if p.get("state") == "open"]
         merged_prs = [p for p in associated if p.get("merged_at")]
