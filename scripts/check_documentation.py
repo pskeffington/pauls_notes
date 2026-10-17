@@ -16,8 +16,8 @@ SOURCE_PATH = re.compile(
 # not routine Git terminology such as "authenticate"/"authentication".
 # Token boundaries prevent accidental substring matches.
 FRONT_PAGE_RESTRICTED_CLAIMS = re.compile(
-    r'\\b(?:dartmouth|university|institution(?:al)?|authentic(?:ity)?|'
-    r'independently|copyright\\s+clearance|official\\s+curriculum)\\b',
+    r'\b(?:dartmouth|university|institution(?:al)?|authentic(?:ity)?|'
+    r'independently|copyright\s+clearance|official\s+curriculum)\b',
     re.I,
 )
 
