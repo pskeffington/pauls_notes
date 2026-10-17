@@ -28,6 +28,7 @@ def fixture():
     def pr(number, head, state, merged_at=None, body="", source=REPO):
         return {
             "number": number, "head_ref": head, "head_repository": source,
+            "head_sha": next(b["sha"] for b in branches if b["name"] == head),
             "state": state, "merged_at": merged_at, "body": body,
             "merge_commit_sha": ("a" * 40) if merged_at else None,
         }
@@ -53,7 +54,7 @@ def fixture():
 class BranchRetentionAuditTests(unittest.TestCase):
     def test_statuses_never_approve_deletion(self):
         snap = fixture()
-        result = classify(snap)
+        result = classify(snap, [], snap["branches"][0]["sha"])
         found = {r["branch"]: r for r in result["branches"]}
         expected = {
             "main": "default_hold",
@@ -121,6 +122,59 @@ class BranchRetentionAuditTests(unittest.TestCase):
         result = classify(snap)
         found = {r["branch"]: r for r in result["branches"]}
         self.assertEqual(found["docs/merged-clean"]["decision"], "unresolved_hold")
+
+    def test_merged_branch_head_mismatch_stays_held(self):
+        snap = fixture()
+        snap["branches"][5]["sha"] = "b" * 40
+        result = classify(snap, [], snap["branches"][0]["sha"])
+        found = {r["branch"]: r for r in result["branches"]}
+        row = found["docs/merged-clean"]
+        self.assertEqual(row["decision"], "merged_head_mismatch_hold")
+        self.assertFalse(row["matches_sole_merged_pr_head"])
+
+    def test_missing_pr_head_sha_stays_held(self):
+        snap = fixture()
+        for pr in snap["pull_requests"]:
+            if pr["number"] == 100:
+                pr["head_sha"] = None
+        result = classify(snap, [], snap["branches"][0]["sha"])
+        found = {r["branch"]: r for r in result["branches"]}
+        self.assertEqual(found["docs/merged-clean"]["decision"],
+                         "merged_head_mismatch_hold")
+
+    def test_no_repository_scan_is_not_a_cleanup_candidate(self):
+        report = classify(fixture())
+        found = {r["branch"]: r for r in report["branches"]}
+        self.assertEqual(found["docs/merged-clean"]["decision"],
+                         "unscanned_source_hold")
+        self.assertFalse(report["scanned_default_tree"])
+
+    def test_skipped_text_file_is_not_a_cleanup_candidate(self):
+        snap = fixture()
+        report = classify(snap, [], snap["branches"][0]["sha"], skipped=1)
+        found = {r["branch"]: r for r in report["branches"]}
+        self.assertEqual(found["docs/merged-clean"]["decision"],
+                         "incomplete_text_scan_hold")
+        self.assertEqual(report["skipped_text_files"], 1)
+
+    def test_exact_head_and_complete_scan_allows_review_only(self):
+        snap = fixture()
+        report = classify(snap, [], snap["branches"][0]["sha"], skipped=0)
+        row = next(r for r in report["branches"]
+                   if r["branch"] == "docs/merged-clean")
+        self.assertTrue(row["matches_sole_merged_pr_head"])
+        self.assertEqual(row["decision"], "merged_manual_review")
+        self.assertNotIn("approved", row["decision"])
+
+    def test_reused_branch_with_multiple_prs_is_held(self):
+        snap = fixture()
+        original = next(p for p in snap["pull_requests"] if p["number"] == 100)
+        additional = dict(original, number=104, merged_at=None, state="closed")
+        snap["pull_requests"].append(additional)
+        report = classify(snap, [], snap["branches"][0]["sha"])
+        row = next(r for r in report["branches"]
+                   if r["branch"] == "docs/merged-clean")
+        self.assertEqual(row["decision"], "unresolved_hold")
 
     def test_repository_slug_validation(self):
         self.assertIsNotNone(REPOSITORY_RE.fullmatch(REPO))
