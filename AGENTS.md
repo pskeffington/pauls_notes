@@ -1,28 +1,30 @@
 # AI research-agent operating rules — Paul's Notes
 
-Applicable to all AI coding agents, scripts and automated pull requests in this repository.
+Applicable to all AI coding agents, scripts and automated pull requests in this public repository.
 
-## Authorized data boundary
+**Research scope:** Paul's Notes supports [methods for any cancer type](docs/cancer-research-scope.md), including molecular, pathology/imaging, translational and population-health studies. **Breast cancer/TCGA-BRCA is the active worked example, not an exclusive permitted topic or dataset.** Separate scientific and data-admission reviews are required for a new cancer study.
 
-1. **Default execution:** synthetic teaching data generated locally. Any actual TCGA-BRCA ingestion requires a separately reviewed experiment/data-use contract.
-2. **Official provenance:** only GDC files currently verified as `access=open` and project `TCGA-BRCA` by the GDC API are eligible for later approved local research. A project label, filename, mirror or human claim alone is insufficient. The [read-only GDC preflight](04_machine_learning/research_toolkit/gdc_open_access_preflight.py) does not authorize downloads or fitting.
-3. **Never** access, request, transfer, stage, commit, attach to chat/AI prompts, or upload controlled-access GDC data, dbGaP tokens, patient names, health-record numbers, dates of birth, contact information or otherwise restricted participant data.
-4. Treat GDC case/sample barcodes and rare combinations of clinical/genomic features as linkable, even if GDC lists the source file as open. Never include row-level identifiers or participant predictions in public issues, logs, model cards, figures, artifacts or PRs.
-5. Do not attempt participant reidentification, inference of individual identities, or linkage to external identifiable data.
+## Authorized data boundary — all sources
 
-## Before any code/commit/model publication
+1. **Default executable data: synthetic teaching data generated locally.** No patient-level cancer cohort, from TCGA, another registry, an institution or a different public resource, becomes an approved input because it is online or a JSON variable was changed.
+2. **Verify the actual provider.** For each proposed real-data study, record source/release/file access, use restrictions, consent/license, intended cohort, allowed outputs and a separately reviewed study protocol. The [GDC metadata preflight](04_machine_learning/research_toolkit/gdc_open_access_preflight.py) is **specific to the current TCGA-BRCA case** and only checks official GDC file metadata with `access=open`. It makes no download and never authorizes fitting; do not apply it to other projects or weaken its `PROJECT` filter.
+3. **Never** stage, commit, share in CI/artifacts or send to external AI prompts protected, controlled, identifiable or linkable participant data, credentials, raw genomic/clinical/imaging datasets, case/sample/visit identifiers, individual predictions or model weights derived from real participants. If a separate institution permits private processing, conduct it in independent approved infrastructure, **not this public repository**.
+4. Treat all providers' pseudonymous specimen/registry labels, clinical/genomic combinations and rare features as potentially linkable. Do not reidentify participants or link to outside identifiable sources.
+5. Keep every downloaded research file, trained real-data model and participant-level run artifact out of public Git and GitHub Actions artifacts. A project label such as `TCGA-BRCA` or `open` is not a privacy certificate.
 
-* Keep every TCGA archive, downloaded clinical/biospecimen/genomic file, locally fitted model/weights and row-level run output outside this repository and outside GitHub Actions artifacts. Never add data with `git add -f`.
-* Register each new public CSV/TSV/JSON as a reviewed **synthetic, aggregate, bibliographic or policy artifact** in [public_data_assets.json](scripts/public_data_assets.json). Registration does not replace inspection for hidden identifiers.
-* Run `python3 scripts/check_public_data_boundaries.py --staged` before committing and `--tracked` for full-tree checks. Tests: `python3 -m unittest discover -s scripts/tests -p test_public_data_boundaries.py -v`. Do not remove/disable failing guards to admit an input.
-* Ensure configuration-driven experimentation cannot enable clinical, patient-level or prohibited workflows by only editing variables. Dartmouth.HSE R18F/R19 approval gates remain independent from GDC file access designation.
-* Add [research-only model disclaimer](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md) to output summaries and model cards. No diagnosis, treatment selection, clinical prognosis, decision support or validated medical-device claims.
-* Use training-only preprocessing, person-grouped partitions and explicit measurement/label contracts; never call outer held-out fold outcomes into selection/tuning.
-* Source artifacts and log messages must never print the exact sensitive value that caused a guard failure. Rejection categories are enough.
+## Before code/commit/model publication
 
-## Publication, citation and failure behavior
+- Register each new public CSV/TSV/JSON as independently reviewed synthetic, aggregate, bibliography or policy content in [the asset register](scripts/public_data_assets.json); inclusion on an allowlist alone is not deidentification.
+- Run `python3 scripts/check_public_data_boundaries.py --staged` before committing and `--tracked` for full-tree checks; run the deliberate-failure tests in `scripts/tests/test_public_data_boundaries.py`. Do not circumvent a failure by relabeling the source or removing protections.
+- The [general cancer research contract](docs/cancer-research-scope.md) and [model-use policy](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md) apply to **all cancer data**. A new source needs its own provider-specific adapter/protocol; the current `synthetic-validation` runner accepts only invented data and cannot unlock patient-level training.
+- Preserve correct observational units: person, specimen, slide/scan/patch, cell, visit and assay are not interchangeable. Group appropriately; learn imputation, scaling, feature selection and hyperparameters only inside training folds; protect reserved outcomes and report uncertainty honestly.
+- Do not print exact sensitive data or filenames in error logs; fail with categories/hashes where possible. Never claim a heuristic scan proves all PII/PHI absent.
+- Label all example outputs **RESEARCH AND EDUCATIONAL USE ONLY; NOT FOR CLINICAL USE**. Current code is not approved for diagnosis, screening, prognosis, treatment selection, patient-level predictions or clinical decision support.
 
-* Follow [NCI TCGA attribution guidance](https://www.cancer.gov/ccg/research/genome-sequencing/tcga/using-tcga-data/citing) and identify any real TCGA-BRCA source accession/release in approved publications.
-* Label purely synthetic findings `SYNTHETIC`; do not suggest they were learned from TCGA cases.
-* If official metadata verification, privacy review, classification, release permission, or scientific validation is unclear, **stop that data operation**. Continue with a synthetic fixture or a metadata-only audit, not a default-open fallback.
-* Do not assume `.gitignore` or a regex scan proves anonymity, prevents forced pushes or erases Git history. Require PR review and the repository data-safety status check for merge.
+## Research-specific rules and evidence
+
+- The frozen G0–G3/R3 breast-specimen experiments and the 12-chapter 60-gene book remain one **worked case**. Changing cancer type, source, endpoint, imaging modality or label requires an independently declared study contract and evaluation; no cross-cancer performance claim follows from synthetic tests.
+- The private Dartmouth.HSE R18F/R19 admission gates continue to apply **to that separate private study** and are not automatically the research protocol for unrelated cancer work. Neither GDC file availability nor public teaching code overrides them.
+- Cite **the actual provider** for every executed study. Use [NCI's TCGA attribution](https://www.cancer.gov/ccg/research/genome-sequencing/tcga/using-tcga-data/citing) only for results based on TCGA; never claim invented or non-TCGA data are TCGA-derived.
+- If provider metadata, data rights, privacy approval, scientific validation or release permission are ambiguous, stop that data operation and continue with synthetic fixtures or metadata-only investigation.
+- `.gitignore`, a regex scanner and an `open` classification are not historical or privacy guarantees. The public data-safety status must be enforced under repository rules, with review of protected policy files, Git history/secrets and CI retention ([governance issue #8](https://github.com/pskeffington/pauls_notes/issues/8)).
