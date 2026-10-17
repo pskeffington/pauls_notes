@@ -1,5 +1,7 @@
 # 4. Object-oriented Rust: structs, methods, traits and composition
 
+**Scope:** All identifiers and measurements in these examples are invented or synthetic; no participant data are used.
+
 [← Ownership](03_ownership_and_borrowing.md) · [Course contents](README.md) · [Next: Cargo, testing and tooling](05_cargo_testing_and_quality.md) · [Rust Book: OOP characteristics](https://doc.rust-lang.org/stable/book/ch18-01-what-is-oo.html)
 
 Rust supports **objects that combine data and behavior, information hiding, and polymorphism**. It does *not* support conventional class inheritance. Instead, Rust developers often use **structs** for data, **methods** for behavior, **enums** for defined alternatives, **traits** for shared capabilities, and **composition** for combining components.
@@ -73,14 +75,18 @@ pub struct Pair {
 
 impl Pair {
     pub fn new(comparator: Specimen, tumor: Specimen) -> Result<Self, &'static str> {
-        // A checked constructor ensures the same person and opposite tissue types.
-        // See the complete, compiling source in lab/src/objects.rs.
-        todo!()
+        if comparator.tissue() != Tissue::Comparator || tumor.tissue() != Tissue::Tumor {
+            return Err("Expected comparator followed by tumor");
+        }
+        if comparator.person_id() != tumor.person_id() {
+            return Err("Specimens must come from the same fictional person");
+        }
+        Ok(Self { comparator, tumor })
     }
 }
 ~~~
 
-**The constructor above is a design sketch only; it will panic if called.** Use the [fully implemented source](lab/src/objects.rs) to learn and run tests. The crucial design idea is *has-a*: a pair **has two specimens**; it is not a special subclass of `Specimen`.
+**The constructor above is an excerpt** relying on the previously defined `Specimen` and `Tissue` types. See the [complete compilable implementation](lab/src/objects.rs) and its negative tests. The crucial design idea is *has-a*: a pair **has two specimens**; it is not a special subclass of `Specimen`.
 
 Composition is particularly valuable for the breast-cancer book, where a person may contribute multiple specimens, one specimen may yield multiple assay files, and assays measure features. Those are **relationships among different entities**, not inherited class hierarchies.
 
