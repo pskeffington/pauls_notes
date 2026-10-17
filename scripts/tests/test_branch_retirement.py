@@ -6,7 +6,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from confirm_branch_retirement import ALLOWLIST, validate
+from confirm_branch_retirement import ALLOWLIST, approval_phrase, validate
 
 BRANCH = "feat/phase4-assay-robustness-gates"
 SHA = ALLOWLIST[BRANCH]["head"]
@@ -41,7 +41,14 @@ def report():
 def check(value=None, **kwargs):
     opts = dict(branch=BRANCH, sha=SHA, confirmation="DELETE " + BRANCH,
                 external_refs_reviewed="true", actor="pskeffington",
-                repository="pskeffington/pauls_notes", now=WHEN)
+                repository="pskeffington/pauls_notes",
+                issue_comments=[{
+                    "user": {"login": "pskeffington"},
+                    "body": approval_phrase(BRANCH, SHA),
+                    "html_url": ("https://github.com/pskeffington/pauls_notes/"
+                                 "issues/22#issuecomment-1234"),
+                }],
+                now=WHEN)
     opts.update(kwargs)
     return validate(report() if value is None else value, **opts)
 
@@ -91,6 +98,24 @@ class RetirementPreflightTests(unittest.TestCase):
                          {"external_refs_reviewed": "TRUE"}):
             with self.subTest(override=override), self.assertRaises(ValueError):
                 check(**override)
+
+    def test_owner_comment_and_sha_are_both_required(self):
+        good = {
+            "user": {"login": "pskeffington"},
+            "body": approval_phrase(BRANCH, SHA),
+            "html_url": ("https://github.com/pskeffington/pauls_notes/"
+                         "issues/22#issuecomment-1234"),
+        }
+        mutations = [
+            [],
+            [dict(good, user={"login": "someone-else"})],
+            [dict(good, body=approval_phrase(BRANCH, "0" * 40))],
+            [dict(good, body="Please delete this branch")],
+            [dict(good, html_url="https://github.com/someone/repo/issues/1")],
+        ]
+        for comments in mutations:
+            with self.subTest(comments=comments), self.assertRaises(ValueError):
+                check(issue_comments=comments)
 
     def test_reject_incomplete_audit(self):
         mutations = (
