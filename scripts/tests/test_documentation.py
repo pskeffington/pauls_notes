@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from check_documentation import check_navigation
+from check_documentation import check_navigation, unsupported_front_page_claims
 
 
 class NavigationTests(unittest.TestCase):
@@ -23,6 +23,27 @@ class NavigationTests(unittest.TestCase):
             (root / 'scripts').mkdir()
             (root / 'scripts/missing.py').write_text('pass\n')
             self.assertEqual(check_navigation(root)[1], [])
+
+    def test_git_sign_in_terms_not_blocked_on_front_page(self):
+        language = ('Sign in to GitHub; configure authentication; '
+                    'the authenticated client uses a credential helper. '
+                    'Authenticate without including a password.')
+        self.assertEqual(unsupported_front_page_claims(language), [])
+
+    def test_prohibited_identity_claims_remain_blocked(self):
+        cases = (
+            'Dartmouth affiliation',
+            'a university class',
+            'institutional endorsement',
+            'authentic research curriculum',
+            'authenticity guarantee',
+            'independently approved',
+            'copyright clearance',
+            'official curriculum',
+        )
+        for case in cases:
+            with self.subTest(case=case):
+                self.assertTrue(unsupported_front_page_claims(case))
 
     def test_fragments_and_duplicate_headings(self):
         with tempfile.TemporaryDirectory() as folder:

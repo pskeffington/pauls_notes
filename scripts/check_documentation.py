@@ -12,6 +12,21 @@ IGNORED_DIRS = {'.git', '.venv', 'venv', '__pycache__', 'node_modules',
 SOURCE_PATH = re.compile(
     r'(?<![\w/])(?:scripts|0[1-6]_[A-Za-z_]+)/[A-Za-z0-9_./-]+\.(?:py|R|sh|tex|bib)\b')
 
+# Restrict unsupported identity/curriculum claims on the public front page,
+# not routine Git terminology such as "authenticate"/"authentication".
+# Token boundaries prevent accidental substring matches.
+FRONT_PAGE_RESTRICTED_CLAIMS = re.compile(
+    r'\b(?:dartmouth|university|institution(?:al)?|authentic(?:ity)?|'
+    r'independently|copyright\s+clearance|official\s+curriculum)\b',
+    re.I,
+)
+
+
+def unsupported_front_page_claims(text):
+    """Return actual restricted words/phrases, not lexical substrings."""
+    return [match.group(0) for match in FRONT_PAGE_RESTRICTED_CLAIMS.finditer(text)]
+
+
 
 def source_files(root):
     """Walk source without descending into local environments or outputs."""
@@ -85,7 +100,7 @@ def main():
     home = (ROOT / 'README.md').read_text()
     if 'Authored by Paul Skeffington · Compiled with OpenAI' not in home:
         errors.append('Missing front-page attribution')
-    if re.search(r'dartmouth|university|institution|authentic|independently|copyright clearance|official curriculum', home, re.I):
+    if unsupported_front_page_claims(home):
         errors.append('Unexpected front-page identity or authenticity language')
     if errors:
         raise SystemExit('\n'.join(errors))
