@@ -77,7 +77,7 @@ python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
 GITHUB_TOKEN="$(gh auth token)" python3 scripts/audit_branch_retention.py --repository pskeffington/pauls_notes --scan-root . --output /tmp/branch-retention-review.json
 ```
 
-Alternatively, open **GitHub Actions → Read-only branch retention audit → Run workflow** after this change merges. Its report artifact is `branch-retention-review` with 14-day retention. The workflow has read-only GitHub permissions and **no delete/update-ref operation**. The resulting JSON includes branch head SHAs, associated PR numbers, immutable merged SHAs, known branch-qualified link counts and an explicit disposition; it does **not** include PR-body text or any research dataset.
+Alternatively, open **GitHub Actions → Read-only branch retention audit → Run workflow**. The same read-only report runs automatically on a `main` push that changes the auditor, its tests or workflow file. Its report artifact is `branch-retention-review` with 14-day retention. The workflow has read-only GitHub permissions and **no delete/update-ref operation**. The resulting JSON includes branch head SHAs, associated PR numbers, immutable merged SHAs, known branch-qualified link counts and an explicit disposition; it does **not** include PR-body text or any research dataset.
 
 | Report decision | Interpretation |
 | --- | --- |
@@ -86,9 +86,12 @@ Alternatively, open **GitHub Actions → Read-only branch retention audit → Ru
 | `frozen_protocol_hold` | Keep G4 protocol branch until explicit freeze/reference review |
 | `legacy_work_hold` | Keep reviewed-but-not-deletion-approved `work/` branch |
 | `referenced_hold` | Known direct GitHub branch URL still present in scanned text/PR bodies |
-| `merged_manual_review` | One merged same-repository PR; **candidate for a human link/evidence review only** |
+| `merged_head_mismatch_hold` | Historical merged PR head SHA is missing or no longer matches the live branch SHA; keep branch |
+| `unscanned_source_hold` | No exact-main source scan supplied; do not make a cleanup candidate |
+| `incomplete_text_scan_hold` | One or more supported text files were skipped; review and rescan |
+| `merged_manual_review` | One merged same-repository PR **with an identical current head SHA**, complete exact-main source scan, no known branch-qualified links; **human review only** |
 | `unresolved_hold` | Missing/ambiguous/unmerged PR association; no deletion without investigation |
 
-Classification fails if a supplied checkout does not equal the exact current default-branch SHA, or if inventory branch names duplicate. Its reference scan checks supported tracked text up to 2 MB per file and PR **bodies**; it cannot prove that no references remain outside those boundaries. The audit does not delete anything, does not approve deletion, and never rewrites history. When a candidate is explicitly cleared, verify that its remote branch head still matches the recorded SHA, confirm no essential links/evidence are lost, then use GitHub's branch-management control and record the change in [Issue #22](https://github.com/pskeffington/pauls_notes/issues/22).
+Classification fails if a supplied checkout does not equal the exact current default-branch SHA, or if inventory branch names duplicate. Its reference scan checks supported tracked text up to 2 MB per file and PR **bodies**; it cannot prove that no references remain outside those boundaries. The audit does not delete anything, does not approve deletion, and never rewrites history. As an additional fail-closed rule, a historical merged-PR head is **not** a manual-review candidate unless its PR-recorded SHA exactly equals the live branch SHA, and the complete default-branch text scan has no skipped files. Existing external references and PR comments still require separate human review. When a candidate is explicitly cleared, verify that its remote branch head still matches the recorded SHA, confirm no essential links/evidence are lost, then use GitHub's branch-management control and record the change in [Issue #22](https://github.com/pskeffington/pauls_notes/issues/22).
 
 **Scientific and privacy boundary:** This classifier is not a D0 access/secret scan, not a D1 admission check, and does not accept G4 survival or release any participant-level information. Data and scientific gate counts are unchanged by branch housekeeping.

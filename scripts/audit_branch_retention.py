@@ -81,6 +81,7 @@ def live_snapshot(repository, token):
             {
                 "number": p["number"],
                 "head_ref": p["head"]["ref"],
+                "head_sha": p["head"].get("sha"),
                 "head_repository": (p["head"].get("repo") or {}).get("full_name"),
                 "state": p["state"],
                 "merged_at": p.get("merged_at"),
@@ -169,6 +170,14 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
         ]
         open_prs = [p for p in associated if p.get("state") == "open"]
         merged_prs = [p for p in associated if p.get("merged_at")]
+        # A branch name may be reused or advanced after its former PR merged.
+        # Never treat a PR's historical branch name as proof of head identity.
+        exact_merged_head = (
+            len(associated) == 1 and len(merged_prs) == 1
+            and re.fullmatch(r"[0-9a-f]{40,64}",
+                             merged_prs[0].get("head_sha") or "") is not None
+            and merged_prs[0]["head_sha"] == b["sha"]
+        )
         link_count = source_links[name] + pr_links[name]
 
         if name == default:
@@ -184,7 +193,14 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
         elif link_count:
             decision = "referenced_hold"
         elif len(associated) == 1 and len(merged_prs) == 1:
-            decision = "merged_manual_review"
+            if not exact_merged_head:
+                decision = "merged_head_mismatch_hold"
+            elif checkout_sha is None:
+                decision = "unscanned_source_hold"
+            elif skipped:
+                decision = "incomplete_text_scan_hold"
+            else:
+                decision = "merged_manual_review"
         else:
             decision = "unresolved_hold"
 
@@ -194,6 +210,7 @@ def classify(snapshot, source_texts=(), checkout_sha=None, skipped=0):
             "decision": decision,
             "pull_requests": sorted(p["number"] for p in associated),
             "merged_prs": sorted(p["number"] for p in merged_prs),
+            "matches_sole_merged_pr_head": exact_merged_head,
             "merged_commit_shas": sorted(p["merge_commit_sha"] for p in merged_prs
                                         if p.get("merge_commit_sha")),
             "branch_qualified_links_in_default_tree": source_links[name],
