@@ -45,6 +45,8 @@ python3 -m venv .venv
 
 This creates a new directory with a fitted pipeline, held-out assessment, feature-review table, environment versions and SHA-256 manifest. **The output path must be new and outside the repository**; choose another path if it already exists. The 60 people and 48 anonymous features in this example are invented teaching data, **not TCGA patient records or the book's 60 named genes**.
 
+**Variable-only synthetic ML:** The [configurable oncology teaching lab](04_machine_learning/research_toolkit/README.md) lets you change numeric generator, nested person-grouping, feature-selection and regularization settings in JSON and produce a new auditable research-only report. This remains simulated breast-specimen classification, not an adapter for TCGA or any other participant dataset.
+
 Prefer a lighter introduction? Start with the [computing walkthrough](03_learning/README.md#run-the-combined-example). Want an additional programming language? See [Rust inference](04_machine_learning/rust-deployment.md), [native Rust training](04_machine_learning/rust-native-training.md) and the [R/Python methods guide](04_machine_learning/methods-and-deployments.md). Each guide states what has actually been executed.
 
 ## Explore the collection

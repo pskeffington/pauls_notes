@@ -60,6 +60,10 @@ python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py
 
 Use the pinned Python dependencies and a new output directory outside the repository with an existing parent.
 
+## Configure a synthetic oncology ML run
+
+Use the [variable-only synthetic ML toolkit](research_toolkit/README.md) to change bounded settings for sample/person counts, anonymous features, missingness, grouped inner/outer folds and a candidate search. It saves all inner candidate scores, selected features and coefficients, person-disjoint outer predictions, and **descriptive** calibration counts. The current study example is invented paired breast-specimen classification; **no real cancer dataset is accepted**, including TCGA-BRCA. A separate study protocol and provider-specific access review are required for any new real-data research.
+
 ## Run the Rust prediction deployment
 
 The [Rust guide](rust-deployment.md) adds a compiled prediction CLI for the same two fitted assay procedures, with saved preprocessing parameters and cross-language parity checks. Start with its committed synthetic example; prediction requires no Python runtime after compilation. The [native training extension](rust-native-training.md) is opt-in and separately validated; the frozen inference baseline retains its own CI path.

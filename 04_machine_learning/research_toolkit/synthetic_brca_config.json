@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "stage": "synthetic-validation",
+  "data": {"people": 60, "specimens_per_person": 2, "features": 24, "informative": 8, "missing_fraction": 0.05},
+  "design": {"outer_folds": 3, "inner_folds": 3, "feature_counts": [4, 8, 16], "regularization_C": [0.1, 1.0, 10.0]},
+  "models": ["majority", "logistic"],
+  "seed": 711
+}
