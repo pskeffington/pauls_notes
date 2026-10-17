@@ -2,7 +2,7 @@
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-[Biomedical coding](README.md) · [Machine-learning methods](../04_machine_learning/README.md) · [Rust ML literature](../04_machine_learning/rust-ml-literature.md) · [Native Rust training](../04_machine_learning/rust-native-training.md) · [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) · [Structured source register](rust_coding_best_practices_sources.csv)
+[Biomedical coding](README.md) · [Machine-learning methods](../04_machine_learning/README.md) · [Rust ML literature](../04_machine_learning/rust-ml-literature.md) · [Native Rust training](../04_machine_learning/rust-native-training.md) · [Breast cancer book](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data) · [Structured source register](rust_coding_best_practices_sources.csv) · [Publication bibliography](rust_coding_references.bib)
 
 **Evidence checked on 2026-10-17.** This targeted coding-focused corpus contains **34 distinct sources: 6 peer-reviewed papers, 2 preprints, 17 primary Rust documentation pages, and 9 tool/framework references**. It complements—not replaces—the separate [Rust machine-learning review](../04_machine_learning/rust-ml-literature.md) of native training, deployment, bindings, and single-cell methods.
 
@@ -368,4 +368,4 @@ Every note records **what the source supports**, **what it cannot support**, and
 6. **Reproducibility:** record toolchain target, machine environment, exact data/schema lineage, source hashes, selected settings, resources, outputs and failure logs outside public Git.
 7. **Research release:** review public GDC file access individually, consent/reuse requirements, quasi-identifiers, model artifacts and small groups before publishing; no clinical-use claims.
 
-The [structured source register](rust_coding_best_practices_sources.csv) is validated offline by `scripts/check_rust_coding_corpus.py`, including duplicate DOIs, source classes, dates, card coverage, scientific-claim statuses and the current crate's pinned manifest/toolchain. **Corpus integrity is bibliographic and policy evidence, not proof that each third-party crate is vulnerability-free or each numerical method is correct.**
+The [structured source register](rust_coding_best_practices_sources.csv) and [eight-paper BibTeX bibliography](rust_coding_references.bib) are validated offline by `scripts/check_rust_coding_corpus.py`, including duplicate DOIs, source classes, dates, card coverage, scientific-claim statuses and the current crate's pinned manifest/toolchain. **Corpus integrity is bibliographic and policy evidence, not proof that each third-party crate is vulnerability-free or each numerical method is correct.**
