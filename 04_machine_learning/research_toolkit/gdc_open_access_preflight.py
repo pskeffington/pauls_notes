@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Read-only official GDC metadata preflight; NEVER downloads participant data."""
+"""TCGA-BRCA-specific GDC metadata preflight; never downloads participant data.
+
+This is one oncology example adapter, NOT universal cancer data admission.
+Other GDC projects/providers need independently reviewed study/source contracts.
+"""
 import argparse
 import hashlib
 import json
@@ -12,6 +16,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[2]
 API = "https://api.gdc.cancer.gov/files"
+# Deliberately frozen to the current example; do not relax to admit other cancers.
 PROJECT = "TCGA-BRCA"
 ALLOWED_DATA_TYPES = frozenset({
     "Gene Expression Quantification",
