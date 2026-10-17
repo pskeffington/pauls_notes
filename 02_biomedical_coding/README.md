@@ -4,7 +4,7 @@
 
 **Author:** Paul Skeffington · **Prepared with OpenAI**
 
-This section connects influential biomedical computing, statistics, genomics, and clinical-AI papers to study-aware coding rules. Each referenced paper is treated as a **source**, not as an automatically validated software implementation.
+This section supports [research across cancer types](../docs/cancer-research-scope.md) and connects influential biomedical computing, statistics, genomics, and clinical-AI papers to study-aware coding rules. Each referenced paper is treated as a **source**, not as an automatically validated software implementation.
 
 ## Start here
 
