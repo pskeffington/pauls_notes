@@ -2,6 +2,8 @@
 
 [Home](README.md)
 
+**New to Git?** Start with [Git and GitHub from zero to first push](03_learning/git-github-from-zero-to-push.md). For maintainers, consult the [dated branch inventory and safe cleanup rules](docs/repository-hygiene.md) and the [PR review template](.github/pull_request_template.md). Keep ordinary changes on a focused branch, use an up-to-date `main` as the base, and verify the checks on the final PR commit before merging. A merged PR does not make its old branch safe to delete if documentation or a frozen research protocol still refers to it.
+
 Keep material organized by subject across **any cancer type**. Start each new oncology example with its own cancer context, biological question, observation unit, data source, endpoint, access status, methods and interpretation. **The existing breast cancer book and TCGA-BRCA plan are current worked cases, not requirements for every new method or tumor type.** Link additions to the book when they actually extend that case; for another cancer or modality, link a separately reviewed study protocol and evidence corpus. Preserve the distinction between generic synthetic teaching fixtures and analyses of real participant data. Distinguish executed examples, reference patterns, and proposed work. Mark synthetic data and unverified claims clearly. See the [repository-wide scope and case-specific rules](docs/cancer-research-scope.md).
 
 Use descriptive `snake_case` names for R and Python functions. Validate schemas, identifiers, types, and missingness before analysis. Keep source files free of work on import where practical. Use explicit seeds for stochastic examples, preserve independent units during resampling, and fit preprocessing within the training partition.
