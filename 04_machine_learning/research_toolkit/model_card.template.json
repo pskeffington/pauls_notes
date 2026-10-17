@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "document_type": "research_model_card_template_not_a_validated_model",
+  "research_use_only": true,
+  "clinical_use_authorized": false,
+  "diagnostic_use_authorized": false,
+  "individual_prognosis_authorized": false,
+  "treatment_selection_authorized": false,
+  "reidentification_permitted": false,
+  "controlled_access_permitted": false,
+  "direct_identifiers_permitted": false,
+  "patient_level_training_currently_admitted": false,
+  "current_runner_data": "internally_generated_synthetic_only",
+  "holdout_requirements": "person_grouped_nested_evaluation_with_training_only_preprocessing_and_selection",
+  "data_release_status": "requires_independent_review_before_public_model_or_predicted_row_release",
+  "result_status": "exploratory_not_clinically_validated",
+  "limitations": [
+    "No clinical utility demonstrated",
+    "No independent external validation implied",
+    "Real-data model weights and predictions require privacy review",
+    "Small classes and molecular measurements can create reidentification risk"
+  ],
+  "cancer_research_scope": "any cancer type with independent study and data-use review",
+  "current_worked_case": "synthetic paired-specimen breast cancer teaching example",
+  "data_provider": "internally_generated_synthetic_only",
+  "data_access_contract": "source_specific_independent_review_required_for_any_real_data",
+  "current_gdc_adapter_scope": "TCGA-BRCA metadata-only; not a universal cancer-data adapter",
+  "actual_real_cancer_data_processed": false,
+  "provider_specific_attribution": "cite actual provider when used; TCGA acknowledgment only for real TCGA-derived results"
+}

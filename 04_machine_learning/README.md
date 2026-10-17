@@ -60,6 +60,10 @@ python3 04_machine_learning/tests/test_breast_cancer_feature_selection.py
 
 Use the pinned Python dependencies and a new output directory outside the repository with an existing parent.
 
+## Configuration-driven synthetic cancer ML toolkit
+
+The [JSON-configured synthetic ML research toolkit](research_toolkit/README.md) demonstrates grouped, nested assessment with fold-local preparation, feature selection and explicit nonclinical outputs. The **current fixture** is a synthetic breast-specimen category task; the reusable **methods** can guide future studies in other cancers only with independently reviewed data, endpoints and grouping. The [cancer-wide data/model policy](research_toolkit/MODEL_USE_POLICY.md) covers all providers, while [TCGA-BRCA GDC preflight](research_toolkit/gdc_open_access_preflight.py) is limited to that one metadata source and downloads or trains on no patient records.
+
 ## Run the Rust prediction deployment
 
 The [Rust guide](rust-deployment.md) adds a compiled prediction CLI for the same two fitted assay procedures, with saved preprocessing parameters and cross-language parity checks. Start with its committed synthetic example; prediction requires no Python runtime after compilation. The [native training extension](rust-native-training.md) is opt-in and separately validated; the frozen inference baseline retains its own CI path.

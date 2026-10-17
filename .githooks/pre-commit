@@ -1,0 +1,4 @@
+#!/bin/sh
+# Optional local defense in depth. Enable: git config core.hooksPath .githooks
+set -eu
+exec python3 scripts/check_public_data_boundaries.py --staged

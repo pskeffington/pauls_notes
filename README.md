@@ -45,6 +45,8 @@ python3 -m venv .venv
 
 This creates a new directory with a fitted pipeline, held-out assessment, feature-review table, environment versions and SHA-256 manifest. **The output path must be new and outside the repository**; choose another path if it already exists. The 60 people and 48 anonymous features in this example are invented teaching data, **not TCGA patient records or the book's 60 named genes**.
 
+For **variable-only synthetic cancer ML experiments**, use the [configuration-driven research toolkit](04_machine_learning/research_toolkit/README.md). It enforces [research-only model use and privacy safeguards](04_machine_learning/research_toolkit/MODEL_USE_POLICY.md) across providers; the GDC metadata checker is currently specific to TCGA-BRCA and does not authorize patient training.
+
 Prefer a lighter introduction? Start with the [computing walkthrough](03_learning/README.md#run-the-combined-example). Want an additional programming language? See [Rust inference](04_machine_learning/rust-deployment.md), [native Rust training](04_machine_learning/rust-native-training.md) and the [R/Python methods guide](04_machine_learning/methods-and-deployments.md). Each guide states what has actually been executed.
 
 ## Explore the collection
