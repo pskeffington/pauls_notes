@@ -1,0 +1,31 @@
+name: Configurable synthetic ML toolkit
+
+on:
+  pull_request:
+    paths: ["04_machine_learning/research_toolkit/**", ".github/workflows/configurable-ml-toolkit.yml"]
+  push:
+    branches: [main]
+    paths: ["04_machine_learning/research_toolkit/**", ".github/workflows/configurable-ml-toolkit.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned Python requirements
+        run: |
+          python3 -m pip install -r 04_machine_learning/requirements-python.txt
+      - name: Validate configuration-based synthetic grouped ML
+        run: |
+          python3 -m unittest discover -s 04_machine_learning/research_toolkit -p 'test_*.py' -v
+          python3 04_machine_learning/research_toolkit/research_runner.py --config 04_machine_learning/research_toolkit/synthetic_brca_config.json --output "$RUNNER_TEMP/configurable-synthetic"
