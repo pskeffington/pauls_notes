@@ -165,6 +165,11 @@ fn validate_person_partition(
 
 fn run() -> Result<(), &'static str> {
     let pairs = complete_pairs(&BOOK_ROWS)?;
+    validate_person_partition(
+        &pairs,
+        &["DemoPair1", "DemoPair2", "DemoPair3", "DemoPair4"],
+        &["DemoPair5", "DemoPair6"],
+    )?;
     let values = log2_contrasts(&pairs)?;
     let estimate = mean(&values)?;
     let (min, max) = leave_one_out_range(&values)?;
