@@ -81,6 +81,9 @@ def run(config):
                 raise ValueError("Insufficient classes in inner partition")
         for model_name in config["models"]:
             selected = None
+            candidate_history = None
+            feature_indices = None
+            coefficients = None
             if model_name == "majority":
                 estimator = DummyClassifier(strategy="prior").fit(X[train], y[train])
             else:
@@ -89,12 +92,64 @@ def run(config):
                 search.fit(X[train], y[train])
                 estimator = search.best_estimator_
                 selected = {k: (int(v) if isinstance(v, (np.integer, int)) else float(v)) for k, v in search.best_params_.items()}
+                candidate_history = [
+                    {
+                        "select_k": int(parameters["select__k"]),
+                        "regularization_C": float(parameters["classifier__C"]),
+                        "inner_mean_balanced_accuracy": float(score),
+                        "inner_std_balanced_accuracy": float(std),
+                        "inner_rank": int(rank),
+                    }
+                    for parameters, score, std, rank in zip(
+                        search.cv_results_["params"],
+                        search.cv_results_["mean_test_score"],
+                        search.cv_results_["std_test_score"],
+                        search.cv_results_["rank_test_score"],
+                    )
+                ]
+                if (len(candidate_history) != len(design["feature_counts"]) * len(design["regularization_C"])
+                    or not all(np.isfinite(c["inner_mean_balanced_accuracy"]) and np.isfinite(c["inner_std_balanced_accuracy"]) for c in candidate_history)):
+                    raise ValueError("Incomplete or nonfinite inner candidate history")
+                feature_indices = estimator.named_steps["select"].get_support(indices=True).astype(int).tolist()
+                coefficients = estimator.named_steps["classifier"].coef_[0].astype(float).tolist()
+                if len(feature_indices) != len(coefficients):
+                    raise ValueError("Feature and coefficient lengths diverged")
             if not np.array_equal(estimator.classes_, np.array([0, 1])):
                 raise ValueError("Synthetic category-1 probability contract violated")
             pred = estimator.predict_proba(X[test])
             if pred.shape != (len(test), 2) or not np.isfinite(pred).all():
                 raise ValueError("Invalid probabilities")
-            records.append({"fold": fold, "model": model_name, "train_people": int(len(np.unique(groups[train]))), "test_people": int(len(np.unique(groups[test]))), "test_rows": int(len(test)), "balanced_accuracy": float(balanced_accuracy_score(y[test], pred.argmax(axis=1))), "accuracy": float(accuracy_score(y[test], pred.argmax(axis=1))), "log_loss": float(log_loss(y[test], pred, labels=[0, 1])), "selected_parameters": selected, "test_group_ids": groups[test].astype(int).tolist(), "test_row_indices": test.astype(int).tolist(), "labels": y[test].astype(int).tolist(), "probability_class_1": pred[:, 1].tolist()})
+            # Descriptive bins only: observed counts are not a calibrated
+            # confidence interval, external validation, or a tuning objective.
+            bin_index = np.minimum((pred[:, 1] * 5).astype(int), 4)
+            calibration = [
+                {
+                    "bin_index": i,
+                    "lower_probability": i / 5,
+                    "upper_probability": (i + 1) / 5,
+                    "observations": int(np.sum(bin_index == i)),
+                    "positive_labels": int(np.sum(y[test][bin_index == i])),
+                    "mean_predicted_class_1": (float(np.mean(pred[bin_index == i, 1])) if np.any(bin_index == i) else None),
+                }
+                for i in range(5)
+            ]
+            records.append({
+                "fold": fold, "model": model_name,
+                "train_people": int(len(np.unique(groups[train]))),
+                "test_people": int(len(np.unique(groups[test]))), "test_rows": int(len(test)),
+                "train_group_ids": np.unique(groups[train]).astype(int).tolist(),
+                "test_group_ids": groups[test].astype(int).tolist(),
+                "test_row_indices": test.astype(int).tolist(),
+                "balanced_accuracy": float(balanced_accuracy_score(y[test], pred.argmax(axis=1))),
+                "accuracy": float(accuracy_score(y[test], pred.argmax(axis=1))),
+                "log_loss": float(log_loss(y[test], pred, labels=[0, 1])),
+                "selected_parameters": selected, "inner_candidate_scores": candidate_history,
+                "selected_feature_indices": feature_indices,
+                "selected_coefficients_standardized_class_1": coefficients,
+                "calibration_descriptive_bins": calibration,
+                "labels": y[test].astype(int).tolist(),
+                "probability_class_1": pred[:, 1].tolist(),
+            })
     return {"status": "synthetic_validation_only", "training_data": "internally_generated",
             "clinical_claim": False, "observations": len(X), "groups": people,
             "features": X.shape[1], "records": records,
@@ -109,7 +164,7 @@ def run(config):
                 "current_worked_case": "synthetic_breast_specimen_category",
                 "reidentification_permitted": False,
                 "disclaimer": "NOT FOR CLINICAL USE: not a diagnostic, prognostic, treatment-selection or medical decision tool.",
-                "policy_path": "04_machine_learning/research_toolkit/MODEL_USE_POLICY.md"
+                "policy_path": "docs/cancer-research-scope.md"
             }}
 
 def main(argv=None):
