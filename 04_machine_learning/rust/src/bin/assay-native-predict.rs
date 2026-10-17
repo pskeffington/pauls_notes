@@ -90,7 +90,14 @@ fn run() -> Result<()> {
         "input_sha256": format!("{:x}",Sha256::digest(&input_bytes)),
         "predictions_sha256": format!("{:x}",Sha256::digest(&bytes)),
         "rows": predictions.len(), "protocol_id": model.protocol_id,
-        "positive_class": 1, "training_performed": false
+        "positive_class": 1, "training_performed": false,
+        "model_use": {
+            "data_scope": "synthetic_paired_specimen_teaching_only",
+            "clinical_use_authorized": false,
+            "patient_level_training_authorized": false,
+            "tcga_case_data_processed": false,
+            "disclaimer": "RESEARCH AND EDUCATION ONLY. NOT FOR CLINICAL USE. No diagnosis, treatment selection, screening, or individual prognosis."
+        }
     });
     let mut manifest = OpenOptions::new()
         .write(true)
@@ -99,9 +106,10 @@ fn run() -> Result<()> {
     manifest.write_all(serde_json::to_string_pretty(&record)?.as_bytes())?;
     manifest.sync_all()?;
     println!(
-        "Scored {} synthetic specimens without training",
+        "Scored {} synthetic-schema specimen rows without training",
         predictions.len()
     );
+    println!("RESEARCH AND EDUCATION ONLY. NOT FOR CLINICAL USE.");
     Ok(())
 }
 fn main() {
