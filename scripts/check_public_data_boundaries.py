@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed tracked/staged content guard for the public teaching repository.
+"""Fail-closed public Git safety for cancer-study files from ANY provider.
 
 Heuristic defense in depth: cannot certify absence of all PII/PHI, nor scan Git history.
 Never prints sensitive matched values.
@@ -24,7 +24,8 @@ BLOCKED_ENDINGS = (
     ".bam", ".bai", ".cram", ".fastq", ".fastq.gz", ".fq", ".fq.gz",
     ".vcf", ".vcf.gz", ".maf", ".maf.gz", ".svs", ".dcm", ".dicom",
     ".tar", ".tar.gz", ".tgz", ".zip", ".7z", ".parquet", ".feather",
-    ".h5ad", ".rds", ".rdata", ".pkl", ".pickle", ".joblib", ".pt",
+    ".h5ad", ".nii", ".nii.gz", ".nrrd", ".ndpi", ".mrxs", ".ome.tiff",
+    ".rds", ".rdata", ".pkl", ".pickle", ".joblib", ".pt",
     ".pth", ".safetensors", ".onnx", ".pem", ".p12", ".key",
 )
 DATA_ENDINGS = (".csv", ".tsv", ".json", ".jsonl", ".ndjson")
