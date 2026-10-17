@@ -4,6 +4,8 @@ import importlib.util
 import json
 import tempfile
 import unittest
+from unittest import mock
+import numpy as np
 from pathlib import Path
 
 SOURCE = Path(__file__).with_name("research_runner.py")
@@ -21,6 +23,25 @@ class ResearchRunnerTests(unittest.TestCase):
             self.assertEqual(len(row["probability_class_1"]), row["test_rows"])
             self.assertEqual(len(row["test_group_ids"]), row["test_rows"])
             self.assertEqual(len(set(row["test_group_ids"])), row["test_people"])
+
+    def test_generator_signal_matches_its_invented_targets(self):
+        # Deliberately obvious fictional signal: the classifier must retain the
+        # feature/label association emitted by make_classification, not reshuffle
+        # labels independently of the generated person-level measurements.
+        def known_signal(**kwargs):
+            n, columns = kwargs["n_samples"], kwargs["n_features"]
+            labels = np.arange(n) % 2
+            matrix = np.random.default_rng(101).normal(0, .1, (n, columns))
+            matrix[:, 0] += (2 * labels - 1) * 8.0
+            return matrix, labels
+
+        with mock.patch.object(runner, "make_classification", side_effect=known_signal):
+            result = runner.run(CONFIG)
+        assessment = [r for r in result["records"] if r["model"] == "logistic"]
+        self.assertEqual(len(assessment), CONFIG["design"]["outer_folds"])
+        # This bounded negative-control fixture would reliably fail if the
+        # generated labels were independently randomized after generating X.
+        self.assertTrue(all(r["balanced_accuracy"] >= .95 for r in assessment))
 
     def test_research_and_external_training_refused(self):
         for stage in ["patient-prediction", "frozen-descriptive", "research-training"]:
