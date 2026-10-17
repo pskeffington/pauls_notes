@@ -108,7 +108,28 @@ def inspect(path, blob):
 def git_output(*args):
     return subprocess.check_output(["git", "-C", str(ROOT), *args])
 
+def indexed_modes():
+    """Use Git's staged modes; reading a symlink target does not establish safety."""
+    modes = {}
+    for record in git_output("ls-files", "--stage", "-z").split(b"\0"):
+        if not record:
+            continue
+        metadata, separator, name = record.partition(b"\t")
+        if not separator:
+            raise ValueError("Malformed Git index record")
+        mode = metadata.split(b" ", 1)[0]
+        # Multiple index stages indicate an unresolved merge; fail closed.
+        modes[name] = b"unmerged" if name in modes else mode
+    return modes
+
+
+def safe_git_mode(mode):
+    """Only ordinary executable/non-executable files are eligible for review."""
+    return mode in (b"100644", b"100755")
+
+
 def paths_and_reader(staged):
+    modes = indexed_modes()
     if staged:
         paths = git_output("diff", "--cached", "--name-only", "--diff-filter=ACMR", "-z").split(b"\0")
         def reader(path):
@@ -118,12 +139,17 @@ def paths_and_reader(staged):
         def reader(path):
             location = ROOT / path
             if location.is_symlink():
-                raise ValueError("symlinks forbidden in tracked repository files")
+                raise ValueError("Nonregular tracked entry")
             return location.read_bytes()
     for encoded in paths:
         if encoded:
             path = encoded.decode("utf-8")
-            yield path, reader(path)
+            mode = modes.get(encoded)
+            # Reject tracked symlinks/submodules before resolving or inspecting content.
+            if not safe_git_mode(mode):
+                yield path, b"", mode
+                continue
+            yield path, reader(path), mode
 
 def registered_assets(staged):
     """Consult a reviewed exact-path registry; read index bytes for staged safety."""
@@ -168,8 +194,11 @@ def main(argv=None):
     approved = registered_assets(args.staged)
     failures = []
     paths_seen = set()
-    for path, blob in paths_and_reader(args.staged):
+    for path, blob, mode in paths_and_reader(args.staged):
         paths_seen.add(path)
+        if not safe_git_mode(mode):
+            failures.append((path, "symlink, submodule or unresolved Git entry"))
+            continue
         reason = registration_problem(path, approved)
         if reason:
             failures.append((path, reason))
