@@ -2,11 +2,15 @@
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-This public teaching toolkit is designed to support **approved future Dartmouth HSE research methods** through a reusable variable/configuration contract. It does **not** use, copy, inspect, import or train on private Dartmouth datasets; it does not grant patient-level research admission. The private Dartmouth R19 policy explicitly limits training to internally generated synthetic observations and keeps R18F patient-level prediction blocked. The private study's preselected 60 genes cannot be reused as unbiased in-fold feature selection; the public pedagogical 60-gene book is a different catalog.
+This reusable configuration-driven toolkit is intended to support **methods for any cancer type**, subject to a separate protocol for each new cohort, tumor context, modality and endpoint. The current runnable configuration is **synthetic paired-specimen breast cancer teaching data**; the [public cancer research scope](../../docs/cancer-research-scope.md) is wider than that example. The code does **not** download, inspect or fit private Dartmouth data, GDC participants or any other real patients. In the separate Dartmouth.HSE study, R18F/R19 gates still prohibit patient-level training; those private-study limits are not a requirement that unrelated cancer projects use the same dataset or endpoint.
 
-## TCGA open-access privacy and model-use policy
+## Cancer-wide privacy and source-specific admission
 
-Read the [mandatory model-use/privacy notice](MODEL_USE_POLICY.md) and [machine-readable model-card template](model_card.template.json). **TCGA-BRCA does not imply every GDC file is open access.** Publicly released clinical and biospecimen files must be verified individually. Data archives, participant-linked predictions, model weights, and secrets are never committed here. Do not share sample-level GDC records with external AI tools or telemetry. The [repository scanner](../../scripts/check_public_data_boundaries.py) runs on all GitHub pull requests and can be enabled locally as a staged Git hook. Any new public CSV or JSON must be explicitly reviewed and added to the [registered public assets](../../scripts/public_data_assets.json) first.
+Read the [cancer-wide model-use/privacy policy](MODEL_USE_POLICY.md) and [generic research model-card template](model_card.template.json). Dataset rights, access and permitted publication differ among providers: **every real cancer dataset requires its own reviewed study contract**. Participant-linked clinical/genomic/imaging records, predictions, model weights and secrets from **any source** must stay outside public Git, unrestricted AI tools and telemetry. The [repository scanner](../../scripts/check_public_data_boundaries.py) covers the public code tree regardless of cancer site and can run as a local staged hook. New public CSV/JSON content requires independent review and registration in [the public-asset ledger](../../scripts/public_data_assets.json); this does not prove the data are anonymous.
+
+### Current TCGA-BRCA/GDC metadata example
+
+For the present breast-cancer source example, **TCGA-BRCA does not imply that every GDC file is open access**. This project-specific checker is one adapter, not the admissibility rule for all oncology research.
 
 The [read-only GDC preflight](gdc_open_access_preflight.py) queries the authoritative official GDC `files` endpoint by **file UUID**, checks `access=open`, project `TCGA-BRCA`, allowed data types and metadata checksums, and records only aggregate metadata outside the repository. It performs **zero downloads and zero fits**. Example (the UUID list must come from the public GDC Data Portal; no patient identifiers):
 
@@ -16,7 +20,7 @@ python3 04_machine_learning/research_toolkit/gdc_open_access_preflight.py \
   --output /tmp/new-gdc-preflight
 ```
 
-The synthetic runner remains independent of those public GDC metadata checks. It cannot be switched to patient-level training by changing JSON; the private Dartmouth HSE R18F/R19 admission requirements remain in force.
+The synthetic runner remains independent of the GDC metadata checker. It cannot be switched to **any real cancer data source** by changing JSON. Different cancer projects require independently reviewed adapters and study-specific data/use permissions. Dartmouth HSE R18F/R19 restrictions continue to govern **that private study**, not the repository's entire scientific subject matter.
 
 ## Variable-only execution
 
@@ -35,7 +39,7 @@ The labels are invented binary specimen categories, **not** survival, subtype ac
 
 ## Research integration design and admission boundary
 
-For a future **private** research adapter, separately implement and review a new admissible stage with explicit cohort/sample provenance, data dictionary, target definition, correct observation unit, frozen feature universe, grouped nested split, outcome timing, calibration/uncertainty plan, audit/replay and resource policy. This extension must go through Dartmouth's own R18F/R19 scientific gate; do **not** import a patient file into the synthetic runner or change the stage allowlist to bypass that gate. Keep private data and model artifacts outside the public repository.
+For a future independently **authorized cancer study**, separately implement and review a provider-specific input adapter with cohort/sample provenance, data dictionary, source rights, target definition, correct observation unit, frozen feature universe, grouped nested assessment, outcome timing, calibration/uncertainty plan, independent audit and resource policy. If the adapter is for Dartmouth.HSE, its own R18F/R19 science gates are additionally required. **Never** import real participant files into the synthetic runner or loosen the stage allowlist to bypass study-specific admission. Keep data and model artifacts outside this public repository.
 
 Proposed future Rust integration: export a reviewed schema-only plan/metadata and pass fold-local numerical matrices to native Rust training after admission; Rust and Python should share identities, split maps and preprocessing checks but should not silently assume objectives, loss scaling or class encoding agree. The existing G3 fixed-objective Rust comparison remains a distinct synthetic protocol.
 
@@ -43,7 +47,7 @@ Proposed future Rust integration: export a reviewed schema-only plan/metadata an
 
 1. Parameterized input contract and synthetic nested-group smoke — **implemented; local unit checks run**.
 2. Independent held-out metric and split-contract audit, source commit pinning and CI replay — **partially implemented, pending review**.
-3. Approved private adapter for R18F patient-level prediction — **blocked, not implemented**.
+3. Real-data adapter for a separately authorized cancer cohort — **blocked, not implemented**; current TCGA-BRCA/Dartmouth R18F admission remains a specific outstanding case.
 4. Multi-class, survival/time-dependent, calibrated and externally replicated workflows — **separate prospective protocols required**.
 
-Change configuration, not scientific admission status, to test engineering scenarios.
+Change configuration to test **synthetic engineering scenarios**, not scientific admission status, cancer subtype truth, or real-data permissions.
