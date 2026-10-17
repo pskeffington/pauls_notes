@@ -104,6 +104,9 @@ def run(config):
                 "patient_level_training_authorized": False,
                 "data_access": "internally_generated_synthetic_only",
                 "tcga_case_data_processed": False,
+                "real_cancer_data_processed": False,
+                "research_scope": "any_cancer_type_requires_separate_study_admission",
+                "current_worked_case": "synthetic_breast_specimen_category",
                 "reidentification_permitted": False,
                 "disclaimer": "NOT FOR CLINICAL USE: not a diagnostic, prognostic, treatment-selection or medical decision tool.",
                 "policy_path": "04_machine_learning/research_toolkit/MODEL_USE_POLICY.md"
