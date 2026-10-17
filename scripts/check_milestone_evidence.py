@@ -185,7 +185,7 @@ def main():
         for message in problems:
             print("FAILED milestone evidence: " + message, file=sys.stderr)
         raise SystemExit(1)
-    print("PASS: 13 roadmap gates; 7 bounded completions, 3 drafts, 2 planned, 1 blocked; source and CI provenance structurally consistent")
+    print("PASS: 13 roadmap gates; 8 bounded completions, 2 drafts, 2 planned, 1 blocked; source and CI provenance structurally consistent")
     print("NOTE: offline check only; verify current GitHub CI/PR state and independent permissions before changing gate labels")
 
 

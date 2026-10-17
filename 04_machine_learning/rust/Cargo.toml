@@ -32,3 +32,7 @@ optional = true
 name = "assay-train"
 path = "src/bin/assay-train.rs"
 required-features = ["native-training"]
+
+[[bin]]
+name = "assay-native-predict"
+path = "src/bin/assay-native-predict.rs"

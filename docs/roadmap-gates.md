@@ -36,7 +36,7 @@ Two tracks prevent a common category mistake: **scientific experiment milestone 
 | R0 | Rust syntax→ownership→structs/traits→research engineering, locked Cargo lab/tests | **Complete (bounded)** | [R0 evidence](#r0-rust-foundations-and-object-oriented-learning) |
 | R1 | Source-graded Rust coding corpus, exact references and offline integrity checks | **Complete (bounded)** | [R1 evidence](#r1-rust-literature-and-coding-quality-corpus) |
 | R2 | Twelve-chapter book-aligned Rust handbook and standalone six-pair arithmetic example | **Complete (bounded)** | [R2 evidence](#r2-breast-cancer-book-aligned-rust-engineering) |
-| R3 | Reviewed, independently audited frozen-model export and standalone Rust predictor | **In review — draft PR** | [PR #6](https://github.com/pskeffington/pauls_notes/pull/6); not in `main` |
+| R3 | Audited final-development native-fit frozen Rust inference; independent probability and identity parity | **Complete (bounded)** | [R3 evidence](#r3-audited-native-fit-frozen-rust-inference) |
 | R4 | Variable-only grouped synthetic ML runner with fold-local tuning and audit | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); no real TCGA fitting |
 | D0 | Enforce public Git boundaries, file-level GDC access preflight and nonclinical warnings | **In review — draft PR** | [PR #7](https://github.com/pskeffington/pauls_notes/pull/7); not enforced on `main` yet |
 | D1 | Independent approval of real TCGA-BRCA cohort, permitted data and study protocol | **Blocked** | [Data access and methods contract](research-workflow.md#2-specify-input-and-access-contracts) |
@@ -216,23 +216,35 @@ The [native push CI run](https://github.com/pskeffington/pauls_notes/actions/run
 | Scientific boundary | Six pairs are not the 60-person/48-anonymous-feature G3 training cohort; the book's 60 named genes were not used as fitted model features |
 | Exit and next stage | Handbook/documentation reviewed and tested. Any actual model/backend extension requires its own source, numerical oracle, budget, privacy and PR gate |
 
-## R3–R4 and D0: drafted extensions, not released
+## R3: audited native-fit frozen Rust inference
+
+| Field | Verified record |
+| --- | --- |
+| Status and scope | **Complete within fixed-objective, synthetic numerical software scope**; no human clinical/learner-validation claim |
+| Source | [Merged PR #6](https://github.com/pskeffington/pauls_notes/pull/6), accepted head `75409525de2119618b4dfecea7a9aa3e56af947c`, merged `214ee72743601da0f4b4da0add61cbaf04080e1d` |
+| Code | [Read-only Rust frozen inference module](../04_machine_learning/rust/src/frozen.rs), [CLI](../04_machine_learning/rust/src/bin/assay-native-predict.rs), [independent verifier](../04_machine_learning/validation/validate_native_frozen_inference.py) and [failure-fixture tests](../04_machine_learning/tests/test_native_frozen_inference.py) |
+| Executed acceptance | [Native numerical training CI](https://github.com/pskeffington/pauls_notes/actions/runs/39050714181) and [ML deployment CI](https://github.com/pskeffington/pauls_notes/actions/runs/39050714166) passed on the reviewed head, alongside documentation, robustness, replication and uncertainty |
+| Independent numeric evidence | Audited prior G3 synthetic final-development model and complete source/fit provenance; rebuilt Rust CLI **without** training feature; compared **90 development-only probabilities**, observed max absolute Rust/Python difference `2.220e-16` against frozen tolerance `1e-12`; class-1 identity and ordered specimen IDs checked |
+| Data and reporting | Fifteen reserved people unscored; no real TCGA records loaded; model, input and output SHA-256 checked; training=false and explicit **NOT FOR CLINICAL USE** warnings in Rust manifest and CLI. Temporary synthetic parity bundle not attached to the CI archive |
+| Boundary | Final-development values are **in-sample numerical probes**, not new held-out accuracy, external validation, clinical utility, prevalence inference, subtype performance or survival predictions |
+| Next action | Keep the frozen G3 objective/seed unchanged, retain negative tests and require a new study protocol for any model/data expansion |
+
+## R4 and D0: drafted work, not released
 
 | Gate | Source and executed branch check | Why it remains open |
 | --- | --- | --- |
-| R3 — frozen native Rust inference | [Draft PR #6](https://github.com/pskeffington/pauls_notes/pull/6), head `31f925a04c81e37127e16b0417380fb1d6b3feef`; [branch ML deployment CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/38955192728) | Not merged; resolve merge conflict and independently audit frozen final-development export and Rust/Python parity before review/merge |
-| R4 — JSON-configured grouped synthetic model development | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7), head `438d0c261ff732d15df311aa4a100fb5330e3b2b`; [branch runner CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/38960168519) | Not merged; rebase to current book/Rust course/README, recheck full split and transform contracts. Python-only prototype, **not** native-Rust configuration training |
-| D0 — public repository privacy controls | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7); [branch data-safety CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/38960168517) | Not merged: missing required `main` branch protection/secret history review and up-to-date registered CSV assets. Read-only GDC preflight is not data admission |
-| D1 — real TCGA-BRCA experiment | No admitted patient-level model runner or validated cohort on `main` | **Blocked.** Requires file-by-file official GDC `open` classification, use-rights/privacy review, identity linkage, endpoint/fold design, normalization, reviewable protocol and independent permission |
+| R4 — JSON-configured grouped synthetic model development | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7), reviewed head `ecbd6d477c6866184fdfd9688253147bcf92f8fe`; [synthetic runner CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/39050178217) | Reconciled to current `main` as of the review, but **not merged**; synthetic feature-target coupling and positive-class contracts were corrected and tested. Confirm current `main` again if it advances; this is Python, **not** a Rust training backend |
+| D0 — repository privacy controls | [Draft PR #7](https://github.com/pskeffington/pauls_notes/pull/7); [public-data safety CI passed](https://github.com/pskeffington/pauls_notes/actions/runs/39050178249) | **Not on main**; registered merged Rust literature CSV, scanner rejects nonregular Git entries. A required status check, human privacy review, secret/history scan and branch ruleset remain unverified; connected app could not access branch-protection administration |
+| D1 — real TCGA-BRCA study | No approved patient-level model runner or validated cohort on `main` | **Blocked.** Requires authoritative file-level GDC `open` evidence, use-rights/privacy review, cohort linkage, endpoint/normalization, person-grouped study protocol and independent release permission |
 
-**Source-status caveat:** Recorded success belongs to each named PR head and CI run, not automatically to future rebases or the current `main` tree. A branch check is useful engineering evidence but is **not** a published code path until merged and separately reviewed. [Issue #8](https://github.com/pskeffington/pauls_notes/issues/8) tracks required branch/data-safety governance.
+**Source-status caveat:** Recorded branch success applies only to the named PR head and CI run, not to future rebases or the current `main` tree. [Issue #8](https://github.com/pskeffington/pauls_notes/issues/8) tracks policy enforcement and history/secret review; a metadata-only GDC preflight is not data admission.
 
 ## Next phased acceptance sequence
 
-1. **Documentation and learning:** keep R0–R2 as bounded completed deliverables, maintain the 34-source corpus, and require learner explanation rather than a CI badge for mastery.
+1. **Documentation and learning:** keep R0–R3 as bounded completed deliverables, maintain the 34-source corpus, and require learner explanation rather than a CI badge for mastery.
 2. **Privacy first:** reconcile D0/PR #7 against latest `main` and verify its registered assets; obtain appropriate branch protection, secret/history checks and reviewer signoff. Do not infer privacy from a successful heuristic scan alone.
 3. **Synthetic parameterized research:** close R4 only after a new reviewed PR with replayed config/split/feature-selection tests and clean hashes. No hidden real-data mode is allowed.
-4. **Rust predictor parity:** close R3 separately after resolving PR #6 and independently verifying audited final-development export, class-1 probability agreement and fail-closed model validation.
+4. **Rust predictor parity:** R3 is closed within the frozen synthetic final-development numerical replay. Maintain the 90-row parity reference, explicit category-1 meaning, stored hashes and nonclinical restrictions; require a separately approved protocol for new methods or real data.
 5. **New science:** G4 requires a frozen synthetic time-to-event protocol; G5 requires declared source and reproduction target. D1 stays blocked until a separate approved real-data protocol. These are not automatically completed by R3/R4.
 
 ## Completion discipline

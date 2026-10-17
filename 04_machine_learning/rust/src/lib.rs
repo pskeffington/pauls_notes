@@ -275,3 +275,6 @@ mod tests {
 
 #[cfg(feature = "native-training")]
 pub mod training;
+
+/// Strict read-only replay of previously fitted native Rust models.
+pub mod frozen;
