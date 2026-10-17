@@ -20,12 +20,14 @@ class PublicDataBoundaryTests(unittest.TestCase):
         for path in ("raw_data/clinical.csv", "controlled_access/tumor.csv",
                      "04_machine_learning/gdc_downloads/data.txt", "data/case.vcf",
                      "model_weights.onnx", "sample.fastq.gz", "clinical.project-tcga-brca.tar.gz",
+                     "other_tumor_slide.ndpi", "brain_tumor.nii.gz", "unknown_scan.nrrd",
                      "local/gdc-token-2026.txt"):
             with self.subTest(path=path):
                 self.assertTrue(guard.inspect(path, b"file contents"))
 
     def test_identifier_patterns_and_columns_denied(self):
         cases = [
+            ("colorectal_registry.csv", b"patient_id,measurement\nExample1,3\n"),
             ("tables/subjects.csv", b"email_address,feature\nexample@localhost.org,2\n"),
             ("tables/subjects.csv", b"medical_record_number,x\nPRIVATE,1\n"),
             ("tables/subjects.tsv", b"date_of_birth\tx\n2000-01-01\t2\n"),
