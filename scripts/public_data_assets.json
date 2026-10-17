@@ -11,6 +11,10 @@
       "kind": "methods_reference"
     },
     {
+      "path": "02_biomedical_coding/rust_coding_best_practices_sources.csv",
+      "kind": "literature"
+    },
+    {
       "path": "04_machine_learning/evidence/breast-cancer-studies.csv",
       "kind": "literature"
     },
