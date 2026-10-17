@@ -24,6 +24,64 @@ class ResearchRunnerTests(unittest.TestCase):
             self.assertEqual(len(row["test_group_ids"]), row["test_rows"])
             self.assertEqual(len(set(row["test_group_ids"])), row["test_people"])
 
+    def test_person_grouping_candidate_history_and_descriptive_calibration(self):
+        result = runner.run(CONFIG)
+        self.assertEqual(result["groups"], CONFIG["data"]["people"])
+        people_by_fold = []
+        for row in result["records"]:
+            train = set(row["train_group_ids"])
+            test = set(row["test_group_ids"])
+            self.assertFalse(train & test)
+            self.assertEqual(len(train), row["train_people"])
+            self.assertEqual(len(test), row["test_people"])
+            self.assertEqual(train | test, set(range(result["groups"])))
+            self.assertEqual(len(row["labels"]), row["test_rows"])
+            self.assertEqual(sum(b["observations"] for b in row["calibration_descriptive_bins"]), row["test_rows"])
+            self.assertEqual(sum(b["positive_labels"] for b in row["calibration_descriptive_bins"]), sum(row["labels"]))
+            for b in row["calibration_descriptive_bins"]:
+                self.assertGreaterEqual(b["positive_labels"], 0)
+                self.assertLessEqual(b["positive_labels"], b["observations"])
+                if b["observations"] == 0:
+                    self.assertIsNone(b["mean_predicted_class_1"])
+                else:
+                    self.assertGreaterEqual(b["mean_predicted_class_1"], b["lower_probability"])
+                    self.assertLessEqual(b["mean_predicted_class_1"], b["upper_probability"])
+            if row["model"] == "logistic":
+                choices = row["inner_candidate_scores"]
+                self.assertEqual(
+                    len(choices),
+                    len(CONFIG["design"]["feature_counts"]) * len(CONFIG["design"]["regularization_C"])
+                )
+                self.assertTrue(all(1 <= c["inner_rank"] <= len(choices) for c in choices))
+                self.assertEqual(len(row["selected_feature_indices"]), row["selected_parameters"]["select__k"])
+                self.assertEqual(
+                    len(row["selected_coefficients_standardized_class_1"]),
+                    len(row["selected_feature_indices"]),
+                )
+                self.assertTrue(all(0 <= k < result["features"] for k in row["selected_feature_indices"]))
+                people_by_fold.append(test)
+            else:
+                self.assertIsNone(row["selected_parameters"])
+                self.assertIsNone(row["inner_candidate_scores"])
+                self.assertIsNone(row["selected_feature_indices"])
+        self.assertEqual(len(people_by_fold), CONFIG["design"]["outer_folds"])
+        self.assertEqual(set.union(*people_by_fold), set(range(result["groups"])))
+        for i, a in enumerate(people_by_fold):
+            for b in people_by_fold[i + 1:]:
+                self.assertFalse(a & b)
+
+    def test_unapproved_cancer_data_sources_are_not_admitted(self):
+        for extra in (
+            {"data_path": "/local/another-tumor.csv"},
+            {"dataset": "TCGA-BRCA"},
+            {"provider": "institutional_imaging"},
+            {"clinical_use_authorized": True},
+        ):
+            item = copy.deepcopy(CONFIG)
+            item.update(extra)
+            with self.subTest(extra=extra), self.assertRaises(ValueError):
+                runner.validate(item)
+
     def test_generator_signal_matches_its_invented_targets(self):
         # Deliberately obvious fictional signal: the classifier must retain the
         # feature/label association emitted by make_classification, not reshuffle
