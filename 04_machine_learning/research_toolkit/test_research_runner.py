@@ -76,6 +76,9 @@ class ResearchRunnerTests(unittest.TestCase):
         self.assertFalse(model_use["clinical_use_authorized"])
         self.assertFalse(model_use["patient_level_training_authorized"])
         self.assertFalse(model_use["tcga_case_data_processed"])
+        self.assertFalse(model_use["real_cancer_data_processed"])
+        self.assertIn("any_cancer_type", model_use["research_scope"])
+        self.assertEqual(model_use["current_worked_case"], "synthetic_breast_specimen_category")
         self.assertIn("NOT FOR CLINICAL USE", model_use["disclaimer"])
 
     def test_output_is_exclusive(self):
