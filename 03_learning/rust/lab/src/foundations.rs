@@ -44,7 +44,10 @@ mod tests {
     fn chapter_11_ratios_and_direction() {
         assert!((log2_change(20.0, 10.0).unwrap() - 1.0).abs() < 1e-12);
         assert!((log2_change(5.0, 10.0).unwrap() + 1.0).abs() < 1e-12);
-        assert_eq!(direction(0.0).unwrap(), "unchanged in invented measurements");
+        assert_eq!(
+            direction(0.0).unwrap(),
+            "unchanged in invented measurements"
+        );
         assert_eq!(positive_count(&[1.0, 2.0, 0.0, -1.0, 1.0, 0.0]).unwrap(), 3);
     }
 
