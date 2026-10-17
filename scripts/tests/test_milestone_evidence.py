@@ -35,7 +35,7 @@ class MilestoneEvidenceTests(unittest.TestCase):
 
     def test_draft_pr_cannot_be_promoted_by_editing_status(self):
         snapshot = copy.deepcopy(self.snapshot)
-        self.gate(snapshot, "R4")["status"] = "complete_bounded"
+        self.gate(snapshot, "D0")["status"] = "complete_bounded"
         problems = self.inspect(snapshot)
         self.assertTrue(any("delivery scope" in issue or "merge commit" in issue for issue in problems))
 
