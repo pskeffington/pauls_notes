@@ -4,7 +4,7 @@ on:
   pull_request:
     paths: ["04_machine_learning/**", ".github/workflows/native-rust-training.yml"]
   push:
-    branches: [main, feat/native-rust-training]
+    branches: [main]
     paths: ["04_machine_learning/**", ".github/workflows/native-rust-training.yml"]
   workflow_dispatch:
 

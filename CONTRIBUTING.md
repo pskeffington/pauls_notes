@@ -26,6 +26,7 @@ Run commands below from the repository root. Python checks use the standard libr
 | --- | --- |
 | Navigation and referenced scripts | `python3 scripts/check_documentation.py` |
 | Python and Bash syntax | `python3 scripts/check_repository.py` |
+| Tracked editor/build debris (not privacy admission) | `python3 scripts/check_repository_artifacts.py` and `python3 -m unittest discover -s scripts/tests -p test_repository_artifacts.py -v` |
 | Navigation regression tests | `python3 scripts/tests/test_documentation.py` |
 | Book structure and examples | `python3 scripts/check_book_learning.py` and `python3 03_learning/tests/test_book_learning.py` |
 | Breast cancer ML evidence integrity | `python3 scripts/check_ml_evidence.py` and `python3 scripts/tests/test_ml_evidence.py` |

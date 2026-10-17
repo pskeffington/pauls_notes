@@ -4,7 +4,7 @@ on:
   pull_request:
     paths: ["04_machine_learning/**", ".github/workflows/assay-uncertainty-validation.yml"]
   push:
-    branches: [main, feat/phase4c-person-uncertainty]
+    branches: [main]
     paths: ["04_machine_learning/**", ".github/workflows/assay-uncertainty-validation.yml"]
   workflow_dispatch:
 
