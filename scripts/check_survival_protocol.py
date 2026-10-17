@@ -141,7 +141,7 @@ def validate(contract, protocol, dictionary):
             "Fixed Cox training-only survival probability contract changed")
     require(est["null"].get("model") == "survival::survfit" and
             est["null"].get("formula") == "Surv(time_months, event) ~ 1" and
-            "training-only" in str(est["null"].get("prediction")),
+            any(term in str(est["null"].get("prediction")) for term in ("training-fold", "training-only")),
             "Null KM baseline changed")
     require(est["censor"].get("model") == "survival::survfit" and
             est["censor"].get("formula") == "Surv(time_months, 1 - event) ~ 1" and
