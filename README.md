@@ -37,7 +37,7 @@ git commit -m "docs: update README"
 git push -u origin docs/my-change
 ```
 
-Then open a **pull request** on GitHub for review and merging. These commands assume you have already cloned a repository, configured your Git identity and authenticated with push access. **Commit saves locally; push uploads; a pull request proposes a merge.** Never commit credentials, patient-linked records or restricted research data. Start with the [beginner guide](03_learning/git-github-from-zero-to-push.md) if any prerequisite is unfamiliar.
+Then open a **pull request** on GitHub for review and merging. These commands assume you have already cloned a repository, configured your Git identity and signed in with push access. **Commit saves locally; push uploads; a pull request proposes a merge.** Never commit credentials, patient-linked records or restricted research data. Start with the [beginner guide](03_learning/git-github-from-zero-to-push.md) if any prerequisite is unfamiliar.
 
 ## Follow a research question
 
