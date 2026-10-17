@@ -42,6 +42,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: read
+      issues: read
     steps:
       - name: Checkout exact main and full history for ancestry checks
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -53,7 +54,7 @@ jobs:
         run: |
           python3 -m unittest discover -s scripts/tests -p 'test_branch_retirement.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
-      - name: Verify latest branch report and explicit owner approval
+      # Deletion requires an exact owner-authored approval comment in Issue #22.\n      - name: Verify latest branch report and explicit owner approval
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: ${{ inputs.branch }}
