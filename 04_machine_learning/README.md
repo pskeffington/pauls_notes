@@ -8,6 +8,7 @@ Follow the [breast cancer book's research question](../06_RESOURCES/Genomics/BRE
 
 | Subject | Resource | Practical purpose |
 | --- | --- | --- |
+| Learn Rust before implementing a model | [Rust foundations and object-oriented engineering](../03_learning/rust/README.md) | Variables, collections, ownership, structs, methods, traits, tests and a small synthetic research lab |
 | Understanding the subject | [What is machine learning?](what-is-machine-learning.md) | Features, targets, learning, assessment and interpretation in plain language |
 | Seeing the data flow | [Visual data guide](visual-data-guide.md) | Follow rows through splitting, training, validation, preprocessing and nested evaluation |
 | Choosing a method | [Basic algorithm guide](basic-algorithms.md) | Regression, classification, trees, kernels, clustering, PCA and survival |
