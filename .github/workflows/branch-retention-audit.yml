@@ -2,6 +2,12 @@ name: Read-only branch retention audit
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/audit_branch_retention.py"
+      - "scripts/tests/test_branch_retention.py"
+      - ".github/workflows/branch-retention-audit.yml"
 
 permissions:
   contents: read
