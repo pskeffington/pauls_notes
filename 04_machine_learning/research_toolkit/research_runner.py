@@ -52,11 +52,19 @@ def run(config):
     data, design, seed = config["data"], config["design"], config["seed"]
     people, specimens = data["people"], data["specimens_per_person"]
     rng = np.random.default_rng(seed)
-    group_labels = np.arange(people) % 2
-    rng.shuffle(group_labels)
-    unique_x, _ = make_classification(n_samples=people, n_features=data["features"], n_informative=data["informative"], n_redundant=0, n_repeated=0, n_classes=2, random_state=seed)
+    # Keep generator features and invented labels together. Independently
+    # shuffling labels would turn this into an accidental null-signal experiment.
+    unique_x, generated_labels = make_classification(
+        n_samples=people,
+        n_features=data["features"],
+        n_informative=data["informative"],
+        n_redundant=0,
+        n_repeated=0,
+        n_classes=2,
+        random_state=seed,
+    )
     groups = np.repeat(np.arange(people), specimens)
-    y = np.repeat(group_labels, specimens)
+    y = np.repeat(generated_labels.astype(int), specimens)
     X = np.repeat(unique_x, specimens, axis=0) + rng.normal(0, .1, size=(people * specimens, data["features"]))
     X[rng.random(X.shape) < data["missing_fraction"]] = np.nan
     records = []
@@ -81,6 +89,8 @@ def run(config):
                 search.fit(X[train], y[train])
                 estimator = search.best_estimator_
                 selected = {k: (int(v) if isinstance(v, (np.integer, int)) else float(v)) for k, v in search.best_params_.items()}
+            if not np.array_equal(estimator.classes_, np.array([0, 1])):
+                raise ValueError("Synthetic category-1 probability contract violated")
             pred = estimator.predict_proba(X[test])
             if pred.shape != (len(test), 2) or not np.isfinite(pred).all():
                 raise ValueError("Invalid probabilities")
