@@ -1,0 +1,116 @@
+name: Guarded historical branch retirement
+
+# Strictly manual. This is the only workflow allowed to remove a reviewed
+# historical branch, and only with a SHA lease and independent confirmation.
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "One historical branch approved for retirement in Issue #22"
+        required: true
+        type: choice
+        options:
+          - feat/phase4-assay-robustness-gates
+          - docs/roadmap-gates-and-replication-contract
+          - feat/phase4b-repeated-cohort-replication
+          - feat/phase4c-person-uncertainty
+          - feat/native-rust-training
+      expected_sha:
+        description: "Exact 40-character reviewed branch head SHA from Issue #22"
+        required: true
+        type: string
+      confirmation:
+        description: "Type DELETE followed by one space and the full branch name"
+        required: true
+        type: string
+      external_refs_reviewed:
+        description: "I reviewed off-repository links, archived evidence and Issue #22"
+        required: true
+        type: boolean
+        default: false
+
+permissions: {}
+concurrency:
+  group: guarded-historical-retirement
+  cancel-in-progress: false
+
+jobs:
+  retire-one:
+    if: github.actor == 'pskeffington' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - name: Checkout exact main and full history for ancestry checks
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Independently test retirement controls
+        run: |
+          python3 -m unittest discover -s scripts/tests -p 'test_branch_retirement.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
+      - name: Verify latest branch report and explicit owner approval
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ inputs.branch }}
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+          EXTERNAL_REFS_REVIEWED: ${{ inputs.external_refs_reviewed }}
+        run: |
+          python3 scripts/audit_branch_retention.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --scan-root . \
+            --output "$RUNNER_TEMP/branch-retirement-audit.json"
+          python3 scripts/confirm_branch_retirement.py \
+            --report "$RUNNER_TEMP/branch-retirement-audit.json" \
+            --branch "$BRANCH" \
+            --expected-sha "$EXPECTED_SHA" \
+            --confirmation "$CONFIRMATION" \
+            --external-refs-reviewed "$EXTERNAL_REFS_REVIEWED" \
+            --actor "$GITHUB_ACTOR" \
+            --repository "$GITHUB_REPOSITORY" \
+            --receipt "$RUNNER_TEMP/branch-retirement-receipt.json"
+      - name: Delete one SHA-leased historical branch, then verify absence
+        env:
+          BRANCH: ${{ inputs.branch }}
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: |
+          set -euo pipefail
+          current="$(git ls-remote --exit-code --heads origin "refs/heads/${BRANCH}" | awk '{print $1}')"
+          if [ "$current" != "$EXPECTED_SHA" ]; then
+            echo "ABORT: remote SHA no longer matches reviewed head"
+            exit 1
+          fi
+          # Atomic lease rejects deletion if GitHub's remote SHA changed.
+          git push --porcelain \
+            --force-with-lease="refs/heads/${BRANCH}:${EXPECTED_SHA}" \
+            origin ":refs/heads/${BRANCH}"
+          remaining="$(git ls-remote --heads origin "refs/heads/${BRANCH}")"
+          if [ -n "$remaining" ]; then
+            echo "FAIL: remote branch still exists"
+            exit 1
+          fi
+          echo "Verified deletion of one SHA-matched historical branch"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          p = Path(os.environ["RUNNER_TEMP"]) / "branch-retirement-receipt.json"
+          record = json.loads(p.read_text(encoding="utf-8"))
+          record["result"] = "DELETED_AND_REMOTE_ABSENCE_VERIFIED"
+          p.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
+      - name: Preserve success or failure evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: historical-branch-retirement-receipt
+          path: |
+            ${{ runner.temp }}/branch-retirement-audit.json
+            ${{ runner.temp }}/branch-retirement-receipt.json
+          if-no-files-found: warn
+          retention-days: 90
