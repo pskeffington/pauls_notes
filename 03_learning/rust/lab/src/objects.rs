@@ -87,7 +87,10 @@ pub trait Describe {
 impl Describe for Specimen {
     fn summary(&self) -> String {
         // Deliberately avoid printing a person identifier or measurement.
-        format!("synthetic {:?} specimen; research teaching only", self.tissue)
+        format!(
+            "synthetic {:?} specimen; research teaching only",
+            self.tissue
+        )
     }
 }
 
@@ -101,7 +104,9 @@ pub struct GeneAnnotation {
 impl GeneAnnotation {
     pub fn new(symbol: &str, domain: &str) -> Result<Self, &'static str> {
         if symbol.is_empty()
-            || !symbol.chars().all(|c| c.is_ascii_uppercase() || c.is_ascii_digit())
+            || !symbol
+                .chars()
+                .all(|c| c.is_ascii_uppercase() || c.is_ascii_digit())
             || domain.trim().is_empty()
             || domain.trim() != domain
         {
@@ -116,7 +121,10 @@ impl GeneAnnotation {
 
 impl Describe for GeneAnnotation {
     fn summary(&self) -> String {
-        format!("{}: {} (biological reference; not a trained feature)", self.symbol, self.domain)
+        format!(
+            "{}: {} (biological reference; not a trained feature)",
+            self.symbol, self.domain
+        )
     }
 }
 
