@@ -205,12 +205,11 @@ class BranchRetentionAuditTests(unittest.TestCase):
         snap = fixture()
         mainsha = snap["branches"][0]["sha"]
         ancestorsha = snap["branches"][5]["sha"]
-        divergentsha = snap["branches"][6]["sha"]
         missing = snap["branches"][7]["sha"]
 
         def fake_git(cmd, **kwargs):
             if "rev-parse" in cmd:
-                return subprocess.CompletedProcess(cmd, 0, stdout=mainsha+"\\n")
+                return subprocess.CompletedProcess(cmd, 0, stdout=mainsha)
             if "cat-file" in cmd:
                 sha = cmd[-1].split("^", 1)[0]
                 return subprocess.CompletedProcess(cmd, 1 if sha == missing else 0)
@@ -231,7 +230,7 @@ class BranchRetentionAuditTests(unittest.TestCase):
     def test_history_refuses_stale_default_checkout(self):
         snap = fixture()
         def fake_git(cmd, **kwargs):
-            return subprocess.CompletedProcess(cmd, 0, stdout="f"*40+"\\n")
+            return subprocess.CompletedProcess(cmd, 0, stdout="f"*40)
         with patch("audit_branch_retention.subprocess.run", side_effect=fake_git):
             with self.assertRaisesRegex(ValueError, "exact current default-branch"):
                 git_branch_reachability(Path("."), snap)
