@@ -138,8 +138,8 @@ class SquashEquivalentRetirementTests(unittest.TestCase):
             for n, _, sha, _ in RETIRED_PR_HEADS
         }
         # The script has separate current-time validation; use fixture timestamp now.
-        with patch("retire_squash_equivalent_heads.datetime") as dt:
-            dt.now.return_value = NOW
+        with patch("retire_squash_equivalent_heads.validate_audit",
+                   return_value={r["branch"]: r for r in report["branches"]}):
             result = validate_all(report, heads, pr_refs, pulls_from_manifest())
         self.assertEqual(len(result), 18)
         self.assertEqual(result[0]["pr"], 6)
@@ -152,8 +152,8 @@ class SquashEquivalentRetirementTests(unittest.TestCase):
         heads = refs_from_report(report)
         pr_refs = {f"refs/pull/{n}/head": sha
                    for n, _, sha, _ in RETIRED_PR_HEADS}
-        with patch("retire_squash_equivalent_heads.datetime") as dt:
-            dt.now.return_value = NOW
+        with patch("retire_squash_equivalent_heads.validate_audit",
+                   return_value={r["branch"]: r for r in report["branches"]}):
             wrong = dict(heads)
             wrong["refs/heads/" + RETIRED_PR_HEADS[0][1]] = "0" * 40
             with self.assertRaisesRegex(ValueError, "Remote branch moved"):
