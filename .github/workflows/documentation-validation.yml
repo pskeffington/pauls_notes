@@ -27,6 +27,7 @@ jobs:
           python3 -m unittest discover -s scripts/tests -p 'test_repository_artifacts.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_branch_retirement.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_retire_squash_equivalent_heads.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_retire_five_ancestors.py' -v
           python3 scripts/tests/test_documentation.py
           python3 scripts/check_ml_evidence.py
