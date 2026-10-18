@@ -165,7 +165,7 @@ def validate_all(audit, heads, pull_refs, pulls):
     target_names = {branch for _, branch, _, _ in RETIRED_PR_HEADS}
     if len(target_names) != 18 or len({pr for pr, *_ in RETIRED_PR_HEADS}) != 18:
         raise ValueError("Duplicate fixed retirement target")
-    if set(index) != set(heads):
+    if set(index) != {ref.removeprefix("refs/heads/") for ref in heads}:
         raise ValueError("Remote branch set changed since audit")
     if any(heads.get("refs/heads/" + name) != index[name]["head_sha"] for name in index):
         raise ValueError("Remote branch moved since audit")
