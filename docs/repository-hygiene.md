@@ -147,3 +147,27 @@ A one-time [SHA-leased ancestor consolidation](../.github/workflows/consolidate-
 The one-time workflow retains a 90-day JSON audit and receipt under GitHub Actions. After it runs, the operator must verify the resulting branch list and the retained branches, link the workflow run in Issue #22, and optionally dispatch the independent read-only branch audit. Deleting a merged source branch never erases its already-reachable commits. Unindexed external bookmarks or stale links cannot be exhaustively discovered.
 
 The earlier [manual-only retirement workflow](../.github/workflows/guarded-branch-retirement.yml) remains available for individually approved reviewed heads; its YAML syntax was corrected in this pass. It must never be used on D0 #7, G4 #19, the G4 frozen protocol, or the legacy `work/` branches. For all other historical heads, complete independent PR/tree reconciliation and a new code-reviewed allowlist are required before deletion.
+
+
+## Squash-history reconciliation and redundant branch retirement — 2026-10-18
+
+**Problem:** Many of the remaining historical branch heads diverge in *commit ancestry* because their pull requests were squash-merged. Merging those old branches again would risk reintroducing obsolete file versions. A divergent Git history does **not** imply that the PR's changes were omitted from `main`.
+
+**Independent evidence recorded before this change:** For each of merged PRs **#6, #9–#17, #20–#21, and #23–#28** (18 historical branches), the original head and immutable squash-merge commit had identical complete Git file trees: the same paths, blob object IDs and file modes, with no truncated source-tree response. GitHub's preserved `refs/pull/N/head` also matched each of the 18 original branch tips. Thus the original file snapshot is already represented by an ancestor merge commit on `main`, and the original PR tip remains accessible separately from the ordinary `refs/heads/` branch.
+
+**Never delete/remerge without that evidence.** The [frozen G4 protocol PR #18](https://github.com/pskeffington/pauls_notes/pull/18) is deliberately **excluded**, despite its matching file-tree snapshot: active downstream G4 implementation references and protocol freeze review take priority. Active [D0 #7](https://github.com/pskeffington/pauls_notes/pull/7) and [G4 #19](https://github.com/pskeffington/pauls_notes/pull/19) draft heads and both legacy `work/` heads also remain excluded.
+
+The one-time [squash-equivalent consolidation workflow](../.github/workflows/consolidate-squash-equivalent.yml) executes only when its workflow file is first added to `main`, from an owner-authored `main` push. It performs the following **before any** of the 18 SHA-leased ref removals:
+
+- Verify the current complete `main` source scan has no skipped text files and no branch-dependent GitHub URLs in scanned tracked text or PR descriptions.
+- Verify the fixed list of 18 original branch SHAs, recorded merged-PR identities, and that the original head SHA exactly equals `refs/pull/N/head`.
+- Verify both commits exist, the original head's **entire Git tree ID** equals the immutable squash merge's **entire Git tree ID**, and the merge commit is reachable from current `main`.
+- Verify all six mandatory hold branches are still present: `main`, D0, G4, the frozen G4 protocol, and both legacy work branches. Capture the complete set of preexisting branch names and SHAs for comparison.
+- After all preflights pass, remove one pinned historical ref at a time with `git push --force-with-lease`, verifying that no other branch SHA or ref changes and that the original `refs/pull/N/head` remains reachable. If a later step fails, stop immediately and preserve the partial receipt for review.
+- Preserve the input audit, per-PR tree/merge proofs, removed-ref receipts and any error for 90 days under GitHub Actions. This is **not** Git history erasure or a patient/privacy remediation.
+
+**Scope of external-reference verification:** Main-tree files and PR descriptions are checked automatically; a previous targeted scan also found no direct branch-qualified GitHub URLs. Unindexed outside webpages, bookmarks or external private repositories cannot be guaranteed free of old branch links. The immutable PR merge and original commit SHA remain the preferred references for historical work.
+
+**Important distinction:** This one-time, evidence-gated batch is a separate cleanup from the five ancestry-contained branches removed in [consolidation PR #28](https://github.com/pskeffington/pauls_notes/pull/28). The [independent read-only branch-retention audit](../.github/workflows/branch-retention-audit.yml) intentionally continues classifying squash-divergent histories as `diverged_history_hold` for its default general-purpose policy. The special one-time workflow requires stronger *full-snapshot equivalence* and PR-ref retention; it does not broadly weaken that policy or authorize unknown branches.
+
+After the one-time workflow completes, review its success/partial-failure receipt, verify actual remote branch inventory and preserved PR refs, and record the result in [Issue #22](https://github.com/pskeffington/pauls_notes/issues/22). Until execution evidence confirms it, do **not** claim all 18 were removed. The G4, D0 and D1 scientific and privacy gates are unchanged.

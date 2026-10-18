@@ -1,0 +1,61 @@
+name: Consolidate snapshot-equivalent merged branches
+
+# Single-use, owner-only retirement after comparing original PR trees with
+# their immutable squash-merge trees. Never remerges code or erases history.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/consolidate-squash-equivalent.yml"
+
+permissions: {}
+concurrency:
+  group: consolidation-of-squash-equivalent-branches
+  cancel-in-progress: false
+
+jobs:
+  consolidate:
+    if: github.repository == 'pskeffington/pauls_notes' && github.actor == 'pskeffington' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - name: Checkout full history and keep original PR refs available
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Validate source-tree, retention and deletion controls
+        run: |
+          python3 -m unittest discover -s scripts/tests -p 'test_branch_retention.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_retire_squash_equivalent_heads.py' -v
+          python3 scripts/check_repository_artifacts.py
+      - name: Verify current default tree and retained research heads
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/audit_branch_retention.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --scan-root . \
+            --output "$RUNNER_TEMP/squash-consolidation-audit.json"
+      - name: Verify all 18 identical Git trees and PR refs, then prune exact SHA targets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/retire_squash_equivalent_heads.py \
+            --audit "$RUNNER_TEMP/squash-consolidation-audit.json" \
+            --receipt "$RUNNER_TEMP/squash-consolidation-receipt.json" \
+            --execute
+      - name: Preserve preflight, partial, and final audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: squash-equivalent-consolidation-evidence
+          path: |
+            ${{ runner.temp }}/squash-consolidation-audit.json
+            ${{ runner.temp }}/squash-consolidation-receipt.json
+          retention-days: 90
+          if-no-files-found: warn
