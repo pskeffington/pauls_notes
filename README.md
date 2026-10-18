@@ -73,7 +73,7 @@ Prefer a lighter introduction? Start with the [computing walkthrough](03_learnin
 | Biology and genomics | [Genomics resources](06_RESOURCES/Genomics/README.md) | The book, gene biology, annotations and pathway context |
 | Computing foundations | [Unix and Bash](01_unix_bash/README.md) · [Computing subjects](03_learning/README.md) | Shell scripts, data types, reshaping, missingness and statistics |
 | Machine learning | [ML home](04_machine_learning/README.md) | Algorithms, feature selection, comparisons, validation, Python, R and Rust |
-| Visualization | [R plotting tools](06_RESOURCES/R/README.md) · [ML figure gallery](04_machine_learning/gallery/README.md) | Reusable plots, annotation and interpretation |
+| Visualization | [R plotting tools](06_RESOURCES/R/README.md) · [Annotated heatmaps and z-score tails](06_RESOURCES/Genomics/HEATMAP_BEST_PRACTICES.md) · [ML figure gallery](04_machine_learning/gallery/README.md) | Reusable plots, annotations, gene-expression tails and interpretation |
 | Research evidence | [Biomedical coding](02_biomedical_coding/README.md) · [Rust engineering handbook](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) · [Literature resources](06_RESOURCES/Literature/README.md) | Source matrices, programming and verification rules, methods and quality checks |
 | Writing and reproducibility | [LaTeX and bibliography](06_RESOURCES/LaTeX/README.md) · [Research workflow](docs/research-workflow.md) | Manuscripts, citations, provenance and execution records |
 
