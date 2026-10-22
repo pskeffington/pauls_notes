@@ -4,6 +4,7 @@
 
 | Task | Source or guide |
 | --- | --- |
+| **Pick an appropriate statistical test** | [Data-type-first biomedical statistics guide](../../03_learning/biomedical-statistics-decision-guide.md) with a decision flowchart and examples |
 | General summaries and graphs | [Reusable functions](Reusable_Functions.R) |
 | Statistical plot helpers | [Statistics and plots](stats_plots.R) |
 | Multi-panel summaries | [Biostatistics panels](biostat_panels.R) |
