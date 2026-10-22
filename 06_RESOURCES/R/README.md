@@ -4,6 +4,8 @@
 
 | Task | Source or guide |
 | --- | --- |
+| **Pick an appropriate statistical test** | [Data-type-first biomedical statistics guide](../../03_learning/biomedical-statistics-decision-guide.md) with a decision flowchart and examples |
+| Synthetic biomedical hypothesis-test teaching lab | [Base-R statistical test lab](../../03_learning/examples/statistical_test_lab.R) and [numerical/negative-case tests](../../03_learning/tests/test_statistical_test_lab.R) |
 | General summaries and graphs | [Reusable functions](Reusable_Functions.R) |
 | Statistical plot helpers | [Statistics and plots](stats_plots.R) |
 | Multi-panel summaries | [Biostatistics panels](biostat_panels.R) |

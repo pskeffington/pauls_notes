@@ -45,6 +45,8 @@ jobs:
         run: Rscript --vanilla 03_learning/tests/test_research_case.R
       - name: Exercise extended learning competencies
         run: Rscript --vanilla 03_learning/tests/test_mastery.R
+      - name: Validate synthetic biomedical statistics lab and failure cases
+        run: Rscript --vanilla 03_learning/tests/test_statistical_test_lab.R
       - name: Exercise shell filtering and the R summary bridge
         run: bash 03_learning/tests/test_shell_practice.sh
       - name: Check book examples and reusable resource summaries

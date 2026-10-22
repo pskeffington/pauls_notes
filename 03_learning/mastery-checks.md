@@ -9,6 +9,7 @@ Use the checks to test a skill on new inputs. A passing program checks computati
 The main analysis needs base R. The extended R checks additionally require `dplyr` 1.1 or later, `tidyr`, `ggplot2` and `survey`. These packages are installed in the continuous-integration job. Run from the repository root:
 
 ```bash
+Rscript --vanilla 03_learning/tests/test_statistical_test_lab.R
 Rscript --vanilla 03_learning/tests/test_research_case.R
 Rscript --vanilla 03_learning/tests/test_mastery.R
 Rscript --vanilla 03_learning/tests/check_learning_pages.R
@@ -19,6 +20,29 @@ Rscript --vanilla 03_learning/tests/test_resource_contracts.R
 The shell suite runs its R bridge checks when Rscript is available. Continuous integration requires R and executes both. Tests create and clean their own temporary directories; no study inputs are needed.
 
 For the parallel Rust learning route, start with [foundations to research engineering](rust/README.md) and use its [Rust mastery checks](rust/07_practice_and_mastery.md). These checks are separate from the R curriculum, and the Rust lab handles only synthetic teaching data.
+
+## Introductory biomedical statistics: data-type-first mastery
+
+Use the [computational statistical biology decision guide](biomedical-statistics-decision-guide.md) and [20-question statistics workbook](statistics-practice-workbook.md). The [synthetic base R example](examples/statistical_test_lab.R) provides **16 invented person-level rows**, including continuous marker and paired measures, binary diagnosis, ordered severity and count events with person-time. Run:
+
+```bash
+Rscript --vanilla 03_learning/examples/statistical_test_lab.R
+Rscript --vanilla 03_learning/tests/test_statistical_test_lab.R
+Rscript --vanilla 03_learning/tests/check_learning_pages.R
+```
+
+| Gate | What the learner explains or independently computes | Numerical / contract evidence |
+| --- | --- | --- |
+| ST01 | Distinguish continuous values, discrete event counts, nominal and ordered categories, time-to-event records and IDs | Classify all 8 workbook items; code preserves factors and units |
+| ST02 | Distinguish an outcome's type from a group/predictor's type | Name the outcome and independent unit for all 12 scenarios |
+| ST03 | Independent versus paired continuous outcomes | 8 people per group; mean marker 10.000 versus 13.875; Comparison minus Reference = **+3.875 invented units** |
+| ST04 | Paired differences need one person identifier | 16 aligned paired rows; mean after-minus-before difference = **27/16 = +1.6875 invented units** |
+| ST05 | Qualitative and ordinal test caveats | 2x2 table with fixed counts; Fisher test bounded p-value; ordinal rank procedure treats grades as ordered, not continuous intervals |
+| ST06 | Different hypotheses use different outcome models | Finite coefficients for a toy binary logistic and Poisson log-exposure model |
+| ST07 | Negative cases and invariance | Duplicate IDs, missing data, non-integer/negative counts, zero exposure, unordered grades rejected; row permutations preserve group/paired estimates |
+| ST08 | Explain and limit the output | Contrast direction, units, confidence intervals, p-values, family for multiplicity and noncausal/clinical boundary |
+
+**Automation boundary:** An R test passing validates the stated synthetic computation and input contracts only. The workbook requires written conceptual explanations that are *not* verified by automation, and no real dataset is admitted.
 
 ## R operations and data meaning
 
