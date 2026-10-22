@@ -1,62 +1,127 @@
-# Biomedical statistics: which test, when, and why?
+# Basics of Computational Statistical Biology
 
+**From data type to statistical test: an R-based biomedical decision guide**  
 **Paul's Notes | Independent teaching guide | Reviewed 2026-10-22**  
-**Scope:** Biomedical, public-health and cancer research of any cancer type. The breast-cancer specimen example is illustrative, not an exclusive scope.  
-[Back to learning](README.md) · [Evidence review and source register](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Privacy and admission](../docs/research-workflow.md)
+**Scope:** Biomedical, clinical, public-health and cancer research across all cancer types. Breast cancer examples are illustrations, not a limit on the guide.  
+[Learning home](README.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
 
-> **Start with the scientific question and study design, not a p-value or a normality test.** This guide supports educational method selection. It does not replace a prespecified statistical analysis plan, independent statistical review, or a dataset-specific privacy/access decision. All example observations below are invented; nothing here authorizes clinical use or participant-data publication.
+**Start here: What type of data are we working with — quantitative (numerical), qualitative (categorical), counts, or time-to-event?** Identify what is measured *before* looking up a t-test, chi-square test or regression model. Then refine the choice by the question, number of groups, pairing and sampling design.
 
-## 1. Six questions to ask before choosing a method
+> Teaching guide, not an automatic test recommender or clinical decision-support system. All examples are synthetic. Do not put protected records, identifiers or restricted cancer data in this public repository.
 
-1. **What is the aim?** Describe a population; compare groups; estimate an adjusted association; test an intervention; predict a future outcome; or describe survival? Distinguish a causal effect from a predictive association.
-2. **What is the outcome?** Continuous measurement (including units), binary state, nominal category, ordered category, nonnegative count with exposure, survival time with censoring, or high-dimensional features?
-3. **What is an independent experimental/observational unit?** Person, patient, donor, household, laboratory animal, clinical site, sample or cell? Cells and repeated samples from one donor are usually *not* independent donors.
-4. **How are observations related?** Independent groups; matched cases; paired tumor/normal specimens; repeated visits; nested hospitals/sites; survey clusters, weights and strata?
-5. **What quantity are we estimating?** Mean difference, location shift, relative/risk difference, odds/risk ratio, incidence-rate ratio, hazard ratio, correlation, discrimination/calibration or time-specific risk?
-6. **What must be defended?** Missingness and exclusions; confounding; multiplicity; shape and variance assumptions; expected cell counts; time origin, events and censoring; effect-size precision; protocol and software versions.
+## 1. First classify the data
 
-A test name without answers to these questions is **not** a complete method decision.
+| Family | Type | What it means | Biomedical example | In R |
+| --- | --- | --- | --- | --- |
+| **Quantitative** | **Continuous** | A measurable number on a scale; decimals may be meaningful | Blood pressure (mmHg), serum creatinine, cell size, log2-transformed expression | Usually `numeric`; inspect units and measurement scale |
+| **Quantitative** | **Discrete count** | Nonnegative integer numbers of events or objects | Hospital visits, infections, sequencing read counts | Usually `integer`/`numeric`, **but interpreted as counts** |
+| **Qualitative** | **Nominal: binary** | Exactly two unordered categories | Tumor present/absent, treatment/control, ER-positive/negative | `factor` with two levels (or justified 0/1 outcome for a model) |
+| **Qualitative** | **Nominal: 3+ levels** | Three or more unordered categories | Molecular subtype, blood type, diagnostic category | `factor` |
+| **Qualitative** | **Ordinal** | Categories have a meaningful order but not necessarily equal spacing | Cancer stage I–IV, toxicity grade, mild/moderate/severe | `ordered` factor with specified order |
+| **Special endpoint** | **Time-to-event** | Duration **plus** whether an event happened or the record was censored | Time to recurrence with loss-to-follow-up status | `time` numeric + `event` indicator; use `Surv()` |
 
-## 2. Main decision flowchart
+**Do not mistake storage for science.** A cancer stage coded `1, 2, 3, 4` is **ordinal**, not an interval-scale measurement merely because it uses numbers. A specimen ID written as `101` is an **identifier**, not a continuous measurement. Raw RNA-seq reads are **counts**; log2 expression values may be continuous measurements, but transformed expression must **not** be fed back into a raw-count model.
 
-The chart shows a **starting route**, not an automatic endorsement. Follow it with the independence, assumption and effect-size gates below.
+**Overlay that changes the test, but is not a data type:** independent patients versus the same patients before/after; specimens nested within donors; repeated visits within sites; repeated cells within one specimen; and stratified/clustered survey sampling. Also ask whether the variable is the **outcome** or an **explanatory group/predictor**.
+
+### Simplest examples
+
+- **Continuous outcome + categorical group:** Does mean blood pressure differ between independent treatment groups? Start with **Welch two-sample t-test**, or an appropriate adjusted/robust model.
+- **Two continuous variables:** Does age vary with biomarker concentration? Begin with a scatterplot, then **Pearson or Spearman association** or regression as justified.
+- **Two categorical variables:** Is disease status associated with exposure group? Start with an independent **chi-square/Fisher contingency-table analysis**, after checking counts and design.
+- **Paired binary outcome:** Did disease-positive status change in **the same people**? Use a **McNemar** approach, not an independent chi-square test.
+- **Event counts:** How does the infection rate change per person-year? Start with **Poisson regression with a log-exposure offset**, assess dispersion and consider negative binomial.
+- **Time plus censoring:** Does recurrence-free survival differ? Start with **Kaplan–Meier/log-rank** descriptively; consider Cox or another prespecified model for adjusted association.
+
+## 2. Data-first statistical test flowchart
+
+Read from the **measured outcome**, then use pairing/grouping and study assumptions to refine the choice. Statistical questions can be descriptive, comparative, associative or predictive; this tree is an **entry point**, not a substitute for the study protocol.
 
 ```mermaid
 flowchart TD
-    A["Define question, target effect and unit of observation"] --> B{"Primary analytical aim?"}
-    B -->|Describe| D["Counts, denominators, distributions, uncertainty<br/>No hypothesis test automatically required"]
-    B -->|Predict| P["Define prediction horizon and target<br/>Grouped external or held-out validation;<br/>discrimination AND calibration"]
-    B -->|Compare or associate| C{"What is the outcome?"}
-    C -->|Continuous| X{"Dependent observations?"}
-    X -->|Independent: 2 groups| X2["Welch two-sample t test<br/>or suitable rank/robust method"]
-    X -->|Paired: 2 conditions| XP["Paired t test on differences<br/>or signed-rank/sign method"]
-    X -->|3+ groups| X3["ANOVA or Welch ANOVA;<br/>mixed model if repeated;<br/>Kruskal-Wallis for rank-oriented aim"]
-    X -->|Repeated or clustered| XM["Linear mixed-effects model or GEE;<br/>survey design methods if sampled clusters"]
-    C -->|Binary or nominal| Y{"Paired or clustered?"}
-    Y -->|Independent| YI["Chi-square or Fisher for unadjusted tables;<br/>logistic or multinomial regression for adjustment"]
-    Y -->|Paired| YP["McNemar for paired binary;<br/>matched/conditional or clustered models as needed"]
-    C -->|Ordered categories| O["Ordinal model or justified rank method;<br/>check proportional-odds assumption"]
-    C -->|Counts or rates| R["Poisson with exposure offset;<br/>check dispersion; consider negative binomial"]
-    C -->|Time to event| S["KM and log-rank for unadjusted survival;<br/>Cox/AFT or competing-risk methods as appropriate"]
-    C -->|Many molecular features| H["Assay-aware model: DESeq2 / edgeR / limma<br/>design matrix, contrasts and multiple testing"]
-    D --> Z["Report sample sizes, uncertainty and data provenance"]
-    P --> Z
-    X2 --> Z
-    XP --> Z
-    X3 --> Z
-    XM --> Z
-    YI --> Z
-    YP --> Z
-    O --> Z
-    R --> Z
-    S --> Z
-    H --> Z
-    Z --> Q["Review dependence, assumptions, missingness,<br/>confounding, multiplicity and model diagnostics"]
+  A["START: What type of OUTCOME do you have?"] --> B{"Data type?"}
+  B -->|Quantitative| C{"Continuous or counts?"}
+  B -->|Qualitative| D{"Nominal or ordinal?"}
+  B -->|Time + event status| S["Survival: Kaplan-Meier / log-rank<br/>Adjusted: Cox or justified alternative<br/>Competing events need special methods"]
+  B -->|Many molecular features| H["Check assay scale and sample IDs<br/>Raw RNA-seq counts: DESeq2 / edgeR<br/>voom / intensities: limma + FDR"]
+  C -->|Continuous| E{"What comparison?"}
+  C -->|Discrete counts/rates| R["Poisson model + exposure offset<br/>Check overdispersion: negative binomial"]
+  E -->|2 independent groups| T["Welch two-sample t test<br/>Alternative: rank / robust method"]
+  E -->|2 paired observations| P["Paired t test on differences<br/>Alternative: signed-rank / sign method"]
+  E -->|3+ independent groups| AN["ANOVA / Welch ANOVA<br/>Alternative: Kruskal-Wallis"]
+  E -->|2 quantitative variables| CR["Pearson / Spearman correlation<br/>or linear regression"]
+  E -->|Repeated / clustered| MX["Mixed-effects model or GEE<br/>Design-aware survey methods if needed"]
+  D -->|Nominal binary or 3+| N{"Design?"}
+  D -->|Ordinal| O["Rank-based comparison or<br/>ordinal regression"]
+  N -->|1 proportion| BIN["Exact binomial test / confidence interval"]
+  N -->|Independent groups| CH["Chi-square or Fisher<br/>Adjusted: logistic / multinomial model"]
+  N -->|Paired binary| MC["McNemar or matched analysis"]
+  S --> Z["VERIFY: unit, dependence, assumptions,<br/>missingness, effect size / CI, multiplicity"]
+  H --> Z
+  R --> Z
+  T --> Z
+  P --> Z
+  AN --> Z
+  CR --> Z
+  MX --> Z
+  O --> Z
+  BIN --> Z
+  CH --> Z
+  MC --> Z
 ```
 
-**Important overrides:** If treatment groups differ in confounders or the estimand is adjusted, use a design-appropriate regression model rather than treating a marginal two-group test as a causal estimate. If data are paired, repeated, clustered or sampled with unequal probabilities, do not assume independent rows. For high-dimensional assays, a per-feature ordinary t-test is not a default substitute for validated assay-specific modeling.
+**Decision hierarchy:** (1) measured outcome **type** → (2) one, two or many groups / explanatory variables → (3) **independent, paired or clustered** design → (4) scientific estimand and assumptions → (5) statistical procedure → (6) estimate, confidence interval, diagnostics and defensible interpretation.
 
-## 3. Quick selection table: common biomedical questions
+## 3. Quick fundamentals: descriptive statistics come before testing
+
+| Data type | What to summarize first | First plot | Inferential quantity |
+| --- | --- | --- | --- |
+| Continuous | `n`, missing, mean, SD, median, IQR, min/max | Histogram, box/violin with data points, Q–Q or scatterplot | Mean difference, coefficient, correlation and CI |
+| Discrete counts | `n`, zeros, median/range, event total, **exposure time** | Count bar chart or count distribution | Rate ratio or count-model coefficient and CI |
+| Nominal | Group counts, denominators, proportions | Bar plot with denominators | Risk difference/ratio, odds ratio or association with CI |
+| Ordinal | Counts in each ordered grade, cumulative proportions | Ordered bars / stacked bars | Ordinal odds ratio or distribution/rank contrast |
+| Time-to-event | At-risk counts, events and censored records, follow-up | KM curve with at-risk table | Survival probability at a horizon, hazard ratio or cumulative incidence |
+
+### Two important distinctions
+
+**Parametric versus nonparametric is not simply normal versus non-normal.** Parametric models specify a model family and estimand (for example a mean difference); rank methods answer a potentially different question (relative distributions). A Shapiro–Wilk p-value on raw values is **not** a universal switch between t-tests and Wilcoxon tests. Examine the study design, shape, influential values and how you intend to interpret the estimate.
+
+**A statistical test does not replace a model.** With confounders, predictors, multiple groups, repeated observations, different follow-up times or multiple tested genes, choose a justified regression, longitudinal, survival or genomic modeling framework. A significant association by itself does not establish causation or clinical usefulness.
+
+### Read and classify columns in R
+
+```r
+# Synthetic, illustrative types; no real participant data.
+types <- data.frame(
+  specimen_id = c("A01", "A02", "A03", "A04"),
+  glucose_mg_dl = c(89.1, 102.5, 95.2, 110.0),
+  infection_count = c(0L, 1L, 3L, 1L),
+  disease = factor(c("No", "Yes", "No", "Yes")),
+  stage = ordered(c("I", "II", "I", "III"),
+                  levels = c("I", "II", "III", "IV"))
+)
+str(types)
+summary(types)
+table(types$disease, useNA = "ifany")
+table(types$stage, useNA = "ifany")
+hist(types$glucose_mg_dl, main = "Invented glucose values",
+     xlab = "mg/dL")
+```
+
+This gives a beginner a concrete distinction between `numeric`, `integer`, `factor` and `ordered`. A real study must preserve original categories and units, validated IDs, missingness and sample definitions.
+
+## 4. Then identify the scientific question and design
+
+1. **Aim:** Describe a distribution? Compare groups? Estimate association? Predict disease? Study survival? Make a causal claim only with appropriate design and assumptions.
+2. **Outcome and predictors:** Which variable is being explained, and which variables are groups/exposures? Their combination matters: quantitative outcome + categorical group commonly leads to a mean model; binary outcome + quantitative predictors commonly leads to logistic regression.
+3. **Unit of independence:** Patient, donor, animal or study site? Technical replicates, cells and paired tissue samples are not automatically independent.
+4. **Number of groups and pairing:** One proportion; two independent means; two paired measures; three independent groups; repeated visits; nested sites?
+5. **Target estimate:** Mean difference, odds ratio, risk difference, incidence-rate ratio, correlation, hazard ratio or prediction risk at a horizon?
+6. **Validity:** Missing data, unequal variances, distribution shape, sparse cells, confounding, survey weights, censoring, multiplicity, code reproducibility and privacy?
+
+**Worked choice:** You record ESR1 expression (continuous transformed assay value) for matched tumor and normal specimens from each person. The *measurement* is continuous, but the **pairing** determines the initial two-condition analysis (paired mean difference / suitable paired alternative). For raw gene-level RNA-seq counts across the entire transcriptome, use an assay-appropriate count model with participant blocking and multiplicity correction instead.
+
+## 5. Data-type-to-test reference: common biomedical questions
 
 | Question / outcome | Data structure | Starting method in R | What to report / watch |
 | --- | --- | --- | --- |
@@ -83,7 +148,7 @@ flowchart TD
 
 **One sample:** A one-sample t-test compares a quantitative mean with a prespecified benchmark (`t.test(x, mu = target)`); a binomial test addresses a single proportion (`binom.test(successes, total)`). **More than two time points:** prefer mixed/repeated-measures approaches after checking the covariance assumptions, dropout and study design. **Two predictors:** Pearson or Spearman applies to association; choose regression if direction, adjustment, time structure or a response model is needed.
 
-## 4. The assumptions and design gates
+## 6. The assumptions and design gates
 
 - **Independence first:** a large sample size cannot repair pseudoreplication. Technical replicates, longitudinal observations and tumor/normal specimens from one person need ID-aware methods. Random-effects models and GEEs answer related but distinct conditional vs population-average questions.
 - **Outcome scale and estimand:** a t-test addresses means; a rank-sum test generally addresses relative distributions/stochastic ordering, and only under extra shape/location assumptions can be translated into a median/location claim.
@@ -100,7 +165,7 @@ flowchart TD
 
 See [Chicco et al. (2025)](https://doi.org/10.1186/s13040-025-00465-6), [Muhammad (2023)](https://doi.org/10.1172/JCI171058), [Rahnenführer et al. (2023)](https://doi.org/10.1186/s12916-023-02858-y), and [Gurski and Dittel (2026)](https://doi.org/10.1093/immhor/vlaf072). Those papers explain important subsets of these decisions; the above is an independently prepared synthesis, not a universal algorithm endorsed by the papers.
 
-## 5. Worked decisions from cancer research
+## 7. Worked decisions from cancer research
 
 ### A. Tumor versus normal specimens from the same person
 **Question:** Is an assay-derived continuous biomarker different between paired specimens?  
@@ -118,7 +183,7 @@ See [Chicco et al. (2025)](https://doi.org/10.1186/s13040-025-00465-6), [Muhamma
 **Question:** Does an intervention-by-time association persist while accounting for clustering?  
 **Unit:** People within sites, repeated visits. **Start:** mixed-effects model or GEE with a scientifically defensible correlation structure, adequate cluster count and sensitivity assessment. If randomized by site, a simple row-level t-test incorrectly treats every visit as an independent randomization.
 
-## 6. R examples: transparent, minimal calls
+## 8. R examples: transparent, minimal calls
 
 These are **API patterns**, not commands to run against unidentified data. `d` must be a reviewed data frame with correct types, factor levels, units, person identifiers, and protocol-approved outcomes.
 
@@ -155,7 +220,7 @@ utils::sessionInfo()
 
 The repository already provides [keys and reshaping](keys-and-reshaping.md), [missingness and comparisons](missingness-and-comparisons.md), [models and uncertainty](models-and-uncertainty.md), and [R statistical visualizations](../06_RESOURCES/R/README.md). Use those as prerequisites.
 
-## 7. R biomedical deployment: from analysis to an auditable deliverable
+## 9. R biomedical deployment: from analysis to an auditable deliverable
 
 **Minimal architecture (no clinical deployment claim):**
 
@@ -194,7 +259,7 @@ git status --short
 
 Do not add placeholders to an existing project and pretend the pipeline has run. In this repository, these are proposed integration patterns; no validated clinical deployment or new R runtime execution is asserted by this document. For package validation and CI evidence see [biomedical coding gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) and [primary R reference material](../02_biomedical_coding/PRIMARY_DOCUMENTATION.md).
 
-## 8. Reporting checklist before publication
+## 10. Reporting checklist before publication
 
 - [ ] Protocol states primary/secondary outcome, comparison, estimand and study design before examining results.
 - [ ] Independent unit, participant/specimen/visit hierarchy, group counts, missingness and exclusions are stated.
@@ -209,7 +274,7 @@ Do not add placeholders to an existing project and pretend the pipeline has run.
 
 For trials use [CONSORT 2025](https://doi.org/10.1136/bmj-2024-081123); for prediction modeling use [TRIPOD+AI](https://doi.org/10.1136/bmj-2023-078378). Reporting checklists are **not** automatic proof that a statistical method is appropriate.
 
-## 9. Further reading and review status
+## 11. Further reading and review status
 
 The [recent methods / R / deployment evidence review](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) links original publications, year, DOI, contribution, and what each source **does not** validate. Its companion [CSV register](../06_RESOURCES/Literature/biostatistics_r_literature_2021_2026.csv) supports filtering and future source-check passes. This is a **curated narrative review**; it is not a PRISMA systematic search or a reproduced analysis of every paper.
 
