@@ -5,7 +5,7 @@
 
 ## Scope and method
 
-A **curated narrative reading list**, focused on recent articles that help interpret variable types, choose appropriate statistical methods, implement analysis in R, and deliver reproducible scientific computing. Included below are **eight primary publications (2021–2025)** located from publisher/journal records, DOI metadata and article pages as of **2026-10-22**. It is **not** a systematic review, PRISMA search, clinical guideline, validation of paper code, exhaustive comparison of packages, or a claim that all studies are applicable to a particular population. No original patient data or third-party article content is stored here.
+A **curated narrative reading list**, focused on recent articles that help interpret variable types, choose appropriate statistical methods, implement analysis in R, and deliver reproducible scientific computing. Included below are **eleven primary publications (2021–2025)** located from publisher/journal records, DOI metadata and article pages as of **2026-10-22**. It is **not** a systematic review, PRISMA search, clinical guideline, validation of paper code, exhaustive comparison of packages, or a claim that all studies are applicable to a particular population. No original patient data or third-party article content is stored here.
 
 Methods are grouped by the teaching decision they inform rather than ranking papers by citation count. A publication supports **why a method matters**; current primary package documentation governs **how to run the installed version**.
 
@@ -22,9 +22,13 @@ Methods are grouped by the teaching decision they inform rather than ranking pap
 | BS-007 | [Collins et al., 2024](https://doi.org/10.1136/bmj-2023-078378). *TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods.* | Reporting consensus | Transparent reporting for clinical prediction models, regression and ML | A reporting standard is not an external validation certificate or justification for a particular predictor |
 | BS-008 | [Hopewell et al., 2025](https://doi.org/10.1136/bmj-2024-081123). *CONSORT 2025 statement: updated guideline for reporting randomised trials.* | Reporting consensus | Updated RCT reporting with design, allocation, outcomes and open-science disclosures | Does not apply to every observational molecular study; trial reporting != causal identification or model validation |
 
+| BS-009 | [West, 2021](https://doi.org/10.1177/0004563221992088). *Best practice in statistics: Use the Welch t-test when testing the difference between two groups.* | Clinical biochemistry practice article | Explains why Welch's unequal-variance t-test is a useful starting point for independent means | Still assumes a meaningful mean estimand and defensible sampling; does not address clustering, heavy tails or causal identification |
+| BS-010 | [Wilcox & Rousselet, 2023](https://doi.org/10.1002/cpz1.719). *An Updated Guide to Robust Statistical Methods in Neuroscience.* | Updated methods overview with R code | Explains robust estimators, heteroscedasticity and alternative approaches when conventional comparisons mislead | Robustness does not waive the need for independent units, prespecified estimands or uncertainty review |
+| BS-011 | [Midway & White, 2025](https://doi.org/10.1098/rsos.241904). *Testing for normality in regression models: mistakes abound (but may not matter).* | Empirical/simulation methods critique | Differentiates normality assumptions for modeled residuals from indiscriminate tests of raw outcome columns | Simulation results are context-dependent; does **not** justify selecting a new test solely from a Shapiro p-value |
+
 ## Direct translation into the beginner's flowchart
 
-1. **Data type first:** Continuous, count, nominal, ordinal and censored time-to-event require different distributions/estimands. **BS-001** motivates the initial t/rank/chi-square/Kruskal-Wallis split.
+1. **Data type first:** Continuous, count, nominal, ordinal and censored time-to-event require different distributions/estimands. **BS-001** motivates the initial t/rank/chi-square/Kruskal-Wallis split; **BS-009 to BS-011** add practical cautions on Welch tests, robustness and residual diagnostics.
 2. **Independence next:** Tumor/normal pairs and repeated visits cannot be treated like unrelated patients. **BS-002** motivates blocking and within-unit covariance.
 3. **Genomic measurement scale:** Raw gene-level RNA-seq counts demand assay-aware count models and multiple testing; transformed expression can serve other models, but is not raw read-count input. **BS-003** informs method comparison; check current Bioconductor vignettes.
 4. **Computational translation:** Write typed data contracts, checks, versioned analysis and pipeline steps. **BS-004 to BS-006** support the R infrastructure and automation layers.
@@ -48,8 +52,10 @@ Methods are grouped by the teaching decision they inform rather than ranking pap
 | --- | --- |
 | Publisher/journal title, year, DOI and linked source | Source pages inspected 2026-10-22 |
 | Practical implications | Independent synthesis for educational use; **not** extracted recommendations attributed verbatim to papers |
-| Eight-row machine-readable register | Prepared; repository/CI validation should confirm structure and path integrity |
+| Eleven-row machine-readable register | Prepared; repository/CI validation should confirm structure and path integrity |
 | Independent rerun of published papers | **Not performed** |
 | Clinical study method sign-off, external validation, data admission | **Not performed / not conferred** |
+
+Recent methods also disagree in their emphasis on normality screening: a beginner should evaluate the design, estimand, influence, sample size and model assumptions rather than implementing an automatic Shapiro-result switch. Source position and software behavior should be documented separately.
 
 Only add new references after checking source identity, DOI resolution, year, study type and relevance; add a clear entry about limitations. Keep references in this bounded beginner guide separate from the broad [biomedical coding corpus](../../02_biomedical_coding/README.md). Do not publish participant-linked records or unreviewed small-cell exports.
