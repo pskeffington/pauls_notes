@@ -33,6 +33,38 @@
 - **Event counts:** How does the infection rate change per person-year? Start with **Poisson regression with a log-exposure offset**, assess dispersion and consider negative binomial.
 - **Time plus censoring:** Does recurrence-free survival differ? Start with **Kaplan–Meier/log-rank** descriptively; consider Cox or another prespecified model for adjusted association.
 
+### What is the **outcome** and what is the **predictor**?
+
+The same column can be a grouping variable in one research question and an outcome in another. **Identify the outcome variable before using the test-selection chart.**
+
+| Outcome being explained | Predictor / comparison | First method family (if observations are independent) |
+| --- | --- | --- |
+| Continuous biomarker | One binary group | Welch two-sample t-test for mean contrast; linear model for adjustment |
+| Continuous biomarker | Group with 3+ categories | ANOVA / Welch ANOVA for means; a design-specific regression or rank procedure if justified |
+| Continuous biomarker | Continuous predictor | Correlation or linear regression, depending on the question and adjustment |
+| Binary disease status | Exposure group or continuous predictor | Contingency table for an unadjusted group comparison; logistic regression for association with predictors |
+| Nominal outcome with 3+ categories | One or more predictors | Multinomial model (not a binary logistic model) |
+| Ordered grade | Group or numerical predictor | Ordinal model; rank procedures for particular unadjusted questions |
+| Event count | Group/exposure and follow-up duration | Poisson-rate model with log(person-time) offset; consider negative binomial for dispersion |
+| Survival time **and** event status | Treatment/exposure or covariates | Survival methods that explicitly represent censoring and time origin |
+| Thousands of gene-level assay features | Groups, paired patients, covariates | Assay-aware modeling with a design matrix, contrasts and multiple testing |
+
+**Special cases:** Ratios, percentages, bounded biomarkers, zero-inflated counts and repeated measures may need models beyond the first-row suggestion. A numeric outcome is not necessarily normally distributed; a binary predictor does not make the outcome binary.
+
+### What statistical distribution might describe the outcome?
+
+| Data behavior | Elementary probability model | Biomedical example and caution |
+| --- | --- | --- |
+| Approximately symmetric continuous variation | Normal/Gaussian | Height or some laboratory residuals; assess model residuals and influence |
+| Positive right-skewed continuous measurement | Log-normal or another positive-valued model | Biomarker concentration; do not log-transform zeros or negative values |
+| Yes/no event in an independent trial | Bernoulli; aggregated successes out of `n` use binomial | Case/event status or response among eligible people; define the denominator |
+| Number of events during exposure | Poisson | Episodes per person-year; unequal exposure needs an offset, and dispersion must be checked |
+| More variable counts than a Poisson can represent | Negative binomial candidate | Overdispersed visits or infection counts; estimate dispersion |
+| Categories with a meaningful sequence | Ordinal response model | Toxicity grade I–IV; numerical labels do **not** imply equal spacing |
+| Event time subject to incomplete follow-up | Survival/censoring model | Recurrence or death; event indicator and time zero are part of the outcome |
+
+Model-family suggestions are hypotheses to evaluate, not automatic distribution tests. **The central limit theorem concerns the sampling distribution of suitable summaries under conditions; it does not create independent people or make strongly skewed original measurements normal.**
+
 ## 2. Data-first statistical test flowchart
 
 Read from the **measured outcome**, then use pairing/grouping and study assumptions to refine the choice. Statistical questions can be descriptive, comparative, associative or predictive; this tree is an **entry point**, not a substitute for the study protocol.
@@ -110,6 +142,37 @@ hist(types$glucose_mg_dl, main = "Invented glucose values",
 
 This gives a beginner a concrete distinction between `numeric`, `integer`, `factor` and `ordered`. A real study must preserve original categories and units, validated IDs, missingness and sample definitions.
 
+### Foundation lab: compute, verify and explain
+
+From the repository root, this **base-R-only** example generates 16 entirely invented people. It records an independent group, a continuous marker, a paired before/after measurement for each person, binary diagnosis, ordinal severity, event counts and follow-up exposure. Every type is used later in the guide.
+
+```r
+source("03_learning/examples/statistical_test_lab.R")
+lab <- make_statistical_test_lab()
+stopifnot(nrow(lab) == 16L, !anyDuplicated(lab$person_id))
+str(lab)
+table(lab$group)
+table(lab$diagnosis)
+summary(lab$marker_au)
+fit_lab <- analyse_statistical_test_lab(lab)
+stopifnot(
+  isTRUE(all.equal(fit_lab$comparison_minus_reference, 3.875)),
+  isTRUE(all.equal(fit_lab$paired_mean_change, 27 / 16))
+)
+```
+
+**Check by hand before trusting the computer:** the mean marker value is 10.000 in the reference group and 13.875 in the comparison group; hence comparison minus reference is **+3.875 invented units**. Summing all 16 within-person changes gives 27 invented units, so their mean after-minus-before change is **27/16 = 1.6875**. Neither number is a clinical estimate.
+
+Run the independent lab checks:
+
+```bash
+Rscript --vanilla 03_learning/examples/statistical_test_lab.R
+Rscript --vanilla 03_learning/tests/test_statistical_test_lab.R
+Rscript --vanilla 03_learning/tests/check_learning_pages.R
+```
+
+[Practice selecting tests before seeing the answers](statistics-practice-workbook.md) — scenario questions, answer key and examples of invalid test choices.
+
 ## 4. Then identify the scientific question and design
 
 1. **Aim:** Describe a distribution? Compare groups? Estimate association? Predict disease? Study survival? Make a causal claim only with appropriate design and assumptions.
@@ -183,42 +246,82 @@ See [Chicco et al. (2025)](https://doi.org/10.1186/s13040-025-00465-6), [Muhamma
 **Question:** Does an intervention-by-time association persist while accounting for clustering?  
 **Unit:** People within sites, repeated visits. **Start:** mixed-effects model or GEE with a scientifically defensible correlation structure, adequate cluster count and sensitivity assessment. If randomized by site, a simple row-level t-test incorrectly treats every visit as an independent randomization.
 
-## 8. R examples: transparent, minimal calls
+## 8. R examples: matching code to a tested statistical question
 
-These are **API patterns**, not commands to run against unidentified data. `d` must be a reviewed data frame with correct types, factor levels, units, person identifiers, and protocol-approved outcomes.
+All examples below **run against one declared synthetic cohort**, using only base R. R's formula notation (`outcome ~ predictors`) makes variable roles explicit. Validate units, IDs and missingness first; these numbers are not patient data. The examples illustrate methods, **not** which test is automatically appropriate for a real study.
 
 ```r
-# Independent mean difference: Welch is the default
-fit_mean <- stats::t.test(marker ~ group, data = d)
+source("03_learning/examples/statistical_test_lab.R")
+d <- make_statistical_test_lab()
+validate_statistical_test_lab(d)
 
-# Paired mean difference: before and after vectors must be matched by ID first
-fit_paired <- stats::t.test(d$before, d$after, paired = TRUE)
+# 1. Quantitative continuous outcome, independent groups:
+fit_mean <- stats::t.test(marker_au ~ group, data = d) # Welch default
+contrast_mean <- mean(d$marker_au[d$group == "Comparison"]) -
+                 mean(d$marker_au[d$group == "Reference"])
 
-# Independent binary categorical response: confirm table counts first
-tab <- table(d$group, d$event)
-fit_2x2 <- if (any(chisq.test(tab)$expected < 5)) {
-  stats::fisher.test(tab)
-} else {
-  stats::chisq.test(tab, correct = FALSE)
-}
-# Threshold above is an illustrative screening rule, not a sufficient universal
-# algorithm. Use appropriate methods when table size or design requires them.
+# 2. Quantitative continuous outcome, paired people:
+# Before and after are in the same validated person-level row.
+fit_paired <- stats::t.test(d$after_au, d$before_au, paired = TRUE)
+paired_mean <- mean(d$after_au - d$before_au)
 
-# Adjusted associations
-fit_cont <- stats::lm(marker ~ group + age, data = d)
-fit_binary <- stats::glm(event ~ group + age, data = d,
-                         family = stats::binomial())
+# 3. Qualitative nominal binary, independent groups:
+tab <- table(d$group, d$diagnosis)
+fit_fisher <- stats::fisher.test(tab)
+# The invented 2-by-2 counts are sparse. Do not use a universal "5" rule
+# as a substitute for reviewing the sampling and approximation conditions.
 
-# Prespecified multiple-testing family; report its definition
-adjusted_p <- stats::p.adjust(p_values, method = "BH")
+# 4. Ordinal outcome, independent groups:
+# The integers represent ranks ONLY; they are not equal-spaced stages.
+fit_ordinal <- stats::wilcox.test(as.integer(severity) ~ group,
+                                   data = d, exact = FALSE)
 
-# Session audit (record this alongside study inputs and output checks)
-utils::sessionInfo()
+# 5. Two quantitative columns and adjusted continuous association:
+fit_correlation <- stats::cor.test(d$age_years, d$marker_au)
+fit_continuous <- stats::lm(marker_au ~ age_years + group, data = d)
+
+# 6. Binary OUTCOME from group:
+fit_binary <- stats::glm(I(diagnosis == "Yes") ~ group,
+                         family = stats::binomial(), data = d)
+
+# 7. Nonnegative event COUNT with positive person-time exposure:
+fit_count_rate <- stats::glm(
+  event_count ~ group + offset(log(exposure_years)),
+  family = stats::poisson(), data = d)
+
+# Multiple testing illustration ONLY: a separately designated hypothetical
+# family of four gene-level tests, not a correction across unrelated tests.
+mock_gene_p_values <- c(gene_A = .003, gene_B = .02,
+                        gene_C = .07, gene_D = .6)
+mock_gene_q_values <- stats::p.adjust(mock_gene_p_values, "BH")
+
+# Independent arithmetic checks (all invented):
+stopifnot(isTRUE(all.equal(contrast_mean, 3.875)),
+          isTRUE(all.equal(paired_mean, 27 / 16)),
+          isTRUE(all.equal(unname(fit_paired$estimate), 27 / 16)),
+          all(is.finite(coef(fit_continuous))),
+          all(is.finite(coef(fit_binary))),
+          all(is.finite(coef(fit_count_rate))))
 ```
 
-**Caution:** The paired vectors above are safe only **after** a checked ID join and complete-pair selection; ordering rows separately can silently fabricate pairs. `glm(..., family = binomial())` estimates log odds; exponentiation yields odds ratios, not risk ratios. For complex survey or clustered data, the above simple examples are insufficient.
+### Read an output without overstating it
 
-The repository already provides [keys and reshaping](keys-and-reshaping.md), [missingness and comparisons](missingness-and-comparisons.md), [models and uncertainty](models-and-uncertainty.md), and [R statistical visualizations](../06_RESOURCES/R/README.md). Use those as prerequisites.
+| R result | What you may say | What you **cannot** infer |
+| --- | --- | --- |
+| `fit_mean$estimate` and `fit_mean$conf.int` | Estimates of reference and comparison means, plus a confidence interval for their **R-defined first-minus-second** difference | That randomly assigned treatment works or confounding is absent |
+| `contrast_mean` | Comparison minus reference = **+3.875** invented measurement units | That it has clinical importance without a meaningful threshold |
+| `fit_paired$estimate` | Mean **after minus before** change = **+1.6875** invented units across 16 complete pairs | That 32 independent people were observed |
+| `fit_fisher` | Exact conditional association test for the 2×2 invented count table | The probability the null hypothesis is true |
+| `fit_ordinal` | Rank-based comparison of ordered severity codes | That each consecutive severity grade is equally spaced |
+| `fit_binary` | Log-odds coefficients for a *binary outcome*; `exp(coef(...))` gives odds ratios | Risk ratios or proof of causality |
+| `fit_count_rate` | Log incidence-rate coefficients conditional on the Poisson-rate model and person-time offset | Valid uncertainty without dispersion/independence diagnostics |
+| `mock_gene_q_values` | Benjamini–Hochberg adjusted values for a **specified hypothetical family** | Correct multiple-testing control for an unspecified or outcome-selected family |
+
+**P-value:** Under a specified null hypothesis and statistical model, it measures how surprising a statistic at least as extreme as the observed one would be. It is **not** the probability the null is true. **95% confidence interval:** a procedure designed to cover the fixed parameter in 95% of hypothetical repetitions under its assumptions; it is not generally a 95% posterior probability for the observed interval. **Effect size:** quantitative magnitude and direction; report its units, denominator and uncertainty.
+
+**R and method safety:** A data frame named `d` must exist and pass schema checks before any formula-model call. Do not sort paired before/after vectors independently; preserve the **same person_id**. Ordinary R `glm()` default standard errors do not account for unmodeled site clusters or survey weights. For actual genomic inference, use assay-appropriate models rather than these toy tests.
+
+The source and negative-case regression tests are [`statistical_test_lab.R`](examples/statistical_test_lab.R) and [`test_statistical_test_lab.R`](tests/test_statistical_test_lab.R). The source-only functions have no effects on import and never download datasets. For further basics, see [keys and reshaping](keys-and-reshaping.md), [missingness](missingness-and-comparisons.md), [models and uncertainty](models-and-uncertainty.md), and the [figure gallery](../06_RESOURCES/R/README.md).
 
 ## 9. R biomedical deployment: from analysis to an auditable deliverable
 
