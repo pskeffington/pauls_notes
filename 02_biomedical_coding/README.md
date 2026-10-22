@@ -19,6 +19,10 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
+## Learn statistics from the measurement type
+
+Use the [data-type-first computational statistical biology guide](../03_learning/biomedical-statistics-decision-guide.md) to choose tests from continuous, count, nominal, ordinal and censored outcomes. Then use the [practice workbook](../03_learning/statistics-practice-workbook.md) and the [synthetic R test lab](../03_learning/examples/statistical_test_lab.R) before approaching cohort-specific analysis. The [recent statistical methods and R workflow register](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) is separate from full study-method validation.
+
 ## Explore computing subjects
 
 Start with the [computing subject guides](../03_learning/README.md). They cover R objects, checked joins, reshaping, missingness, paired comparisons, exploratory models, visualization, simulation and a complete local Bash-to-R deployment. The case uses base R; optional examples show dplyr, tidyr and survey interfaces.
