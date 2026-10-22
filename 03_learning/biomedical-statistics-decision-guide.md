@@ -246,6 +246,36 @@ See [Chicco et al. (2025)](https://doi.org/10.1186/s13040-025-00465-6), [Muhamma
 **Question:** Does an intervention-by-time association persist while accounting for clustering?  
 **Unit:** People within sites, repeated visits. **Start:** mixed-effects model or GEE with a scientifically defensible correlation structure, adequate cluster count and sensitivity assessment. If randomized by site, a simple row-level t-test incorrectly treats every visit as an independent randomization.
 
+### E. Emergency-department visits before and after legislation (Year 1 versus Year 2)
+
+**Question:** Did emergency-department (ED) utilization change after a law took effect? **Outcome:** ED visits are **quantitative discrete counts**. **Predictor:** Period is **qualitative binary** (pre-legislation Year 1 vs post-legislation Year 2). The outcome type determines the count-model family; the binary predictor does not turn visits into a categorical outcome.
+
+**First clarify the observation unit and exposure:** two annual totals alone, repeated monthly totals, individual patients, or multiple hospitals give different designs. Record the covered population/person-time, changes in catchment or coding, hospital coverage, and whether seasonal patterns or long-term trends may differ.
+
+| Available data | Initial method to consider | Why it may be inadequate |
+| --- | --- | --- |
+| One count and defensible population/person-time exposure per year | Poisson rate comparison or Poisson regression with a `log(exposure)` offset, assessing the Poisson assumptions | Only two annual observations cannot estimate baseline trend, seasonality, autocorrelation or law causality |
+| Many monthly observations on both sides | Segmented interrupted time-series count regression with exposure offset; assess trend, level change, seasonality, autocorrelation and overdispersion | Other simultaneous policy or service changes may explain the break |
+| Individual repeated patient counts | Repeated-measures Poisson/negative-binomial approach, GEE or mixed-effects counts with patient IDs | Treating each visit as independent creates pseudoreplication |
+| Multiple hospitals and a credible comparison group | Controlled interrupted time series or an appropriately justified difference-in-differences design | Parallel-trends/comparability assumptions and concurrent shocks require evaluation |
+
+**Invented arithmetic example (not a study result):** Year 1 has 1,200 ED visits over 100,000 person-years; Year 2 has 1,050 over 105,000 person-years. Rates are **12.0** and **10.0 visits per 1,000 person-years**, giving a post/pre **rate ratio of 0.8333**, a descriptive **16.7% lower observed rate**. Without the denominators, the annual-count comparison conflates changes in visits and exposure.
+
+```r
+# Invented aggregated teaching counts; two years cannot identify a causal policy effect.
+visits <- c(1200L, 1050L)
+person_years <- c(100000, 105000)
+period <- factor(c("Pre", "Post"), levels = c("Pre", "Post"))
+rates_per_1000 <- visits / person_years * 1000
+observed_rate_ratio <- unname(rates_per_1000[2] / rates_per_1000[1])
+stopifnot(isTRUE(all.equal(rates_per_1000, c(12, 10))),
+          isTRUE(all.equal(observed_rate_ratio, 5/6)))
+fit <- glm(visits ~ period + offset(log(person_years)), family = poisson())
+exp(coef(fit)[["periodPost"]])  # post/pre estimate; only 2 rows: no residual df
+```
+
+**Reporting boundary:** report the observed rate ratio and denominator; do not label the difference a legislative *effect* from a two-year pre/post comparison. For a defensible policy evaluation, seek additional pre/post time points, measured confounders and preferably a suitable comparison series. The two-row Poisson fit illustrates the offset but supplies **no residual degrees of freedom for assessing model fit/dispersion** and cannot independently verify its substantive assumptions.
+
 ## 8. R examples: matching code to a tested statistical question
 
 All examples below **run against one declared synthetic cohort**, using only base R. R's formula notation (`outcome ~ predictors`) makes variable roles explicit. Validate units, IDs and missingness first; these numbers are not patient data. The examples illustrate methods, **not** which test is automatically appropriate for a real study.
