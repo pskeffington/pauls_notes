@@ -2,6 +2,8 @@
 
 [Computing subjects](README.md) · [Related: execution](run-and-package.md)
 
+For cross-sectional, case-control, cohort, randomized, diagnostic, prediction and synthesis designs, read [study types with nine published-paper examples](study-designs-and-published-examples.md). It separates random sampling from random allocation and shows how design changes the estimand before a statistical test is selected.
+
 ## A reproducible simulation has a declared purpose
 
 The deployed eight-person case uses fixed values to teach exact counts and failure checks. A probability simulation answers a different question: how a specified generator behaves across repeated draws. A seed makes a pseudorandom sequence reproducible within a recorded environment; it does not validate the generator as a biological model.

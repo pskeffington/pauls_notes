@@ -175,6 +175,8 @@ Rscript --vanilla 03_learning/tests/check_learning_pages.R
 
 ## 4. Then identify the scientific question and design
 
+Read [study types and published-paper examples](study-designs-and-published-examples.md) for nine source-linked cases explaining recruitment, timing, allocation, the reported analysis, and what each design can establish. The examples include observational molecular research, case-control and cohort studies, individual and cluster randomized trials, a screening rollout, diagnostic AI, prognosis, and participant-data meta-analysis. These are literature readings; the executable examples in this test guide remain synthetic.
+
 1. **Aim:** Describe a distribution? Compare groups? Estimate association? Predict disease? Study survival? Make a causal claim only with appropriate design and assumptions.
 2. **Outcome and predictors:** Which variable is being explained, and which variables are groups/exposures? Their combination matters: quantitative outcome + categorical group commonly leads to a mean model; binary outcome + quantitative predictors commonly leads to logistic regression.
 3. **Unit of independence:** Patient, donor, animal or study site? Technical replicates, cells and paired tissue samples are not automatically independent.
