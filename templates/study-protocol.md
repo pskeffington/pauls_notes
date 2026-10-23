@@ -1,5 +1,7 @@
 # Study protocol
 
+Use the [narrative researcher checklist](../03_learning/researcher-analysis-checklist.md) to develop the analysis rationale, then record the study-specific decisions below.
+
 - Working title:
 - Research question and objective:
 - Descriptive, causal, prognostic or predictive aim:

@@ -175,6 +175,8 @@ Rscript --vanilla 03_learning/tests/check_learning_pages.R
 
 ## 4. Then identify the scientific question and design
 
+Use the [narrative researcher checklist](researcher-analysis-checklist.md) to work through outcome type, purpose, sampling, independence, timing, feasibility, adjustment, method, diagnostics and reporting. Its completed decision paragraph records why a proposed analysis matches the question.
+
 Read [study types and published-paper examples](study-designs-and-published-examples.md) for nine source-linked cases explaining recruitment, timing, allocation, the reported analysis, and what each design can establish. The examples include observational molecular research, case-control and cohort studies, individual and cluster randomized trials, a screening rollout, diagnostic AI, prognosis, and participant-data meta-analysis. These are literature readings; the executable examples in this test guide remain synthetic.
 
 1. **Aim:** Describe a distribution? Compare groups? Estimate association? Predict disease? Study survival? Make a causal claim only with appropriate design and assumptions.

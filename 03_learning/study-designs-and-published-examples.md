@@ -164,6 +164,8 @@ These are design extensions for recognition, not additional verified-paper case 
 
 ## 6. Read a paper using the same extraction questions every time
 
+To plan your own analysis, work through the [narrative researcher checklist](researcher-analysis-checklist.md). It expands these reading questions into a written method-selection rationale, with four worked narratives.
+
 1. State the question, target population, outcome type, and estimand in one sentence.
 2. Explain inclusion: disease status, exposure, clinic attendance, population sampling, or allocation?
 3. Draw the timing in words: eligibility/index date, exposure/predictors, follow-up, endpoint, censoring. Check for information acquired after prediction time or immortal time introduced by exposure classification.
