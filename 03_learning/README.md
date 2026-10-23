@@ -13,7 +13,7 @@ Use the [current breast-cancer learning roadmap](../docs/learning-roadmap.md) fo
 | Research task | Subject guide | Practical result |
 | --- | --- | --- |
 | Classify biomedical data and choose an introductory statistical method | [Data-type-first biomedical statistics guide](biomedical-statistics-decision-guide.md) | Quantitative vs qualitative, paired and clustered design; visual test-choice flowchart, executable synthetic R example and method caveats |
-| Work from a research question to an analysis plan | [Principles of analysis selection](researcher-analysis-checklist.md) | Textbook chapter, analysis rationale, researcher checklist, and four worked examples |
+| Work from a research question to an analysis plan | [Choosing an analysis: clinical research guide](researcher-analysis-checklist.md) | Clinical explanations, cited method choices, researcher checklist, and four worked examples |
 | Recognize study types in published research | [Study designs and published examples](study-designs-and-published-examples.md) | Nine source-linked readings: sampling, timing, allocation, actual analysis, and limits on interpretation |
 | Practice choosing a valid test, then verify it in R | [Biomedical statistics workbook](statistics-practice-workbook.md) | Eight data-type and twelve method-choice cases, full answer key and independent numerical/negative-case lab checks |
 | Learn Git and GitHub command-line basics | [Git/GitHub from zero to push](git-github-from-zero-to-push.md) | Install, authenticate, clone or initialize, branch, commit, push and open a pull request |
