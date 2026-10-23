@@ -10,6 +10,8 @@ This chapter follows that sequence from a clinical question to a written analysi
 
 **Learning objectives.** The reader should be able to classify an outcome; distinguish independent groups from repeated observations; state the quantity being estimated; select a candidate analysis family; and identify the assumptions and reporting requirements that need further review.
 
+**Suggested reading route.** Begin with Sections 1–5 to define the outcome and study structure, then use Section 8 to identify a candidate method and Section 11 to interpret the result. Sections 6–7 and 9–10 explain the checks needed before a final analysis plan is defensible. The policy equation is an optional extension; the clinical explanation can be read independently. Finish with the [short-answer exercises](#self-assessment-clinical-reasoning) and researcher checklist.
+
 **How to read the citations.** Numbered links lead to the reference list. Methods articles support analysis principles, software manuals support the named procedures, and reporting guidelines describe information that a paper should disclose. A reporting checklist does not establish that a design or model is valid. The four worked examples are hypothetical; linked empirical studies are identified separately. Sources were checked on October 23, 2026, using accessible original publications, documentation, and article records. No published analysis was independently reproduced.
 
 ## 1. Identify the Outcome: What Was Measured?
@@ -70,7 +72,7 @@ With several visits, a **mixed-effects model** can represent variation between p
 
 ## 5. Define Follow-up and the Denominator
 
-A **denominator** identifies the amount of observation behind a count or proportion. Ten infections among 100 patients differs from ten among 1,000. For a rate, the denominator may combine people and time: 100 people followed for one year contribute 100 person-years if each completes that year. A count-rate model can include an **offset**, a term that accounts for different amounts of exposure. [14](#ref-14)
+A **denominator** identifies the amount of observation behind a count or proportion. Ten infections among 100 patients differs from ten among 1,000. A **risk** is the proportion experiencing a defined event during a specified period, whereas an **incidence rate** counts events relative to time at risk. For a rate, the denominator may combine people and time: 100 people each contributing one year at risk provide 100 person-years. For a first-event rate, time at risk usually stops at that event; recurrent-event analyses require their own rules. [7](#ref-7), [24](#ref-24) A count-rate model can include an **offset**, a term that accounts for different amounts of exposure. [14](#ref-14)
 
 **Censoring** means that the exact event time is not observed within available follow-up. A patient who remains recurrence-free through their last visit has contributed information up to that time; they have not necessarily remained recurrence-free forever. Survival methods use event and follow-up information together. [7](#ref-7)
 
@@ -80,7 +82,7 @@ The **time origin** is when follow-up begins, such as diagnosis or randomization
 
 ## 6. Assess Missing Data and Feasibility
 
-Before analysis, record the numbers of eligible patients, exclusions, observed outcomes, and patients with missing measurements. Check units, identifiers, and implausible values. These details establish which patients actually contribute to each result. Observational-study reports should explain participant flow, missingness, and analysis populations. [19](#ref-19)
+Before analysis, record the numbers of eligible patients, exclusions, observed outcomes, and patients with missing measurements. Check units, identifiers, and implausible values. These details establish which patients actually contribute to each result. **Bias** is a systematic distortion of the result; greater precision from a larger sample does not by itself remove it. Observational-study reports should explain participant flow, missingness, and analysis populations. [19](#ref-19)
 
 Missing measurements can introduce bias. For example, patients who feel worse may be less likely to attend a follow-up visit. An analysis of attendees alone may then describe a selected group. **Multiple imputation** creates several plausible completed datasets under an explicit model and combines the analyses; it does not recover the unknown values with certainty or remove the need to assess missingness assumptions. [8](#ref-8)
 
@@ -135,6 +137,8 @@ A **residual** is a measure of discrepancy between an observed value and what th
 
 A **sensitivity analysis** asks whether a conclusion changes under another defensible assumption or analytical choice. It is useful for issues such as missing-data assumptions and policy timing. It should address a scientific concern, rather than search for a favorable p-value. [8](#ref-8), [16](#ref-16), [18](#ref-18)
 
+A procedure should be chosen for its target question, rather than by using a normality-test p-value as a switch between a t-test and a rank test. The two procedures can address different aspects of a distribution. The paired t-test concerns a mean difference; the signed-rank procedure has its own distributional assumptions. [5](#ref-5), [12](#ref-12)
+
 **Clinical checkpoint:** “Which conditions does this analysis rely on, and would a reasonable alternative change its interpretation?”
 
 ## 10. Prespecify the Comparison and Address Multiple Testing
@@ -150,6 +154,27 @@ Testing many outcomes, genes, subgroups, or time points creates opportunities fo
 Interpret the magnitude and uncertainty, not only whether p is below a threshold. A small p-value does not measure clinical importance. A **95% confidence interval** comes from a procedure designed to include the fixed population quantity in 95% of repeated samples under its assumptions. It is an interval for an estimate, not a range containing 95% of individual patients. [27](#ref-27) It does not remove bias from the design. [19](#ref-19)
 
 For a hypothetical example with complete follow-up, 20 events among 100 patients versus 10 among 100 give risks of 20% and 10%. The risk ratio is 2 and the risk difference is 10 percentage points. The odds ratio is (20/80)/(10/90) = 2.25. This invented arithmetic illustrates why an odds ratio is not interchangeable with a risk ratio. [25](#ref-25)
+
+### Reading a model result on the correct scale
+
+Before interpreting a coefficient, identify its scale and reference group. “Group A minus Group B” reverses sign if the order is reversed. A ratio also needs a named numerator and denominator. [5](#ref-5), [25](#ref-25)
+
+| Reported quantity | Value indicating no contrast | Clinical reading |
+| --- | --- | --- |
+| Mean difference | 0 | Difference in the outcome's units, such as mmHg |
+| Risk difference | 0 | Difference in event probabilities; often reported in percentage points |
+| Risk ratio | 1 | Event risk in the named numerator group divided by that in the reference group |
+| Odds ratio | 1 | Ratio of odds, which is not generally a ratio of risks |
+| Incidence-rate ratio | 1 | Ratio of rates using the stated exposure denominator |
+| Hazard ratio | 1 | Relative instantaneous event rate under the survival model, not a fixed-horizon risk ratio |
+
+These interpretations follow the corresponding mean, odds, rate, and survival models. Logistic and Poisson regression coefficients are commonly reported after exponentiation; a raw coefficient on a log or log-odds scale is not already the reported ratio. [5](#ref-5), [14](#ref-14), [24](#ref-24), [25](#ref-25)
+
+### Statistical uncertainty and clinical importance
+
+The following intervals are **invented reading examples**, not calculated study results. Suppose that the reported blood-pressure difference is −2 mmHg with a 95% confidence interval from −8 to +4 mmHg. The interval spans zero and includes differences in both directions. It does not establish that the groups are equivalent or that an important difference is absent. Equivalence requires a separately justified question, margin, and analysis. [28](#ref-28)
+
+Conversely, an invented difference of −0.2 mmHg with an interval from −0.3 to −0.1 mmHg is precisely estimated but small. Whether that magnitude matters must be judged against a prespecified clinical criterion and context; statistical evidence alone does not decide it. Neither illustration establishes a treatment effect without a suitable design. [18](#ref-18), [19](#ref-19)
 
 Reports should identify the analyzed population, exclusions, missingness, model, estimates, and uncertainty. Suitable reporting frameworks include CONSORT for randomized trials, STROBE for observational research, STARD for diagnostic accuracy, and TRIPOD+AI for prediction. These frameworks support transparency; they do not replace evaluation of bias or method suitability. [3](#ref-3), [19](#ref-19), [20](#ref-20), [10](#ref-10)
 
@@ -211,6 +236,17 @@ The denominator determines the rate being estimated. Visits per resident-year de
 
 For each period, the researcher first reports the count, exposure denominator, rate, and missingness or coverage changes. The ratio of the post-policy rate to the pre-policy rate is a descriptive rate ratio. Even if a Poisson comparison supplies a confidence interval, two annual observations provide no residual information with which to assess trend, seasonality, serial dependence, or dispersion. [16](#ref-16)
 
+### Analysis choice depends on the information available
+
+| Available information | Defensible initial analysis | Question still unresolved |
+| --- | --- | --- |
+| Two annual visit counts only | Describe the count difference | Did traffic volume, population, or hospital coverage change? |
+| Two annual counts with comparable exposure denominators | Describe rates and the post/pre rate ratio; model-based uncertainty requires additional assumptions | Was there already a changing trend, and what else changed at the same time? |
+| Adequate monthly observations before and after implementation | Consider a prespecified interrupted time series | Is continuation of the earlier trend a credible comparison? |
+| Adequate monthly observations plus a suitable control series | Consider a controlled interrupted time series | Is the control comparable, unaffected by the policy, and subject to similar background changes? |
+
+This table applies the design principles of interrupted time-series evaluation to the hypothetical scenario. It does not prescribe a universal minimum number of time points or establish causal identification from a table of counts. [16](#ref-16)
+
 ### Candidate model for a monthly series: an optional mathematical extension
 
 The clinical idea is to separate an immediate change in the visit rate from a change in its subsequent trend. The equation below formalizes that proposed comparison. It is a teaching specification informed by segmented-regression methods, not an executed fit. [16](#ref-16)
@@ -252,6 +288,26 @@ Consider a cohort used to predict breast cancer death within ten years of diagno
 The protocol specifies when prediction occurs, which patients are eligible, and which measurements are available at that time. Evaluation considers whether predictions distinguish outcomes, agree with observed risks, and support useful decisions at relevant thresholds. Model selection and evaluation must be described so that the reader can assess whether performance was tested beyond the data used in development. [10](#ref-10)
 
 A prediction such as “10-year risk under observed care” does not establish how changing a patient's treatment would change that risk. Causal treatment questions require additional design and assumptions. [9](#ref-9) This hypothetical example does not modify the repository's frozen survival experiment.
+
+## Self-Assessment: Clinical Reasoning
+
+Answer each question in one or two sentences before consulting the answer sketches. The scenarios are hypothetical and do not require calculations.
+
+1. Twenty patients have a biomarker measured before and after treatment. There are forty recorded values. What is the independent unit, and what comparison should a paired analysis preserve?
+2. Crash-related ED visits fell after a texting law, but only one annual count from each period is available. What can be described, and what cannot be attributed to the law?
+3. A prognostic model has a high AUC but consistently predicts risks above the observed frequencies. Which performance property is problematic?
+4. A study reports a mean difference whose confidence interval spans zero and clinically important values. Does this establish that the groups have the same outcome?
+5. A case-control study samples equal numbers of patients with and without cancer. Can the sample's 50% case fraction be reported as population cancer risk?
+
+### Answer sketches
+
+| Question | Reasoning | Supporting reading |
+| --- | --- | --- |
+| 1 | The patient is the independent unit; preserve each patient's before/after link and analyze the within-person contrast. Forty values are not forty independent people. | [4](#ref-4), [5](#ref-5) |
+| 2 | The observed count change can be described. Without adequate time points, denominators, and comparison information, a policy effect cannot be separated from other changes. | [16](#ref-16) |
+| 3 | Calibration is problematic. Discrimination can be strong even when predicted probabilities are systematically too high. | [26](#ref-26) |
+| 4 | No. The interval may reflect substantial uncertainty, and a nonsignificant comparison does not establish equivalence. | [28](#ref-28) |
+| 5 | No. The design set the case fraction; it does not directly estimate population risk. | [2](#ref-2), [25](#ref-25) |
 
 ## Researcher Checklist
 
@@ -376,10 +432,14 @@ The following checklist records the decisions developed in the chapter. Each com
 
 <a id="ref-26"></a>
 
-**26.** [Developing clinical prediction models: a step-by-step guide. *BMJ*. 2024;386:e078276.](https://doi.org/10.1136/bmj-2023-078276) Methods guide: model development, performance assessment, validation, and clinical usefulness.
+**26.** [Efthimiou O, Seo M, Chalkou K, Debray T, Egger M, Salanti G. Developing clinical prediction models: a step-by-step guide. *BMJ*. 2024;386:e078276.](https://doi.org/10.1136/bmj-2023-078276) Methods guide: model development, performance assessment, validation, and clinical usefulness.
 
 <a id="ref-27"></a>
 
 **27.** [The BMJ. *Statistics at Square One*: Statements of probability and confidence intervals.](https://www.bmj.com/about-bmj/resources-readers/publications/statistics-square-one/4-statements-probability-and-confiden) Foundational teaching: confidence intervals versus individual reference ranges.
+
+<a id="ref-28"></a>
+
+**28.** [Altman DG, Bland JM. Absence of evidence is not evidence of absence. *BMJ*. 1995;311:485.](https://doi.org/10.1136/bmj.311.7003.485) Teaching article: why a nonsignificant result does not establish no important difference.
 
 The [nine-paper source register](../06_RESOURCES/Literature/study_design_paper_examples.csv) provides the separate design-reading collection. The completed study rationale belongs in the protocol; execution details and deviations belong in the [analysis record](../templates/analysis-record.md). Participant records and restricted inputs remain outside the public notes.
