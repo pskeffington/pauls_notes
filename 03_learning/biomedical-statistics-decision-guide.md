@@ -175,7 +175,7 @@ Rscript --vanilla 03_learning/tests/check_learning_pages.R
 
 ## 4. Then identify the scientific question and design
 
-Use the [narrative researcher checklist](researcher-analysis-checklist.md) to work through outcome type, purpose, sampling, independence, timing, feasibility, adjustment, method, diagnostics and reporting. Its completed decision paragraph records why a proposed analysis matches the question.
+The [analysis-selection chapter](researcher-analysis-checklist.md) develops the relationship among outcome type, purpose, sampling, dependence, timing, feasibility, adjustment, diagnostics and reporting. Its analysis rationale records the methodological justification for a proposed procedure.
 
 Read [study types and published-paper examples](study-designs-and-published-examples.md) for nine source-linked cases explaining recruitment, timing, allocation, the reported analysis, and what each design can establish. The examples include observational molecular research, case-control and cohort studies, individual and cluster randomized trials, a screening rollout, diagnostic AI, prognosis, and participant-data meta-analysis. These are literature readings; the executable examples in this test guide remain synthetic.
 
@@ -252,7 +252,7 @@ See [Chicco et al. (2025)](https://doi.org/10.1186/s13040-025-00465-6), [Muhamma
 
 ### E. Emergency-department visits before and after legislation (Year 1 versus Year 2)
 
-**Question:** Did emergency-department (ED) utilization change after a law took effect? **Outcome:** ED visits are **quantitative discrete counts**. **Predictor:** Period is **qualitative binary** (pre-legislation Year 1 vs post-legislation Year 2). The outcome type determines the count-model family; the binary predictor does not turn visits into a categorical outcome.
+**Question:** Did motor-vehicle-crash-related emergency-department (ED) visits change after a prohibition on texting while driving took effect? The [textbook worked example](researcher-analysis-checklist.md#worked-example-c-emergency-visits-following-a-texting-while-driving-prohibition) develops the study-design and modeling rationale for this question. **Outcome:** ED visits are **quantitative discrete counts**. **Predictor:** Period is **qualitative binary** (pre-legislation Year 1 vs post-legislation Year 2). The outcome type determines the count-model family; the binary predictor does not turn visits into a categorical outcome.
 
 **First clarify the observation unit and exposure:** two annual totals alone, repeated monthly totals, individual patients, or multiple hospitals give different designs. Record the covered population/person-time, changes in catchment or coding, hospital coverage, and whether seasonal patterns or long-term trends may differ.
 
