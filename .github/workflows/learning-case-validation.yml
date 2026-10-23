@@ -9,6 +9,8 @@ on:
       - "06_RESOURCES/tests/**"
       - "06_RESOURCES/Genomics/**"
       - "scripts/check_book_learning.py"
+      - "scripts/check_biostatistics_evidence.py"
+      - "scripts/tests/test_biostatistics_evidence.py"
       - ".github/workflows/learning-case-validation.yml"
   pull_request:
     paths:
@@ -17,6 +19,8 @@ on:
       - "06_RESOURCES/tests/**"
       - "06_RESOURCES/Genomics/**"
       - "scripts/check_book_learning.py"
+      - "scripts/check_biostatistics_evidence.py"
+      - "scripts/tests/test_biostatistics_evidence.py"
       - ".github/workflows/learning-case-validation.yml"
 
 permissions:
@@ -34,7 +38,7 @@ jobs:
       - name: Install R and optional example packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-proc r-cran-survival r-bioc-edger
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-proc r-cran-survival r-cran-mass r-cran-nnet r-cran-lme4 r-cran-geepack r-cran-ordinal r-cran-cmprsk r-bioc-deseq2 r-bioc-edger r-bioc-limma
       - name: Check documentation and shell syntax
         run: |
           python3 scripts/check_documentation.py
@@ -47,6 +51,11 @@ jobs:
         run: Rscript --vanilla 03_learning/tests/test_mastery.R
       - name: Validate synthetic biomedical statistics lab and failure cases
         run: Rscript --vanilla 03_learning/tests/test_statistical_test_lab.R
+      - name: Require every chart object and method to have paper and execution coverage
+        run: |
+          python3 scripts/check_biostatistics_evidence.py
+          python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_evidence.py' -v
+          Rscript --vanilla 03_learning/tests/test_paper_linked_tests.R --full
       - name: Exercise shell filtering and the R summary bridge
         run: bash 03_learning/tests/test_shell_practice.sh
       - name: Check book examples and reusable resource summaries

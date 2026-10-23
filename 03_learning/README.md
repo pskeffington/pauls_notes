@@ -13,6 +13,7 @@ Use the [current breast-cancer learning roadmap](../docs/learning-roadmap.md) fo
 | Research task | Subject guide | Practical result |
 | --- | --- | --- |
 | Classify biomedical data and choose an introductory statistical method | [Data-type-first biomedical statistics guide](biomedical-statistics-decision-guide.md) | Quantitative vs qualitative, paired and clustered design; visual test-choice flowchart, executable synthetic R example and method caveats |
+| Follow every decision-tree object into a published paper and executed analysis | [bio_stats paper-to-test atlas](bio_stats/README.md) | All 19 objects; published calculation replays, independent synthetic R adaptations, diagnostics and an explicit numerical disagreement |
 | Practice choosing a valid test, then verify it in R | [Biomedical statistics workbook](statistics-practice-workbook.md) | Eight data-type and twelve method-choice cases, full answer key and independent numerical/negative-case lab checks |
 | Learn Git and GitHub command-line basics | [Git/GitHub from zero to push](git-github-from-zero-to-push.md) | Install, authenticate, clone or initialize, branch, commit, push and open a pull request |
 | Learn Rust from first principles to object-oriented research code | [Rust foundations and engineering course](rust/README.md) | Variables, collections, ownership, structs, traits, Cargo and a tested synthetic paired-specimen lab |
