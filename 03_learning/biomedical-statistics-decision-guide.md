@@ -3,11 +3,11 @@
 **From data type to statistical test: an R-based biomedical decision guide**  
 **Paul's Notes | Independent teaching guide | Reviewed 2026-10-22**  
 **Scope:** Biomedical, clinical, public-health and cancer research across all cancer types. Breast cancer examples are illustrations, not a limit on the guide.  
-[Learning home](README.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
+[Learning home](README.md) · [Every chart node: paper and executable test](bio_stats/README.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
 
 **Start here: What type of data are we working with — quantitative (numerical), qualitative (categorical), counts, or time-to-event?** Identify what is measured *before* looking up a t-test, chi-square test or regression model. Then refine the choice by the question, number of groups, pairing and sampling design.
 
-> Teaching guide, not an automatic test recommender or clinical decision-support system. All examples are synthetic. Do not put protected records, identifiers or restricted cancer data in this public repository.
+> Teaching guide, not an automatic test recommender or clinical decision-support system. The foundation examples are synthetic. The linked bio_stats atlas also identifies published toy vectors and one published aggregate table explicitly; it contains no participant-level study records. Do not put protected records, identifiers or restricted cancer data in this public repository.
 
 ## 1. First classify the data
 
@@ -69,40 +69,81 @@ Model-family suggestions are hypotheses to evaluate, not automatic distribution 
 
 Read from the **measured outcome**, then use pairing/grouping and study assumptions to refine the choice. Statistical questions can be descriptive, comparative, associative or predictive; this tree is an **entry point**, not a substitute for the study protocol.
 
+The three panels form one decision tree: follow **E** into the continuous-design panel and **D** into the categorical-design panel. Every terminal method leads to **Z**. Paper IDs resolve in the table and atlas below.
+
+**Outcome family**
+
 ```mermaid
 flowchart TD
-  A["START: What type of OUTCOME do you have?"] --> B{"Data type?"}
-  B -->|Quantitative| C{"Continuous or counts?"}
-  B -->|Qualitative| D{"Nominal or ordinal?"}
-  B -->|Time + event status| S["Survival: Kaplan-Meier / log-rank<br/>Adjusted: Cox or justified alternative<br/>Competing events need special methods"]
-  B -->|Many molecular features| H["Check assay scale and sample IDs<br/>Raw RNA-seq counts: DESeq2 / edgeR<br/>voom / intensities: limma + FDR"]
-  C -->|Continuous| E{"What comparison?"}
-  C -->|Discrete counts/rates| R["Poisson model + exposure offset<br/>Check overdispersion: negative binomial"]
-  E -->|2 independent groups| T["Welch two-sample t test<br/>Alternative: rank / robust method"]
-  E -->|2 paired observations| P["Paired t test on differences<br/>Alternative: signed-rank / sign method"]
-  E -->|3+ independent groups| AN["ANOVA / Welch ANOVA<br/>Alternative: Kruskal-Wallis"]
-  E -->|2 quantitative variables| CR["Pearson / Spearman correlation<br/>or linear regression"]
-  E -->|Repeated / clustered| MX["Mixed-effects model or GEE<br/>Design-aware survey methods if needed"]
-  D -->|Nominal binary or 3+| N{"Design?"}
-  D -->|Ordinal| O["Rank-based comparison or<br/>ordinal regression"]
-  N -->|1 proportion| BIN["Exact binomial test / confidence interval"]
-  N -->|Independent groups| CH["Chi-square or Fisher<br/>Adjusted: logistic / multinomial model"]
-  N -->|Paired binary| MC["McNemar or matched analysis"]
-  S --> Z["VERIFY: unit, dependence, assumptions,<br/>missingness, effect size / CI, multiplicity"]
+  A["A: Identify outcome - BS-001"] --> B{"B: Data type? - BS-001"}
+  B -->|Quantitative| C{"C: Continuous or counts? - AT-004"}
+  B -->|Qualitative| D{"D: Nominal or ordinal? - AT-008"}
+  B -->|Time + event status| S["S: KM / log-rank / Cox / competing-risk CIF - AT-012 to AT-014"]
+  B -->|Many molecular features| H["H: DESeq2 / edgeR / voom / limma + FDR - AT-015 to AT-019"]
+  C -->|Continuous| E{"E: Comparison and dependence? - BS-002"}
+  C -->|Discrete counts/rates| R["R: Poisson + offset / negative binomial - AT-004"]
+  S --> Z["Z: Verify design, assumptions, missingness, effect / CI, multiplicity - BS-002 / AT-019 / AT-020"]
   H --> Z
   R --> Z
-  T --> Z
+```
+
+**Continuous comparison and dependence**
+
+```mermaid
+flowchart TD
+  E{"E: Comparison and dependence? - BS-002"}
+  E -->|2 independent groups| T["T: Welch t / rank-sum alternative - BS-009 / BS-001"]
+  E -->|2 paired observations| P["P: Paired t / signed-rank / sign - BS-001 / AT-001"]
+  E -->|3+ independent groups| AN["AN: ANOVA / Welch ANOVA / Kruskal-Wallis - AT-002 / AT-021 / BS-001"]
+  E -->|2 quantitative variables| CR["CR: Pearson / Spearman / linear regression - AT-003 / AT-022"]
+  E -->|Repeated / clustered| MX["MX: Mixed model / GEE / survey design - AT-009 to AT-011"]
+  T --> Z["Z: Verify design, assumptions, missingness, effect / CI, multiplicity - BS-002 / AT-019 / AT-020"]
   P --> Z
   AN --> Z
   CR --> Z
   MX --> Z
-  O --> Z
+```
+
+**Categorical design**
+
+```mermaid
+flowchart TD
+  D{"D: Nominal or ordinal? - AT-008"}
+  D -->|Nominal binary or 3+| N{"N: Independent or paired? - AT-006 / AT-007"}
+  D -->|Ordinal| O["O: Rank comparison / ordinal regression - AT-008"]
+  N -->|1 proportion| BIN["BIN: Exact binomial test / CI - AT-005"]
+  N -->|Independent groups| CH["CH: Chi-square / Fisher / logistic / multinomial - AT-006 / AT-008 / AT-023"]
+  N -->|Paired binary| MC["MC: McNemar - AT-007"]
+  O --> Z["Z: Verify design, assumptions, missingness, effect / CI, multiplicity - BS-002 / AT-019 / AT-020"]
   BIN --> Z
   CH --> Z
   MC --> Z
 ```
 
 **Decision hierarchy:** (1) measured outcome **type** → (2) one, two or many groups / explanatory variables → (3) **independent, paired or clustered** design → (4) scientific estimand and assumptions → (5) statistical procedure → (6) estimate, confidence interval, diagnostics and defensible interpretation.
+
+### bio_stats: every chart object has a paper and an execution path
+
+The IDs printed inside the chart map to **all 19 objects**, including the six decision objects and final verification object. Read the [paper-to-test atlas](bio_stats/README.md) for the scientific question, a named paper and precise section/table, what the authors actually did, runnable R, output interpretation, and reproduction status for each branch. The [machine-readable map](bio_stats/decision-tree-evidence.json) also tracks every named method within compound boxes; a coverage check fails if a chart object loses its paper or demonstration.
+
+| Chart objects | Papers and demonstrations |
+| --- | --- |
+| `A`, `B`, `C`, `D`, `E`, `N` | [Outcome, scale and design gates](bio_stats/README.md#decision-objects) — Chicco et al. (2025), Green (2021), Selman et al. (2024), Muhammad (2023), Kim (2017), Fagerland et al. (2013) |
+| `T` | [Independent means and rank-sum](bio_stats/README.md#t-independent-continuous-outcomes) — West (2021), Chicco et al. (2025) |
+| `P` | [Paired t, signed-rank and sign](bio_stats/README.md#p-paired-continuous-outcomes) — Chicco et al. (2025), Roberson et al. (1995) |
+| `AN` | [ANOVA, Welch ANOVA and Kruskal-Wallis](bio_stats/README.md#an-three-or-more-independent-groups) — Gurski and Dittel (2026), Welch (1951), Chicco et al. (2025) |
+| `CR` | [Correlation and regression](bio_stats/README.md#cr-two-quantitative-variables) — Schober et al. (2018), Aggarwal and Ranganathan (2017) |
+| `R` | [Poisson and negative binomial](bio_stats/README.md#r-counts-and-rates) — Green (2021) |
+| `BIN` | [Binomial test and CI](bio_stats/README.md#bin-one-proportion) — Clopper and Pearson (1934), plus the R manual |
+| `CH` | [Chi-square, Fisher, logistic and multinomial](bio_stats/README.md#ch-independent-categorical-outcomes) — Kim (2017), Ranganathan et al. (2017), Selman et al. (2024) |
+| `MC` | [Published McNemar replay](bio_stats/README.md#mc-paired-binary-outcomes) — Fagerland et al. (2013), Tables 1 and 6 |
+| `O` | [Ordinal ranks and proportional odds](bio_stats/README.md#o-ordered-outcomes) — Selman et al. (2024) |
+| `MX` | [Mixed, GEE and survey methods](bio_stats/README.md#mx-repeated-clustered-and-survey-designs) — Bates et al. (2015), Højsgaard et al. (2006), Lumley (2004) |
+| `S` | [KM, log-rank, Cox and competing risks](bio_stats/README.md#s-time-to-event-and-competing-risks) — Clark et al. (2003), Bradburn et al. (2003), Austin et al. (2016) |
+| `H` | [DESeq2, edgeR, voom and intensity limma](bio_stats/README.md#h-many-molecular-features) — Love et al. (2014), Robinson et al. (2010), Law et al. (2014), Ritchie et al. (2015) |
+| `Z` | [Diagnostics, uncertainty and multiplicity](bio_stats/README.md#z-final-verification) — Muhammad (2023), Benjamini and Hochberg (1995), Sterne et al. (2009) |
+
+**Evidence distinction:** the atlas reproduces selected published toy/aggregate calculations and executes independent synthetic adaptations for the other branches. It does not claim a replay of every study's participant-level analysis. One published rank-sum discrepancy is retained explicitly. Foundational papers sit alongside recent literature because the original statistical procedures predate the 2021–2026 reading window.
 
 ## 3. Quick fundamentals: descriptive statistics come before testing
 
@@ -411,4 +452,4 @@ For trials use [CONSORT 2025](https://doi.org/10.1136/bmj-2024-081123); for pred
 
 The [recent methods / R / deployment evidence review](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) links original publications, year, DOI, contribution, and what each source **does not** validate. Its companion [CSV register](../06_RESOURCES/Literature/biostatistics_r_literature_2021_2026.csv) supports filtering and future source-check passes. This is a **curated narrative review**; it is not a PRISMA systematic search or a reproduced analysis of every paper.
 
-**Evidence boundary:** source metadata and article conclusions were checked against publisher / PubMed or journal pages during the 2026-10-22 review. No independent replay of published results or execution of the example code is claimed by this addition. Consult the original paper, up-to-date package manual and local statistical reviewer for any new use.
+**Evidence boundary:** source metadata and relevant methods were checked against publisher, PubMed and package documentation during the 2026-10-22 review. The [bio_stats execution ledger](bio_stats/README.md#execution-and-reproduction-ledger) records which selected published calculations and synthetic examples were executed, including a numerical disagreement. This does not reproduce complete study analyses or establish suitability for a new clinical dataset.

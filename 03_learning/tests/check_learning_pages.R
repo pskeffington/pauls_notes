@@ -1,6 +1,7 @@
 # Execute each page's R examples in page-local order, with a fresh environment per page.
 # Bash deployment examples are run by the workflow with a disposable output path.
 paths <- sort(list.files("03_learning", pattern = "[.]md$", full.names = TRUE))
+paths <- c(paths, "03_learning/bio_stats/README.md")
 blocks <- 0L
 for (path in paths) {
   text <- readLines(path, warn = FALSE)
