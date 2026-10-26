@@ -48,6 +48,20 @@ The majority-class predictor is a comparison baseline. The generator returns its
 
 The report contains explicit `clinical_use_authorized=false`, `patient_level_training_authorized=false`, `real_cancer_data_processed=false` and the **NOT FOR CLINICAL USE** disclaimer. There is **no independent clinical validation**, and no evidence is asserted for a different cancer cohort.
 
+## Cancer-wide public-data safeguards and the current GDC example
+
+**Methods for any cancer type** can use the teaching patterns here, but a new real-data provider or endpoint requires its own independently approved protocol. The [provider-neutral model-use/privacy policy](MODEL_USE_POLICY.md) and [model-card template](model_card.template.json) prohibit participant-linked data and clinical-use claims from this public repository. The [public Git guard](../../scripts/check_public_data_boundaries.py) and [explicit structured-asset register](../../scripts/public_data_assets.json) add reviewed boundaries for files from **any oncology source**; heuristic scans are not deidentification.
+
+The **TCGA-BRCA-only** [read-only GDC metadata preflight](gdc_open_access_preflight.py) checks official file UUIDs against explicit `access=open`, case project `TCGA-BRCA`, approved data types and checksums. It makes **no download, model fit, clinical claim or approval for another cancer study**. To check a reviewed list of *GDC file UUIDs only*:
+
+```bash
+python3 04_machine_learning/research_toolkit/gdc_open_access_preflight.py \
+  --ids /tmp/gdc-public-file-ids.txt \
+  --output /tmp/new-gdc-metadata-review
+```
+
+The PR branch's guards still require human privacy review, Git history/secret inspection and required-status protection on `main` before [D0 can close](../../docs/roadmap-gates.md#d0-and-d1-privacy-and-real-data-admission-remain-open). Source-specific metadata checks never unlock patient data through the synthetic runner.
+
 ## Verify and extend safely
 
 ```bash
