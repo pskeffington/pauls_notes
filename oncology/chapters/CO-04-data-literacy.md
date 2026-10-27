@@ -102,7 +102,7 @@ For example, the derived flag `baseline_assay_available` cannot simply mean “t
 
 ## 5. Keys, joins and record multiplicity
 
-A **primary key** uniquely identifies rows within a table. A **foreign key** links a child record to its parent. A join combines records based on these keys. When one parent has multiple children on each of two tables, a direct join may create a many-to-many multiplication.
+A **primary key** uniquely identifies rows within a table; the [GDC biospecimen data model](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) illustrates how related case and specimen entities retain distinct identities. A **foreign key** links a child record to its parent. A join combines records based on these keys. When one parent has multiple children on each of two tables, a direct join may create a many-to-many multiplication.
 
 Example:
 
@@ -130,7 +130,7 @@ Three common conceptual missing-data categories are:
 - **MAR:** missingness may depend on recorded variables but not on the unobserved value after conditioning on those variables.
 - **MNAR:** missingness can still depend on unobserved values even after considering recorded variables.
 
-These are modeling assumptions, not labels one can usually establish from a simple missingness table. Cancer cohorts often have informative measurement patterns: more ill patients may undergo more testing, and follow-up may differ across institutions. Complete-case analysis can change the study population and introduce bias.
+These are modeling assumptions, not labels one can usually establish from a simple missingness table (see [Sterne et al. on clinical missing-data methods](https://pubmed.ncbi.nlm.nih.gov/19564179/)). Cancer cohorts often have informative measurement patterns: more ill patients may undergo more testing, and follow-up may differ across institutions. Complete-case analysis can change the study population and introduce bias.
 
 Always distinguish a missing biomarker measurement, a failed assay, a clinically not-indicated test and a missing follow-up endpoint. A row with no event documentation is not automatically event-free. Record observation windows and why each record entered or left the analysis.
 
@@ -142,7 +142,7 @@ In oncology research, whether data occur **before** or **after** a specified ori
 
 Suppose the research aim is to predict recurrence from measurements available at diagnosis. A genomic profile obtained after recurrence is not a valid baseline feature. Neither is a survival time, future treatment decision or post-progression assessment that would not have been known at prediction time.
 
-A related problem occurs when splitting high-dimensional datasets into training and testing subsets. If multiple specimens from one patient cross the split boundary, apparent generalization may be contaminated by within-person similarities. Train/test separation should follow the intended generalization unit and pre-specified study design.
+A related problem occurs when splitting high-dimensional datasets into training and testing subsets. If multiple specimens from one patient cross the split boundary, apparent generalization may be contaminated by within-person similarities, consistent with the broader [scientific data-leakage literature](https://doi.org/10.1016/j.patter.2023.100804). Train/test separation should follow the intended generalization unit and pre-specified study design.
 
 **Contrast:** A model intended to predict future *specimens from already-known people* may legitimately have a different design than one intended to generalize to entirely new patients. The validation scheme must match the claim.
 
