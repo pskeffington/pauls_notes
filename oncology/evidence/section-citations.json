@@ -1,0 +1,269 @@
+{
+  "schema_version": "1.0",
+  "citation_style": "section-level in-text reference links plus independent source registry",
+  "coverage": "all level-two and level-three headings in the current introduction and drafted chapters",
+  "documents": [
+    {
+      "path": "oncology/INTRODUCTION.md",
+      "citations": {
+        "The question behind the methods": [
+          "NCI-CANCER",
+          "NCI-TRIALS",
+          "NCI-STATS"
+        ],
+        "Why oncology is the organizing case": [
+          "HALLMARKS",
+          "GDC-BIO"
+        ],
+        "Why begin with foundations instead of artificial intelligence": [
+          "LEAKAGE",
+          "TRIPOD-AI"
+        ],
+        "A promise to the reader": [
+          "ICMJE",
+          "STROBE"
+        ],
+        "Scientific independence and responsibility": [
+          "HHS-RESEARCH",
+          "ICMJE"
+        ],
+        "The first research habit": [
+          "STROBE",
+          "NCI-TRIALS"
+        ]
+      }
+    },
+    {
+      "path": "oncology/chapters/CO-01-cancer-biology.md",
+      "citations": {
+        "Why this chapter matters": [
+          "NCI-CANCER",
+          "HALLMARKS"
+        ],
+        "Learning outcomes": [
+          "NCI-CANCER",
+          "FDA-BEST"
+        ],
+        "1. What cancer represents": [
+          "HALLMARKS",
+          "NCI-CANCER"
+        ],
+        "2. From mechanism to measurement": [
+          "FDA-BEST",
+          "NCI-BIOMARKER"
+        ],
+        "Key distinction: biomarker roles": [
+          "FDA-BEST",
+          "FDA-BEST-BOOK"
+        ],
+        "3. The hierarchy of observational units": [
+          "GDC-BIO",
+          "LEAKAGE"
+        ],
+        "4. Heterogeneity and sampling": [
+          "HALLMARKS",
+          "NCI-CANCER"
+        ],
+        "5. Worked synthetic scenario: molecular signal and recurrence": [
+          "TRIPOD-AI",
+          "NCI-OS"
+        ],
+        "Small quantitative exercise": [
+          "NCI-OS",
+          "STROBE"
+        ],
+        "6. Three questions before computation": [
+          "STROBE",
+          "FDA-BEST"
+        ],
+        "7. Mastery checks": [
+          "LEAKAGE",
+          "TRIPOD-AI"
+        ],
+        "Answer guide (condensed)": [
+          "FDA-BEST",
+          "GDC-ENTITY"
+        ],
+        "8. Independent further reading": [
+          "HALLMARKS",
+          "NCI-CANCER"
+        ]
+      }
+    },
+    {
+      "path": "oncology/chapters/CO-02-clinical-oncology-data.md",
+      "citations": {
+        "Why clinical data matter": [
+          "GDC-ENTITY",
+          "NCI-STAGE"
+        ],
+        "Learning objectives": [
+          "NCI-STAGE",
+          "NCI-CTCAE"
+        ],
+        "1. The clinical timeline precedes the data model": [
+          "STROBE",
+          "NCI-OS"
+        ],
+        "2. Separate the clinical entities": [
+          "GDC-BIO",
+          "GDC-ENTITY"
+        ],
+        "3. Stage, grade, histology and molecular classification": [
+          "NCI-STAGE",
+          "NCI-GRADE"
+        ],
+        "4. Response and toxicity are different constructs": [
+          "RECIST",
+          "NCI-CTCAE"
+        ],
+        "5. Endpoint semantics and the denominator": [
+          "NCI-OS",
+          "TRIPOD-AI"
+        ],
+        "6. A minimum clinical oncology research dictionary": [
+          "GDC-ENTITY",
+          "STROBE"
+        ],
+        "7. Worked example: a teaching extract with related records": [
+          "GDC-BIO",
+          "GDC-ENTITY"
+        ],
+        "Compact R demonstration": [
+          "GDC-ENTITY",
+          "STROBE"
+        ],
+        "8. Research governance": [
+          "HHS-RESEARCH",
+          "GDC-BIO"
+        ],
+        "9. Competency exercises and answer checks": [
+          "RECIST",
+          "NCI-STAGE"
+        ],
+        "10. Core sources and further reading": [
+          "NCI-CTCAE",
+          "GDC-BIO"
+        ]
+      }
+    },
+    {
+      "path": "oncology/chapters/CO-03-molecular-foundations.md",
+      "citations": {
+        "Why molecular data matter": [
+          "NCI-BIOMARKER",
+          "GDC-RNA"
+        ],
+        "Learning objectives": [
+          "FDA-BEST",
+          "GDC-RNA"
+        ],
+        "1. Biological information and its regulation": [
+          "NCI-CANCER",
+          "HALLMARKS"
+        ],
+        "2. Somatic change, germline variation and tumor evolution": [
+          "NCI-CANCER",
+          "NCI-BIOMARKER"
+        ],
+        "3. Molecular measurements are not interchangeable": [
+          "GDC-RNA",
+          "FDA-BEST"
+        ],
+        "4. A recurring breast cancer example: ESR1 and ERBB2": [
+          "NCI-BREAST",
+          "NCI-BIOMARKER"
+        ],
+        "5. From sequence reads to a count matrix": [
+          "GDC-RNA",
+          "DESEQ2"
+        ],
+        "6. A mathematical miniature: effect size versus evidence": [
+          "DESEQ2",
+          "GDC-RNA"
+        ],
+        "Executable base-R thought experiment": [
+          "DESEQ2",
+          "GDC-RNA"
+        ],
+        "7. Purity, batch, normalization and missingness": [
+          "GDC-BIO",
+          "DESEQ2"
+        ],
+        "8. Minimal molecular dataset contract": [
+          "GDC-ENTITY",
+          "GDC-RNA"
+        ],
+        "9. Research exercises with answer guidance": [
+          "FDA-BEST",
+          "DESEQ2"
+        ],
+        "10. Primary and authoritative reading": [
+          "GDC-RNA",
+          "NCI-BREAST"
+        ]
+      }
+    },
+    {
+      "path": "oncology/chapters/CO-04-data-literacy.md",
+      "citations": {
+        "Why data literacy is a scientific skill": [
+          "GDC-BIO",
+          "LEAKAGE"
+        ],
+        "Learning objectives": [
+          "STROBE",
+          "GDC-ENTITY"
+        ],
+        "1. Four units that must not be conflated": [
+          "GDC-ENTITY",
+          "LEAKAGE"
+        ],
+        "2. How counts change with the question": [
+          "GDC-BIO",
+          "TRIPOD-AI"
+        ],
+        "3. Measurement scales and variable roles": [
+          "NCI-STAGE",
+          "GDC-RNA"
+        ],
+        "4. What a data dictionary must record": [
+          "GDC-BIO",
+          "STROBE"
+        ],
+        "5. Keys, joins and record multiplicity": [
+          "GDC-ENTITY",
+          "STROBE"
+        ],
+        "6. Missingness is information about observation": [
+          "MISSING",
+          "STROBE"
+        ],
+        "7. Time, eligibility and information leakage": [
+          "LEAKAGE",
+          "TRIPOD-AI"
+        ],
+        "8. Worked lab: six invented people, nine specimens": [
+          "GDC-BIO",
+          "LEAKAGE"
+        ],
+        "Hand calculation": [
+          "GDC-ENTITY",
+          "TRIPOD-AI"
+        ],
+        "9. Worked design challenge: choosing the split": [
+          "LEAKAGE",
+          "TRIPOD-AI"
+        ],
+        "10. Mastery exercises and answer guide": [
+          "MISSING",
+          "TRIPOD-AI"
+        ],
+        "11. Primary and further reading": [
+          "GDC-ENTITY",
+          "TRIPOD-AI"
+        ]
+      }
+    }
+  ]
+}
