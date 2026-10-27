@@ -63,3 +63,20 @@ Populate placeholders from the document actually fetched; do not persist placeho
 - Recheck human-readable claims against the milestone ledger after major releases.
 
 This is a discovery and governance contract. It does not claim an automated index generator or CI validator is already installed.
+
+
+## Executable index builder (October 2026)
+
+The standard-library-only generator is [`scripts/build_machine_index.py`](../scripts/build_machine_index.py), with [unit tests](../scripts/test_machine_index.py) and [CI](../.github/workflows/machine-index.yml).
+
+From the repository root:
+
+```bash
+python3 -m unittest discover -s scripts -p 'test_machine_index.py' -v
+python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
+python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
+```
+
+The emitted JSONL contains exact source text, source line spans, role, relative path, section identifier and SHA-256 digest. Output is deterministic for identical tracked Markdown content, with no generated timestamp or floating `main` URL embedded in records. Attach the actual Git commit SHA and indexing timestamp in the downstream ingestion manifest. Link problems are reported but do not fail the default build; use `--strict-links` to enforce a zero-warning gate after existing documentation issues are cleaned up. The index currently uses heading-aware chunks, not bounded token-size subchunks or embeddings.
+
+The GitHub Actions workflow builds an ephemeral index and checks its deterministic replay, schema fields and unique section IDs. It does not publish or commit a generated index file. CI execution must be observed before treating this as a passing repository gate.
