@@ -33,6 +33,18 @@ Cancer development can be described by multiple interacting processes: growth si
 
 **Section references:** [Hallmarks of Cancer: New Dimensions (2022)](https://doi.org/10.1158/2159-8290.CD-21-1059) · [What Is Cancer?](https://www.cancer.gov/about-cancer/understanding/what-is-cancer)
 
+## Breast cancer at the cellular level: a first example
+
+The breast contains **lobules**, which produce milk, and **ducts**, which carry milk toward the nipple. Both contain **epithelial cells**—the cells that form the lining of these structures. Most breast cancers are **carcinomas**, meaning malignancies that arise from epithelial cells, commonly associated with the ducts or lobules. These are different from **T lymphocytes**, the immune cells that may recognize and attack abnormal cells. Breast cancer is not generally caused by T-cell mutations. [NCI: What Is Breast Cancer?](https://www.cancer.gov/types/breast/what-is-breast-cancer)
+
+Normal epithelial cells maintain organized tissue architecture through signals controlling division, differentiation and survival. Cancer can develop as acquired genetic and other molecular changes disrupt these controls. **Ductal carcinoma in situ (DCIS)** describes abnormal cells confined within ducts, without invasion of surrounding breast tissue; **invasive carcinoma** has extended beyond its site of origin into adjacent tissue. Not every in situ lesion progresses, and the term *invasive* does not by itself mean that distant metastasis has occurred. [NCI: Types of Breast Cancer](https://www.cancer.gov/types/breast/breast-cancer-types)
+
+A breast tumor is also more than its malignant epithelial cells. It may contain fibroblasts, blood vessels, immune cells—including T cells—and extracellular matrix. Their interactions form the **tumor microenvironment**, which can influence tumor development and immune responses. Biomarkers such as estrogen receptor and HER2 describe important molecular features of some breast cancers, but biomarker measurements should not be confused with the identity of the cell lineage or with proof of treatment response. [NCI: Tumor Biology and Microenvironment Research](https://www.cancer.gov/about-nci/organization/dcb/research-portfolio/tbmr) · [NCI: Breast Cancer Biomarker Tests](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests)
+
+**Research connection:** Before analyzing a breast cancer biopsy, ask which cell types are represented, whether the sample is from a ductal or lobular lesion, whether invasion is documented, and which specific assay measured a biomarker. A bulk tissue gene-expression result is an observation from a **mixture of cells**, not necessarily a measurement from cancer cells alone.
+
+**Section references:** [What Is Breast Cancer? — NCI](https://www.cancer.gov/types/breast/what-is-breast-cancer) · [Types of Breast Cancer — NCI](https://www.cancer.gov/types/breast/breast-cancer-types) · [Tumor Biology and Microenvironment Research — NCI](https://www.cancer.gov/about-nci/organization/dcb/research-portfolio/tbmr)
+
 ## 2. From mechanism to measurement
 
 | Biological concept | Example observation | What the observation does not prove |
