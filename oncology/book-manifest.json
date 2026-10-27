@@ -82,7 +82,8 @@
           "test_paths": [
             "scripts/test_oncology_calculus.py"
           ],
-          "execution_status": "source-and-synthetic-reference-checked-awaiting-runtime-ci"
+          "execution_status": "python-hash-matched-local-replay-5-tests-passed-r-and-ci-unverified",
+          "validation_record": "oncology/evidence/CO-06-VALIDATION-2026-10-27.md"
         }
       ]
     },
