@@ -51,12 +51,20 @@
         {
           "id": "CO-05",
           "title": "Essential mathematics I",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [
             "CO-04"
           ],
-          "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "evidence_status": "section-linked-unreviewed",
+          "chapter_path": "oncology/chapters/CO-05-essential-mathematics-i.md",
+          "lab_paths": [
+            "oncology/examples/oncology_math.py",
+            "oncology/examples/oncology_math.R"
+          ],
+          "test_paths": [
+            "scripts/test_oncology_math.py"
+          ],
+          "execution_status": "checks-authored-awaiting-ci-confirmation"
         },
         {
           "id": "CO-06",
