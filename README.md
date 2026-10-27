@@ -12,7 +12,7 @@ An open, methods-focused notebook for **research across all cancer types**, incl
 
 ## Computational Oncology textbook
 
-The new [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a **planned ten-part, 60-chapter independent ebook** with a [publication roadmap](oncology/ROADMAP.md) and [machine-readable chapter manifest](oncology/book-manifest.json). This is an original oncology-centered learning architecture, not university course material or a claim that the full manuscript has been written.
+The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter independent ebook** with four drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript is not yet written or independently reviewed.
 
 ## Start here
 
