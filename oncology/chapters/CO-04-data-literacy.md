@@ -228,7 +228,7 @@ For new-patient prediction, a person-disjoint outer assessment is the baseline r
 
 **Review status:** Draft 0.1 with invented teaching data, not scientific peer review or clinical certification. Demonstrations explain integrity concepts and do not license the use of participant data.
 
-**Next:** [CO-05 — Essential Mathematics I](../ROADMAP.md), covering algebra, logarithms, rates and units through oncology examples.
+**Next:** [CO-05 — Essential Mathematics I](CO-05-essential-mathematics-i.md), covering algebra, logarithms, rates and units through oncology examples.
 
 **Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
 
