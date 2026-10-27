@@ -15,7 +15,7 @@ Read the original [Introduction — Why Cancer Research Matters](INTRODUCTION.md
 | [CO-03: Molecular Foundations](chapters/CO-03-molecular-foundations.md) | What do molecular assays actually measure? | Draft; section-linked evidence |
 | [CO-04: Data Literacy](chapters/CO-04-data-literacy.md) | What does a row represent and which units are independent? | Draft; section-linked evidence |
 | [CO-05: Essential Mathematics I](chapters/CO-05-essential-mathematics-i.md) | Which quantities, denominators, units and logarithms make oncology calculations meaningful? | Draft; section-linked evidence and executable labs |
-| [CO-06: Essential Mathematics II](chapters/CO-06-essential-mathematics-ii.md) | How do derivatives, matrices and optimization explain statistical models? | Draft; section-linked evidence and Python/R labs |
+| [CO-06: Essential Mathematics II](chapters/CO-06-essential-mathematics-ii.md) | How do derivatives, matrices and optimization explain statistical models? | Draft; [Python validation recorded](evidence/CO-06-VALIDATION-2026-10-27.md); R/CI pending |
 
 Continue with the [complete 60-chapter roadmap](ROADMAP.md). Chapters CO-07 through CO-60 remain planned; do not assume that a roadmap title is an authored chapter.
 
