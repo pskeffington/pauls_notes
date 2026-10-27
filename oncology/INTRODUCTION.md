@@ -37,7 +37,7 @@ We will show failures as well as successes: missing data, misleading plots, inva
 
 ## Scientific independence and responsibility
 
-This is an independently written educational reference, not a reproduction of Dartmouth or any other institution's courses. It draws on the general foundations of biomedical science and on appropriately cited, independently accessible research literature. Examples use synthetic data unless a separate, documented data-rights and privacy review authorizes another source. A teaching example is not clinical evidence; a validated software routine is not an externally validated clinical model; and this book does not confer medical qualifications or replace professional judgment.
+This is an independently written educational reference, not a reproduction of any institution's courses. It draws on the general foundations of biomedical science and on appropriately cited, independently accessible research literature. Examples use synthetic data unless a separate, documented data-rights and privacy review authorizes another source. A teaching example is not clinical evidence; a validated software routine is not an externally validated clinical model; and this book does not confer medical qualifications or replace professional judgment.
 
 ## The first research habit
 
