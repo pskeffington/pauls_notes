@@ -26,4 +26,4 @@ Rscript --vanilla oncology/examples/oncology_calculus.R
 
 The CO-05 mathematical examples deliberately use **different** populations and endpoints for cancer incidence, recurrence person-time and treatment response. A shared numeric scale does not make those quantities comparable. All outputs must be interpreted together with the numerator, denominator, time frame, unit and source. Source definitions appear in the [CO-05 section references](../chapters/CO-05-essential-mathematics-i.md) and [evidence register](../evidence/source-registry.json).
 
-**Current verification state:** Test code and CI steps are provided. A passing live CI execution and independent clinical review must be confirmed separately before changing the manuscript status to reviewed or released.
+**Current verification state:** The CO-06 [Python test source and lab](../evidence/CO-06-VALIDATION-2026-10-27.md) were replayed locally with matching Git blob hashes and all 5 test methods passed. R runtime execution and a successful CI run are not independently verified; no technical check alone establishes scientific or clinical review.
