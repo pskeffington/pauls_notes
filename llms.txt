@@ -12,6 +12,8 @@ Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/m
 - [CO-02 clinical oncology data](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-02-clinical-oncology-data.md): draft clinical endpoints and data schema
 - [CO-03 molecular foundations](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-03-molecular-foundations.md): draft omics and biomarker interpretation
 - [CO-04 data literacy](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-04-data-literacy.md): draft observation grains and leakage controls
+- [CO-05 mathematics](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-05-essential-mathematics-i.md): ratios, oncology rates, unit conversion, log2 fold change and reproducible numerical examples
+- [Oncology teaching labs](https://github.com/pskeffington/pauls_notes/blob/main/oncology/examples/README.md): synthetic Python and R exercises
 - [Readable source bibliography](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/SOURCES.md): verified reference links by subject
 - [Section source register](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/source-registry.json): direct evidence URLs and claim scope
 - [Section citation index](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/section-citations.json): H2/H3 source crosswalk
