@@ -1,0 +1,46 @@
+name: Machine documentation index
+on:
+  push:
+    paths:
+      - '**/*.md'
+      - '**/*.markdown'
+      - 'scripts/build_machine_index.py'
+      - 'scripts/test_machine_index.py'
+      - '.github/workflows/machine-index.yml'
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '**/*.markdown'
+      - 'scripts/build_machine_index.py'
+      - 'scripts/test_machine_index.py'
+      - '.github/workflows/machine-index.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test parser
+        run: python -m unittest discover -s scripts -p 'test_machine_index.py' -v
+      - name: Generate index
+        run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
+      - name: Verify deterministic replay
+        run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
+      - name: Validate JSONL identifiers and required fields
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          records = [json.loads(line) for line in Path('/tmp/pauls-notes-index.jsonl').read_text().splitlines()]
+          required = {'schema_version', 'repository', 'path', 'section_id', 'heading', 'start_line', 'end_line', 'role', 'content_sha256', 'text'}
+          assert records, 'Index must not be empty'
+          assert all(required <= set(r) for r in records), 'Missing index field'
+          keys = [r['section_id'] for r in records]
+          assert len(keys) == len(set(keys)), 'Duplicate section IDs'
+          print(f'Validated {len(records)} indexed sections')
+          PY
