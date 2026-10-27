@@ -354,6 +354,30 @@
       "kind": "technical-specification",
       "supports": "set.seed, RNGkind, reproducibility and R random-number generation",
       "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "NCI-BREAST-CELLS",
+      "title": "What Is Breast Cancer? — NCI",
+      "url": "https://www.cancer.gov/types/breast/what-is-breast-cancer",
+      "kind": "clinical-reference",
+      "supports": "Breast ducts and lobules; epithelial origins; in situ versus invasive breast tumors",
+      "verification": "Official source inspected October 2026; scientific editorial review pending"
+    },
+    {
+      "id": "NCI-BREAST-TYPES",
+      "title": "Types of Breast Cancer — NCI",
+      "url": "https://www.cancer.gov/types/breast/breast-cancer-types",
+      "kind": "clinical-reference",
+      "supports": "Ductal versus lobular carcinoma and distinction between DCIS and invasive disease",
+      "verification": "Official source inspected October 2026; scientific editorial review pending"
+    },
+    {
+      "id": "NCI-TME",
+      "title": "Tumor Biology and Microenvironment Research — NCI",
+      "url": "https://www.cancer.gov/about-nci/organization/dcb/research-portfolio/tbmr",
+      "kind": "authoritative-overview",
+      "supports": "Interactions between malignant cells, immune cells, stromal cells and tumor microenvironment",
+      "verification": "Official source inspected October 2026; scientific editorial review pending"
     }
   ]
 }
