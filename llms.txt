@@ -1,0 +1,28 @@
+# Paul's Notes
+> Open educational reference for cancer research, biomedical statistics, computational biology, machine learning, R, Python, Rust and reproducible research. Current worked examples emphasize synthetic breast cancer data; the repository is not limited to breast cancer.
+
+Canonical repository: https://github.com/pskeffington/pauls_notes
+Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
+Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
+
+## Primary routes
+- [Cancer research scope](https://github.com/pskeffington/pauls_notes/blob/main/docs/cancer-research-scope.md): broad oncology use cases and boundaries
+- [Biomedical statistics decision guide](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/biomedical-statistics-decision-guide.md): select analyses by variable type and design
+- [Research workflow](https://github.com/pskeffington/pauls_notes/blob/main/docs/research-workflow.md): protocols, reproducibility, data admission
+- [Machine learning guide](https://github.com/pskeffington/pauls_notes/blob/main/04_machine_learning/README.md): validation, models and worked examples
+- [Visual ML data guide](https://github.com/pskeffington/pauls_notes/blob/main/04_machine_learning/visual-data-guide.md): train/validation separation
+- [Rust learning course](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/rust/README.md): foundations through biomedical engineering
+- [Biomedical coding](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/README.md): research software methods
+- [Genomics resources](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/Genomics/README.md): gene biology and current worked example
+- [Literature resources](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/Literature/README.md): evidence and literature review entrypoint
+- [Research milestones](https://github.com/pskeffington/pauls_notes/blob/main/docs/roadmap-gates.md): implementation gates and evidence
+- [Machine-readable milestone ledger](https://github.com/pskeffington/pauls_notes/blob/main/docs/milestone-evidence.toml): authoritative structured status; verify current text and evidence
+
+## Agent and retrieval cautions
+- Learning examples, test passes, published evidence and clinically validated results are distinct categories.
+- Synthetic assay data must never be described as real TCGA or participant records.
+- TCGA-BRCA is an example source under study, not a blanket admission or data-access authorization.
+- Do not infer clinical accuracy, regulatory clearance, or safety from passing code tests.
+- Verify primary references and the current gate ledger before stating implementation or scientific status.
+- Never publish credentials, private records, or controlled-access participant data.
+- Prefer stable repository paths and actual source text over summaries generated from the index.
