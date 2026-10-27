@@ -80,3 +80,24 @@ python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --c
 The emitted JSONL contains exact source text, source line spans, role, relative path, section identifier and SHA-256 digest. Output is deterministic for identical tracked Markdown content, with no generated timestamp or floating `main` URL embedded in records. Attach the actual Git commit SHA and indexing timestamp in the downstream ingestion manifest. Link problems are reported but do not fail the default build; use `--strict-links` to enforce a zero-warning gate after existing documentation issues are cleaned up. The index currently uses heading-aware chunks, not bounded token-size subchunks or embeddings.
 
 The GitHub Actions workflow builds an ephemeral index and checks its deterministic replay, schema fields and unique section IDs. It does not publish or commit a generated index file. CI execution must be observed before treating this as a passing repository gate.
+
+
+## Retrieval enrichment and incremental changes (Pass 3)
+
+Run the basic builder first, then enrich its records:
+
+```bash
+python3 scripts/build_machine_index.py --output /tmp/pauls-notes-base.jsonl
+python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-base.jsonl --output /tmp/pauls-notes-enriched.jsonl
+python3 -m unittest discover -s scripts -p 'test_*machine_index.py' -v
+```
+
+Enriched records retain all base fields and add `topics`, `retrieval_terms`, `outbound_documents`, and `inbound_documents`. These are deterministic, heuristic navigation aids; they do **not** constitute formal biomedical ontology coding or independently validated citations. Cross-document edges are computed from existing local Markdown links, not inferred semantic relationships.
+
+To compare the current base index with a previous base index:
+
+```bash
+python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-base.jsonl --output /tmp/pauls-notes-enriched.jsonl --previous /tmp/previous-base.jsonl --delta-output /tmp/section-delta.json
+```
+
+The delta lists added, removed, changed and unchanged sections based on section IDs and content hashes. It reports change candidates for downstream indexing; it does not yet implement selective vector re-embedding. The CI workflow tests deterministic enrichment, but does not publish indexes or claim ontology validation. Broken links remain non-fatal unless strict link checking is requested.
