@@ -9,7 +9,7 @@ This book connects foundational scientific explanations to the actual publicatio
 ## Citation format and granularity
 
 - Substantive clinical, biological, methodological and regulatory claims should be supported with **direct inline links near the relevant claim**, supported by an explicit source list at the end of each meaningful subsection.
-- For the current draft, every `##` and `###` section in the introduction and CO-01 through CO-04 contains `**Section references:**` followed by direct HTTPS links. A machine-readable mapping preserves those associations independently of formatted prose.
+- For the current draft, every `##` and `###` section in the introduction and CO-01 through CO-05 contains `**Section references:**` followed by direct HTTPS links. A machine-readable mapping preserves those associations independently of formatted prose.
 - At least two suitable primary or authoritative sources per substantive section are preferable when the argument spans more than one domain. A single highly specific original source may be sufficient for a narrow methodological point. The validator enforces structural presence, not scientific suitability.
 - Cite original research by DOI or PubMed and official terminology/data rules by the owning standards organization. Secondary summaries may help explain background but should not be presented as the original evidence.
 - Mathematical identities and independently invented teaching exercises do not require a publication for the arithmetic itself; their **scientific interpretation and method assumptions** do require evidence when appropriate.
