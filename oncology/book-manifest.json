@@ -1,0 +1,668 @@
+{
+  "schema_version": "1.0",
+  "book_id": "pauls-notes-computational-oncology",
+  "title": "Computational Oncology: A Clinician–Scientist's Guide",
+  "canonical_roadmap": "oncology/ROADMAP.md",
+  "scope": "independent-educational-textbook",
+  "chapters_total": 60,
+  "parts": [
+    {
+      "part": 1,
+      "title": "Clinical and computational foundations",
+      "chapters": [
+        {
+          "id": "CO-01",
+          "title": "Cancer biology",
+          "status": "planned",
+          "prerequisites": [],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-02",
+          "title": "Clinical oncology data",
+          "status": "planned",
+          "prerequisites": [
+            "CO-01"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-03",
+          "title": "Molecular foundations",
+          "status": "planned",
+          "prerequisites": [
+            "CO-02"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-04",
+          "title": "Data literacy",
+          "status": "planned",
+          "prerequisites": [
+            "CO-03"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-05",
+          "title": "Essential mathematics I",
+          "status": "planned",
+          "prerequisites": [
+            "CO-04"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-06",
+          "title": "Essential mathematics II",
+          "status": "planned",
+          "prerequisites": [
+            "CO-05"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 2,
+      "title": "Probability, biostatistics and inference",
+      "chapters": [
+        {
+          "id": "CO-07",
+          "title": "Randomness and probability",
+          "status": "planned",
+          "prerequisites": [
+            "CO-06"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-08",
+          "title": "Discrete outcomes",
+          "status": "planned",
+          "prerequisites": [
+            "CO-07"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-09",
+          "title": "Continuous distributions",
+          "status": "planned",
+          "prerequisites": [
+            "CO-08"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-10",
+          "title": "Sampling",
+          "status": "planned",
+          "prerequisites": [
+            "CO-09"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-11",
+          "title": "Statistical inference",
+          "status": "planned",
+          "prerequisites": [
+            "CO-10"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-12",
+          "title": "Comparison methods",
+          "status": "planned",
+          "prerequisites": [
+            "CO-11"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-13",
+          "title": "Sample size and multiplicity",
+          "status": "planned",
+          "prerequisites": [
+            "CO-12"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 3,
+      "title": "Research design, ethics and epidemiology",
+      "chapters": [
+        {
+          "id": "CO-14",
+          "title": "Questions and protocols",
+          "status": "planned",
+          "prerequisites": [
+            "CO-13"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-15",
+          "title": "Descriptive oncology epidemiology",
+          "status": "planned",
+          "prerequisites": [
+            "CO-14"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-16",
+          "title": "Observational study designs",
+          "status": "planned",
+          "prerequisites": [
+            "CO-15"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-17",
+          "title": "Randomized trials",
+          "status": "planned",
+          "prerequisites": [
+            "CO-16"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-18",
+          "title": "Bias and generalizability",
+          "status": "planned",
+          "prerequisites": [
+            "CO-17"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-19",
+          "title": "Causal diagrams and target trials",
+          "status": "planned",
+          "prerequisites": [
+            "CO-18"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-20",
+          "title": "Screening and diagnostic accuracy",
+          "status": "planned",
+          "prerequisites": [
+            "CO-19"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-21",
+          "title": "Research ethics",
+          "status": "planned",
+          "prerequisites": [
+            "CO-20"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 4,
+      "title": "Regression and longitudinal outcomes",
+      "chapters": [
+        {
+          "id": "CO-22",
+          "title": "Linear regression",
+          "status": "planned",
+          "prerequisites": [
+            "CO-21"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-23",
+          "title": "Logistic regression",
+          "status": "planned",
+          "prerequisites": [
+            "CO-22"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-24",
+          "title": "Count and rate regression",
+          "status": "planned",
+          "prerequisites": [
+            "CO-23"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-25",
+          "title": "Survival fundamentals",
+          "status": "planned",
+          "prerequisites": [
+            "CO-24"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-26",
+          "title": "Cox models",
+          "status": "planned",
+          "prerequisites": [
+            "CO-25"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-27",
+          "title": "Repeated measures",
+          "status": "planned",
+          "prerequisites": [
+            "CO-26"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-28",
+          "title": "Penalization and nonlinear models",
+          "status": "planned",
+          "prerequisites": [
+            "CO-27"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 5,
+      "title": "Data engineering and scientific programming",
+      "chapters": [
+        {
+          "id": "CO-29",
+          "title": "R fundamentals",
+          "status": "planned",
+          "prerequisites": [
+            "CO-28"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-30",
+          "title": "Python fundamentals",
+          "status": "planned",
+          "prerequisites": [
+            "CO-29"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-31",
+          "title": "Shell Git and environments",
+          "status": "planned",
+          "prerequisites": [
+            "CO-30"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-32",
+          "title": "Relational databases and SQL",
+          "status": "planned",
+          "prerequisites": [
+            "CO-31"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-33",
+          "title": "Clinical informatics",
+          "status": "planned",
+          "prerequisites": [
+            "CO-32"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-34",
+          "title": "Data quality",
+          "status": "planned",
+          "prerequisites": [
+            "CO-33"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-35",
+          "title": "Reproducible pipelines and HPC",
+          "status": "planned",
+          "prerequisites": [
+            "CO-34"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-36",
+          "title": "Scientific visualization",
+          "status": "planned",
+          "prerequisites": [
+            "CO-35"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 6,
+      "title": "Genomics and multimodal cancer biology",
+      "chapters": [
+        {
+          "id": "CO-37",
+          "title": "Sequencing and assay design",
+          "status": "planned",
+          "prerequisites": [
+            "CO-36"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-38",
+          "title": "RNA sequencing",
+          "status": "planned",
+          "prerequisites": [
+            "CO-37"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-39",
+          "title": "Mutation and copy number",
+          "status": "planned",
+          "prerequisites": [
+            "CO-38"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-40",
+          "title": "Pathway analysis",
+          "status": "planned",
+          "prerequisites": [
+            "CO-39"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-41",
+          "title": "Single-cell and spatial omics",
+          "status": "planned",
+          "prerequisites": [
+            "CO-40"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-42",
+          "title": "Cancer imaging and pathology",
+          "status": "planned",
+          "prerequisites": [
+            "CO-41"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 7,
+      "title": "Statistical learning and predictive modeling",
+      "chapters": [
+        {
+          "id": "CO-43",
+          "title": "Prediction tasks",
+          "status": "planned",
+          "prerequisites": [
+            "CO-42"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-44",
+          "title": "Preprocessing and partitions",
+          "status": "planned",
+          "prerequisites": [
+            "CO-43"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-45",
+          "title": "Classical ML models",
+          "status": "planned",
+          "prerequisites": [
+            "CO-44"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-46",
+          "title": "Unsupervised learning",
+          "status": "planned",
+          "prerequisites": [
+            "CO-45"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-47",
+          "title": "Feature selection and tuning",
+          "status": "planned",
+          "prerequisites": [
+            "CO-46"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-48",
+          "title": "Model evaluation",
+          "status": "planned",
+          "prerequisites": [
+            "CO-47"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 8,
+      "title": "Deep learning and applied AI",
+      "chapters": [
+        {
+          "id": "CO-49",
+          "title": "Neural networks",
+          "status": "planned",
+          "prerequisites": [
+            "CO-48"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-50",
+          "title": "Imaging models",
+          "status": "planned",
+          "prerequisites": [
+            "CO-49"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-51",
+          "title": "Clinical NLP",
+          "status": "planned",
+          "prerequisites": [
+            "CO-50"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-52",
+          "title": "Language models and RAG",
+          "status": "planned",
+          "prerequisites": [
+            "CO-51"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-53",
+          "title": "Agents and human oversight",
+          "status": "planned",
+          "prerequisites": [
+            "CO-52"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-54",
+          "title": "Multimodal AI and monitoring",
+          "status": "planned",
+          "prerequisites": [
+            "CO-53"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 9,
+      "title": "Scientific translation and communication",
+      "chapters": [
+        {
+          "id": "CO-55",
+          "title": "Evidence appraisal",
+          "status": "planned",
+          "prerequisites": [
+            "CO-54"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-56",
+          "title": "Scientific writing",
+          "status": "planned",
+          "prerequisites": [
+            "CO-55"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-57",
+          "title": "Clinical interpretation",
+          "status": "planned",
+          "prerequisites": [
+            "CO-56"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    },
+    {
+      "part": 10,
+      "title": "Independent research laboratory",
+      "chapters": [
+        {
+          "id": "CO-58",
+          "title": "Protocol lab",
+          "status": "planned",
+          "prerequisites": [
+            "CO-57"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-59",
+          "title": "Reproducibility lab",
+          "status": "planned",
+          "prerequisites": [
+            "CO-58"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        },
+        {
+          "id": "CO-60",
+          "title": "Final research monograph",
+          "status": "planned",
+          "prerequisites": [
+            "CO-59"
+          ],
+          "evidence_status": "not-reviewed",
+          "chapter_path": null
+        }
+      ]
+    }
+  ]
+}
