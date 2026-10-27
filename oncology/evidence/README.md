@@ -29,6 +29,7 @@ This book connects foundational scientific explanations to the actual publicatio
 - `clinical-reference`: clinical definitions and institutional guidelines, with version/scope checks.
 - `authoritative-overview`: established background and definitions, not disease-specific treatment protocols.
 - `technical-specification`: file types, data lineage, processing contracts and documentation.
+- `open-textbook`: publicly accessible educational explanations of general mathematics; independently authored chapter examples and derivations remain required.
 - `peer-reviewed-method`: a published analytical framework, not proof of its suitability in every dataset.
 - `peer-reviewed-review`: conceptual synthesis and competing interpretations.
 - `reporting-guideline`: transparency standards, **not** independent validation of a study.
