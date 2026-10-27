@@ -1,0 +1,65 @@
+# Machine-readable discovery and indexing contract
+
+This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
+
+## Canonical navigation
+
+| Topic key | Entrypoint | Content role | Data boundary |
+| --- | --- | --- | --- |
+| oncology.scope | `docs/cancer-research-scope.md` | research scope | general educational content |
+| research.protocol | `docs/research-workflow.md` | study design and admission | verify dataset-specific permissions |
+| statistics.select | `03_learning/biomedical-statistics-decision-guide.md` | test selection | teaching, not an analysis of a patient cohort |
+| statistics.practice | `03_learning/statistics-practice-workbook.md` | practice | educational examples |
+| ml.overview | `04_machine_learning/README.md` | method hub | inspect each example's evidence |
+| ml.visual | `04_machine_learning/visual-data-guide.md` | training explanation | teaching case |
+| ml.tuning | `04_machine_learning/model-tuning.md` | tuning and evaluation | do not equate test runs with validation |
+| ml.survival | `04_machine_learning/survival-protocol.md` | survival protocol | consult milestone status before claims |
+| genomics.book | `06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md` | teaching narrative | not patient-level observations |
+| literature.stats | `06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md` | evidence guide | check cited originals |
+| rust.course | `03_learning/rust/README.md` | language instruction | teaching and engineering |
+| rust.practices | `02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md` | engineering guidance | not a clinical assurance |
+| milestones | `docs/milestone-evidence.toml` | machine-readable delivery state | authoritative only within recorded scope |
+
+## Retrieval rules
+
+1. First retrieve this discovery document or `llms.txt`; identify the best matching topic key.
+2. Retrieve the linked original file and its immediate linked protocol or evidence record. Never answer solely from an index summary.
+3. Record repository URL, commit SHA, relative path, heading and retrieval date for every cited claim. Build a section ID as `<relative-path>#<heading-slug>`; retain the commit SHA separately.
+4. Chunk Markdown along heading boundaries (not arbitrary page lengths). Preserve parent headings, tables, code fences, captions and their nearby explanatory text. Keep citations attached to the claim they support.
+5. Label chunks by evidence role: `instruction`, `protocol`, `literature`, `example`, `source_code`, `test`, `status` or `template`. A label is a retrieval classification, not a quality grade.
+6. Keep status from `docs/milestone-evidence.toml` separate from narrative descriptions. If source and status appear inconsistent, disclose the conflict rather than silently promoting a planned gate to completed.
+7. Exclude `.git`, caches, virtual environments, generated plots, large binaries, datasets and secrets from text embedding by default. Analyze code/test files only when the task calls for their implementation details.
+8. Treat links and external papers as references requiring independent verification; do not infer that a citation alone confirms the text's interpretation.
+9. Preserve source version and re-index on new commits. Do not deduplicate across distinct protocols solely because their text is similar.
+10. Refuse to index personally identifiable, protected, controlled-access or credential data into a public search layer.
+
+## Recommended search record
+
+Each indexed section should carry:
+```json
+{
+  "schema_version": "1.0",
+  "repository": "pskeffington/pauls_notes",
+  "commit_sha": "<actual indexed commit SHA>",
+  "path": "03_learning/biomedical-statistics-decision-guide.md",
+  "heading": "<actual source heading>",
+  "section_id": "03_learning/biomedical-statistics-decision-guide.md#<heading-slug>",
+  "role": "instruction",
+  "content_sha256": "<SHA-256 of exact indexed section>",
+  "source_url": "https://github.com/pskeffington/pauls_notes/blob/<commit-sha>/03_learning/biomedical-statistics-decision-guide.md",
+  "retrieved_at": "<ISO-8601 timestamp>"
+}
+```
+Populate placeholders from the document actually fetched; do not persist placeholders as real records.
+
+## Recommended automation gates
+
+- Confirm paths and anchor targets exist at the selected commit.
+- Fail index builds for duplicate `(commit_sha, section_id)` identifiers or missing provenance fields.
+- Report broken internal links and newly orphaned Markdown documents.
+- Track added, changed and removed files between commits using content digests.
+- Validate JSON output against a versioned schema before publication.
+- Check public-index inputs against privacy and secret-scanning controls.
+- Recheck human-readable claims against the milestone ledger after major releases.
+
+This is a discovery and governance contract. It does not claim an automated index generator or CI validator is already installed.
