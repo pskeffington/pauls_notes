@@ -75,7 +75,7 @@ Assay metadata must identify platform, reference/annotation version, protocol, p
 
 The gene **ESR1** encodes estrogen receptor alpha; clinical estrogen-receptor status is assessed through specified diagnostic procedures, commonly protein-based immunohistochemical testing. **ERBB2** encodes HER2, a receptor involved in growth signaling. HER2 status is determined using established clinical testing and interpretation frameworks, including protein expression and, when appropriate, gene amplification assessment.
 
-A molecular data table may include `ESR1_expression` and `ERBB2_expression`. Those numerical values are not automatically equivalent to clinical `ER_status` or `HER2_status`. Such equivalence requires independently established assay-specific interpretation; thresholds from one platform or study cannot be transferred without validation.
+A molecular data table may include `ESR1_expression` and `ERBB2_expression`; the [NCI breast cancer biomarker reference](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests) explains why clinical receptor status relies on defined diagnostic assays. Those numerical values are not automatically equivalent to clinical `ER_status` or `HER2_status`. Such equivalence requires independently established assay-specific interpretation; thresholds from one platform or study cannot be transferred without validation.
 
 This distinction also matters for treatment-effect prediction. If patients with higher ESR1 RNA levels have better recorded outcomes, the observation alone does not establish that a particular therapy causes the benefit or that an RNA cutoff should guide care. The analysis must account for disease context, treatments, outcome definitions, confounding, and evidence about comparative treatment effects.
 
@@ -96,11 +96,11 @@ A simplified bulk RNA-seq analysis has the following conceptual stages:
 7. Estimate an effect and its uncertainty, accounting for study design and multiple comparisons.
 8. Review biological interpretation and evaluate generalization to independent material.
 
-The NCI GDC pipeline provides raw gene-level counts as well as transformed representations, including FPKM and TPM. These have different definitions and uses; do not provide TPM as input to a differential-expression method that expects untransformed counts without a methodologically justified alternative.
+The [NCI GDC mRNA pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/) provides raw gene-level counts as well as transformed representations, including FPKM and TPM. These have different definitions and uses; do not provide TPM as input to a differential-expression method that expects untransformed counts without a methodologically justified alternative.
 
 For illustration, let `K[i,j]` be the nonnegative integer read count for gene *i* in specimen *j*. The specimen is a column in the usual gene-by-sample count matrix. The biological replicate count is determined by independent participants or experimental units, not the number of sequenced reads.
 
-A standard negative-binomial differential-expression framework often expresses count variation through a mean and dispersion, with normalization for sequencing exposure and design-specific predictors. DESeq2 is one well-documented example; its original methods paper should be read together with current versioned package documentation. This chapter does not implement or validate a complete DESeq2 analysis.
+A standard negative-binomial differential-expression framework often expresses count variation through a mean and dispersion, with normalization for sequencing exposure and design-specific predictors. [DESeq2](https://doi.org/10.1186/s13059-014-0550-8) is one well-documented example; its original methods paper should be read together with current versioned package documentation. This chapter does not implement or validate a complete DESeq2 analysis.
 
 **Section references:** [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/) · [Love et al., DESeq2 (2014)](https://doi.org/10.1186/s13059-014-0550-8)
 
