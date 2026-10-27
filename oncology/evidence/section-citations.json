@@ -264,6 +264,81 @@
           "TRIPOD-AI"
         ]
       }
+    },
+    {
+      "path": "oncology/chapters/CO-05-essential-mathematics-i.md",
+      "citations": {
+        "Why mathematics belongs in oncology research": [
+          "SEER-INCIDENCE",
+          "CDC-RATE"
+        ],
+        "Learning objectives and starting assumptions": [
+          "NIST-CONVERSION",
+          "CDC-RATE"
+        ],
+        "1. Variables, equations and rearrangement": [
+          "SEER-INCIDENCE",
+          "NIST-CONVERSION"
+        ],
+        "2. Ratios, proportions and percentages": [
+          "CDC-RATE",
+          "RECIST"
+        ],
+        "3. Absolute and relative comparisons": [
+          "CDC-RATE",
+          "STROBE"
+        ],
+        "4. Population rates, person-time rates and risk": [
+          "SEER-INCIDENCE",
+          "CDC-PERSONTIME",
+          "SEER-STAT-TYPES"
+        ],
+        "5. Units, conversion and measurement precision": [
+          "NIST-CONVERSION",
+          "NIST-SI"
+        ],
+        "6. Powers, exponentials and logarithms": [
+          "GDC-RNA",
+          "DESEQ2"
+        ],
+        "7. Log2 fold change for molecular measurements": [
+          "GDC-RNA",
+          "DESEQ2"
+        ],
+        "8. Exponential models: useful mathematics, limited biology": [
+          "NCI-CANCER",
+          "HALLMARKS"
+        ],
+        "9. Standardized values without diagnostic overreach": [
+          "TRIPOD-AI",
+          "LEAKAGE"
+        ],
+        "10. Integrated worked case: three incompatible denominators": [
+          "SEER-INCIDENCE",
+          "CDC-PERSONTIME",
+          "STROBE"
+        ],
+        "11. Reproducible exercises in Python and R": [
+          "NIST-CONVERSION",
+          "CDC-RATE",
+          "GDC-RNA"
+        ],
+        "12. Original mastery exercises": [
+          "CDC-RATE",
+          "NIST-CONVERSION",
+          "GDC-RNA"
+        ],
+        "13. Answer key, interpretation and common failures": [
+          "CDC-RATE",
+          "CDC-PERSONTIME",
+          "DESEQ2"
+        ],
+        "14. Evidence boundaries and progression": [
+          "SEER-INCIDENCE",
+          "NIST-CONVERSION",
+          "GDC-RNA"
+        ]
+      }
     }
   ]
 }
