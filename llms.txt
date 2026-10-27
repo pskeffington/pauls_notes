@@ -9,6 +9,12 @@ Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/m
 - [Book navigation](https://github.com/pskeffington/pauls_notes/blob/main/oncology/README.md): canonical reader entrypoint
 - [Purpose-led introduction](https://github.com/pskeffington/pauls_notes/blob/main/oncology/INTRODUCTION.md): why oncology research and why these methods
 - [CO-01 cancer biology](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-01-cancer-biology.md): draft first chapter
+- [CO-02 clinical oncology data](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-02-clinical-oncology-data.md): draft clinical endpoints and data schema
+- [CO-03 molecular foundations](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-03-molecular-foundations.md): draft omics and biomarker interpretation
+- [CO-04 data literacy](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-04-data-literacy.md): draft observation grains and leakage controls
+- [Section source register](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/source-registry.json): direct evidence URLs and claim scope
+- [Section citation index](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/section-citations.json): H2/H3 source crosswalk
+- [Evidence policy](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/README.md): scientific and editorial citation gates
 - [Book manifest](https://github.com/pskeffington/pauls_notes/blob/main/oncology/book-manifest.json): 60 chapter IDs, paths, statuses and prerequisites
 - [Textbook roadmap](https://github.com/pskeffington/pauls_notes/blob/main/oncology/ROADMAP.md): architecture and milestones
 
