@@ -204,7 +204,7 @@ For coverage verification only, check that the finished manuscript teaches mathe
 The introduction and CO-01 through CO-04 are drafted and carry direct section-level evidence links; chapters CO-05 through CO-60 remain planned. This is **B1 authoring in progress**, not a completed or peer-reviewed book.
 
 - [Reader navigation](README.md) lists the actual authored chapters rather than placeholder links.
-- [Source register](evidence/source-registry.json) records curated primary and authoritative evidence URLs.
+- [Source register](evidence/source-registry.json) records curated primary and authoritative evidence URLs; the [readable bibliography](evidence/SOURCES.md) groups those links by scientific role.
 - [Section citation crosswalk](evidence/section-citations.json) maps every H2/H3 heading in the five drafted manuscript documents to external evidence sources.
 - [Evidence and editorial policy](evidence/README.md) distinguishes structural citation coverage from claim-level scholarly review.
 - [Automated citation validation](../scripts/validate_oncology_citations.py) fails when new manuscript sections lack a mapped, direct linked reference or cite an unknown source.
