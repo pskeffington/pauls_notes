@@ -69,12 +69,20 @@
         {
           "id": "CO-06",
           "title": "Essential mathematics II",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [
             "CO-05"
           ],
-          "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "evidence_status": "section-linked-unreviewed",
+          "chapter_path": "oncology/chapters/CO-06-essential-mathematics-ii.md",
+          "lab_paths": [
+            "oncology/examples/oncology_calculus.py",
+            "oncology/examples/oncology_calculus.R"
+          ],
+          "test_paths": [
+            "scripts/test_oncology_calculus.py"
+          ],
+          "execution_status": "source-and-synthetic-reference-checked-awaiting-runtime-ci"
         }
       ]
     },
