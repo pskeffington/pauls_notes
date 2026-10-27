@@ -13,7 +13,8 @@ This page is for search systems, RAG pipelines, documentation harvesters and aut
 | book.chapter.03 | `oncology/chapters/CO-03-molecular-foundations.md` | textbook chapter | draft; not independently reviewed |
 | book.chapter.04 | `oncology/chapters/CO-04-data-literacy.md` | textbook chapter | draft; not independently reviewed |
 | book.chapter.05 | `oncology/chapters/CO-05-essential-mathematics-i.md` | textbook chapter | draft; arithmetic labs added; independent review pending |
-| book.chapter.06 | `oncology/chapters/CO-06-essential-mathematics-ii.md` | textbook chapter | draft; calculus and linear algebra labs added; review pending |
+| book.chapter.06 | `oncology/chapters/CO-06-essential-mathematics-ii.md` | textbook chapter | draft; Python local validation passed, R/CI pending |
+| book.validation.06 | `oncology/evidence/CO-06-VALIDATION-2026-10-27.md` | technical evidence report | precise scope and outstanding checks |
 | book.labs | `oncology/examples/README.md` | executable lab navigation | synthetic inputs only |
 | book.citations | `oncology/evidence/section-citations.json` | section-to-source map | structural links only |
 | book.references | `oncology/evidence/source-registry.json` | linked source metadata | does not prove claim-level validity |
