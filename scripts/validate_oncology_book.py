@@ -32,6 +32,22 @@ def validate(root=ROOT):
             resolved = (root / path).resolve()
             if not resolved.is_relative_to((root / "oncology").resolve()) or not resolved.is_file():
                 problems.append(f"invalid chapter_path: {c['id']}")
+        for field, expected_directory, allowed_extensions in (
+            ("lab_paths", "oncology/examples", {".py", ".R"}),
+            ("test_paths", "scripts", {".py"}),
+        ):
+            values = c.get(field, [])
+            if not isinstance(values, list) or len(values) != len(set(values)) or any(
+                not isinstance(value, str) for value in values
+            ):
+                problems.append(f"invalid {field}: {c['id']}")
+                continue
+            for value in values:
+                target = (root / value).resolve()
+                if not target.is_relative_to((root / expected_directory).resolve()) or (
+                    target.suffix not in allowed_extensions or not target.is_file()
+                ):
+                    problems.append(f"missing/unsafe {field}: {c['id']} {value}")
         if any(pr not in ids for pr in c.get("prerequisites", [])):
             problems.append(f"unknown prerequisite: {c['id']}")
         if c["id"] in c.get("prerequisites", []):
