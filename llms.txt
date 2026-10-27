@@ -5,6 +5,13 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
+## Computational Oncology textbook
+- [Book navigation](https://github.com/pskeffington/pauls_notes/blob/main/oncology/README.md): canonical reader entrypoint
+- [Purpose-led introduction](https://github.com/pskeffington/pauls_notes/blob/main/oncology/INTRODUCTION.md): why oncology research and why these methods
+- [CO-01 cancer biology](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-01-cancer-biology.md): draft first chapter
+- [Book manifest](https://github.com/pskeffington/pauls_notes/blob/main/oncology/book-manifest.json): 60 chapter IDs, paths, statuses and prerequisites
+- [Textbook roadmap](https://github.com/pskeffington/pauls_notes/blob/main/oncology/ROADMAP.md): architecture and milestones
+
 ## Primary routes
 - [Cancer research scope](https://github.com/pskeffington/pauls_notes/blob/main/docs/cancer-research-scope.md): broad oncology use cases and boundaries
 - [Biomedical statistics decision guide](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/biomedical-statistics-decision-guide.md): select analyses by variable type and design
