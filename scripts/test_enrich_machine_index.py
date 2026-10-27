@@ -24,6 +24,17 @@ class EnrichmentTests(unittest.TestCase):
         rows = [item("README.md", "Root", "[X](https://example.org) [Y](#local) [Z](missing.md)")]
         self.assertEqual(mod.enrich(rows)[0]["outbound_documents"], [])
 
+    def test_scientific_section_citation_ids_are_joined_without_guessing(self):
+        path = "oncology/chapters/CO-05-essential-mathematics-i.md"
+        rows = [item(path, "4. Population rates, person-time rates and risk", "rates"),
+                item("README.md", "Introduction", "background")]
+        mapping = {path: {"4. Population rates, person-time rates and risk":
+                          ["SEER-INCIDENCE", "CDC-PERSONTIME"]}}
+        enriched = mod.enrich(rows, mapping)
+        self.assertEqual(enriched[0]["citation_ids"], ["SEER-INCIDENCE", "CDC-PERSONTIME"])
+        self.assertEqual(enriched[1]["citation_ids"], [])
+        self.assertEqual(enriched, mod.enrich(rows, mapping))
+
     def test_delta_added_removed_changed(self):
         old = [item("a.md", "a", "", "one"), item("b.md", "b", "", "old"), item("d.md", "d", "", "same")]
         new = [item("b.md", "b", "", "new"), item("c.md", "c", "", "yes"), item("d.md", "d", "", "same")]
