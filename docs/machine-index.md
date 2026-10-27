@@ -101,3 +101,9 @@ python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-base.jsonl --ou
 ```
 
 The delta lists added, removed, changed and unchanged sections based on section IDs and content hashes. It reports change candidates for downstream indexing; it does not yet implement selective vector re-embedding. The CI workflow tests deterministic enrichment, but does not publish indexes or claim ontology validation. Broken links remain non-fatal unless strict link checking is requested.
+
+## Pass 4: Curated research methods
+
+The [method registry](research-method-map.json) gives stable keys to selected teaching methods and links them to the statistics guide and literature identifiers. The [validator](../scripts/validate_research_methods.py) checks method ID uniqueness, source paths, and whether referenced BS literature identifiers appear in the current curated reading list. An empty evidence list means no publication-level relationship has been curated; it does not imply the method lacks evidence.
+
+Run `python3 scripts/validate_research_methods.py` and `python3 -m unittest discover -s scripts -p 'test_research_method_registry.py' -v`. CI runs both on changes to the registry or validator. A registry record is a navigation pointer, not proof that a particular publication supports every implementation choice. Direct links to specific assumptions, code implementations, and verified study-level evidence remain future enrichment work.
