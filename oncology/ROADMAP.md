@@ -201,7 +201,7 @@ For coverage verification only, check that the finished manuscript teaches mathe
 
 ## Draft publication and citation coverage snapshot — 2026-10-27
 
-The introduction and CO-01 through CO-04 are drafted and carry direct section-level evidence links; chapters CO-05 through CO-60 remain planned. This is **B1 authoring in progress**, not a completed or peer-reviewed book.
+The introduction and CO-01 through CO-05 are drafted and carry direct section-level evidence links; chapters CO-06 through CO-60 remain planned. This is **B1 authoring in progress**, not a completed or peer-reviewed book.
 
 - [Reader navigation](README.md) lists the actual authored chapters rather than placeholder links.
 - [Source register](evidence/source-registry.json) records curated primary and authoritative evidence URLs; the [readable bibliography](evidence/SOURCES.md) groups those links by scientific role.
