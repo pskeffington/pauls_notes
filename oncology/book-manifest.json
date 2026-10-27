@@ -15,38 +15,38 @@
           "title": "Cancer biology",
           "status": "draft",
           "prerequisites": [],
-          "evidence_status": "not-reviewed",
+          "evidence_status": "section-linked-unreviewed",
           "chapter_path": "oncology/chapters/CO-01-cancer-biology.md"
         },
         {
           "id": "CO-02",
           "title": "Clinical oncology data",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [
             "CO-01"
           ],
-          "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "evidence_status": "section-linked-unreviewed",
+          "chapter_path": "oncology/chapters/CO-02-clinical-oncology-data.md"
         },
         {
           "id": "CO-03",
           "title": "Molecular foundations",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [
             "CO-02"
           ],
-          "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "evidence_status": "section-linked-unreviewed",
+          "chapter_path": "oncology/chapters/CO-03-molecular-foundations.md"
         },
         {
           "id": "CO-04",
           "title": "Data literacy",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [
             "CO-03"
           ],
-          "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "evidence_status": "section-linked-unreviewed",
+          "chapter_path": "oncology/chapters/CO-04-data-literacy.md"
         },
         {
           "id": "CO-05",
@@ -666,5 +666,8 @@
     }
   ],
   "introduction_path": "oncology/INTRODUCTION.md",
-  "navigation_path": "oncology/README.md"
+  "navigation_path": "oncology/README.md",
+  "introduction_status": "draft",
+  "source_registry_path": "oncology/evidence/source-registry.json",
+  "section_citations_path": "oncology/evidence/section-citations.json"
 }
