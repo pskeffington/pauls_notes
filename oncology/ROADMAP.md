@@ -210,3 +210,11 @@ The introduction and CO-01 through CO-06 are drafted and carry direct section-le
 - [Automated citation validation](../scripts/validate_oncology_citations.py) fails when new manuscript sections lack a mapped, direct linked reference or cite an unknown source.
 
 **Editorial requirement:** Source links must be placed near the claims they support and verified in context before any chapter advances beyond draft status. A cited reporting guideline is not evidence of a successful clinical study or verified model.
+
+## CO-06 validation milestone — 2026-10-27
+
+The [CO-06 calculus, matrices and optimization draft](chapters/CO-06-essential-mathematics-ii.md) now has independent [Python/R teaching implementations](examples/README.md), a [recorded local verification pass](evidence/CO-06-VALIDATION-2026-10-27.md), and registered source links. The Python code and regression tests were hash-matched to their GitHub blobs, compiled and executed: **five tests passed**. A separate arithmetic replay confirmed the least-squares solution, gradients, convergence and trapezoidal area. The R runtime and a successful remote CI run remain unverified; the chapter remains **draft**.
+
+The October 27 read-back found **60 registered chapters, six drafts, seven citation-mapped manuscript documents, 93 mapped H2/H3 sections, 194 section/source assignments and 36 registered sources**, with no observed structural citation mismatches. These are indexing facts, not completed scholarly peer review.
+
+**Next manuscript gate: CO-07 — Randomness and Probability.** Develop sample spaces and events, conditional probability, Bayes' theorem, independence, disease-screening base-rate examples, reproducible discrete simulations, and method-aware citations. Link those foundations to CO-08 binomial and Poisson outcomes and retain the same synthetic-data, independent-review and validation boundaries.
