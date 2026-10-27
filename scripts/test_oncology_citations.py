@@ -23,7 +23,7 @@ class CitationCoverageTests(unittest.TestCase):
     def test_missing_inline_link_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            for relative in (module.SOURCES, module.COVERAGE, module.MANIFEST):
+            for relative in (module.SOURCES, module.COVERAGE, module.MANIFEST, module.SOURCE_INDEX):
                 destination = root / relative
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(module.ROOT / relative, destination)
@@ -40,7 +40,7 @@ class CitationCoverageTests(unittest.TestCase):
     def test_unmapped_new_section_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            for relative in (module.SOURCES, module.COVERAGE, module.MANIFEST):
+            for relative in (module.SOURCES, module.COVERAGE, module.MANIFEST, module.SOURCE_INDEX):
                 destination = root / relative
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(module.ROOT / relative, destination)
