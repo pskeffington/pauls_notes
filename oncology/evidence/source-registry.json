@@ -186,6 +186,54 @@
       "kind": "editorial-standard",
       "supports": "Medical research writing, reporting and source responsibility",
       "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "SEER-INCIDENCE",
+      "title": "SEER: Cancer Incidence Rates",
+      "url": "https://seer.cancer.gov/statistics/types/incidence.html",
+      "kind": "authoritative-overview",
+      "supports": "Distinguishes new cancer counts, population-based incidence rates, age adjustment and population definitions",
+      "verification": "Official source page inspected for this chapter; clinical claim review pending"
+    },
+    {
+      "id": "SEER-STAT-TYPES",
+      "title": "SEER: Defining Cancer Statistics",
+      "url": "https://seer.cancer.gov/statistics/types.html",
+      "kind": "authoritative-overview",
+      "supports": "Incidence, mortality, prevalence, survival and lifetime-risk measures are distinct",
+      "verification": "Official source page inspected for this chapter; clinical claim review pending"
+    },
+    {
+      "id": "CDC-RATE",
+      "title": "CDC: Principles of Epidemiology, Frequency Measures",
+      "url": "https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson3/section1.html",
+      "kind": "authoritative-overview",
+      "supports": "Ratio versus proportion and rate; event numerator and population denominator",
+      "verification": "Official source page inspected for this chapter; chapter review pending"
+    },
+    {
+      "id": "CDC-PERSONTIME",
+      "title": "CDC: Principles of Epidemiology, Measures of Risk",
+      "url": "https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson3/section2.html",
+      "kind": "authoritative-overview",
+      "supports": "Incidence proportion versus person-time incidence rate and denominator requirements",
+      "verification": "Official source page inspected for this chapter; chapter review pending"
+    },
+    {
+      "id": "NIST-CONVERSION",
+      "title": "NIST: Unit Conversion",
+      "url": "https://www.nist.gov/pml/owm/metric-si/unit-conversion",
+      "kind": "technical-specification",
+      "supports": "Unit conversions, conversion factors, dimensional checks, significant digits and final rounding",
+      "verification": "Official source page inspected for this chapter; chapter review pending"
+    },
+    {
+      "id": "NIST-SI",
+      "title": "NIST: Writing with SI Units",
+      "url": "https://www.nist.gov/pml/owm/writing-si-metric-system-units",
+      "kind": "technical-specification",
+      "supports": "Proper SI unit notation, precision and communication conventions",
+      "verification": "Official source page inspected for this chapter; chapter review pending"
     }
   ]
 }
