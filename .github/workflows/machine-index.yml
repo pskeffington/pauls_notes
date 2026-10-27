@@ -65,8 +65,8 @@ jobs:
         run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
       - name: Enrich and verify retrieval metadata
         run: |
-          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched.jsonl
-          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched-replay.jsonl
+          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched.jsonl --section-citations oncology/evidence/section-citations.json
+          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched-replay.jsonl --section-citations oncology/evidence/section-citations.json
           cmp /tmp/pauls-notes-enriched.jsonl /tmp/pauls-notes-enriched-replay.jsonl
       - name: Verify deterministic replay
         run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
