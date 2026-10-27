@@ -14,6 +14,7 @@ This page is for search systems, RAG pipelines, documentation harvesters and aut
 | book.chapter.04 | `oncology/chapters/CO-04-data-literacy.md` | textbook chapter | draft; not independently reviewed |
 | book.citations | `oncology/evidence/section-citations.json` | section-to-source map | structural links only |
 | book.references | `oncology/evidence/source-registry.json` | linked source metadata | does not prove claim-level validity |
+| book.bibliography | `oncology/evidence/SOURCES.md` | reader-facing linked references | verified routes, not scientific sign-off |
 | book.evidence.policy | `oncology/evidence/README.md` | editorial standards | independent review required |
 | book.manifest | `oncology/book-manifest.json` | chapter inventory | CO-01 through CO-04 have draft manuscript paths |
 | book.roadmap | `oncology/ROADMAP.md` | authoring milestones | plans are not completed chapters |
