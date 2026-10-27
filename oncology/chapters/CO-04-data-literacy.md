@@ -11,6 +11,8 @@ Data literacy begins before statistics. It asks: *Who or what was observed? Why 
 
 **Guiding question:** How can a researcher turn complex oncology records into correct, auditable units of analysis?
 
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Kapoor and Narayanan: Data Leakage (2023)](https://doi.org/10.1016/j.patter.2023.100804)
+
 ## Learning objectives
 
 Upon completing this chapter, the reader should be able to:
@@ -22,6 +24,8 @@ Upon completing this chapter, the reader should be able to:
 6. Explain why participant-based data partitions are essential when predicting outcomes for new people.
 7. Recognize common temporal leakage and selection mechanisms.
 8. Run and interpret a minimal, dependency-free synthetic data-integrity lab.
+
+**Section references:** [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/) · [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/)
 
 ## 1. Four units that must not be conflated
 
@@ -49,6 +53,8 @@ Study population (eligible people)
 
 The lines express **relationships**, not a claim that every oncology system has the same database structure.
 
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [Kapoor and Narayanan: Data Leakage (2023)](https://doi.org/10.1016/j.patter.2023.100804)
+
 ## 2. How counts change with the question
 
 Consider six independent people who contribute nine tissue specimens. Let `N_people = 6` and `N_specimens = 9`. If the question is the proportion of *patients* with a baseline assay result, the eligible patient count is the natural denominator. If the question is the fraction of *specimens* with sufficient sequencing quality, the specimen count may be appropriate.
@@ -56,6 +62,8 @@ Consider six independent people who contribute nine tissue specimens. Let `N_peo
 An estimate based on nine rows can be valid for a specimen-level estimand while invalid for an independent-person estimand. Replication in the laboratory, multiple cells, multiple lesions and repeated visits can supply information without creating additional independent patients.
 
 **Statistical consequence:** If correlated observations are analyzed as independent, reported uncertainty may be understated. The appropriate remedy depends on design: participant-level aggregation, clustered estimation, hierarchical models, repeated-measures methods or an explicitly justified sampling/weighting strategy. Blindly deleting duplicates is not a general solution.
+
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
 
 ## 3. Measurement scales and variable roles
 
@@ -74,6 +82,8 @@ A variable is not defined solely by its storage type. For example, `stage = 2` m
 
 A column can also change **role** across research questions. ER status might be an outcome in one validation study, an explanatory covariate in a prognosis model and a treatment-effect modifier in a randomized trial. A statistical method must be chosen for the intended question, not simply from the column name.
 
+**Section references:** [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
+
 ## 4. What a data dictionary must record
 
 Every analysis-ready variable should have, at minimum:
@@ -87,6 +97,8 @@ Every analysis-ready variable should have, at minimum:
 - Intended analytic role and any known limitations.
 
 For example, the derived flag `baseline_assay_available` cannot simply mean “this person has any assay row.” It must specify the qualifying specimen type and time window. A result measured after treatment or after the outcome is not necessarily an eligible baseline predictor.
+
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
 
 ## 5. Keys, joins and record multiplicity
 
@@ -109,6 +121,8 @@ Example:
 
 In SQL, `COUNT(*)` answers how many rows remain; `COUNT(DISTINCT person_id)` answers how many distinct people are represented. Neither alone proves the join is correct.
 
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
+
 ## 6. Missingness is information about observation
 
 Three common conceptual missing-data categories are:
@@ -120,6 +134,8 @@ These are modeling assumptions, not labels one can usually establish from a simp
 
 Always distinguish a missing biomarker measurement, a failed assay, a clinically not-indicated test and a missing follow-up endpoint. A row with no event documentation is not automatically event-free. Record observation windows and why each record entered or left the analysis.
 
+**Section references:** [Sterne et al., Missing Data (2009)](https://pubmed.ncbi.nlm.nih.gov/19564179/) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
+
 ## 7. Time, eligibility and information leakage
 
 In oncology research, whether data occur **before** or **after** a specified origin can determine if they are appropriate predictors.
@@ -129,6 +145,8 @@ Suppose the research aim is to predict recurrence from measurements available at
 A related problem occurs when splitting high-dimensional datasets into training and testing subsets. If multiple specimens from one patient cross the split boundary, apparent generalization may be contaminated by within-person similarities. Train/test separation should follow the intended generalization unit and pre-specified study design.
 
 **Contrast:** A model intended to predict future *specimens from already-known people* may legitimately have a different design than one intended to generalize to entirely new patients. The validation scheme must match the claim.
+
+**Section references:** [Kapoor and Narayanan: Data Leakage (2023)](https://doi.org/10.1016/j.patter.2023.100804) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
 
 ## 8. Worked lab: six invented people, nine specimens
 
@@ -152,11 +170,15 @@ Expected core counts:
 
 The script validates specimen ID uniqueness, valid parent references, dates, boolean flags and partition names, and emits a transparent JSON summary. These are **engineering assertions** on a synthetic fixture, not a statistical result or clinical validation.
 
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Kapoor and Narayanan: Data Leakage (2023)](https://doi.org/10.1016/j.patter.2023.100804)
+
 ### Hand calculation
 
 The proportion of people with a baseline assay in this invented roster is `5 / 6`, approximately `0.833` (83.3%). It is not `8 / 9` or `5 / 9`, because the estimand is person-level availability. Conversely, the question “what fraction of nine specimen records have a successful assay?” requires specimen-level counting.
 
 For a genuine study, even these simple descriptive proportions require a clear sampling frame and a defensible definition of eligibility; do not generalize them from this artificial exercise.
+
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
 
 ## 9. Worked design challenge: choosing the split
 
@@ -171,6 +193,8 @@ Before accepting this plan, require the investigator to state:
 6. Which held-out performance and uncertainty measures address the clinical estimand.
 
 For new-patient prediction, a person-disjoint outer assessment is the baseline requirement; external-site or temporal testing may be necessary for stronger claims. A held-out test set does not alone prove transportability or clinical usefulness.
+
+**Section references:** [Kapoor and Narayanan: Data Leakage (2023)](https://doi.org/10.1016/j.patter.2023.100804) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
 
 ## 10. Mastery exercises and answer guide
 
@@ -192,6 +216,8 @@ For new-patient prediction, a person-disjoint outer assessment is the baseline r
 **Exercise F: Defensibility.** Design one audit that would prevent specimen duplication from inflating participant counts.  
 *Answer:* validate unique participant keys, specimen foreign keys, expected cardinality and distinct-person denominators before and after linkage.
 
+**Section references:** [Sterne et al., Missing Data (2009)](https://pubmed.ncbi.nlm.nih.gov/19564179/) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
+
 ## 11. Primary and further reading
 
 - NCI Genomic Data Commons. [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization). Documented case, sample, portion and aliquot relationships.
@@ -203,3 +229,6 @@ For new-patient prediction, a person-disjoint outer assessment is the baseline r
 **Review status:** Draft 0.1 with invented teaching data, not scientific peer review or clinical certification. Demonstrations explain integrity concepts and do not license the use of participant data.
 
 **Next:** [CO-05 — Essential Mathematics I](../ROADMAP.md), covering algebra, logarithms, rates and units through oncology examples.
+
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
+
