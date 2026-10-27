@@ -10,6 +10,10 @@ An open, methods-focused notebook for **research across all cancer types**, incl
 
 **Quick navigation:** [Research scope](docs/cancer-research-scope.md) · [Start here](#start-here) · [Research workflow](#follow-a-research-question) · [Run the current example](#put-the-methods-to-work) · [Browse subjects](#explore-the-collection) · [Progress and limitations](#research-progress-and-boundaries)
 
+## Computational Oncology textbook
+
+The new [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a **planned ten-part, 60-chapter independent ebook** with a [publication roadmap](oncology/ROADMAP.md) and [machine-readable chapter manifest](oncology/book-manifest.json). This is an original oncology-centered learning architecture, not university course material or a claim that the full manuscript has been written.
+
 ## Start here
 
 Choose the route that matches what you need; no weekly sequence is required.
