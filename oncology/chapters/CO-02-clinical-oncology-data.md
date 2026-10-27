@@ -66,7 +66,7 @@ This is an illustrative normalized schema, not a claim that all electronic healt
 
 ## 3. Stage, grade, histology and molecular classification
 
-**Stage** generally characterizes extent of disease; many solid tumors use TNM-related systems, but staging is disease-specific and some cancers use other systems. **Grade** typically characterizes histologic or cellular differentiation or aggressiveness according to a particular grading framework. Neither should be treated as a simple continuous number merely because it is encoded numerically.
+**Stage** generally characterizes extent of disease; many solid tumors use TNM-related systems, but staging is disease-specific and some cancers use other systems ([NCI cancer staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging)). **Grade** typically characterizes histologic or cellular differentiation or aggressiveness according to a particular grading framework. Neither should be treated as a simple continuous number merely because it is encoded numerically.
 
 A strong staging record preserves `cancer_site`, `stage_system`, `stage_edition`, `stage_group`, `stage_basis` (for example, clinical or pathological when applicable) and `stage_assessed_at`. Stage at initial diagnosis is not synonymous with disease burden measured after recurrence or progression. NCI explains why an original diagnostic stage remains distinct from subsequent changes in disease extent.
 
@@ -83,11 +83,11 @@ Do not calculate a mean of stage categories as though the differences between st
 
 ## 4. Response and toxicity are different constructs
 
-For selected solid-tumor research settings, RECIST 1.1 provides standardized imaging-response rules. However, not all diseases, therapies or studies use RECIST; immune-based treatments and hematologic diseases may require different prespecified systems. A recorded `partial_response` is meaningful only when the criterion, assessment date, baseline and adjudication approach are known.
+For selected solid-tumor research settings, RECIST 1.1 provides standardized imaging-response rules ([original RECIST 1.1 guideline](https://pubmed.ncbi.nlm.nih.gov/19097774/)). However, not all diseases, therapies or studies use RECIST; immune-based treatments and hematologic diseases may require different prespecified systems. A recorded `partial_response` is meaningful only when the criterion, assessment date, baseline and adjudication approach are known.
 
 **Objective response rate (ORR)** generally requires a protocol-defined numerator and analysis population, often complete plus partial responders under the chosen system; requirements such as confirmation, measurable disease and handling of missing assessment must be written into the protocol. A response proportion is not interchangeable with overall survival or durable benefit.
 
-**Adverse events (AEs)** describe unwanted medical occurrences and are not automatically caused by treatment. The NCI Common Terminology Criteria for Adverse Events (CTCAE) standardizes descriptions and severity grades in oncology research. As of this edition, NCI lists CTCAE **version 6.0**; a study must retain the version actually used, and a conversion between v5.0 and v6.0 is not simply a renaming operation.
+**Adverse events (AEs)** describe unwanted medical occurrences and are not automatically caused by treatment. The NCI Common Terminology Criteria for Adverse Events (CTCAE) standardizes descriptions and severity grades in oncology research. As of this edition, NCI lists CTCAE **version 6.0** in its [current adverse-event guidance](https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events); a study must retain the version actually used, and a conversion between v5.0 and v6.0 is not simply a renaming operation.
 
 Patient-reported outcomes capture another dimension, often including symptoms or functioning. They should not be folded into a clinician-graded toxicity field without a justified measurement mapping.
 
@@ -105,7 +105,7 @@ Patient-reported outcomes capture another dimension, often including symptoms or
 
 Common oncology endpoints include overall survival (OS), progression-free survival (PFS), disease-free survival (DFS), event-free survival (EFS), time to recurrence, treatment response and toxicity incidence. These names are not permission to assume identical definitions across studies. A protocol must say exactly what counts as an event, what time origin applies, and which patients are eligible.
 
-**Overall survival** commonly uses death from any cause as its event, with time measured from a prespecified origin. **Progression-free survival** commonly incorporates progression or death, but exact criteria, ascertainment and sensitivity analyses are protocol-specific. **DFS** and **EFS** can vary substantially by malignancy and intervention.
+**Overall survival** commonly uses death from any cause as its event, with time measured from a prespecified origin ([NCI overall-survival definition](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/overall-survival)). **Progression-free survival** commonly incorporates progression or death, but exact criteria, ascertainment and sensitivity analyses are protocol-specific. **DFS** and **EFS** can vary substantially by malignancy and intervention.
 
 For right-censored data we may store `time` plus `event` for a given estimand, with `event = 1` for a defined event and `event = 0` for a censored observation. This two-field representation is not sufficient to answer every competing-risk, interval-censoring or multi-state question. If death precludes the recurrence of interest, the treatment of death must be justified rather than silently coded as ordinary noninformative censoring.
 
