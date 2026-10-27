@@ -339,6 +339,84 @@
           "GDC-RNA"
         ]
       }
+    },
+    {
+      "path": "oncology/chapters/CO-06-essential-mathematics-ii.md",
+      "citations": {
+        "Why mathematics II is needed for cancer research": [
+          "NIST-OLS",
+          "BIOC-SE"
+        ],
+        "Learning outcomes and prerequisites": [
+          "MATH-DERIV",
+          "R-MATMULT"
+        ],
+        "1. Functions and average rates of change": [
+          "MATH-DERIV",
+          "STROBE"
+        ],
+        "2. Derivatives, limits and meaningful units": [
+          "MATH-DERIV",
+          "NIST-CONVERSION"
+        ],
+        "3. Exponential functions and the chain rule": [
+          "MATH-DERIV",
+          "NIST-OLS"
+        ],
+        "4. Partial derivatives and gradients": [
+          "MATH-GRAD",
+          "NIST-OLS"
+        ],
+        "5. Vectors, dot products and their biological meaning": [
+          "R-MATMULT",
+          "BIOC-SE"
+        ],
+        "6. Two matrix orientations: assays and clinical models": [
+          "BIOC-SE",
+          "R-MATMULT"
+        ],
+        "7. Matrix multiplication, rank and identifiability": [
+          "NIST-OLS",
+          "R-QR"
+        ],
+        "8. Derive and fit a miniature least-squares model": [
+          "NIST-OLS",
+          "STROBE"
+        ],
+        "9. Loss functions, gradients and gradient descent": [
+          "MATH-GRAD",
+          "NIST-OLS"
+        ],
+        "10. The logistic curve and its derivative": [
+          "MATH-DERIV",
+          "TRIPOD-AI"
+        ],
+        "11. Integration and trapezoidal approximation": [
+          "MATH-QUAD",
+          "NIST-CONVERSION"
+        ],
+        "12. Numerical verification and common pitfalls": [
+          "R-QR",
+          "LEAKAGE"
+        ],
+        "13. Reproducible laboratory walkthrough": [
+          "R-QR",
+          "NIST-OLS"
+        ],
+        "14. Original practice problems": [
+          "MATH-GRAD",
+          "BIOC-SE",
+          "TRIPOD-AI"
+        ],
+        "15. Worked answers with interpretation": [
+          "NIST-OLS",
+          "LEAKAGE"
+        ],
+        "16. Mastery gate and the road to probability": [
+          "MATH-DERIV",
+          "NIST-OLS"
+        ]
+      }
     }
   ]
 }
