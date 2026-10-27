@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = "oncology/evidence/source-registry.json"
 COVERAGE = "oncology/evidence/section-citations.json"
 MANIFEST = "oncology/book-manifest.json"
+SOURCE_INDEX = "oncology/evidence/SOURCES.md"
 HEAD = re.compile(r"^(#{2,3})[ \t]+(.+?)\s*$")
 FENCE = re.compile(r"^\s*(`{3,}|~{3,})")
 REF_LINE = re.compile(r"^\*\*Section references:\*\* (.+)$", re.M)
@@ -81,6 +82,15 @@ def validate(root=ROOT):
             issues.append(f"{identifier}: invalid HTTPS link")
         if not source.get("title") or not source.get("kind") or not source.get("supports"):
             issues.append(f"{identifier}: incomplete source metadata")
+
+    try:
+        source_index = (root / SOURCE_INDEX).read_text(encoding="utf-8")
+    except OSError:
+        source_index = ""
+        issues.append("missing readable source bibliography")
+    for identifier, source in library.items():
+        if f"[{source.get('title')}]({source.get('url')})" not in source_index:
+            issues.append(f"source bibliography missing link for {identifier}")
 
     documents = coverage.get("documents", [])
     covered_paths = set()
