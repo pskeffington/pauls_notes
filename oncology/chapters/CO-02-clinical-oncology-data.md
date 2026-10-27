@@ -11,6 +11,8 @@ A single word such as *response* may refer to a radiographic category, a laborat
 
 **Guiding question:** How do we represent a person's cancer care as research data without changing the meaning of what was observed?
 
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging)
+
 ## Learning objectives
 
 The reader should be able to:
@@ -21,6 +23,8 @@ The reader should be able to:
 5. Draft a minimal data dictionary with keys, cardinality, units, allowed values, provenance and missingness.
 6. Detect duplicate joins, time-order violations, denominator changes and common interpretation errors.
 7. Identify when controlled or protected clinical data require separate authorization and cannot enter a public educational repository.
+
+**Section references:** [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging) · [CTCAE and Adverse Event Reporting](https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events)
 
 ## 1. The clinical timeline precedes the data model
 
@@ -37,6 +41,8 @@ We should document at least five elements for every clinically defined time-to-e
 - **Competing and censoring rules:** what happens for loss to follow-up, administrative closure or another event that changes the possibility of observing the event of interest?
 
 The same person may contribute multiple episodes to an explicitly defined recurrent-event analysis, but the episodes are not automatically independent individuals.
+
+**Section references:** [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/) · [Overall Survival (NCI Dictionary)](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/overall-survival)
 
 ## 2. Separate the clinical entities
 
@@ -56,6 +62,8 @@ This is an illustrative normalized schema, not a claim that all electronic healt
 
 **Cardinality matters.** Joining six people to three treatment administrations each produces up to 18 administration rows. Counting those rows as 18 participants is incorrect. If an outcome is person-level, choose the analysis grain deliberately before joining.
 
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/)
+
 ## 3. Stage, grade, histology and molecular classification
 
 **Stage** generally characterizes extent of disease; many solid tumors use TNM-related systems, but staging is disease-specific and some cancers use other systems. **Grade** typically characterizes histologic or cellular differentiation or aggressiveness according to a particular grading framework. Neither should be treated as a simple continuous number merely because it is encoded numerically.
@@ -70,6 +78,8 @@ An example oncology dataset might contain:
 - **Treatment:** an exposure history, not a single permanent patient attribute.
 
 Do not calculate a mean of stage categories as though the differences between stage I and II and between III and IV have equal scientific meaning.
+
+**Section references:** [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging) · [Tumor Grade](https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/tumor-grade)
 
 ## 4. Response and toxicity are different constructs
 
@@ -89,6 +99,8 @@ Patient-reported outcomes capture another dimension, often including symptoms or
 | Vital status | Was death ascertained by the specified cutoff? | Treat absent death documentation as evidence of survival |
 | Progression | Did the protocol-defined progression event occur? | Treat every imaging change as objective progression |
 
+**Section references:** [RECIST 1.1: Revised Response Evaluation Criteria (2009)](https://pubmed.ncbi.nlm.nih.gov/19097774/) · [CTCAE and Adverse Event Reporting](https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events)
+
 ## 5. Endpoint semantics and the denominator
 
 Common oncology endpoints include overall survival (OS), progression-free survival (PFS), disease-free survival (DFS), event-free survival (EFS), time to recurrence, treatment response and toxicity incidence. These names are not permission to assume identical definitions across studies. A protocol must say exactly what counts as an event, what time origin applies, and which patients are eligible.
@@ -98,6 +110,8 @@ Common oncology endpoints include overall survival (OS), progression-free surviv
 For right-censored data we may store `time` plus `event` for a given estimand, with `event = 1` for a defined event and `event = 0` for a censored observation. This two-field representation is not sufficient to answer every competing-risk, interval-censoring or multi-state question. If death precludes the recurrence of interest, the treatment of death must be justified rather than silently coded as ordinary noninformative censoring.
 
 **Immortal-time warning:** defining the exposed group using a treatment that could only be received after surviving to a later date, then analyzing survival from an earlier origin as if exposure existed from the start, creates a structural bias. Represent treatment start and eligibility times explicitly.
+
+**Section references:** [Overall Survival (NCI Dictionary)](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/overall-survival) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
 
 ## 6. A minimum clinical oncology research dictionary
 
@@ -122,6 +136,8 @@ Missingness codes should distinguish truly unknown, not applicable, not collecte
 
 Each research release must include provenance: source system, extraction date, codebook version, transformation history, access classification and eligibility rules.
 
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
+
 ## 7. Worked example: a teaching extract with related records
 
 Imagine an invented cohort with **8 people, 12 specimens and 20 encounters**. The analysis asks: among the eight eligible people, how many have a recorded baseline assay? A specimen table and an encounter table cannot be joined indiscriminately to count people.
@@ -133,6 +149,8 @@ A robust sequence is:
 4. Create a one-row-per-person baseline eligibility indicator by an explicitly justified rule.
 5. Join that person-level indicator to the participant roster with an expected row count of eight.
 6. Report the number of eligible people with a documented assay, not the number of assay or encounter rows.
+
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/)
 
 ### Compact R demonstration
 
@@ -159,11 +177,15 @@ stopifnot(nrow(joined) == 12L, length(unique(joined$person_id)) == 8L)
 
 This example checks **join cardinality**, not a cancer treatment outcome. An assay being present does not imply clinical validity, and a passing `stopifnot` is a code assertion rather than scientific proof.
 
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
+
 ## 8. Research governance
 
 Patient-linked clinical records may contain direct or indirect identifiers and may be subject to privacy, institutional, contractual and consent restrictions. Publicly available documentation about a data source does not authorize exporting its restricted data. Prefer fabricated teaching fixtures. Any real oncology research dataset requires project-specific review of access rights, acceptable use, retention, disclosure and de-identification before ingestion or publication.
 
 A distinction central to this book: **a model that can read a record is not necessarily permitted to retain, transmit or index it.** The same applies to embedding pipelines, search indexes and machine-generated research summaries.
+
+**Section references:** [HIPAA and Research](https://www.hhs.gov/hipaa/for-professionals/special-topics/research/index.html) · [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization)
 
 ## 9. Competency exercises and answer checks
 
@@ -173,6 +195,8 @@ A distinction central to this book: **a model that can read a record is not nece
 4. **Safety:** Is a grade 3 AE necessarily caused by study therapy? *Check:* no; severity and attribution are distinct.
 5. **Protocol design:** A paper reports ORR without specifying response criteria or the denominator. What must be requested? *Check:* response system/version, imaging rules, evaluable population, assessment/confirmation and missingness rules.
 6. **Data debugging:** A specimen-level table is joined to an event table by `person_id` and the number of event rows doubles. What should be verified? *Check:* keys, event grain, duplicate matches and intended estimand before deduplication.
+
+**Section references:** [RECIST 1.1: Revised Response Evaluation Criteria (2009)](https://pubmed.ncbi.nlm.nih.gov/19097774/) · [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging)
 
 ## 10. Core sources and further reading
 
@@ -186,3 +210,6 @@ A distinction central to this book: **a model that can read a record is not nece
 **Review record:** Draft 0.1; original synthesis and invented teaching example. Source links checked during October 2026 authoring; exact practice is disease-, protocol- and edition-specific. No clinical validation or independent expert peer review has been completed.
 
 **Next:** [CO-03 — Molecular Foundations](CO-03-molecular-foundations.md).
+
+**Section references:** [CTCAE and Adverse Event Reporting](https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events) · [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization)
+
