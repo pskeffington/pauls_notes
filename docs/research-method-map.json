@@ -1,0 +1,1 @@
+{"schema_version":"1.0","methods":[{"id":"welch-t","guide":"03_learning/biomedical-statistics-decision-guide.md","evidence_ids":["BS-001","BS-009"]},{"id":"poisson-rate","guide":"03_learning/biomedical-statistics-decision-guide.md","evidence_ids":[]},{"id":"repeated-measures","guide":"03_learning/biomedical-statistics-decision-guide.md","evidence_ids":["BS-002"]}]}
