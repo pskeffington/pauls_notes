@@ -1,6 +1,6 @@
 # Evidence and Citation Policy — Computational Oncology
 
-[Book home](../README.md) · [Source registry](source-registry.json) · [Section crosswalk](section-citations.json) · [Citation validator](../../scripts/validate_oncology_citations.py)
+[Book home](../README.md) · [Human bibliography](SOURCES.md) · [Source registry](source-registry.json) · [Section crosswalk](section-citations.json) · [Citation validator](../../scripts/validate_oncology_citations.py)
 
 ## Purpose
 
