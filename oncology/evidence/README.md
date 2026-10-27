@@ -36,6 +36,10 @@ This book connects foundational scientific explanations to the actual publicatio
 - `regulatory-guidance`: rules that require current jurisdictional and situational interpretation.
 - `editorial-standard`: manuscript practice, referencing and scholarly transparency.
 
+## Current technical validation records
+
+- [CO-06: Python numerical replay and repository citation audit (2026-10-27)](CO-06-VALIDATION-2026-10-27.md) — includes exact source hashes, five passing local tests, and explicit R/CI limits. Chapter remains a draft.
+
 ## Research boundaries
 
 The manuscript is for learning research design and computation. Public availability of a study description or portal does not imply unrestricted permission to retrieve, embed, release or model participant-level records. Protect privacy, respect data-use agreements and keep public repositories limited to independently authorized material.
