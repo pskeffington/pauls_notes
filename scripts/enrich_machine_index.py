@@ -22,8 +22,9 @@ LINK = re.compile(r"(?<!!)\[[^\]]+\]\((<[^>]+>|[^)]+)\)")
 def tokens(text):
     return {w.lower() for w in WORDS.findall(text) if w.lower() not in STOP}
 
-def enrich(records):
-    """Return sections with deterministic topics and forward/back links."""
+def enrich(records, citation_map=None):
+    """Return sections with deterministic topics, citation IDs and document links."""
+    citation_map = citation_map or {}
     paths = {r["path"] for r in records}
     edges = defaultdict(set)
     for r in records:
@@ -52,6 +53,7 @@ def enrich(records):
         r["outbound_documents"] = sorted(edges[r["path"]])
         r["inbound_documents"] = sorted(reverse[r["path"]])
         r["retrieval_terms"] = sorted(tokens(r["heading"]))[:24]
+        r["citation_ids"] = list(citation_map.get(r["path"], {}).get(r["heading"], []))
         result.append(r)
     return result
 
@@ -72,6 +74,8 @@ def main():
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--previous", type=Path)
     p.add_argument("--delta-output", type=Path)
+    p.add_argument("--section-citations", type=Path,
+                   help="Optional authoritative textbook section-to-source mapping JSON")
     a = p.parse_args()
     records = load(a.input)
     required = {"path", "section_id", "content_sha256", "heading", "text"}
@@ -79,7 +83,14 @@ def main():
         p.error("input missing required index fields")
     if len({r["section_id"] for r in records}) != len(records):
         p.error("duplicate section IDs")
-    output = enrich(records)
+    citation_map = {}
+    if a.section_citations:
+        mapped = json.loads(a.section_citations.read_text(encoding="utf-8"))
+        if mapped.get("schema_version") != "1.0" or not isinstance(mapped.get("documents"), list):
+            p.error("unsupported section citation schema")
+        for doc in mapped["documents"]:
+            citation_map[doc["path"]] = doc["citations"]
+    output = enrich(records, citation_map)
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text("".join(json.dumps(r, sort_keys=True, ensure_ascii=False) + "\n" for r in output), encoding="utf-8")
     if a.previous:
