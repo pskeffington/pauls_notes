@@ -24,7 +24,7 @@ def make_fixture(destination: Path) -> Path:
         referenced.add(data[key])
     for part in data["parts"]:
         for chapter in part["chapters"]:
-            for key in ("chapter_path",):
+            for key in ("chapter_path", "validation_record"):
                 if chapter.get(key):
                     referenced.add(chapter[key])
             referenced.update(chapter.get("lab_paths", []))
@@ -61,6 +61,16 @@ class BookRegistryTests(unittest.TestCase):
             )
             manifest.write_text(json.dumps(payload), encoding="utf-8")
             self.assertTrue(any("missing/unsafe test_paths" in issue for issue in book.validate(root)))
+
+    def test_missing_validation_record_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = make_fixture(root)
+            payload = json.loads(manifest.read_text(encoding="utf-8"))
+            payload["parts"][0]["chapters"][5]["validation_record"] = "oncology/evidence/missing-proof.md"
+            manifest.write_text(json.dumps(payload), encoding="utf-8")
+            self.assertTrue(any("missing/unsafe validation_record" in issue
+                                for issue in book.validate(root)))
 
     def test_duplicate_chapter_id_fails(self):
         with tempfile.TemporaryDirectory() as temporary:
