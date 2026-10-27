@@ -13,10 +13,10 @@
         {
           "id": "CO-01",
           "title": "Cancer biology",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [],
           "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "chapter_path": "oncology/chapters/CO-01-cancer-biology.md"
         },
         {
           "id": "CO-02",
@@ -664,5 +664,7 @@
         }
       ]
     }
-  ]
+  ],
+  "introduction_path": "oncology/INTRODUCTION.md",
+  "navigation_path": "oncology/README.md"
 }
