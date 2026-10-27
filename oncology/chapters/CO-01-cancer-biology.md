@@ -140,7 +140,7 @@ These questions establish a bridge to [data literacy](../../03_learning/objects-
 ## 8. Independent further reading
 
 - Hanahan D, Weinberg RA. *Hallmarks of Cancer.* Cell (2000). DOI: [10.1016/S0092-8674(00)81683-9](https://pubmed.ncbi.nlm.nih.gov/10647931/).
-- Hanahan D, Weinberg RA. *Hallmarks of Cancer: The Next Generation.* Cell (2011). DOI: [10.1016/j.cell.2011.02.013](https://doi.org/10.1016/j.cell.2011.02.013).
+- Hanahan D, Weinberg RA. *Hallmarks of Cancer: The Next Generation.* Cell (2011). DOI: [10.1016/j.cell.2011.02.013](https://pubmed.ncbi.nlm.nih.gov/21376230/).
 - Hanahan D. *Hallmarks of Cancer: New Dimensions.* Cancer Discovery (2022). DOI: [10.1158/2159-8290.CD-21-1059](https://doi.org/10.1158/2159-8290.CD-21-1059).
 - National Cancer Institute, [What Is Cancer?](https://www.cancer.gov/about-cancer/understanding/what-is-cancer) — introductory authoritative overview; verify current page before citing specific clinical claims.
 
