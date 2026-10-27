@@ -15,6 +15,7 @@ on:
       - 'scripts/validate_oncology_citations.py'
       - 'scripts/test_oncology_citations.py'
       - 'scripts/test_oncology_math.py'
+      - 'scripts/test_oncology_book.py'
       - 'scripts/test_machine_index.py'
       - '.github/workflows/machine-index.yml'
   pull_request:
@@ -37,12 +38,16 @@ jobs:
           python-version: '3.12'
       - name: Test parser
         run: python -m unittest discover -s scripts -p 'test_machine_index.py' -v
+      - name: Test index enrichment
+        run: python -m unittest discover -s scripts -p 'test_enrich_machine_index.py' -v
       - name: Validate research method registry
         run: |
           python scripts/validate_research_methods.py
           python -m unittest discover -s scripts -p 'test_research_method_registry.py' -v
       - name: Validate oncology textbook manifest
-        run: python scripts/validate_oncology_book.py
+        run: |
+          python scripts/validate_oncology_book.py
+          python -m unittest discover -s scripts -p 'test_oncology_book.py' -v
       - name: Validate oncology section citations
         run: |
           python scripts/validate_oncology_citations.py
