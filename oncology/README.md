@@ -2,28 +2,40 @@
 
 **Computational Oncology: A Clinician–Scientist's Guide**
 
-An independently authored, ten-part, 60-chapter learning roadmap from foundational cancer biology and quantitative reasoning through research design, survival analysis, genomics, machine learning, applied AI and reproducible research.
+A ten-part, 60-chapter independent learning architecture spanning cancer biology, quantitative reasoning, study design, clinical data engineering, genomics, imaging, machine learning, applied AI and reproducible research. Four manuscript chapters and the introduction are drafted; **none are yet independently peer reviewed or released as final textbook chapters**.
 
 ## Start reading
 
-1. [Introduction — Why Cancer Research Matters and Why We Begin Here](INTRODUCTION.md) — the human and scientific purpose.
-2. [CO-01 — Cancer Biology for Quantitative Investigators](chapters/CO-01-cancer-biology.md) — **draft**, including unit-of-analysis examples and mastery checks.
-3. [Full chapter roadmap](ROADMAP.md) — the remaining 59 planned chapters and publication gates.
+Read the original [Introduction — Why Cancer Research Matters](INTRODUCTION.md), then follow the drafted opening sequence.
 
-## Browse by purpose
-
-| Need | Resource | Readiness |
+| Chapter | Clinical and scientific question | Manuscript status |
 | --- | --- | --- |
-| Complete book structure and milestones | [Roadmap](ROADMAP.md) | Architecture drafted |
-| Stable IDs, chapter paths and statuses | [Book manifest](book-manifest.json) | Machine-readable |
-| Introductory probability and statistics | [Statistics decision guide](../03_learning/biomedical-statistics-decision-guide.md) | Existing learning guide, not a released book chapter |
-| Scientific computing foundations | [Computing subjects](../03_learning/README.md) | Existing learning resources |
-| Molecular cancer example | [Breast cancer and gene reference](../06_RESOURCES/Genomics/README.md) | Existing reference |
-| ML, validation and reproducibility | [Machine learning home](../04_machine_learning/README.md) | Existing learning resources |
-| Research evidence and coding | [Biomedical coding guide](../02_biomedical_coding/README.md) | Existing reference |
+| [CO-01: Cancer Biology](chapters/CO-01-cancer-biology.md) | How does cancer biology become a research variable? | Draft; section-linked evidence |
+| [CO-02: Clinical Oncology Data](chapters/CO-02-clinical-oncology-data.md) | How do clinical observations become usable data? | Draft; section-linked evidence |
+| [CO-03: Molecular Foundations](chapters/CO-03-molecular-foundations.md) | What do molecular assays actually measure? | Draft; section-linked evidence |
+| [CO-04: Data Literacy](chapters/CO-04-data-literacy.md) | What does a row represent and which units are independent? | Draft; section-linked evidence |
 
-## Publication and mastery standard
+Continue with the [complete 60-chapter roadmap](ROADMAP.md). Chapters CO-05 through CO-60 remain planned; do not assume that a roadmap title is an authored chapter.
 
-A chapter advances through **planned → draft → tested → reviewed → released**. Code tests cannot alone establish scientific review, and text completion does not imply clinical validity. Every chapter will require independently authored clinical framing, formal methods, reproducible examples where appropriate, critical interpretation, scientific references and original exercises.
+## References and evidence
 
-This independently authored educational resource is not medical advice, professional certification, or a substitute for supervised clinical training.
+Every H2/H3 section in the **current introduction and CO-01 through CO-04 drafts** has directly clickable source references. The [curated source registry](evidence/source-registry.json) records titles, URLs, roles and source context. The [section citation crosswalk](evidence/section-citations.json) supports machine retrieval, and the [evidence policy](evidence/README.md) describes the scientific review requirements. A [citation validator](../scripts/validate_oncology_citations.py) checks that every drafted section retains those links.
+
+**Citation coverage is not equivalent to scientific peer review.** Linked sources should be checked against the particular claim and intended research context before a chapter is marked reviewed or released. Original numerical examples use invented teaching data.
+
+## Existing foundation libraries
+
+| Need | Resource |
+| --- | --- |
+| Biostatistics and selection of methods | [Statistics decision guide](../03_learning/biomedical-statistics-decision-guide.md) |
+| Scientific computing with worked examples | [Computing subjects](../03_learning/README.md) |
+| Clinical and molecular case context | [Genomics reference](../06_RESOURCES/Genomics/README.md) |
+| Machine learning and validation | [Machine learning guide](../04_machine_learning/README.md) |
+| Methods literature and code quality | [Biomedical coding](../02_biomedical_coding/README.md) |
+| Machine-readable book state | [Chapter manifest](book-manifest.json) |
+
+## Publication standard
+
+The book advances through **planned → draft → tested → reviewed → released**. Learning outcomes, synthetic laboratory checks, scientific references and editorial/source verification are separate requirements. No part of the manuscript confers medical credentials, validates a clinical model or substitutes for professional care or supervised medical training.
+
+The educational writing, organization and examples are independently developed; third-party research is cited rather than reproduced.
