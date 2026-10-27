@@ -95,6 +95,15 @@ This bibliography groups external scientific and technical references used in th
 | --- | --- | --- |
 | `ICMJE` | [ICMJE Recommendations (2026)](https://icmje.org/recommendations/) | Medical research writing, reporting and source responsibility |
 
+
+## Breast cancer cellular foundations
+
+| Reference ID | Linked source | Relevance |
+| --- | --- | --- |
+| `NCI-BREAST-CELLS` | [What Is Breast Cancer? — NCI](https://www.cancer.gov/types/breast/what-is-breast-cancer) | Breast ducts and lobules; epithelial origins; in situ versus invasive breast tumors |
+| `NCI-BREAST-TYPES` | [Types of Breast Cancer — NCI](https://www.cancer.gov/types/breast/breast-cancer-types) | Ductal versus lobular carcinoma and distinction between DCIS and invasive disease |
+| `NCI-TME` | [Tumor Biology and Microenvironment Research — NCI](https://www.cancer.gov/about-nci/organization/dcb/research-portfolio/tbmr) | Interactions between malignant cells, immune cells, stromal cells and tumor microenvironment |
+
 ## Verification and release boundary
 
 The listed URLs have been inspected for subject suitability in the October 2026 manuscript work, but availability, source version, clinical interpretation, publication rights and suitability for any specific claim require independent review before chapter release. The course examples are fabricated and no protected or patient-level records are stored here.
