@@ -128,3 +128,20 @@ The delta lists added, removed, changed and unchanged sections based on section 
 The [method registry](research-method-map.json) gives stable keys to selected teaching methods and links them to the statistics guide and literature identifiers. The [validator](../scripts/validate_research_methods.py) checks method ID uniqueness, source paths, and whether referenced BS literature identifiers appear in the current curated reading list. An empty evidence list means no publication-level relationship has been curated; it does not imply the method lacks evidence.
 
 Run `python3 scripts/validate_research_methods.py` and `python3 -m unittest discover -s scripts -p 'test_research_method_registry.py' -v`. CI runs both on changes to the registry or validator. A registry record is a navigation pointer, not proof that a particular publication supports every implementation choice. Direct links to specific assumptions, code implementations, and verified study-level evidence remain future enrichment work.
+
+
+## Evidence-aware section indexing — October 2026
+
+The [textbook section citation register](../oncology/evidence/section-citations.json) can be joined into the enriched JSONL catalog with a source-ID field rather than by inferring scientific support from keywords.
+
+```bash
+python3 scripts/build_machine_index.py --output /tmp/pauls-notes-base.jsonl
+python3 scripts/enrich_machine_index.py \
+  --input /tmp/pauls-notes-base.jsonl \
+  --output /tmp/pauls-notes-enriched.jsonl \
+  --section-citations oncology/evidence/section-citations.json
+```
+
+Each enriched section includes `citation_ids` (empty where no curated section mapping exists). Resolve IDs against [the source registry](../oncology/evidence/source-registry.json) and use the exact link associated with the selected section. Do not assign evidence from another heading merely because its keywords resemble the question. The [citation validator](../scripts/validate_oncology_citations.py) separately checks that manuscript section references are present and match the register.
+
+The join is deterministic but **not** scientific claim validation. Human scholarly review, assessment of each linked publication and independent replay remain required. The enrichment process does not download external articles or publish participant records.
