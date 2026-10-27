@@ -19,7 +19,7 @@ Continue with the [complete 60-chapter roadmap](ROADMAP.md). Chapters CO-05 thro
 
 ## References and evidence
 
-Every H2/H3 section in the **current introduction and CO-01 through CO-04 drafts** has directly clickable source references. The [curated source registry](evidence/source-registry.json) records titles, URLs, roles and source context. The [section citation crosswalk](evidence/section-citations.json) supports machine retrieval, and the [evidence policy](evidence/README.md) describes the scientific review requirements. A [citation validator](../scripts/validate_oncology_citations.py) checks that every drafted section retains those links.
+Every H2/H3 section in the **current introduction and CO-01 through CO-04 drafts** has directly clickable source references. The [linked bibliography](evidence/SOURCES.md) and [curated source registry](evidence/source-registry.json) records titles, URLs, roles and source context. The [section citation crosswalk](evidence/section-citations.json) supports machine retrieval, and the [evidence policy](evidence/README.md) describes the scientific review requirements. A [citation validator](../scripts/validate_oncology_citations.py) checks that every drafted section retains those links.
 
 **Citation coverage is not equivalent to scientific peer review.** Linked sources should be checked against the particular claim and intended research context before a chapter is marked reviewed or released. Original numerical examples use invented teaching data.
 
