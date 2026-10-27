@@ -234,6 +234,62 @@
       "kind": "technical-specification",
       "supports": "Proper SI unit notation, precision and communication conventions",
       "verification": "Official source page inspected for this chapter; chapter review pending"
+    },
+    {
+      "id": "MATH-DERIV",
+      "title": "Calculus I: Derivatives as Rates of Change",
+      "url": "https://openstax.org/books/calculus-volume-1/pages/3-4-derivatives-as-rates-of-change",
+      "kind": "open-textbook",
+      "supports": "Difference quotients, analytic derivatives and time-rate interpretation",
+      "verification": "Official publicly accessible text inspected October 2026; independent chapter review pending"
+    },
+    {
+      "id": "MATH-GRAD",
+      "title": "Calculus III: Directional Derivatives and the Gradient",
+      "url": "https://openstax.org/books/calculus-volume-3/pages/4-6-directional-derivatives-and-the-gradient",
+      "kind": "open-textbook",
+      "supports": "Partial derivatives, gradients and multivariate directions of change",
+      "verification": "Official publicly accessible text inspected October 2026; independent chapter review pending"
+    },
+    {
+      "id": "MATH-QUAD",
+      "title": "Calculus II: Numerical Integration",
+      "url": "https://openstax.org/books/calculus-volume-2/pages/3-6-numerical-integration",
+      "kind": "open-textbook",
+      "supports": "Trapezoidal approximation and the distinction between an integral and discrete observations",
+      "verification": "Official publicly accessible text inspected October 2026; independent chapter review pending"
+    },
+    {
+      "id": "NIST-OLS",
+      "title": "NIST: Linear Least Squares Regression",
+      "url": "https://www.itl.nist.gov/div898/handbook/pmd/section1/pmd141.htm",
+      "kind": "technical-specification",
+      "supports": "Linear-in-parameters regression formulation and least-squares fitting",
+      "verification": "Official primary technical source inspected October 2026; independent chapter review pending"
+    },
+    {
+      "id": "BIOC-SE",
+      "title": "Bioconductor: SummarizedExperiment Assay Structure",
+      "url": "https://bioconductor.org/packages/release/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html",
+      "kind": "technical-specification",
+      "supports": "Features as rows, samples as columns, coordinated sample and feature metadata",
+      "verification": "Official package vignette inspected October 2026; package versions must be pinned for implementation"
+    },
+    {
+      "id": "R-MATMULT",
+      "title": "R Base: Matrix Multiplication",
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/base/html/matmult.html",
+      "kind": "technical-specification",
+      "supports": "Conformable numeric matrices, dot products and matrix multiplication in R",
+      "verification": "Official language manual inspected October 2026; versioned implementation guidance"
+    },
+    {
+      "id": "R-QR",
+      "title": "R Base: QR Decomposition and qr.solve",
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/base/html/qr.html",
+      "kind": "technical-specification",
+      "supports": "QR regression fitting, rank/linear dependence and numerical stability",
+      "verification": "Official language manual inspected October 2026; versioned implementation guidance"
     }
   ]
 }
