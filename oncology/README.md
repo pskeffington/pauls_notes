@@ -26,4 +26,4 @@ An independently authored, ten-part, 60-chapter learning roadmap from foundation
 
 A chapter advances through **planned → draft → tested → reviewed → released**. Code tests cannot alone establish scientific review, and text completion does not imply clinical validity. Every chapter will require independently authored clinical framing, formal methods, reproducible examples where appropriate, critical interpretation, scientific references and original exercises.
 
-This educational resource is independent of Dartmouth and other universities, and is not medical advice, professional certification or a substitute for supervised clinical training.
+This independently authored educational resource is not medical advice, professional certification, or a substitute for supervised clinical training.
