@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "scope": "Independent computational oncology manuscript; source links are claim-context anchors, not automatic scientific endorsement.",
+  "verification_date": "2026-10-27",
+  "sources": [
+    {
+      "id": "NCI-CANCER",
+      "title": "What Is Cancer?",
+      "url": "https://www.cancer.gov/about-cancer/understanding/what-is-cancer",
+      "kind": "authoritative-overview",
+      "supports": "Cancer mechanisms, variation and basic tumor biology",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-TRIALS",
+      "title": "Clinical Trials Programs and Initiatives",
+      "url": "https://www.cancer.gov/research/infrastructure/clinical-trials",
+      "kind": "authoritative-overview",
+      "supports": "Research purpose, intervention evaluation and translation",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-STATS",
+      "title": "Cancer Statistics",
+      "url": "https://www.cancer.gov/about-cancer/understanding/statistics",
+      "kind": "authoritative-overview",
+      "supports": "Incidence, mortality, population denominators and limitations",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-STAGE",
+      "title": "Cancer Staging",
+      "url": "https://www.cancer.gov/about-cancer/diagnosis-staging/staging",
+      "kind": "clinical-reference",
+      "supports": "Stage, TNM systems and extent of disease",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-GRADE",
+      "title": "Tumor Grade",
+      "url": "https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/tumor-grade",
+      "kind": "clinical-reference",
+      "supports": "Grade versus stage and histological classification",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-BIOMARKER",
+      "title": "Biomarker Testing for Cancer Treatment",
+      "url": "https://www.cancer.gov/about-cancer/treatment/types/biomarker-testing-cancer-treatment",
+      "kind": "clinical-reference",
+      "supports": "Molecular tumor testing, use cases and limitations",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-BREAST",
+      "title": "Tests for Breast Cancer Biomarkers",
+      "url": "https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests",
+      "kind": "clinical-reference",
+      "supports": "ER, PR, HER2 assays and clinical biomarker context",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-CTCAE",
+      "title": "CTCAE and Adverse Event Reporting",
+      "url": "https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events",
+      "kind": "clinical-reference",
+      "supports": "Adverse event grading, attribution and CTCAE release",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "NCI-OS",
+      "title": "Overall Survival (NCI Dictionary)",
+      "url": "https://www.cancer.gov/publications/dictionaries/cancer-terms/def/overall-survival",
+      "kind": "clinical-reference",
+      "supports": "Time origin and overall survival endpoint",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "GDC-BIO",
+      "title": "Biospecimen Data Standardization",
+      "url": "https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization",
+      "kind": "technical-specification",
+      "supports": "Case, sample, analyte, aliquot relationships and provenance",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "GDC-ENTITY",
+      "title": "Biospecimen Data (GDC Documentation)",
+      "url": "https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/",
+      "kind": "technical-specification",
+      "supports": "Biospecimen hierarchy and assay data associations",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "GDC-RNA",
+      "title": "GDC mRNA Analysis Pipeline",
+      "url": "https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/",
+      "kind": "technical-specification",
+      "supports": "RNA read counts, transforms, sequence processing",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "FDA-BEST",
+      "title": "About Biomarkers and Qualification / BEST",
+      "url": "https://www.fda.gov/drugs/biomarker-qualification-program/about-biomarkers-and-qualification",
+      "kind": "glossary",
+      "supports": "Biomarker definition, predictive versus prognostic roles",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "FDA-BEST-BOOK",
+      "title": "BEST Biomarkers, EndpointS, and other Tools",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK326791/",
+      "kind": "glossary",
+      "supports": "Biomarker classification and measurement context",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "HALLMARKS",
+      "title": "Hallmarks of Cancer: New Dimensions (2022)",
+      "url": "https://doi.org/10.1158/2159-8290.CD-21-1059",
+      "kind": "peer-reviewed-review",
+      "supports": "Hallmark framework, microenvironment and tumor evolution",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "RECIST",
+      "title": "RECIST 1.1: Revised Response Evaluation Criteria (2009)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19097774/",
+      "kind": "peer-reviewed-guideline",
+      "supports": "Solid tumor imaging response assessment",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "DESEQ2",
+      "title": "Love et al., DESeq2 (2014)",
+      "url": "https://doi.org/10.1186/s13059-014-0550-8",
+      "kind": "peer-reviewed-method",
+      "supports": "RNA-seq count models, dispersion, log-fold changes",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "LEAKAGE",
+      "title": "Kapoor and Narayanan: Data Leakage (2023)",
+      "url": "https://doi.org/10.1016/j.patter.2023.100804",
+      "kind": "peer-reviewed-method",
+      "supports": "Data leakage, independence and validation failures",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "TRIPOD-AI",
+      "title": "TRIPOD+AI Reporting Statement (2024)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38626948/",
+      "kind": "reporting-guideline",
+      "supports": "Prediction-model reporting and transparency",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "STROBE",
+      "title": "STROBE Observational Study Reporting",
+      "url": "https://www.equator-network.org/reporting-guidelines/strobe/",
+      "kind": "reporting-guideline",
+      "supports": "Observational study design, transparent reporting",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "MISSING",
+      "title": "Sterne et al., Missing Data (2009)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19564179/",
+      "kind": "peer-reviewed-method",
+      "supports": "Missingness assumptions and clinical multiple imputation pitfalls",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "HHS-RESEARCH",
+      "title": "HIPAA and Research",
+      "url": "https://www.hhs.gov/hipaa/for-professionals/special-topics/research/index.html",
+      "kind": "regulatory-guidance",
+      "supports": "Research disclosures, privacy conditions and authorizations",
+      "verification": "public source page checked; no chapter-level expert review"
+    },
+    {
+      "id": "ICMJE",
+      "title": "ICMJE Recommendations (2026)",
+      "url": "https://icmje.org/recommendations/",
+      "kind": "editorial-standard",
+      "supports": "Medical research writing, reporting and source responsibility",
+      "verification": "public source page checked; no chapter-level expert review"
+    }
+  ]
+}
