@@ -37,9 +37,9 @@ def validate(root=ROOT):
             ("test_paths", "scripts", {".py"}),
         ):
             values = c.get(field, [])
-            if not isinstance(values, list) or len(values) != len(set(values)) or any(
+            if not isinstance(values, list) or any(
                 not isinstance(value, str) for value in values
-            ):
+            ) or len(values) != len(set(values)):
                 problems.append(f"invalid {field}: {c['id']}")
                 continue
             for value in values:
