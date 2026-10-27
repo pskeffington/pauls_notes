@@ -12,11 +12,13 @@ This page is for search systems, RAG pipelines, documentation harvesters and aut
 | book.chapter.02 | `oncology/chapters/CO-02-clinical-oncology-data.md` | textbook chapter | draft; not independently reviewed |
 | book.chapter.03 | `oncology/chapters/CO-03-molecular-foundations.md` | textbook chapter | draft; not independently reviewed |
 | book.chapter.04 | `oncology/chapters/CO-04-data-literacy.md` | textbook chapter | draft; not independently reviewed |
+| book.chapter.05 | `oncology/chapters/CO-05-essential-mathematics-i.md` | textbook chapter | draft; arithmetic labs added; independent review pending |
+| book.labs | `oncology/examples/README.md` | executable lab navigation | synthetic inputs only |
 | book.citations | `oncology/evidence/section-citations.json` | section-to-source map | structural links only |
 | book.references | `oncology/evidence/source-registry.json` | linked source metadata | does not prove claim-level validity |
 | book.bibliography | `oncology/evidence/SOURCES.md` | reader-facing linked references | verified routes, not scientific sign-off |
 | book.evidence.policy | `oncology/evidence/README.md` | editorial standards | independent review required |
-| book.manifest | `oncology/book-manifest.json` | chapter inventory | CO-01 through CO-04 have draft manuscript paths |
+| book.manifest | `oncology/book-manifest.json` | chapter inventory | CO-01 through CO-05 have draft manuscript paths |
 | book.roadmap | `oncology/ROADMAP.md` | authoring milestones | plans are not completed chapters |
 
 Agents must consult the manifest rather than inferring that a planned chapter exists. Use the source registry and per-section mapping for citation retrieval, but check the linked original source before asserting that it supports a specific scientific claim. Chapter URLs are valid only where `chapter_path` is not null; the original research methods and examples are separate existing assets.
