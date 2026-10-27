@@ -48,6 +48,11 @@
           "HALLMARKS",
           "NCI-CANCER"
         ],
+        "Breast cancer at the cellular level: a first example": [
+          "NCI-BREAST-CELLS",
+          "NCI-BREAST-TYPES",
+          "NCI-TME"
+        ],
         "2. From mechanism to measurement": [
           "FDA-BEST",
           "NCI-BIOMARKER"
