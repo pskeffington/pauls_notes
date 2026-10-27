@@ -290,6 +290,70 @@
       "kind": "technical-specification",
       "supports": "QR regression fitting, rank/linear dependence and numerical stability",
       "verification": "Official language manual inspected October 2026; versioned implementation guidance"
+    },
+    {
+      "id": "OS-PROB",
+      "title": "OpenStax: Probability Theory and Bayes' Theorem",
+      "url": "https://openstax.org/books/principles-data-science/pages/3-4-probability-theory",
+      "kind": "open-textbook",
+      "supports": "Probability foundations, conditional probability, Bayes theorem and computational interpretation",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "OS-PROB-RULES",
+      "title": "OpenStax: Two Basic Rules of Probability",
+      "url": "https://openstax.org/books/introductory-statistics/pages/3-3-two-basic-rules-of-probability",
+      "kind": "open-textbook",
+      "supports": "Addition and multiplication rules, independence and mutually exclusive events",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "OS-PROB-TERMS",
+      "title": "OpenStax: Introductory Statistics Probability Terminology",
+      "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-key-terms",
+      "kind": "open-textbook",
+      "supports": "Sample spaces, events, complements, conditional probability and independence",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "NCI-SCREEN-HCP",
+      "title": "NCI PDQ: Cancer Screening Overview for Health Professionals",
+      "url": "https://www.cancer.gov/about-cancer/screening/hp-screening-overview-pdq",
+      "kind": "clinical-reference",
+      "supports": "Cancer screening sensitivity, specificity, PPV, NPV, prevalence, false positives, harms and mortality endpoints",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "NCI-SCREEN-PAT",
+      "title": "NCI PDQ: Cancer Screening Overview for Patients",
+      "url": "https://www.cancer.gov/about-cancer/screening/patient-screening-overview-pdq",
+      "kind": "clinical-reference",
+      "supports": "Screening versus diagnosis, false positives, overdiagnosis and the limits of early detection",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "SCREEN-PRIMER",
+      "title": "Assessment of Cancer Screening: Performance Measures",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK550207/",
+      "kind": "peer-reviewed-review",
+      "supports": "2-by-2 screening tables and the definitions of sensitivity, specificity, PPV and NPV",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "PY-RANDOM",
+      "title": "Python 3.12: random module and reproducibility",
+      "url": "https://docs.python.org/3.12/library/random.html",
+      "kind": "technical-specification",
+      "supports": "Pseudorandom sampling, fixed-seed replay and version-dependent random-number generator behavior",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
+    },
+    {
+      "id": "R-RANDOM",
+      "title": "R Base: Random Number Generation",
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Random.html",
+      "kind": "technical-specification",
+      "supports": "set.seed, RNGkind, reproducibility and R random-number generation",
+      "verification": "Source URL and topical relevance inspected 2026-10-27; chapter-level scientific review pending"
     }
   ]
 }
