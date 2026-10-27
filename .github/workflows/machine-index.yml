@@ -12,6 +12,8 @@ on:
       - 'docs/research-method-map.json'
       - 'oncology/**'
       - 'scripts/validate_oncology_book.py'
+      - 'scripts/validate_oncology_citations.py'
+      - 'scripts/test_oncology_citations.py'
       - 'scripts/test_machine_index.py'
       - '.github/workflows/machine-index.yml'
   pull_request:
@@ -40,6 +42,10 @@ jobs:
           python -m unittest discover -s scripts -p 'test_research_method_registry.py' -v
       - name: Validate oncology textbook manifest
         run: python scripts/validate_oncology_book.py
+      - name: Validate oncology section citations
+        run: |
+          python scripts/validate_oncology_citations.py
+          python -m unittest discover -s scripts -p 'test_oncology_citations.py' -v
       - name: Generate index
         run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
       - name: Enrich and verify retrieval metadata
