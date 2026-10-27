@@ -32,6 +32,11 @@ def validate(root=ROOT):
             resolved = (root / path).resolve()
             if not resolved.is_relative_to((root / "oncology").resolve()) or not resolved.is_file():
                 problems.append(f"invalid chapter_path: {c['id']}")
+        record = c.get("validation_record")
+        if record is not None:
+            target = (root / record).resolve() if isinstance(record, str) else None
+            if target is None or not target.is_relative_to((root / "oncology/evidence").resolve()) or not target.is_file() or target.suffix != ".md":
+                problems.append(f"missing/unsafe validation_record: {c['id']}")
         for field, expected_directory, allowed_extensions in (
             ("lab_paths", "oncology/examples", {".py", ".R"}),
             ("test_paths", "scripts", {".py"}),
