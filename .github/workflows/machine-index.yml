@@ -5,6 +5,8 @@ on:
       - '**/*.md'
       - '**/*.markdown'
       - 'scripts/build_machine_index.py'
+      - 'scripts/enrich_machine_index.py'
+      - 'scripts/test_enrich_machine_index.py'
       - 'scripts/test_machine_index.py'
       - '.github/workflows/machine-index.yml'
   pull_request:
@@ -29,6 +31,11 @@ jobs:
         run: python -m unittest discover -s scripts -p 'test_machine_index.py' -v
       - name: Generate index
         run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
+      - name: Enrich and verify retrieval metadata
+        run: |
+          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched.jsonl
+          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched-replay.jsonl
+          cmp /tmp/pauls-notes-enriched.jsonl /tmp/pauls-notes-enriched-replay.jsonl
       - name: Verify deterministic replay
         run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
       - name: Validate JSONL identifiers and required fields
