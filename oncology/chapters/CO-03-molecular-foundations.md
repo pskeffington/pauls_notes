@@ -11,6 +11,8 @@ Cancer involves genetic and nongenetic changes operating in a changing cellular 
 
 **Guiding question:** What does each molecular assay actually measure, and how does its meaning constrain a cancer research conclusion?
 
+**Section references:** [Biomarker Testing for Cancer Treatment](https://www.cancer.gov/about-cancer/treatment/types/biomarker-testing-cancer-treatment) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
+
 ## Learning objectives
 
 The reader should be able to:
@@ -21,6 +23,8 @@ The reader should be able to:
 5. Compute a basic log2 ratio and explain why it is not a complete differential-expression analysis.
 6. Explain the difference between a biological mechanism, a candidate biomarker and a clinically validated test.
 7. Design a minimal metadata contract for an oncology molecular experiment.
+
+**Section references:** [About Biomarkers and Qualification / BEST](https://www.fda.gov/drugs/biomarker-qualification-program/about-biomarkers-and-qualification) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
 
 ## 1. Biological information and its regulation
 
@@ -38,6 +42,8 @@ For each biological claim, ask which layer was observed:
 
 A molecular signal becomes clinically useful only when measurement reliability, biological interpretation and appropriate clinical evidence support the proposed use.
 
+**Section references:** [What Is Cancer?](https://www.cancer.gov/about-cancer/understanding/what-is-cancer) · [Hallmarks of Cancer: New Dimensions (2022)](https://doi.org/10.1158/2159-8290.CD-21-1059)
+
 ## 2. Somatic change, germline variation and tumor evolution
 
 A **somatic alteration** is acquired in cells during life and may be present in a subset of tumor cells. A **germline variant** is present in the inherited genetic background and may be found throughout the body. Not every somatic change is a driver of malignancy; many changes may be passengers or uncertain in significance. Even a plausible driver alteration does not guarantee a drug will work for a particular person.
@@ -45,6 +51,8 @@ A **somatic alteration** is acquired in cells during life and may be present in 
 A tumor can contain multiple related cellular populations. Evolutionary selection, local microenvironment and therapy can shift their composition over time. A molecular profile from one biopsy therefore represents a particular specimen at a particular time. It may not fully describe every lesion or later state.
 
 Tumor–normal comparisons can help distinguish some acquired alterations, but matched normal material can also create incidental germline findings. The existence of tumor and normal samples does not by itself establish authorization to publish participant-linked variant data. Access control and consent remain dataset-specific.
+
+**Section references:** [What Is Cancer?](https://www.cancer.gov/about-cancer/understanding/what-is-cancer) · [Biomarker Testing for Cancer Treatment](https://www.cancer.gov/about-cancer/treatment/types/biomarker-testing-cancer-treatment)
 
 ## 3. Molecular measurements are not interchangeable
 
@@ -61,6 +69,8 @@ Tumor–normal comparisons can help distinguish some acquired alterations, but m
 
 Assay metadata must identify platform, reference/annotation version, protocol, processing release and sample provenance. A file named `expression.csv` is not a sufficiently specified biological measurement.
 
+**Section references:** [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/) · [About Biomarkers and Qualification / BEST](https://www.fda.gov/drugs/biomarker-qualification-program/about-biomarkers-and-qualification)
+
 ## 4. A recurring breast cancer example: ESR1 and ERBB2
 
 The gene **ESR1** encodes estrogen receptor alpha; clinical estrogen-receptor status is assessed through specified diagnostic procedures, commonly protein-based immunohistochemical testing. **ERBB2** encodes HER2, a receptor involved in growth signaling. HER2 status is determined using established clinical testing and interpretation frameworks, including protein expression and, when appropriate, gene amplification assessment.
@@ -70,6 +80,8 @@ A molecular data table may include `ESR1_expression` and `ERBB2_expression`. Tho
 This distinction also matters for treatment-effect prediction. If patients with higher ESR1 RNA levels have better recorded outcomes, the observation alone does not establish that a particular therapy causes the benefit or that an RNA cutoff should guide care. The analysis must account for disease context, treatments, outcome definitions, confounding, and evidence about comparative treatment effects.
 
 The existing [60-gene breast cancer companion](../../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) offers extended biological reading. The book's executable feature-selection demonstrations use **invented features** and must not be presented as a validated classifier using the companion's 60 named genes.
+
+**Section references:** [Tests for Breast Cancer Biomarkers](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests) · [Biomarker Testing for Cancer Treatment](https://www.cancer.gov/about-cancer/treatment/types/biomarker-testing-cancer-treatment)
 
 ## 5. From sequence reads to a count matrix
 
@@ -90,6 +102,8 @@ For illustration, let `K[i,j]` be the nonnegative integer read count for gene *i
 
 A standard negative-binomial differential-expression framework often expresses count variation through a mean and dispersion, with normalization for sequencing exposure and design-specific predictors. DESeq2 is one well-documented example; its original methods paper should be read together with current versioned package documentation. This chapter does not implement or validate a complete DESeq2 analysis.
 
+**Section references:** [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/) · [Love et al., DESeq2 (2014)](https://doi.org/10.1186/s13059-014-0550-8)
+
 ## 6. A mathematical miniature: effect size versus evidence
 
 Suppose the average normalized abundance of an invented gene is 40 units in one group and 80 in another. The descriptive fold ratio is `80 / 40 = 2`; the log2 fold ratio is `log2(2) = 1`. Reversing the comparison gives `log2(40 / 80) = -1`.
@@ -97,6 +111,8 @@ Suppose the average normalized abundance of an invented gene is 40 units in one 
 That calculation states the **direction and magnitude of the observed ratio**, subject to the measurement definition. It does not calculate a standard error, confidence interval, p-value or posterior probability. It also does not establish that the groups differ biologically rather than through batch, cell composition, selection or sampling variability.
 
 A fully worked differential-expression analysis needs raw or otherwise appropriate inputs, normalization, design matrix, dispersion/variance assumptions, independent biological units, effect estimation, multiple-testing treatment and appropriate diagnostics.
+
+**Section references:** [Love et al., DESeq2 (2014)](https://doi.org/10.1186/s13059-014-0550-8) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
 
 ### Executable base-R thought experiment
 
@@ -117,6 +133,8 @@ stopifnot(isTRUE(all.equal(ratio, 2)),
 
 A key learning exercise is explaining why four values from **four independent people** differ scientifically from four aliquots of a **single specimen**, even when the numbers and resulting means are identical.
 
+**Section references:** [Love et al., DESeq2 (2014)](https://doi.org/10.1186/s13059-014-0550-8) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
+
 ## 7. Purity, batch, normalization and missingness
 
 **Tumor purity:** A bulk tissue specimen includes malignant and nonmalignant cells. Changes in measured expression may reflect differing mixtures of cell types rather than altered expression within cancer cells.
@@ -128,6 +146,8 @@ A key learning exercise is explaining why four values from **four independent pe
 **Missingness:** A gene may have few or zero assigned reads because of biological absence, insufficient depth, feature annotation, processing filters or assay problems. A zero is not always a failed test and a missing specimen is not a zero-count sample. Track these states separately.
 
 **Feature identifiers:** Gene symbols may change or alias; stable identifiers and annotation release should be retained. Verify duplicates and mapping losses before merging expression matrices with clinical annotations.
+
+**Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Love et al., DESeq2 (2014)](https://doi.org/10.1186/s13059-014-0550-8)
 
 ## 8. Minimal molecular dataset contract
 
@@ -146,6 +166,8 @@ A key learning exercise is explaining why four values from **four independent pe
 
 The GDC case → sample → portion → analyte → aliquot hierarchy is a useful real-world example of why these identifiers cannot be casually collapsed. See the [GDC biospecimen documentation](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization).
 
+**Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
+
 ## 9. Research exercises with answer guidance
 
 1. **Assay meaning:** Why cannot `ERBB2_expression = 12` directly establish clinical HER2-positive status? *Check:* units, platform, validated clinical assay and scoring framework are unspecified.
@@ -154,6 +176,8 @@ The GDC case → sample → portion → analyte → aliquot hierarchy is a usefu
 4. **Confounding:** All tumor specimens are sequenced in batch A and normal specimens in batch B. Name the fundamental identification problem. *Check:* batch and tissue status are completely confounded.
 5. **Clinical interpretation:** Explain the difference between a gene associated with survival and a validated treatment-selection biomarker. *Check:* clinical intended use, comparative treatment effect, measurement validity and independent evidence.
 6. **Governance:** A controlled-access tumor–normal file is easy to download with credentials. Does that permit publishing it in an open teaching repository? *Check:* no; permissions and access controls must be examined independently.
+
+**Section references:** [About Biomarkers and Qualification / BEST](https://www.fda.gov/drugs/biomarker-qualification-program/about-biomarkers-and-qualification) · [Love et al., DESeq2 (2014)](https://doi.org/10.1186/s13059-014-0550-8)
 
 ## 10. Primary and authoritative reading
 
@@ -166,3 +190,6 @@ The GDC case → sample → portion → analyte → aliquot hierarchy is a usefu
 **Review record:** Draft 0.1, independently written pedagogical synthesis with fabricated values; not independently scientifically reviewed or validated as clinical guidance. Sources were consulted during October 2026 authoring. Technical package-specific instructions require versioned confirmation when a full analysis is implemented.
 
 **Next:** [CO-04 — Data Literacy and Observational Units](CO-04-data-literacy.md).
+
+**Section references:** [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/) · [Tests for Breast Cancer Biomarkers](https://www.cancer.gov/types/breast/diagnosis/breast-cancer-biomarker-tests)
+
