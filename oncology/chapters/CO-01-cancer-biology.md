@@ -29,7 +29,7 @@ Normal cells respond to external and internal signals governing proliferation, d
 
 **A tumor is a changing biological population, not a single constant measurement.** A sample may contain malignant cells alongside stromal, immune, vascular and other nonmalignant cells. A genomic profile therefore reflects specimen composition, assay characteristics and analytical choices as well as cancer biology.
 
-Cancer development can be described by multiple interacting processes: growth signaling, evasion of growth suppression and cell death, genomic instability, altered metabolism, immune interactions and tissue invasion. These are explanatory frameworks, not a universal checklist that every tumor must satisfy in the same order. Consult the primary Hallmarks of Cancer literature and up-to-date authoritative disease-specific sources before treating a general mechanism as established for a particular clinical setting.
+Cancer development can be described by multiple interacting processes: growth signaling, evasion of growth suppression and cell death, genomic instability, altered metabolism, immune interactions and tissue invasion. These are explanatory frameworks, not a universal checklist that every tumor must satisfy in the same order (see [Hallmarks of Cancer: New Dimensions](https://doi.org/10.1158/2159-8290.CD-21-1059)). Consult the primary Hallmarks of Cancer literature and up-to-date authoritative disease-specific sources before treating a general mechanism as established for a particular clinical setting.
 
 **Section references:** [Hallmarks of Cancer: New Dimensions (2022)](https://doi.org/10.1158/2159-8290.CD-21-1059) · [What Is Cancer?](https://www.cancer.gov/about-cancer/understanding/what-is-cancer)
 
@@ -51,7 +51,7 @@ Every analysis needs an explicit measurement model: What biological quantity is 
 
 ### Key distinction: biomarker roles
 
-A **diagnostic** marker helps classify an existing condition; a **prognostic** marker is associated with outcomes independent of a specific treatment comparison; a **predictive treatment-effect** marker identifies variation in the relative effect of a treatment. A feature associated with outcomes among treated patients alone is not automatically a predictive treatment-effect marker. That claim generally requires a credible comparison of treatment effects across marker-defined groups.
+A **diagnostic** marker helps classify an existing condition; a **prognostic** marker is associated with outcomes independent of a specific treatment comparison; a **predictive treatment-effect** marker identifies variation in the relative effect of a treatment (see the [FDA–NIH BEST glossary](https://www.ncbi.nlm.nih.gov/books/NBK326791/)). A feature associated with outcomes among treated patients alone is not automatically a predictive treatment-effect marker. That claim generally requires a credible comparison of treatment effects across marker-defined groups.
 
 **Section references:** [About Biomarkers and Qualification / BEST](https://www.fda.gov/drugs/biomarker-qualification-program/about-biomarkers-and-qualification) · [BEST Biomarkers, EndpointS, and other Tools](https://www.ncbi.nlm.nih.gov/books/NBK326791/)
 
