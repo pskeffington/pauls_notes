@@ -171,7 +171,7 @@ Every chapter receives:
 
 Use the publicly listed disciplinary subjects of biomedical data science as an **external completeness check only**. Do not copy university slide decks, handouts, recorded lectures, assessments, answer keys, LMS content or proprietary instructional diagrams. Do not mirror university course assignments or publish course-derived materials. Instead develop original chapter sequencing, explanations, synthetic datasets, illustrations, questions and software from independent sources.
 
-Use original figures or carefully licensed figures with attribution and permissions. Cite original methodological papers and authoritative technical documentation; store metadata and analysis rather than full third-party copyrighted articles. Mark the book as unaffiliated with Dartmouth or any other university.
+Use original figures or carefully licensed figures with attribution and permissions. Cite original methodological papers and authoritative technical documentation; store metadata and analysis rather than full third-party copyrighted articles. Do not claim affiliation, endorsement, or instructional approval from any academic institution.
 
 ## Existing Paul's Notes material to reuse by reference
 
@@ -186,11 +186,10 @@ Use original figures or carefully licensed figures with attribution and permissi
 
 Existing material is linked rather than duplicated. This file is the canonical roadmap; it is **not** a claim that all 60 chapters are already written.
 
-## External coverage benchmark
+## Disciplinary coverage checklist
 
 For coverage verification only, check that the finished manuscript teaches mathematics/calculus/linear algebra, R, probability and biostatistics, ethics, wrangling, visualization, regression, survival/longitudinal modeling, research design, systems thinking, Python/Bash/HPC, statistical learning, genomics, machine learning/deep learning/NLP, LLM/RAG/agent systems and full research project communication. These are general fields, not a reproduction of a program's unique curriculum.
 
-Public benchmark: https://healthsciences.dartmouth.edu/education/degree-programs/master-science-health-data-science/online/curriculum (reviewed October 2026).
 
 ## Immediate authoring queue
 
