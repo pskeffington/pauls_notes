@@ -4,7 +4,7 @@
 
 A planned 60-chapter, ten-part, oncology-centered educational reference covering cancer biology, mathematics, biostatistics, research design, regression, computing, clinical data systems, genomics, imaging, predictive modeling, applied AI, scientific communication and independent reproducible research.
 
-Start with the [master textbook roadmap](ROADMAP.md), then use the [machine-readable chapter manifest](book-manifest.json) to track part/chapter coverage and publication readiness.
+Begin with [Why Cancer Research Matters—and Why We Begin Here](INTRODUCTION.md), then read the [master textbook roadmap](ROADMAP.md), then use the [machine-readable chapter manifest](book-manifest.json) to track part/chapter coverage and publication readiness.
 
 ## Reader promises
 - Teach from basic concepts to independently defensible computational oncology research.
