@@ -7,6 +7,9 @@ on:
       - 'scripts/build_machine_index.py'
       - 'scripts/enrich_machine_index.py'
       - 'scripts/test_enrich_machine_index.py'
+      - 'scripts/validate_research_methods.py'
+      - 'scripts/test_research_method_registry.py'
+      - 'docs/research-method-map.json'
       - 'scripts/test_machine_index.py'
       - '.github/workflows/machine-index.yml'
   pull_request:
@@ -29,6 +32,10 @@ jobs:
           python-version: '3.12'
       - name: Test parser
         run: python -m unittest discover -s scripts -p 'test_machine_index.py' -v
+      - name: Validate research method registry
+        run: |
+          python scripts/validate_research_methods.py
+          python -m unittest discover -s scripts -p 'test_research_method_registry.py' -v
       - name: Generate index
         run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
       - name: Enrich and verify retrieval metadata
