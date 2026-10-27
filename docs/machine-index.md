@@ -2,6 +2,18 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
+## Computational Oncology routes
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| book.home | `oncology/README.md` | reader navigation | independent textbook |
+| book.introduction | `oncology/INTRODUCTION.md` | scholarly purpose | draft introduction |
+| book.chapter.01 | `oncology/chapters/CO-01-cancer-biology.md` | textbook chapter | draft; not independently reviewed |
+| book.manifest | `oncology/book-manifest.json` | chapter inventory | only CO-01 has a manuscript path |
+| book.roadmap | `oncology/ROADMAP.md` | authoring milestones | plans are not completed chapters |
+
+Agents must consult the manifest rather than inferring that a planned chapter exists. Chapter URLs are valid only where `chapter_path` is not null; the original research methods and examples are separate existing assets.
+
 ## Canonical navigation
 
 | Topic key | Entrypoint | Content role | Data boundary |
