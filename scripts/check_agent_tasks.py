@@ -46,8 +46,12 @@ def validate(registry: dict, manifest: dict, root: Path) -> list[str]:
         for dep in deps:
             if dep == tid or dep not in lookup:
                 errors.append(f"{tid}: missing or self dependency {dep!r}")
-        if task.get("state") == "verified" and not task.get("evidence"):
-            errors.append(f"{tid}: verified without recorded evidence")
+        if task.get("state") == "verified":
+            if not task.get("evidence"):
+                errors.append(f"{tid}: verified without recorded evidence")
+            for dep in deps:
+                if dep in lookup and lookup[dep].get("state") != "verified":
+                    errors.append(f"{tid}: verified with unverified dependency {dep}")
     visited: set[str] = set()
     active: set[str] = set()
 
