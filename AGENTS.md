@@ -31,6 +31,8 @@ python3 -m unittest discover -s scripts -p 'test_*machine_index.py' -v
 python3 scripts/build_machine_index.py --output /tmp/pauls-notes-agent-index.jsonl
 python3 scripts/build_machine_index.py --output /tmp/pauls-notes-agent-index.jsonl --check
 python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-agent-index.jsonl --output /tmp/pauls-notes-agent-enriched.jsonl
+python3 scripts/test_audit_machine_index.py
+python3 scripts/audit_machine_index.py --input /tmp/pauls-notes-agent-enriched.jsonl --output /tmp/pauls-notes-agent-audit.json
 python3 scripts/check_milestone_evidence.py
 ```
 Confirm `--help` and tool availability before adding optional strict-link or external tool gates. Run chapter-specific and ML tests when their files are touched. Do not treat this command list as proof it ran.
