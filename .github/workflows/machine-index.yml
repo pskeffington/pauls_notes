@@ -20,6 +20,8 @@ on:
       - 'scripts/test_oncology_calculus.py'
       - 'scripts/test_oncology_book.py'
       - 'scripts/test_machine_index.py'
+      - 'scripts/audit_machine_index.py'
+      - 'scripts/test_audit_machine_index.py'
       - '.github/workflows/machine-index.yml'
   pull_request:
     paths:
@@ -87,6 +89,17 @@ jobs:
           python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched.jsonl --section-citations oncology/evidence/section-citations.json
           python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched-replay.jsonl --section-citations oncology/evidence/section-citations.json
           cmp /tmp/pauls-notes-enriched.jsonl /tmp/pauls-notes-enriched-replay.jsonl
+      - name: Audit document coverage and orphan candidates
+        run: |
+          python3 scripts/test_audit_machine_index.py
+          python3 scripts/audit_machine_index.py --input /tmp/pauls-notes-enriched.jsonl --output /tmp/pauls-notes-audit.json
+      - name: Preserve document-coverage audit
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: machine-index-coverage
+          path: /tmp/pauls-notes-audit.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Verify deterministic replay
         run: python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
       - name: Validate JSONL identifiers and required fields
