@@ -16,7 +16,7 @@ This is an **execution queue**, not a claim of implementation. It defines propos
 | ID | Priority | Status at queue creation | Task | Acceptance gate |
 | --- | --- | --- | --- | --- |
 | IDX-01 | P0 | Ready | Audit links, headings, duplicate section IDs, orphaned pages and indexing coverage across textbook and learning resources | Record baseline diagnostics and proposed repairs; determinism and existing machine-index tests pass |
-| IDX-02 | P0 | Planned (after IDX-01) | Add machine-readable agent task registry or verified task export, aligned to this human queue | Stable IDs, dependencies, statuses, owner-less handoffs, schema tests and deterministic output |
+| IDX-02 | P0 | In progress — registry and static validator authored; dependency IDX-01 still open | Add machine-readable agent task registry or verified task export, aligned to this human queue | Stable IDs, dependencies, statuses, owner-less handoffs, schema tests and deterministic output |
 | DOC-01 | P0 | Ready | Reconcile chapter statuses and navigation against the 60-entry book manifest and actual files | No chapter marked drafted without manuscript; README, oncology/README, llms.txt, registry and manifest cross-links agree |
 | CO-07 | P1 | Ready for authored draft; not delivered | Author original Ch. 07 probability and Bayes in oncology, with independent synthetic worked examples | Section citations, numerical R/Python replay where appropriate, clinical interpretation, exercises, limitations, editorial validation |
 | CO-08 | P1 | Planned after CO-07 conventions | Ch. 08 discrete outcomes: binomial, hypergeometric, Poisson, denominators and rates | Distribution-selection casework, independently checked numeric examples, source references and mastery checks |
@@ -42,3 +42,10 @@ Begin with **IDX-01 + DOC-01 as a documentation-only audit**. Inventory the trac
 
 ## Index and handoff output expected from an agent
 At minimum: `task_id`, `state`, `depends_on`, `affected_paths`, `input_provenance`, `test_commands`, `observed_results`, `evidence_links`, `limitations`, `next_task`. For machine retrieval, preserve source path, heading identifier, content hash and exact version/commit in downstream ingestion. An indexed reference is a search aid, not a verified scientific citation.
+
+## 2026-10-30 audit checkpoint and machine registry
+
+- Inspected the tracked Git tree at the documentation branch: **341 files**. Compared all entries of `oncology/book-manifest.json` to tracked paths: **60 chapters, six drafts, 54 planned**; no missing draft manuscripts, no planned chapters with a manuscript path, and no missing declared lab/test paths. This closes **only the manifest path-integrity subcheck** of DOC-01; full reader navigation, citations, and runtime tests remain open.
+- Added [structured task registry](agent-tasks.json) and [offline graph/manifest validator](../scripts/check_agent_tasks.py) for IDX-02. Static source review is not a successful execution or CI report; state remains **in progress**.
+- Run `python3 scripts/check_agent_tasks.py` and existing machine-index tests before promotion. Resolve any discovered mismatch, and record actual command output plus commit SHA in review evidence.
+- IDX-01 requires executed link/heading/coverage diagnostics and orphan report, not just this path check. Keep IDX-01 **ready** and IDX-02 dependent on it until those diagnostics pass.
