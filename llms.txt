@@ -44,3 +44,8 @@ Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/m
 - Verify primary references and the current gate ledger before stating implementation or scientific status.
 - Never publish credentials, private records, or controlled-access participant data.
 - Prefer stable repository paths and actual source text over summaries generated from the index.
+
+## Agent development
+- [Agent operating contract](https://github.com/pskeffington/pauls_notes/blob/main/AGENTS.md): scoped task selection, privacy boundaries and verification.
+- [Agent roadmap and task queue](https://github.com/pskeffington/pauls_notes/blob/main/docs/agent-tasking.md): stable IDs, dependencies, acceptance gates and handoffs.
+- [Agent route index](https://github.com/pskeffington/pauls_notes/blob/main/docs/agent-index.md): find the controlling documents for every agent workstream.

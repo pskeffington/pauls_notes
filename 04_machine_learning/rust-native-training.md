@@ -2,7 +2,7 @@
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-[ML subjects](README.md) · [Frozen protocol](rust-training-protocol.md) · [Release-source addendum](rust-training-source-addendum.md) · [Contract](evidence/rust-training-contract-v1.json) · [Compact verification record](evidence/rust-training-validation-2026-10-16.json) · [G3 ledger](../docs/roadmap-gates.md#g3-native-rust-training) · [Preserved inference](rust-deployment.md)
+[ML subjects](README.md) · [Frozen protocol](rust-training-protocol.md) · [Release-source addendum](rust-training-source-addendum.md) · [Contract](evidence/rust-training-contract-v1.json) · [Compact verification record](evidence/rust-training-validation-2026-10-16.json) · [G3 ledger](../docs/roadmap-gates.md#g3-native-rust-training) · [Preserved inference](rust-deployment.md) · [Portable native-fit continuation](rust-native-deployment-next.md)
 
 **G3 adds a working native Linfa logistic fit and numerical comparison on synthetic data.** It follows people → specimens → measurements → preparation → training → validation → prediction → interpretation. The task remains recorded specimen category, not recurrence, future diagnosis or treatment benefit. The 48 anonymous features are not the book's 60 named genes.
 

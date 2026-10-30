@@ -6,13 +6,15 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 An open, methods-focused notebook for **research across all cancer types**, including molecular oncology, pathology/imaging, cancer epidemiology, computational biology and translational research. The **current worked case** uses a breast cancer teaching book and synthetic paired-specimen ML, with **TCGA-BRCA as the current data-source example under consideration**. Neither TCGA nor breast cancer limits this repository's research scope. Start with a research question, then build a documented, reproducibly checked analysis.
 
+**Agent development:** [Operating instructions](AGENTS.md) · [Prioritized task queue](docs/agent-tasking.md) · [Agent route index](docs/agent-index.md).
+
 **Machine-readable access:** [Agent discovery (llms.txt)](llms.txt) · [Indexing and retrieval contract](docs/machine-index.md) — stable topic routes, provenance, source boundaries and RAG guidance.
 
 **Quick navigation:** [Research scope](docs/cancer-research-scope.md) · [Start here](#start-here) · [Research workflow](#follow-a-research-question) · [Run the current example](#put-the-methods-to-work) · [Browse subjects](#explore-the-collection) · [Progress and limitations](#research-progress-and-boundaries)
 
 ## Computational Oncology textbook
 
-The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter independent ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript is not yet written or independently reviewed.
+The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter independent ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript is not yet written or reviewed by external subject-matter experts.
 
 ## Start here
 

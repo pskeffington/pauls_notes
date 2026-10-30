@@ -147,3 +147,16 @@ python3 scripts/enrich_machine_index.py \
 Each enriched section includes `citation_ids` (empty where no curated section mapping exists). Resolve IDs against [the source registry](../oncology/evidence/source-registry.json) and use the exact link associated with the selected section. Do not assign evidence from another heading merely because its keywords resemble the question. The [citation validator](../scripts/validate_oncology_citations.py) separately checks that manuscript section references are present and match the register.
 
 The join is deterministic but **not** scientific claim validation. Human scholarly review, assessment of each linked publication and independent replay remain required. The enrichment process does not download external articles or publish participant records.
+
+## Coverage and orphan-candidate audit (agent pass, 2026-10-30)
+
+The index pipeline now has a [coverage auditor](../scripts/audit_machine_index.py) and [unit tests](../scripts/test_audit_machine_index.py). Run the builder and enrichment as shown above, then:
+
+```bash
+python3 scripts/test_audit_machine_index.py
+python3 scripts/audit_machine_index.py --input /tmp/pauls-notes-enriched.jsonl --output /tmp/pauls-notes-audit.json
+```
+
+The audit compares indexed paths to all nonempty tracked Markdown inputs, rejects duplicate section identifiers and inconsistent incoming-link metadata, and reports documents without Markdown incoming links as **orphan candidates**. Such candidates can legitimately be reached through `llms.txt`, external stable URLs or direct entrypoints and are **not automatically release failures**. Review each candidate, then update navigation only when a concrete reader or agent retrieval gap is confirmed.
+
+The workflow stores the deterministic audit JSON as a short-retention artifact. It does not publish the full index, crawl remote citations, build embeddings, claim clinical verification, or automatically fix links. See [agent tasking](agent-tasking.md) for the current gate status.

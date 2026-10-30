@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "snapshot_date": "2026-10-30",
+  "source": "docs/agent-tasking.md",
+  "states": [
+    "ready",
+    "planned",
+    "blocked",
+    "in_progress",
+    "verified"
+  ],
+  "priority_order": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "notes": "Bounded index coverage, orphan navigation and task-registry graph checks were observed passing at commit b8a9d1cf210ba77b5860a62cf91d688a45f7326a. This does not assert latest-head CI or scientific/clinical validation.",
+  "tasks": [
+    {
+      "id": "IDX-01",
+      "priority": "P0",
+      "state": "verified",
+      "depends_on": [],
+      "summary": "Index diagnostics, link and orphan audit",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": [
+        "https://github.com/pskeffington/pauls_notes/actions/runs/41025578262"
+      ]
+    },
+    {
+      "id": "IDX-02",
+      "priority": "P0",
+      "state": "verified",
+      "depends_on": [
+        "IDX-01"
+      ],
+      "summary": "Machine-readable task registry and validator",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": [
+        "https://github.com/pskeffington/pauls_notes/actions/runs/41025578262"
+      ]
+    },
+    {
+      "id": "DOC-01",
+      "priority": "P0",
+      "state": "ready",
+      "depends_on": [],
+      "summary": "Chapter manifest and navigation reconciliation",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "CO-07",
+      "priority": "P1",
+      "state": "ready",
+      "depends_on": [],
+      "summary": "Probability and Bayesian oncology chapter",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "CO-08",
+      "priority": "P1",
+      "state": "planned",
+      "depends_on": [
+        "CO-07"
+      ],
+      "summary": "Discrete distributions chapter",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "CO-09",
+      "priority": "P1",
+      "state": "planned",
+      "depends_on": [
+        "CO-07"
+      ],
+      "summary": "Continuous distributions chapter",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "CO-10",
+      "priority": "P1",
+      "state": "planned",
+      "depends_on": [
+        "CO-07",
+        "CO-08",
+        "CO-09"
+      ],
+      "summary": "Sampling and resampling chapter",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "G4-01",
+      "priority": "P1",
+      "state": "planned",
+      "depends_on": [],
+      "summary": "Synthetic survival validation against frozen protocol",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "G5-01",
+      "priority": "P2",
+      "state": "planned",
+      "depends_on": [
+        "G4-01"
+      ],
+      "summary": "Bounded published numerical result reproduction",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "GOV-01",
+      "priority": "P0",
+      "state": "blocked",
+      "depends_on": [],
+      "summary": "D0/D1 independent review for real data",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "QA-01",
+      "priority": "P1",
+      "state": "ready",
+      "depends_on": [],
+      "summary": "Chapter citation and numerical regressions",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
+      "id": "REL-01",
+      "priority": "P2",
+      "state": "planned",
+      "depends_on": [
+        "DOC-01",
+        "QA-01"
+      ],
+      "summary": "Accessible publication export and reproducibility",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    }
+  ]
+}
