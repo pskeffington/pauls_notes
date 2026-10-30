@@ -14,16 +14,18 @@
     "P1",
     "P2"
   ],
-  "notes": "Planned dependencies express ordering, not proof of completion. Do not treat task state as scientific gate admission.",
+  "notes": "Task state is an engineering queue, not a scientific/clinical claim. IDX-01 CI validation is passing at the cited baseline revision; orphan report integration and triage remain open.",
   "tasks": [
     {
       "id": "IDX-01",
       "priority": "P0",
-      "state": "ready",
+      "state": "in_progress",
       "depends_on": [],
       "summary": "Index diagnostics, link and orphan audit",
       "acceptance_source": "docs/agent-tasking.md",
-      "evidence": []
+      "evidence": [
+        "https://github.com/pskeffington/pauls_notes/actions/runs/41024862009"
+      ]
     },
     {
       "id": "IDX-02",
