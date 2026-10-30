@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs/agent-tasks.json"
 MANIFEST = ROOT / "oncology/book-manifest.json"
-ID = re.compile(r"^(?:IDX|DOC|CO|G|GOV|QA|REL)-[0-9]{2}$")
+ID = re.compile(r"^(?:IDX|DOC|CO|GOV|QA|REL)-[0-9]{2}|G[0-9]+-[0-9]{2}$")
 
 
 def validate(registry: dict, manifest: dict, root: Path) -> list[str]:
