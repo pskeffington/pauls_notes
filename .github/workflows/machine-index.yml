@@ -10,6 +10,8 @@ on:
       - 'scripts/validate_research_methods.py'
       - 'scripts/test_research_method_registry.py'
       - 'docs/research-method-map.json'
+      - 'docs/agent-tasks.json'
+      - 'llms.txt'
       - 'oncology/**'
       - 'scripts/validate_oncology_book.py'
       - 'scripts/validate_oncology_citations.py'
@@ -25,61 +27,71 @@ on:
       - '**/*.markdown'
       - 'oncology/**'
       - 'scripts/**'
+      - 'docs/agent-tasks.json'
+      - 'llms.txt'
       - '.github/workflows/machine-index.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          python-version: '3.12'
+          persist-credentials: false
+      - name: Install base R
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends r-base-core
+          python3 --version
+          Rscript --version
+      - name: Validate agent task registry
+        run: |
+          python3 scripts/check_agent_tasks.py
+          python3 scripts/test_agent_tasks.py
       - name: Test parser
-        run: python -m unittest discover -s scripts -p 'test_machine_index.py' -v
+        run: python3 -m unittest discover -s scripts -p 'test_machine_index.py' -v
       - name: Test index enrichment
-        run: python -m unittest discover -s scripts -p 'test_enrich_machine_index.py' -v
+        run: python3 -m unittest discover -s scripts -p 'test_enrich_machine_index.py' -v
       - name: Validate research method registry
         run: |
-          python scripts/validate_research_methods.py
-          python -m unittest discover -s scripts -p 'test_research_method_registry.py' -v
+          python3 scripts/validate_research_methods.py
+          python3 -m unittest discover -s scripts -p 'test_research_method_registry.py' -v
       - name: Validate oncology textbook manifest
         run: |
-          python scripts/validate_oncology_book.py
-          python -m unittest discover -s scripts -p 'test_oncology_book.py' -v
+          python3 scripts/validate_oncology_book.py
+          python3 -m unittest discover -s scripts -p 'test_oncology_book.py' -v
       - name: Validate oncology section citations
         run: |
-          python scripts/validate_oncology_citations.py
-          python -m unittest discover -s scripts -p 'test_oncology_citations.py' -v
+          python3 scripts/validate_oncology_citations.py
+          python3 -m unittest discover -s scripts -p 'test_oncology_citations.py' -v
       - name: Verify CO-05 arithmetic (Python)
         run: |
-          python oncology/examples/oncology_math.py
-          python -m unittest discover -s scripts -p 'test_oncology_math.py' -v
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'release'
+          python3 oncology/examples/oncology_math.py
+          python3 -m unittest discover -s scripts -p 'test_oncology_math.py' -v
       - name: Verify CO-05 arithmetic (base R)
         run: Rscript --vanilla oncology/examples/oncology_math.R
       - name: Verify CO-06 calculus and linear algebra (Python)
         run: |
-          python oncology/examples/oncology_calculus.py
-          python -m unittest discover -s scripts -p 'test_oncology_calculus.py' -v
+          python3 oncology/examples/oncology_calculus.py
+          python3 -m unittest discover -s scripts -p 'test_oncology_calculus.py' -v
       - name: Verify CO-06 calculus and linear algebra (base R)
         run: Rscript --vanilla oncology/examples/oncology_calculus.R
       - name: Generate index
-        run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
+        run: python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
       - name: Enrich and verify retrieval metadata
         run: |
-          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched.jsonl --section-citations oncology/evidence/section-citations.json
-          python scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched-replay.jsonl --section-citations oncology/evidence/section-citations.json
+          python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched.jsonl --section-citations oncology/evidence/section-citations.json
+          python3 scripts/enrich_machine_index.py --input /tmp/pauls-notes-index.jsonl --output /tmp/pauls-notes-enriched-replay.jsonl --section-citations oncology/evidence/section-citations.json
           cmp /tmp/pauls-notes-enriched.jsonl /tmp/pauls-notes-enriched-replay.jsonl
       - name: Verify deterministic replay
-        run: python scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
+        run: python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl --check
       - name: Validate JSONL identifiers and required fields
         run: |
-          python - <<'PY'
+          python3 - <<'PY'
           import json
           from pathlib import Path
           records = [json.loads(line) for line in Path('/tmp/pauls-notes-index.jsonl').read_text().splitlines()]
