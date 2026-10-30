@@ -36,6 +36,16 @@ class AgentTaskRegistryTests(unittest.TestCase):
         registry["tasks"][0]["evidence"] = []
         self.assertTrue(any("verified without recorded evidence" in error for error in validate(registry, self.manifest, ROOT)))
 
+    def test_verified_dependency_must_be_verified(self):
+        registry = copy.deepcopy(self.registry)
+        for task in registry["tasks"]:
+            if task["id"] == "IDX-01":
+                task["state"] = "planned"
+            if task["id"] == "IDX-02":
+                task["state"] = "verified"
+                task["evidence"] = ["https://example.org/checked"]
+        self.assertTrue(any("verified with unverified dependency IDX-01" in error for error in validate(registry, self.manifest, ROOT)))
+
 
 if __name__ == "__main__":
     unittest.main()
