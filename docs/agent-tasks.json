@@ -14,29 +14,31 @@
     "P1",
     "P2"
   ],
-  "notes": "Task state is an engineering queue, not a scientific/clinical claim. IDX-01 CI validation is passing at the cited baseline revision; orphan report integration and triage remain open.",
+  "notes": "Bounded index coverage, orphan navigation and task-registry graph checks were observed passing at commit b8a9d1cf210ba77b5860a62cf91d688a45f7326a. This does not assert latest-head CI or scientific/clinical validation.",
   "tasks": [
     {
       "id": "IDX-01",
       "priority": "P0",
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": [],
       "summary": "Index diagnostics, link and orphan audit",
       "acceptance_source": "docs/agent-tasking.md",
       "evidence": [
-        "https://github.com/pskeffington/pauls_notes/actions/runs/41024862009"
+        "https://github.com/pskeffington/pauls_notes/actions/runs/41025578262"
       ]
     },
     {
       "id": "IDX-02",
       "priority": "P0",
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": [
         "IDX-01"
       ],
       "summary": "Machine-readable task registry and validator",
       "acceptance_source": "docs/agent-tasking.md",
-      "evidence": []
+      "evidence": [
+        "https://github.com/pskeffington/pauls_notes/actions/runs/41025578262"
+      ]
     },
     {
       "id": "DOC-01",
