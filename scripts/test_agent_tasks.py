@@ -33,6 +33,7 @@ class AgentTaskRegistryTests(unittest.TestCase):
     def test_verified_requires_evidence(self):
         registry = copy.deepcopy(self.registry)
         registry["tasks"][0]["state"] = "verified"
+        registry["tasks"][0]["evidence"] = []
         self.assertTrue(any("verified without recorded evidence" in error for error in validate(registry, self.manifest, ROOT)))
 
 
