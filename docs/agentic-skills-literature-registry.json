@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-10-31",
+  "repository": "pskeffington/pauls_notes",
+  "source_document": "docs/agentic-skills-literature-matrix.md",
+  "verification_scope": "Bibliographic title, lead author, year, venue and source URL checked against linked research listings; no claim-level independent replication.",
+  "records": [
+    {
+      "id": "AG-LIT-01",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "year": 2023,
+      "publication_type": "conference",
+      "venue": "ICLR",
+      "lead_author": "Shunyu Yao",
+      "source_url": "https://mlanthology.org/iclr/2023/yao2023iclr-react/",
+      "topics": [
+        "reasoning",
+        "acting",
+        "tool-use"
+      ],
+      "priority_ids": [
+        "AG-M1"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-02",
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "year": 2023,
+      "publication_type": "conference",
+      "venue": "NeurIPS",
+      "lead_author": "Timo Schick",
+      "source_url": "https://proceedings.neurips.cc/paper_files/paper/2023/file/d842425e4bf79ba039352da0f658a906-Paper-Conference.pdf",
+      "topics": [
+        "tool-use",
+        "api"
+      ],
+      "priority_ids": [
+        "AG-M1"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-03",
+      "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+      "year": 2023,
+      "publication_type": "preprint",
+      "venue": "arXiv",
+      "lead_author": "Guanzhi Wang",
+      "source_url": "https://arxiv.org/abs/2305.16291",
+      "topics": [
+        "skill-library",
+        "lifelong-learning"
+      ],
+      "priority_ids": [
+        "AG-M2"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-04",
+      "title": "DSPy: Compiling Declarative Language Model Calls into State-of-the-Art Pipelines",
+      "year": 2024,
+      "publication_type": "conference",
+      "venue": "ICLR",
+      "lead_author": "Omar Khattab",
+      "source_url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/f1cf02ce09757f57c3b93c0db83181e0-Abstract-Conference.html",
+      "topics": [
+        "templating",
+        "optimization"
+      ],
+      "priority_ids": [
+        "AG-M1",
+        "AG-M2"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-05",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "year": 2020,
+      "publication_type": "conference",
+      "venue": "NeurIPS",
+      "lead_author": "Patrick Lewis",
+      "source_url": "https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
+      "topics": [
+        "rag",
+        "retrieval"
+      ],
+      "priority_ids": [
+        "AG-M3"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-06",
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "year": 2023,
+      "publication_type": "conference",
+      "venue": "NeurIPS",
+      "lead_author": "Noah Shinn",
+      "source_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html",
+      "topics": [
+        "feedback",
+        "recovery"
+      ],
+      "priority_ids": [
+        "AG-M5"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-07",
+      "title": "SWE-bench: Can Language Models Resolve Real-world Github Issues?",
+      "year": 2024,
+      "publication_type": "conference",
+      "venue": "ICLR",
+      "lead_author": "Carlos E. Jimenez",
+      "source_url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/edac78c3e300629acfe6cbe9ca88fb84-Abstract-Conference.html",
+      "topics": [
+        "software-evaluation",
+        "benchmark"
+      ],
+      "priority_ids": [
+        "AG-M4"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-08",
+      "title": "AgentBench: Evaluating LLMs as Agents",
+      "year": 2024,
+      "publication_type": "conference",
+      "venue": "ICLR",
+      "lead_author": "Xiao Liu",
+      "source_url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/e9df36b21ff4ee211a8b71ee8b7e9f57-Abstract-Conference.html",
+      "topics": [
+        "agent-evaluation",
+        "benchmark"
+      ],
+      "priority_ids": [
+        "AG-M4"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    },
+    {
+      "id": "AG-LIT-09",
+      "title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+      "year": 2023,
+      "publication_type": "preprint",
+      "venue": "arXiv",
+      "lead_author": "Kai Greshake",
+      "source_url": "https://arxiv.org/abs/2302.12173",
+      "topics": [
+        "prompt-injection",
+        "security"
+      ],
+      "priority_ids": [
+        "AG-M3",
+        "AG-M5"
+      ],
+      "evidence_role": "literature",
+      "limitations": "See human-readable matrix; transfer to repository is an engineering proposal, not validated experimental outcome."
+    }
+  ]
+}
