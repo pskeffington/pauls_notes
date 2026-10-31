@@ -60,6 +60,8 @@ acceptance:
 
 **Repository-specific safeguards:** keep research-source licensing and privacy boundaries intact; never send controlled biomedical data, credentials or participant-linked records to an unapproved model endpoint. An agent's successful code execution is **not** proof of scientific validity, clinical readiness or deployment safety.
 
+**Scholarly evidence:** [Literature matrix — authors, methods, limitations and research priorities](docs/agentic-skills-literature-matrix.md).
+
 **Related reading:** [Machine-readable indexing and RAG contract](docs/machine-index.md) · [Reproducible research workflow](docs/research-workflow.md) · [Research record template](templates/analysis-record.md) · [Contributing and validation](CONTRIBUTING.md) · [Git/GitHub foundations](03_learning/git-github-from-zero-to-push.md).
 
 ## Start here
