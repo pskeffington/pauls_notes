@@ -3,6 +3,8 @@
 **Scope:** Research supporting reusable agent skills, tool integration, planning, retrieval, evaluation, and security.  
 **Reviewed:** 2026-10-31. **Evidence rule:** Publications below are external research; suggested adoption is an engineering inference, not a result measured in this repository.
 
+**Machine-readable bibliography:** [JSON publication registry](agentic-skills-literature-registry.json) with stable AG-LIT identifiers, primary URLs, research topics, publication classes and priority links. Bibliographic verification does not imply experimental replication or full claim-level source review.
+
 ## Matrix
 
 | ID | Authors / year | Publication and venue | Method / contribution | Limitations / transfer risks | Implication for Paul's Notes |
