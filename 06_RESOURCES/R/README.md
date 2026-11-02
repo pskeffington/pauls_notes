@@ -15,7 +15,7 @@
 | Compact plotting calls | [One-call source](one_call_plots.R) and [guide](../ONE_CALL_PLOTS.md) |
 | Interactive plotting | [Plotly helpers](plotly_visuals.R) |
 | Colors and scales | [Scientific palette](scientific_palette.R) |
-| Synthetic cohort | [Practice data generator](teaching_data.R) |
+| Synthetic cohort | [Practice data generator](teaching_data.R) |\n| Synthetic HSE-style biomarker and hemoglobin fixtures | [Synthetic biostat generator](synthetic_biostat.R) |\n| Evidence-bound biomedical Results narratives | [Narrative helpers](biomedical_narrative.R) and [method/usage guide](../../02_biomedical_coding/SYNTHETIC_BIOSTAT_NARRATIVE.md) |
 
 Run scripts from the repository root. R and packages used by the selected helper must be installed; consult its `requireNamespace` or package calls. Tests use packages including ggplot2; interactive helpers also require plotly. Record the installed versions in the study's dependency manifest.
 
