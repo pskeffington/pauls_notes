@@ -44,7 +44,7 @@ cat(pn_narrate_sampling(result, unit = "g/dL"))
 # 05 | NORMALITY ASSUMPTION AUDIT
 # ================================================================
 diagnostics <- pn_normality_diagnostics(x)
-print(diagnostics)
+print(diagnostics)\ncat(pn_narrate_normality(diagnostics, group = "Reference"))
 ```
 
 When knitting, use a results='asis' chunk for Markdown prose if required, or regular output for verbatim narrative. To keep source text personal, code comments can be used as operator notes; the narrative text is derived from numeric objects.
