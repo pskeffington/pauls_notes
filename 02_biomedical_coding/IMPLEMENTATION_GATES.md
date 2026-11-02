@@ -45,3 +45,7 @@
 
 
 [Return to matrix](BIOMEDICAL_CODING_LITERATURE_MATRIX.md).
+
+## Descriptive figure regression checks
+
+For manuscript-oriented descriptive plots, apply [descriptive figure regression standards](DESCRIPTIVE_FIGURE_REGRESSION_STANDARDS.md) before clearing G2/G7/G8. These document observed ggplot2 manual-scale key collisions caused by named palette subsetting, in-panel legends obscuring data, and skewed violin densities requiring explicit axis transformations and original-scale estimator markers. The paired synthetic fixtures are in `scripts/test_descriptive_figure_contracts.R`. Screenshots are diagnostic inputs only; do not commit figures or participant-level records. Distinguish a *test specified* from a *test executed and passed*.
