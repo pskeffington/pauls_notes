@@ -39,7 +39,7 @@ negative <- c(0, -2, 3)
 stopifnot(!all(negative >= 0))
 
 if (requireNamespace("ggplot2", quietly = TRUE)) {
-  demo <- data.frame(group = groups, value = c(0, 1, 9))
+  demo <- data.frame(\n    group = factor(rep(c("Female", "Male"), each = 5), levels = c("Female", "Male")),\n    value = c(0, 1, 3, 5, 9, 0.5, 2, 4, 6, 10)\n  )
   p <- ggplot2::ggplot(demo,
           ggplot2::aes(x = group, y = value, fill = group)) +
        ggplot2::geom_violin(scale = "width", trim = TRUE) +
