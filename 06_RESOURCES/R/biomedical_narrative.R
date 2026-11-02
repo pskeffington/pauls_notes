@@ -128,3 +128,30 @@ pn_narrate_sampling <- function(result, unit = "g/dL") {
           result$tail, result$observed_mean, unit,
           pn_probability_label(result$one_sided_probability))
 }
+
+pn_narrate_normality <- function(result, group = "Sample", alpha = 0.05) {
+  if (!is.list(result) || !all(c("n", "shapiro_w", "shapiro_p") %in% names(result)))
+    stop("Use pn_normality_diagnostics() output.")
+  if (length(alpha) != 1L || !is.numeric(alpha) || !is.finite(alpha) ||
+      alpha <= 0 || alpha >= 1) stop("alpha must lie between 0 and 1.")
+  if (!is.finite(result$shapiro_p))
+    return(sprintf("%s: Shapiro-Wilk unavailable (n = %d); inspect data adequacy.", group, result$n))
+  decision <- if (result$shapiro_p < alpha)
+    "evidence against the normal-reference model" else
+    "insufficient evidence against the normal-reference model"
+  sprintf("%s (n = %d): Shapiro-Wilk W = %.3f, p = %s; %s at alpha = %.2f. Neither outcome establishes the underlying population distribution; assess Q-Q plots and analysis assumptions.",
+          group, result$n, result$shapiro_w,
+          pn_probability_label(result$shapiro_p), decision, alpha)
+}
+
+pn_narrate_geometric_contrast <- function(stats, reference, comparison, unit = "mg/L") {
+  if (!is.data.frame(stats) || !all(c("group", "geometric_mean") %in% names(stats)))
+    stop("Use pn_geometric_descriptives() output.")
+  a <- stats$geometric_mean[stats$group == reference]
+  b <- stats$geometric_mean[stats$group == comparison]
+  if (length(a) != 1L || length(b) != 1L ||
+      !is.finite(a) || !is.finite(b) || a <= 0 || b <= 0)
+    stop("Two distinct groups with positive geometric means required.")
+  sprintf("Observed geometric mean of %s: %.3f %s versus %s: %.3f %s; descriptive ratio (%s / %s) = %.3f. No hypothesis test or causal inference is implied.",
+          comparison, b, unit, reference, a, unit, comparison, reference, b / a)
+}
