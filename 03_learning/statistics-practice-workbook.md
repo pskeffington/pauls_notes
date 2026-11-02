@@ -45,6 +45,10 @@ For each item, also state **one common incorrect test** (for example, a row-inde
 
 All values are invented. The lab runs with **base R** and creates no reports or patient records.
 
+### Block 1 — Method and executable code
+
+The independent unit is a synthetic person, with 16 unique people equally allocated to two groups. The analysis compares group means and a paired within-person difference. The following original code and arithmetic assertions are preserved exactly.
+
 ```r
 source("03_learning/examples/statistical_test_lab.R")
 d <- make_statistical_test_lab()
@@ -66,6 +70,23 @@ stopifnot(isTRUE(all.equal(difference, 3.875)),
 stopifnot(a$welch$p.value >= 0, a$welch$p.value <= 1,
           a$fisher$p.value >= 0, a$fisher$p.value <= 1)
 ```
+
+### Block 2 — Numerical output and validation
+
+Execute the original fixture before recording its results. The assertions in Block 1 check the known fixture values; they do **not** constitute an independently executed result in this Markdown document.
+
+| Quantity | Fixture expectation | Source / denominator | Execution status in this document |
+| --- | ---: | --- | --- |
+| Total observations | 16 | One row per unique synthetic person | Not run |
+| Participants per group | 8 | Group membership, 16 people total | Not run |
+| Comparison minus Reference mean | +3.875 arbitrary units | Two independent groups of 8 | Not run |
+| Mean within-person after minus before | +1.6875 arbitrary units | 16 matched pairs | Not run |
+
+The fixture's p-values and other estimates must be collected from the executing R session; none are presented here as independently validated numerical findings.
+
+### Block 3 — Scientific interpretation
+
+The difference in synthetic group means and paired within-person change are descriptive properties of invented observations. The pairing is determined by repeated measurements of the same person. Neither a positive difference nor a successful assertion proves that any intervention is effective. The fixture is not an efficacy study and cannot establish causation.
 
 **Write out the answer to these four interpretation prompts:** What is the outcome data type for `marker_au`? Is `diagnosis` categorical even though logistic regression accepts a 0/1 coding? Why are `before_au` and `after_au` paired? Does the difference `+3.875` mean that an intervention is effective? Explain why or why not.
 
