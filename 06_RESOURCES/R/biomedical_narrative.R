@@ -28,7 +28,7 @@ pn_group_descriptives <- function(data, value, group) {
                median = if (n) stats::median(x) else NA_real_,
                q1 = q[1], q3 = q[2], iqr = q[2] - q[1],
                min = if (n) min(x) else NA_real_,
-               max = if (n) max(x) else NA_real_))
+               max = if (n) max(x) else NA_real_)
   }))
 }
 
