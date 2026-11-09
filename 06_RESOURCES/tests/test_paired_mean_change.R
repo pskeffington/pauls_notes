@@ -28,7 +28,7 @@ stopifnot(
   isTRUE(all.equal(result$degrees_freedom, unname(expected$parameter))),
   isTRUE(all.equal(result$p_value, expected$p.value)),
   isTRUE(all.equal(c(result$ci_lower, result$ci_upper),
-                   unname(expected$conf.int)))
+                   as.numeric(expected$conf.int)))
 )
 
 permuted <- paired_mean_change(data[c(5, 7, 2, 8, 1, 4, 6, 3), ],
