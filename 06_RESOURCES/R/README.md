@@ -6,6 +6,9 @@
 | --- | --- |
 | **Pick an appropriate statistical test** | [Data-type-first biomedical statistics guide](../../03_learning/biomedical-statistics-decision-guide.md) with a decision flowchart and examples |
 | **Reusable two-group Welch mean test + ggplot2 CI** | [Generic Welch comparison](welch_mean_comparison.R), [usage and assumptions](../WELCH_MEAN_COMPARISON.md), and [synthetic regression tests](../tests/test_welch_mean_comparison.R) |
+| **Biomedical method decision adviser (no automatic inference)** | [R decision selector](biomedical_test_selector.R), [design-first flowchart](../BIOMEDICAL_TEST_DECISION_TREE.md), [literature crosswalk](../Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) |
+| **ID-aligned paired mean change and ggplot2 CI** | [Reusable paired t-test](paired_mean_change.R) · [synthetic tests](../tests/test_paired_mean_change.R) |
+| **Three-plus independent group means** | [Welch one-way ANOVA](welch_oneway_comparison.R), [synthetic tests](../tests/test_welch_oneway_comparison.R); omnibus only, no unadjusted pairwise claims |
 | Synthetic biomedical hypothesis-test teaching lab | [Base-R statistical test lab](../../03_learning/examples/statistical_test_lab.R) and [numerical/negative-case tests](../../03_learning/tests/test_statistical_test_lab.R) |
 | General summaries and graphs | [Reusable functions](Reusable_Functions.R) |
 | Statistical plot helpers | [Statistics and plots](stats_plots.R) |
@@ -22,6 +25,9 @@ Run scripts from the repository root. R and packages used by the selected helper
 
 ```bash
 Rscript --vanilla 06_RESOURCES/tests/test_stats_plots.R
+Rscript --vanilla 06_RESOURCES/tests/test_biomedical_test_selector.R
+Rscript --vanilla 06_RESOURCES/tests/test_paired_mean_change.R
+Rscript --vanilla 06_RESOURCES/tests/test_welch_oneway_comparison.R
 Rscript --vanilla 06_RESOURCES/tests/test_specialist_visuals.R
 Rscript --vanilla 06_RESOURCES/Genomics/FIGURES/gene_companion_walkthrough.R
 ```
