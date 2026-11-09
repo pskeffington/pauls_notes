@@ -4,10 +4,10 @@ This toolkit converts computed research statistics into **reusable, auditable Re
 
 ## Files
 
-- [`biomedical_narrative.R`](../../06_RESOURCES/R/biomedical_narrative.R) - group summaries, positive-only geometric means, Shapiro-Wilk (optional Anderson-Darling and Lilliefors), central-limit normal approximation, directional tail probability, and tightly conditioned narrative.
-- [`synthetic_biostat.R`](../../06_RESOURCES/R/synthetic_biostat.R) - reproducible, fictitious participants with missing values and one zero biomarker.
-- [`test_biomedical_narrative.R`](../../06_RESOURCES/tests/test_biomedical_narrative.R) - positive and negative fixtures.
-- Existing shared code: [stats_plots.R](../../06_RESOURCES/R/stats_plots.R), [scientific_palette.R](../../06_RESOURCES/R/scientific_palette.R), [teaching_data.R](../../06_RESOURCES/R/teaching_data.R), and [statistical_test_lab.R](../../03_learning/examples/statistical_test_lab.R). Reuse these, do not fork their implementations.
+- [`biomedical_narrative.R`](../06_RESOURCES/R/biomedical_narrative.R) - group summaries, positive-only geometric means, Shapiro-Wilk (optional Anderson-Darling and Lilliefors), central-limit normal approximation, directional tail probability, and tightly conditioned narrative.
+- [`synthetic_biostat.R`](../06_RESOURCES/R/synthetic_biostat.R) - reproducible, fictitious participants with missing values and one zero biomarker.
+- [`test_biomedical_narrative.R`](../06_RESOURCES/tests/test_biomedical_narrative.R) - positive and negative fixtures.
+- Existing shared code: [stats_plots.R](../06_RESOURCES/R/stats_plots.R), [scientific_palette.R](../06_RESOURCES/R/scientific_palette.R), [teaching_data.R](../06_RESOURCES/R/teaching_data.R), and [statistical_test_lab.R](../03_learning/examples/statistical_test_lab.R). Reuse these, do not fork their implementations.
 
 ## R Markdown use (one setup, reusable named chunks)
 
