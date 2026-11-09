@@ -22,6 +22,8 @@ Begin with the question, then identify the observations, axes, units and groups.
 | Principal component plot | Points locate samples on components summarizing variation in the input matrix. Axis labels may show the variance explained. | Separation depends on preprocessing and feature selection; it does not itself validate a classifier or identify a cause. |
 | Volcano plot | Horizontal position shows an effect such as log-fold change; vertical position often shows a negative log p-value or adjusted p-value. | Read the actual labels and thresholds. Counts, the fitted model and multiple-testing choices determine the inference; plotted prominence alone does not establish biological importance. |
 
+For gene-expression heatmaps with metadata tracks, row-wise color scaling and two-sided z-score tail bars, follow the [annotated heatmap best-practices guide](Genomics/HEATMAP_BEST_PRACTICES.md). Tail-bar lengths are per-gene percentages of observed samples, **not** z-score units or a differential-expression test.
+
 ## Explain a line, a band or a p-value
 
 In the reusable scatter functions, an optional straight line is a least-squares fit. With grouped points, `plt_scatter(fit = TRUE)` fits **one pooled line**. Its shaded confidence band describes uncertainty in the estimated mean response; it does not contain a fixed percentage of individual observations.

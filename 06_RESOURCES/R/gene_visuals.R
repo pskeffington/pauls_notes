@@ -43,6 +43,38 @@ top_variable_genes <- function(expr, n = 50L) {
   rownames(expr)[head(order(-gene_variance, rownames(expr)), min(n, nrow(expr)))]
 }
 
+
+# Gene-wise percentages of observed z-scores outside +/- threshold.
+# Input is already row-standardized: genes in rows, samples in columns.
+# This function does NOT normalize counts or compute z-scores.
+row_z_tail_percentages <- function(hm_z, threshold = 1) {
+  if (!is.matrix(hm_z) || !is.numeric(hm_z) ||
+      any(dim(hm_z) == 0L))
+    stop("hm_z must be a nonempty numeric genes-by-samples matrix.")
+  if (is.null(rownames(hm_z)) || is.null(colnames(hm_z)) ||
+      anyNA(rownames(hm_z)) || anyNA(colnames(hm_z)) ||
+      any(!nzchar(trimws(rownames(hm_z)))) ||
+      any(!nzchar(trimws(colnames(hm_z)))) ||
+      anyDuplicated(rownames(hm_z)) || anyDuplicated(colnames(hm_z)))
+    stop("Gene and sample identifiers must be unique and nonblank.")
+  if (any(is.nan(hm_z)) || any(is.infinite(hm_z)))
+    stop("Resolve NaN/Inf row-scaling values before counting z-score tails.")
+  if (!is.numeric(threshold) || length(threshold) != 1L ||
+      !is.finite(threshold) || threshold <= 0)
+    stop("threshold must be one positive finite number.")
+
+  n_obs <- rowSums(!is.na(hm_z))
+  if (any(n_obs == 0L))
+    stop("All-missing gene rows have undefined z-score tail percentages.")
+
+  z_pct <- cbind(
+    Low = 100 * rowSums(hm_z < -threshold, na.rm = TRUE) / n_obs,
+    High = 100 * rowSums(hm_z > threshold, na.rm = TRUE) / n_obs
+  )
+  rownames(z_pct) <- rownames(hm_z)
+  z_pct
+}
+
 # Heatmap: select genes FIRST (avoids materializing a full long table).
 # center_rows=TRUE highlights within-gene sample differences. Z-scores
 # are not absolute gene abundance and should be labeled accordingly.
