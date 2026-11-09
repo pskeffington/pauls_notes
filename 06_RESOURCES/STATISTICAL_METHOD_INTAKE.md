@@ -7,7 +7,9 @@
 1. Search `06_RESOURCES/R/`, `03_learning/examples/`, existing tests and method guides before introducing another method. Distinguish tutorial usage from a reusable method with a documented data/argument contract.
 2. If the method exists as a reusable tested helper, reuse or improve that helper rather than cloning the implementation.
 3. If absent as a reusable helper, introduce a neutral function in `06_RESOURCES/R/` with corresponding synthetic-only tests in `06_RESOURCES/tests/`; document it and link it from `06_RESOURCES/R/README.md`.
-4. Use a feature branch and pull request, retaining the existing implementation unchanged unless a defect or clear extension justifies modifying it.
+4. For each new method family, update the [literature registry](Literature/biostatistics_r_literature_2021_2026.csv), [source-to-method matrix](Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md), [design-first flowchart](BIOMEDICAL_TEST_DECISION_TREE.md), and [method registry](../docs/research-method-map.json) using verified primary references and explicit methodological limits.
+5. Add synthetic tests for method routing, evidence paths, invalid designs and consistency between table/figure result objects; register the tests in CI.
+6. Use a feature branch and pull request, retaining the existing implementation unchanged unless a defect or clear extension justifies modifying it.
 
 ## Input and naming contract
 
