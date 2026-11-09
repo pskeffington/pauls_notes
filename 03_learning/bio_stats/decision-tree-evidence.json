@@ -1,0 +1,511 @@
+{
+  "reviewed": "2026-10-22",
+  "chart": "../biomedical-statistics-decision-guide.md",
+  "source": "../examples/paper_linked_tests.R",
+  "papers": [
+    {
+      "id": "BS-001",
+      "authors": "Chicco, Sichenze & Jurman",
+      "year": 2025,
+      "title": "A simple guide to the use of Student's t-test, Mann-Whitney U test, Chi-squared test, and Kruskal-Wallis test in biostatistics",
+      "identifier": "10.1186/s13040-025-00465-6",
+      "url": "https://doi.org/10.1186/s13040-025-00465-6",
+      "locator": "Methods; Results: Tests on artificial data; Tables 9 and 10",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "BS-002",
+      "authors": "Muhammad",
+      "year": 2023,
+      "title": "Guidelines for repeated measures statistical analysis approaches with basic science research considerations",
+      "identifier": "10.1172/JCI171058",
+      "url": "https://doi.org/10.1172/JCI171058",
+      "locator": "Comparison of statistical approaches using simulated data; Table 1",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "BS-009",
+      "authors": "West",
+      "year": 2021,
+      "title": "Best practice in statistics: Use the Welch t-test when testing the difference between two groups",
+      "identifier": "10.1177/0004563221992088",
+      "url": "https://doi.org/10.1177/0004563221992088",
+      "locator": "Abstract and comparison of Student and Welch procedures",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-001",
+      "authors": "Roberson, Shema, Mundfrom & Holmes",
+      "year": 1995,
+      "title": "Analysis of paired Likert data: how to evaluate change and preference questions",
+      "identifier": "PMID:8582561",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8582561/",
+      "locator": "Abstract: Methods and Results; paired simulated Likert comparisons",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-002",
+      "authors": "Gurski & Dittel",
+      "year": 2026,
+      "title": "Making multiple comparisons easy: a decision tree and visual statistics guide for data with more than two groups",
+      "identifier": "10.1093/immhor/vlaf072",
+      "url": "https://doi.org/10.1093/immhor/vlaf072",
+      "locator": "Statistical principles; ANOVA and multiple comparisons",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-003",
+      "authors": "Schober, Boer & Schwarte",
+      "year": 2018,
+      "title": "Correlation Coefficients: Appropriate Use and Interpretation",
+      "identifier": "10.1213/ANE.0000000000002864",
+      "url": "https://doi.org/10.1213/ANE.0000000000002864",
+      "locator": "Abstract; Pearson and Spearman interpretation",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-004",
+      "authors": "Green",
+      "year": 2021,
+      "title": "Too many zeros and/or highly skewed? A tutorial on modelling health behaviour as count data with Poisson and negative binomial regression",
+      "identifier": "10.1080/21642850.2021.1920416",
+      "url": "https://doi.org/10.1080/21642850.2021.1920416",
+      "locator": "Methods and worked count-regression examples; abstract inspected",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-005",
+      "authors": "Clopper & Pearson",
+      "year": 1934,
+      "title": "The use of confidence or fiducial limits illustrated in the case of the binomial",
+      "identifier": "10.1093/biomet/26.4.404",
+      "url": "https://doi.org/10.1093/biomet/26.4.404",
+      "locator": "Original interval method; implementation verified against stats::binom.test manual",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-006",
+      "authors": "Kim",
+      "year": 2017,
+      "title": "Statistical notes for clinical researchers: Chi-squared test and Fisher's exact test",
+      "identifier": "10.5395/rde.2017.42.2.152",
+      "url": "https://doi.org/10.5395/rde.2017.42.2.152",
+      "locator": "Chi-squared test; Fisher's exact test; Table 1 Example 3",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-007",
+      "authors": "Fagerland, Lydersen & Laake",
+      "year": 2013,
+      "title": "The McNemar test for binary matched-pairs data: mid-p and asymptotic are better than exact conditional",
+      "identifier": "10.1186/1471-2288-13-91",
+      "url": "https://doi.org/10.1186/1471-2288-13-91",
+      "locator": "Background; Methods equations 1-5; Tables 1 and 6",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-008",
+      "authors": "Selman et al.",
+      "year": 2024,
+      "title": "Statistical analyses of ordinal outcomes in randomised controlled trials: a scoping review",
+      "identifier": "10.1186/s13063-024-08072-2",
+      "url": "https://doi.org/10.1186/s13063-024-08072-2",
+      "locator": "Background: proportional odds, multinomial, Wilcoxon and binary models; Results",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-009",
+      "authors": "Bates, Maechler, Bolker & Walker",
+      "year": 2015,
+      "title": "Fitting Linear Mixed-Effects Models Using lme4",
+      "identifier": "10.18637/jss.v067.i01",
+      "url": "https://doi.org/10.18637/jss.v067.i01",
+      "locator": "Model specification and lmer implementation; abstract and current manual inspected",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-010",
+      "authors": "Hojsgaard, Halekoh & Yan",
+      "year": 2006,
+      "title": "The R Package geepack for Generalized Estimating Equations",
+      "identifier": "10.18637/jss.v015.i02",
+      "url": "https://doi.org/10.18637/jss.v015.i02",
+      "locator": "Marginal generalized linear models for clustered data; geeglm manual",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-011",
+      "authors": "Lumley",
+      "year": 2004,
+      "title": "Analysis of Complex Survey Samples",
+      "identifier": "10.18637/jss.v009.i08",
+      "url": "https://doi.org/10.18637/jss.v009.i08",
+      "locator": "Survey design and design-based analysis; publisher record",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-012",
+      "authors": "Clark, Bradburn, Love & Altman",
+      "year": 2003,
+      "title": "Survival Analysis Part I: Basic concepts and first analyses",
+      "identifier": "10.1038/sj.bjc.6601118",
+      "url": "https://doi.org/10.1038/sj.bjc.6601118",
+      "locator": "Kaplan-Meier estimation and survival comparison; ovarian cancer worked example",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-013",
+      "authors": "Bradburn, Clark, Love & Altman",
+      "year": 2003,
+      "title": "Survival Analysis Part II: Multivariate data analysis - an introduction to concepts and methods",
+      "identifier": "10.1038/sj.bjc.6601119",
+      "url": "https://doi.org/10.1038/sj.bjc.6601119",
+      "locator": "Cox proportional hazards modeling and adjusted interpretation",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-014",
+      "authors": "Austin, Lee & Fine",
+      "year": 2016,
+      "title": "Introduction to the Analysis of Survival Data in the Presence of Competing Risks",
+      "identifier": "10.1161/CIRCULATIONAHA.115.017719",
+      "url": "https://doi.org/10.1161/CIRCULATIONAHA.115.017719",
+      "locator": "Cumulative incidence and competing hazards; EFFECT heart-failure case study",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-015",
+      "authors": "Love, Huber & Anders",
+      "year": 2014,
+      "title": "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2",
+      "identifier": "10.1186/s13059-014-0550-8",
+      "url": "https://doi.org/10.1186/s13059-014-0550-8",
+      "locator": "Negative-binomial models, dispersion estimation and Wald tests; current vignette",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-016",
+      "authors": "Robinson, McCarthy & Smyth",
+      "year": 2010,
+      "title": "edgeR: a Bioconductor package for differential expression analysis of digital gene expression data",
+      "identifier": "10.1093/bioinformatics/btp616",
+      "url": "https://doi.org/10.1093/bioinformatics/btp616",
+      "locator": "Replicated count data and empirical Bayes negative-binomial modeling; PubMed abstract",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-017",
+      "authors": "Law, Chen, Shi & Smyth",
+      "year": 2014,
+      "title": "voom: precision weights unlock linear model analysis tools for RNA-seq read counts",
+      "identifier": "10.1186/gb-2014-15-2-r29",
+      "url": "https://doi.org/10.1186/gb-2014-15-2-r29",
+      "locator": "Mean-variance weights, simulations and two case studies",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-018",
+      "authors": "Ritchie et al.",
+      "year": 2015,
+      "title": "limma powers differential expression analyses for RNA-sequencing and microarray studies",
+      "identifier": "10.1093/nar/gkv007",
+      "url": "https://doi.org/10.1093/nar/gkv007",
+      "locator": "Linear models and empirical Bayes moderation for assay data; PubMed abstract",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-019",
+      "authors": "Benjamini & Hochberg",
+      "year": 1995,
+      "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+      "identifier": "10.1111/j.2517-6161.1995.tb02031.x",
+      "url": "https://doi.org/10.1111/j.2517-6161.1995.tb02031.x",
+      "locator": "Step-up procedure and independence result; publisher abstract",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-020",
+      "authors": "Sterne et al.",
+      "year": 2009,
+      "title": "Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls",
+      "identifier": "10.1136/bmj.b2393",
+      "url": "https://doi.org/10.1136/bmj.b2393",
+      "locator": "Missingness assumptions and sensitivity; not a generic imputation recipe",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-021",
+      "authors": "Welch",
+      "year": 1951,
+      "title": "On the comparison of several mean values: an alternative approach",
+      "identifier": "10.1093/biomet/38.3-4.330",
+      "url": "https://doi.org/10.1093/biomet/38.3-4.330",
+      "locator": "Unequal-variance comparison of several means; publisher record",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-022",
+      "authors": "Aggarwal & Ranganathan",
+      "year": 2017,
+      "title": "Common pitfalls in statistical analysis: Linear regression analysis",
+      "identifier": "10.4103/2229-3485.203040",
+      "url": "https://doi.org/10.4103/2229-3485.203040",
+      "locator": "Linear response model and assumptions; PubMed record",
+      "checked": "2026-10-22"
+    },
+    {
+      "id": "AT-023",
+      "authors": "Ranganathan, Pramesh & Aggarwal",
+      "year": 2017,
+      "title": "Common pitfalls in statistical analysis: Logistic regression",
+      "identifier": "10.4103/picr.PICR_87_17",
+      "url": "https://doi.org/10.4103/picr.PICR_87_17",
+      "locator": "Binary response, adjusted odds ratios and regression assumptions; PubMed record",
+      "checked": "2026-10-22"
+    }
+  ],
+  "nodes": [
+    {
+      "node": "A",
+      "paper_ids": [
+        "BS-001"
+      ],
+      "outputs": [],
+      "section": "decision-objects",
+      "execution": "design_gate"
+    },
+    {
+      "node": "B",
+      "paper_ids": [
+        "BS-001"
+      ],
+      "outputs": [],
+      "section": "decision-objects",
+      "execution": "design_gate"
+    },
+    {
+      "node": "C",
+      "paper_ids": [
+        "AT-004"
+      ],
+      "outputs": [],
+      "section": "decision-objects",
+      "execution": "design_gate"
+    },
+    {
+      "node": "D",
+      "paper_ids": [
+        "AT-008"
+      ],
+      "outputs": [],
+      "section": "decision-objects",
+      "execution": "design_gate"
+    },
+    {
+      "node": "E",
+      "paper_ids": [
+        "BS-002"
+      ],
+      "outputs": [],
+      "section": "decision-objects",
+      "execution": "design_gate"
+    },
+    {
+      "node": "N",
+      "paper_ids": [
+        "AT-006",
+        "AT-007"
+      ],
+      "outputs": [],
+      "section": "decision-objects",
+      "execution": "design_gate"
+    },
+    {
+      "node": "T",
+      "paper_ids": [
+        "BS-009",
+        "BS-001"
+      ],
+      "outputs": [
+        "welch",
+        "rank_sum"
+      ],
+      "section": "t-independent-continuous-outcomes",
+      "execution": "runnable"
+    },
+    {
+      "node": "P",
+      "paper_ids": [
+        "BS-001",
+        "AT-001"
+      ],
+      "outputs": [
+        "paired_t",
+        "signed_rank",
+        "sign"
+      ],
+      "section": "p-paired-continuous-outcomes",
+      "execution": "runnable"
+    },
+    {
+      "node": "AN",
+      "paper_ids": [
+        "AT-002",
+        "AT-021",
+        "BS-001"
+      ],
+      "outputs": [
+        "anova",
+        "welch_anova",
+        "kruskal_wallis"
+      ],
+      "section": "an-three-or-more-independent-groups",
+      "execution": "runnable"
+    },
+    {
+      "node": "CR",
+      "paper_ids": [
+        "AT-003",
+        "AT-022"
+      ],
+      "outputs": [
+        "pearson",
+        "spearman",
+        "linear"
+      ],
+      "section": "cr-two-quantitative-variables",
+      "execution": "runnable"
+    },
+    {
+      "node": "R",
+      "paper_ids": [
+        "AT-004"
+      ],
+      "outputs": [
+        "poisson",
+        "negative_binomial"
+      ],
+      "section": "r-counts-and-rates",
+      "execution": "runnable"
+    },
+    {
+      "node": "BIN",
+      "paper_ids": [
+        "AT-005"
+      ],
+      "outputs": [
+        "binomial"
+      ],
+      "section": "bin-one-proportion",
+      "execution": "runnable"
+    },
+    {
+      "node": "CH",
+      "paper_ids": [
+        "AT-006",
+        "AT-008",
+        "AT-023"
+      ],
+      "outputs": [
+        "chi_square",
+        "fisher",
+        "logistic",
+        "multinomial"
+      ],
+      "section": "ch-independent-categorical-outcomes",
+      "execution": "runnable"
+    },
+    {
+      "node": "MC",
+      "paper_ids": [
+        "AT-007"
+      ],
+      "outputs": [
+        "published.mcnemar",
+        "published.mcnemar_cc",
+        "published.mcnemar_exact",
+        "published.mcnemar_mid_p"
+      ],
+      "section": "mc-paired-binary-outcomes",
+      "execution": "runnable"
+    },
+    {
+      "node": "O",
+      "paper_ids": [
+        "AT-008"
+      ],
+      "outputs": [
+        "ordinal_rank",
+        "ordinal",
+        "ordinal_po_check"
+      ],
+      "section": "o-ordered-outcomes",
+      "execution": "runnable"
+    },
+    {
+      "node": "MX",
+      "paper_ids": [
+        "BS-002",
+        "AT-009",
+        "AT-010",
+        "AT-011"
+      ],
+      "outputs": [
+        "mixed",
+        "mixed_lrt",
+        "gee",
+        "survey"
+      ],
+      "section": "mx-repeated-clustered-and-survey-designs",
+      "execution": "runnable"
+    },
+    {
+      "node": "S",
+      "paper_ids": [
+        "AT-012",
+        "AT-013",
+        "AT-014"
+      ],
+      "outputs": [
+        "kaplan_meier",
+        "log_rank",
+        "cox",
+        "cox_ph_check",
+        "cumulative_incidence"
+      ],
+      "section": "s-time-to-event-and-competing-risks",
+      "execution": "runnable"
+    },
+    {
+      "node": "H",
+      "paper_ids": [
+        "AT-015",
+        "AT-016",
+        "AT-017",
+        "AT-018",
+        "AT-019"
+      ],
+      "outputs": [
+        "deseq2",
+        "edger",
+        "voom_limma",
+        "intensity_limma"
+      ],
+      "section": "h-many-molecular-features",
+      "execution": "runnable"
+    },
+    {
+      "node": "Z",
+      "paper_ids": [
+        "BS-002",
+        "AT-019",
+        "AT-020"
+      ],
+      "outputs": [
+        "Z"
+      ],
+      "section": "z-final-verification",
+      "execution": "runnable"
+    }
+  ]
+}
