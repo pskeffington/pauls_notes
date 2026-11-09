@@ -79,7 +79,7 @@ biomedical_method_decision <- function(
     result
   }
 
-  if (question == "describe")
+  if (question == "describe" && design == "independent")
     return(decision(
       "descriptive", "Descriptive analysis (no hypothesis test)",
       "implemented", "describe_measurements(data, value, group = NULL)",
@@ -96,7 +96,7 @@ biomedical_method_decision <- function(
       "Weights alone are insufficient; strata and PSU/replicate design matter.",
       c("Verify weights, PSUs, strata and representativeness.",
         "Use design-aware variances and degrees of freedom."),
-      c("BS-012", "BS-013")
+      c("BS-013", "BS-019")
     ))
 
   if (design %in% c("clustered", "repeated"))
@@ -108,6 +108,15 @@ biomedical_method_decision <- function(
         "Specify covariance or working-correlation structure and dropout.",
         "Select model family and diagnostics from outcome scale."),
       c("BS-002", "BS-014", "BS-015")
+    ))
+
+  if (question == "describe")
+    return(decision(
+      "descriptive-design-review", "Design-aware descriptive summaries",
+      "specialist-review", "Specify clustered or repeated summary estimand",
+      "A descriptive target for correlated observations requires a defined observation unit.",
+      "Distinguish participants from repeated rows and any weighting.",
+      "BS-014"
     ))
 
   if (outcome_type == "omics_counts")
@@ -179,7 +188,7 @@ biomedical_method_decision <- function(
     ))
 
   if (design == "paired") {
-    if (outcome_type == "continuous" && identical(n_groups, 2))
+    if (outcome_type == "continuous" && identical(as.integer(n_groups), 2L))
       return(decision(
         "paired-t", "Paired t-test of within-subject mean change",
         "implemented", "paired_mean_change(data, id, visit, outcome, before_level, after_level)",
@@ -188,7 +197,7 @@ biomedical_method_decision <- function(
           "Inspect distribution of paired differences and influential points."),
         "BS-014"
       ))
-    if (outcome_type == "binary" && identical(n_groups, 2))
+    if (outcome_type == "binary" && identical(as.integer(n_groups), 2L))
       return(decision(
         "mcnemar", "McNemar comparison of paired binary responses",
         "documented", "stats::mcnemar.test()",
@@ -197,7 +206,7 @@ biomedical_method_decision <- function(
           "Review exact alternative for sparse discordant pairs."),
         "BS-012"
       ))
-    if (outcome_type == "ordinal" && identical(n_groups, 2))
+    if (outcome_type == "ordinal" && identical(as.integer(n_groups), 2L))
       return(decision(
         "signed-rank", "Paired Wilcoxon signed-rank or sign analysis",
         "implemented", "wilcox_paired(data, value, group, id)",
@@ -216,8 +225,16 @@ biomedical_method_decision <- function(
   }
 
   # Independent-observation routes only beyond this point.
+  if (is.null(n_groups) && outcome_type %in% c("continuous", "binary", "nominal", "ordinal"))
+    return(decision(
+      "group-count-review", "Specify comparison group structure",
+      "specialist-review", "Provide n_groups and the intended group contrast",
+      "Group count is required to choose a comparison method.",
+      "Declare the number of observed groups and reference/category labels.",
+      "BS-012"
+    ))
   if (outcome_type == "continuous") {
-    if (identical(n_groups, 2))
+    if (identical(as.integer(n_groups), 2L))
       return(decision(
         "welch-t", "Welch independent two-sample t-test",
         "implemented", "welch_mean_comparison(data, outcome, group, reference_level, comparison_level)",
@@ -246,11 +263,11 @@ biomedical_method_decision <- function(
 
   if (outcome_type == "ordinal")
     return(decision(
-      if (identical(n_groups, 2)) "wilcox-independent" else "kruskal-wallis",
-      if (identical(n_groups, 2)) "Wilcoxon rank-sum (distribution)"
+      if (identical(as.integer(n_groups), 2L)) "wilcox-independent" else "kruskal-wallis",
+      if (identical(as.integer(n_groups), 2L)) "Wilcoxon rank-sum (distribution)"
       else "Kruskal-Wallis multi-group distribution comparison",
-      if (identical(n_groups, 2)) "implemented" else "documented",
-      if (identical(n_groups, 2)) "wilcox_independent(data, value, group)"
+      if (identical(as.integer(n_groups), 2L)) "implemented" else "documented",
+      if (identical(as.integer(n_groups), 2L)) "wilcox_independent(data, value, group)"
       else "stats::kruskal.test()",
       "Rank procedures compare aspects of distributions, not automatically means or medians.",
       c("Preserve ordinal coding and ties.",
@@ -260,11 +277,11 @@ biomedical_method_decision <- function(
 
   if (outcome_type %in% c("binary", "nominal"))
     return(decision(
-      if (identical(n_groups, 1)) "binomial-proportion" else "contingency-analysis",
-      if (identical(n_groups, 1)) "Single proportion/exact binomial"
+      if (identical(as.integer(n_groups), 1L)) "binomial-proportion" else "contingency-analysis",
+      if (identical(as.integer(n_groups), 1L)) "Single proportion/exact binomial"
       else "Categorical contingency analysis (chi-square/Fisher)",
       "documented",
-      if (identical(n_groups, 1)) "stats::binom.test()"
+      if (identical(as.integer(n_groups), 1L)) "stats::binom.test()"
       else "stats::chisq.test(); stats::fisher.test()",
       "Categorical inference is based on counts and group denominators, not means.",
       c("Verify raw cell counts, denominators and sparse-cell assumptions.",
