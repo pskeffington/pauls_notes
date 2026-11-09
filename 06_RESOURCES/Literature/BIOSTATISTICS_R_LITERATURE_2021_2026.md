@@ -1,6 +1,6 @@
 # Biomedical statistical methods and R deployment: curated 2021–2026 reading
 
-**Paul's Notes · expanded 2026-11-08**  
+**Paul's Notes · expanded 2026-11-08**<br>
 [Data-first learning guide](../../03_learning/biomedical-statistics-decision-guide.md) · [Machine-readable source table](biostatistics_r_literature_2021_2026.csv) · [Existing biomedical evidence matrix](../../02_biomedical_coding/BIOMEDICAL_CODING_LITERATURE_MATRIX.md)
 
 ## Scope and method
