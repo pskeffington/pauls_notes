@@ -55,7 +55,7 @@ print(figure)
 
 The horizontal blue point and interval are **the exact result object** used in the table; dashed vertical line shows the null difference of zero. Colors follow the Okabe–Ito convention: blue `#0072B2`, missing-data neutral `#808080`. The interval is a **confidence interval for the difference in means**, not a boxplot whisker or individual-group SD. Use ggplot2 for every figure in the same report; never substitute a separately rendered Matplotlib picture.
 
-The test is implemented using `stats::t.test(x = comparison_values, y = reference_values, var.equal = FALSE)`. This agrees with [R's official `t.test` manual](https://search.r-project.org/R/refmans/stats/html/t.test.html). The method-selection context and source evidence are documented in [biomedical statistics decision guide](../../03_learning/biomedical-statistics-decision-guide.md) and [literature matrix](../Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md).
+The test is implemented using `stats::t.test(x = comparison_values, y = reference_values, var.equal = FALSE)`. This agrees with [R's official `t.test` manual](https://search.r-project.org/R/refmans/stats/html/t.test.html). The method-selection context and source evidence are documented in [biomedical statistics decision guide](../03_learning/biomedical-statistics-decision-guide.md) and [literature matrix](Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md).
 
 ## Testing
 
