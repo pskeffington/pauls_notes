@@ -186,7 +186,7 @@ biomedical_method_decision <- function(
       c("Check nonnegative integer counts and person-time/exposure.",
         "Assess mean/variance relation and zero-generating process.",
         "Consider negative binomial where Poisson dispersion is inadequate."),
-      "BS-012"
+      "BS-018"
     ))
 
   if (question == "associate")
