@@ -47,7 +47,7 @@ stopifnot(
   isTRUE(all.equal(result$degrees_freedom, unname(expected$parameter))),
   isTRUE(all.equal(result$p_value, expected$p.value)),
   isTRUE(all.equal(c(result$ci_lower, result$ci_upper),
-                   unname(expected$conf.int))),
+                   as.numeric(expected$conf.int))),
   identical(result$reject_null, result$p_value < 0.05),
   is.data.frame(welch_mean_result_table(result)),
   grepl("n = 12 complete of 12", format_welch_mean_result(result), fixed = TRUE)
