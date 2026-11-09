@@ -1,9 +1,9 @@
 # Basics of Computational Statistical Biology
 
 **From data type to statistical test: an R-based biomedical decision guide**  
-**Paul's Notes | Independent teaching guide | Reviewed 2026-10-22**  
+**Paul's Notes | Independent teaching guide | Expanded 2026-11-08**  
 **Scope:** Biomedical, clinical, public-health and cancer research across all cancer types. Breast cancer examples are illustrations, not a limit on the guide.  
-[Learning home](README.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
+[Learning home](README.md) · [Expanded design-first decision tree](../06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
 
 **Start here: What type of data are we working with — quantitative (numerical), qualitative (categorical), counts, or time-to-event?** Identify what is measured *before* looking up a t-test, chi-square test or regression model. Then refine the choice by the question, number of groups, pairing and sampling design.
 
@@ -71,35 +71,48 @@ Read from the **measured outcome**, then use pairing/grouping and study assumpti
 
 ```mermaid
 flowchart TD
-  A["START: What type of OUTCOME do you have?"] --> B{"Data type?"}
-  B -->|Quantitative| C{"Continuous or counts?"}
-  B -->|Qualitative| D{"Nominal or ordinal?"}
-  B -->|Time + event status| S["Survival: Kaplan-Meier / log-rank<br/>Adjusted: Cox or justified alternative<br/>Competing events need special methods"]
-  B -->|Many molecular features| H["Check assay scale and sample IDs<br/>Raw RNA-seq counts: DESeq2 / edgeR<br/>voom / intensities: limma + FDR"]
-  C -->|Continuous| E{"What comparison?"}
-  C -->|Discrete counts/rates| R["Poisson model + exposure offset<br/>Check overdispersion: negative binomial"]
-  E -->|2 independent groups| T["Welch two-sample t test<br/>Alternative: rank / robust method"]
-  E -->|2 paired observations| P["Paired t test on differences<br/>Alternative: signed-rank / sign method"]
-  E -->|3+ independent groups| AN["ANOVA / Welch ANOVA<br/>Alternative: Kruskal-Wallis"]
-  E -->|2 quantitative variables| CR["Pearson / Spearman correlation<br/>or linear regression"]
-  E -->|Repeated / clustered| MX["Mixed-effects model or GEE<br/>Design-aware survey methods if needed"]
-  D -->|Nominal binary or 3+| N{"Design?"}
-  D -->|Ordinal| O["Rank-based comparison or<br/>ordinal regression"]
-  N -->|1 proportion| BIN["Exact binomial test / confidence interval"]
-  N -->|Independent groups| CH["Chi-square or Fisher<br/>Adjusted: logistic / multinomial model"]
-  N -->|Paired binary| MC["McNemar or matched analysis"]
-  S --> Z["VERIFY: unit, dependence, assumptions,<br/>missingness, effect size / CI, multiplicity"]
-  H --> Z
-  R --> Z
-  T --> Z
-  P --> Z
-  AN --> Z
-  CR --> Z
-  MX --> Z
-  O --> Z
-  BIN --> Z
-  CH --> Z
-  MC --> Z
+  A[Define outcome and population estimand] --> B{Study design?}
+  B -->|Complex survey| SV[Survey design: weights + PSU + strata]
+  B -->|Repeated or clustered| RE[Mixed model or GEE review]
+  B -->|Paired| P{Paired outcome type?}
+  B -->|Independent| I{Independent outcome type?}
+  P -->|Continuous 2 levels| PT[ID-aligned paired t-test]
+  P -->|Binary 2 levels| MC[McNemar or exact discordance review]
+  P -->|Ordinal 2 levels| WS[Paired Wilcoxon signed-rank or sign review]
+  P -->|Other| PR[Pair-aware specialist review]
+  I -->|Continuous| C{Number of groups?}
+  I -->|Binary or nominal| N{Groups / cell structure?}
+  I -->|Ordinal| O{Number of groups?}
+  I -->|Count| CT{Exposure/time known?}
+  I -->|Time to event| ST[Time zero, censoring, competing risk review]
+  I -->|Raw omics counts| OM[Assay-aware models + multiplicity]
+  C -->|2| WT[Welch two-sample mean test]
+  C -->|3 or more| WA[Welch one-way omnibus ANOVA]
+  C -->|Unknown| U[Clarify groups and estimand]
+  N -->|One proportion| BN[Exact binomial test]
+  N -->|Independent groups| CF[Chi-square / Fisher after counts review]
+  O -->|2| W[Wilcoxon rank-sum distribution test]
+  O -->|3 or more| K[Kruskal-Wallis distribution test]
+  CT -->|Yes| PO[Poisson / NB rate model and dispersion review]
+  CT -->|No| CE[Exposure audit before rate inference]
+  SV --> G[Verify assumptions, estimand, denominators, uncertainty]
+  RE --> G
+  PT --> G
+  MC --> G
+  WS --> G
+  PR --> G
+  WT --> G
+  WA --> G
+  U --> G
+  BN --> G
+  CF --> G
+  W --> G
+  K --> G
+  PO --> G
+  CE --> G
+  ST --> G
+  OM --> G
+  G --> X[Report estimate, CI, test decision, ggplot2 figure if justified]
 ```
 
 **Decision hierarchy:** (1) measured outcome **type** → (2) one, two or many groups / explanatory variables → (3) **independent, paired or clustered** design → (4) scientific estimand and assumptions → (5) statistical procedure → (6) estimate, confidence interval, diagnostics and defensible interpretation.
