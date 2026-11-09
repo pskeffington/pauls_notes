@@ -30,6 +30,38 @@ Three redundant refs were removed through GitHub's **Delete branch** control aft
 
 After each deletion, GitHub's branch view showed the deleted state; the final structured branch inventory omits all three refs. The two PR refs remain preserved. A refreshed full-history audit against unchanged `main` at `92091b1adfac9527878b32709798d35fe3d79054` found **16 branches**: **12 `active_pr_hold`**, **2 `legacy_work_hold`**, **1 `frozen_protocol_hold`**, and `main` (`default_hold`), with **zero skipped text files**. PR #40's branch is included in the 12 active holds. Open PR branches, both legacy `work/` refs, and the frozen protocol ref remain intact. `main` is not protected, and the read-only scanner approves no deletion by itself.
 
+## Mainline consolidation and final branch inventory — 2026-11-09 16:59 UTC
+
+The student-guide and repository-professionalization work was consolidated into `main` at `e42f3f78afce6901d3f053af13da9d34a2784715`. The merged PRs were #30, #33–#40. PR #31 was closed with zero changed files; its head tree equaled its base tree. PRs #7 (D0) and #19 (G4) were closed **without merging** because their stated privacy/governance and numerical-execution gates remain unmet. Their branch heads remain available for a later review; closing these PRs does not accept the code or change D0/D1/G4 status.
+
+After verifying each merged PR head, merge ancestry, and references, the following merged heads were removed from `refs/heads/`. GitHub's immutable PR head refs remain available:
+
+| PR | Removed branch | Preserved PR head | Merge commit on `main` |
+| ---: | --- | --- | --- |
+| #30 | `docs/heatmap-zscore-tails-20261018` | `1c341fdf7556537a0a61aaa99ba6cb85d7061841` | `c81804e9da42ab576fd00d4c26bfa741e40af5e3` |
+| #33 | `feat/biostats-paper-linked-tree` | `3989246b3053010240eab8b60a4613490d81b014` | `c745d97a440e43dfde90a72b7bb8a01dd90d8861` |
+| #34 | `docs/study-design-paper-examples` | `491a6a4f7528b5d6911805e695b3ad10f2f525cf` | `428079a931df2316c85c742202f705323bed74b4` |
+| #35 | `docs/agent-roadmap-index-20261030` | `b946421f90073ee7fb85b9a78ed0682658302d6d` | `e42f3f78afce6901d3f053af13da9d34a2784715` |
+| #36 | `docs/biomedical-figure-regression-guidance` | `1537e1bade8e620c60a2d3f5b980a1bda92e7c35` | `1aeae2b22fbd8eee6e114e797b44f3ab5fed35b7` |
+| #37 | `feat/synthetic-biostat-narrative` | `7de5feb79c954dd4986edb5f2556ab64fdaf0ab7` | `42c21555ea506d8e838254621503f67f3b8987b4` |
+| #38 | `docs/triple-block-analysis-reporting` | `1748a3ff7dbfb39c232cdbc99ababec50457ba92` | `b416646ec4183ff7dc33d8be2e75ea2cf2a523ff` |
+| #39 | `feat/generic-welch-comparison-20261108` | `536afd7861cf1bb454c3024bebe14ec26f9cc293` | `175b43af8d8e3c059615cded5e9f8fd689d4afd4` |
+| #40 | `docs/student-guide-and-branch-audit-20261109` | `bb4a13c28c6d283b7e7e90f10d8d9ee199b42d01` | `b50e30b546eaf19a4420e22f428fe3302fee11f2` |
+| #31 | `learning/binomial-latex-practice-20261020` | `debdf44edb0b98dd89effcf27e73ef449b255675` | Not merged; branch tree equaled PR base tree |
+
+Before deletion, a read-only full-history audit against the exact `main` SHA above found no branch-qualified source or PR-body links for the nine merged heads. Targeted PR discussion and Issue #22 reference checks also found no links to them. After deletion, a final read-only audit scanned the default tree with **zero skipped text files** and found **six branch refs** and **zero open PRs**:
+
+| Remaining branch | Retention reason |
+| --- | --- |
+| `main` | Sole integration/default branch; GitHub reports it is not protected |
+| `docs/g4-frozen-synthetic-survival-protocol-20261017` | Frozen protocol reference retained |
+| `feat/config-driven-ml-research-toolkit` | Closed PR #7; retain unmerged D0 work for its outstanding security/privacy gates |
+| `feat/g4-survival-execution-20261017` | Closed PR #19; retain unmerged G4 work for numerical execution and independent review |
+| `work/biomedical-learning` | Legacy branch retained pending provenance/reference review |
+| `work/learning-check-coverage` | Legacy branch retained pending reconciliation of its five non-ancestor commits |
+
+The classifier reported `default_hold: 1`, `frozen_protocol_hold: 1`, `unresolved_hold: 2`, and `legacy_work_hold: 2`. There are no active pull requests, and only `main` is the integration branch. The other five refs are retained protocol, closed-work, or legacy snapshots; they are not active development PRs. Branch deletion removes a ref, not its historical commits or preserved PR records. Do not describe the repository's privacy, clinical, or G4 gates as completed by this consolidation.
+
 **Audit date:** 2026-10-17. **Scope:** `pskeffington/pauls_notes` GitHub branch/PR snapshot and contributor tooling after [beginner Git guide PR #20](https://github.com/pskeffington/pauls_notes/pull/20) merged into `main` (squash merge `c40d8f3f1472d2f0266069aa5e0030930faf93dc`). This is a dated audit, not continuous monitoring.
 
 ## Current branch / PR inventory
