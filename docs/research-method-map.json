@@ -188,6 +188,27 @@
         "BS-001",
         "BS-012"
       ]
+    },
+    {
+      "id": "descriptive-categorical",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-016"
+      ]
+    },
+    {
+      "id": "ordinal-one-sample-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
+    },
+    {
+      "id": "nominal-one-sample-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
     }
   ]
 }
