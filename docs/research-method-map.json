@@ -1,1 +1,214 @@
-{"schema_version":"1.0","methods":[{"id":"welch-t","guide":"03_learning/biomedical-statistics-decision-guide.md","evidence_ids":["BS-001","BS-009"]},{"id":"poisson-rate","guide":"03_learning/biomedical-statistics-decision-guide.md","evidence_ids":[]},{"id":"repeated-measures","guide":"03_learning/biomedical-statistics-decision-guide.md","evidence_ids":["BS-002"]}]}
+{
+  "schema_version": "1.0",
+  "methods": [
+    {
+      "id": "welch-t",
+      "guide": "03_learning/biomedical-statistics-decision-guide.md",
+      "evidence_ids": [
+        "BS-001",
+        "BS-009"
+      ]
+    },
+    {
+      "id": "poisson-rate",
+      "guide": "03_learning/biomedical-statistics-decision-guide.md",
+      "evidence_ids": []
+    },
+    {
+      "id": "repeated-measures",
+      "guide": "03_learning/biomedical-statistics-decision-guide.md",
+      "evidence_ids": [
+        "BS-002"
+      ]
+    },
+    {
+      "id": "welch-anova",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-001",
+        "BS-012"
+      ]
+    },
+    {
+      "id": "paired-t",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-014"
+      ]
+    },
+    {
+      "id": "descriptive",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-016"
+      ]
+    },
+    {
+      "id": "descriptive-design-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-014",
+        "BS-019"
+      ]
+    },
+    {
+      "id": "survey-design-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-013",
+        "BS-019"
+      ]
+    },
+    {
+      "id": "correlated-outcome-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-002",
+        "BS-014",
+        "BS-015"
+      ]
+    },
+    {
+      "id": "omics-design-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-003"
+      ]
+    },
+    {
+      "id": "prediction-validation-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-007"
+      ]
+    },
+    {
+      "id": "adjusted-model-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012",
+        "BS-013"
+      ]
+    },
+    {
+      "id": "survival-analysis-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-013"
+      ]
+    },
+    {
+      "id": "time-origin-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-013"
+      ]
+    },
+    {
+      "id": "count-rate-model-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-018"
+      ]
+    },
+    {
+      "id": "count-exposure-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-018"
+      ]
+    },
+    {
+      "id": "association-model-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-013"
+      ]
+    },
+    {
+      "id": "mcnemar",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
+    },
+    {
+      "id": "signed-rank",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-001"
+      ]
+    },
+    {
+      "id": "paired-design-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-014"
+      ]
+    },
+    {
+      "id": "group-count-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
+    },
+    {
+      "id": "continuous-design-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-001"
+      ]
+    },
+    {
+      "id": "wilcox-independent",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-001"
+      ]
+    },
+    {
+      "id": "kruskal-wallis",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-001"
+      ]
+    },
+    {
+      "id": "binomial-proportion",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
+    },
+    {
+      "id": "contingency-analysis",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-001",
+        "BS-012"
+      ]
+    },
+    {
+      "id": "descriptive-categorical",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-016"
+      ]
+    },
+    {
+      "id": "ordinal-one-sample-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
+    },
+    {
+      "id": "nominal-one-sample-review",
+      "guide": "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md",
+      "evidence_ids": [
+        "BS-012"
+      ]
+    }
+  ]
+}

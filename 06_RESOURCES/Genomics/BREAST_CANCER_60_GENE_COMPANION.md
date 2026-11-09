@@ -1054,6 +1054,8 @@ flowchart LR
 
 In the synthetic heatmap, TeachA changes from +2 in C1 to −1 in C4. Those labels specify fourfold and one-half ratios under the stated comparison. A row z-score would answer a different question about deviations from that row's mean; it would not retain these ratio units. The unchanged numerical range across columns allows direct scale comparison. None of these chosen values supports a subtype, cluster, p-value or actual gene result.
 
+For an annotated RNA-expression heatmap, see the [row z-score and two-sided tail guide](HEATMAP_BEST_PRACTICES.md). It explains how sample Type and recorded PAM50 Subtype tracks differ from gene-level bar annotations, and why neither row-wise color nor percentage tails establish differential expression.
+
 For a scatterplot, check whether one dot is a specimen, person or aggregate. For a boxplot, inspect sample sizes and whether repeated observations violate a simple independent-group interpretation. For a model plot, determine whether intervals describe means, predictions or another quantity. Color and ordering can guide attention but cannot substitute for those definitions. The [plot-reading guide](../READING_PLOTS.md) and [visualization gallery](../SPECIALIST_VISUALIZATIONS.md) extend these skills. We now gather the remaining inferential limits before working through a complete example.
 
 [Previous chapter](#chapter-8-from-measurements-to-scientific-evidence) · [Return to contents](#contents) · [Next chapter](#chapter-10-what-the-data-cannot-tell-us)

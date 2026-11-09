@@ -20,6 +20,29 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
   de <- data.frame(logFC = rnorm(20), FDR = seq(.001, 1, length.out=20))
   stopifnot(inherits(plot_gene_volcano(de), "ggplot"))
 }
+# Invented values: a strict cutoff excludes exactly -1 and +1.
+z_fixture <- matrix(c(-2, -1, 0, 2,
+                      NA, -2, 1, 2), nrow = 2, byrow = TRUE,
+                    dimnames = list(c("ESR1", "ERBB2"), paste0("S", 1:4)))
+tails <- row_z_tail_percentages(z_fixture)
+stopifnot(identical(dimnames(tails), list(c("ESR1", "ERBB2"), c("Low", "High"))),
+          isTRUE(all.equal(as.numeric(tails[1, ]), c(25, 25))),
+          isTRUE(all.equal(as.numeric(tails[2, ]), c(100/3, 100/3))),
+          isTRUE(all.equal(as.numeric(row_z_tail_percentages(z_fixture, 2)[1, ]),
+                           c(0, 0))),
+          all(tails >= 0 & tails <= 100))
+z_bad <- z_fixture
+z_bad[1, ] <- NA_real_
+stopifnot(inherits(try(row_z_tail_percentages(z_bad), silent = TRUE), "try-error"))
+z_bad <- z_fixture
+z_bad[1, 1] <- NaN
+stopifnot(inherits(try(row_z_tail_percentages(z_bad), silent = TRUE), "try-error"))
+z_bad <- z_fixture
+colnames(z_bad)[1] <- colnames(z_bad)[2]
+stopifnot(inherits(try(row_z_tail_percentages(z_bad), silent = TRUE), "try-error"))
+stopifnot(inherits(try(row_z_tail_percentages(z_fixture, threshold = 0),
+                     silent = TRUE), "try-error"))
+
 cat("PASS: synthetic genomics visualizations and validation smoke tests\n")
 
 blank <- m

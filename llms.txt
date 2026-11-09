@@ -23,6 +23,11 @@ Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/m
 - [Book manifest](https://github.com/pskeffington/pauls_notes/blob/main/oncology/book-manifest.json): 60 chapter IDs, paths, statuses and prerequisites
 - [Textbook roadmap](https://github.com/pskeffington/pauls_notes/blob/main/oncology/ROADMAP.md): architecture and milestones
 
+## Agentic templating and scholarly skills
+- [Agentic skills literature matrix](https://github.com/pskeffington/pauls_notes/blob/main/docs/agentic-skills-literature-matrix.md): nine scholarly works, limitations and engineering priorities
+- [Machine-readable agentic bibliography](https://github.com/pskeffington/pauls_notes/blob/main/docs/agentic-skills-literature-registry.json): AG-LIT IDs, author metadata, venues, source links, topics and priority crosswalk
+- [Machine indexing contract](https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md): document chunking, retrieval provenance and evidence boundaries
+
 ## Primary routes
 - [Cancer research scope](https://github.com/pskeffington/pauls_notes/blob/main/docs/cancer-research-scope.md): broad oncology use cases and boundaries
 - [Biomedical statistics decision guide](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/biomedical-statistics-decision-guide.md): select analyses by variable type and design

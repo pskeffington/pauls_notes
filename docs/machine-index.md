@@ -43,6 +43,16 @@ Agents must consult the manifest rather than inferring that a planned chapter ex
 | rust.practices | `02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md` | engineering guidance | not a clinical assurance |
 | milestones | `docs/milestone-evidence.toml` | machine-readable delivery state | authoritative only within recorded scope |
 
+## Agentic templating and scholarly literature routes
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| agentic.overview | `README.md#agentic-templating-skills-and-best-practices` | skill and templating overview | design guidance, not measured deployment |
+| agentic.literature | `docs/agentic-skills-literature-matrix.md` | authored scholarly matrix | source summaries and engineering interpretations |
+| agentic.registry | `docs/agentic-skills-literature-registry.json` | structured bibliography | bibliographic metadata; not claim-level verification |
+
+Resolve `AG-LIT-01` through `AG-LIT-09` using the JSON registry's `records[].id`, then retrieve `source_url` for primary-source verification. Keep `publication_type` distinct from evidence quality and `priority_ids` distinct from empirical findings. Both files are tracked inputs to the existing heading-aware Markdown indexer; the JSON registry is a complementary structured catalog, **not** automatically joined into that JSONL. Each downstream consumer must explicitly ingest the registry if it needs publication-level metadata.
+
 ## Retrieval rules
 
 1. First retrieve this discovery document or `llms.txt`; identify the best matching topic key.
