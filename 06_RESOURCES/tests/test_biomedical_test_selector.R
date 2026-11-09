@@ -17,8 +17,11 @@ check <- function(args, id, status) {
 }
 
 check(list("continuous", "independent", n_groups = 2), "welch-t", "implemented")
+check(list("continuous", "independent", n_groups = 2L), "welch-t", "implemented")
+check(list("continuous", "independent"), "group-count-review", "specialist-review")
 check(list("continuous", "independent", n_groups = 3), "welch-anova", "implemented")
 check(list("continuous", "paired", n_groups = 2), "paired-t", "implemented")
+check(list("continuous", "paired", n_groups = 2L), "paired-t", "implemented")
 check(list("continuous", "paired", n_groups = 3), "paired-design-review", "specialist-review")
 check(list("binary", "paired", n_groups = 2), "mcnemar", "documented")
 check(list("ordinal", "paired", n_groups = 2), "signed-rank", "implemented")
@@ -35,6 +38,10 @@ check(list("omics_counts"), "omics-design-review", "specialist-review")
 check(list("continuous", question = "predict"), "prediction-validation-review", "specialist-review")
 check(list("continuous", question = "associate"), "association-model-review", "documented")
 check(list("continuous", question = "describe"), "descriptive", "implemented")
+check(list("binary", question = "describe"), "descriptive-categorical", "documented")
+check(list("nominal", "independent", n_groups = 1L), "nominal-one-sample-review", "specialist-review")
+check(list("ordinal", "independent", n_groups = 1L), "ordinal-one-sample-review", "specialist-review")
+check(list("binary", "complex_survey", question = "describe"), "survey-design-review", "specialist-review")
 
 # First gate: sampling design supersedes outcome-based independent tests.
 check(list("continuous", "complex_survey", n_groups = 2), "survey-design-review", "specialist-review")
