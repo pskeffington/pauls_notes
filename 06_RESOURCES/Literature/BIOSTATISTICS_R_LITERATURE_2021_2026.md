@@ -1,11 +1,11 @@
 # Biomedical statistical methods and R deployment: curated 2021–2026 reading
 
-**Paul's Notes · reviewed 2026-10-22**  
+**Paul's Notes · expanded 2026-11-08**  
 [Data-first learning guide](../../03_learning/biomedical-statistics-decision-guide.md) · [Machine-readable source table](biostatistics_r_literature_2021_2026.csv) · [Existing biomedical evidence matrix](../../02_biomedical_coding/BIOMEDICAL_CODING_LITERATURE_MATRIX.md)
 
 ## Scope and method
 
-A **curated narrative reading list**, focused on recent articles that help interpret variable types, choose appropriate statistical methods, implement analysis in R, and deliver reproducible scientific computing. Included below are **eleven primary publications (2021–2025)** located from publisher/journal records, DOI metadata and article pages as of **2026-10-22**. It is **not** a systematic review, PRISMA search, clinical guideline, validation of paper code, exhaustive comparison of packages, or a claim that all studies are applicable to a particular population. No original patient data or third-party article content is stored here.
+A **curated narrative reading list**, focused on recent articles that help interpret variable types, choose appropriate statistical methods, implement analysis in R, and deliver reproducible scientific computing. Included below are **nineteen curated publications (2021–2026)** located from publisher/journal records, DOI metadata and article pages as of **2026-11-08**. It is **not** a systematic review, PRISMA search, clinical guideline, validation of paper code, exhaustive comparison of packages, or a claim that all studies are applicable to a particular population. No original patient data or third-party article content is stored here.
 
 Methods are grouped by the teaching decision they inform rather than ranking papers by citation count. A publication supports **why a method matters**; current primary package documentation governs **how to run the installed version**.
 
@@ -25,6 +25,15 @@ Methods are grouped by the teaching decision they inform rather than ranking pap
 | BS-009 | [West, 2021](https://doi.org/10.1177/0004563221992088). *Best practice in statistics: Use the Welch t-test when testing the difference between two groups.* | Clinical biochemistry practice article | Explains why Welch's unequal-variance t-test is a useful starting point for independent means | Still assumes a meaningful mean estimand and defensible sampling; does not address clustering, heavy tails or causal identification |
 | BS-010 | [Wilcox & Rousselet, 2023](https://doi.org/10.1002/cpz1.719). *An Updated Guide to Robust Statistical Methods in Neuroscience.* | Updated methods overview with R code | Explains robust estimators, heteroscedasticity and alternative approaches when conventional comparisons mislead | Robustness does not waive the need for independent units, prespecified estimands or uncertainty review |
 | BS-011 | [Midway & White, 2025](https://doi.org/10.1098/rsos.241904). *Testing for normality in regression models: mistakes abound (but may not matter).* | Empirical/simulation methods critique | Differentiates normality assumptions for modeled residuals from indiscriminate tests of raw outcome columns | Simulation results are context-dependent; does **not** justify selecting a new test solely from a Shapiro p-value |
+
+| BS-012 | [Kim, Kim & Kwak (2024)](https://doi.org/10.4097/kja.24016), *Comprehensive guidelines for appropriate statistical analysis methods in research* | Methods guide | Organizes test selection around endpoint, hypothesis, design and assumptions | Does not replace study-specific independence or diagnostics |
+| BS-013 | [Pérez-Guerrero et al. (2024)](https://doi.org/10.3390/jcm13144005), *Methodological and Statistical Considerations for Cross-Sectional, Case-Control, and Cohort Studies* | Observational methods review | Clarifies outcome and study-design decisions | Simplified charts omit specialized clustered, causal and rare-event settings |
+| BS-014 | [Delporte et al. (2025)](https://doi.org/10.1177/09622802241300823), *Analysing matched continuous longitudinal data: A review* | Systematic methods review | Distinguishes simple paired contrasts from more complex matched longitudinal models | Pairing and correlation structure require design-specific consideration |
+| BS-015 | [Wijesuriya et al. (2025)](https://doi.org/10.1002/sim.10274), *Multiple Imputation for Longitudinal Data: A Tutorial* | Tutorial in biostatistics | Addresses longitudinal missingness and correlation-aware imputation | Missing-data mechanism must be justified; not an automatic imputation recipe |
+| BS-016 | [Christensen, Ranstam & Overgaard (2023)](https://doi.org/10.2340/17453674.2023.11656), *Guidelines for a structured manuscript: Statistical methods and reporting in biomedical research journals* | Reporting guidance | Requires denominators, method rationale, uncertainty and sensitivity analyses | Reporting alone does not validate a statistical model |
+| BS-017 | [Mondal et al. (2026)](https://doi.org/10.7759/cureus.116428), *Effect Estimates, Effect Sizes, Confidence Intervals, and P-values: A Framework for Reporting and Interpreting Biomedical Research* | Educational framework | Reinforces effect magnitude, confidence intervals and p values | A teaching framework cannot replace model-specific theory |
+| BS-018 | [Fernandez & Vatcheva (2022)](https://doi.org/10.1186/s12874-022-01685-8), *A comparison of statistical methods for modeling count data with an application to hospital length of stay* | Simulation and applied comparison | Explains Poisson, NB and zero-inflation under dispersion changes | Simulation results are context-specific; no universal count model |
+| BS-019 | [Dey et al. (2025)](https://doi.org/10.1186/s12874-024-02454-5), *The proper application of logistic regression model in complex survey data: a systematic review* | Systematic methodological review | Documents common failures to use weights, PSUs and strata | Focuses on particular surveys; follow each survey's design guide |
 
 ## Direct translation into the beginner's flowchart
 
@@ -59,3 +68,19 @@ Methods are grouped by the teaching decision they inform rather than ranking pap
 Recent methods also disagree in their emphasis on normality screening: a beginner should evaluate the design, estimand, influence, sample size and model assumptions rather than implementing an automatic Shapiro-result switch. Source position and software behavior should be documented separately.
 
 Only add new references after checking source identity, DOI resolution, year, study type and relevance; add a clear entry about limitations. Keep references in this bounded beginner guide separate from the broad [biomedical coding corpus](../../02_biomedical_coding/README.md). Do not publish participant-linked records or unreviewed small-cell exports.
+
+## Expanded evidence-to-decision crosswalk (2026-11-08)
+
+| Clinical/data situation | Evidence IDs | Design gate before method | Implementation |
+| --- | --- | --- | --- |
+| Two independent continuous groups | BS-009, BS-011, BS-012 | Confirm independent units, influential values and mean estimand | Generic Welch helper, draft PR #39 |
+| Independent continuous groups, 3+ | BS-001, BS-012 | Distinguish omnibus inference from pairwise contrasts; state multiplicity | Welch ANOVA helper, draft PR #39 |
+| Paired continuous values | BS-014 | Align by subject and visit; check difference distribution and complete pairs | Paired t helper, draft PR #39 |
+| Paired binary outcome | BS-012, BS-014 | Tabulate discordant pairs and assess sparse-data exact options | Documented stats::mcnemar.test |
+| Binary/nominal independent groups | BS-001, BS-012, BS-013 | Verify raw counts, denominator, cell frequencies, design | Existing teaching methods; specialist review where needed |
+| Count/rate outcomes | BS-018 | Confirm exposure, dispersion and zero-generating mechanisms | Model-specific review |
+| Repeated measures and longitudinal missingness | BS-002, BS-014, BS-015 | Check subject IDs, time, covariance and missingness | Specialist model review |
+| Complex survey | BS-013, BS-019 | Require weights plus PSU/strata/replicate design | Survey specialist review |
+| Interpretation and reporting | BS-016, BS-017 | Estimate, interval, sampling denominator, multiplicity and clinical relevance | Reproducible result table and ggplot2 figure where supported |
+
+These are method-selection references, not evidence that a generic test or model is scientifically valid for a particular study. Package documentation governs current implementation details.

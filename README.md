@@ -14,7 +14,7 @@ This repository is a **modular field guide for biomedical students and early-car
 
 ## Computational Oncology textbook
 
-The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript is not yet written or reviewed by an external reviewer.
+The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
 
 ## Agentic templating, skills, and best practices
 
