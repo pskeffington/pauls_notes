@@ -2,7 +2,7 @@
 
 [Book home](../README.md) · [Evidence policy](README.md) · [Machine-readable registry](source-registry.json) · [Section citation map](section-citations.json)
 
-This bibliography groups external scientific and technical references used in the current introduction and CO-01 through CO-06. **A citation establishes traceability, not independent scientific review of each claim.** Original explanations and synthetic exercises are authored separately from source materials.
+This bibliography groups registered external scientific and technical references used in the introduction and drafted chapters, plus sources reserved for planned textbook chapters. **A citation establishes traceability, not independent scientific review of each claim.** Original explanations and synthetic exercises are authored separately from source materials.
 
 ## Foundational oncology and epidemiology
 
@@ -103,6 +103,32 @@ This bibliography groups external scientific and technical references used in th
 | `NCI-BREAST-CELLS` | [What Is Breast Cancer? — NCI](https://www.cancer.gov/types/breast/what-is-breast-cancer) | Breast ducts and lobules; epithelial origins; in situ versus invasive breast tumors |
 | `NCI-BREAST-TYPES` | [Types of Breast Cancer — NCI](https://www.cancer.gov/types/breast/breast-cancer-types) | Ductal versus lobular carcinoma and distinction between DCIS and invasive disease |
 | `NCI-TME` | [Tumor Biology and Microenvironment Research — NCI](https://www.cancer.gov/about-nci/organization/dcb/research-portfolio/tbmr) | Interactions between malignant cells, immune cells, stromal cells and tumor microenvironment |
+
+
+The following records are in the source registry for foundational probability and future textbook cases. Listing them does not establish that a future chapter has been authored or its claims scientifically reviewed.
+
+## Probability and computational foundations
+
+| Reference ID | Direct linked source | Relevance |
+| --- | --- | --- |
+| `OS-PROB` | [OpenStax: Probability Theory and Bayes' Theorem](https://openstax.org/books/principles-data-science/pages/3-4-probability-theory) | Probability foundations, conditional probability, Bayes theorem and computational interpretation |
+| `OS-PROB-RULES` | [OpenStax: Two Basic Rules of Probability](https://openstax.org/books/introductory-statistics/pages/3-3-two-basic-rules-of-probability) | Addition and multiplication rules, independence and mutually exclusive events |
+| `OS-PROB-TERMS` | [OpenStax: Introductory Statistics Probability Terminology](https://openstax.org/books/introductory-statistics-2e/pages/3-key-terms) | Sample spaces, events, complements, conditional probability and independence |
+
+## Cancer screening and diagnostic evidence
+
+| Reference ID | Direct linked source | Relevance |
+| --- | --- | --- |
+| `NCI-SCREEN-HCP` | [NCI PDQ: Cancer Screening Overview for Health Professionals](https://www.cancer.gov/about-cancer/screening/hp-screening-overview-pdq) | Cancer screening sensitivity, specificity, PPV, NPV, prevalence, false positives, harms and mortality endpoints |
+| `NCI-SCREEN-PAT` | [NCI PDQ: Cancer Screening Overview for Patients](https://www.cancer.gov/about-cancer/screening/patient-screening-overview-pdq) | Screening versus diagnosis, false positives, overdiagnosis and the limits of early detection |
+| `SCREEN-PRIMER` | [Assessment of Cancer Screening: Performance Measures](https://www.ncbi.nlm.nih.gov/books/NBK550207/) | 2-by-2 screening tables and the definitions of sensitivity, specificity, PPV and NPV |
+
+## Reproducible random-number generation
+
+| Reference ID | Direct linked source | Relevance |
+| --- | --- | --- |
+| `PY-RANDOM` | [Python 3.12: random module and reproducibility](https://docs.python.org/3.12/library/random.html) | Pseudorandom sampling, fixed-seed replay and version-dependent random-number generator behavior |
+| `R-RANDOM` | [R Base: Random Number Generation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Random.html) | set.seed, RNGkind, reproducibility and R random-number generation |
 
 ## Verification and release boundary
 
