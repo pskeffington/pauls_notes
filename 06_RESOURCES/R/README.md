@@ -9,7 +9,7 @@
 | General summaries and graphs | [Reusable functions](Reusable_Functions.R) |
 | Statistical plot helpers | [Statistics and plots](stats_plots.R) |
 | Multi-panel summaries | [Biostatistics panels](biostat_panels.R) |
-| Gene expression visuals | [Gene visuals](gene_visuals.R) |
+| Gene expression visuals | [Gene visuals and two-sided z-score tail helper](gene_visuals.R) · [annotated RNA-seq heatmap guide](../Genomics/HEATMAP_BEST_PRACTICES.md) |
 | Paired plots, calibration and uncertainty | [Specialist source](specialist_visuals.R) and [guide](../SPECIALIST_VISUALIZATIONS.md) |
 | Plot labels and annotations | [Annotation source](plot_annotations.R) and [guide](../PLOT_ANNOTATIONS.md) |
 | Compact plotting calls | [One-call source](one_call_plots.R) and [guide](../ONE_CALL_PLOTS.md) |
