@@ -8,11 +8,13 @@ An open, methods-focused notebook for **research across all cancer types**, incl
 
 **Machine-readable access:** [Agent discovery (llms.txt)](llms.txt) · [Indexing and retrieval contract](docs/machine-index.md) — stable topic routes, provenance, source boundaries and RAG guidance.
 
-**Quick navigation:** [Agentic templating and skills](#agentic-templating-skills-and-best-practices) · [Research scope](docs/cancer-research-scope.md) · [Start here](#start-here) · [Research workflow](#follow-a-research-question) · [Run the current example](#put-the-methods-to-work) · [Browse subjects](#explore-the-collection) · [Progress and limitations](#research-progress-and-boundaries)
+**Quick navigation:** [Start with your task](#start-here) · [Browse learning tracks](#learn-by-topic) · [Research scope](docs/cancer-research-scope.md) · [Research workflow](#follow-a-research-question) · [Run an example](#put-the-methods-to-work) · [Progress and limitations](#research-progress-and-boundaries)
+
+This repository is a **modular field guide for biomedical students and early-career researchers**. Read one section to answer a current question, then follow prerequisites or related links when useful; there is no required course order. Each subject overview points to focused lessons, runnable examples, expected outputs, and limitations. Start with the task table below or browse by topic.
 
 ## Computational Oncology textbook
 
-The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter independent ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript is not yet written or independently reviewed.
+The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript is not yet written or reviewed by an external reviewer.
 
 ## Agentic templating, skills, and best practices
 
@@ -66,7 +68,7 @@ acceptance:
 
 ## Start here
 
-Choose the route that matches what you need; no weekly sequence is required.
+Choose the route that matches what you need; no weekly sequence is required. Each topic can be used on its own, and the final column gives optional next steps.
 
 | I want to… | Start with | Then explore |
 | --- | --- | --- |
@@ -106,6 +108,29 @@ Then open a **pull request** on GitHub for review and merging. These commands as
 2. **Prepare measurements without leakage.** Use the [visual data-flow guide](04_machine_learning/visual-data-guide.md) to understand training-only imputation, scaling and feature selection.
 3. **Compare methods fairly.** Follow the [paired assay comparison](04_machine_learning/model-comparison.md) and [model-tuning guide](04_machine_learning/model-tuning.md) before interpreting scores.
 4. **Explain and reproduce the result.** Inspect the [seven-figure gallery](04_machine_learning/gallery/README.md), [evidence review](04_machine_learning/corpus-review.md) and [analysis record template](templates/analysis-record.md).
+
+## Learn by topic
+
+Use these subject tracks as standalone references. Start with the overview for a map of the material, then open the lesson that matches your question.
+
+| Track | Start here | Useful when you need to… |
+| --- | --- | --- |
+| Biology and cancer context | [Cancer research scope](docs/cancer-research-scope.md) · [Genomics resources](06_RESOURCES/Genomics/README.md) | frame a biological question, interpret gene or pathway material, and distinguish examples from study findings |
+| Command line and files | [Unix and Bash](01_unix_bash/README.md) | inspect files, automate a repeatable run, and understand command output and exit codes |
+| Data and biomedical statistics | [Computing subjects](03_learning/README.md) · [Statistics decision guide](03_learning/biomedical-statistics-decision-guide.md) | represent observations, join tables, handle missing data, choose an introductory method, and explain uncertainty |
+| Research workflow | [Research workflow](docs/research-workflow.md) · [Study protocol template](templates/study-protocol.md) | define a study question, units, data access, analysis plan, and reproducible record |
+| Machine learning | [ML overview](04_machine_learning/README.md) | understand models, compare methods, check leakage, evaluate predictions, and interpret limits |
+| Figures and communication | [Visualization resources](06_RESOURCES/README.md) | choose a plot, label it clearly, and communicate what the display does and does not show |
+| Programming for biomedical work | [Computing subjects](03_learning/README.md) · [Rust course](03_learning/rust/README.md) | learn a language or follow a runnable, research-oriented example |
+| Git and collaboration | [Git/GitHub tutorial](03_learning/git-github-from-zero-to-push.md) | save changes safely, work on a branch, and propose a reviewable contribution |
+
+## How to use an individual guide
+
+1. Read its question, prerequisites, and expected output before running code.
+2. Use only the stated teaching data or data you are authorized to analyze; patient data requires source-specific review and approval.
+3. Compare results with the expected output, change one assumption, and explain what changed.
+4. Record software versions, data provenance, choices, and limitations with the [analysis record](templates/analysis-record.md).
+5. Follow the overview links when a concept is unfamiliar. A guide does not mean every optional method has been executed or reviewed for every study.
 
 ## Put the methods to work
 
