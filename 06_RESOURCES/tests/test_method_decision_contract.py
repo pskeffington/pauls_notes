@@ -30,7 +30,8 @@ ROUTES = {
     "survival-analysis-review", "time-origin-review", "prediction-validation-review",
     "adjusted-model-review", "association-model-review", "continuous-design-review",
     "group-count-review", "paired-design-review", "descriptive",
-    "descriptive-design-review",
+    "descriptive-design-review", "descriptive-categorical",
+    "ordinal-one-sample-review", "nominal-one-sample-review",
 }
 PROHIBITED_DOMAIN_TOKENS = [
     "CHIndex", "SDOHIndex", "NHBlack", "NHWhite",
@@ -47,7 +48,7 @@ def main() -> None:
     tree = TREE.read_text(encoding="utf-8")
     literature = LITERATURE.read_text(encoding="utf-8")
     table = SOURCE_TABLE.read_text(encoding="utf-8")
-    assert "flowchart TD" in tree and "Weights" not in tree, "Flowchart must use design-aware route labels"
+    assert "flowchart TD" in tree and "weights + PSU + strata" in tree, "Missing design-aware flow"
     assert "Complex survey" in tree and "Paired" in tree and "Independent" in tree
     assert "ggplot2" in tree
     for method_id in ROUTES:
@@ -64,7 +65,7 @@ def main() -> None:
         assert evidence_id in literature, f"Missing literature matrix id {evidence_id}"
         assert f'"{evidence_id}"' in table, f"Missing CSV literature ID {evidence_id}"
     assert "2026-11-08" in literature and "2026-11-08" in table
-    print("PASS: 24 decision branches, six implemented helpers (including existing), 19 literature IDs, no domain names")
+    print("PASS: 27 decision branches, six implemented helpers (including existing), 19 literature IDs, no domain names")
 
 
 if __name__ == "__main__":
