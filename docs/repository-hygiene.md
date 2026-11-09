@@ -2,6 +2,22 @@
 
 [Home](../README.md) · [Contributing](../CONTRIBUTING.md) · [Git/GitHub from zero to push](../03_learning/git-github-from-zero-to-push.md) · [Scientific milestone gates](roadmap-gates.md)
 
+## Live branch audit — 2026-11-09
+
+The read-only classifier ran against `main` at `92091b1adfac9527878b32709798d35fe3d79054`, using a full-history clone, the live GitHub branch/PR inventory, and a complete default-tree scan (**zero skipped text files**). It found 18 branches: **11 `active_pr_hold`**, **2 `legacy_work_hold`**, **1 `frozen_protocol_hold`**, **2 `diverged_history_hold`**, **1 `unresolved_hold`**, and `main` (`default_hold`). No branch is an automatic deletion candidate. The classifier never deletes refs and its output is not approval.
+
+| Branch(es) | Current audit result | Next action |
+| --- | --- | --- |
+| `main` | Default hold | Retain as integration target |
+| `feat/config-driven-ml-research-toolkit`, `feat/g4-survival-execution-20261017`, `docs/heatmap-zscore-tails-20261018`, `docs/agent-roadmap-index-20261030`, `docs/study-design-paper-examples`, `feat/biostats-paper-linked-tree`, `learning/binomial-latex-practice-20261020`, `docs/biomedical-figure-regression-guidance`, `feat/synthetic-biostat-narrative`, `docs/triple-block-analysis-reporting`, `feat/generic-welch-comparison-20261108` | Open-PR holds (#7, #19, #30, #35–#39) | Preserve until each PR is merged/closed and its branch/tree references are separately reconciled |
+| `docs/g4-frozen-synthetic-survival-protocol-20261017` | Frozen protocol hold (#18) | Preserve the immutable protocol and downstream references |
+| `work/biomedical-learning`, `work/learning-check-coverage` | Legacy holds | Retain pending owner review of provenance and references |
+| `chore/squash-tree-parity-retirement-20261018` | Diverged history hold; exact PR #29 head matches its live SHA, but branch commits are not ancestors of current `main` | Do not remerge or delete from ancestry alone; verify full-tree equivalence, immutable merge ancestry, preserved PR ref, and external references |
+| `docs/biomedical-statistics-decision-guide-20261022` | Diverged history hold; exact PR #32 head matches, branch commits are not ancestors of current `main` | Reconcile full tree against the immutable merge before any retirement decision |
+| `docs/codex-dev-production-index-20261029` | Unresolved hold; points to current `main` with no associated PR | Keep; review whether the redundant branch ref can be retired after reference checks |
+
+This snapshot supersedes the **branch counts only** in earlier sections; those dated records remain historical evidence. Current `main` is not protected according to the live branch endpoint, so avoid claiming that GitHub enforces PR-only changes or required checks. Two merged divergent histories have no branch-qualified URLs in the scanned default tree or PR bodies, but off-repository references still need review. Branch deletion must use the separately reviewed, exact-SHA guarded process described below; no branch was deleted during this audit.
+
 **Audit date:** 2026-10-17. **Scope:** `pskeffington/pauls_notes` GitHub branch/PR snapshot and contributor tooling after [beginner Git guide PR #20](https://github.com/pskeffington/pauls_notes/pull/20) merged into `main` (squash merge `c40d8f3f1472d2f0266069aa5e0030930faf93dc`). This is a dated audit, not continuous monitoring.
 
 ## Current branch / PR inventory
