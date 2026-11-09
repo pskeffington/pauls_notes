@@ -108,3 +108,37 @@ Expected method: welch-t, if and only if the analyst separately establishes inde
 6. Verify package versions, run synthetic fixture tests, inspect rendered graphics, and keep scientific/design validation separate from successful code execution.
 
 **Literature registry:** BS-001 through BS-019 are curated rather than exhaustive. Methods literature establishes rationale; current R documentation controls function signatures. The research-method registry in docs/research-method-map.json supplies stable route IDs.
+
+## Full machine-readable route index
+
+The R selector currently exposes **27 method IDs**. An ID marked implemented refers to a reusable R helper on this draft branch or previously in main; documented methods have upstream R entrypoints; specialist-review methods are intentionally not automated.
+
+| Route ID | Status |
+| --- | --- |
+| descriptive | implemented |
+| descriptive-categorical | documented |
+| descriptive-design-review | specialist-review |
+| survey-design-review | specialist-review |
+| correlated-outcome-review | specialist-review |
+| omics-design-review | specialist-review |
+| prediction-validation-review | specialist-review |
+| adjusted-model-review | specialist-review |
+| survival-analysis-review | specialist-review |
+| time-origin-review | specialist-review |
+| count-rate-model-review | specialist-review |
+| count-exposure-review | specialist-review |
+| association-model-review | documented |
+| paired-t | implemented |
+| mcnemar | documented |
+| signed-rank | implemented |
+| paired-design-review | specialist-review |
+| group-count-review | specialist-review |
+| welch-t | implemented |
+| welch-anova | implemented |
+| continuous-design-review | documented |
+| wilcox-independent | implemented |
+| kruskal-wallis | documented |
+| binomial-proportion | documented |
+| contingency-analysis | documented |
+| ordinal-one-sample-review | specialist-review |
+| nominal-one-sample-review | specialist-review |
