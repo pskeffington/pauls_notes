@@ -5,6 +5,7 @@
 | Task | Source or guide |
 | --- | --- |
 | **Pick an appropriate statistical test** | [Data-type-first biomedical statistics guide](../../03_learning/biomedical-statistics-decision-guide.md) with a decision flowchart and examples |
+| **Run every chart method and inspect its paper** | [bio_stats paper-to-test atlas](../../03_learning/bio_stats/README.md), with full R execution and numerical checks |
 | **Reusable two-group Welch mean test + ggplot2 CI** | [Generic Welch comparison](welch_mean_comparison.R), [usage and assumptions](../WELCH_MEAN_COMPARISON.md), and [synthetic regression tests](../tests/test_welch_mean_comparison.R) |
 | **Biomedical method decision adviser (no automatic inference)** | [R decision selector](biomedical_test_selector.R), [design-first flowchart](../BIOMEDICAL_TEST_DECISION_TREE.md), [literature crosswalk](../Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) |
 | **ID-aligned paired mean change and ggplot2 CI** | [Reusable paired t-test](paired_mean_change.R) · [synthetic tests](../tests/test_paired_mean_change.R) |

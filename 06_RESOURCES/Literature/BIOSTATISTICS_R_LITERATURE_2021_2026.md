@@ -9,6 +9,8 @@ A **curated narrative reading list**, focused on recent articles that help inter
 
 Methods are grouped by the teaching decision they inform rather than ranking papers by citation count. A publication supports **why a method matters**; current primary package documentation governs **how to run the installed version**.
 
+For node-by-node implementation, see the separate [bio_stats paper-to-test atlas](../../03_learning/bio_stats/README.md). It maps all 19 chart objects to 26 recent and foundational papers, runs every named method, and distinguishes selected published calculations from synthetic adaptations and an unresolved numerical disagreement. Its wider date range does not change this eleven-paper recent reading list or imply that those eleven studies have all been reproduced.
+
 ## Source-to-learning and implementation matrix
 
 | ID | Publication and year | Type | Practical contribution | Required interpretation / limitation |
