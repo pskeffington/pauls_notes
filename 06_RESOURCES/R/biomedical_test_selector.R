@@ -79,12 +79,24 @@ biomedical_method_decision <- function(
     result
   }
 
-  if (question == "describe" && design == "independent")
+  if (question == "describe" && design == "independent" &&
+      outcome_type %in% c("continuous", "count"))
     return(decision(
-      "descriptive", "Descriptive analysis (no hypothesis test)",
+      "descriptive", "Numeric descriptive analysis (no hypothesis test)",
       "implemented", "describe_measurements(data, value, group = NULL)",
-      "Describe denominators and distributions before selecting inference.",
-      "Use appropriate summaries for variable type; do not report a test p-value."
+      "Describe numeric distributions and denominators before inference.",
+      "Report mean/SD and median/IQR where appropriate, not a p-value.",
+      "BS-016"
+    ))
+
+  if (question == "describe" && design == "independent" &&
+      outcome_type %in% c("binary", "nominal", "ordinal"))
+    return(decision(
+      "descriptive-categorical", "Categorical counts/proportions (no test)",
+      "documented", "base::table() and explicit denominator",
+      "Describe categories using counts, percentages and missingness.",
+      "Use denominators explicitly; ordered categories must preserve order.",
+      "BS-016"
     ))
 
   # Design gates outrank outcome labels: never silently infer simple-sample
@@ -261,6 +273,15 @@ biomedical_method_decision <- function(
     ))
   }
 
+  if (outcome_type == "ordinal" && identical(as.integer(n_groups), 1L))
+    return(decision(
+      "ordinal-one-sample-review", "One-sample ordinal distribution question",
+      "specialist-review", "Specify hypothesized categorical distribution",
+      "One ordinal group is not a two-group Wilcoxon or Kruskal-Wallis test.",
+      "Define categorical probabilities, direction and sample design.",
+      "BS-012"
+    ))
+
   if (outcome_type == "ordinal")
     return(decision(
       if (identical(as.integer(n_groups), 2L)) "wilcox-independent" else "kruskal-wallis",
@@ -273,6 +294,15 @@ biomedical_method_decision <- function(
       c("Preserve ordinal coding and ties.",
         "Do not treat ordinal labels as equally spaced values."),
       "BS-001"
+    ))
+
+  if (outcome_type == "nominal" && identical(as.integer(n_groups), 1L))
+    return(decision(
+      "nominal-one-sample-review", "Multinomial goodness-of-fit review",
+      "specialist-review", "stats::chisq.test() with prespecified expected counts",
+      "Single-group nominal categories are not a binary proportion test.",
+      "Specify categories and hypothesized probabilities, then check cell counts.",
+      "BS-012"
     ))
 
   if (outcome_type %in% c("binary", "nominal"))
