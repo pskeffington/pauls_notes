@@ -1,6 +1,6 @@
 # bio_stats: from every decision-tree object to a paper and an R analysis
 
-[Data-first chart](../biomedical-statistics-decision-guide.md#2-data-first-statistical-test-flowchart) · [Learning home](../README.md) · [Source and node map](decision-tree-evidence.json) · [Executable implementations](../examples/paper_linked_tests.R) · [Numerical checks](../tests/test_paper_linked_tests.R)
+[Evidence-linked flowcharts](../biomedical-statistics-decision-guide.md#2-evidence-linked-statistical-test-flowcharts) · [Learning home](../README.md) · [Source and node map](decision-tree-evidence.json) · [Executable implementations](../examples/paper_linked_tests.R) · [Numerical checks](../tests/test_paper_linked_tests.R)
 
 **Reviewed and executed: 2026-10-22.** Follow the node ID printed in the chart. Every one of its **19 objects** has a named publication, a source location, and either an executable design check or an implemented method. A decision diamond is a scientific question; it does not have its own hypothesis-test p-value.
 
