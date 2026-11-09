@@ -32,7 +32,7 @@ class NavigationTests(unittest.TestCase):
 
     def test_prohibited_identity_claims_remain_blocked(self):
         cases = (
-            'Dartmouth affiliation',
+            'college affiliation',
             'a university class',
             'institutional endorsement',
             'authentic research curriculum',

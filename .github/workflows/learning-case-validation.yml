@@ -6,6 +6,9 @@ on:
     paths:
       - "03_learning/**"
       - "06_RESOURCES/R/**"
+      - "06_RESOURCES/Literature/**"
+      - "06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md"
+      - "docs/research-method-map.json"
       - "06_RESOURCES/tests/**"
       - "06_RESOURCES/Genomics/**"
       - "scripts/check_book_learning.py"
@@ -43,6 +46,8 @@ jobs:
         run: |
           python3 scripts/check_documentation.py
           python3 scripts/check_book_learning.py
+          python3 scripts/validate_research_methods.py
+          python3 06_RESOURCES/tests/test_method_decision_contract.py
           python3 03_learning/tests/test_book_learning.py
           bash -n 03_learning/examples/run_case.sh
       - name: Exercise the analysis and output contract

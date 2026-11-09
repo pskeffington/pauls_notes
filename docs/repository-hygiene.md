@@ -2,6 +2,34 @@
 
 [Home](../README.md) · [Contributing](../CONTRIBUTING.md) · [Git/GitHub from zero to push](../03_learning/git-github-from-zero-to-push.md) · [Scientific milestone gates](roadmap-gates.md)
 
+## Initial branch audit — 2026-11-09 15:55 UTC
+
+The read-only classifier ran against `main` at `92091b1adfac9527878b32709798d35fe3d79054`, using a full-history clone, the live GitHub branch/PR inventory, and a complete default-tree scan (**zero skipped text files**). At that snapshot it found 18 branches: **11 `active_pr_hold`**, **2 `legacy_work_hold`**, **1 `frozen_protocol_hold`**, **2 `diverged_history_hold`**, **1 `unresolved_hold`**, and `main` (`default_hold`). This snapshot predates creation of this guide's branch and PR #40. The classifier never deletes refs and its output is not approval.
+
+| Branch(es) | Snapshot disposition at 15:55 UTC | Next action at that snapshot |
+| --- | --- | --- |
+| `main` | Default hold | Retain as integration target |
+| `feat/config-driven-ml-research-toolkit`, `feat/g4-survival-execution-20261017`, `docs/heatmap-zscore-tails-20261018`, `learning/binomial-latex-practice-20261020`, `feat/biostats-paper-linked-tree`, `docs/study-design-paper-examples`, `docs/agent-roadmap-index-20261030`, `docs/biomedical-figure-regression-guidance`, `feat/synthetic-biostat-narrative`, `docs/triple-block-analysis-reporting`, `feat/generic-welch-comparison-20261108` | Open-PR holds (#7, #19, #30, #31, #33–#39) | Preserve until each PR is merged/closed and its branch/tree references are separately reconciled |
+| `docs/g4-frozen-synthetic-survival-protocol-20261017` | Frozen protocol hold (#18) | Preserve the immutable protocol and downstream references |
+| `work/biomedical-learning`, `work/learning-check-coverage` | Legacy holds | Retain pending owner review of provenance and references |
+| `chore/squash-tree-parity-retirement-20261018` | Diverged-history hold in the generic classifier; PR #29 head matches the live SHA | PR head and immutable merge commit have identical tree `d6b4e2a…`; merge commit is an ancestor of current `main`, and `refs/pull/29/head` still points to the branch SHA. Content is represented in `main`; external-reference review and exact-SHA owner approval remain before retirement |
+| `docs/biomedical-statistics-decision-guide-20261022` | Diverged-history hold in the generic classifier; PR #32 head matches the live SHA | PR head and immutable merge commit have identical tree `d4d4884…`; merge commit is an ancestor of current `main`, and `refs/pull/32/head` still points to the branch SHA. Content is represented in `main`; external-reference review and exact-SHA owner approval remain before retirement |
+| `docs/codex-dev-production-index-20261029` | Unresolved hold; points to current `main` with no associated PR | Keep; review whether the redundant branch ref can be retired after reference checks |
+
+This snapshot supersedes the **branch counts only** in earlier sections; those dated records remain historical evidence. Current `main` is not protected according to the live branch endpoint, so avoid claiming that GitHub enforces PR-only changes or required checks. The two merged divergent histories had no branch-qualified URLs in the scanned default tree or PR bodies; their tree and merge-ancestry proofs were verified before retirement. The initial audit itself deleted no branches.
+
+## Verified branch retirements — 2026-11-09
+
+Three redundant refs were removed through GitHub's **Delete branch** control after comparing their contents and reviewing repository references:
+
+| Deleted branch | Evidence retained |
+| --- | --- |
+| `chore/squash-tree-parity-retirement-20261018` (PR #29; head `8cf2f91d48dfff0201e8242e4c7557c081fe000d`) | Head tree and immutable merge tree both `d6b4e2a73d51ed87033eb31ba3a870595ec31f3d`; merge commit `c695cb604f34fcad430a249fac0785460e45ca58` is an ancestor of `main`; source/PR-body and related issue/PR comment review found no branch-qualified links. `refs/pull/29/head` still points to the original head. |
+| `docs/biomedical-statistics-decision-guide-20261022` (PR #32; head `a6929c92c2d7b41e40bc85a45336c6db36277edf`) | Head tree and immutable merge tree both `d4d4884ffa9751e6a420b5ec169e6471c87b876b`; merge commit `a6ccbff413c0927466811e55c56892c0e22435ba` is an ancestor of `main`; source, PR body, and related issue/PR comment review found no branch-qualified links. `refs/pull/32/head` still points to the original head. |
+| `docs/codex-dev-production-index-20261029` (head `f32ebc8cbe8615792dd2e24526e07453a2eb05d7`) | Exact commit is reachable from `main`; no associated PR or matching source, issue, or PR reference was found. Its commit and files remain in `main`. |
+
+After each deletion, GitHub's branch view showed the deleted state; the final structured branch inventory omits all three refs. The two PR refs remain preserved. A refreshed full-history audit against unchanged `main` at `92091b1adfac9527878b32709798d35fe3d79054` found **16 branches**: **12 `active_pr_hold`**, **2 `legacy_work_hold`**, **1 `frozen_protocol_hold`**, and `main` (`default_hold`), with **zero skipped text files**. PR #40's branch is included in the 12 active holds. Open PR branches, both legacy `work/` refs, and the frozen protocol ref remain intact. `main` is not protected, and the read-only scanner approves no deletion by itself.
+
 **Audit date:** 2026-10-17. **Scope:** `pskeffington/pauls_notes` GitHub branch/PR snapshot and contributor tooling after [beginner Git guide PR #20](https://github.com/pskeffington/pauls_notes/pull/20) merged into `main` (squash merge `c40d8f3f1472d2f0266069aa5e0030930faf93dc`). This is a dated audit, not continuous monitoring.
 
 ## Current branch / PR inventory
@@ -59,7 +87,7 @@ This is an additional audit against `main` at `dd479979730ab34bc9f1acc87919657a3
 - **CI triggers:** historical feature-branch **push** triggers were present in `native-rust-training.yml`, `assay-uncertainty-validation.yml` and `assay-replication-validation.yml`. The cleanup retains **main-only push**, path-filtered **pull requests**, and **manual dispatch**, without changing fitting code, scientific baselines or artifact handling. Previously archived CI evidence remains referenced by its immutable run/commit identities.
 - **Tracked-build hygiene:** `scripts/check_repository_artifacts.py` and its positive/negative controls reject accidentally tracked editor files and build/runtime directories. Curated figures, book materials, pinned lockfiles, example reports and evidence artifacts are intentionally preserved. This **does not** detect participant-linked data, credentials, privacy breaches or licensing issues: D0 must still pass separately.
 
-**Deletion disposition:** `work/biomedical-learning` is content-obsolete; `work/learning-check-coverage` is content-reconciled but has five non-ancestor commits and needs final historical/link review before remote deletion. The frozen G4 protocol remains anchored at merged PR #18 commit `d53de90837342d661e5528e8d7c15995e5bccd01`; its branch is **not** a deletion candidate until PR #18 branch-qualified links and ongoing G4 implementation references are reconciled. **No remote refs were deleted by this pass.**
+**Deletion disposition at this 2026-10-17 snapshot:** `work/biomedical-learning` is content-obsolete; `work/learning-check-coverage` is content-reconciled but has five non-ancestor commits and needs final historical/link review before remote deletion. The frozen G4 protocol remains anchored at merged PR #18 commit `d53de90837342d661e5528e8d7c15995e5bccd01`; its branch is **not** a deletion candidate until PR #18 branch-qualified links and ongoing G4 implementation references are reconciled. **No remote refs were deleted during that pass.**
 
 
 ## Branch retention review instrument — 2026-10-17 pass
@@ -109,7 +137,7 @@ The first automatic read-only audit was executed on `main` at `e74257220f180d80b
 | [#4](https://github.com/pskeffington/pauls_notes/pull/4) | `feat/phase4c-person-uncertainty` | `daa6650537d259d87e4c3b6f396b1fe08bfa173c` |
 | [#5](https://github.com/pskeffington/pauls_notes/pull/5) | `feat/native-rust-training` | `9b468ebec1043df81d91465f0816e40c27bc48f8` |
 
-The legacy `work/biomedical-learning` branch is also contained in `main` but remains on `legacy_work_hold`; its lack of an associated merged PR and external-reference review prevents automatic clearance. **No branch has been deleted.** GitHub issue/PR comments, archived workflows, other repositories, bookmarks, and external sites are outside the audit's URL-scan boundary; an operator must review those and recheck exact remote SHA before deleting any branch.
+The legacy `work/biomedical-learning` branch is also contained in `main` but remains on `legacy_work_hold`; its lack of an associated merged PR and external-reference review prevents automatic clearance. At the time of this historical audit, **no branch had been deleted**. GitHub issue/PR comments, archived workflows, other repositories, bookmarks, and external sites were outside that audit's URL-scan boundary; an operator must review those and recheck exact remote SHA before deleting any branch.
 
 **Scientific and privacy boundary:** This classifier is not a D0 access/secret scan, not a D1 admission check, and does not accept G4 survival or release any participant-level information. Data and scientific gate counts are unchanged by branch housekeeping.
 

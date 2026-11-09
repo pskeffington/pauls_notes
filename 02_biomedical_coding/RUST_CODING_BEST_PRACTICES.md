@@ -29,7 +29,7 @@ The corpus was collected by targeted searches for Rust ownership, API guidelines
 | RG-07 | Dependency and unsafe-code review | First-party `#![forbid(unsafe_code)]`; inspect transitive dependencies, RustSec advisories, audit source/licensing | First-party unsafe forbidden; extra supply-chain tools not executed in this pass |
 | RG-08 | Measured performance | Profile before optimizing; keep feature sets, inputs, objective, precision and hardware matched | Resource observations exist; no speed superiority claim |
 | RG-09 | Optional high assurance | Evaluate bounded proofs/Miri/Kani or refinement systems only for concrete critical invariants | Research candidates only; no verification result asserted |
-| RG-10 | Research data/privacy/clinical boundary | TCGA open-access metadata is not blanket permission; no controlled data, direct identifiers, or participant-level outputs in public Git | Existing synthetic baseline; separate [private Dartmouth research gates](../docs/research-workflow.md#2-specify-input-and-access-contracts) remain |
+| RG-10 | Research data/privacy/clinical boundary | TCGA open-access metadata is not blanket permission; no controlled data, direct identifiers, or participant-level outputs in public Git | Existing synthetic baseline; separate [study-specific data-access gates](../docs/research-workflow.md#2-specify-input-and-access-contracts) remain |
 
 ### Working Rust quality commands
 
@@ -239,7 +239,7 @@ A real TCGA-BRCA adapter will require **new** patient/specimen data-use and scie
 ### 12. Implementation status and next code gates
 
 - **In main:** frozen synthetic Rust inference, separate native Linfa training baseline, numerical checks, literature/citation corpus and now a **standalone book arithmetic + grouping reference with source tests**. No first-party unsafe code is introduced.
-- **Not established by this guide:** fuzzing coverage, property-testing coverage beyond the documented fixtures, formal verification, systematic supply-chain audit, multiclass/subtype and survival training, protected TCGA input, private Dartmouth approval, generalizable disease prediction or clinical utility.
+- **Not established by this guide:** fuzzing coverage, property-testing coverage beyond the documented fixtures, formal verification, systematic supply-chain audit, multiclass/subtype and survival training, protected TCGA input, study-specific data authorization, generalizable disease prediction or clinical utility.
 - **Next engineering gate:** independent code review of any future numeric parser/adaptor; bounded input sizes, checked file staging, leakage negative controls, source/lock/license review and end-to-end parity on a prespecified **synthetic** fixture *before* any new study-specific data permission.
 
 
