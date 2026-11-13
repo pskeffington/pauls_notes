@@ -85,8 +85,10 @@ breast_cancer_test_atlas <- function() {
     out$cox <- survival::coxph(surv ~ marker + group,data=survival_data)
   }
   if (requireNamespace("MASS",quietly=TRUE))
-    out$negative_binomial <- MASS::glm.nb(
-      visits ~ group + offset(log(years)),data=count_data)
+    out$negative_binomial <- tryCatch(
+      MASS::glm.nb(visits ~ group + offset(log(years)), data=count_data),
+      error=function(e) structure(list(message=conditionMessage(e)),
+                                  class="optional_model_unavailable"))
   out
 }
 
