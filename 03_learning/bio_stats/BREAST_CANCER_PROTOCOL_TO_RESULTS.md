@@ -65,4 +65,4 @@ Rscript --vanilla 03_learning/tests/test_breast_cancer_protocol_replay.R
 Rscript -e 'rmarkdown::render("03_learning/examples/breast_cancer_protocol_report.Rmd", output_format="html_document")'
 ```
 
-The code has to be executed with a real R installation before any numerical result can be marked validated. Source standards: [SPIRIT 2025](https://www.bmj.com/content/389/bmj-2024-081477), [CONSORT 2025](https://www.bmj.com/content/389/bmj-2024-081477), and [ICH E9(R1)](https://www.fda.gov/media/108698/download). Verify current versions for clinical use; protocol statements above are original teaching specifications.
+The code has to be executed with a real R installation before any numerical result can be marked validated. Source standards: [SPIRIT 2025](https://www.bmj.com/content/389/bmj-2024-081477), [CONSORT 2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC11995449/), and [ICH E9(R1)](https://www.fda.gov/media/108698/download). Verify current versions for clinical use; protocol statements above are original teaching specifications.
