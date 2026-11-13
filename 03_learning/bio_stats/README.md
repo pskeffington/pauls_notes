@@ -2,7 +2,7 @@
 
 [Evidence-linked flowcharts](../biomedical-statistics-decision-guide.md#2-evidence-linked-statistical-test-flowcharts) · [Learning home](../README.md) · [Source and node map](decision-tree-evidence.json) · [Executable implementations](../examples/paper_linked_tests.R) · [Numerical checks](../tests/test_paper_linked_tests.R)
 
-**Reviewed and executed: 2026-10-22.** Follow the node ID printed in the chart. Every one of its **19 objects** has a named publication, a source location, and either an executable design check or an implemented method. A decision diamond is a scientific question; it does not have its own hypothesis-test p-value.
+**Breast cancer narrative:** [26-method worked interpretation atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [synthetic laboratory](../examples/breast_cancer_test_atlas.R) · [tests](../tests/test_breast_cancer_test_atlas.R).\n\n**Reviewed and executed: 2026-10-22.** Follow the node ID printed in the chart. Every one of its **19 objects** has a named publication, a source location, and either an executable design check or an implemented method. A decision diamond is a scientific question; it does not have its own hypothesis-test p-value.
 
 This is a teaching atlas, with three explicitly different evidence levels:
 
