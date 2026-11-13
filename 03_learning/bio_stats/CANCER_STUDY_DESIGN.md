@@ -107,6 +107,8 @@ quad n_Tapprox r n_C.
 
 An unequal ratio usually increases total n for a fixed target contrast under equal variances. Compare scenarios and clinical feasibility rather than optimizing n alone.
 
+**Independent numerical teaching reference:** For the hypothetical Δ=5, σ=12, α=.05 and power=.80, the **normal-approximation** equal-arm calculation is **91 analyzable participants per arm** (rounded up). Assuming 10% missing primary endpoints gives **102 enrolled per arm** under the simple inflation rule. These are not the exact t-test requirements; the R companion also calculates `power.t.test()`, which must be reported separately after execution. For the hypothetical HR=.75 and balanced allocation, the asymptotic Schoenfeld expression gives approximately **380 observed events**; this is not 380 recruited patients.
+
 ### 6.2 Binary response endpoint
 
 Let the *hypothetical planning* control pCR probability be 0.30 and intervention probability 0.45, with absolute difference .15. Use `stats::power.prop.test(p1=.30,p2=.45,power=.80,sig.level=.05,alternative="two.sided")` for a standard equal-arm approximate design. **Round up** each arm. In a protocol, identify the effect scale (risk difference, OR, etc.) and justify the assumed .30 and .45; do not call them historical trial results unless verified. Exact, score, regression-adjusted and simulation-based designs may require different sample sizes.
