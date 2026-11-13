@@ -8,7 +8,7 @@ Choose the subject that matches your research question. Each guide explains a pr
 
 Use the [current breast-cancer learning roadmap](../docs/learning-roadmap.md) for one complete worked example, or the [cancer-wide research scope](../docs/cancer-research-scope.md) to design a separate study with a different tumor site, modality or outcome.
 
-## Core statistics foundations
+## Cancer study design\n\n[**Cancer Study Design: From Research Question to Defensible Sample Size**](bio_stats/CANCER_STUDY_DESIGN.md) covers observational and randomized designs, estimands, endpoint definitions, continuous/binary/survival power, unequal allocation, loss to follow-up, correlated observations and protocol safeguards. [Study design calculator](examples/breast_cancer_study_design.R) · [numerical tests](tests/test_breast_cancer_study_design.R).\n\n## Core statistics foundations
 
 The [distribution and power module](bio_stats/BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md) extends the course into normal/z, t, chi-square, F, exact-binomial and Poisson calculations, sampling distributions, confidence intervals, and power, with [synthetic numerical checks](tests/test_breast_cancer_distribution_lab.R).
 
