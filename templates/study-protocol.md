@@ -1,6 +1,6 @@
 # Study protocol
 
-Use the [analysis-selection chapter and researcher checklist](../03_learning/researcher-analysis-checklist.md) to develop the analysis rationale, then record the study-specific decisions below.
+Use the [cancer study-design chapter](../03_learning/bio_stats/CANCER_STUDY_DESIGN.md) for estimands, endpoints, sample size, survival event planning, attrition and oversight. [Synthetic R design calculator](../03_learning/examples/breast_cancer_study_design.R).\n\nUse the [analysis-selection chapter and researcher checklist](../03_learning/researcher-analysis-checklist.md) to develop the analysis rationale, then record the study-specific decisions below.
 
 - Working title:
 - Research question and objective:
