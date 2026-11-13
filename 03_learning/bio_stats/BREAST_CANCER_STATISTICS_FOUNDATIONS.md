@@ -1,6 +1,6 @@
 # Breast cancer biostatistics: major foundations and methods
 
-[Distribution mathematics and power](BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md) · [Rosner-aligned test matrix](ROSNER_TEST_SELECTION_MATRIX.md) | [26 method breast cancer atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) | [Reference-value validation](BREAST_CANCER_NUMERICAL_VALIDATION.md) | [Foundations R lab](../examples/breast_cancer_foundations_lab.R)
+[Distribution mathematics and power](BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md) · [Cancer study design and sample size](CANCER_STUDY_DESIGN.md) · [Rosner-aligned test matrix](ROSNER_TEST_SELECTION_MATRIX.md) | [26 method breast cancer atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) | [Reference-value validation](BREAST_CANCER_NUMERICAL_VALIDATION.md) | [Foundations R lab](../examples/breast_cancer_foundations_lab.R)
 
 **Scope.** Original biomedical teaching notes organized around Bernard Rosner, *Fundamentals of Biostatistics*, 8th edition. All participants, outcomes, scores and clinical scenarios in this chapter are **synthetic**. Measurements are arbitrary teaching units; do not claim these are actual Ki-67 values, TCGA-BRCA results, or treatment effects.
 
