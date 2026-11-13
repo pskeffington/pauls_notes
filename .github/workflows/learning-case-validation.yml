@@ -41,7 +41,7 @@ jobs:
       - name: Install R and optional example packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-proc r-cran-survival r-cran-mass r-cran-nnet r-cran-lme4 r-cran-geepack r-cran-ordinal r-cran-cmprsk r-bioc-deseq2 r-bioc-edger r-bioc-limma
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-rmarkdown r-cran-knitr r-cran-proc r-cran-survival r-cran-mass r-cran-nnet r-cran-lme4 r-cran-geepack r-cran-ordinal r-cran-cmprsk r-bioc-deseq2 r-bioc-edger r-bioc-limma
       - name: Check documentation and shell syntax
         run: |
           python3 scripts/check_documentation.py
@@ -70,6 +70,21 @@ jobs:
           for test_file in 06_RESOURCES/tests/test_*.R; do
             Rscript --vanilla "$test_file"
           done
+      - name: Validate breast cancer statistical learning and protocol replay
+        run: |
+          Rscript --vanilla 03_learning/tests/test_breast_cancer_foundations_lab.R
+          Rscript --vanilla 03_learning/tests/test_breast_cancer_distribution_lab.R
+          Rscript --vanilla 03_learning/tests/test_breast_cancer_reference_values.R
+          Rscript --vanilla 03_learning/tests/test_breast_cancer_test_atlas.R
+          Rscript --vanilla 03_learning/tests/test_rosner_method_cases.R
+          Rscript --vanilla 03_learning/tests/test_breast_cancer_study_design.R
+          Rscript --vanilla 03_learning/tests/test_breast_cancer_protocol_replay.R
+          Rscript --vanilla 03_learning/tests/test_rosner_method_crosswalk.R
+      - name: Knit the synthetic breast cancer protocol report
+        run: |
+          mkdir -p "$RUNNER_TEMP/breast-cancer-report"
+          Rscript --vanilla -e 'rmarkdown::render("03_learning/examples/breast_cancer_protocol_report.Rmd", output_format="html_document", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
+
       - name: Execute learning page examples
         run: Rscript --vanilla 03_learning/tests/check_learning_pages.R
       - name: Execute Bash-to-R deployment
