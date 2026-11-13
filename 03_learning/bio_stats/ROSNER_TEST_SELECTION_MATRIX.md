@@ -92,6 +92,32 @@ If ESR1 expression is recorded twice for each patient, pair on **person ID and v
 
 Do **not** mark an example validated simply because it is documented here; no new R test execution was performed as part of this documentation-only pass. Existing methods and empirical evidence remain governed by the [method intake rules](../../06_RESOURCES/STATISTICAL_METHOD_INTAKE.md) and the [paper atlas](README.md).
 
+## Executable Rosner crosswalk
+
+The primary R selector offers **optional textbook references**. Existing methods and routing remain unchanged if the flag is omitted.
+
+```r
+source("06_RESOURCES/R/biomedical_test_selector.R")
+source("06_RESOURCES/R/rosner_method_crosswalk.R")
+selected <- biomedical_method_decision(
+  outcome_type = "continuous", design = "independent", n_groups = 2L,
+  include_rosner = TRUE
+)
+print(selected)
+selected$rosner$chapters   # "8"
+selected$required_checks  # analytical gates, not automatic approval
+```
+
+The [CSV crosswalk](rosner_method_registry.csv) records all 27 selector IDs; `coverage = extension` explicitly means a contemporary method/design overlay, **not** a claim about Rosner's text. [Synthetic method exercises](../examples/rosner_method_cases.R) provide independent continuous, paired continuous, binomial, categorical, Poisson and optional survival examples. All data are invented; never report their estimates as clinical findings.
+
+```bash
+Rscript --vanilla 06_RESOURCES/tests/test_biomedical_test_selector.R
+Rscript --vanilla 06_RESOURCES/tests/test_rosner_method_crosswalk.R
+Rscript --vanilla 03_learning/tests/test_rosner_method_cases.R
+```
+
+**Execution status:** Added tests require an R installation to verify; these files have not been executed in the current environment.
+
 ## Source and scope
 
 **Primary textbook:** Rosner B. *Fundamentals of Biostatistics*. 8th ed. Cengage Learning; 2016. ISBN 9781305268920. [Publisher catalog / chapter list](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-rosner/9781305268920).
