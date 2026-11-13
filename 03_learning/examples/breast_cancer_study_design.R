@@ -2,7 +2,7 @@
 # Sourcing defines functions; no packages installed or data read.
 validate_design_probability <- function(x, name, allow_zero = FALSE) {
   if (!is.numeric(x) || length(x) != 1L || !is.finite(x) ||
-      x < if (allow_zero) 0 else .Machine$double.eps ||
+      x < (if (allow_zero) 0 else .Machine$double.eps) ||
       x >= 1) stop(name, " must be in ",
                    if (allow_zero) "[0,1)." else "(0,1).", call. = FALSE)
   invisible(x)
