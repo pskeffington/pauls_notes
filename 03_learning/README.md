@@ -8,6 +8,10 @@ Choose the subject that matches your research question. Each guide explains a pr
 
 Use the [current breast-cancer learning roadmap](../docs/learning-roadmap.md) for one complete worked example, or the [cancer-wide research scope](../docs/cancer-research-scope.md) to design a separate study with a different tumor site, modality or outcome.
 
+## Core statistics foundations
+
+Start with the [breast cancer statistical foundations course](bio_stats/BREAST_CANCER_STATISTICS_FOUNDATIONS.md): sampling and the central limit theorem, Student and Welch t-tests, paired t, ordinary/Welch ANOVA, binomial and Poisson, with [synthetic executable R cases](examples/breast_cancer_foundations_lab.R). Continue into the [26-method interpretation atlas](bio_stats/BREAST_CANCER_WORKED_TEST_ATLAS.md).
+
 ## Browse subjects
 
 | Research task | Subject guide | Practical result |
