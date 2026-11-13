@@ -13,8 +13,13 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE,
                       fig.width=7, fig.height=4)
-source("03_learning/examples/breast_cancer_protocol_replay.R",
-       local=TRUE)
+candidate_roots <- c(".", "../..", "../../..")
+found_roots <- candidate_roots[file.exists(file.path(candidate_roots,
+ "03_learning/examples/breast_cancer_protocol_replay.R"))]
+if (!length(found_roots)) stop("Could not locate repository root.")
+repo_root <- found_roots[1L]
+source(file.path(repo_root,
+ "03_learning/examples/breast_cancer_protocol_replay.R"), local=TRUE)
 replay <- bc_protocol_replay(seed=7122026L)
 plan <- replay$plan
 d <- replay$data
