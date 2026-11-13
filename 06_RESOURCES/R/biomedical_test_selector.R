@@ -346,7 +346,7 @@ print.biomedical_method_decision <- function(x, ...) {
     chapter_text <- if (length(x$rosner$chapters))
       paste(x$rosner$chapters, collapse = ", ") else "not assigned"
     cat("Rosner 8e chapters: ", chapter_text,
-        " | coverage: ", x$rosner$coverage, "\\n", sep = "")
+        " | coverage: ", x$rosner$coverage, "\n", sep = "")
   }
   invisible(x)
 }
