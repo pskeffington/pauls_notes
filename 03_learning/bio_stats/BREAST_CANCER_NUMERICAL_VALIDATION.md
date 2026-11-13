@@ -4,6 +4,18 @@
 
 **Validation pass: 2026-11-13.** All values below are computed from **synthetic teaching observations**. Independent numerical reference calculations were run using Python/SciPy 1.17.0; **R execution has not been verified in this environment**. Fixed numerical targets are asserted in a companion R test so another researcher can replay the examples. Numerical agreement does **not** establish that a synthetic analysis is appropriate for real breast cancer research.
 
+## Textbook source locators
+
+Rosner, *Fundamentals of Biostatistics*, eighth edition, [publisher's table of contents](https://nz.cengage.com/c/fundamentals-of-biostatistics-8e-rosner/9781305268920/):
+
+- **Chapter 2:** descriptive statistics (corrected from the earlier Chapter 3 registry mapping).
+- **Chapter 7:** one-sample inference for binomial and Poisson distributions.
+- **Sections 8.2–8.3:** paired t inference and interval estimation; **8.7:** unequal-variance independent t inference.
+- **Section 10.7:** chi-square goodness-of-fit.
+- **Sections 14.8–14.11:** survival introduction, Kaplan–Meier, log-rank and proportional hazards.
+
+The chapter/section crosswalk is intended for reader navigation. Worked examples here use original synthetic numbers, not Rosner's textbook datasets.
+
 ## 1. Welch's t-test: independent continuous biomarker levels
 
 **Question.** Do independent patients in hypothetical cohorts A and B have different mean biomarker scores?
