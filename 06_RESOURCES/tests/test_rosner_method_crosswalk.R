@@ -31,11 +31,34 @@ survey <- rosner_annotate_decision(biomedical_method_decision(
 stopifnot(identical(survey$method_id, "survey-design-review"),
           identical(survey$rosner$coverage, "extension"),
           identical(length(survey$rosner$chapters), 0L))
+# The primary selector must return the same decision with opt-in enrichment.
+opt <- biomedical_method_decision("continuous", n_groups = 2L,
+                                  include_rosner = TRUE)
+base <- biomedical_method_decision("continuous", n_groups = 2L)
+stopifnot(is.null(base$rosner),
+          identical(opt$method_id, base$method_id),
+          identical(opt$status, base$status),
+          identical(opt$evidence_ids, base$evidence_ids),
+          identical(opt$required_checks, base$required_checks),
+          identical(opt$decision_path, base$decision_path),
+          identical(opt$rosner$chapters, "8"),
+          any(grepl("Rosner 8e chapters: 8",
+                    capture.output(print(opt)), fixed = TRUE)))
+opt_survey <- biomedical_method_decision("binary", design = "complex_survey",
+                                          n_groups = 2L, include_rosner = TRUE)
+stopifnot(identical(opt_survey$method_id, "survey-design-review"),
+          identical(opt_survey$rosner$coverage, "extension"),
+          identical(length(opt_survey$rosner$chapters), 0L))
+stopifnot(identical(rosner_method_crosswalk("omics-design-review")$coverage,
+                    "extension"))
+
 failed <- function(expr) inherits(try(expr, silent = TRUE), "try-error")
 stopifnot(failed(rosner_method_crosswalk("unknown-method")),
           failed(rosner_method_crosswalk(NA_character_)),
           failed(rosner_method_crosswalk(character())),
-          failed(rosner_annotate_decision(list())))
+          failed(rosner_annotate_decision(list())),
+          failed(biomedical_method_decision("binary", include_rosner = NA)),
+          failed(biomedical_method_decision("binary", include_rosner = 1)))
 # Analytic exact-tail identity: probability of >=k includes k.
 k <- 36L; n <- 80L; p0 <- .35
 tail <- stats::pbinom(k - 1L, n, p0, lower.tail = FALSE)
