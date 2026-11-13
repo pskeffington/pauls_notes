@@ -3,7 +3,7 @@
 **From data type to statistical test: an R-based biomedical decision guide**  
 **Paul's Notes | Independent teaching guide | Expanded 2026-11-08**<br>
 **Scope:** Biomedical, clinical, public-health and cancer research across all cancer types. Breast cancer examples are illustrations, not a limit on the guide.  
-[Learning home](README.md) · [Expanded design-first decision tree](../06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md) · [Every chart node: paper and executable test](bio_stats/README.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
+[Rosner textbook testing matrix](bio_stats/ROSNER_TEST_SELECTION_MATRIX.md) · [Learning home](README.md) · [Expanded design-first decision tree](../06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md) · [Every chart node: paper and executable test](bio_stats/README.md) · [Recent literature and R workflows](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [R tools](../06_RESOURCES/R/README.md) · [Study protocol](../templates/study-protocol.md) · [Research/data boundaries](../docs/research-workflow.md)
 
 **Start here: What type of data are we working with — quantitative (numerical), qualitative (categorical), counts, or time-to-event?** Identify what is measured *before* looking up a t-test, chi-square test or regression model. Then refine the choice by the question, number of groups, pairing and sampling design.
 
