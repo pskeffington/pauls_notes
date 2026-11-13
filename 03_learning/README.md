@@ -10,6 +10,8 @@ Use the [current breast-cancer learning roadmap](../docs/learning-roadmap.md) fo
 
 ## Core statistics foundations
 
+The [distribution and power module](bio_stats/BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md) extends the course into normal/z, t, chi-square, F, exact-binomial and Poisson calculations, sampling distributions, confidence intervals, and power, with [synthetic numerical checks](tests/test_breast_cancer_distribution_lab.R).
+
 Start with the [breast cancer statistical foundations course](bio_stats/BREAST_CANCER_STATISTICS_FOUNDATIONS.md): sampling and the central limit theorem, Student and Welch t-tests, paired t, ordinary/Welch ANOVA, binomial and Poisson, with [synthetic executable R cases](examples/breast_cancer_foundations_lab.R). Continue into the [26-method interpretation atlas](bio_stats/BREAST_CANCER_WORKED_TEST_ATLAS.md).
 
 ## Browse subjects
