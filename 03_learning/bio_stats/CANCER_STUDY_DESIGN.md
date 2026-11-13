@@ -4,7 +4,7 @@
 
 **Independent teaching chapter · November 2026.** Breast cancer is the running narrative; methods transfer to other cancer sites. All numerical assumptions and scenarios below are hypothetical, **not observed trial results or treatment recommendations**. Rosner, *Fundamentals of Biostatistics* (8th ed.), supplies core probability, hypothesis tests and power foundations. Modern protocol/reporting standards and oncology endpoint guidance are cited at the end. This is a learning resource, not a complete protocol ready for human-participant recruitment.
 
-## 1. Begin with the research question, not the test
+## Worked end-to-end companion\n\nThe [frozen synthetic breast cancer protocol-to-results exercise](BREAST_CANCER_PROTOCOL_TO_RESULTS.md) translates this design framework into [cohort generation and prespecified analysis](../examples/breast_cancer_protocol_replay.R), a [knit-ready Methods/Results report](../examples/breast_cancer_protocol_report.Rmd), and [replay tests](../tests/test_breast_cancer_protocol_replay.R). Outcomes are deliberately synthetic and cannot support clinical claims.\n\n## 1. Begin with the research question, not the test
 
 **Motivating question:** Among adults with a defined breast cancer subtype beginning specified treatment, does an intervention change the risk of pathological response compared with standard care?
 
