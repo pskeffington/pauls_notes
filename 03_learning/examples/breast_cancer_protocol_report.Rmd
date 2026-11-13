@@ -1,0 +1,132 @@
+---
+title: "Synthetic Breast Cancer Trial — Protocol to Results"
+subtitle: "Educational end-to-end biostatistics exercise"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+**Synthetic data only.** This report is not clinical evidence, does not evaluate a real treatment, and contains no patient records. See the [frozen teaching protocol](../bio_stats/BREAST_CANCER_PROTOCOL_TO_RESULTS.md).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE,
+                      fig.width=7, fig.height=4)
+source("03_learning/examples/breast_cancer_protocol_replay.R",
+       local=TRUE)
+replay <- bc_protocol_replay(seed=7122026L)
+plan <- replay$plan
+d <- replay$data
+a <- replay$analysis
+```
+
+# Background and research question
+
+**Research question:** In a synthetic randomized breast cancer trial, is the probability of **documented pathological complete response by the prespecified window** different under hypothetical treatment B versus A?
+
+The outcome is deliberately a **composite documented-response endpoint**: patients whose assessments are unavailable are counted as **without documented response**. This does not establish their underlying biological response status. The scientific target is the between-arm difference in the probability of documented response, B minus A.
+
+# Prespecified study design and power
+
+The simulated research population consists of one record per randomized patient. The hypothetical planning response probabilities are 0.30 (A) and 0.45 (B) among assessable participants; enrollment targets assume two-sided alpha=0.05, target power=0.80, equal allocation and 10% unavailable outcomes. Calculated sample size is approximate and must **not** be interpreted as 80% power for the composite endpoint once missing assessments become nonresponses.
+
+```{r design}
+design <- data.frame(
+  Item = c("p(A), assessable","p(B), assessable","Planning difference",
+           "Two-sided alpha","Target power","Assessment unavailable",
+           "Analyzable n per arm","Enrolled n per arm"),
+  Value = c(plan$p_a,plan$p_b,plan$p_b-plan$p_a,
+            plan$alpha,plan$power,plan$loss,
+            plan$analyzable_per_arm,plan$enrolled_per_arm)
+)
+knitr::kable(design, digits=3,
+             caption="Prespecified hypothetical planning assumptions")
+```
+
+# Methods
+
+Participants are assigned 1:1 to A or B using fixed-seed pseudorandom allocation. Synthetic underlying binary responses are generated independently by assigned arm, followed by an independent assessment-unavailable indicator. The composite endpoint is 1 only for a measured underlying response; otherwise 0.
+
+The primary estimand is the randomized-arm **difference in documented response rates (B − A)**. The teaching analysis reports an unpooled Wald 95% CI for the risk difference and a two-sided independent two-proportion Pearson score test with continuity correction disabled. Fisher's exact test and a complete-case comparison are *sensitivity analyses*, not a replacement primary analysis. The Wald CI is used to expose the formula; more robust score/Newcombe or exact interval methods require methodological review before clinical use. There is one primary hypothesis; secondary results are exploratory.
+
+# Data quality and participant flow
+
+```{r checks}
+bc_validate_trial(d)
+stopifnot(!anyDuplicated(d$patient_id),
+          nrow(d)==plan$n_total,
+          all(a$summary$randomized ==
+              a$summary$assessed + a$summary$unassessed))
+knitr::kable(a$summary, digits=3,
+             caption="Synthetic randomized enrollment and endpoint status")
+```
+
+# Primary results
+
+```{r primary-table}
+result <- data.frame(
+  Contrast="B minus A: documented response",
+  Risk_difference=a$risk_difference,
+  CI_lower=a$risk_difference_ci[1],
+  CI_upper=a$risk_difference_ci[2],
+  p_value=a$primary_test$p.value
+)
+knitr::kable(result,digits=4,
+             caption="Synthetic primary treatment contrast")
+```
+
+```{r figure}
+means <- a$summary$documented_rate
+barplot(means, names.arg=a$summary$arm,
+        ylim=c(0,max(.1,means)*1.25), col=c("#0072B2","#D55E00"),
+        ylab="Documented pCR proportion",
+        main="Synthetic response by randomized arm",
+        sub=paste0("Randomized n: A=",a$summary$randomized[1],
+                   "; B=",a$summary$randomized[2],
+                   "; unavailable: A=",a$summary$unassessed[1],
+                   "; B=",a$summary$unassessed[2]))
+```
+
+```{r narrative, results='asis'}
+cat(sprintf(
+  "Among **%d synthetic randomized participants** (%d assigned A, %d assigned B), documented response occurred in **%d/%d** (%.1f%%) in A and **%d/%d** (%.1f%%) in B. The prespecified **B-minus-A risk difference** was **%.3f** (unpooled Wald **95%% CI %.3f to %.3f**); the two-sided uncorrected two-proportion test gave **p=%.4f**. These findings describe only a simulated documented-endpoint contrast and do not imply treatment effectiveness in breast cancer.\n",
+  nrow(d),a$summary$randomized[1],a$summary$randomized[2],
+  a$summary$documented_response[1],a$summary$randomized[1],
+  100*a$summary$documented_rate[1],
+  a$summary$documented_response[2],a$summary$randomized[2],
+  100*a$summary$documented_rate[2],
+  a$risk_difference,a$risk_difference_ci[1],a$risk_difference_ci[2],
+  a$primary_test$p.value
+))
+```
+
+# Sensitivity analyses
+
+```{r sensitivity}
+sensitivity <- data.frame(
+  Method=c("Fisher exact (two-sided, documented response)",
+           "Assessed-only risk difference B minus A"),
+  Estimate=c(unname(a$fisher_test$estimate),
+             a$assessed_only_difference),
+  Interpretation=c("Odds ratio, not risk ratio",
+                   "Different denominator and missingness estimand")
+)
+knitr::kable(sensitivity,digits=4,
+             caption="Exploratory sensitivity comparisons")
+```
+
+Fisher's estimate is a conditional **odds ratio**, not the primary risk difference. The assessed-only analysis conditions on having an available assessment, which may introduce selection bias and **changes the estimand**. Neither is a replacement for the prespecified composite endpoint.
+
+# Discussion, limitations and governance
+
+The assigned pCR probabilities are fictional. Missing assessments were simulated independently of outcomes for simplicity; real discontinuation, death, or missing surgical pathology can be informative. Coding lack of documentation as failure measures **documented response**, not biological nonresponse. The originally planned sample size uses assessable outcome rates and thus does not guarantee power for the composite endpoint. The normal-approximation CI may be inaccurate for sparse or extreme outcomes. The design does not address real eligibility, patient safety, ethics review, registration, trial conduct or external validity.
+
+The cohort is synthetic and free of actual patient identifiers. Replay requires the R implementation and checked package versions. CI and figures are **not independently validated** merely because a document can knit.
+
+# Computational provenance
+
+```{r provenance}
+cat("Seed:",replay$seed,"\n")
+print(utils::sessionInfo())
+```
