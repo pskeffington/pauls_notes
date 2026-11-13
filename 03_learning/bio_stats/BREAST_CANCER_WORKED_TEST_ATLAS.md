@@ -1,6 +1,6 @@
 # Breast cancer biostatistics: worked interpretation atlas
 
-[Rosner testing matrix](ROSNER_TEST_SELECTION_MATRIX.md) · [Decision-tree evidence](README.md) · [R laboratory](../examples/breast_cancer_test_atlas.R) · [Rosner chapter registry](rosner_method_registry.csv) · [Breast cancer learning materials](../../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
+[Foundations course: CLT, Welch, Student t, ANOVA and Poisson](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [Rosner testing matrix](ROSNER_TEST_SELECTION_MATRIX.md) · [Decision-tree evidence](README.md) · [R laboratory](../examples/breast_cancer_test_atlas.R) · [Rosner chapter registry](rosner_method_registry.csv) · [Breast cancer learning materials](../../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
 
 **Teaching edition, 2026-11-13.** Each method in the [Rosner-aligned matrix](ROSNER_TEST_SELECTION_MATRIX.md) has a breast-cancer narrative. The R laboratory uses **invented patients and invented measurements**, never downloaded clinical records. Tumor stage, receptor status, log-expression and follow-up durations are synthetic. **Do not interpret any numerical output as a finding about real patients, treatment effectiveness, ESR1, ERBB2, or any cancer subtype.**
 
