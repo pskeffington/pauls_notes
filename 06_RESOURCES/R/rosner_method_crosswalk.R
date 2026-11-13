@@ -5,7 +5,7 @@ rosner_method_crosswalk <- function(method_id) {
       is.na(method_id) || !nzchar(method_id))
     stop("method_id must be one nonempty character value.", call. = FALSE)
   ids <- c("descriptive", "descriptive-categorical", "descriptive-design-review", "survey-design-review", "correlated-outcome-review", "omics-design-review", "prediction-validation-review", "adjusted-model-review", "survival-analysis-review", "time-origin-review", "count-rate-model-review", "count-exposure-review", "association-model-review", "paired-t", "mcnemar", "signed-rank", "paired-design-review", "group-count-review", "welch-t", "welch-anova", "continuous-design-review", "ordinal-one-sample-review", "wilcox-independent", "kruskal-wallis", "nominal-one-sample-review", "binomial-proportion", "contingency-analysis")
-  chapters <- c("3", "3", "", "", "13", "", "", "11;13;14", "14", "14", "14", "14", "11;13", "8", "10", "9", "", "", "8", "12", "7;8", "", "9", "12", "10", "4;7", "10")
+  chapters <- c("2", "2", "", "", "13", "", "", "11;13;14", "14", "14", "14", "14", "11;13", "8", "10", "9", "", "", "8", "12", "7;8", "", "9", "12", "10", "4;7", "10")
   coverage <- c("textbook", "textbook", "extension", "extension", "extension", "extension", "extension", "textbook", "textbook", "textbook", "textbook", "textbook", "textbook", "textbook", "textbook", "textbook", "extension", "design_gate", "textbook", "textbook", "textbook", "extension", "textbook", "textbook", "textbook", "textbook", "textbook")
   idx <- match(method_id, ids)
   if (is.na(idx)) stop("Unrecognized method_id: ", method_id, call. = FALSE)
