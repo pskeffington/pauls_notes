@@ -1,6 +1,6 @@
 method_id,topic,rosner_chapters,coverage
-"descriptive","Descriptive numerical","3","textbook"
-"descriptive-categorical","Categorical descriptive","3","textbook"
+"descriptive","Descriptive numerical","2","textbook"
+"descriptive-categorical","Categorical descriptive","2","textbook"
 "descriptive-design-review","Design-aware description","","extension"
 "survey-design-review","Complex survey","","extension"
 "correlated-outcome-review","Repeated measures","13","extension"
