@@ -10,7 +10,8 @@ biomedical_method_decision <- function(
     adjusted = FALSE,
     has_exposure = FALSE,
     has_censoring = FALSE,
-    multiple_outcomes = FALSE) {
+    multiple_outcomes = FALSE,
+    include_rosner = FALSE) {
 
   types <- c("continuous", "binary", "nominal", "ordinal",
              "count", "time_to_event", "omics_counts")
@@ -33,10 +34,18 @@ biomedical_method_decision <- function(
 
   bools <- list(adjusted = adjusted, has_exposure = has_exposure,
                 has_censoring = has_censoring,
-                multiple_outcomes = multiple_outcomes)
+                multiple_outcomes = multiple_outcomes,
+                include_rosner = include_rosner)
   if (!all(vapply(bools, function(x)
     is.logical(x) && length(x) == 1L && !is.na(x), logical(1))))
     stop("All design flags must be one nonmissing logical value.",
+         call. = FALSE)
+
+  # Optional textbook annotation requires an explicit, separately sourced helper.
+  # Default routing and result shape remain unchanged for existing callers.
+  if (include_rosner &&
+      !exists("rosner_annotate_decision", mode = "function", inherits = TRUE))
+    stop("For include_rosner=TRUE, first source 06_RESOURCES/R/rosner_method_crosswalk.R.",
          call. = FALSE)
 
   if (!is.null(n_groups) &&
@@ -76,6 +85,8 @@ biomedical_method_decision <- function(
                     multiple_outcomes = multiple_outcomes)
     )
     class(result) <- "biomedical_method_decision"
+    if (include_rosner)
+      result <- rosner_annotate_decision(result)
     result
   }
 
@@ -331,5 +342,11 @@ print.biomedical_method_decision <- function(x, ...) {
       "Path: ", paste(x$decision_path, collapse = " / "), "\n",
       "Study requirements: ", paste(x$required_checks, collapse = " | "),
       "\n", sep = "")
+  if (!is.null(x$rosner)) {
+    chapter_text <- if (length(x$rosner$chapters))
+      paste(x$rosner$chapters, collapse = ", ") else "not assigned"
+    cat("Rosner 8e chapters: ", chapter_text,
+        " | coverage: ", x$rosner$coverage, "\\n", sep = "")
+  }
   invisible(x)
 }
