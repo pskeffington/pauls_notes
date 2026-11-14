@@ -13,6 +13,8 @@ on:
       - "06_RESOURCES/Genomics/**"
       - "scripts/check_book_learning.py"
       - "scripts/check_biostatistics_evidence.py"
+      - "scripts/check_biostatistics_matrix.py"
+      - "scripts/tests/test_biostatistics_matrix.py"
       - "scripts/tests/test_biostatistics_evidence.py"
       - ".github/workflows/learning-case-validation.yml"
   pull_request:
@@ -23,6 +25,8 @@ on:
       - "06_RESOURCES/Genomics/**"
       - "scripts/check_book_learning.py"
       - "scripts/check_biostatistics_evidence.py"
+      - "scripts/check_biostatistics_matrix.py"
+      - "scripts/tests/test_biostatistics_matrix.py"
       - "scripts/tests/test_biostatistics_evidence.py"
       - ".github/workflows/learning-case-validation.yml"
 
@@ -58,6 +62,8 @@ jobs:
         run: Rscript --vanilla 03_learning/tests/test_statistical_test_lab.R
       - name: Require every chart object and method to have paper and execution coverage
         run: |
+          python3 scripts/check_biostatistics_matrix.py
+          python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_matrix.py' -v
           python3 scripts/check_biostatistics_evidence.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_evidence.py' -v
           Rscript --vanilla 03_learning/tests/test_paper_linked_tests.R --full
@@ -85,6 +91,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/breast-cancer-report"
           Rscript --vanilla -e 'rmarkdown::render("03_learning/examples/breast_cancer_protocol_report.Rmd", output_format="html_document", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
 
+      - name: Validate matrix gate review against all 27 statistical routes
+        run: Rscript --vanilla 06_RESOURCES/tests/test_biomedical_matrix_gate_review.R
       - name: Execute learning page examples
         run: Rscript --vanilla 03_learning/tests/check_learning_pages.R
       - name: Execute Bash-to-R deployment
