@@ -2,7 +2,7 @@
 
 **Paul's Notes | Expanded method selector and literature crosswalk | 2026-11-08**
 
-[Test selection guide](../03_learning/biomedical-statistics-decision-guide.md) · [Selector R source](R/biomedical_test_selector.R) · [R library index](R/README.md) · [Literature matrix](Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [Method intake rules](STATISTICAL_METHOD_INTAKE.md)
+[V2 route-by-route matrix and assumption gates](../03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md) · [Test selection guide](../03_learning/biomedical-statistics-decision-guide.md) · [Selector R source](R/biomedical_test_selector.R) · [R library index](R/README.md) · [Literature matrix](Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) · [Method intake rules](STATISTICAL_METHOD_INTAKE.md)
 
 ## Purpose and scope
 
