@@ -2,6 +2,20 @@
 
 **Audit date:** 2026-11-13. **Scope:** `03_learning` statistical foundations, Rosner crosswalk, study-design calculator and synthetic protocol-to-results case.
 
+## November 14, 2026 — V2 decision matrix validation extension
+
+The [route-by-route V2 matrix](BIOMEDICAL_DECISION_MATRIX_V2.md) and [CSV registry](biomedical_decision_matrix.csv) now cover **27 distinct selector IDs** linked to **25 defined assumption gates** through **156 route-gate relationships**. A cross-file connector-side structural inspection checked for duplicate/missing selector IDs, missing Rosner crosswalk IDs, unknown gates and empty matrix fields; **no mismatches were observed**. That inspection is not an R test or clinical validation.
+
+**Committed new validation paths:**
+
+```bash
+python3 scripts/check_biostatistics_matrix.py
+python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_matrix.py' -v
+Rscript --vanilla 06_RESOURCES/tests/test_biomedical_matrix_gate_review.R
+```
+
+The first checks the CSV schema and cross-reference integrity; the negative fixtures probe missing routes, duplicate IDs, illegal classes, empty interpretations and bad gates. The R suite is designed to replay each selector route and verify that every gate begins `not_checked`, concerns block review and even all-`documented` gates confer only `ready_for_human_review`. **These suites were added to GitHub Actions but no completed execution log was available during this pass.** Never equate a successful matrix lookup or a complete checklist with sound study design, valid assumptions or a real clinical finding.
+
 ## Execution environments
 
 - **Local execution:** BLOCKED. The current local container has neither `R` nor `Rscript`; installed package cache is unavailable and the environment cannot access package repositories. Therefore this audit does **not** claim an R pass.
