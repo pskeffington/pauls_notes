@@ -4,6 +4,10 @@
 
 **Teaching crosswalk | 2026-11-13.** An original method-selection aid organized around Bernard Rosner, *Fundamentals of Biostatistics*, **8th ed.** (Cengage, 2016; ISBN 9781305268920). Chapter references follow the [publisher's table of contents](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-rosner/9781305268920). This is **not** a reproduction of Rosner's copyrighted flowchart, worked exercises or textbook text. Rosner is the foundational textbook; the existing paper atlas supplies independently linked biomedical applications. Specific modeling choices below are editorial guidance, not claims that Rosner mandates a given software function.
 
+## Version 2 decision matrix and assumption gates
+
+[**V2 route-by-route method-selection matrix**](BIOMEDICAL_DECISION_MATRIX_V2.md) consolidates 27 routes, mandatory input evidence, a 25-gate checklist and synthetic breast-cancer interpretation notes. It leaves Rosner's original topical crosswalk and the R test-selector's behavior unchanged.
+
 ## Breast-cancer worked examples and interpretation\n\n[**Independent numerical reference calculations**](BREAST_CANCER_NUMERICAL_VALIDATION.md) — 5 fully worked synthetic examples, hand formulas, R calls, reference values, uncertainty, and Results narratives.\n\n[**Full 26-method breast-cancer teaching atlas**](BREAST_CANCER_WORKED_TEST_ATLAS.md) — study questions, synthetic input structure, R commands, interpretation of effects and confidence intervals, assumption gates and modern extensions. [Executable synthetic R laboratory](../examples/breast_cancer_test_atlas.R) · [Numerical/contract checks](../tests/test_breast_cancer_test_atlas.R).\n\n## Selection contract: ask in this order
 
 1. **Scientific target:** describe a parameter, estimate an effect, test a prespecified hypothesis, assess association, or predict outcomes? Specify the estimand, population, time zero and meaningful effect size.
