@@ -1,10 +1,10 @@
-# Complete Biomedical methods 8e methodological alignment — breast cancer biostatistics
+# Complete eighth-edition methods methodological alignment — breast cancer biostatistics
 
 **Retrieval key:** `pauls-notes.biostat8.complete-methodology.v1`  
-**Source:** the cited textbook author, *Fundamentals of Biostatistics*, 8th edition (Cengage, 2016), ISBN 9781305268920. Full PDF supplied by the user (962 PDF pages); manuscript is copyrighted and **is not copied into this repository**.  
+**Source:** *Fundamentals of Biostatistics*, 8th edition (Cengage, 2016), ISBN 9781305268920. Full PDF supplied by the user (962 PDF pages); manuscript is copyrighted and **is not copied into this repository**.  
 **Scope boundary:** The eighth-edition table of contents, preface, and opening chapter material were directly inspected across **all 14 chapters**. Focused content checks also cover descriptive quantiles, inference structure, multiple comparisons, bootstrap, permutation tests, correlated outcomes and survival (see [source notes](BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md)). The contract below is an **original, chapter-complete implementation specification**, not an assertion that all 962 pages, numbered exercises and derivations received line-by-line review.
 
-## Biomedical methods's instructional method as a coding standard
+## Source-text teaching approach as a coding standard
 
 The preface (PDF pp. 15–18) describes instruction built from authentic medical-research problems, thorough explanations of the concepts without treating statistics as a recipe book, and computer results where helpful. It distinguishes the introductory foundation (chapters 1–12) from advanced epidemiologic and person-time work (chapters 13–14). It also specifies carrying **full precision during calculations** and rounding only displayed results.
 
