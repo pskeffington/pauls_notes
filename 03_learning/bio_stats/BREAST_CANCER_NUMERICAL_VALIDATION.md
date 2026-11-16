@@ -1,12 +1,12 @@
 # Breast cancer biostatistics — numerical validation and interpretation
 
-[Worked method atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [R example source](../examples/breast_cancer_test_atlas.R) · [R reference assertions](../tests/test_breast_cancer_reference_values.R) · [Biomedical methods method matrix](BIOSTAT_TEST_SELECTION_MATRIX.md)
+[Worked method atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [R example source](../examples/breast_cancer_test_atlas.R) · [R reference assertions](../tests/test_breast_cancer_reference_values.R) · [biostatistics method matrix](BIOSTAT_TEST_SELECTION_MATRIX.md)
 
 **Validation pass: 2026-11-13.** All values below are computed from **synthetic teaching observations**. Independent numerical reference calculations were run using Python/SciPy 1.17.0; **R execution has not been verified in this environment**. Fixed numerical targets are asserted in a companion R test so another researcher can replay the examples. Numerical agreement does **not** establish that a synthetic analysis is appropriate for real breast cancer research.
 
 ## Textbook source locators
 
-Biomedical methods, *Fundamentals of Biostatistics*, eighth edition, [publisher's table of contents](https://nz.cengage.com/c/fundamentals-of-biostatistics-8e-biostat/9781305268920/):
+biostatistics, *Fundamentals of Biostatistics*, eighth edition, [publisher's table of contents](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md):
 
 - **Chapter 2:** descriptive statistics (corrected from the earlier Chapter 3 registry mapping).
 - **Chapter 7:** one-sample inference for binomial and Poisson distributions.
@@ -14,7 +14,7 @@ Biomedical methods, *Fundamentals of Biostatistics*, eighth edition, [publisher'
 - **Section 10.7:** chi-square goodness-of-fit.
 - **Sections 14.8–14.11:** survival introduction, Kaplan–Meier, log-rank and proportional hazards.
 
-The chapter/section crosswalk is intended for reader navigation. Worked examples here use original synthetic numbers, not Biomedical methods's textbook datasets.
+The chapter/section crosswalk is intended for reader navigation. Worked examples here use original synthetic numbers, not the cited textbook's textbook datasets.
 
 ## 1. Welch's t-test: independent continuous biomarker levels
 
