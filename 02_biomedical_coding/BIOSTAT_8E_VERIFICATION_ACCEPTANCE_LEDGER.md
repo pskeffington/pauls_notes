@@ -91,3 +91,20 @@ For acceptance, record exit codes, R and package versions, CI job URL/commit SHA
 **In-session checks performed:** GitHub source was refetched after commit, and the following properties were checked: all four new CI trigger classes present under both push and pull request; preflight job and attribution check present; five Python regression test definitions; a specific missing-fence assertion; independent Welch and paired CI calculations present; and zero discrepancies in these source-level checks.
 
 **Execution boundary:** `Rscript` and `R` were not present in the available execution container. Git clone from GitHub failed due to DNS/network restrictions, so the complete repository and Python tests could not be run locally. CI run success is **not** established from source inspection. Treat Python/R tests as configured but unexecuted until actual CI logs or a clean local replay are inspected. Bibliography-only scholarly attribution policy remains unchanged. No book chapter or publication status was promoted.
+
+
+## Acceptance continuation — estimand consistency and model contracts (2026-11-15)
+
+**Confirmed semantic mismatch corrected.** The workbook previously described a “grade–subtype association” but its implementation is a comparison of continuous synthetic ERBB2 scores across tumor grades. It now labels the actual grade-specific score estimand. The classifier example is correctly described as held-out *prediction* discrimination, not demonstrated diagnostic screening performance.
+
+**Repeated-measures design corrected.** The original teaching fixture generated independently drawn baseline and follow-up values despite fitting a patient random-intercept model. The revised fixture draws a patient baseline and then generates follow-up from baseline plus a stochastic within-person change; patient IDs and two-visit ordering remain unchanged. A regression assertion requires a positive within-person visit correlation greater than 0.5 in this seeded synthetic fixture. This fixes pedagogical coherence, not clinical realism.
+
+**Additional full-study inference gates authored:**
+- Exact per-analysis observation count: synthetic baseline 240, linear regression 234, logistic regression 238, Poisson regression 240, accounting for deliberately injected missing values.
+- Wald logistic odds-ratio intervals recomputed from coefficients, covariance diagonal and standard-normal critical value; labels distinguish odds ratios from risk ratios.
+- Poisson incidence-rate ratios and confidence limits recomputed independently from model coefficients/standard errors; tests require `log(exposure_years)` as an offset, rather than an estimated slope.
+- The previous independently calculated Welch and paired t confidence intervals remain in place.
+
+**Source recheck:** GitHub returned the updated R Markdown workbook and R acceptance script; source inspection found 17 named R chunks, 17 closing fences, revised estimand labels, correlated synthetic visit generation, all model-specific assertions, and retained full-study execution and knit CI steps. Repository code search found only the dedicated methodology bibliography containing the named textbook author.
+
+**Execution status:** Source/structure confirmed; `Rscript` is not installed in the available container. GitHub commit statuses contained no entries and the PR-filtered workflow lookup returned no runs for the tested commit, so neither test execution nor successful CI was demonstrated. **Do not mark numerical runtime, knitted report, statistical review, or publication acceptance complete.** No patient data were used and oncology manuscript statuses remain untouched.
