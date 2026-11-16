@@ -2,6 +2,10 @@
 
 **Audit date:** 2026-11-13. **Scope:** `03_learning` statistical foundations, biostatistics chapter crosswalk, study-design calculator and synthetic protocol-to-results case.
 
+## Evidence epochs and acceptance boundaries
+
+This status document records work available **through its dated audits**, not a live query of every GitHub Actions run. Three evidence streams must remain separate: (1) the October 22 paper-linked **19-object teaching atlas** with historical synthetic and published-aggregate calculation replays; (2) the November 14 **27-selector/25-gate** matrix source checks; and (3) the later **17-chunk synthetic breast cancer workbook** and figure gallery, whose committed R tests and HTML rendering require their own verified execution. An earlier R 4.3.3 atlas result cannot be used as proof that later code executed. The [complete acceptance ledger](../../02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md) holds the new workstream's evidence and pending gates.
+
 ## November 14, 2026 — V2 decision matrix validation extension
 
 The [route-by-route V2 matrix](BIOMEDICAL_DECISION_MATRIX_V2.md) and [CSV registry](biomedical_decision_matrix.csv) now cover **27 distinct selector IDs** linked to **25 defined assumption gates** through **156 route-gate relationships**. A cross-file connector-side structural inspection checked for duplicate/missing selector IDs, missing biostatistics chapter crosswalk IDs, unknown gates and empty matrix fields; **no mismatches were observed**. That inspection is not an R test or clinical validation.
@@ -18,9 +22,9 @@ The first checks the CSV schema and cross-reference integrity; the negative fixt
 
 ## Execution environments
 
-- **Local execution:** BLOCKED. The current local container has neither `R` nor `Rscript`; installed package cache is unavailable and the environment cannot access package repositories. Therefore this audit does **not** claim an R pass.
+- **Local execution in the November 2026 acceptance audit environment:** BLOCKED. That container had neither `R` nor `Rscript`; no run was recorded there. This does **not** negate the earlier dated atlas execution record and cannot be generalized to other machines.
 - **GitHub CI:** `.github/workflows/learning-case-validation.yml` has an R runner installation step and now **explicitly invokes** the newly added R suites and renders the synthetic R Markdown study report.
-- **Current CI outcome:** NOT VERIFIED from this audit. The GitHub connector exposes neither an independently confirmed completed push-triggered run nor its job logs here. A committed workflow is not proof of green CI.
+- **CI outcome as of this audit:** NOT VERIFIED. The GitHub connector exposes neither an independently confirmed completed push-triggered run nor its job logs here. A committed workflow is not proof of green CI.
 
 ## Tests specified for the runner
 
@@ -67,6 +71,7 @@ These independently checked values are teaching references. None implies real br
 | Parse all new R files in an R runtime | Pending | R parse succeeds under installed R |
 | Execute full R unit suite | Pending | Exit status 0 and detailed logs |
 | Knit HTML protocol report | Pending | Renderer exits 0; output reviewed |
+| Execute newer 17-chunk workbook and graph gallery | Pending | Dedicated R acceptance job exit 0; retained synthetic HTML inspected |
 | Visual review of figures/tables | Pending | Open rendered output and inspect titles, denominators, clipping, missingness |
 | Clinical validity | Not assessed | Appropriate governed data, real protocol, ethics, statistical review |
 
