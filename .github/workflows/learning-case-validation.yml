@@ -25,6 +25,8 @@ on:
       - "llms.txt"
       - "docs/machine-index.md"
       - "02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md"
+      - "scripts/check_notes_docs_hygiene.py"
+      - "scripts/tests/test_notes_docs_hygiene.py"
       - ".github/workflows/learning-case-validation.yml"
   pull_request:
     paths:
@@ -46,6 +48,8 @@ on:
       - "docs/machine-index.md"
       - "02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md"
       - "scripts/check_methodology_attribution.py"
+      - "scripts/check_notes_docs_hygiene.py"
+      - "scripts/tests/test_notes_docs_hygiene.py"
       - ".github/workflows/learning-case-validation.yml"
 
 permissions:
@@ -66,6 +70,8 @@ jobs:
           python3 scripts/check_biostat_8e_alignment.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostat_8e_alignment.py' -v
           python3 scripts/check_methodology_attribution.py
+          python3 scripts/check_notes_docs_hygiene.py
+          python3 -m unittest discover -s scripts/tests -p "test_notes_docs_hygiene.py" -v
 
   breast-cancer-workbook:
     name: Isolated synthetic breast cancer R acceptance
@@ -144,6 +150,8 @@ jobs:
           python3 scripts/check_biostat_8e_alignment.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostat_8e_alignment.py' -v
           python3 scripts/check_methodology_attribution.py
+          python3 scripts/check_notes_docs_hygiene.py
+          python3 -m unittest discover -s scripts/tests -p "test_notes_docs_hygiene.py" -v
           python3 scripts/check_biostatistics_evidence.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_evidence.py' -v
           Rscript --vanilla 03_learning/tests/test_paper_linked_tests.R --full
