@@ -39,8 +39,10 @@ class WorkbookMarkupTests(unittest.TestCase):
             MODULE.validate_workbook_markup(broken)
 
     def test_unclosed_fence_rejected(self):
-        broken = self.original + "```{r unexpected}\n"
-        with self.assertRaises(ValueError):
+        # Keep the 17 chunk labels intact; remove one closing fence only.
+        head, tail = self.original.rsplit("\n```\n", 1)
+        broken = head + "\n[missing fence]\n" + tail
+        with self.assertRaisesRegex(ValueError, "Unbalanced"):
             MODULE.validate_workbook_markup(broken)
 
     def test_missing_exact_pair_column_rejected(self):
