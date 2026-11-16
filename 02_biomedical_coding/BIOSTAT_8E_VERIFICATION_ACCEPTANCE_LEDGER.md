@@ -78,3 +78,16 @@ For acceptance, record exit codes, R and package versions, CI job URL/commit SHA
 **CI evidence:** GitHub combined-status response exposed zero status entries; the commit-associated workflow lookup (which filters to PR-triggered runs) exposed zero runs. Neither is evidence of successful or failed main-branch Actions execution. R execution, knitted HTML visual review, independent statistical review and publication readiness remain **pending**.
 
 **Source policy:** Educational assets use methodology-first names; bibliography-only author attribution is checked by `scripts/check_methodology_attribution.py`. Maintain scholarly source credits in `METHODOLOGY_SOURCE_REFERENCES.md` when specific claims need them, without branding the internal analysis, function names or examples.
+
+
+## Acceptance continuation — CI preflight and independent inference checks (2026-11-15)
+
+**Verified source change P-01:** `.github/workflows/learning-case-validation.yml` now has a separate `methodology-preflight` job on Ubuntu with no R installation requirement. The preflight invokes `scripts/check_biostat_8e_alignment.py`, five workbook markup regression tests, and `scripts/check_methodology_attribution.py`. Both push and pull-request path filters now include `AGENTS.md`, `llms.txt`, `docs/machine-index.md`, the bibliography and the attribution checker itself. The existing full R execution and knit job is retained.
+
+**Verified source change P-02:** The unclosed-fence test now removes a closing code fence without changing the count of the 17 R chunk labels; it therefore tests the **fence-balance** error path, rather than passing only because an 18th chunk was added.
+
+**Verified source change P-03:** `02_biomedical_coding/tests/test_full_study_execution.R` now calculates the Welch Satterthwaite degrees of freedom, t statistic and 95% CI independently from unrounded group vectors. It separately calculates the paired mean and t-based 95% CI from within-patient differences. Each is compared to the corresponding `stats::t.test()` output with a numerical tolerance of 1e-10. Confidence-interval attributes are intentionally dropped for the numeric comparison, not for original analysis.
+
+**In-session checks performed:** GitHub source was refetched after commit, and the following properties were checked: all four new CI trigger classes present under both push and pull request; preflight job and attribution check present; five Python regression test definitions; a specific missing-fence assertion; independent Welch and paired CI calculations present; and zero discrepancies in these source-level checks.
+
+**Execution boundary:** `Rscript` and `R` were not present in the available execution container. Git clone from GitHub failed due to DNS/network restrictions, so the complete repository and Python tests could not be run locally. CI run success is **not** established from source inspection. Treat Python/R tests as configured but unexecuted until actual CI logs or a clean local replay are inspected. Bibliography-only scholarly attribution policy remains unchanged. No book chapter or publication status was promoted.
