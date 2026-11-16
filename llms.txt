@@ -4,6 +4,8 @@
 Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
+Task-first NAVIGATION.md: https://github.com/pskeffington/pauls_notes/blob/main/docs/NAVIGATION.md
+Stable route manifest: https://github.com/pskeffington/pauls_notes/blob/main/docs/navigation-routes.json
 
 ## Documentation and maintenance
 - [Documentation ownership and maintenance](https://github.com/pskeffington/pauls_notes/blob/main/docs/DOCUMENTATION_MAINTENANCE.md): canonical file responsibilities, source/acceptance boundaries and scoped cleanup log.
