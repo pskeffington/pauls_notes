@@ -1,5 +1,7 @@
 # Machine-readable discovery and indexing contract
 
+**Task-level routing:** [Navigation guide](NAVIGATION.md) · [Route manifest](navigation-routes.json) · [route validation script](../scripts/check_navigation_routes.py). Use the manifest for the first destination and this index for narrower sections; neither is an execution result.
+
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
 ## Documentation maintenance contract
