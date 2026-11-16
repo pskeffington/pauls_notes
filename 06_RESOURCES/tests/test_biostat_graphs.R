@@ -46,6 +46,23 @@ boot <- attr(p_boot,"figure_statistics")
 stopifnot(inherits(p_boot,"ggplot"),boot$resamples==100L,
           boot$quantile_type==7L,
           near(boot$interval,stats::quantile(est,c(.025,.975),type=7)))
+## ROC must use sensitivity on y and 1-specificity on x; rank AUC
+## independently agrees with the trapezoidal empirical curve.
+roc_data <- data.frame(score=c(.9,.5,.5,.2),status=c(1L,0L,1L,0L))
+p_roc <- biostat_graph_roc(roc_data,"score","status",
+                           positive=1L,evaluation_partition="synthetic")
+roc_summary <- attr(p_roc,"figure_statistics")
+stopifnot(inherits(p_roc,"ggplot"),
+          near(roc_summary$auc,.875),
+          near(roc_summary$roc$false_positive_rate[1],0),
+          near(tail(roc_summary$roc$false_positive_rate,1),1),
+          near(roc_summary$roc$sensitivity[1],0),
+          near(tail(roc_summary$roc$sensitivity,1),1))
+stopifnot(fails(biostat_graph_roc(roc_data,"score","status",
+                                  positive=2L,evaluation_partition="synthetic")),
+          fails(biostat_graph_roc(data.frame(score=1:3,status=c(1,1,1)),
+                                  "score","status",
+                                  evaluation_partition="synthetic")))
 stopifnot(fails(biostat_graph_box(d,"measure","group",unit="")),
           fails(biostat_graph_box_stats(data.frame(group=c("A","B"),
                                                     measure=c(NA_real_,1)),
