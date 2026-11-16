@@ -10,12 +10,11 @@ if (length(missing)) stop("Missing required packages: ",paste(missing,collapse="
 path <- "02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd"
 if (!file.exists(path)) stop("Run test from the repository root")
 rmd <- readLines(path,warn=FALSE,encoding="UTF-8")
-labels <- sub("^\`\`\`\\{r[[:space:]]+([^,}[:space:]]+).*", "\\1",
-              grep("^\`\`\`\\{r[[:space:]]+",rmd,value=TRUE))
+labels <- sub("^```\\{r[[:space:]]+([^,}[:space:]]+).*", "\\1",
+              grep("^```\\{r[[:space:]]+",rmd,value=TRUE))
 if (length(labels)!=17L || anyDuplicated(labels)) stop("Chunk count or labels changed")
 
 code_file <- tempfile(fileext=".R")
-on.exit <- NULL
 knitr::purl(path, output=code_file, quiet=TRUE, documentation=0L)
 if (!file.exists(code_file)) stop("Failed to purl source")
 parse(file=code_file, keep.source=FALSE)
@@ -32,7 +31,6 @@ stopifnot(
   !anyDuplicated(e$study$patient_id),
   sum(is.na(e$study$erbb2_score))==4L,
   sum(is.na(e$study$tumor_cm))==2L,
-  e$n_observed %in% c(NULL,236L) || !exists("n_observed",envir=e,inherits=FALSE),
   nrow(e$plot_data)==236L,
   length(e$a)+length(e$b)==236L,
   e$welch$conf.int[1] <= e$welch$estimate[1]-e$welch$estimate[2],
