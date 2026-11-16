@@ -20,7 +20,7 @@ For descriptive biomedical R, inspect `02_biomedical_coding/BIOSTAT_ALIGNMENT_FI
 
 ## Scientific reporting agent chain and PDF release acceptance
 
-For scientific reports, manuscripts, statistical interpretations, LaTeX, R Markdown, or final PDF presentation, first inspect [Scientific Reporting QA](skills/scientific-reporting-qa/SKILL.md) and the [R Markdown/PDF presentation acceptance contract](02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Route work explicitly through evidence steward → methods reviewer → scientific editor → typesetting engineer → acceptance reviewer; the same agent may fulfill several roles when findings are recorded independently.
+For scientific reports, manuscripts, statistical interpretations, LaTeX, R Markdown, or final PDF presentation, first inspect the canonical skill in the dedicated `agent_skills` repository: [Scientific Reporting QA](https://github.com/pskeffington/agent_skills/blob/main/.agents/skills/scientific-reporting-qa/SKILL.md) and the [R Markdown/PDF presentation acceptance contract](02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Route work explicitly through evidence steward → methods reviewer → scientific editor → typesetting engineer → acceptance reviewer; the same agent may fulfill several roles when findings are recorded independently.
 
 - Protect case boundaries: **never import particular study datasets, participant counts, endpoints, conclusions, numerical estimates, or report passages into reusable methods or skills**.
 - For reports, use impersonal scientific prose; avoid authorial first-person identifiers and the author's prohibited transition. Prefer valid semicolons; distinguish APA 7 conventions from local house style.
