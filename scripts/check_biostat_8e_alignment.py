@@ -69,8 +69,8 @@ def validate():
                 "SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd").read_text(
                     encoding="utf-8")
     import re
-    chunk_labels = re.findall(r"^```\\{r\\s+([^,}\\s]+)", workbook, re.M)
-    closing_fences = len(re.findall(r"^```\\s*$", workbook, re.M))
+    chunk_labels = re.findall(r"^```\{r\s+([^,}\s]+)", workbook, re.M)
+    closing_fences = len(re.findall(r"^```\s*$", workbook, re.M))
     if len(chunk_labels) != 17 or len(set(chunk_labels)) != 17:
         raise ValueError("Expected 17 unique R chunk labels")
     if closing_fences != len(chunk_labels):
