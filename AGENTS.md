@@ -4,7 +4,7 @@ Scope: the complete repository. Read this before editing. Repository owner: Paul
 
 ## Author-neutral methodology and bibliographic attribution
 
-All internal educational material must use **method names and scientific concepts**, not a textbook author's name, as headings, file paths, R symbols, retrieval keys, CI jobs, or labels. Cite the textbook only for a source-specific methodological assertion and use the dedicated bibliography at `02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md`. Keep edition and section numbers for provenance when needed. Run `python3 scripts/check_methodology_attribution.py` before merging educational documentation or code. This rule does not change scientific assumptions, preserve reproducibility, or authorize erasing proper scholarly credit.
+All internal educational material must use **method names and scientific concepts**, not a textbook author's name, as headings, file paths, R symbols, retrieval keys, CI jobs, or labels. Cite the textbook only for a source-specific methodological assertion and use the dedicated bibliography at `02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md`. Keep edition and section numbers for provenance when needed. Run `python3 scripts/check_methodology_attribution.py` before merging educational documentation or code. This rule does not change scientific assumptions, diminish reproducibility, or authorize erasing proper scholarly credit.
 
 ## Graph-method alignment
 
@@ -13,13 +13,13 @@ Use `03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md` as the canonical figure-t
 ## Breast cancer statistics textbook alignment
 For any request to build or review the breast cancer biostatistics textbook, retrieve `oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` and the actual `oncology/book-manifest.json` first. Use the eighth-edition biostatistics guide `02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` only within its recorded review scope, keep the sixth edition separate, implement the BR-001–BR-010 gates, and do not mark a planned chapter as drafted or validated without source, numeric, runtime and reviewer evidence.
 
-## biostatistics verification evidence and CI acceptance
+## Biostatistics verification evidence and CI acceptance
 For verification or acceptance work, consult `02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md`. Distinguish actual PDF/structural/numerical evidence from still-unrun R tests, full knitted output, and independent statistical review. The workbook acceptance command is `Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R`; CI also knits the workbook and checks a nonempty HTML artifact. A defined CI job is not a passed CI job.
 
-## Complete eighth-edition methods method alignment and evidence controls
+## Eighth-edition methodological alignment and evidence controls
 Before writing breast cancer statistics, consult `02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md` and `02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv` after the oncology roadmap. Keep eighth-edition methods and 6e citations separate. Apply medical question → sampling unit → assumptions → hand/numerical check → R code → diagnostics → effect/CI → interpretation. Run `python3 scripts/check_biostat_8e_alignment.py` for structural routes and R/knit tests separately. A complete topical crosswalk is not full-book verification, code execution or scientific review.
 
-## biostatistics source-alignment first pass
+## Biostatistics source-alignment first pass
 For descriptive biomedical R, inspect `02_biomedical_coding/BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md` and `06_RESOURCES/R/biostat_descriptive_contract.R`. eighth-edition methods uses quantile type 2 in §2.4, whereas preexisting Paul's Notes descriptive functions use type 7. Choose and report the convention explicitly, never silently migrate results, and execute `06_RESOURCES/tests/test_biostat_descriptive_contract.R` before treating the module as verified. Do not mark unrun R tests passed.
 
 ## Scientific reporting agent chain and PDF release acceptance
