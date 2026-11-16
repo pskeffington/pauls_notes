@@ -1,8 +1,8 @@
-# Biomedical methods 8e method-aligned descriptive estimators.
+# Explicit-quantile descriptive estimators for biomedical analyses.
 # This is a separate opt-in module: never silently change stats_plots.R.
 # Source in R or invoke functions after loading; no execution at import.
 #
-# Source: Biomedical methods (2016), Fundamentals of Biostatistics, 8e,
+# Source: Fundamentals of Biostatistics (8th ed., 2016),
 # section 2.4, printed pp. 17-19 (quantile type 2 illustrations).
 # R base stats::quantile type 7 is Paul's Notes existing convention.
 #
