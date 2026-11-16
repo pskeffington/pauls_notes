@@ -1,0 +1,158 @@
+---
+title: "Biomedical Graph Methods — Synthetic Breast Cancer Gallery"
+author: "Paul's Notes"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+params:
+  seed: 711
+---
+
+# Methodology and reproducibility
+
+This gallery contains **original synthetic data and original R figures**. It
+demonstrates four foundational graph purposes: separated categorical bars,
+numeric distribution, location/spread summaries, and uncertainty of a resampled
+*estimator*. It does not reproduce source textbook figures or study data.
+Source edition/section evidence is recorded in
+[Graph method alignment](GRAPH_METHODS_ALIGNMENT.md) and bibliographic credits
+in the central source register.
+
+Every figure distinguishes observations from estimates, includes a denominator,
+labels measurements with units, and identifies the type of quartiles or interval
+where relevant. Mean markers, box whiskers, individual observations, and
+confidence limits must never be conflated.
+
+```{r graph-setup}
+required <- c("ggplot2", "knitr")
+missing <- required[!vapply(required, requireNamespace, logical(1), quietly=TRUE)]
+if (length(missing)) stop("Missing graph dependencies: ", paste(missing,collapse=", "))
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=TRUE)
+module_candidates <- c("06_RESOURCES/R/biostat_graphs.R",
+                       "../../06_RESOURCES/R/biostat_graphs.R")
+modules <- module_candidates[file.exists(module_candidates)]
+if (!length(modules)) stop("Cannot locate original biomedical graph module.")
+source(modules[1], local=TRUE)
+set.seed(params$seed)
+synthetic <- data.frame(
+  subject_id = sprintf("S%03d", seq_len(48L)),
+  subtype = factor(rep(c("Luminal-like","Basal-like"),each=24L),
+                   levels=c("Luminal-like","Basal-like")),
+  grade = factor(sample(c("I","II","III"),48L,replace=TRUE,
+                        prob=c(.2,.5,.3)),levels=c("I","II","III")),
+  marker = c(stats::rnorm(24L,12,2),stats::rnorm(24L,9,3))
+)
+synthetic$marker[c(5L,39L)] <- NA_real_
+stopifnot(nrow(synthetic)==48L,!anyDuplicated(synthetic$subject_id),
+          sum(is.na(synthetic$marker))==2L)
+```
+
+# 1. Separated categorical bar graph
+
+```{r graph-bars, fig.width=8, fig.height=4.6}
+p_bar <- biostat_graph_bar(synthetic,category="grade",
+  title="Synthetic tumor-grade frequencies")
+print(p_bar)
+knitr::kable(attr(p_bar,"figure_statistics"),
+             caption="Exact grade counts; total denominator is 48")
+```
+
+Separate bars represent mutually exclusive categories. The vertical axis is a
+count rather than a mean or percentage. Numeric label frequencies and total N
+are available independently of the figure.
+
+# 2. Continuous distribution histogram
+
+```{r graph-distribution, fig.width=8, fig.height=4.7}
+observed <- synthetic$marker[!is.na(synthetic$marker)]
+p_hist <- ggplot2::ggplot(data.frame(marker=observed),
+                         ggplot2::aes(x=.data$marker)) +
+  ggplot2::geom_histogram(bins=15L,fill="#0072B2",colour="white") +
+  ggplot2::labs(
+    title="Synthetic marker distribution",
+    subtitle=sprintf("Observed n=%d; missing=%d",
+                     length(observed),sum(is.na(synthetic$marker))),
+    x="Fictional marker (arbitrary teaching score)",
+    y="Number of observations",
+    caption="Histogram bars show frequency intervals, not categorical groups."
+  ) + ggplot2::theme_classic(base_size=12)
+print(p_hist)
+```
+
+A histogram shows the shape of a numeric variable. Adjacent intervals are not
+separate categories; use an appropriate fixed bin policy for comparisons.
+
+# 3. Median, quartiles, mean, whiskers and observations
+
+```{r graph-box, fig.width=8, fig.height=5.2}
+pal <- c("Luminal-like"="#0072B2","Basal-like"="#D55E00")
+p_box <- biostat_graph_box(
+  synthetic,value="marker",group="subtype",
+  unit="arbitrary teaching score",palette=pal,
+  title="Synthetic marker by fictional subtype"
+)
+print(p_box)
+knitr::kable(attr(p_box,"figure_statistics"),
+             caption="Unrounded type-2 quartiles, mean, 1.5×IQR whiskers and denominators")
+```
+
+The box spans Q1–Q3 with a distinct median line. The **+** signifies the
+sample mean, not the midpoint of the box or a confidence limit. Whiskers are
+observed extrema within 1.5×IQR; outlying observations remain visible as
+separate points. These figures use **type-2** R quantiles explicitly. Never
+silently substitute another quantile convention in an existing study.
+
+# 4. Stem-and-leaf: individual observed values
+
+```{r graph-stem, results='markup'}
+## Display a small subset so the textual stem-and-leaf remains readable.
+stem_text <- biostat_graph_stem(
+  round(synthetic$marker[seq_len(16L)],1),
+  unit="arbitrary teaching score"
+)
+cat(paste(stem_text,collapse="\n"))
+```
+
+Stem-and-leaf is a textual distribution display for modest sample sizes. It
+retains digit-level observation information at the chosen display precision;
+the data's unit and the deliberate pre-display rounding are recorded.
+
+# 5. Resampling distribution and percentile interval
+
+```{r graph-bootstrap, fig.width=8, fig.height=4.8}
+## Independent synthetic subjects are the resampling unit.
+groups <- split(synthetic$marker,synthetic$subtype)
+left <- groups[["Luminal-like"]]
+right <- groups[["Basal-like"]]
+left <- left[!is.na(left)];right <- right[!is.na(right)]
+observed_difference <- mean(right)-mean(left)
+boot <- replicate(1000L,
+  mean(sample(right,length(right),replace=TRUE))-
+  mean(sample(left,length(left),replace=TRUE))
+)
+p_boot <- biostat_graph_bootstrap(
+  boot,estimate=observed_difference,unit="score difference",
+  title="Bootstrap distribution of synthetic group mean differences"
+)
+print(p_boot)
+knitr::kable(data.frame(
+  resamples=length(boot),point_estimate=observed_difference,
+  lower=unname(stats::quantile(boot,.025,type=7)),
+  upper=unname(stats::quantile(boot,.975,type=7))),
+  caption="Point estimate and percentile bootstrap limits (display rounding only)")
+```
+
+This histogram describes **1000 resampled mean differences**, not the original
+individual measurements. The vertical markers distinguish point estimate,
+lower percentile and upper percentile. Valid uncertainty statements require
+correct resampling units and appropriate interval assumptions.
+
+# Acceptance boundaries
+
+- All records and values are simulated. Nothing is a breast cancer effect
+  estimate, verified assay distribution or clinical risk.
+- Graphics demonstrate different questions and therefore use different axes
+  and denominators intentionally.
+- A generated figure is not accepted until the R chunks execute and the
+  rendered HTML is visually inspected for labels, legend placement and clipping.
