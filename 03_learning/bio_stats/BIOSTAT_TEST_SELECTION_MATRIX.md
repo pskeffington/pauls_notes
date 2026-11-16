@@ -1,16 +1,16 @@
-# Biomedical methods-aligned biomedical statistical test decision matrix
+# Methodology-aligned biomedical statistical test decision matrix
 
 [Biomedical statistics learning guide](../biomedical-statistics-decision-guide.md) · [Design-first selector](../../06_RESOURCES/BIOMEDICAL_TEST_DECISION_TREE.md) · [Paper and executable-test atlas](README.md) · [R implementations](../../06_RESOURCES/R/README.md)
 
-**Teaching crosswalk | 2026-11-13.** An original method-selection aid organized around the cited textbook author, *Fundamentals of Biostatistics*, **8th ed.** (Cengage, 2016; ISBN 9781305268920). Chapter references follow the [publisher's table of contents](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-biostat/9781305268920). This is **not** a reproduction of Biomedical methods's copyrighted flowchart, worked exercises or textbook text. Biomedical methods is the foundational textbook; the existing paper atlas supplies independently linked biomedical applications. Specific modeling choices below are editorial guidance, not claims that Biomedical methods mandates a given software function.
+**Teaching crosswalk | 2026-11-13.** An original method-selection aid organized around the cited textbook author, *Fundamentals of Biostatistics*, **8th ed.** (Cengage, 2016; ISBN 9781305268920). Chapter references follow the [publisher's table of contents](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md). This is **not** a reproduction of the cited textbook's copyrighted flowchart, worked exercises or textbook text. biostatistics is the foundational textbook; the existing paper atlas supplies independently linked biomedical applications. Specific modeling choices below are editorial guidance, not claims that biostatistics mandates a given software function.
 
 ## Complete eighth-edition source alignment
 
-[Biomedical methods 8e methodological contract](../../02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md) · [14-chapter machine registry](../../02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv) · [full breast cancer book roadmap](../../oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). These provide routing and acceptance requirements across fourteen chapter families. Preserve edition-specific source locations and the existing 27 selector IDs. Follow the problem → model → computation progression with current R methods and original synthetic oncology examples.
+[eighth-edition methods methodological contract](../../02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md) · [14-chapter machine registry](../../02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv) · [full breast cancer book roadmap](../../oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). These provide routing and acceptance requirements across fourteen chapter families. Preserve edition-specific source locations and the existing 27 selector IDs. Follow the problem → model → computation progression with current R methods and original synthetic oncology examples.
 
 ## Version 2 decision matrix and assumption gates
 
-[**V2 route-by-route method-selection matrix**](BIOMEDICAL_DECISION_MATRIX_V2.md) consolidates 27 routes, mandatory input evidence, a 25-gate checklist and synthetic breast-cancer interpretation notes. It leaves Biomedical methods's original topical crosswalk and the R test-selector's behavior unchanged.
+[**V2 route-by-route method-selection matrix**](BIOMEDICAL_DECISION_MATRIX_V2.md) consolidates 27 routes, mandatory input evidence, a 25-gate checklist and synthetic breast-cancer interpretation notes. It leaves the cited textbook's original topical crosswalk and the R test-selector's behavior unchanged.
 
 ## Breast-cancer worked examples and interpretation\n\n[**Independent numerical reference calculations**](BREAST_CANCER_NUMERICAL_VALIDATION.md) — 5 fully worked synthetic examples, hand formulas, R calls, reference values, uncertainty, and Results narratives.\n\n[**Full 26-method breast-cancer teaching atlas**](BREAST_CANCER_WORKED_TEST_ATLAS.md) — study questions, synthetic input structure, R commands, interpretation of effects and confidence intervals, assumption gates and modern extensions. [Executable synthetic R laboratory](../examples/breast_cancer_test_atlas.R) · [Numerical/contract checks](../tests/test_breast_cancer_test_atlas.R).\n\n## Selection contract: ask in this order
 
@@ -23,7 +23,7 @@
 
 ## Primary decision matrix
 
-| Outcome / question | Design and comparison | Starting method / R entrypoint | Must check before inference | Biomedical methods 8e | Existing atlas / selector |
+| Outcome / question | Design and comparison | Starting method / R entrypoint | Must check before inference | eighth-edition methods | Existing atlas / selector |
 | --- | --- | --- | --- | --- | --- |
 | Continuous mean vs known reference | One independent sample | One-sample t, `stats::t.test(x, mu=...)` | Independent sampling, mean estimand, distribution/outliers, interval | Ch 7 | One-sample route: distinguish from 2-group |
 | Continuous means | Two independent groups | Welch t, `stats::t.test(y ~ group)` | Individual independence, direction, influential observations, mean vs ranks | Ch 8 | `T`, `welch-t` |
@@ -100,7 +100,7 @@ If ESR1 expression is recorded twice for each patient, pair on **person ID and v
 
 Do **not** mark an example validated simply because it is documented here; no new R test execution was performed as part of this documentation-only pass. Existing methods and empirical evidence remain governed by the [method intake rules](../../06_RESOURCES/STATISTICAL_METHOD_INTAKE.md) and the [paper atlas](README.md).
 
-## Executable Biomedical methods crosswalk
+## Executable biostatistics crosswalk
 
 The primary R selector offers **optional textbook references**. Existing methods and routing remain unchanged if the flag is omitted.
 
@@ -116,7 +116,7 @@ selected$biostat$chapters   # "8"
 selected$required_checks  # analytical gates, not automatic approval
 ```
 
-The [CSV crosswalk](biostat_method_registry.csv) records all 27 selector IDs; `coverage = extension` explicitly means a contemporary method/design overlay, **not** a claim about Biomedical methods's text. [Synthetic method exercises](../examples/biostat_method_cases.R) provide independent continuous, paired continuous, binomial, categorical, Poisson and optional survival examples. All data are invented; never report their estimates as clinical findings.
+The [CSV crosswalk](biostat_method_registry.csv) records all 27 selector IDs; `coverage = extension` explicitly means a contemporary method/design overlay, **not** a claim about the cited textbook's text. [Synthetic method exercises](../examples/biostat_method_cases.R) provide independent continuous, paired continuous, binomial, categorical, Poisson and optional survival examples. All data are invented; never report their estimates as clinical findings.
 
 ```bash
 Rscript --vanilla 06_RESOURCES/tests/test_biomedical_test_selector.R
@@ -128,6 +128,6 @@ Rscript --vanilla 03_learning/tests/test_biostat_method_cases.R
 
 ## Source and scope
 
-**Primary textbook:** Biomedical methods B. *Fundamentals of Biostatistics*. 8th ed. Cengage Learning; 2016. ISBN 9781305268920. [Publisher catalog / chapter list](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-biostat/9781305268920).
+**Primary source:** *Fundamentals of Biostatistics*, 8th ed. (2016), with full attribution in the bibliography. [Publisher catalog / chapter list](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md).
 
 **Modern applications:** consult the [paper-based evidence atlas](README.md) and [2021–2026 biomedical R-method literature](../../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md). Crosswalk chapter assignments describe topical coverage, not exact section-by-section reproduction or independent verification of every formula in the book.
