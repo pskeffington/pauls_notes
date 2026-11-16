@@ -2,7 +2,7 @@
 
 [Statistics foundations](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [Distribution and power guide](BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md) · [Worked breast cancer tests](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [Design calculator](../examples/breast_cancer_study_design.R) · [Synthetic validation](../tests/test_breast_cancer_study_design.R) · [Study protocol template](../../templates/study-protocol.md)
 
-**Independent teaching chapter · November 2026.** Breast cancer is the running narrative; methods transfer to other cancer sites. All numerical assumptions and scenarios below are hypothetical, **not observed trial results or treatment recommendations**. Rosner, *Fundamentals of Biostatistics* (8th ed.), supplies core probability, hypothesis tests and power foundations. Modern protocol/reporting standards and oncology endpoint guidance are cited at the end. This is a learning resource, not a complete protocol ready for human-participant recruitment.
+**Independent teaching chapter · November 2026.** Breast cancer is the running narrative; methods transfer to other cancer sites. All numerical assumptions and scenarios below are hypothetical, **not observed trial results or treatment recommendations**. Biomedical methods, *Fundamentals of Biostatistics* (8th ed.), supplies core probability, hypothesis tests and power foundations. Modern protocol/reporting standards and oncology endpoint guidance are cited at the end. This is a learning resource, not a complete protocol ready for human-participant recruitment.
 
 ## Worked end-to-end companion\n\nThe [frozen synthetic breast cancer protocol-to-results exercise](BREAST_CANCER_PROTOCOL_TO_RESULTS.md) translates this design framework into [cohort generation and prespecified analysis](../examples/breast_cancer_protocol_replay.R), a [knit-ready Methods/Results report](../examples/breast_cancer_protocol_report.Rmd), and [replay tests](../tests/test_breast_cancer_protocol_replay.R). Outcomes are deliberately synthetic and cannot support clinical claims.\n\n## 1. Begin with the research question, not the test
 
@@ -181,7 +181,7 @@ Copy these fields to the [protocol template](../../templates/study-protocol.md):
 
 ## References and guideline hierarchy
 
-1. Rosner B. *Fundamentals of Biostatistics*. 8th ed. Cengage; 2016. [Publisher record](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-rosner/9781305268920).
+1. Biomedical methods B. *Fundamentals of Biostatistics*. 8th ed. Cengage; 2016. [Publisher record](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-biostat/9781305268920).
 2. [SPIRIT 2025 randomized trial protocol guidance](https://www.bmj.com/content/389/bmj-2024-081477); [explanation of sample-size reporting](https://pmc.ncbi.nlm.nih.gov/articles/PMC12128891/).
 3. [CONSORT 2025 randomized trial reporting guidance](https://pmc.ncbi.nlm.nih.gov/articles/PMC11995449/), particularly endpoints, sample size, participant flow and missing data.
 4. [ICH E9(R1), estimands and sensitivity analysis](https://www.fda.gov/media/108698/download); [2024 BMJ primer](https://www.bmj.com/content/384/bmj-2023-076316).
