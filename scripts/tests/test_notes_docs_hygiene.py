@@ -33,6 +33,7 @@ class NotesDocHygieneTests(unittest.TestCase):
         issues = module.inspect_page("03_learning/README.md",
                                      "One paragraph\\nAnother paragraph")
         self.assertTrue(any("backslash-n" in x for x in issues))
+
     def test_legacy_placeholder_rejected(self):
         issues = module.inspect_page("03_learning/README.md",
                                      "Biomedical methods chapter outline")
