@@ -177,7 +177,7 @@ for (i in seq_len(nrow(box_summary))) {
       !is.na(e$study$erbb2_score)]
   q <- as.numeric(stats::quantile(observed,c(.25,.50,.75),type=2))
   stopifnot(
-    isTRUE(all.equal(as.numeric(box_summary[i,c("q1","median","q3")]),
+    isTRUE(all.equal(as.numeric(unlist(box_summary[i,c("q1","median","q3")],use.names=FALSE)),
                      q,tolerance=1e-12)),
     isTRUE(all.equal(as.numeric(box_summary$mean[i]),
                      mean(observed),tolerance=1e-12))
