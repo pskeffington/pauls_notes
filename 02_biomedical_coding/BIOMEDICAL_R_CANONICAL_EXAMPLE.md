@@ -34,6 +34,19 @@ When asked to create, repair, review, or extend an R/R Markdown biomedical analy
 | 09 | Computed interpretation | Statistical evidence piped into text, uncertainty, limitations, no causality without design support |
 | 10 | Reproducibility and audit | Session info, inclusion/omission counts, verified execution status |
 
+## Full-study analysis workbook — preferred for broad research requests
+
+**If the user asks for a complete biomedical study, multiple statistical methods, study design comparisons, or a fully knitted walkthrough, read and reuse this exact runnable example first:**
+
+[Complete synthetic breast cancer study — R Markdown](examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd)
+
+**Machine route:** `02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd`  
+**Retrieval key:** `pauls-notes.biomedical-r.full-study.v1`
+
+The full-study example contains a synthetic cohort, verified data contracts, a test-selection matrix, 17 named R chunks, descriptive tables and figures, Welch and rank-sum tests, one-sample testing, ANOVA and Kruskal–Wallis, categorical tests, Pearson/Spearman correlation, linear/logistic/Poisson models, survival and Cox analysis, paired/repeated measures, held-out diagnostic classification metrics, bootstrap CIs, multiple-testing adjustments, and automatically generated methods/results. The example does **not** imply every test belongs in every study. Choose only analyses dictated by design and estimand.
+
+The shorter example below remains the minimal convention reference for focused R coding requests; for broad or multi-method requests use the full-study workbook.
+
 ## Canonical runnable R Markdown example — synthetic breast cancer
 
 **Worked research scenario:** A simulated breast cancer cohort with luminal-like and basal-like labels, comparing a fictional, normalized ERBB2 expression score. These randomly generated values and group labels do **not** represent clinical specimens, molecular subtyping, or TCGA-BRCA measurements. Expression scores have arbitrary teaching units. A two-group Welch test is included solely to demonstrate method-to-code reasoning, not to imply it is the right method for every gene-expression workflow.
