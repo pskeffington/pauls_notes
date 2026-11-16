@@ -42,7 +42,7 @@ stopifnot(is.null(base$biostat),
           identical(opt$required_checks, base$required_checks),
           identical(opt$decision_path, base$decision_path),
           identical(opt$biostat$chapters, "8"),
-          any(grepl("Biomedical methods 8e chapters: 8",
+          any(grepl("Biostatistics chapter map (8e): 8",
                     capture.output(print(opt)), fixed = TRUE)))
 opt_survey <- biomedical_method_decision("binary", design = "complex_survey",
                                           n_groups = 2L, include_biostat = TRUE)
@@ -66,4 +66,4 @@ direct <- sum(stats::dbinom(k:n, n, p0))
 stopifnot(isTRUE(all.equal(tail, direct, tolerance = 1e-12)))
 rate <- 40 / 100000 * 20000
 stopifnot(identical(rate, 8))
-cat("PASS: Biomedical methods registry, selector annotations, error handling and exact binomial tail.\n")
+cat("PASS: biostatistics method registry, selector annotations, error handling and exact binomial tail.\n")
