@@ -57,6 +57,15 @@ class NavigationContractTests(unittest.TestCase):
         self.assertTrue(any("invalid audience" in item for item in failures))
         self.assertTrue(any("empty boundary" in item for item in failures))
 
+    def test_home_prioritizes_tasks_over_agent_details(self):
+        home = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertEqual(module.inspect_home_presentation(home), [])
+        reversed_order = (
+            "## Agentic templating, skills, and best practices\n"
+            "## Start here\n## Learn by topic\n"
+        )
+        self.assertTrue(module.inspect_home_presentation(reversed_order))
+
     def test_missing_reader_guide_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             base = Path(td)
