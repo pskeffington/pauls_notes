@@ -1,14 +1,16 @@
 # Breast cancer biostatistics: worked interpretation atlas
 
-[Foundations course: CLT, Welch, Student t, ANOVA and Poisson](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [Biomedical methods testing matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) · [Decision-tree evidence](README.md) · [R laboratory](../examples/breast_cancer_test_atlas.R) · [Biomedical methods chapter registry](biostat_method_registry.csv) · [Breast cancer learning materials](../../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
+[Foundations course: CLT, Welch, Student t, ANOVA and Poisson](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [biomedical statistics testing matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) · [Decision-tree evidence](README.md) · [R laboratory](../examples/breast_cancer_test_atlas.R) · [biomedical statistics chapter registry](biostat_method_registry.csv) · [Breast cancer learning materials](../../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md)
 
-**Teaching edition, 2026-11-13.** Each method in the [Biomedical methods-aligned matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) has a breast-cancer narrative. The R laboratory uses **invented patients and invented measurements**, never downloaded clinical records. Tumor stage, receptor status, log-expression and follow-up durations are synthetic. **Do not interpret any numerical output as a finding about real patients, treatment effectiveness, ESR1, ERBB2, or any cancer subtype.**
+**Teaching edition, 2026-11-13.** Each method in the [methodology-aligned matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) has a breast-cancer narrative. The R laboratory uses **invented patients and invented measurements**, never downloaded clinical records. Tumor stage, receptor status, log-expression and follow-up durations are synthetic. **Do not interpret any numerical output as a finding about real patients, treatment effectiveness, ESR1, ERBB2, or any cancer subtype.**
 
-The foundational organization follows the cited textbook author, *Fundamentals of Biostatistics*, 8th ed. (Cengage, 2016), as a **topical crosswalk**, not copied textbook exercises or text. See the existing [published-paper atlas](README.md) for independently linked method papers. Some methods below are **modern extensions**, not represented as textbook claims.
+The foundational organization follows *Fundamentals of Biostatistics*, 8th ed. (Cengage, 2016), as a **topical crosswalk**, not copied textbook exercises or text. See the existing [published-paper atlas](README.md) for independently linked method papers. Some methods below are **modern extensions**, not represented as textbook claims.
 
-**Numerical verification companion:** [Fully worked calculations, fixed reference results, and publication-style interpretations](BREAST_CANCER_NUMERICAL_VALIDATION.md) · [independent numerical replay checks](../tests/test_breast_cancer_reference_values.R).\n\n## Full methodology alignment contract
+**Numerical verification companion:** [Fully worked calculations, fixed reference results, and publication-style interpretations](BREAST_CANCER_NUMERICAL_VALIDATION.md) · [independent numerical replay checks](../tests/test_breast_cancer_reference_values.R).
 
-This atlas routes through the [Biomedical methods 8e implementation contract](../../02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md), [machine coverage registry](../../02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv), and [book roadmap](../../oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). Each method needs medical question, sampling unit, estimand, model, assumptions, original calculations, runnable R, diagnostics, effect/interval, interpretation and counterexample. This navigation does not establish that all 26 methods were newly executed or scientifically reviewed.
+## Full methodology alignment contract
+
+This atlas routes through the [eighth-edition methods implementation contract](../../02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md), [machine coverage registry](../../02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv), and [book roadmap](../../oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). Each method needs medical question, sampling unit, estimand, model, assumptions, original calculations, runnable R, diagnostics, effect/interval, interpretation and counterexample. This navigation does not establish that all 26 methods were newly executed or scientifically reviewed.
 
 ## A single clinical research narrative
 
@@ -33,7 +35,7 @@ Imagine a research team studying postoperative breast cancer outcomes. Investiga
 
 Each method below supplies **question → illustrative data → R method → interpretation → gate**. Execute the [companion laboratory](../examples/breast_cancer_test_atlas.R) in R to obtain numerical results from the invented inputs. Where a CI is available, report it before considering the p-value.
 
-### 01. One-sample mean — Biomedical methods Chapter 7
+### 01. One-sample mean — biomedical statistics Chapter 7
 
 **Question:** Is the mean of an invented postoperative log-expression score different from a prespecified, externally justified reference of 10 units? **Data:** independent patients, one numeric score each (not IDs). **R:** `t.test(marker, mu=10)`. **Interpretation:** the sample mean minus 10 and its 95% CI quantify a *mean difference*, not recurrence risk; state which direction is clinically relevant. **Gate:** reference validity, independence, extreme values, plausible mean-model assumptions. A score cannot be called log2 expression without its assay protocol.
 
@@ -153,5 +155,5 @@ Never insert invented numerical values from this teaching chapter into a real ab
 
 - [R laboratory for these chapters](../examples/breast_cancer_test_atlas.R) is a synthetic-only companion; optional packages are checked before use.
 - [Existing paper-linked decision-tree atlas](README.md) provides publication-level context; this chapter is an **original breast cancer teaching overlay**, not a reproduction of those publications.
-- [Biomedical methods foundational matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) lists the chapters and the distinction between textbook coverage and extensions.
+- [biomedical statistics foundational matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) lists the chapters and the distinction between textbook coverage and extensions.
 - [Research governance gates](../../02_biomedical_coding/IMPLEMENTATION_GATES.md) apply: G2 units/IDs/missingness, G3 design, G5 diagnostics/uncertainty, G7 figures, G8 executable replay.
