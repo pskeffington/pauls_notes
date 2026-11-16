@@ -3,7 +3,7 @@
 Scope: the complete repository. Read this before editing. Repository owner: Paul Skeffington. This independent educational project covers computational oncology across cancer types; breast cancer and TCGA-BRCA are worked examples, not universal assumptions.
 
 ## Biomedical R / biostatistics coding — mandatory example
-For any biomedical R, R Markdown, biostatistics or knitted-report generation/review, retrieve `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` before writing code. It is the canonical *layout and style example*, not a substitute for study-specific data dictionary, statistical-design decisions or `02_biomedical_coding/IMPLEMENTATION_GATES.md`. Apply named chunks, `##` R code section comments, explicit checks, computed statistical evidence in narrative, Okabe–Ito plots and real knit verification. Never put Markdown `**` into executable R code.
+For any biomedical R, R Markdown, biostatistics or knitted-report generation/review, retrieve `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` before writing code. For complete study templates or broad multi-method walkthroughs also retrieve `02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd` (retrieval key `pauls-notes.biomedical-r.full-study.v1`). It is the canonical *layout and style example*, not a substitute for study-specific data dictionary, statistical-design decisions or `02_biomedical_coding/IMPLEMENTATION_GATES.md`. Apply named chunks, `##` R code section comments, explicit checks, computed statistical evidence in narrative, Okabe–Ito plots and real knit verification. Never put Markdown `**` into executable R code.
 
 ## Entry and authority order
 1. `README.md` and `llms.txt`: human and machine navigation.
