@@ -29,8 +29,8 @@ validate_numeric <- function(x, label = "x") {
 # Comprehensive numerical summary. Returned numeric measurements are ROUNDED
 # for presentation. Do not reuse rounded summaries for downstream tests, models,
 # intervals or scientific estimands; calculate from original unrounded inputs.
-# Rosner 8e section 2.4 illustrates quantile type 2. For Rosner-specific
-# replication use rosner_descriptive_contract.R (method = "rosner8").
+# Biomedical methods 8e section 2.4 illustrates quantile type 2. For Biomedical methods-specific
+# replication use biostat_descriptive_contract.R (method = "biostat8").
 # The existing helper deliberately preserves historical type 7 behavior.
 # One row per group, including explicit
 # missingness and robust quantiles. SD and variance are *sample* statistics.
