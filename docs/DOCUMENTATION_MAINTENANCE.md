@@ -76,7 +76,7 @@ small changes supported by exact file inspection, with regression coverage.
 
 ## Link integrity and bounded hygiene continuation — 2026-11-16
 
-**Confirmed path checks:** The GitHub connector retrieved 48 distinct priority targets from biomedical documentation navigation, including the figure gallery, analysis examples, R helper modules, crosswalk data, acceptance tests, source bibliography, and the book's learning routes. All 48 returned content successfully. This is a sampled link-target existence check; it is **not** a whole-repository Markdown anchor or URL audit.
+**Confirmed path checks:** The GitHub connector retrieved 48 targeted link-path fetch checks from biomedical documentation navigation, including the figure gallery, analysis examples, R helper modules, crosswalk data, acceptance tests, source bibliography, and the book's learning routes. All 48 fetch checks returned content successfully; some targets were checked more than once. This is a sampled link-target existence check; it is **not** a whole-repository Markdown anchor or URL audit.
 
 **Checker defect corrected:** `scripts/check_notes_docs_hygiene.py` previously treated all literal backslash-n sequences as accidental formatting errors. It now inspects narrative text outside Markdown fenced code blocks and ignores backtick-delimited inline code spans. This preserves legitimate Python/R snippets demonstrating escape sequences. The checker still flags `\\n` in ordinary prose, author-name branding and old placeholder labels in the eleven canonical entrypoints.
 
