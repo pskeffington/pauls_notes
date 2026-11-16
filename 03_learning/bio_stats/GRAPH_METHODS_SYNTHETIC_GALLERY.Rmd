@@ -148,6 +148,34 @@ individual measurements. The vertical markers distinguish point estimate,
 lower percentile and upper percentile. Valid uncertainty statements require
 correct resampling units and appropriate interval assumptions.
 
+# 6. Sensitivity versus false-positive rate
+
+```{r graph-roc, fig.width=6.7, fig.height=5.5}
+## Entirely invented scores and outcomes, not an evaluated clinical model.
+roc_input <- synthetic[!is.na(synthetic$marker),,drop=FALSE]
+roc_score <- stats::plogis((roc_input$marker-10)/2)
+set.seed(params$seed+5L)
+roc_outcome <- stats::rbinom(nrow(roc_input),1L,prob=roc_score)
+p_roc <- biostat_graph_roc(
+  data.frame(score=roc_score,outcome=roc_outcome),
+  score="score",outcome="outcome",positive=1L,
+  evaluation_partition="synthetic",
+  title="Illustrative ROC for invented binary outcomes"
+)
+print(p_roc)
+knitr::kable(data.frame(
+  positive=attr(p_roc,"figure_statistics")$positive_n,
+  negative=attr(p_roc,"figure_statistics")$negative_n,
+  auc=attr(p_roc,"figure_statistics")$auc),
+  caption="Empirical AUC; outcome and scores are simulated")
+```
+
+The x-axis is **1 − specificity** (false-positive rate); the y-axis is
+**sensitivity**. Coordinates represent thresholds, not a fitted regression
+line. The diagonal is a chance reference introduced as an annotation, not a
+confidence interval. This purely simulated example is not external or
+held-out diagnostic validation.
+
 # Acceptance boundaries
 
 - All records and values are simulated. Nothing is a breast cancer effect
