@@ -6,7 +6,7 @@
 
 ## Source material actually checked
 
-- the cited textbook author, *Fundamentals of Biostatistics*, **8th edition** (2016), uploaded full PDF; chapter 1 on planning, sampling, order of measurement and data validation (printed pp. 1–4); chapter 2 on descriptive reporting and quantile definitions (printed pp. 5–23); eighth-edition preface on full-precision intermediate calculations (printed p. xiv).
+- *Fundamentals of Biostatistics*, **8th edition** (2016), uploaded full PDF; chapter 1 on planning, sampling, order of measurement and data validation (printed pp. 1–4); chapter 2 on descriptive reporting and quantile definitions (printed pp. 5–23); eighth-edition preface on full-precision intermediate calculations (printed p. xiv).
 - Exact authority for quantiles: §2.4, printed p. 18, demonstrates `stats::quantile(..., type=2)`, matching the text's sample percentile definition.
 - Existing code inspected on main: `06_RESOURCES/R/stats_plots.R` uses `stats::quantile(...,type=7)`, with count/missingness and sample SD; `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` and full synthetic Rmd use type-7 quantiles. **Both conventions are valid; results can differ on small samples.**
 - The sixth-edition TOC is a **different source**, not to be used to assign eighth-edition section/page numbers.
@@ -16,7 +16,7 @@
 | ID | Inspection | Finding | First-pass action | Status |
 | --- | --- | --- | --- | --- |
 | A-01 | Source edition | 6e TOC and 8e full text both exist | Maintain edition-specific sources, paths and stable keys | documented |
-| A-02 | Quantile method | Biomedical methods 8e explicitly uses type 2; existing helper type 7 | Add opt-in type-2 helper; preserve established type-7 default | code authored; runtime unverified |
+| A-02 | Quantile method | eighth-edition methods explicitly uses type 2; existing helper type 7 | Add opt-in type-2 helper; preserve established type-7 default | code authored; runtime unverified |
 | A-03 | Arithmetic precision | Biomedical methods carries intermediate calculations at full precision | Add display-only rounding rule for all methods and Rmd | documentation rule |
 | A-04 | Patient/specimen structure | Ch 1 stresses unique IDs and validation before analysis | Reassert G2 uniqueness, missingness, units and input validation | existing gate; no new tests |
 | A-05 | Bias/design | Ch 1 highlights sites, sampling, measurement order and missing readings | Make patient/site/visit and acquisition-order metadata explicit in case labs | queued |
