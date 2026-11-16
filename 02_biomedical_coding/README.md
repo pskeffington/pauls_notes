@@ -2,6 +2,8 @@
 
 **Paul's Notes · Biomedical research computing**
 
+[Home](../README.md) · [Task-first navigation](../docs/NAVIGATION.md) · [Method-selection matrix](../03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md) · [Acceptance ledger](BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md)
+
 **Author:** Paul Skeffington · **Prepared with OpenAI**
 
 This section supports [research across cancer types](../docs/cancer-research-scope.md) and connects influential biomedical computing, statistics, genomics, and clinical-AI papers to study-aware coding rules. Each referenced paper is treated as a **source**, not as an automatically validated software implementation.
