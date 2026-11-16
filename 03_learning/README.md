@@ -2,7 +2,7 @@
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-[Paul's Notes](../README.md) · [Research workflow](../docs/research-workflow.md)
+[Paul's Notes](../README.md) · [Task-first navigation](../docs/NAVIGATION.md) · [Research workflow](../docs/research-workflow.md)
 
 Choose the subject that matches your research question. Each guide explains a practical task, gives a runnable example, names the expected result, and asks you to change one assumption. Read any subject on its own, use the related-topic links for context, or combine the methods in the complete analysis example.
 
