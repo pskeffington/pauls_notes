@@ -72,7 +72,7 @@ reference_ci <- difference_mean + c(-1, 1)*stats::qt(.975,df=df)*se
 stopifnot(
   isTRUE(all.equal(unname(e$welch$statistic),unname(reference_t), tolerance=1e-10)),
   isTRUE(all.equal(unname(e$welch$parameter),unname(df), tolerance=1e-10)),
-  isTRUE(all.equal(unname(e$welch$conf.int),unname(reference_ci),
+  isTRUE(all.equal(as.numeric(e$welch$conf.int),as.numeric(reference_ci),
                    tolerance=1e-10))
 )
 
@@ -84,7 +84,7 @@ paired_ci <- paired_mean +
 stopifnot(
   isTRUE(all.equal(unname(e$paired_t$estimate),unname(paired_mean),
                    tolerance=1e-10)),
-  isTRUE(all.equal(unname(e$paired_t$conf.int),unname(paired_ci),
+  isTRUE(all.equal(as.numeric(e$paired_t$conf.int),as.numeric(paired_ci),
                    tolerance=1e-10))
 )
 
