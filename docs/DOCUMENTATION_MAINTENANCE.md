@@ -83,3 +83,14 @@ small changes supported by exact file inspection, with regression coverage.
 **Path enforcement:** In addition to requiring the expected navigation routes in text, the hygiene checker now confirms that the corresponding canonical local files actually exist. The dedicated Python unit suite now has eight test cases, including code-fence and inline-code false-positive defenses, narrative escape detection, and missing route destinations.
 
 **Execution boundary:** GitHub files were fetched and source-inspected after edits. The eight new/existing tests are registered in the learning-case CI workflow, but a successful Python job result was not available in this session. No R execution, clinical result or publication claim was changed. The broad `scripts/check_documentation.py` validator remains the authority for full Markdown link and anchor traversal; its latest execution status must be obtained from actual CI logs.
+
+
+## Evidence-status editorial reconciliation — 2026-11-16
+
+**Issue addressed:** The statistical atlas README reports a dated October 22 R execution and lists published-aggregate/toy and synthetic calculation outputs. A separate November validation document records later 27-route/25-gate registry checks, while the newer 17-chunk workbook and figure gallery still lack confirmed R/HTML acceptance. Reading these without their respective dates could falsely imply that one execution validated all three scopes.
+
+**Changes:** `03_learning/bio_stats/README.md` now labels the October result as a historical 19-object atlas execution. `03_learning/bio_stats/R_VALIDATION_STATUS.md` separates atlas, matrix, and workbook evidence epochs, dates its container/CI claims, adds the later workbook/gallery to the pending release table, and points to the canonical acceptance ledger. The earlier numeric results and package versions remain as historical records; this docs pass did not independently reproduce them.
+
+**Regression controls:** The bounded hygiene checker now covers 12 documentation entrypoints, requires the atlas's historical-versus-new acceptance distinction and the status page's epoch breakdown, and accepts both repository-root navigation paths and valid relative Markdown links while checking their actual targets. The Python suite has 10 test cases; **source-reviewed and configured** does not mean executed. The CI outcome of this change has not been obtained.
+
+**Next gate:** Execute `scripts/check_notes_docs_hygiene.py`, its unit tests, `scripts/check_documentation.py`, and independent R/HTML acceptance in CI or a reproducible local environment. Record exact run URL, result, and artifact before marking the respective new gates passed.
