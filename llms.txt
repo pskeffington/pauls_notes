@@ -5,6 +5,10 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
+## Source-to-code first pass (Rosner 8e)
+- [First-pass source and code audit](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md): verified quantile-convention mismatch, opt-in compatibility module, explicit tests and pending R execution; search key `pauls-notes.biomedical.rosner-alignment-first-pass.v1`.
+- [Opt-in Rosner descriptive contract](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/R/rosner_descriptive_contract.R): type-2 vs type-7 quantiles with strict input checks.
+
 ## Breast cancer biostatistics roadmap
 - [Rosner-aligned breast cancer textbook build plan](https://github.com/pskeffington/pauls_notes/blob/main/oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md): gated chapter and method alignment, original synthetic R examples, review requirements, BR-001–BR-010 tasks; retrieval key `pauls-notes.breast-cancer.rosner-methodology-roadmap.v1`.
 - [Rosner eighth-edition coding companion](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md): source-aware statistical method cards and coding safeguards.
