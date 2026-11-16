@@ -5,6 +5,7 @@ Scope is deliberately limited to entrypoint/navigation and core method pages.
 Source bibliography and long-lived historical evidence are not modified.
 """
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = (
@@ -37,10 +38,30 @@ REQUIRED_ROUTES = {
     ),
 }
 
+def narrative_lines(text):
+    """Ignore deliberate escape characters inside Markdown code spans/fences."""
+    fenced = False
+    fence_char = None
+    fence_width = 0
+    for line in text.splitlines():
+        match = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if match:
+            marker = match.group(1)
+            if not fenced:
+                fenced = True
+                fence_char = marker[0]
+                fence_width = len(marker)
+            elif marker[0] == fence_char and len(marker) >= fence_width:
+                fenced = False
+            continue
+        if not fenced:
+            yield re.sub(r"`[^`]*`", "", line)
+
+
 def inspect_page(relative, text):
     """Return narrowly defined, line-oriented problems for one file."""
     failures = []
-    if "\\n" in text:
+    if any("\\n" in line for line in narrative_lines(text)):
         failures.append("literal backslash-n found in narrative Markdown")
     for term in PLACEHOLDERS:
         if term.casefold() in text.casefold():
@@ -52,6 +73,8 @@ def inspect_page(relative, text):
     for route in REQUIRED_ROUTES.get(relative, ()):
         if route not in text:
             failures.append("canonical route not indexed: " + route)
+        elif not (ROOT / route).is_file():
+            failures.append("canonical route target missing: " + route)
     return failures
 
 def validate():
