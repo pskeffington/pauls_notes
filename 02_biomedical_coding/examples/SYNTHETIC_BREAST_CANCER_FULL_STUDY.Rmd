@@ -352,10 +352,12 @@ Poisson uses an event *count*, with log(person-time) offset and equidispersion a
 if (requireNamespace("survival",quietly=TRUE)) {
   S <- survival::Surv(time=study$followup_months,event=study$event)
   km <- survival::survfit(S~subtype,data=study)
-  graphics::plot(km,col=unname(pal),lwd=2,mark.time=TRUE,
+  graphics::plot(km,col=unname(pal),lty=c(1,2),lwd=2,mark.time=TRUE,
+                 ylim=c(0,1),
                  xlab="Synthetic follow-up (months)",ylab="Event-free proportion",
                  main="Synthetic Kaplan-Meier curves")
-  graphics::legend("bottomleft",legend=names(pal),col=unname(pal),lwd=2,bty="n")
+  graphics::legend("bottomleft",legend=names(pal),col=unname(pal),
+                   lty=c(1,2),lwd=2,bty="n")
   lr <- survival::survdiff(S~subtype,data=study)
   logrank_p <- stats::pchisq(lr$chisq,df=length(lr$n)-1,lower.tail=FALSE)
   cox_fit <- survival::coxph(S~subtype+age_years,data=study,x=TRUE)
