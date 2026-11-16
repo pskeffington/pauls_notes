@@ -4,6 +4,10 @@
 
 **Teaching crosswalk | 2026-11-13.** An original method-selection aid organized around Bernard Rosner, *Fundamentals of Biostatistics*, **8th ed.** (Cengage, 2016; ISBN 9781305268920). Chapter references follow the [publisher's table of contents](https://www.cengage.com/c/fundamentals-of-biostatistics-8e-rosner/9781305268920). This is **not** a reproduction of Rosner's copyrighted flowchart, worked exercises or textbook text. Rosner is the foundational textbook; the existing paper atlas supplies independently linked biomedical applications. Specific modeling choices below are editorial guidance, not claims that Rosner mandates a given software function.
 
+## Complete eighth-edition source alignment
+
+[Rosner 8e methodological contract](../../02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md) · [14-chapter machine registry](../../02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv) · [full breast cancer book roadmap](../../oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). These provide routing and acceptance requirements across fourteen chapter families. Preserve edition-specific source locations and the existing 27 selector IDs. Follow the problem → model → computation progression with current R methods and original synthetic oncology examples.
+
 ## Version 2 decision matrix and assumption gates
 
 [**V2 route-by-route method-selection matrix**](BIOMEDICAL_DECISION_MATRIX_V2.md) consolidates 27 routes, mandatory input evidence, a 25-gate checklist and synthetic breast-cancer interpretation notes. It leaves Rosner's original topical crosswalk and the R test-selector's behavior unchanged.
