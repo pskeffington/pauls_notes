@@ -2,6 +2,15 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
+## Complete Rosner 8e biomedical source-to-code contract
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| `biomedical.rosner8.complete_methods` | `02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md` | all fourteen chapter method/coding acceptance contracts | source opening/targeted content; not full-book line-by-line audit |
+| `biomedical.rosner8.coverage_registry` | `02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv` | source page/edition, ontology mappings and code evidence state | all R execution/statistical review pending |
+
+Structural validator: `python3 scripts/check_rosner_8e_alignment.py`. Do not interpret a structural pass as an inferential code pass.
+
 ## First-pass biomedical coding source alignment
 
 | Topic key | Entrypoint | Content role | Boundary |
