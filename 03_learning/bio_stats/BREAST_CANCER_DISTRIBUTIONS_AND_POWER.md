@@ -2,7 +2,7 @@
 
 [Cancer study design and sample size](CANCER_STUDY_DESIGN.md) · [Foundations](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [Method atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [Synthetic R lab](../examples/breast_cancer_distribution_lab.R) · [Checks](../tests/test_breast_cancer_distribution_lab.R)
 
-**Scope.** Original Biomedical methods-aligned, synthetic breast cancer teaching material. No patient records, TCGA results or clinical effectiveness claims. All biomarker scores are arbitrary units.
+**Scope.** Original Methodology-aligned, synthetic breast cancer teaching material. No patient records, TCGA results or clinical effectiveness claims. All biomarker scores are arbitrary units.
 
 ## Method map
 
