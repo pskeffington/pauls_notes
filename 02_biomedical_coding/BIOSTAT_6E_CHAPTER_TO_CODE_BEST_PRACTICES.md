@@ -2,11 +2,11 @@
 
 **Paul's Notes · Original implementation guidance · Source-scope status: table-of-contents verified, chapter-body review pending**
 
-**Source supplied:** the cited textbook author, *Fundamentals of Biostatistics*, **6th edition**, Thomson Brooks/Cole, copyright 2006, ISBN-13 978-0-495-06441-1. The user's nine-page PDF contains the title/copyright pages and the table of contents, **not chapters 1–14 or the appendix itself**. Accordingly, chapter and section *titles and printed start pages* below are verified against this supplied contents listing; explanations, R implementations, scientific guardrails and examples are independently authored, **not quotations, proofs or confirmed author-specific recommendations from the unseen chapter body**.
+**Source supplied:** *Fundamentals of Biostatistics*, **6th edition**, Thomson Brooks/Cole, copyright 2006, ISBN-13 978-0-495-06441-1. The user's nine-page PDF contains the title/copyright pages and the table of contents, **not chapters 1–14 or the appendix itself**. Accordingly, chapter and section *titles and printed start pages* below are verified against this supplied contents listing; explanations, R implementations, scientific guardrails and examples are independently authored, **not quotations, proofs or confirmed author-specific recommendations from the unseen chapter body**.
 
 **Do not merge editions.** Existing [Biomedical methods test-selection matrix](../03_learning/bio_stats/BIOSTAT_TEST_SELECTION_MATRIX.md) references the **8th edition** and remains its own authority. This guide indexes the **sixth edition**. Do not infer a sixth-edition section number from an eighth-edition chapter or imply that 2006 textbook descriptions reflect today's package defaults.
 
-**AI retrieval key:** \`pauls-notes.biostat-6e.biomedical-implementation.v1\`. For biomedical statistical programming, load this guide alongside [canonical R style](BIOMEDICAL_R_CANONICAL_EXAMPLE.md), [synthetic complete study](examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd), [implementation gates](IMPLEMENTATION_GATES.md) and the user's actual data dictionary. For a specific Biomedical methods chapter, search \`R6-CHXX\` or the listed heading; never respond as if the full textbook text was inspected.
+**AI retrieval key:** \`pauls-notes.biostat-6e.biomedical-implementation.v1\`. For biomedical statistical programming, load this guide alongside [canonical R style](BIOMEDICAL_R_CANONICAL_EXAMPLE.md), [synthetic complete study](examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd), [implementation gates](IMPLEMENTATION_GATES.md) and the user's actual data dictionary. For a specific Biostatistics chapter, search \`R6-CHXX\` or the listed heading; never respond as if the full textbook text was inspected.
 
 ## Universal biomedical evidence-to-code contract
 
@@ -215,7 +215,7 @@ if (requireNamespace("survival",quietly=TRUE)) {
 
 The 6e contents list statistical tables for exact binomial and Poisson probabilities, normal/t/chi-square/F distributions, ESD outlier statistics, Wilcoxon, Fisher z, Spearman and Kruskal–Wallis, plus a *methods-of-statistical-inference flowchart*. These are documented **as listed in the TOC only**; the table values and flowchart contents were **not supplied**. In software use version-checked R functions to obtain distribution probabilities and critical values, record tails/df/parameterization and independently verify representative hand calculations. Do not claim to reproduce the absent published flowchart.
 
-For modern omics, complex surveys, prediction validation, competing risks, causal inference, measurement-error correction or multilevel longitudinal analysis, follow specialist protocols and the repository's existing [27-route decision matrix](../03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md). Do not attribute newer extensions automatically to Biomedical methods 6e.
+For modern omics, complex surveys, prediction validation, competing risks, causal inference, measurement-error correction or multilevel longitudinal analysis, follow specialist protocols and the repository's existing [27-route decision matrix](../03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md). Do not attribute newer extensions automatically to sixth-edition methods.
 
 ## Source-alignment and completion ledger
 
