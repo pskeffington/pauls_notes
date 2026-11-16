@@ -13,7 +13,7 @@ MATRIX_COLUMNS = (
     "common_pitfall", "reporting_quantity", "route_class",
 )
 GATE_COLUMNS = ("gate_key", "review_question", "minimum_evidence")
-ROSNER_COLUMNS = ("method_id", "topic", "rosner_chapters", "coverage")
+BIOSTAT_COLUMNS = ("method_id", "topic", "biostat_chapters", "coverage")
 ROUTE_CLASSES = {"descriptive", "inferential", "review", "design_gate"}
 OUTCOME_FAMILIES = {
     "any", "numeric", "categorical", "omics_counts", "time_to_event", "count",
@@ -52,15 +52,15 @@ def validate_matrix(root: Path = ROOT) -> dict[str, int]:
     base = root / BASE
     matrix = read_rows(base / "biomedical_decision_matrix.csv", MATRIX_COLUMNS)
     dictionary = read_rows(base / "biomedical_gate_dictionary.csv", GATE_COLUMNS)
-    rosner = read_rows(base / "rosner_method_registry.csv", ROSNER_COLUMNS)
+    biostat = read_rows(base / "biostat_method_registry.csv", BIOSTAT_COLUMNS)
 
     ids = unique_keys(matrix, "method_id", "matrix")
-    rosner_ids = unique_keys(rosner, "method_id", "Rosner crosswalk")
+    biostat_ids = unique_keys(biostat, "method_id", "Biomedical methods crosswalk")
     known_gates = unique_keys(dictionary, "gate_key", "gate dictionary")
-    if ids != rosner_ids:
+    if ids != biostat_ids:
         raise MatrixValidationError(
-            f"Route coverage differs from Rosner crosswalk: "
-            f"missing={sorted(rosner_ids - ids)}, extra={sorted(ids - rosner_ids)}"
+            f"Route coverage differs from Biomedical methods crosswalk: "
+            f"missing={sorted(biostat_ids - ids)}, extra={sorted(ids - biostat_ids)}"
         )
     if len(ids) != 27:
         raise MatrixValidationError(f"Expected 27 selector routes, found {len(ids)}")
@@ -113,5 +113,5 @@ if __name__ == "__main__":
         "PASS: biostatistics route matrix — "
         f"{stats['routes']} routes, {stats['gates']} defined gates, "
         f"{stats['reviewed_gate_links']} route-gate links; "
-        "matches Rosner crosswalk and R selector."
+        "matches Biomedical methods crosswalk and R selector."
     )
