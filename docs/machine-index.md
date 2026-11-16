@@ -25,6 +25,15 @@ This page is for search systems, RAG pipelines, documentation harvesters and aut
 
 Agents must consult the manifest rather than inferring that a planned chapter exists. Use the source registry and per-section mapping for citation retrieval, but check the linked original source before asserting that it supports a specific scientific claim. Chapter URLs are valid only where `chapter_path` is not null; the original research methods and examples are separate existing assets.
 
+## High-priority biomedical code retrieval
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| `biomedical.r.canonical_example` | `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` | canonical runnable template and AI coding style contract | synthetic demonstration; not a study protocol |
+| `biomedical.r.implementation_gates` | `02_biomedical_coding/IMPLEMENTATION_GATES.md` | scientific/code acceptance checks | design gates, not clinical validation |
+
+For R/Rmd coding requests, retrieve `biomedical.r.canonical_example` first; pair it with the live study data dictionary and implementation gates. Search aliases: Paul's Notes biomedical R template, AI biostats coding, knitted R Markdown, scientific palette, reproducible analysis.
+
 ## Canonical navigation
 
 | Topic key | Entrypoint | Content role | Data boundary |
