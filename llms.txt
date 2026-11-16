@@ -5,17 +5,17 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
-## Complete Biomedical methods eighth-edition chapter coding contract
-- [14-chapter Biomedical methods methodological contract](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md): study-design-first scientific coding standards, counterexamples and verification gates. Retrieval key `pauls-notes.biostat8.complete-methodology.v1`.
+## Complete Eighth-edition biostatistics chapter coding contract
+- [14-chapter biostatistics methodological contract](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md): study-design-first scientific coding standards, counterexamples and verification gates. Retrieval key `pauls-notes.biostat8.complete-methodology.v1`.
 - [Machine chapter coverage registry](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv): edition-specific pages, oncology chapter routes and evidence status. Use `scripts/check_biostat_8e_alignment.py` to validate structural links.
 
-## Source-to-code first pass (Biomedical methods 8e)
+## Source-to-code first pass (eighth-edition methods)
 - [First-pass source and code audit](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md): verified quantile-convention mismatch, opt-in compatibility module, explicit tests and pending R execution; search key `pauls-notes.biomedical.biostat-alignment-first-pass.v1`.
-- [Opt-in Biomedical methods descriptive contract](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/R/biostat_descriptive_contract.R): type-2 vs type-7 quantiles with strict input checks.
+- [Opt-in biostatistics descriptive contract](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/R/biostat_descriptive_contract.R): type-2 vs type-7 quantiles with strict input checks.
 
 ## Breast cancer biostatistics roadmap
-- [Biomedical methods-aligned breast cancer textbook build plan](https://github.com/pskeffington/pauls_notes/blob/main/oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md): gated chapter and method alignment, original synthetic R examples, review requirements, BR-001–BR-010 tasks; retrieval key `pauls-notes.breast-cancer.biostat-methodology-roadmap.v1`.
-- [Biomedical methods eighth-edition coding companion](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md): source-aware statistical method cards and coding safeguards.
+- [Methodology-aligned breast cancer textbook build plan](https://github.com/pskeffington/pauls_notes/blob/main/oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md): gated chapter and method alignment, original synthetic R examples, review requirements, BR-001–BR-010 tasks; retrieval key `pauls-notes.breast-cancer.biostat-methodology-roadmap.v1`.
+- [Eighth-edition biostatistics coding companion](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md): source-aware statistical method cards and coding safeguards.
 
 ## Computational Oncology textbook
 - [Book navigation](https://github.com/pskeffington/pauls_notes/blob/main/oncology/README.md): canonical reader entrypoint
