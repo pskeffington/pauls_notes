@@ -30,6 +30,7 @@ Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/m
 
 ## Canonical biomedical R coding template (read first for R analysis)
 - [AI-ready biomedical R canonical example](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md): required example sheet for R/Rmd analysis structure, chunks, statistical evidence, plots, knitting and validation; retrieval key `pauls-notes.biomedical-r.canonical-example.v1`.
+- [Full synthetic breast cancer study workbook](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd): complete Rmd with 17 code chunks, research test-selection matrix and multi-method walkthrough. Retrieval key `pauls-notes.biomedical-r.full-study.v1`.
 - [Biomedical implementation gates](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/IMPLEMENTATION_GATES.md): study/design/data/inference quality checks; read alongside the template.
 
 ## Primary routes
