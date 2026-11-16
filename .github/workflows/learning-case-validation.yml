@@ -86,6 +86,7 @@ jobs:
       - name: Run descriptive and full-study numerical acceptance
         run: |
           Rscript --vanilla 06_RESOURCES/tests/test_biostat_descriptive_contract.R
+          Rscript --vanilla 06_RESOURCES/tests/test_biostat_graphs.R
           Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R
       - name: Render and inspect complete synthetic study
         run: |
@@ -95,6 +96,11 @@ jobs:
           grep -Fq "Synthetic Breast Cancer Study" "$RUNNER_TEMP/synthetic-breast-cancer-methods.html"
           grep -Fq "Computational provenance" "$RUNNER_TEMP/synthetic-breast-cancer-methods.html"
           cp "$RUNNER_TEMP/synthetic-breast-cancer-methods.html" "$RUNNER_TEMP/biomedical-methods-artifacts/"
+          Rscript --vanilla -e 'rmarkdown::render("03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd", output_format="html_document", output_file="synthetic-biomedical-graph-gallery.html", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
+          test -s "$RUNNER_TEMP/synthetic-biomedical-graph-gallery.html"
+          grep -Fq "Stem-and-leaf" "$RUNNER_TEMP/synthetic-biomedical-graph-gallery.html"
+          grep -Fq "Bootstrap distribution" "$RUNNER_TEMP/synthetic-biomedical-graph-gallery.html"
+          cp "$RUNNER_TEMP/synthetic-biomedical-graph-gallery.html" "$RUNNER_TEMP/biomedical-methods-artifacts/"
           Rscript --vanilla -e 'writeLines(capture.output(utils::sessionInfo()), file.path(Sys.getenv("RUNNER_TEMP"),"biomedical-methods-artifacts","session-info.txt"))'
       - name: Retain synthetic knitted report and environment evidence
         if: always()
