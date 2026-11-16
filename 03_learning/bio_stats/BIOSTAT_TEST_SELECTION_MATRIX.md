@@ -134,6 +134,6 @@ Rscript --vanilla 03_learning/tests/test_biostat_method_cases.R
 
 ## Source and scope
 
-**Primary source:** *Fundamentals of Biostatistics*, 8th ed. (2016), with full attribution in the bibliography. [Publisher catalog / chapter list](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md).
+**Primary source:** *Fundamentals of Biostatistics*, 8th ed. (2016), with full attribution in the bibliography. [Edition-specific methodology bibliography](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md).
 
 **Modern applications:** consult the [paper-based evidence atlas](README.md) and [2021–2026 biomedical R-method literature](../../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md). Crosswalk chapter assignments describe topical coverage, not exact section-by-section reproduction or independent verification of every formula in the book.
