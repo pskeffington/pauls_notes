@@ -14,6 +14,8 @@ The following **method features**, rather than the original copyrighted image as
 - Chapter 2, §2.8, printed p. 27 (PDF page 49): categorical bar-graph construction with separate rectangular bars and frequency heights; stem-and-leaf as a value-preserving alternative to grouped bars.
 - Chapter 2, Figures 2.7–2.8, printed pp. 29–30 (PDF pages 51–52): stem-and-leaf display and a box plot showing lower/upper quartiles, a median line and a separately marked sample mean.
 - Chapter 2, definitions 2.11–2.12, printed p. 31 (PDF page 53): 1.5×IQR and 3×IQR outlier thresholds, with distinct ordinary and extreme outlying-value indicators. These are exploratory flags, not individual hypothesis tests.
+- Chapter 3, §3.9, Figure 3.7, printed p. 63 (PDF page 85): ROC displays sensitivity against 1 − specificity, with threshold-dependent coordinates and area-under-curve interpretation.
+- Chapter 14, §14.9, Figure 14.5, printed p. 812 (PDF page 834): group survival probabilities plotted against elapsed time.
 - Chapter 6, §6.11, Figure 6.11, printed p. 201 (PDF page 223): histogram of 1000 bootstrap estimator replicates, not of the original individual observations.
 
 The associated original programming work is indexed in [Graph method alignment](../03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md). All figure examples use new, synthetic measurements. No source image is copied, traced, or embedded.
