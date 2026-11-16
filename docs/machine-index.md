@@ -2,29 +2,29 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
-## Complete Rosner 8e biomedical source-to-code contract
+## Complete Biomedical methods 8e biomedical source-to-code contract
 
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
-| `biomedical.rosner8.complete_methods` | `02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md` | all fourteen chapter method/coding acceptance contracts | source opening/targeted content; not full-book line-by-line audit |
-| `biomedical.rosner8.coverage_registry` | `02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv` | source page/edition, ontology mappings and code evidence state | all R execution/statistical review pending |
+| `biomedical.biostat8.complete_methods` | `02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md` | all fourteen chapter method/coding acceptance contracts | source opening/targeted content; not full-book line-by-line audit |
+| `biomedical.biostat8.coverage_registry` | `02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv` | source page/edition, ontology mappings and code evidence state | all R execution/statistical review pending |
 
-Structural validator: `python3 scripts/check_rosner_8e_alignment.py`. Do not interpret a structural pass as an inferential code pass.
+Structural validator: `python3 scripts/check_biostat_8e_alignment.py`. Do not interpret a structural pass as an inferential code pass.
 
 ## First-pass biomedical coding source alignment
 
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
-| `biomedical.rosner8.first_pass_audit` | `02_biomedical_coding/ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md` | source-to-code discrepancy ledger and verification commands | R runtime and knit not yet verified |
-| `biomedical.rosner8.quantiles` | `06_RESOURCES/R/rosner_descriptive_contract.R` | explicit opt-in type-2 and type-7 quantile implementations | code authored, deterministic R test execution pending |
+| `biomedical.biostat8.first_pass_audit` | `02_biomedical_coding/BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md` | source-to-code discrepancy ledger and verification commands | R runtime and knit not yet verified |
+| `biomedical.biostat8.quantiles` | `06_RESOURCES/R/biostat_descriptive_contract.R` | explicit opt-in type-2 and type-7 quantile implementations | code authored, deterministic R test execution pending |
 
 ## Breast cancer statistics book methodology route
 
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
-| `oncology.breast_cancer.rosner_roadmap` | `oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` | gated chapter/biostatistics roadmap | planned tasks, not published or validated chapters |
-| `biomedical.rosner8.code_companion` | `02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` | source-aligned independent coding examples | targeted source verification; not full-page review |
-| `biomedical.rosner6.toc` | `02_biomedical_coding/ROSNER_6E_CHAPTER_TO_CODE_BEST_PRACTICES.md` | separate sixth-edition crosswalk | TOC based, chapter text unavailable |
+| `oncology.breast_cancer.biostat_roadmap` | `oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` | gated chapter/biostatistics roadmap | planned tasks, not published or validated chapters |
+| `biomedical.biostat8.code_companion` | `02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` | source-aligned independent coding examples | targeted source verification; not full-page review |
+| `biomedical.biostat6.toc` | `02_biomedical_coding/BIOSTAT_6E_CHAPTER_TO_CODE_BEST_PRACTICES.md` | separate sixth-edition crosswalk | TOC based, chapter text unavailable |
 
 For alignment requests, retrieve the roadmap and actual book manifest before modifying chapter or gate statuses. Source evidence must be edition specific.
 
