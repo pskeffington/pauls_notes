@@ -6,7 +6,11 @@
 
 The foundational organization follows Bernard Rosner, *Fundamentals of Biostatistics*, 8th ed. (Cengage, 2016), as a **topical crosswalk**, not copied textbook exercises or text. See the existing [published-paper atlas](README.md) for independently linked method papers. Some methods below are **modern extensions**, not represented as textbook claims.
 
-**Numerical verification companion:** [Fully worked calculations, fixed reference results, and publication-style interpretations](BREAST_CANCER_NUMERICAL_VALIDATION.md) · [independent numerical replay checks](../tests/test_breast_cancer_reference_values.R).\n\n## A single clinical research narrative
+**Numerical verification companion:** [Fully worked calculations, fixed reference results, and publication-style interpretations](BREAST_CANCER_NUMERICAL_VALIDATION.md) · [independent numerical replay checks](../tests/test_breast_cancer_reference_values.R).\n\n## Full methodology alignment contract
+
+This atlas routes through the [Rosner 8e implementation contract](../../02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md), [machine coverage registry](../../02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv), and [book roadmap](../../oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). Each method needs medical question, sampling unit, estimand, model, assumptions, original calculations, runnable R, diagnostics, effect/interval, interpretation and counterexample. This navigation does not establish that all 26 methods were newly executed or scientifically reviewed.
+
+## A single clinical research narrative
 
 Imagine a research team studying postoperative breast cancer outcomes. Investigators record one observation per participant at baseline (person ID; treatment group; age; synthetic continuous tumor biomarker; ER/HER2 status; ordered toxicity grade), and may record a matched biomarker after therapy, recurrences during person-time, or time to first recurrence with censoring. Later, they conduct an assay-level analysis across thousands of genes. The core lesson is that **the same clinical theme contains multiple distinct outcomes and sampling models**.
 
