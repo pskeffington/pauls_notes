@@ -1,4 +1,4 @@
-# Independently authored, offline regression tests for Biomedical methods 8e compatibility.
+# Offline regression checks for explicit quantile-method compatibility.
 # Run from repository root:
 # Rscript --vanilla 06_RESOURCES/tests/test_biostat_descriptive_contract.R
 source("06_RESOURCES/R/biostat_descriptive_contract.R")
