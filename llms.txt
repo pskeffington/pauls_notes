@@ -5,6 +5,10 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
+## Documentation and maintenance
+- [Documentation ownership and maintenance](https://github.com/pskeffington/pauls_notes/blob/main/docs/DOCUMENTATION_MAINTENANCE.md): canonical file responsibilities, source/acceptance boundaries and scoped cleanup log.
+- [Core documentation hygiene checks](https://github.com/pskeffington/pauls_notes/blob/main/scripts/check_notes_docs_hygiene.py): Markdown newline, naming and retrieval-route regressions; test status must come from actual CI logs.
+
 ## Biomedical figure methodology and graph acceptance
 - [Original figure-method alignment](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md): categorical bars, stem-and-leaf, box/mean and outlier fences, bootstrap estimator histograms, ROC and survival axes, source-scope and acceptance gates; retrieval key `pauls-notes.biomedical.graph-methods.v1`.
 - [Executable graph module](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/R/biostat_graphs.R) and [synthetic gallery](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd): original synthetic figures, with machine-checkable graph statistics.
