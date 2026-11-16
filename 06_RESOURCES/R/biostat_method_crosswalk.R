@@ -1,4 +1,4 @@
-# Read-only Biomedical methods chapter crosswalk. No dataset access or test execution.
+# Read-only biostatistics chapter crosswalk. No dataset access or test execution.
 # Mapping is an original editorial aid, not a substitute for textbook sections.
 biostat_method_crosswalk <- function(method_id) {
   if (!is.character(method_id) || length(method_id) != 1L ||
@@ -14,7 +14,7 @@ biostat_method_crosswalk <- function(method_id) {
        chapters = if (nzchar(chapters[idx])) strsplit(chapters[idx], ";", fixed = TRUE)[[1L]]
                   else character(),
        coverage = coverage[idx],
-       source = "Biomedical methods, Fundamentals of Biostatistics, 8th ed., Cengage",
+       source = "biostatistics, Fundamentals of Biostatistics, 8th ed., Cengage",
        note = "Topical chapter crosswalk only; extension/gate routes are not textbook claims.")
 }
 
