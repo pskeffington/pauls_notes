@@ -20,6 +20,14 @@ stopifnot(near(st$q1[1],1.5),near(st$median[1],3.5),
           near(st$q3[1],7),near(st$mean[1],4.25),
           near(st$whisker_low[1],1),near(st$whisker_high[1],9))
 stopifnot(!near(st$q1[1],unname(stats::quantile(c(1,2,5,9),.25,type=7))))
+## Mild and extreme outliers are distinct from ordinary points.
+outlier_data <- data.frame(group=rep("C",22L),
+                          measure=c(1:20,50,120))
+outlier_stat <- biostat_graph_box_stats(outlier_data,"measure","group")
+stopifnot(outlier_stat$n_outlying==1L,outlier_stat$n_extreme==1L)
+p_outliers <- biostat_graph_box(outlier_data,"measure","group",unit="score")
+stopifnot(inherits(p_outliers,"ggplot"),
+          length(ggplot2::ggplot_build(p_outliers)$data)>=9L)
 p_box <- biostat_graph_box(d,"measure","group",unit="synthetic units")
 stopifnot(inherits(p_box,"ggplot"),nrow(attr(p_box,"figure_statistics"))==2L)
 stopifnot(length(ggplot2::ggplot_build(p_box)$data)>=7L)
