@@ -2,6 +2,16 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
+## Breast cancer statistics book methodology route
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| `oncology.breast_cancer.rosner_roadmap` | `oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` | gated chapter/biostatistics roadmap | planned tasks, not published or validated chapters |
+| `biomedical.rosner8.code_companion` | `02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` | source-aligned independent coding examples | targeted source verification; not full-page review |
+| `biomedical.rosner6.toc` | `02_biomedical_coding/ROSNER_6E_CHAPTER_TO_CODE_BEST_PRACTICES.md` | separate sixth-edition crosswalk | TOC based, chapter text unavailable |
+
+For alignment requests, retrieve the roadmap and actual book manifest before modifying chapter or gate statuses. Source evidence must be edition specific.
+
 ## Computational Oncology routes
 
 | Topic key | Entrypoint | Content role | Boundary |
