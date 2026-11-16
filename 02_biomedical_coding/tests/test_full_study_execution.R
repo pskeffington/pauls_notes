@@ -47,6 +47,14 @@ stopifnot(
   nrow(e$test_set)>0L,
   nrow(e$train)>0L,
   nrow(e$test_set)+nrow(e$train)<=240L,
+  length(e$train_ids)==168L,
+  length(e$test_ids)==72L,
+  !anyDuplicated(e$train_ids),
+  !anyDuplicated(e$test_ids),
+  !any(e$train_ids %in% e$test_ids),
+  !any(e$train$patient_id %in% e$test_set$patient_id),
+  all(e$train$patient_id %in% e$train_ids),
+  all(e$test_set$patient_id %in% e$test_ids),
   e$tp+e$tn+e$fp+e$fn==nrow(e$test_set),
   is.finite(e$pred_metrics$brier),
   e$pred_metrics$brier>=0,e$pred_metrics$brier<=1,
@@ -151,4 +159,17 @@ stopifnot(
 
 auc <- e$auc_rank(e$probs,e$test_set$response)
 stopifnot(is.finite(auc),auc>=0,auc<=1)
+## Independent pairwise concordance reference, including score ties.
+positive_scores <- e$probs[e$test_set$response==1L]
+negative_scores <- e$probs[e$test_set$response==0L]
+pair_concordance <- outer(positive_scores,negative_scores,">")
+pair_ties <- outer(positive_scores,negative_scores,"==")
+auc_reference <- mean(pair_concordance + 0.5*pair_ties)
+stopifnot(
+  length(positive_scores)>0L,length(negative_scores)>0L,
+  isTRUE(all.equal(as.numeric(auc),as.numeric(auc_reference),
+                   tolerance=1e-12)),
+  isTRUE(all.equal(as.numeric(e$pred_metrics$brier),
+                   mean((e$probs-e$test_set$response)^2),tolerance=1e-12))
+)
 cat("PASS: full synthetic workbook code executed, 17 chunks and analytical contracts.\n")
