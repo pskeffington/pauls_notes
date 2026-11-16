@@ -16,6 +16,7 @@ PAGES = (
     "02_biomedical_coding/README.md",
     "03_learning/README.md",
     "03_learning/bio_stats/README.md",
+    "03_learning/bio_stats/R_VALIDATION_STATUS.md",
     "03_learning/bio_stats/BREAST_CANCER_WORKED_TEST_ATLAS.md",
     "03_learning/bio_stats/BIOSTAT_TEST_SELECTION_MATRIX.md",
     "03_learning/bio_stats/CANCER_STUDY_DESIGN.md",
@@ -31,6 +32,10 @@ REQUIRED_ROUTES = {
     "AGENTS.md": (
         "scripts/check_methodology_attribution.py",
         "06_RESOURCES/R/biostat_graphs.R",
+    ),
+    "03_learning/bio_stats/README.md": (
+        "03_learning/bio_stats/R_VALIDATION_STATUS.md",
+        "02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md",
     ),
     "docs/machine-index.md": (
         "03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd",
@@ -70,6 +75,12 @@ def inspect_page(relative, text):
     attribution_token = bytes.fromhex("726f736e6572").decode("ascii")
     if attribution_token in text.casefold():
         failures.append("author attribution outside the bibliography")
+    if relative == "03_learning/bio_stats/README.md":
+        if "historical, bounded execution" not in text or "runtime and report-rendering gates remain pending" not in text:
+            failures.append("historical atlas and later workbook must have distinct evidence scopes")
+    if relative == "03_learning/bio_stats/R_VALIDATION_STATUS.md":
+        if "Evidence epochs and acceptance boundaries" not in text or "17-chunk workbook" not in text:
+            failures.append("validation status must distinguish the historical atlas from new workbook")
     for route in REQUIRED_ROUTES.get(relative, ()):
         if route not in text:
             failures.append("canonical route not indexed: " + route)
