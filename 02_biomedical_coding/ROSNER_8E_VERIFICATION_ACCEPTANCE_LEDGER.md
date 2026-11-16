@@ -9,6 +9,7 @@
 | Gate | Test / evidence | Result | Limitation |
 | --- | --- | --- | --- |
 | V-01 structure | `rosner_8e_complete_chapter_alignment.csv` rows and 14 IDs | 14 records mapped to valid book chapter IDs and correct edition/page offset (in-session crosswalk validation) | Checks mapping, not every textbook derivation |
+| V-01b book page integrity | PyMuPDF inspected the actual PDF start page for R8-CH01 through R8-CH14 | **14/14** printed start-page numbers verified at PDF page = printed page + 22 | Opening-page integrity only, not a full section-by-section audit |
 | V-02 Rmd fencing | Open/close fences and labels in `SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd` | 17 named unique R chunks; 17 code-fence closures; 12 inline R expressions checked structurally | R parser not available in current environment |
 | V-03 quantiles | Review of `test_rosner_descriptive_contract.R` | Repaired singleton quantile expectation: default Q1/Q2/Q3 returns 3 values | Actual `Rscript` execution pending |
 | V-03b independent numerical replay | Python/NumPy on synthetic vector (1,2,5,9); source PDF p. 40 | Type-2 Q1/median/Q3 = 1.5/3.5/7; type-7 = 1.75/3.5/6; sample SD = 3.593976442141304 | Independent arithmetic/reference verification, **not R execution** |
