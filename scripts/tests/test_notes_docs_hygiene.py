@@ -1,0 +1,33 @@
+"""Regressions for bounded biomedical documentation entrypoint hygiene."""
+import importlib.util
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SPEC = importlib.util.spec_from_file_location(
+    "notes_docs_hygiene", ROOT / "scripts/check_notes_docs_hygiene.py")
+module = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(module)
+
+
+class NotesDocHygieneTests(unittest.TestCase):
+    def test_current_core_pages(self):
+        self.assertEqual(module.validate(), [])
+
+    def test_literal_escaped_newline(self):
+        issues = module.inspect_page("03_learning/README.md",
+                                     "Line one\\nLine two")
+        self.assertTrue(any("backslash-n" in x for x in issues))
+
+    def test_legacy_placeholder_rejected(self):
+        issues = module.inspect_page("03_learning/README.md",
+                                     "Biomedical methods chapter outline")
+        self.assertTrue(any("placeholder" in x for x in issues))
+
+    def test_canonical_routes_required(self):
+        issues = module.inspect_page("README.md", "# Notes")
+        self.assertTrue(any("canonical route" in x for x in issues))
+
+
+if __name__ == "__main__":
+    unittest.main()
