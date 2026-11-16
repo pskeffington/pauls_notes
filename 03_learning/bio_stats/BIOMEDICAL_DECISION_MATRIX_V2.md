@@ -1,6 +1,6 @@
 # Biomedical statistical decision matrix — Version 2
 
-[Statistics foundations](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [Biomedical methods-aligned matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) · [Breast cancer worked tests](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [27-route registry](biomedical_decision_matrix.csv) · [25-gate dictionary](biomedical_gate_dictionary.csv) · [R adviser](../../06_RESOURCES/R/biomedical_matrix_gate_review.R)
+[Statistics foundations](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [methodology-aligned matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) · [Breast cancer worked tests](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [27-route registry](biomedical_decision_matrix.csv) · [25-gate dictionary](biomedical_gate_dictionary.csv) · [R adviser](../../06_RESOURCES/R/biomedical_matrix_gate_review.R)
 
 **Paul's Notes | 2026-11-14 | Synthetic teaching layer.** This matrix extends the existing `biomedical_method_decision()` routes with structured clinical context and explicit pre-inference checks. It does **not** replace the original selector, download study records, execute a statistical test or certify a model's eligibility. Breast cancer is the continuous narrative, not a restriction on which cancers the methods apply to.
 
@@ -61,7 +61,7 @@ flowchart TD
 | One binary proportion | `binomial-proportion` | 36 of 80 patients respond | Exact binomial proportion and tail |
 | Independent categorical table | `contingency-analysis` | HER2 status and response | Counts, denominators, risk/odds measure |
 
-The machine-readable CSV includes each row's **required fields, gate keys, estimand, breast cancer example, interpretation, common failure and reporting quantity**. The separate Biomedical methods crosswalk supplies textbook chapter navigation. **The central limit theorem, statistical power and confidence intervals are foundations—not hypothesis tests and therefore not selector terminal routes.** Study them in the [foundations chapter](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) and [distribution/power chapter](BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md).
+The machine-readable CSV includes each row's **required fields, gate keys, estimand, breast cancer example, interpretation, common failure and reporting quantity**. The separate biostatistics chapter crosswalk supplies textbook chapter navigation. **The central limit theorem, statistical power and confidence intervals are foundations—not hypothesis tests and therefore not selector terminal routes.** Study them in the [foundations chapter](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) and [distribution/power chapter](BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md).
 
 ## R: inspect a method, then interrogate its assumption gates
 
@@ -147,12 +147,12 @@ Rscript --vanilla 06_RESOURCES/tests/test_biomedical_test_selector.R
 Rscript --vanilla 06_RESOURCES/tests/test_biostat_method_crosswalk.R
 ```
 
-The Python validator checks the 27 unique route IDs against the Biomedical methods crosswalk and selector, verifies all 25 gate definitions and rejects duplicates, unknown gates, blank cells and invalid route classes. The R suite exercises **every route**, assumption-state transitions, and failure cases without reading patient data.
+The Python validator checks the 27 unique route IDs against the biostatistics chapter crosswalk and selector, verifies all 25 gate definitions and rejects duplicates, unknown gates, blank cells and invalid route classes. The R suite exercises **every route**, assumption-state transitions, and failure cases without reading patient data.
 
 **Evidence levels:** GitHub commit is a repository update; executable Python tests are structural validation only; R regression tests require a real R runtime; neither certifies clinical adequacy. Keep G0/G1 source/permission, G2 schema, G3 study design, G5 inference, G7 figures and G8 independent replay as separate gates.
 
 ## Source and crosswalk boundaries
 
-- **Foundational text:** the cited textbook author, *Fundamentals of Biostatistics*, 8th ed., Cengage (2016). See [chapter registry](biostat_method_registry.csv) and [original decision matrix](BIOSTAT_TEST_SELECTION_MATRIX.md); topical chapter links are not copied textbook algorithms.
+- **Foundational text:** *Fundamentals of Biostatistics*, 8th ed., Cengage (2016). See [chapter registry](biostat_method_registry.csv) and [original decision matrix](BIOSTAT_TEST_SELECTION_MATRIX.md); topical chapter links are not copied textbook algorithms.
 - **Method evidence:** [decision-tree publication atlas](README.md) and [recent biomedical R literature](../../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md).
 - **Cancer application:** [26-method worked interpretation atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md), [study-design chapter](CANCER_STUDY_DESIGN.md) and [fully worked synthetic calculations](BREAST_CANCER_NUMERICAL_VALIDATION.md).
