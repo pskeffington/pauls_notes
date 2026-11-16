@@ -2,6 +2,10 @@
 
 Scope: the complete repository. Read this before editing. Repository owner: Paul Skeffington. This independent educational project covers computational oncology across cancer types; breast cancer and TCGA-BRCA are worked examples, not universal assumptions.
 
+## Documentation hygiene and canonical ownership
+
+The maintenance contract for reader/agent notes is `docs/DOCUMENTATION_MAINTENANCE.md`. Before modifying navigation, run `python3 scripts/check_notes_docs_hygiene.py` plus `python3 scripts/check_documentation.py`. Do not conflate corrected Markdown with successful R execution, clinical review or publication readiness; record source and runtime evidence separately.
+
 ## Author-neutral methodology and bibliographic attribution
 
 All internal educational material must use **method names and scientific concepts**, not a textbook author's name, as headings, file paths, R symbols, retrieval keys, CI jobs, or labels. Cite the textbook only for a source-specific methodological assertion and use the dedicated bibliography at `02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md`. Keep edition and section numbers for provenance when needed. Run `python3 scripts/check_methodology_attribution.py` before merging educational documentation or code. This rule does not change scientific assumptions, diminish reproducibility, or authorize erasing proper scholarly credit.
