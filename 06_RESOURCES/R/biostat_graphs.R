@@ -279,3 +279,69 @@ biostat_graph_bootstrap <- function(estimates, estimate, unit,
   )
   p
 }
+
+# ROC: threshold-dependent sensitivity versus (1 - specificity).
+# Only evaluate held-out/external predictions from fitted models; "synthetic"
+# denotes an entirely invented teaching classification experiment.
+biostat_graph_roc <- function(data, score, outcome, positive = 1L,
+                              evaluation_partition = c("held-out","external","synthetic"),
+                              title = "Receiver operating characteristic") {
+  biostat_graph_require_ggplot2()
+  evaluation_partition <- match.arg(evaluation_partition)
+  if (!is.data.frame(data) || !is.character(score) || !is.character(outcome) ||
+      length(score)!=1L || length(outcome)!=1L ||
+      !all(c(score,outcome) %in% names(data)) || identical(score,outcome))
+    stop("Provide distinct score and outcome column names.",call.=FALSE)
+  s <- data[[score]]
+  y <- data[[outcome]]
+  biostat_graph_validate_numeric(s,score)
+  if (anyNA(s) || anyNA(y) || !length(s) || length(s)!=length(y))
+    stop("Scores and outcomes must be nonmissing and aligned.",call.=FALSE)
+  if (!is.character(positive) && !is.numeric(positive))
+    stop("positive must identify one outcome category.",call.=FALSE)
+  if (length(positive)!=1L || is.na(positive))
+    stop("positive must identify one outcome category.",call.=FALSE)
+  classes <- unique(as.character(y))
+  if (length(classes)!=2L || !as.character(positive) %in% classes)
+    stop("ROC requires two observed outcome classes and a declared positive class.",
+         call.=FALSE)
+  positive_case <- as.character(y)==as.character(positive)
+  n_pos <- sum(positive_case)
+  n_neg <- length(y)-n_pos
+  cutoffs <- c(Inf,sort(unique(s),decreasing=TRUE))
+  roc <- data.frame(
+    false_positive_rate=vapply(cutoffs,function(t) {
+      mean(s[!positive_case]>=t)
+    },numeric(1)),
+    sensitivity=vapply(cutoffs,function(t) {
+      mean(s[positive_case]>=t)
+    },numeric(1))
+  )
+  auc_trap <- sum(diff(roc$false_positive_rate) *
+    (head(roc$sensitivity,-1L)+tail(roc$sensitivity,-1L))/2)
+  ranks <- rank(s,ties.method="average")
+  auc_rank <- (sum(ranks[positive_case])-n_pos*(n_pos+1)/2) /
+    (n_pos*n_neg)
+  if (!isTRUE(all.equal(auc_trap,auc_rank,tolerance=1e-12)))
+    stop("Internal ROC area identities disagree.",call.=FALSE)
+  p <- ggplot2::ggplot(roc,
+    ggplot2::aes(x=.data$false_positive_rate,y=.data$sensitivity)) +
+    ggplot2::geom_abline(intercept=0,slope=1,linetype="dashed",
+                         colour="#777777",linewidth=.5) +
+    ggplot2::geom_line(colour="#0072B2",linewidth=.9) +
+    ggplot2::geom_point(colour="#0072B2",size=.9) +
+    ggplot2::coord_equal() +
+    ggplot2::scale_x_continuous(limits=c(0,1),breaks=seq(0,1,.2)) +
+    ggplot2::scale_y_continuous(limits=c(0,1),breaks=seq(0,1,.2)) +
+    ggplot2::labs(title=title,
+      subtitle=sprintf("%s evaluation, n=%d (positive=%d; negative=%d)",
+        evaluation_partition,length(s),n_pos,n_neg),
+      x="1 - specificity (false-positive rate)",y="Sensitivity (true-positive rate)",
+      caption=sprintf(
+        "Empirical threshold ROC; AUC=%.3f. Dashed diagonal is chance reference, not an uncertainty interval.",
+        auc_rank)) +
+    ggplot2::theme_classic(base_size=12)
+  attr(p,"figure_statistics") <- list(roc=roc,auc=auc_rank,
+    positive_n=n_pos,negative_n=n_neg,partition=evaluation_partition)
+  p
+}
