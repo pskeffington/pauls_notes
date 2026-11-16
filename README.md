@@ -12,6 +12,10 @@ An open, methods-focused notebook for **research across all cancer types**, incl
 
 This repository is a **modular field guide for biomedical students and early-career researchers**. Read one section to answer a current question, then follow prerequisites or related links when useful; there is no required course order. Each subject overview points to focused lessons, runnable examples, expected outputs, and limitations. Start with the task table below or browse by topic.
 
+## Biomedical statistics and original figures
+
+Start with the [statistical method decision matrix](03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md), [complete synthetic breast cancer study](02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd), or [graph-method alignment and teaching gallery](03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md). Reusable plotting functions and their regression tests are documented in the [R resource index](06_RESOURCES/R/README.md). Sources and completed verification steps are distinguished from tests still awaiting execution in the [acceptance ledger](02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md).
+
 ## Computational Oncology textbook
 
 The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
