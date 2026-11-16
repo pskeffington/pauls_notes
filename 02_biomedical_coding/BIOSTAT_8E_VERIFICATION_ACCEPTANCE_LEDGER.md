@@ -1,4 +1,4 @@
-# eighth-edition methods breast cancer biostatistics — verification and acceptance ledger
+# Breast cancer biostatistics — verification and acceptance ledger
 
 **Date:** 2026-11-15  
 **Workstream:** BC-BIOSTAT-ALIGN-2026; continuation of BR-001/BR-010 acceptance engineering  
@@ -20,7 +20,7 @@
 | V-08 code provenance | notebook/cluster/clinical claims | Study uses invented data, no person-level clinical records; existing oncology book manifest left unchanged | Not a clinical validation |
 | V-09 CI run | GitHub combined status for final workflow change | No combined status entries returned | Does **not** mean CI passed or failed |
 
-**Physical source check:** The uploaded eighth-edition PDF was opened locally and confirmed to have **962 pages**; page 4 identifies the eighth edition, PDF page 27 begins Chapter 2 and PDF page 40 includes Biomedical methods's type-2 quantile example. These page checks supplement the registry source provenance without demonstrating full chapter-level derivation review.
+**Physical source check:** The uploaded eighth-edition PDF was opened locally and confirmed to have **962 pages**; page 4 identifies the eighth edition, PDF page 27 begins Chapter 2 and PDF page 40 includes the source's type-2 quantile example. These page checks supplement the registry source provenance without demonstrating full chapter-level derivation review.
 
 ## Confirmed changes
 
