@@ -17,7 +17,7 @@
 | --- | --- | --- | --- | --- |
 | A-01 | Source edition | 6e TOC and 8e full text both exist | Maintain edition-specific sources, paths and stable keys | documented |
 | A-02 | Quantile method | eighth-edition methods explicitly uses type 2; existing helper type 7 | Add opt-in type-2 helper; preserve established type-7 default | code authored; runtime unverified |
-| A-03 | Arithmetic precision | Biomedical methods carries intermediate calculations at full precision | Add display-only rounding rule for all methods and Rmd | documentation rule |
+| A-03 | Arithmetic precision | The source retains intermediate calculations at full precision | Add display-only rounding rule for all methods and Rmd | documentation rule |
 | A-04 | Patient/specimen structure | Ch 1 stresses unique IDs and validation before analysis | Reassert G2 uniqueness, missingness, units and input validation | existing gate; no new tests |
 | A-05 | Bias/design | Ch 1 highlights sites, sampling, measurement order and missing readings | Make patient/site/visit and acquisition-order metadata explicit in case labs | queued |
 | A-06 | Graphics | Ch 2 calls for self-contained, labeled displays | Retain N, scale, unit and accessible legend checks | existing gate; figure QA pending |
@@ -40,7 +40,7 @@ biostat_descriptive_contract(x, method="biostat8", unit="fictional score")
 biostat_descriptive_contract(x, method="pauls_notes", unit="fictional score")
 ~~~
 
-**Numerical reference, before execution:** For observed synthetic values (1,2,5,9), Biomedical methods type-2 Q1=1.5, median=3.5, Q3=7; type-7 Q1=1.75, median=3.5, Q3=6. Sample mean=4.25, n=4 of N=5; missing 1 (20%). The tests assert these values and retain unrounded calculations.
+**Numerical reference, before execution:** For observed synthetic values (1,2,5,9), Source type-2 Q1=1.5, median=3.5, Q3=7; type-7 Q1=1.75, median=3.5, Q3=6. Sample mean=4.25, n=4 of N=5; missing 1 (20%). The tests assert these values and retain unrounded calculations.
 
 ## Verification commands and status
 
