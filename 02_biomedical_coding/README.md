@@ -8,6 +8,9 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 
 ## Start here
 
+**AI / Codex / R analyst: begin with the [canonical biomedical R Markdown example](BIOMEDICAL_R_CANONICAL_EXAMPLE.md).** It is the retrievable reference for header, named chunks, `##` comments, input validation, descriptives, tests with numerical reasoning, scientific figures and end-to-end knitting. Read [implementation gates](IMPLEMENTATION_GATES.md) and the relevant study dictionary as well.
+
+
 - **New to Rust?** Start with [Rust from the first variable through object-oriented programming and scientific engineering](../03_learning/rust/README.md), including a tested, dependency-free lab.
 - [Rust engineering handbook aligned with the 12-chapter breast cancer book](RUST_CODING_BEST_PRACTICES.md) — 2021–2026 verification and defect studies plus official Rust/Cargo/Clippy guidance, with code checks for the breast-cancer ML runner and a [machine-readable source register](rust_coding_best_practices_sources.csv) and [eight-paper bibliography](rust_coding_references.bib).
 
