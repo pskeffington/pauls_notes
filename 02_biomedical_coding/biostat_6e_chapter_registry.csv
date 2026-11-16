@@ -1,0 +1,15 @@
+chapter_id,edition,chapter,printed_start_page,source_basis,code_theme,implementation_gate,chapter_body_verified
+R6-CH01,6,General Overview,1,provided_toc,study_question_and_design,G3,false
+R6-CH02,6,Descriptive Statistics,6,provided_toc,location_spread_cv_graphics,G2_G7,false
+R6-CH03,6,Probability,43,provided_toc,bayes_screening_roc_base_rates,G3_G5,false
+R6-CH04,6,Discrete Probability Distributions,81,provided_toc,binomial_poisson_counts,G2_G5,false
+R6-CH05,6,Continuous Probability Distributions,122,provided_toc,normal_clt_approximations,G5,false
+R6-CH06,6,Estimation,166,provided_toc,mean_binomial_poisson_intervals,G3_G5,false
+R6-CH07,6,Hypothesis Testing One-Sample Inference,226,provided_toc,one_sample_power_sample_size,G3_G5,false
+R6-CH08,6,Hypothesis Testing Two-Sample Inference,296,provided_toc,paired_independent_welch_outliers,G3_G5,false
+R6-CH09,6,Nonparametric Methods,359,provided_toc,sign_signed_rank_rank_sum,G5,false
+R6-CH10,6,Hypothesis Testing Categorical Data,385,provided_toc,proportions_fisher_mcnemar_kappa,G3_G5,false
+R6-CH11,6,Regression and Correlation Methods,464,provided_toc,linear_regression_partial_rank_correlation,G3_G5,false
+R6-CH12,6,Multisample Inference,557,provided_toc,anova_factorial_random_effects_icc,G3_G5,false
+R6-CH13,6,Design and Analysis Techniques for Epidemiologic Studies,630,provided_toc,confounding_mh_logistic_meta_missing,G3_G5,false
+R6-CH14,6,Hypothesis Testing Person-Time Data,744,provided_toc,incidence_km_logrank_cox,G3_G5,false
