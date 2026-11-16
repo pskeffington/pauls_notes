@@ -64,7 +64,7 @@ bio_matrix_card <- function(decision, root = ".") {
   entry$selector_status <- decision$status
   entry$selector_method <- decision$method
   entry$evidence_ids <- decision$evidence_ids
-  entry$rosner <- if (!is.null(decision$rosner)) decision$rosner else NULL
+  entry$biostat <- if (!is.null(decision$biostat)) decision$biostat else NULL
   class(entry) <- "biomedical_matrix_card"
   entry
 }
