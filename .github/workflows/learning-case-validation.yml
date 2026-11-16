@@ -15,6 +15,7 @@ on:
       - "scripts/check_biostatistics_evidence.py"
       - "scripts/check_biostatistics_matrix.py"
       - "scripts/check_biostat_8e_alignment.py"
+      - "scripts/tests/test_biostat_8e_alignment.py"
       - "scripts/check_methodology_attribution.py"
       - "02_biomedical_coding/**"
       - "oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
@@ -31,6 +32,7 @@ on:
       - "scripts/check_biostatistics_evidence.py"
       - "scripts/check_biostatistics_matrix.py"
       - "scripts/check_biostat_8e_alignment.py"
+      - "scripts/tests/test_biostat_8e_alignment.py"
       - "02_biomedical_coding/**"
       - "oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
       - "scripts/tests/test_biostatistics_matrix.py"
@@ -72,6 +74,7 @@ jobs:
           python3 scripts/check_biostatistics_matrix.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_matrix.py' -v
           python3 scripts/check_biostat_8e_alignment.py
+          python3 -m unittest discover -s scripts/tests -p 'test_biostat_8e_alignment.py' -v
           python3 scripts/check_methodology_attribution.py
           python3 scripts/check_biostatistics_evidence.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_evidence.py' -v
