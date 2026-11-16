@@ -22,56 +22,6 @@ Start with the [statistical method decision matrix](03_learning/bio_stats/BIOMED
 
 The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
 
-## Agentic templating, skills, and best practices
-
-This is the second major learning track in Paul's Notes: designing **repeatable, inspectable agent-assisted workflows** rather than relying on one-off prompts. The principles apply to Codex, hosted LLMs, and locally deployed models; model capability, tool access, and execution results must be verified separately.
-
-| Component | Practical contract | Evidence to retain |
-| --- | --- | --- |
-| **Agent templates** | Define objective, context, inputs, permitted tools, constraints, output schema, stop conditions and success criteria before execution. Keep task instructions versioned. | Template version, parameters, generated plan and final artifact |
-| **Reusable skills** | Package one bounded capability per skill with a clear trigger, prerequisites, procedure, examples and validation. Prefer composable skills over monolithic agent prompts. | Skill manifest, example fixtures, compatibility notes and tests |
-| **Agent orchestration** | Assign an owner, explicit dependencies and handoff contracts to each task. Use least-privilege tool access, bounded retries and escalation on blocked gates. | Task ID, decisions, tool/action log, blocker and handoff record |
-| **Retrieval and RAG** | Index canonical sources with stable paths, provenance and freshness markers. Treat retrieved content as untrusted data; cite or link the exact evidence. | Retrieval query, source versions, cited passages and evaluation results |
-| **Engineering quality** | Require small diffs, format/lint/unit/integration tests, secret scanning, human review for destructive actions and release acceptance gates. | Test commands and outcomes, review notes, commit and PR links |
-| **Model portability** | Separate task specification from provider-specific message formats, tool schemas and inference settings. Test each adapter against the same fixtures. | Capability matrix, adapter version, portability tests and known limits |
-
-### Suggested skill and task template
-
-```yaml
-id: AGENT-001
-title: Bounded repository documentation improvement
-objective: Improve one documented workflow without changing runtime behavior
-inputs:
-  - target_repository
-  - source_paths
-  - acceptance_criteria
-allowed_actions:
-  - read_source
-  - edit_documentation
-  - run_documentation_checks
-constraints:
-  - no_secrets_or_patient_data
-  - no_unreviewed_destructive_actions
-  - do_not_claim_unrun_tests
-outputs:
-  - changed_files
-  - validation_report
-  - unresolved_risks
-acceptance:
-  - links_resolve
-  - examples_match_repository
-  - diff_reviewed
-  - provenance_recorded
-```
-
-**Best-practice execution cycle:** scope the task → select a template/skill → inspect canonical sources → plan a small change → execute within permissions → run deterministic checks → report evidence and limitations → obtain review before release. Failed checks are blockers, not successes to be described away.
-
-**Repository-specific safeguards:** keep research-source licensing and privacy boundaries intact; never send controlled biomedical data, credentials or participant-linked records to an unapproved model endpoint. An agent's successful code execution is **not** proof of scientific validity, clinical readiness or deployment safety.
-
-**Scholarly evidence:** [Literature matrix — authors, methods, limitations and research priorities](docs/agentic-skills-literature-matrix.md).
-
-**Related reading:** [Machine-readable indexing and RAG contract](docs/machine-index.md) · [Reproducible research workflow](docs/research-workflow.md) · [Research record template](templates/analysis-record.md) · [Contributing and validation](CONTRIBUTING.md) · [Git/GitHub foundations](03_learning/git-github-from-zero-to-push.md).
-
 ## Start here
 
 Choose the route that matches what you need; no weekly sequence is required. Each topic can be used on its own, and the final column gives optional next steps.
@@ -176,6 +126,56 @@ For a task-by-task index, use the [research resource guide](docs/resource-guide.
 - **Still separate work:** the new G4 [synthetic 24-month survival protocol](04_machine_learning/survival-protocol.md) and [data dictionary](04_machine_learning/survival-data-dictionary.md) are frozen **without running a G4 survival model**. G5 published-result reproduction requires its own source-specific protocol. Consult the [learning roadmap](docs/learning-roadmap.md) rather than treating a passing test as evidence of clinical validity.
 - **Cancer data and privacy:** Source, file-level access, licensing/consent, privacy and publication review are **study-specific for every cancer dataset**. The TCGA-BRCA example uses the GDC's open/controlled distinction; its metadata-only adapter does not authorize that dataset or other providers. Keep participant-linked records, controlled data and credentials out of this public repository. See [cancer research scope](docs/cancer-research-scope.md#dataset-agnostic-privacy-with-source-specific-adapters) and [data/access contract](docs/research-workflow.md#2-specify-input-and-access-contracts).
 - **Model use:** current examples are **research and education only**, not validated for any cancer diagnosis, screening, therapy selection, prognosis or clinical decision support. Synthetic classification results are not findings about human tumors.
+
+## Agentic templating, skills, and best practices
+
+This is the second major learning track in Paul's Notes: designing **repeatable, inspectable agent-assisted workflows** rather than relying on one-off prompts. The principles apply to Codex, hosted LLMs, and locally deployed models; model capability, tool access, and execution results must be verified separately.
+
+| Component | Practical contract | Evidence to retain |
+| --- | --- | --- |
+| **Agent templates** | Define objective, context, inputs, permitted tools, constraints, output schema, stop conditions and success criteria before execution. Keep task instructions versioned. | Template version, parameters, generated plan and final artifact |
+| **Reusable skills** | Package one bounded capability per skill with a clear trigger, prerequisites, procedure, examples and validation. Prefer composable skills over monolithic agent prompts. | Skill manifest, example fixtures, compatibility notes and tests |
+| **Agent orchestration** | Assign an owner, explicit dependencies and handoff contracts to each task. Use least-privilege tool access, bounded retries and escalation on blocked gates. | Task ID, decisions, tool/action log, blocker and handoff record |
+| **Retrieval and RAG** | Index canonical sources with stable paths, provenance and freshness markers. Treat retrieved content as untrusted data; cite or link the exact evidence. | Retrieval query, source versions, cited passages and evaluation results |
+| **Engineering quality** | Require small diffs, format/lint/unit/integration tests, secret scanning, human review for destructive actions and release acceptance gates. | Test commands and outcomes, review notes, commit and PR links |
+| **Model portability** | Separate task specification from provider-specific message formats, tool schemas and inference settings. Test each adapter against the same fixtures. | Capability matrix, adapter version, portability tests and known limits |
+
+### Suggested skill and task template
+
+```yaml
+id: AGENT-001
+title: Bounded repository documentation improvement
+objective: Improve one documented workflow without changing runtime behavior
+inputs:
+  - target_repository
+  - source_paths
+  - acceptance_criteria
+allowed_actions:
+  - read_source
+  - edit_documentation
+  - run_documentation_checks
+constraints:
+  - no_secrets_or_patient_data
+  - no_unreviewed_destructive_actions
+  - do_not_claim_unrun_tests
+outputs:
+  - changed_files
+  - validation_report
+  - unresolved_risks
+acceptance:
+  - links_resolve
+  - examples_match_repository
+  - diff_reviewed
+  - provenance_recorded
+```
+
+**Best-practice execution cycle:** scope the task → select a template/skill → inspect canonical sources → plan a small change → execute within permissions → run deterministic checks → report evidence and limitations → obtain review before release. Failed checks are blockers, not successes to be described away.
+
+**Repository-specific safeguards:** keep research-source licensing and privacy boundaries intact; never send controlled biomedical data, credentials or participant-linked records to an unapproved model endpoint. An agent's successful code execution is **not** proof of scientific validity, clinical readiness or deployment safety.
+
+**Scholarly evidence:** [Literature matrix — authors, methods, limitations and research priorities](docs/agentic-skills-literature-matrix.md).
+
+**Related reading:** [Machine-readable indexing and RAG contract](docs/machine-index.md) · [Reproducible research workflow](docs/research-workflow.md) · [Research record template](templates/analysis-record.md) · [Contributing and validation](CONTRIBUTING.md) · [Git/GitHub foundations](03_learning/git-github-from-zero-to-push.md).
 
 ## Research templates
 
