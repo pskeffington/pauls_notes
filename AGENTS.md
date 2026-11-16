@@ -18,6 +18,16 @@ Before writing breast cancer statistics, consult `02_biomedical_coding/BIOSTAT_8
 ## biostatistics source-alignment first pass
 For descriptive biomedical R, inspect `02_biomedical_coding/BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md` and `06_RESOURCES/R/biostat_descriptive_contract.R`. eighth-edition methods uses quantile type 2 in §2.4, whereas preexisting Paul's Notes descriptive functions use type 7. Choose and report the convention explicitly, never silently migrate results, and execute `06_RESOURCES/tests/test_biostat_descriptive_contract.R` before treating the module as verified. Do not mark unrun R tests passed.
 
+## Scientific reporting agent chain and PDF release acceptance
+
+For scientific reports, manuscripts, statistical interpretations, LaTeX, R Markdown, or final PDF presentation, first inspect [Scientific Reporting QA](skills/scientific-reporting-qa/SKILL.md) and the [R Markdown/PDF presentation acceptance contract](02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Route work explicitly through evidence steward → methods reviewer → scientific editor → typesetting engineer → acceptance reviewer; the same agent may fulfill several roles when findings are recorded independently.
+
+- Protect case boundaries: **never import particular study datasets, participant counts, endpoints, conclusions, numerical estimates, or report passages into reusable methods or skills**.
+- For reports, use impersonal scientific prose; avoid authorial first-person identifiers and the author's prohibited transition. Prefer valid semicolons; distinguish APA 7 conventions from local house style.
+- Keep statistical R code visible if requested. Separate source lint, authorized numerical execution, successful knit, and rendered page-by-page acceptance; report each gate as passed, failed or not run.
+- Maintain source/PDF revision concordance. A GitHub commit and balanced code fences do not imply a successful knit or visually accepted PDF.
+- Use the existing source-provenance and biostatistics gates; do not bypass source-license, privacy, or clinical-claims controls.
+
 ## Biomedical R / biostatistics coding — mandatory example
 For any biomedical R, R Markdown, biostatistics or knitted-report generation/review, retrieve `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` before writing code. For complete study templates or broad multi-method walkthroughs also retrieve `02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd` (retrieval key `pauls-notes.biomedical-r.full-study.v1`). It is the canonical *layout and style example*, not a substitute for study-specific data dictionary, statistical-design decisions or `02_biomedical_coding/IMPLEMENTATION_GATES.md`. Apply named chunks, `##` R code section comments, explicit checks, computed statistical evidence in narrative, Okabe–Ito plots and real knit verification. Never put Markdown `**` into executable R code.
 
