@@ -42,7 +42,7 @@ permissions:
 jobs:
   execute-case:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -97,6 +97,9 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/breast-cancer-report"
           Rscript --vanilla -e 'rmarkdown::render("03_learning/examples/breast_cancer_protocol_report.Rmd", output_format="html_document", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
+
+      - name: Execute all full-study R chunks and analytic invariants
+        run: Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R
 
       - name: Knit full synthetic Rosner-aligned breast cancer methods workbook
         run: |
