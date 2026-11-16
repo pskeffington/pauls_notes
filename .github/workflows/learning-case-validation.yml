@@ -51,7 +51,7 @@ jobs:
       - name: Install R and optional example packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-rmarkdown r-cran-knitr r-cran-proc r-cran-survival r-cran-mass r-cran-nnet r-cran-lme4 r-cran-geepack r-cran-ordinal r-cran-cmprsk r-bioc-deseq2 r-bioc-edger r-bioc-limma
+          sudo apt-get install -y --no-install-recommends r-base-core r-cran-dplyr r-cran-tidyr r-cran-survey r-cran-ggplot2 r-cran-plotly r-cran-htmlwidgets r-cran-rmarkdown r-cran-knitr r-cran-proc r-cran-survival r-cran-nlme r-cran-mass r-cran-nnet r-cran-lme4 r-cran-geepack r-cran-ordinal r-cran-cmprsk r-bioc-deseq2 r-bioc-edger r-bioc-limma
       - name: Check documentation and shell syntax
         run: |
           python3 scripts/check_documentation.py
