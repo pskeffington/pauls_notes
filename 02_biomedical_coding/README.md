@@ -22,6 +22,10 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
+## Rosner eighth-edition methodology alignment
+
+**For complete Rosner alignment:** read the [fourteen-chapter biomedical coding contract](ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md), the [chapter coverage registry](rosner_8e_complete_chapter_alignment.csv), and the [breast cancer book roadmap](../oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md). Structural validator: `python3 scripts/check_rosner_8e_alignment.py`. These record method and acceptance requirements; they do not certify all source paragraphs, R execution or clinical findings.
+
 ## Rosner eighth-edition source-to-code alignment (first pass)
 
 [First-pass audit and follow-up gates](ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md) · [8e chapter-specific coding companion](ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md) · [Opt-in Rosner descriptive helper](../06_RESOURCES/R/rosner_descriptive_contract.R) · [Offline R regression test](../06_RESOURCES/tests/test_rosner_descriptive_contract.R). Rosner 8e §2.4 explicitly demonstrates quantile type 2, while pre-existing Paul's Notes reports use type 7. The opt-in helper exposes both conventions; do **not** silently change historic output. R test execution is pending.
