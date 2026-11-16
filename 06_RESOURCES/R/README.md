@@ -1,5 +1,7 @@
 # R research tools
 
+**Graph methods implementation:** [original plotting functions](biostat_graphs.R), [source-linked graph contract](../../03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md), [synthetic gallery](../../03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd), and [figure regression tests](../tests/test_biostat_graphs.R). This is an opt-in module; it does not alter historical `stats_plots.R` quartile results.
+
 [Resources](../README.md) · [Function sheet](EASY_FUNCTION_SHEET.md)
 
 | Task | Source or guide |
