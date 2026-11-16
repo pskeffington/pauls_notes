@@ -29,7 +29,7 @@ class TestBiomedicalMatrix(unittest.TestCase):
             for name in (
                 "biomedical_decision_matrix.csv",
                 "biomedical_gate_dictionary.csv",
-                "rosner_method_registry.csv",
+                "biostat_method_registry.csv",
             ):
                 shutil.copyfile(ROOT / "03_learning/bio_stats" / name, base / name)
             selector = temp / "06_RESOURCES/R/biomedical_test_selector.R"
