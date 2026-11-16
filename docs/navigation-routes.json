@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "purpose": "reader-and-agent-entrypoint-routing",
+  "source_of_truth": "docs/navigation-routes.json",
+  "notes": "Routes select existing canonical documentation; they do not confer scientific or execution acceptance.",
+  "routes": [
+    {
+      "id": "research_question",
+      "label": "Frame a cancer research question",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "docs/cancer-research-scope.md",
+      "next": [
+        "research_protocol",
+        "biostatistics"
+      ],
+      "boundary": "Cancer-wide scope; study-specific access and ethics required"
+    },
+    {
+      "id": "research_protocol",
+      "label": "Design and document a study",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "docs/research-workflow.md",
+      "next": [
+        "biostatistics",
+        "biomedical_coding"
+      ],
+      "boundary": "Templates do not constitute IRB or data-access approval"
+    },
+    {
+      "id": "biostatistics",
+      "label": "Select statistical methods",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md",
+      "next": [
+        "r_learning",
+        "figures",
+        "acceptance"
+      ],
+      "boundary": "Method gate output does not authorize inference"
+    },
+    {
+      "id": "r_learning",
+      "label": "Learn and practice R",
+      "audience": [
+        "reader"
+      ],
+      "entry": "03_learning/README.md",
+      "next": [
+        "biostatistics",
+        "biomedical_coding"
+      ],
+      "boundary": "Synthetic cases and historical checks differ from current CI"
+    },
+    {
+      "id": "figures",
+      "label": "Choose and interpret scientific figures",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md",
+      "next": [
+        "biomedical_coding",
+        "acceptance"
+      ],
+      "boundary": "Quartile and plotting conventions explicitly documented; R/render checks pending"
+    },
+    {
+      "id": "biomedical_coding",
+      "label": "Implement biomedical analyses",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "02_biomedical_coding/README.md",
+      "next": [
+        "acceptance",
+        "figures"
+      ],
+      "boundary": "Coding examples require study-specific validity review"
+    },
+    {
+      "id": "oncology_textbook",
+      "label": "Read the computational oncology textbook",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "oncology/README.md",
+      "next": [
+        "biostatistics",
+        "research_protocol"
+      ],
+      "boundary": "Draft chapters, not a final peer-reviewed publication"
+    },
+    {
+      "id": "genomics",
+      "label": "Explore genomics and breast cancer reference",
+      "audience": [
+        "reader"
+      ],
+      "entry": "06_RESOURCES/Genomics/README.md",
+      "next": [
+        "oncology_textbook",
+        "biostatistics"
+      ],
+      "boundary": "Teaching references; no patient-level research conclusions"
+    },
+    {
+      "id": "machine_learning",
+      "label": "Build and assess research ML",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "04_machine_learning/README.md",
+      "next": [
+        "acceptance",
+        "biomedical_coding"
+      ],
+      "boundary": "Synthetic evaluation is not clinical validation"
+    },
+    {
+      "id": "unix",
+      "label": "Learn command-line workflows",
+      "audience": [
+        "reader"
+      ],
+      "entry": "01_unix_bash/README.md",
+      "next": [
+        "r_learning",
+        "machine_learning"
+      ],
+      "boundary": "Inspect shell commands before executing destructive actions"
+    },
+    {
+      "id": "rust",
+      "label": "Learn scientific Rust",
+      "audience": [
+        "reader"
+      ],
+      "entry": "03_learning/rust/README.md",
+      "next": [
+        "biomedical_coding",
+        "acceptance"
+      ],
+      "boundary": "Compiler tests and scientific validity are separate"
+    },
+    {
+      "id": "acceptance",
+      "label": "Check verification evidence",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md",
+      "next": [
+        "research_protocol"
+      ],
+      "boundary": "Recorded source checks do not imply completed R/CI acceptance"
+    },
+    {
+      "id": "agent",
+      "label": "Find agent rules and machine retrieval",
+      "audience": [
+        "agent"
+      ],
+      "entry": "AGENTS.md",
+      "next": [
+        "biomedical_coding",
+        "acceptance"
+      ],
+      "boundary": "Instructions define gates; execution evidence is separate"
+    }
+  ]
+}
