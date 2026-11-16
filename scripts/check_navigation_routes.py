@@ -78,6 +78,18 @@ def validate_manifest(obj, root=ROOT):
     return problems
 
 
+def inspect_home_presentation(text):
+    """Keep the first reader task before advanced agent details."""
+    headings = ["## Start here", "## Learn by topic",
+                "## Agentic templating, skills, and best practices"]
+    offsets = [text.find(h) for h in headings]
+    if any(i < 0 for i in offsets):
+        return ["Home missing reader or agent navigation headings"]
+    if not (offsets[0] < offsets[1] < offsets[2]):
+        return ["Home must show task/learning routes before advanced agent content"]
+    return []
+
+
 def validate(root=ROOT):
     problems = []
     manifest = root / MANIFEST
@@ -103,6 +115,8 @@ def validate(root=ROOT):
             problems.append("Missing entrypoint: " + relative)
             continue
         text = path.read_text(encoding="utf-8")
+        if relative == "README.md":
+            problems.extend(inspect_home_presentation(text))
         if relative in ("README.md", "llms.txt", "docs/machine-index.md"):
             if "NAVIGATION.md" not in text:
                 problems.append(relative + ": navigation guide not discoverable")
