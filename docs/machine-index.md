@@ -30,6 +30,7 @@ Agents must consult the manifest rather than inferring that a planned chapter ex
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
 | `biomedical.r.canonical_example` | `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` | canonical runnable template and AI coding style contract | synthetic demonstration; not a study protocol |
+| `biomedical.r.full_study` | `02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd` | full synthetic breast-cancer R Markdown study and methods walkthrough | invented data; methods are illustrative and not all jointly indicated |
 | `biomedical.r.implementation_gates` | `02_biomedical_coding/IMPLEMENTATION_GATES.md` | scientific/code acceptance checks | design gates, not clinical validation |
 
 For R/Rmd coding requests, retrieve `biomedical.r.canonical_example` first; pair it with the live study data dictionary and implementation gates. Search aliases: Paul's Notes biomedical R template, AI biostats coding, knitted R Markdown, scientific palette, reproducible analysis.
