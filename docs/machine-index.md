@@ -2,6 +2,16 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
+## Biomedical graph methods and machine-verifiable figure contracts
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| `biomedical.graph.methods` | `03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md` | graph choices, axes, quartiles, outliers, ROC/survival source scope and acceptance gates | source-specific figure review; not a full textbook graph audit |
+| `biomedical.graph.code` | `06_RESOURCES/R/biostat_graphs.R` | original reusable R plots: box, categorical bar, stem-and-leaf, bootstrap, ROC | requires R/ggplot2 runtime execution |
+| `biomedical.graph.fixtures` | `06_RESOURCES/tests/test_biostat_graphs.R` | deterministic numeric and graphical contracts | authored tests, passing CI not yet confirmed |
+| `biomedical.graph.gallery` | `03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd` | synthetic seven-chunk gallery of six graph families | HTML rendering and visual QA pending |
+| `biomedical.graph.acceptance` | `02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md` | observed source evidence and unresolved execution gates | do not interpret configured CI as passed |
+
 ## Biomedical statistics: source-to-code methods and acceptance
 
 | Topic key | Entrypoint | Content role | Boundary |
