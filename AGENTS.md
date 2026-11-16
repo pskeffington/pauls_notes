@@ -2,6 +2,10 @@
 
 Scope: the complete repository. Read this before editing. Repository owner: Paul Skeffington. This independent educational project covers computational oncology across cancer types; breast cancer and TCGA-BRCA are worked examples, not universal assumptions.
 
+## Author-neutral methodology and bibliographic attribution
+
+All internal educational material must use **method names and scientific concepts**, not a textbook author's name, as headings, file paths, R symbols, retrieval keys, CI jobs, or labels. Cite the textbook only for a source-specific methodological assertion and use the dedicated bibliography at `02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md`. Keep edition and section numbers for provenance when needed. Run `python3 scripts/check_methodology_attribution.py` before merging educational documentation or code. This rule does not change scientific assumptions, preserve reproducibility, or authorize erasing proper scholarly credit.
+
 ## Breast cancer statistics textbook alignment
 For any request to build or review the breast cancer biostatistics textbook, retrieve `oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` and the actual `oncology/book-manifest.json` first. Use the eighth-edition biostatistics guide `02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` only within its recorded review scope, keep the sixth edition separate, implement the BR-001–BR-010 gates, and do not mark a planned chapter as drafted or validated without source, numeric, runtime and reviewer evidence.
 
