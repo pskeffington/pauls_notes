@@ -2,7 +2,7 @@
 
 **Status:** Figure-method source review completed for the foundational graph chapter and a targeted bootstrap figure; **R execution and visual QA pending**. This is an original editorial crosswalk, not a reproduction of textbook art.
 
-**Source:** *Fundamentals of Biostatistics*, eighth edition, chapter 2 §2.8 (printed pp. 27–31; PDF pages 49–53) and chapter 6 §6.11 (bootstrap histogram, printed p. 200; PDF p. 222). The PDF pages were rendered and inspected directly. Full scholarly citation and edition identifiers are maintained solely in [Methodology source references](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md).
+**Source:** *Fundamentals of Biostatistics*, eighth edition, chapter 2 §2.8 (printed pp. 27–31; PDF pages 49–53) and chapter 6 §6.11 (bootstrap histogram, printed p. 201; PDF p. 223). The PDF pages were rendered and inspected directly. Full scholarly citation and edition identifiers are maintained solely in [Methodology source references](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md).
 
 ## Observed visual method → Paul’s Notes implementation
 
@@ -35,7 +35,7 @@ The source’s original plot is not recreated, traced, downloaded, embedded, or 
 
 ## Acceptance gates
 
-G1. Source provenance is narrow: §2.8 and Fig. 2.8 physically reviewed; §6.11/ Fig. 6.11 inspected; do not claim a book-wide graph audit.
+G1. Source provenance is narrow: §2.8 and Fig. 2.8 physically reviewed; §6.11 / Fig. 6.11 inspected; do not claim a book-wide graph audit.
 
 G2. R helper tests run with no errors in an R/ggplot2 environment; independently verify group-wise type-2 quartiles and mean cross, count totals, stem render and percentile calculation.
 
