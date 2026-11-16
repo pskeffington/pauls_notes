@@ -19,6 +19,20 @@ class NotesDocHygieneTests(unittest.TestCase):
                                      "Line one\\nLine two")
         self.assertTrue(any("backslash-n" in x for x in issues))
 
+    def test_intentional_inline_code_escape_allowed(self):
+        issues = module.inspect_page("03_learning/README.md",
+                                     "The literal `\\n` is a code token.")
+        self.assertFalse(any("backslash-n" in x for x in issues))
+
+    def test_fenced_example_escape_allowed(self):
+        text = "Intro\n```python\nexample = \"\\\\n\"\n```\nClosing."
+        issues = module.inspect_page("03_learning/README.md", text)
+        self.assertFalse(any("backslash-n" in x for x in issues))
+
+    def test_unfenced_narrative_escape_still_rejected(self):
+        issues = module.inspect_page("03_learning/README.md",
+                                     "One paragraph\\nAnother paragraph")
+        self.assertTrue(any("backslash-n" in x for x in issues))
     def test_legacy_placeholder_rejected(self):
         issues = module.inspect_page("03_learning/README.md",
                                      "Biomedical methods chapter outline")
