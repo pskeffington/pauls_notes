@@ -2,6 +2,13 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
+## Documentation maintenance contract
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| `docs.maintenance` | `docs/DOCUMENTATION_MAINTENANCE.md` | canonical ownership, formatting hygiene, routing checks, evidence classification | editorial changes are not scientific acceptance |
+| `docs.hygiene_gate` | `scripts/check_notes_docs_hygiene.py` | bounded regression guard for canonical documentation entrypoints | not whole-repository link verification |
+
 ## Biomedical graph methods and machine-verifiable figure contracts
 
 | Topic key | Entrypoint | Content role | Boundary |
