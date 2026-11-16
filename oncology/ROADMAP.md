@@ -12,6 +12,10 @@ Teach oncologists, physicians, biomedical researchers, and motivated beginners t
 
 **Publication principle:** The book should be readable without running code, but every executable claim must have a tested reference implementation. Use purpose-built synthetic examples by default; publicly available research data are optional only after dataset-specific permission, licensing, privacy, and provenance review.
 
+## Rosner-aligned breast cancer biostatistics development
+
+The [gated Rosner methodology alignment roadmap](ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md) maps the statistics-facing oncology chapters to the eighth-edition Rosner methodological foundations, existing synthetic breast cancer R labs, the 27-route test selector, source/edition checks and publication acceptance gates. This is a **work plan**, not completed chapter-review or reproducibility evidence. Keep the sixth edition separate and do not promote chapter-manifest statuses without executed validation and review.
+
 ## Reader pathways
 
 1. **Clinician without prior programming:** Follow Parts I–III before running any examples; learn R first, then Python.
