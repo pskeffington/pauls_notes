@@ -1,14 +1,14 @@
-# Biomedical methods eighth edition — source-linked biomedical coding implementation companion
+# Eighth-edition biostatistics — source-linked biomedical coding implementation companion
 
-**Edition:** the cited textbook author, *Fundamentals of Biostatistics*, 8th ed., 2016, ISBN 978-1-305-26892-0.  
-**Original digital source:** https://shahealthcare.org/wp-content/uploads/2022/04/Fundamentals-of-Biostatistics-Bernard-Biomedical methods_compressed.pdf (962 PDF pages).  
+**Edition:** *Fundamentals of Biostatistics*, 8th ed., 2016, ISBN 978-1-305-26892-0.  
+**Original digital source:** ../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md (962 PDF pages).  
 **Scope of verification:** Full-volume file/title and contents, preface, and targeted chapter discussions of bootstrap (6.11), permutation testing (9.6), FDR (12.4), clustering/GEE (13.13–13.14), and person-time/survival (14). **This is not a claim that every paragraph, exercise, or mathematical derivation in 962 pages has been individually audited.** Do not reproduce the copyrighted textbook, tables, datasets, flowchart, or exercises in this repository.
 
 **AI retrieval key:** `pauls-notes.biostat-8e.verified-code-companion.v1`. Required alongside [Paul's Notes canonical R practices](BIOMEDICAL_R_CANONICAL_EXAMPLE.md), [full synthetic breast cancer study](examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd), [G0–G10 implementation gates](IMPLEMENTATION_GATES.md), and [8e test selector](../03_learning/bio_stats/BIOSTAT_TEST_SELECTION_MATRIX.md). The distinct [6e crosswalk](BIOSTAT_6E_CHAPTER_TO_CODE_BEST_PRACTICES.md) must **never** be used for 8e page references.
 
 ## Authorial-method style confirmed in 8e preface
 
-Biomedical methods describes an intermediate approach between recipe-driven and purely abstract mathematical instruction: introduce a medical research problem, build a statistical concept through worked examples, and use computer output where relevant (PDF p. 14; preface). He also describes carrying **full numerical precision in intermediate calculations**, despite rounding reported results (PDF p. 15). Therefore the coding companion adopts the following **adaptation**, not a quotation or Biomedical methods-endorsed software standard:
+The source preface describes an intermediate approach between recipe-driven and purely abstract mathematical instruction: introduce a medical research problem, build a statistical concept through worked examples, and use computer output where relevant (PDF p. 14; preface). He also describes carrying **full numerical precision in intermediate calculations**, despite rounding reported results (PDF p. 15). Therefore the coding companion adopts the following **adaptation**, not a quotation or Biomedical methods-endorsed software standard:
 
 1. Clinical/scientific question, sampling unit, protocol and population first.
 2. Specify probability model, estimand, assumptions, alternate designs, and calculation before calling R.
