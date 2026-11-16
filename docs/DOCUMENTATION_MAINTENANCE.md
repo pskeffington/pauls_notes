@@ -72,3 +72,14 @@ actual job log and knitted artifacts.
 Continue with machine-link integrity, repeated passages outside the canonical
 sections, outdated completion claims, and source-to-result provenance. Make
 small changes supported by exact file inspection, with regression coverage.
+
+
+## Link integrity and bounded hygiene continuation — 2026-11-16
+
+**Confirmed path checks:** The GitHub connector retrieved 48 distinct priority targets from biomedical documentation navigation, including the figure gallery, analysis examples, R helper modules, crosswalk data, acceptance tests, source bibliography, and the book's learning routes. All 48 returned content successfully. This is a sampled link-target existence check; it is **not** a whole-repository Markdown anchor or URL audit.
+
+**Checker defect corrected:** `scripts/check_notes_docs_hygiene.py` previously treated all literal backslash-n sequences as accidental formatting errors. It now inspects narrative text outside Markdown fenced code blocks and ignores backtick-delimited inline code spans. This preserves legitimate Python/R snippets demonstrating escape sequences. The checker still flags `\\n` in ordinary prose, author-name branding and old placeholder labels in the eleven canonical entrypoints.
+
+**Path enforcement:** In addition to requiring the expected navigation routes in text, the hygiene checker now confirms that the corresponding canonical local files actually exist. The dedicated Python unit suite now has eight test cases, including code-fence and inline-code false-positive defenses, narrative escape detection, and missing route destinations.
+
+**Execution boundary:** GitHub files were fetched and source-inspected after edits. The eight new/existing tests are registered in the learning-case CI workflow, but a successful Python job result was not available in this session. No R execution, clinical result or publication claim was changed. The broad `scripts/check_documentation.py` validator remains the authority for full Markdown link and anchor traversal; its latest execution status must be obtained from actual CI logs.
