@@ -18,6 +18,10 @@ When asked to create, repair, review, or extend an R/R Markdown biomedical analy
 
 **Code-generation output contract:** deliver one complete working `.Rmd` (or a focused chunk when editing an existing document); concise execution notes; exact validation status; any unresolved assumptions. No extraneous Git commentary in the generated analysis report.
 
+## PDF and LaTeX presentation acceptance
+
+For full R Markdown manuscripts, supplement these coding conventions with the [study-neutral PDF presentation and acceptance workflow](RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Apply source checks, successful execution, successful knit, and rendered-page inspection as separate gates. See its rules for aligned mathematical blocks, controlled figure floats, readable tables, page breaks, p-value formatting, and impersonal report language.
+
 ## Statistical convention audit — quantiles
 
 For descriptive percentile, quartile and IQR calculations, explicitly state the quantile algorithm. Existing Paul’s Notes examples use `stats::quantile(..., type=7)`. Biomedical methods eighth edition §2.4 demonstrates `type=2`, which differs numerically for some finite samples. The opt-in [Biomedical methods descriptive contract](../06_RESOURCES/R/biostat_descriptive_contract.R) allows `method="biostat8"` (type 2) or `method="pauls_notes"` (type 7). Do not alter an existing analysis convention without a documented method decision and a comparison of changed results. See the [first-pass source audit](BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md). Keep full numerical precision until display.
