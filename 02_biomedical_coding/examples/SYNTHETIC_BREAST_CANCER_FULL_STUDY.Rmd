@@ -378,10 +378,11 @@ repeated <- data.frame(
   )))
 )
 wide <- reshape(repeated,idvar="patient_id",timevar="visit",direction="wide")
-stopifnot(nrow(wide)==n,!anyDuplicated(wide$patient_id))
-difference <- wide$score.Follow-up-wide$score.Baseline
-paired_t <- stats::t.test(wide$score.Follow-up,wide$score.Baseline,paired=TRUE)
-paired_rank <- stats::wilcox.test(wide$score.Follow-up,wide$score.Baseline,
+stopifnot(nrow(wide)==n,!anyDuplicated(wide$patient_id),
+          all(c("score.Baseline", "score.Follow-up") %in% names(wide)))
+difference <- wide[["score.Follow-up"]]-wide[["score.Baseline"]]
+paired_t <- stats::t.test(wide[["score.Follow-up"]],wide[["score.Baseline"]],paired=TRUE)
+paired_rank <- stats::wilcox.test(wide[["score.Follow-up"]],wide[["score.Baseline"]],
                                   paired=TRUE,exact=FALSE)
 present(data.frame(n_pairs=length(difference),mean_change=mean(difference),
                    lower=paired_t$conf.int[1],upper=paired_t$conf.int[2],
