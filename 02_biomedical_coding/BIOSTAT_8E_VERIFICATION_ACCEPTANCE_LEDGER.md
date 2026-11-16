@@ -64,3 +64,17 @@ For acceptance, record exit codes, R and package versions, CI job URL/commit SHA
 **Verification performed:** Refetched both committed GitHub files after the edits. Confirmed three unsafe references became zero, the paired block uses exact bracket column access, and the workbook still contains 17 labeled chunks and 17 matching closing fences.
 
 **CI observation:** GitHub commit status API returned no status entries; commit-associated workflow query returned no PR-triggered runs. These API responses do not establish that the main-branch Actions workflow ran successfully. Full R execution, render inspection, and independent statistical/clinical signoff remain pending. Do not mark workbook acceptance passed until actual run logs and generated output are inspected.
+
+## Acceptance continuation — neutral-method migration verification (2026-11-15)
+
+**Confirmed defect V-012: escaped Python regex tokens.** The structural validator's initial code used double-escaped raw regex groups and did not recognize real R Markdown chunks. It was repaired to use Python raw patterns `r"^```\\{r\\s+([^,}\\s]+)"` and `r"^```\\s*$"`; chunk matching and fence matching are now correctly specified.
+
+**New regression coverage:** `scripts/tests/test_biostat_8e_alignment.py` adds five tests: real workbook chunk structure; invalid hyphenated paired column; duplicate chunk labels; unbalanced fences; missing exact paired column. The CI learning-case workflow invokes the new Python tests and also retains the full R study execution and knit gates.
+
+**Method-label compatibility:** The descriptive estimator now labels conventions by actual calculation, `Quantile type 2` and `Quantile type 7`, and the method selector prints `Biostatistics chapter map (8e)`. The selector's associated R test expects the same text. These are presentation changes; formulas and the 27 existing routing IDs have not been altered.
+
+**Observed in-session source verification:** Re-fetched the committed workbook, validator, new regression test, R selector and matching test, and CI workflow. Found 17 distinct chunk labels, 17 closing code fences, five new test cases, the corrected regex source and consistent labels. **These are structural/source checks only**, not execution of Python tests or R.
+
+**CI evidence:** GitHub combined-status response exposed zero status entries; the commit-associated workflow lookup (which filters to PR-triggered runs) exposed zero runs. Neither is evidence of successful or failed main-branch Actions execution. R execution, knitted HTML visual review, independent statistical review and publication readiness remain **pending**.
+
+**Source policy:** Educational assets use methodology-first names; bibliography-only author attribution is checked by `scripts/check_methodology_attribution.py`. Maintain scholarly source credits in `METHODOLOGY_SOURCE_REFERENCES.md` when specific claims need them, without branding the internal analysis, function names or examples.
