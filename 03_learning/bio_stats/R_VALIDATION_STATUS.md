@@ -1,10 +1,10 @@
 # R validation status — breast cancer statistical curriculum
 
-**Audit date:** 2026-11-13. **Scope:** `03_learning` statistical foundations, Rosner crosswalk, study-design calculator and synthetic protocol-to-results case.
+**Audit date:** 2026-11-13. **Scope:** `03_learning` statistical foundations, Biomedical methods crosswalk, study-design calculator and synthetic protocol-to-results case.
 
 ## November 14, 2026 — V2 decision matrix validation extension
 
-The [route-by-route V2 matrix](BIOMEDICAL_DECISION_MATRIX_V2.md) and [CSV registry](biomedical_decision_matrix.csv) now cover **27 distinct selector IDs** linked to **25 defined assumption gates** through **156 route-gate relationships**. A cross-file connector-side structural inspection checked for duplicate/missing selector IDs, missing Rosner crosswalk IDs, unknown gates and empty matrix fields; **no mismatches were observed**. That inspection is not an R test or clinical validation.
+The [route-by-route V2 matrix](BIOMEDICAL_DECISION_MATRIX_V2.md) and [CSV registry](biomedical_decision_matrix.csv) now cover **27 distinct selector IDs** linked to **25 defined assumption gates** through **156 route-gate relationships**. A cross-file connector-side structural inspection checked for duplicate/missing selector IDs, missing Biomedical methods crosswalk IDs, unknown gates and empty matrix fields; **no mismatches were observed**. That inspection is not an R test or clinical validation.
 
 **Committed new validation paths:**
 
@@ -29,10 +29,10 @@ Rscript --vanilla 03_learning/tests/test_breast_cancer_foundations_lab.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_distribution_lab.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_reference_values.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_test_atlas.R
-Rscript --vanilla 03_learning/tests/test_rosner_method_cases.R
+Rscript --vanilla 03_learning/tests/test_biostat_method_cases.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_study_design.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_protocol_replay.R
-Rscript --vanilla 03_learning/tests/test_rosner_method_crosswalk.R
+Rscript --vanilla 03_learning/tests/test_biostat_method_crosswalk.R
 ```
 
 ### R Markdown render
