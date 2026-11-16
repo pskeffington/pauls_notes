@@ -8,7 +8,7 @@
 
 ## Authorial-method style confirmed in 8e preface
 
-The source preface describes an intermediate approach between recipe-driven and purely abstract mathematical instruction: introduce a medical research problem, build a statistical concept through worked examples, and use computer output where relevant (PDF p. 14; preface). He also describes carrying **full numerical precision in intermediate calculations**, despite rounding reported results (PDF p. 15). Therefore the coding companion adopts the following **adaptation**, not a quotation or Biomedical methods-endorsed software standard:
+The source preface describes an intermediate approach between recipe-driven and purely abstract mathematical instruction: introduce a medical research problem, build a statistical concept through worked examples, and use computer output where relevant (PDF p. 14; preface). He also describes carrying **full numerical precision in intermediate calculations**, despite rounding reported results (PDF p. 15). Therefore the coding companion adopts the following **adaptation**, not a quotation or biostatistics-endorsed software standard:
 
 1. Clinical/scientific question, sampling unit, protocol and population first.
 2. Specify probability model, estimand, assumptions, alternate designs, and calculation before calling R.
