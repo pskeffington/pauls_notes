@@ -6,6 +6,10 @@
 
 This section supports [research across cancer types](../docs/cancer-research-scope.md) and connects influential biomedical computing, statistics, genomics, and clinical-AI papers to study-aware coding rules. Each referenced paper is treated as a **source**, not as an automatically validated software implementation.
 
+## Documentation ownership and acceptance
+
+The [machine index](../docs/machine-index.md) is the canonical discovery map; [AGENTS.md](../AGENTS.md) defines coding and agent behavior; the [methodological contract](BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md) states scientific gates; [source references](METHODOLOGY_SOURCE_REFERENCES.md) retain required scholarly citations; the [acceptance ledger](BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md) records verified versus pending execution. Use the [graph gallery and method alignment](../03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md) rather than duplicating graphic conventions in each lesson.
+
 ## Start here
 
 **AI / Codex / R analyst: begin with the [canonical biomedical R Markdown example](BIOMEDICAL_R_CANONICAL_EXAMPLE.md).** It is the retrievable reference for header, named chunks, `##` comments, input validation, descriptives, tests with numerical reasoning, scientific figures and end-to-end knitting. For comprehensive study write-ups and choosing between major analyses, follow the [full synthetic breast cancer R Markdown workbook](examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd). Read [implementation gates](IMPLEMENTATION_GATES.md) and the relevant study dictionary as well.
