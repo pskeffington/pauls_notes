@@ -22,6 +22,10 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
+## Rosner eighth-edition source-to-code alignment (first pass)
+
+[First-pass audit and follow-up gates](ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md) · [8e chapter-specific coding companion](ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md) · [Opt-in Rosner descriptive helper](../06_RESOURCES/R/rosner_descriptive_contract.R) · [Offline R regression test](../06_RESOURCES/tests/test_rosner_descriptive_contract.R). Rosner 8e §2.4 explicitly demonstrates quantile type 2, while pre-existing Paul's Notes reports use type 7. The opt-in helper exposes both conventions; do **not** silently change historic output. R test execution is pending.
+
 ## Learn statistics from the measurement type
 
 Use the [data-type-first computational statistical biology guide](../03_learning/biomedical-statistics-decision-guide.md) to choose tests from continuous, count, nominal, ordinal and censored outcomes. Then use the [practice workbook](../03_learning/statistics-practice-workbook.md) and the [synthetic R test lab](../03_learning/examples/statistical_test_lab.R) before approaching cohort-specific analysis. The [recent statistical methods and R workflow register](../06_RESOURCES/Literature/BIOSTATISTICS_R_LITERATURE_2021_2026.md) is separate from full study-method validation.
