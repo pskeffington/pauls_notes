@@ -5,6 +5,9 @@ Scope: the complete repository. Read this before editing. Repository owner: Paul
 ## Breast cancer statistics textbook alignment
 For any request to build or review the breast cancer biostatistics textbook, retrieve `oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` and the actual `oncology/book-manifest.json` first. Use the eighth-edition Rosner guide `02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` only within its recorded review scope, keep the sixth edition separate, implement the BR-001–BR-010 gates, and do not mark a planned chapter as drafted or validated without source, numeric, runtime and reviewer evidence.
 
+## Rosner verification evidence and CI acceptance
+For verification or acceptance work, consult `02_biomedical_coding/ROSNER_8E_VERIFICATION_ACCEPTANCE_LEDGER.md`. Distinguish actual PDF/structural/numerical evidence from still-unrun R tests, full knitted output, and independent statistical review. The workbook acceptance command is `Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R`; CI also knits the workbook and checks a nonempty HTML artifact. A defined CI job is not a passed CI job.
+
 ## Complete Rosner 8e method alignment and evidence controls
 Before writing breast cancer statistics, consult `02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md` and `02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv` after the oncology roadmap. Keep Rosner 8e and 6e citations separate. Apply medical question → sampling unit → assumptions → hand/numerical check → R code → diagnostics → effect/CI → interpretation. Run `python3 scripts/check_rosner_8e_alignment.py` for structural routes and R/knit tests separately. A complete topical crosswalk is not full-book verification, code execution or scientific review.
 
