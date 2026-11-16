@@ -2,7 +2,7 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
-## Complete Biomedical methods 8e biomedical source-to-code contract
+## Complete eighth-edition methods biomedical source-to-code contract
 
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
