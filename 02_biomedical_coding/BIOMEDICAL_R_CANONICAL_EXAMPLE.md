@@ -34,7 +34,9 @@ When asked to create, repair, review, or extend an R/R Markdown biomedical analy
 | 09 | Computed interpretation | Statistical evidence piped into text, uncertainty, limitations, no causality without design support |
 | 10 | Reproducibility and audit | Session info, inclusion/omission counts, verified execution status |
 
-## Canonical runnable R Markdown example
+## Canonical runnable R Markdown example — synthetic breast cancer
+
+**Worked research scenario:** A simulated breast cancer cohort with luminal-like and basal-like labels, comparing a fictional, normalized ERBB2 expression score. These randomly generated values and group labels do **not** represent clinical specimens, molecular subtyping, or TCGA-BRCA measurements. Expression scores have arbitrary teaching units. A two-group Welch test is included solely to demonstrate method-to-code reasoning, not to imply it is the right method for every gene-expression workflow.
 
 This is a **portable teaching illustration**, not a clinical study or preselected universal test. Synthetic observations are generated locally. For real research, replace the synthetic-data chunk with the approved input/data dictionary and revisit the complete study-design and inference rationale.
 
@@ -42,7 +44,7 @@ Copy the following into a new `.Rmd` file. Keep the YAML and R code fences intac
 
 ~~~markdown
 ---
-title: "Biomedical Analysis — Reproducible Example"
+title: "Synthetic Breast Cancer — ERBB2 Expression Example"
 author: "Research analysis"
 date: "`r Sys.Date()`"
 output:
@@ -56,9 +58,11 @@ params:
 
 # Research question
 
-In this synthetic independent-group teaching study, estimate the difference in
-mean continuous outcome between Group A and Group B. Outcomes have arbitrary
-teaching units; they do not represent a validated biomarker or clinical endpoint.
+In a fictional breast cancer cohort, compare a simulated normalized ERBB2
+expression score between luminal-like and basal-like tumor labels. Each row
+represents one invented patient and one synthetic specimen. Scores are random
+teaching values in arbitrary units, not measured RNA expression, HER2 IHC,
+TCGA-BRCA results, or clinically validated molecular subtypes.
 
 # 01 Environment and reproducibility
 
@@ -75,7 +79,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = TRUE)
 set.seed(params$analysis_seed)
 
 ## 01.02 Consistent Okabe-Ito colors; not arbitrary default colors
-palette <- c(A = "#0072B2", B = "#D55E00")
+palette <- c("Luminal-like" = "#0072B2", "Basal-like" = "#D55E00")
 ```
 
 # 02 Source and data contract
@@ -85,14 +89,14 @@ palette <- c(A = "#0072B2", B = "#D55E00")
 n_per_group <- 40L
 study <- data.frame(
   subject_id = sprintf("S%03d", seq_len(2L * n_per_group)),
-  group = factor(rep(c("A", "B"), each = n_per_group),
-                 levels = c("A", "B")),
-  outcome = c(stats::rnorm(n_per_group, 12, 3),
-              stats::rnorm(n_per_group, 14, 4))
+  group = factor(rep(c("Luminal-like", "Basal-like"), each = n_per_group),
+                 levels = c("Luminal-like", "Basal-like")),
+  erbb2_expression = c(stats::rnorm(n_per_group, 14, 3),
+                       stats::rnorm(n_per_group, 11, 4))
 )
 ## 02.02 Replace this generation block only after input admission
 source_classification <- "synthetic"
-outcome_unit <- "arbitrary teaching units"
+outcome_unit <- "arbitrary normalized expression units"
 ```
 
 # 03 Data validation and missingness
@@ -100,22 +104,22 @@ outcome_unit <- "arbitrary teaching units"
 ```{r validation}
 ## 03.01 Validate structure before producing statistics
 stopifnot(is.data.frame(study), nrow(study) > 0L)
-required_columns <- c("subject_id", "group", "outcome")
+required_columns <- c("subject_id", "group", "erbb2_expression")
 stopifnot(all(required_columns %in% names(study)))
 stopifnot(!anyNA(study$subject_id))
 stopifnot(!anyDuplicated(study$subject_id))
-stopifnot(is.numeric(study$outcome))
-stopifnot(all(is.finite(study$outcome[!is.na(study$outcome)])))
+stopifnot(is.numeric(study$erbb2_expression))
+stopifnot(all(is.finite(study$erbb2_expression[!is.na(study$erbb2_expression)])))
 stopifnot(all(as.character(study$group[!is.na(study$group)]) %in%
-              c("A", "B")))
+              c("Luminal-like", "Basal-like")))
 stopifnot(!anyNA(study$group))
 
 ## 03.02 Explicit denominators and missingness
 N_total <- nrow(study)
-n_observed <- sum(!is.na(study$outcome))
+n_observed <- sum(!is.na(study$erbb2_expression))
 n_missing <- N_total - n_observed
 missingness <- data.frame(
-  variable = "outcome", N = N_total, observed_n = n_observed,
+  variable = "ERBB2 synthetic expression", N = N_total, observed_n = n_observed,
   missing_n = n_missing,
   missing_pct = 100 * n_missing / N_total
 )
@@ -144,7 +148,7 @@ summarise_group <- function(x, group_label) {
   )
 }
 descriptives <- do.call(rbind, lapply(levels(study$group), function(g) {
-  summarise_group(study$outcome[study$group == g], g)
+  summarise_group(study$erbb2_expression[study$group == g], g)
 }))
 rownames(descriptives) <- NULL
 knitr::kable(descriptives, digits = 2,
@@ -155,7 +159,7 @@ knitr::kable(descriptives, digits = 2,
 
 ```{r distribution-figure, fig.width=9, fig.height=5}
 ## 05.01 Fixed seed makes display-only jitter reproducible
-plot_data <- study[!is.na(study$outcome), , drop = FALSE]
+plot_data <- study[!is.na(study$erbb2_expression), , drop = FALSE]
 p <- ggplot2::ggplot(
   plot_data, ggplot2::aes(x = group, y = outcome, fill = group)
 ) +
@@ -169,10 +173,10 @@ p <- ggplot2::ggplot(
   ggplot2::scale_fill_manual(values = palette) +
   ggplot2::scale_color_manual(values = palette) +
   ggplot2::labs(
-    title = "Synthetic outcome by group",
+    title = "Simulated ERBB2 score by breast cancer subtype",
     subtitle = sprintf("Observed n = %d; missing = %d", n_observed, n_missing),
-    x = "Independent group",
-    y = sprintf("Outcome (%s)", outcome_unit),
+    x = "Synthetic tumor subtype",
+    y = sprintf("ERBB2 expression score (%s)", outcome_unit),
     caption = "Whiskers represent the boxplot convention, not confidence intervals."
   ) +
   ggplot2::theme_classic(base_size = 12) +
@@ -182,9 +186,10 @@ print(p)
 
 # 06 Test choice and rationale
 
-The observational unit is a unique synthetic subject. Groups are independent
-by construction, the outcome is continuous, and the target estimand is the
-Group B minus Group A mean difference. Welch's two-sample t-test estimates
+The observational unit is one invented patient/specimen (one sample per
+patient). The fictional subtype groups are independent by construction,
+the simulated ERBB2 expression score is continuous, and the estimand is the
+Basal-like minus Luminal-like mean difference. Welch's two-sample t-test estimates
 and tests a mean difference without assuming equal population variances.
 Normality of observations within groups and independent sampling remain
 study-specific considerations. Diagnostics are descriptive; a non-significant
@@ -194,9 +199,9 @@ normality test does not establish normality.
 
 ```{r assumptions}
 ## 07.01 Inspect distribution, sample size, and group variance
-group_sizes <- table(study$group[!is.na(study$outcome)])
+group_sizes <- table(study$group[!is.na(study$erbb2_expression)])
 stopifnot(length(group_sizes) == 2L, all(group_sizes >= 2L))
-group_variances <- tapply(study$outcome, study$group,
+group_variances <- tapply(study$erbb2_expression, study$group,
                           stats::var, na.rm = TRUE)
 stopifnot(all(is.finite(group_variances)))
 diagnostics <- data.frame(
@@ -211,24 +216,24 @@ knitr::kable(diagnostics, digits = 3,
 # 08 Inference
 
 ```{r welch-test}
-## 08.01 Direction is explicitly Group B minus Group A
-x_a <- study$outcome[study$group == "A"]
-x_b <- study$outcome[study$group == "B"]
+## 08.01 Direction: Basal-like minus Luminal-like
+x_a <- study$erbb2_expression[study$group == "Luminal-like"]
+x_b <- study$erbb2_expression[study$group == "Basal-like"]
 x_a <- x_a[!is.na(x_a)]
 x_b <- x_b[!is.na(x_b)]
 test <- stats::t.test(x_b, x_a, alternative = "two.sided",
                        var.equal = FALSE, conf.level = 0.95)
 effect <- unname(mean(x_b) - mean(x_a))
 evidence <- data.frame(
-  contrast = "B minus A",
+  contrast = "Basal-like minus Luminal-like",
   mean_difference = effect,
   ci_lower = unname(test$conf.int[1]),
   ci_upper = unname(test$conf.int[2]),
   t_statistic = unname(test$statistic),
   df = unname(test$parameter),
   p_value = unname(test$p.value),
-  n_B = length(x_b),
-  n_A = length(x_a)
+  n_basal = length(x_b),
+  n_luminal = length(x_a)
 )
 knitr::kable(evidence, digits = 4,
              caption = "Welch t-test: effect and uncertainty")
@@ -238,15 +243,17 @@ knitr::kable(evidence, digits = 4,
 
 The synthetic dataset contained `r N_total` observations, of which
 `r n_observed` had observed outcomes and `r n_missing` were missing.
-The mean difference (B minus A) was `r sprintf("%.2f", effect)`
+The mean synthetic ERBB2 score difference (basal-like minus luminal-like) was `r sprintf("%.2f", effect)`
 `r outcome_unit` (95% CI `r sprintf("%.2f", test$conf.int[1])`
 to `r sprintf("%.2f", test$conf.int[2])`; Welch
 t(`r sprintf("%.2f", unname(test$parameter))`) =
 `r sprintf("%.2f", unname(test$statistic))`,
 p = `r format.pval(test$p.value, digits = 3)`).
 
-This is statistical evidence from generated data only. It cannot establish
-clinical importance, causation, or generalizability. For real data, report
+This is statistical evidence from invented breast cancer data only. The
+simulated subtype labels are not derived from molecular profiles, and the
+ERBB2 scores are not real expression measurements. This cannot establish
+biological differences, clinical importance, causation, or generalizability. For real data, report
 sampling, selection, missing-data mechanism, model suitability, multiplicity,
 and clinically meaningful effects according to the approved study protocol.
 
@@ -261,6 +268,8 @@ print(utils::sessionInfo())
 ~~~
 
 ## Changes required for a real study
+
+For an actual breast cancer expression analysis, confirm the assay/platform, transformation/normalization, specimen-to-patient mapping, subtype definition and whether subtype assignment is independent of the measured expression feature. Avoid deriving subtype from the same ERBB2 feature and then interpreting the comparison as independent evidence. Specify any batch, covariate, repeated-specimen or multiplicity controls needed before inference.
 
 - Replace synthetic-data creation with a single approved import from a **parameterized path**. Never hard-code personal storage roots into reusable templates; never save PHI to Git or include participant rows in the report.
 - Map every variable to its verified dictionary entry, actual unit, permitted values, measurement time and observation grain. Validate eligibility, duplicates and the join cardinality before calculating results.
