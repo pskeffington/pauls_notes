@@ -21,6 +21,23 @@ REQUIRED = {
     "required_artifacts", "source_scope", "code_status", "statistical_review"
 }
 
+def validate_workbook_markup(workbook):
+    """Check chunk identity, balanced fences, and paired-data field access."""
+    import re
+    chunk_labels = re.findall(r"^```\{r\s+([^,}\s]+)", workbook, re.M)
+    closing_fences = len(re.findall(r"^```\s*$", workbook, re.M))
+    if len(chunk_labels) != 17 or len(set(chunk_labels)) != 17:
+        raise ValueError("Expected 17 unique R chunk labels")
+    if closing_fences != len(chunk_labels):
+        raise ValueError("Unbalanced R Markdown code fences")
+    if "wide$score.Follow-up" in workbook:
+        raise ValueError("Unsafe hyphenated $ column reference in paired analysis")
+    for expr in ('wide[["score.Baseline"]]', 'wide[["score.Follow-up"]]'):
+        if expr not in workbook:
+            raise ValueError("Paired analysis missing exact column key: " + expr)
+    return tuple(chunk_labels)
+
+
 def validate():
     with REGISTRY.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -68,18 +85,7 @@ def validate():
     workbook = (ROOT / "02_biomedical_coding/examples/"
                 "SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd").read_text(
                     encoding="utf-8")
-    import re
-    chunk_labels = re.findall(r"^```\{r\s+([^,}\s]+)", workbook, re.M)
-    closing_fences = len(re.findall(r"^```\s*$", workbook, re.M))
-    if len(chunk_labels) != 17 or len(set(chunk_labels)) != 17:
-        raise ValueError("Expected 17 unique R chunk labels")
-    if closing_fences != len(chunk_labels):
-        raise ValueError("Unbalanced R Markdown code fences")
-    if "wide$score.Follow-up" in workbook:
-        raise ValueError("Unsafe hyphenated $ column reference in paired analysis")
-    for expr in ('wide[["score.Baseline"]]', 'wide[["score.Follow-up"]]'):
-        if expr not in workbook:
-            raise ValueError("Paired analysis missing exact column key: " + expr)
+    validate_workbook_markup(workbook)
     return len(records), len(book_ids)
 
 if __name__ == "__main__":
