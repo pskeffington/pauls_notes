@@ -2,6 +2,10 @@
 
 Scope: the complete repository. Read this before editing. Repository owner: Paul Skeffington. This independent educational project covers computational oncology across cancer types; breast cancer and TCGA-BRCA are worked examples, not universal assumptions.
 
+## Reader and agent navigation contract
+
+Use `docs/navigation-routes.json` for canonical task-to-home routing and `docs/NAVIGATION.md` for reader-facing task flows. Use `docs/machine-index.md` for deep source sections. Maintain stable route IDs, existing destinations and role-specific next steps. Run `python3 scripts/check_navigation_routes.py` before changing navigation. Route availability is not evidence of statistical execution, clinical validity or publication readiness.
+
 ## Documentation hygiene and canonical ownership
 
 The maintenance contract for reader/agent notes is `docs/DOCUMENTATION_MAINTENANCE.md`. Before modifying navigation, run `python3 scripts/check_notes_docs_hygiene.py` plus `python3 scripts/check_documentation.py`. Do not conflate corrected Markdown with successful R execution, clinical review or publication readiness; record source and runtime evidence separately.
