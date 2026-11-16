@@ -6,6 +6,10 @@ Scope: the complete repository. Read this before editing. Repository owner: Paul
 
 All internal educational material must use **method names and scientific concepts**, not a textbook author's name, as headings, file paths, R symbols, retrieval keys, CI jobs, or labels. Cite the textbook only for a source-specific methodological assertion and use the dedicated bibliography at `02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md`. Keep edition and section numbers for provenance when needed. Run `python3 scripts/check_methodology_attribution.py` before merging educational documentation or code. This rule does not change scientific assumptions, preserve reproducibility, or authorize erasing proper scholarly credit.
 
+## Graph-method alignment
+
+Use `03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md` as the canonical figure-type and axis contract. Reuse `06_RESOURCES/R/biostat_graphs.R` and `06_RESOURCES/tests/test_biostat_graphs.R` for new teaching figures. Box quartiles must name their R quantile type; mean (+) and median line are distinct; whiskers are not confidence intervals; outliers outside 1.5×IQR and 3×IQR use distinct markers; ROC is sensitivity versus 1−specificity; survival axes must state event and time unit. Keep the palette and synthetic-data provenance. The historical type-7 descriptive helper must not be migrated silently. The textbook author belongs only in `METHODOLOGY_SOURCE_REFERENCES.md`.
+
 ## Breast cancer statistics textbook alignment
 For any request to build or review the breast cancer biostatistics textbook, retrieve `oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` and the actual `oncology/book-manifest.json` first. Use the eighth-edition biostatistics guide `02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` only within its recorded review scope, keep the sixth edition separate, implement the BR-001–BR-010 gates, and do not mark a planned chapter as drafted or validated without source, numeric, runtime and reviewer evidence.
 
