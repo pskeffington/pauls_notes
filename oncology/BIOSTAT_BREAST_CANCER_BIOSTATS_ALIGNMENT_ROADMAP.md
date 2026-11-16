@@ -1,16 +1,16 @@
-# Roadmap — Biomedical methods-aligned breast cancer biostatistics textbook
+# Roadmap — Methodology-aligned breast cancer biostatistics textbook
 
 **Program ID:** BC-BIOSTAT-ALIGN-2026  
 **Scope:** Paul's Notes breast-cancer biostatistics teaching track and statistics-relevant chapters of the 60-chapter Computational Oncology book.  
 **Current state:** Planning and crosswalk established; **no newly authored chapter, code test, book sign-off or external expert review is implied by this roadmap**.  
-**Primary teaching source:** the cited textbook author, *Fundamentals of Biostatistics*, **8th edition (2016)**, available as a source reference at https://shahealthcare.org/wp-content/uploads/2022/04/Fundamentals-of-Biostatistics-Bernard-Biomedical methods_compressed.pdf. Retain the supplied 6e table-of-contents as a separate edition record; do not combine section numbers.  
+**Primary teaching source:** *Fundamentals of Biostatistics*, **8th edition (2016)**, available as a source reference at ../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md. Retain the supplied 6e table-of-contents as a separate edition record; do not combine section numbers.  
 **Copyright boundary:** Cite methods and original source pages; author original demonstrations, derivations and questions. Do not import the book's prose, exercise text, proprietary figures, tables, flowchart, or datasets into the repository.
 
 ## North-star outcome
 
 A researcher should be able to start from a breast-cancer question; identify independent patient/specimen and assay units; choose and defend a statistical model; derive its mathematical basis; run reproducible R code on a synthetic fixture; inspect assumptions, effect estimates and uncertainty; interpret a medically meaningful result; and distinguish statistical significance, clinical relevance, bias, prediction, and causation.
 
-**Reference priority:** Biomedical methods for foundational inference and teaching progression; modern primary methods literature and official statistical package documentation for current implementation; clinical oncology reporting standards for endpoint/study context; Paul's Notes G0–G10 gates for code quality. Neither textbook reputation nor a passing R test automatically validates a cancer study.
+**Reference priority:** Foundational biostatistics for inference and teaching progression; modern primary methods literature and official statistical package documentation for current implementation; clinical oncology reporting standards for endpoint/study context; Paul's Notes G0–G10 gates for code quality. Neither textbook reputation nor a passing R test automatically validates a cancer study.
 
 ## Existing materials to reuse, not fork
 
@@ -36,11 +36,11 @@ A researcher should be able to start from a breast-cancer question; identify ind
 
 ## Complete chapter-method contract and structural gate
 
-[Biomedical methods 8e complete methodology contract](../02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md) and the [14-chapter machine coverage ledger](../02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv) establish chapter-by-chapter method expectations. Run `python3 scripts/check_biostat_8e_alignment.py` to verify all 14 source chapter IDs, correct edition/page-offset mapping, manifest links, method sections and test file presence. This checks structural coverage **only**; statistical and R/knit gates remain separate. No book-manifest completion statuses have been advanced.
+[eighth-edition methods complete methodology contract](../02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md) and the [14-chapter machine coverage ledger](../02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv) establish chapter-by-chapter method expectations. Run `python3 scripts/check_biostat_8e_alignment.py` to verify all 14 source chapter IDs, correct edition/page-offset mapping, manifest links, method sections and test file presence. This checks structural coverage **only**; statistical and R/knit gates remain separate. No book-manifest completion statuses have been advanced.
 
 ## First alignment implementation checkpoint
 
-[BR-001 first source-to-code audit](../02_biomedical_coding/BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md) has been authored. It identifies the Biomedical methods 8e type-2 versus Paul's Notes type-7 quantile convention and adds an opt-in helper/test without changing established descriptive results. **No R runtime was available; all execution, knitting and scientific-review gates remain pending.** This is a partial BR-001 checkpoint, not closure of BR-001 or advancement of any CO chapter status.
+[BR-001 first source-to-code audit](../02_biomedical_coding/BIOSTAT_ALIGNMENT_FIRST_PASS_AUDIT.md) has been authored. It identifies the eighth-edition methods type-2 versus Paul's Notes type-7 quantile convention and adds an opt-in helper/test without changing established descriptive results. **No R runtime was available; all execution, knitting and scientific-review gates remain pending.** This is a partial BR-001 checkpoint, not closure of BR-001 or advancement of any CO chapter status.
 
 ## Workstreams and gated execution
 
@@ -110,7 +110,7 @@ For each chapter, keep **separate labels**: `outlined`, `drafted`, `source_check
 
 ## Method-to-chapter mapping — priority sequence
 
-| Priority | Biomedical methods 8e chapter(s) | Oncology chapters | Method module / target |
+| Priority | eighth-edition methods chapter(s) | Oncology chapters | Method module / target |
 | --- | --- | --- | --- |
 | 1 | 1–3 | CO-04, CO-07, CO-20 | unit of analysis, probability, screening |
 | 2 | 2, 4–6 | CO-08–CO-10, CO-15 | distributions, sampling, estimation |
@@ -133,7 +133,7 @@ A chapter is a package of independently inspectable materials:
 3. **Study protocol:** eligibility, design, source, independent unit, treatment/exposure definition, time zero, outcome, estimand, contrast, missingness, selection and multiplicity.
 4. **Executable Rmd:** YAML, named section chunks with `##` dividers, synthetic data generator, schema gates, graphics, tables, method diagnostics and data-driven results narrative; no Markdown `**` in R code.
 5. **Test suite:** valid fixture, malformed inputs, paired-vs-independent, NA/Inf, non-positive exposure, empty/singleton groups, sparse counts, and numerical tolerance checks.
-6. **Review record:** Biomedical methods 8e specific section/page (where verified), contemporary source/official R manual if needed, exact commands and outputs, knit QA, specialist reviewer, source boundary and open issues.
+6. **Review record:** eighth-edition methods specific section/page (where verified), contemporary source/official R manual if needed, exact commands and outputs, knit QA, specialist reviewer, source boundary and open issues.
 
 **Templates must not invent results, simulate a patient dataset and label it TCGA, copy textbook content, add silent packages, or change the mainline book manifest without actual chapter implementation and review.**
 
@@ -141,7 +141,7 @@ A chapter is a package of independently inspectable materials:
 
 | Gate | Metric / pass criterion | Initial status |
 | --- | --- | --- |
-| Q1 — Crosswalk | 14/14 Biomedical methods chapters mapped, edition explicit; 60 CO chapter relationships reviewed | Mapping drafted; review pending |
+| Q1 — Crosswalk | 14/14 Biostatistics chapters mapped, edition explicit; 60 CO chapter relationships reviewed | Mapping drafted; review pending |
 | Q2 — Concept coverage | 100% of selected core methods have a question, estimand, assumptions and failure case | Not measured |
 | Q3 — Computation | 100% of claims with numeric worked examples have deterministic fixture and independent tolerance check | Not measured |
 | Q4 — R code | 100% of published code chunks parse/run with required dependencies; invalid data fail appropriately | Not measured |
@@ -178,7 +178,7 @@ Retrieve in this order for breast-cancer biostatistics:
 
 ## Open risks
 
-- Full per-section review of Biomedical methods 8e is not complete: use evidence flags, not blanket “cover-to-cover aligned” claims.
+- Full per-section review of eighth-edition methods is not complete: use evidence flags, not blanket “cover-to-cover aligned” claims.
 - Existing 6e contents and 8e full text can collide if page references are copied without edition fields.
 - Competing risks, modern assay pipelines, prediction and causal inference require current specialists beyond the textbook.
 - The existing full-study Rmd and legacy test atlas need independent execution/knit verification; none is assumed here.
