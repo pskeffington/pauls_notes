@@ -12,9 +12,9 @@ Teach oncologists, physicians, biomedical researchers, and motivated beginners t
 
 **Publication principle:** The book should be readable without running code, but every executable claim must have a tested reference implementation. Use purpose-built synthetic examples by default; publicly available research data are optional only after dataset-specific permission, licensing, privacy, and provenance review.
 
-## Biomedical methods-aligned breast cancer biostatistics development
+## Methodology-aligned breast cancer biostatistics development
 
-The [gated Biomedical methods methodology alignment roadmap](BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md) maps the statistics-facing oncology chapters to the eighth-edition Biomedical methods methodological foundations, existing synthetic breast cancer R labs, the 27-route test selector, source/edition checks and publication acceptance gates. This is a **work plan**, not completed chapter-review or reproducibility evidence. Keep the sixth edition separate and do not promote chapter-manifest statuses without executed validation and review.
+The [gated Biostatistics methodology alignment roadmap](BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md) maps the statistics-facing oncology chapters to the eighth-edition biostatistical methodological foundations, existing synthetic breast cancer R labs, the 27-route test selector, source/edition checks and publication acceptance gates. This is a **work plan**, not completed chapter-review or reproducibility evidence. Keep the sixth edition separate and do not promote chapter-manifest statuses without executed validation and review.
 
 ## Reader pathways
 
