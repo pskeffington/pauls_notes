@@ -5,6 +5,7 @@ Scope is deliberately limited to entrypoint/navigation and core method pages.
 Source bibliography and long-lived historical evidence are not modified.
 """
 from pathlib import Path
+import posixpath
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -82,7 +83,10 @@ def inspect_page(relative, text):
         if "Evidence epochs and acceptance boundaries" not in text or "17-chunk workbook" not in text:
             failures.append("validation status must distinguish the historical atlas from new workbook")
     for route in REQUIRED_ROUTES.get(relative, ()):
-        if route not in text:
+        relative_link = posixpath.relpath(
+            route, start=posixpath.dirname(relative) or "."
+        )
+        if route not in text and ("(" + relative_link + ")") not in text:
             failures.append("canonical route not indexed: " + route)
         elif not (ROOT / route).is_file():
             failures.append("canonical route target missing: " + route)
