@@ -345,7 +345,7 @@ print.biomedical_method_decision <- function(x, ...) {
   if (!is.null(x$biostat)) {
     chapter_text <- if (length(x$biostat$chapters))
       paste(x$biostat$chapters, collapse = ", ") else "not assigned"
-    cat("Biomedical methods 8e chapters: ", chapter_text,
+    cat("Biostatistics chapter map (8e): ", chapter_text,
         " | coverage: ", x$biostat$coverage, "\n", sep = "")
   }
   invisible(x)
