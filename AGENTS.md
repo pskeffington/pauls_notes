@@ -5,6 +5,9 @@ Scope: the complete repository. Read this before editing. Repository owner: Paul
 ## Breast cancer statistics textbook alignment
 For any request to build or review the breast cancer biostatistics textbook, retrieve `oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` and the actual `oncology/book-manifest.json` first. Use the eighth-edition Rosner guide `02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` only within its recorded review scope, keep the sixth edition separate, implement the BR-001–BR-010 gates, and do not mark a planned chapter as drafted or validated without source, numeric, runtime and reviewer evidence.
 
+## Complete Rosner 8e method alignment and evidence controls
+Before writing breast cancer statistics, consult `02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md` and `02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv` after the oncology roadmap. Keep Rosner 8e and 6e citations separate. Apply medical question → sampling unit → assumptions → hand/numerical check → R code → diagnostics → effect/CI → interpretation. Run `python3 scripts/check_rosner_8e_alignment.py` for structural routes and R/knit tests separately. A complete topical crosswalk is not full-book verification, code execution or scientific review.
+
 ## Rosner source-alignment first pass
 For descriptive biomedical R, inspect `02_biomedical_coding/ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md` and `06_RESOURCES/R/rosner_descriptive_contract.R`. Rosner 8e uses quantile type 2 in §2.4, whereas preexisting Paul's Notes descriptive functions use type 7. Choose and report the convention explicitly, never silently migrate results, and execute `06_RESOURCES/tests/test_rosner_descriptive_contract.R` before treating the module as verified. Do not mark unrun R tests passed.
 
