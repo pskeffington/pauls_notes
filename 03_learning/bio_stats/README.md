@@ -1,4 +1,4 @@
-# bio_stats: from every decision-tree object to a paper and an R analysis
+# Biomedical statistics: method selection, evidence, and reproducible R
 
 **Original biomedical graph methods:** [figure-method alignment and acceptance criteria](GRAPH_METHODS_ALIGNMENT.md) · [synthetic six-figure gallery](GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd) · [shared R graph module](../../06_RESOURCES/R/biostat_graphs.R) · [numerical/figure tests](../../06_RESOURCES/tests/test_biostat_graphs.R). Includes explicit quartile type, mean/median marks, outlier fences, categorical frequencies, bootstrap estimator distribution, and held-out ROC axes. All figures are independently authored; source details remain in the bibliography.
 
