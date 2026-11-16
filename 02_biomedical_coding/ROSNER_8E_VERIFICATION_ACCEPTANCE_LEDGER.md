@@ -53,3 +53,14 @@ For acceptance, record exit codes, R and package versions, CI job URL/commit SHA
 - **Governance:** G0–G10 and independent statistical/domain reviews remain required before any manuscript-ready or clinically applicable designation.
 
 **Readiness:** `source-and-code-structure-reviewed`; `r-execution-pending`; `knit-pending`; `independent-statistical-review-pending`; `publication-ready=false`.
+
+
+## Acceptance continuation — parsing and paired-analysis repair (2026-11-15)
+
+**Confirmed defect R-011 — hyphenated visit name parsed as subtraction.** The full-study workbook previously used `wide$score.Follow-up` in the difference, paired t-test and signed-rank test. Because hyphen is an operator in R, this does not refer to the `score.Follow-up` column and would fail evaluation. Replaced all three with `wide[["score.Follow-up"]]`; also bracket-addressed `score.Baseline` and asserted the expected reshape schema. This is a **code-level repair**, not a claimed passed knit.
+
+**Regression hardening:** `02_biomedical_coding/tests/test_full_study_execution.R` now verifies both paired visit column names, 240 numeric finite per-patient differences, and equality to follow-up minus baseline. `scripts/check_rosner_8e_alignment.py` checks 17 unique workbook chunks, matching closing fences, absence of the invalid token, and exact column-key references.
+
+**Verification performed:** Refetched both committed GitHub files after the edits. Confirmed three unsafe references became zero, the paired block uses exact bracket column access, and the workbook still contains 17 labeled chunks and 17 matching closing fences.
+
+**CI observation:** GitHub commit status API returned no status entries; commit-associated workflow query returned no PR-triggered runs. These API responses do not establish that the main-branch Actions workflow ran successfully. Full R execution, render inspection, and independent statistical/clinical signoff remain pending. Do not mark workbook acceptance passed until actual run logs and generated output are inspected.
