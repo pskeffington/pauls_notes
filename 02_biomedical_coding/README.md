@@ -8,7 +8,7 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 
 ## Start here
 
-**AI / Codex / R analyst: begin with the [canonical biomedical R Markdown example](BIOMEDICAL_R_CANONICAL_EXAMPLE.md).** It is the retrievable reference for header, named chunks, `##` comments, input validation, descriptives, tests with numerical reasoning, scientific figures and end-to-end knitting. Read [implementation gates](IMPLEMENTATION_GATES.md) and the relevant study dictionary as well.
+**AI / Codex / R analyst: begin with the [canonical biomedical R Markdown example](BIOMEDICAL_R_CANONICAL_EXAMPLE.md).** It is the retrievable reference for header, named chunks, `##` comments, input validation, descriptives, tests with numerical reasoning, scientific figures and end-to-end knitting. For comprehensive study write-ups and choosing between major analyses, follow the [full synthetic breast cancer R Markdown workbook](examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd). Read [implementation gates](IMPLEMENTATION_GATES.md) and the relevant study dictionary as well.
 
 
 - **New to Rust?** Start with [Rust from the first variable through object-oriented programming and scientific engineering](../03_learning/rust/README.md), including a tested, dependency-free lab.
