@@ -1,0 +1,516 @@
+---
+title: "Synthetic Breast Cancer Study — Complete Biomedical R Methods Workbook"
+author: "Paul's Notes | educational example"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+params:
+  seed: 711
+---
+
+# Study specification and scientific boundaries
+
+**Aim:** demonstrate defensible R workflows on **invented breast cancer data**, not estimate any genuine cancer effect. Every row and value is generated in this document. Subtype, tumor size, ERBB2 score, toxicity, response, survival, person-time, and longitudinal measures are fictional. The quantities, effects and directions are **not validated clinical patterns**. Continuous ERBB2 values are arbitrary teaching scores, not raw gene counts, normalized RNA-seq data or a clinical HER2 assay. The synthetic study uses one baseline row per invented patient; the longitudinal dataset has multiple records per patient and is modeled separately.
+
+**Study estimands:** mean ERBB2 difference by subtype; grade–subtype association; response odds ratio; toxicity event rate ratio; within-patient outcome change; hazard ratio for an illustrative time-to-event endpoint; diagnostic discrimination; and exploratory multi-feature associations. None of these are causal effects. No experiment or randomized treatment allocation is represented.
+
+**Before applying to actual research:** replace synthetic generation with approved inputs and a validated dictionary; establish design, eligibility, patient-specimen cardinality, assay, provenance, transformations, missing-data mechanism, sampling and endpoints. In particular, a subtype classification based on the same gene cannot be used to claim independent confirmation of that gene association.
+
+# 01 Environment and fixed seed
+
+```{r setup, include=TRUE}
+## 01.01 Explicit, minimal dependencies; never install mid-knit
+required <- c("knitr", "ggplot2")
+missing_packages <- required[!vapply(required, requireNamespace, logical(1), quietly=TRUE)]
+if (length(missing_packages)) stop("Missing packages: ", paste(missing_packages, collapse=", "))
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=TRUE)
+set.seed(params$seed)
+
+## 01.02 Standard Paul’s Notes / Okabe-Ito palette
+pal <- c("Luminal-like"="#0072B2", "Basal-like"="#D55E00")
+fmt <- function(x, digits=3) format(round(x, digits), nsmall=digits, trim=TRUE)
+present <- function(x, title, digits=3) {
+  knitr::kable(x, digits=digits, caption=title, row.names=FALSE)
+}
+```
+
+# 02 Synthetic data and machine-checkable dictionary
+
+```{r synthetic-cohort}
+## 02.01 One synthetic subject and one synthetic baseline specimen per row
+n <- 240L
+patient_id <- sprintf("S%04d", seq_len(n))
+subtype <- factor(rep(c("Luminal-like", "Basal-like"), each=n/2L),
+                  levels=names(pal))
+age_years <- pmin(89, pmax(25, round(stats::rnorm(n, 59, 12))))
+tumor_cm <- pmax(0.2, stats::rlnorm(n, log(2.5), 0.38))
+erbb2_score <- stats::rnorm(n, mean=ifelse(subtype=="Basal-like", 11, 14),
+                           sd=ifelse(subtype=="Basal-like", 3.8, 3.0))
+grade <- factor(sample(c("I", "II", "III"), n, replace=TRUE,
+                       prob=c(0.2, 0.5, 0.3)),
+                levels=c("I", "II", "III"), ordered=TRUE)
+## 02.02 Simulated binary response; not an actual therapy outcome
+p_response <- stats::plogis(-0.3 + 0.35*(subtype=="Luminal-like") -
+                            0.16*(tumor_cm-2.5))
+response <- stats::rbinom(n, 1, p_response)
+## 02.03 Synthetic follow-up and censoring; not observed cancer survival
+event_time <- stats::rexp(n, rate=ifelse(subtype=="Basal-like", .10, .07))
+censor_time <- stats::runif(n, min=2, max=15)
+followup_months <- pmin(event_time, censor_time)
+event <- as.integer(event_time <= censor_time)
+## 02.04 Teaching count outcome with known positive person-time
+exposure_years <- stats::runif(n, 0.5, 2)
+toxicity_events <- stats::rpois(n, lambda=exposure_years *
+                               ifelse(subtype=="Basal-like", 1.2, .8))
+study <- data.frame(patient_id, subtype, age_years, tumor_cm,
+                    erbb2_score, grade, response, followup_months,
+                    event, exposure_years, toxicity_events)
+## 02.05 Inject known missing outcomes for explicit reporting
+study$erbb2_score[c(8L, 40L, 133L, 190L)] <- NA_real_
+study$tumor_cm[c(9L, 141L)] <- NA_real_
+data_origin <- "SIMULATED — no patients, no real assay or TCGA-BRCA data"
+dictionary <- data.frame(
+  variable=names(study),
+  type=c("identifier","factor","numeric","numeric","numeric","ordinal",
+         "binary","numeric","binary","numeric","integer count"),
+  unit=c("ID","fictional label","years","cm","arbitrary score","grade",
+         "0/1","months","0/1","years","event count"),
+  stringsAsFactors=FALSE
+)
+present(dictionary, "Synthetic data dictionary")
+```
+
+# 03 Admission, units, missingness and cohort flow
+
+```{r validation}
+## 03.01 Fail closed on schema, ID, and range violations
+stopifnot(nrow(study)==n, !anyNA(study$patient_id),
+          !anyDuplicated(study$patient_id), identical(levels(study$subtype),names(pal)))
+stopifnot(all(study$response %in% c(0L,1L)),
+          all(study$event %in% c(0L,1L)),
+          all(study$toxicity_events >= 0L),
+          all(study$toxicity_events==floor(study$toxicity_events)),
+          all(study$exposure_years > 0), all(study$followup_months > 0))
+stopifnot(all(is.finite(as.matrix(study[c("age_years","tumor_cm","erbb2_score",
+  "followup_months","exposure_years","toxicity_events")])) |
+  is.na(as.matrix(study[c("age_years","tumor_cm","erbb2_score",
+  "followup_months","exposure_years","toxicity_events")]))))
+## 03.02 Missingness with explicit total-N denominator
+missing_report <- data.frame(variable=names(study),
+                             total_n=nrow(study),
+                             observed_n=colSums(!is.na(study)),
+                             missing_n=colSums(is.na(study)))
+missing_report$missing_pct <- 100*missing_report$missing_n/missing_report$total_n
+present(missing_report, "Missingness by variable")
+## 03.03 Document complete cases only at the analysis that requires them
+```
+
+# 04 Descriptive and distributional statistics
+
+```{r descriptive-summary}
+## 04.01 Numeric summaries: n, missing, mean/SD, median/Q1/Q3/IQR
+summ_num <- function(x, label) {
+  total <- length(x); y <- x[!is.na(x)]; z <- length(y)
+  q <- if(z) as.numeric(stats::quantile(y,c(.25,.75),type=7)) else c(NA_real_,NA_real_)
+  data.frame(variable=label,total_n=total,observed_n=z,missing_n=total-z,
+             mean=if(z)mean(y)else NA_real_,
+             sd=if(z>1)stats::sd(y)else NA_real_,
+             median=if(z)stats::median(y)else NA_real_,
+             q1=q[1],q3=q[2],iqr=q[2]-q[1],
+             min=if(z)min(y)else NA_real_,
+             max=if(z)max(y)else NA_real_)
+}
+numeric_summary <- do.call(rbind,lapply(c("age_years","tumor_cm","erbb2_score"),
+                                       function(v) summ_num(study[[v]],v)))
+present(numeric_summary,"Descriptive statistics; sample SD and type-7 quartiles")
+## 04.02 Categorical totals: do not confuse total and valid-case percentages
+category_table <- as.data.frame(table(study$subtype, useNA="ifany"))
+names(category_table) <- c("subtype","n")
+category_table$pct_total <- 100*category_table$n/nrow(study)
+present(category_table,"Synthetic subtype counts; denominator is all rows")
+```
+
+```{r distribution-graphics, fig.width=9, fig.height=5, fig.keep='all'}
+## 04.03 Distribution (histogram) and individual observations (box-jitter)
+plot_data <- study[!is.na(study$erbb2_score), , drop=FALSE]
+p_hist <- ggplot2::ggplot(plot_data,ggplot2::aes(x=erbb2_score,fill=subtype))+
+  ggplot2::geom_histogram(bins=22,alpha=.65,position="identity",color="white")+
+  ggplot2::scale_fill_manual(values=pal)+ggplot2::theme_classic()+
+  ggplot2::labs(title="Synthetic ERBB2 distribution",
+    subtitle=sprintf("Observed n=%d; missing=%d",nrow(plot_data),
+                     sum(is.na(study$erbb2_score))),
+    x="ERBB2 expression (arbitrary score)",y="Specimen count",fill="Fictional subtype")
+print(p_hist)
+p_box <- ggplot2::ggplot(plot_data,ggplot2::aes(subtype,erbb2_score,fill=subtype))+
+  ggplot2::geom_boxplot(width=.48,outlier.shape=NA)+
+  ggplot2::geom_point(ggplot2::aes(color=subtype),
+    position=ggplot2::position_jitter(width=.12,height=0,seed=params$seed),alpha=.35)+
+  ggplot2::scale_fill_manual(values=pal)+ggplot2::scale_color_manual(values=pal)+
+  ggplot2::theme_classic()+ggplot2::theme(legend.position="none")+
+  ggplot2::labs(title="Synthetic ERBB2 by subtype",
+    subtitle=sprintf("n=%d complete expression measurements",nrow(plot_data)),
+    x="Fictional subtype",y="ERBB2 expression (arbitrary score)",
+    caption="Whiskers are 1.5 × IQR conventions, not confidence intervals.")
+print(p_box)
+```
+
+# 05 Test-selection logic — read before applying any method
+
+| Outcome and design | Example / estimand | Candidate analysis | Critical gate |
+| --- | --- | --- | --- |
+| Single continuous sample | Mean score versus predeclared reference | One-sample t or justified robust alternative | Independent units, reference value, distribution |
+| Two independent continuous groups | Mean ERBB2 difference | Welch t; Wilcoxon rank-sum for rank/distribution question | Independence; Wilcoxon not automatically median test |
+| Paired continuous samples | Within-patient marker change | Paired t; paired Wilcoxon | Correct matching, distribution of *differences* |
+| Three or more independent groups | Continuous score across grades | Welch one-way ANOVA; Kruskal–Wallis | Omnibus test then prespecified comparisons |
+| Categorical vs categorical | Response by subtype | Chi-square/Fisher exact | Expected counts, sampling model, effect size |
+| Continuous associations | Tumor size with marker score | Pearson/Spearman | Linearity/outliers or monotonicity, no causation |
+| Adjusted continuous outcome | Marker with size, age, subtype | Linear regression | Residuals, functional form, independence |
+| Binary outcome | Response probability | Logistic regression | Events, separation, confounding and OR interpretation |
+| Event count with exposure | Toxicity incidence | Poisson rate model / NB sensitivity | Offset, equidispersion, excess zeros |
+| Time to event | Synthetic event hazard | Kaplan–Meier / log-rank / Cox | Censoring, time origin, PH assumption |
+| Repeated measurements | Within-person score trend | Paired methods / mixed model | Correlated rows; patient-level ID |
+| Classifier discrimination | Fictional response classification | ROC / AUC, calibration | No leakage, held-out samples, prevalence |
+| Multiple genes/features | Many exploratory associations | Multiple-testing adjustment | Family definition and false discovery rate |
+| Resampling | Mean difference uncertainty | Subject-level bootstrap | Resample independent units; no CI fabrication |
+| Complex survey | Weighted population estimand | survey-aware methods | Valid weights, PSUs, strata; not demonstrated here |
+
+**Researcher's workflow:** identify observation grain → sampling and assignment → outcome scale → estimand → model/test → diagnostics → effect/CI → interpretation. Tests below are *alternative demonstrations*, not a directive to apply every test to the same hypothesis.
+
+# 06 Independent continuous comparisons
+
+```{r continuous-tests}
+## 06.01 Two independent subtype groups; Welch does not assume equal variance
+a <- plot_data$erbb2_score[plot_data$subtype=="Luminal-like"]
+b <- plot_data$erbb2_score[plot_data$subtype=="Basal-like"]
+stopifnot(length(a)>=2L,length(b)>=2L)
+welch <- stats::t.test(b,a,var.equal=FALSE,conf.level=.95)
+welch_tab <- data.frame(contrast="Basal minus Luminal",difference=mean(b)-mean(a),
+                       t=unname(welch$statistic),df=unname(welch$parameter),
+                       lower=welch$conf.int[1],upper=welch$conf.int[2],
+                       p=welch$p.value)
+present(welch_tab,"Welch mean comparison; negative difference means basal score lower")
+## 06.02 Rank-sum asks a rank/distribution question, not always median equality
+rank_test <- stats::wilcox.test(b,a,exact=FALSE)
+present(data.frame(method="Wilcoxon rank-sum",
+                   statistic=unname(rank_test$statistic),p=rank_test$p.value),
+        "Supplemental rank/distribution comparison")
+## 06.03 One-sample test requires a justified *predeclared* benchmark
+teaching_reference <- 12
+one_sample <- stats::t.test(a,mu=teaching_reference)
+present(data.frame(reference=teaching_reference,observed_mean=mean(a),
+                   lower=one_sample$conf.int[1],upper=one_sample$conf.int[2],
+                   p=one_sample$p.value),
+        "Illustrative one-sample benchmark, not a clinical cutoff")
+```
+
+The Welch example estimates a mean difference; the rank-sum example compares rank distributions. The one-sample reference is invented solely to illustrate syntax and cannot be treated as a diagnostic threshold.
+
+# 07 Three-group continuous comparison and post hoc multiplicity
+
+```{r three-group-tests}
+## 07.01 Grade creates three example groups; exploratory only
+grades <- as.factor(study$grade)
+grade_data <- data.frame(score=study$erbb2_score,grade=grades)
+grade_data <- grade_data[stats::complete.cases(grade_data),,drop=FALSE]
+anova_welch <- stats::oneway.test(score~grade,data=grade_data,var.equal=FALSE)
+kw <- stats::kruskal.test(score~grade,data=grade_data)
+present(data.frame(test=c("Welch one-way ANOVA","Kruskal-Wallis"),
+ statistic=c(unname(anova_welch$statistic),unname(kw$statistic)),
+ p=c(anova_welch$p.value,kw$p.value)),"Omnibus grade comparisons")
+## 07.02 Post hoc comparisons are conditional on a declared question
+pairwise_grade <- stats::pairwise.t.test(grade_data$score,grade_data$grade,
+                                        p.adjust.method="holm",pool.sd=FALSE)
+print(pairwise_grade)
+```
+
+Welch ANOVA targets differences among means under unequal variances. Kruskal–Wallis compares rank distributions; neither identifies which pairs differ without follow-up. The paired comparisons shown use Holm multiplicity control; unequal-variance pairwise Welch tests are not the same as the omnibus statistic.
+
+# 08 Categorical comparisons: Chi-square, Fisher and two proportions
+
+```{r categorical-tests}
+## 08.01 Binary response by fictional subtype; check expected cells
+response_table <- table(study$subtype,
+                        factor(study$response,levels=c(0,1),labels=c("No","Yes")))
+print(response_table)
+chi <- suppressWarnings(stats::chisq.test(response_table,correct=FALSE))
+use_fisher <- any(chi$expected < 5)
+association <- if (use_fisher) stats::fisher.test(response_table) else chi
+present(data.frame(method=if(use_fisher)"Fisher exact" else "Pearson Chi-square",
+                   statistic=if(use_fisher)NA_real_ else unname(chi$statistic),
+                   p=association$p.value),"Response × subtype association")
+## 08.02 Report risk per group and crude risk difference, not p alone
+risk <- response_table[,"Yes"]/rowSums(response_table)
+present(data.frame(subtype=names(risk),events=as.integer(response_table[,"Yes"]),
+                   total=as.integer(rowSums(response_table)),
+                   risk=as.numeric(risk)),"Observed synthetic response proportions")
+```
+
+A chi-square test evaluates association; Fisher is used when sparse expected counts make the asymptotic approximation questionable. Risk is a sample proportion and not a hazard. Logistic regression below estimates *odds*, not risk.
+
+# 09 Continuous association and adjusted linear regression
+
+```{r correlation-and-linear}
+## 09.01 Pairwise complete observations for this exact estimand
+xy <- study[stats::complete.cases(study[c("tumor_cm","erbb2_score")]),,drop=FALSE]
+pearson <- stats::cor.test(xy$tumor_cm,xy$erbb2_score,method="pearson")
+spearman <- stats::cor.test(xy$tumor_cm,xy$erbb2_score,
+                            method="spearman",exact=FALSE)
+present(data.frame(method=c("Pearson","Spearman"),
+ estimate=c(unname(pearson$estimate),unname(spearman$estimate)),
+ p=c(pearson$p.value,spearman$p.value),n=nrow(xy)),
+ "Association of synthetic tumor size and ERBB2 score")
+## 09.02 Prespecified covariates; estimates are adjusted associations
+linear_fit <- stats::lm(erbb2_score~subtype+tumor_cm+age_years,data=study,
+                       na.action=stats::na.omit)
+linear_coef <- as.data.frame(summary(linear_fit)$coefficients)
+linear_coef$term <- rownames(linear_coef);rownames(linear_coef)<-NULL
+present(linear_coef[,c("term","Estimate","Std. Error","t value","Pr(>|t|)")],
+        "Adjusted linear regression coefficient table")
+```
+
+```{r linear-diagnostics, fig.width=8, fig.height=5}
+## 09.03 Residual-versus-fitted and Q-Q diagnostics, not a blanket pass
+op <- graphics::par(mfrow=c(1,2))
+graphics::plot(stats::fitted(linear_fit),stats::residuals(linear_fit),
+               xlab="Fitted ERBB2 score",ylab="Residual",main="Residuals vs fitted")
+graphics::abline(h=0,lty=2,col="#D55E00")
+stats::qqnorm(stats::residuals(linear_fit),main="Normal Q-Q residuals")
+stats::qqline(stats::residuals(linear_fit),col="#0072B2")
+graphics::par(op)
+```
+
+Linear coefficients are conditional differences in mean synthetic score; inspect nonlinear patterns, leverage, heteroskedasticity, clustering, collinearity and study justification before interpreting real-world fits. Correlation does not imply causation.
+
+# 10 Binary-outcome logistic regression
+
+```{r logistic-regression}
+## 10.01 Probability model; explicit binary coding 0/1
+logit_fit <- stats::glm(response~subtype+tumor_cm+age_years,
+                        data=study,family=stats::binomial(),
+                        na.action=stats::na.omit)
+logit_mat <- summary(logit_fit)$coefficients
+logit_ci <- stats::confint.default(logit_fit)
+logit_or <- data.frame(term=rownames(logit_mat),
+                      odds_ratio=exp(stats::coef(logit_fit)),
+                      lower=exp(logit_ci[,1]),upper=exp(logit_ci[,2]),
+                      p=logit_mat[,4],row.names=NULL)
+present(logit_or,"Adjusted logistic odds ratios, Wald 95% confidence intervals")
+## 10.02 Diagnostics: events and fitted-probability boundaries
+stopifnot(all(stats::fitted(logit_fit)>0),all(stats::fitted(logit_fit)<1))
+present(data.frame(model_n=stats::nobs(logit_fit),
+                   events=sum(stats::model.response(stats::model.frame(logit_fit))==1),
+                   min_pred=min(stats::fitted(logit_fit)),
+                   max_pred=max(stats::fitted(logit_fit))),
+        "Model sample and prediction range")
+```
+
+An odds ratio is not a risk ratio. In real studies assess separation, sparse events, positivity, predictive calibration, confounding and how continuous predictors enter the log odds. Wald intervals here are demonstration defaults, not universally optimal.
+
+# 11 Count outcomes, offsets and dispersion
+
+```{r poisson-model}
+## 11.01 Rates require an exposure offset; positive exposure validated above
+pois_fit <- stats::glm(toxicity_events~subtype+age_years+
+                         offset(log(exposure_years)),
+                       family=stats::poisson(),data=study)
+dispersion <- sum(stats::residuals(pois_fit,type="pearson")^2) /
+              stats::df.residual(pois_fit)
+pois_beta <- summary(pois_fit)$coefficients
+pois_ci <- stats::confint.default(pois_fit)
+present(data.frame(term=rownames(pois_beta),
+                   rate_ratio=exp(stats::coef(pois_fit)),
+                   lower=exp(pois_ci[,1]),upper=exp(pois_ci[,2]),
+                   p=pois_beta[,4],row.names=NULL),
+        "Poisson incidence rate ratios and Wald intervals")
+present(data.frame(pearson_dispersion=dispersion,
+                   observed_zero_fraction=mean(study$toxicity_events==0)),
+        "Poisson dispersion and observed zeros")
+```
+
+Poisson uses an event *count*, with log(person-time) offset and equidispersion assumption. Check time at risk and event definitions. Overdispersion can require quasi-Poisson, negative binomial or another prespecified framework; a quasi-Poisson scale adjustment does not estimate a separate NB dispersion parameter. Do not confuse counts with rates or use a Poisson count model on continuous measurements.
+
+# 12 Survival analysis: Kaplan–Meier, log-rank and Cox
+
+```{r survival-analysis, fig.width=8, fig.height=5}
+## 12.01 survival is optional; document a skipped analysis if unavailable
+if (requireNamespace("survival",quietly=TRUE)) {
+  S <- survival::Surv(time=study$followup_months,event=study$event)
+  km <- survival::survfit(S~subtype,data=study)
+  graphics::plot(km,col=unname(pal),lwd=2,mark.time=TRUE,
+                 xlab="Synthetic follow-up (months)",ylab="Event-free proportion",
+                 main="Synthetic Kaplan-Meier curves")
+  graphics::legend("bottomleft",legend=names(pal),col=unname(pal),lwd=2,bty="n")
+  lr <- survival::survdiff(S~subtype,data=study)
+  logrank_p <- stats::pchisq(lr$chisq,df=length(lr$n)-1,lower.tail=FALSE)
+  cox_fit <- survival::coxph(S~subtype+age_years,data=study,x=TRUE)
+  cox_ci <- stats::confint(cox_fit)
+  present(data.frame(term=names(stats::coef(cox_fit)),
+                     hazard_ratio=exp(stats::coef(cox_fit)),
+                     lower=exp(cox_ci[,1]),upper=exp(cox_ci[,2]),
+                     row.names=NULL),"Cox adjusted hazard ratios")
+  present(data.frame(logrank_chisq=lr$chisq,p=logrank_p),
+          "Log-rank test: unadjusted curve comparison")
+  print(survival::cox.zph(cox_fit))
+} else {
+  cat("Survival module not executed: install 'survival' before this optional module.\n")
+}
+```
+
+Define event, competing events, time zero, administrative censoring and proportional-hazards diagnostics. Kaplan–Meier handles right censoring, not informative loss to follow-up by fiat; a hazard ratio is not a risk ratio or difference in survival probability. A Cox PH test is diagnostic, not definitive validation.
+
+# 13 Paired and repeated-measure analyses
+
+```{r paired-and-repeated}
+## 13.01 Two synthetic measurements from the SAME patient
+repeated <- data.frame(
+ patient_id=rep(study$patient_id,each=2L),
+ visit=factor(rep(c("Baseline","Follow-up"),times=n),
+              levels=c("Baseline","Follow-up")),
+ score=as.vector(t(cbind(
+    stats::rnorm(n,mean=40,sd=6),
+    stats::rnorm(n,mean=42,sd=6)
+  )))
+)
+wide <- reshape(repeated,idvar="patient_id",timevar="visit",direction="wide")
+stopifnot(nrow(wide)==n,!anyDuplicated(wide$patient_id))
+difference <- wide$score.Follow-up-wide$score.Baseline
+paired_t <- stats::t.test(wide$score.Follow-up,wide$score.Baseline,paired=TRUE)
+paired_rank <- stats::wilcox.test(wide$score.Follow-up,wide$score.Baseline,
+                                  paired=TRUE,exact=FALSE)
+present(data.frame(n_pairs=length(difference),mean_change=mean(difference),
+                   lower=paired_t$conf.int[1],upper=paired_t$conf.int[2],
+                   paired_t_p=paired_t$p.value,paired_wilcoxon_p=paired_rank$p.value),
+        "Paired mean change and signed-rank sensitivity analysis")
+## 13.02 Optional patient random intercept for two repeated observations
+if (requireNamespace("nlme",quietly=TRUE)) {
+  mixed <- nlme::lme(score~visit,random=~1|patient_id,data=repeated)
+  present(data.frame(term=rownames(summary(mixed)$tTable),
+                     summary(mixed)$tTable,row.names=NULL),
+          "Optional repeated-measure random-intercept model")
+} else cat("Mixed-model module not executed: 'nlme' is unavailable.\n")
+```
+
+Paired analyses test within-patient change, not two independent groups. Two visits do not establish the right covariance structure for longer longitudinal trajectories. For repeated visits, account for within-person correlation, informative dropout and irregular follow-up; use appropriate mixed models or marginal models with justified design.
+
+# 14 Classification metrics and leakage-aware evaluation
+
+```{r classifier-evaluation}
+## 14.01 Method demonstration only: use a frozen held-out set
+## Synthetic response prediction has no clinical predictive validity.
+set.seed(params$seed+1L)
+idx <- sample(seq_len(nrow(study)),size=floor(.7*nrow(study)))
+train <- study[idx,,drop=FALSE];test_set <- study[-idx,,drop=FALSE]
+train <- train[stats::complete.cases(train[c("response","subtype","age_years",
+                                            "tumor_cm")]),,drop=FALSE]
+test_set <- test_set[stats::complete.cases(test_set[c("response","subtype",
+                                                    "age_years","tumor_cm")]),,drop=FALSE]
+classifier <- stats::glm(response~subtype+age_years+tumor_cm,
+                         data=train,family=stats::binomial())
+probs <- stats::predict(classifier,newdata=test_set,type="response")
+pred <- as.integer(probs>=.5)
+tp <- sum(pred==1 & test_set$response==1)
+tn <- sum(pred==0 & test_set$response==0)
+fp <- sum(pred==1 & test_set$response==0)
+fn <- sum(pred==0 & test_set$response==1)
+metric <- function(num,den)if(den>0)num/den else NA_real_
+pred_metrics <- data.frame(test_n=nrow(test_set),TP=tp,TN=tn,FP=fp,FN=fn,
+ sensitivity=metric(tp,tp+fn),specificity=metric(tn,tn+fp),
+ ppv=metric(tp,tp+fp),npv=metric(tn,tn+fn),
+ brier=mean((probs-test_set$response)^2))
+present(pred_metrics,"Synthetic held-out classification metrics")
+## 14.02 Base-R AUC is an empirical ranking statistic, 0.5=random chance
+auc_rank <- function(p,y) {
+ pos <- which(y==1);neg <- which(y==0)
+ if(!length(pos)||!length(neg))return(NA_real_)
+ ranks <- rank(p,ties.method="average")
+ (sum(ranks[pos])-length(pos)*(length(pos)+1)/2)/(length(pos)*length(neg))
+}
+cat("Held-out empirical AUC:",fmt(auc_rank(probs,test_set$response)),"\n")
+```
+
+AUC estimates rank discrimination; Brier score evaluates probability prediction error. Neither proves calibration, external validity, or clinical utility. In genuine studies, split by patient/site/time as appropriate, prevent leakage and tune models **inside** the training data only; use untouched test data once. For very small or sparse subsets, report undefined denominators explicitly.
+
+# 15 Bootstrap effect uncertainty and multiple-testing control
+
+```{r bootstrap-and-multiplicity}
+## 15.01 Resample subjects within independent synthetic subtype groups
+set.seed(params$seed+2L)
+B <- 1000L
+boot_diff <- replicate(B,mean(sample(b,length(b),replace=TRUE))-
+                         mean(sample(a,length(a),replace=TRUE)))
+boot_ci <- stats::quantile(boot_diff,c(.025,.975),names=FALSE,type=7)
+present(data.frame(replicates=B,estimate=mean(b)-mean(a),
+                   lower=boot_ci[1],upper=boot_ci[2]),
+        "Stratified subject bootstrap percentile CI (illustrative)")
+## 15.02 Artificial four-feature exploratory family for BH FDR
+feature_data <- data.frame(
+ ERBB2=study$erbb2_score,
+ marker_B=stats::rnorm(n,0,1),
+ marker_C=stats::rnorm(n,.5,1),
+ marker_D=stats::rnorm(n,-.5,1)
+)
+features <- names(feature_data)
+p_raw <- vapply(features,function(v) {
+ x <- feature_data[[v]]
+ z <- !is.na(x)
+ stats::t.test(x[z & study$subtype=="Basal-like"],
+               x[z & study$subtype=="Luminal-like"])$p.value
+},numeric(1))
+present(data.frame(feature=features,raw_p=as.numeric(p_raw),
+                   BH_FDR=stats::p.adjust(p_raw,method="BH"),
+                   Holm=stats::p.adjust(p_raw,method="holm")),
+        "Multiplicity: explicit family of four simulated features")
+```
+
+Percentile bootstrap requires independently resampled units and may be inadequate for skewed or boundary estimands; use a protocol-appropriate interval where needed. BH controls the expected false discovery *proportion under its assumptions*, not the probability a particular claim is false. A four-feature educational example is not a genome-wide expression pipeline.
+
+# 16 Methodology, reporting and computational audit
+
+```{r methods-audit}
+## 16.01 Machine-readable counts that feed the interpretation
+audit <- data.frame(
+  source_class=data_origin, seed=params$seed,
+  baseline_N=nrow(study), independent_subjects=length(unique(study$patient_id)),
+  erbb2_observed=sum(!is.na(study$erbb2_score)),
+  erbb2_missing=sum(is.na(study$erbb2_score)),
+  linear_model_n=stats::nobs(linear_fit),
+  logistic_model_n=stats::nobs(logit_fit),
+  poisson_model_n=stats::nobs(pois_fit),
+  repeated_records=nrow(repeated),
+  heldout_n=nrow(test_set)
+)
+present(audit,"Computational provenance and analysis-specific denominators")
+cat("\nSession provenance:\n")
+print(utils::sessionInfo())
+```
+
+# 17 Computed example results narrative
+
+Among `r nrow(study)` synthetic breast cancer observations, `r sum(!is.na(study$erbb2_score))`
+had an observed fictional ERBB2 score; `r sum(is.na(study$erbb2_score))` were missing.
+The independent-group Welch estimate (basal-like minus luminal-like) was
+`r fmt(mean(b)-mean(a),2)` arbitrary score units (95% CI
+`r fmt(welch$conf.int[1],2)` to `r fmt(welch$conf.int[2],2)`),
+t(`r fmt(unname(welch$parameter),2)`)=`r fmt(unname(welch$statistic),2)`,
+p=`r format.pval(welch$p.value,digits=3)`.
+The simulated within-person score change averaged `r fmt(mean(difference),2)`
+arbitrary score units across `r length(difference)` complete synthetic pairs.
+
+These numerical results are generated at render time; they are **not breast cancer findings**.
+No statistical significance result alone establishes practical or clinical importance.
+
+# 18 Review gates and customization
+
+1. Replace the fictional cohort with a single approved import and a verified dictionary.
+2. Identify population, unit of analysis, inclusion/exclusion, independent patient identifiers, censoring, endpoint, exposures and clinical units.
+3. Predeclare primary/secondary estimands, hypotheses, tests and multiplicity family. Use each section only where its question/design applies.
+4. Record eligible, analyzed and missing counts per method. Never silently delete, impute or recode.
+5. Assess distribution, independence, pairing, expected cells, regression functional form, dispersion, censoring, proportional hazards, prediction leakage and calibration as applicable.
+6. Report each method's rationale, assumptions, estimator, test statistic, uncertainty, exact denominator, scientific meaning and limitations.
+7. Source current repository helpers when available; keep Okabe–Ito mappings, documented seeds and readable plots.
+8. Validate actual execution, inspect the knitted output and record the exact successful/failed commands. Knitting success is not scientific validation.
+
+**Excluded advanced workflows requiring their own protocol:** genome-wide differential expression with raw RNA-seq counts (edgeR/DESeq2), batch correction, high-dimensional feature selection and nested CV, competing risks, causal inference, imputation, survey-weighted population inference, time-dependent Cox models, noninferiority, power/sample-size planning and external validation. These cannot be responsibly reduced to plug-in test snippets without study-specific assumptions.
