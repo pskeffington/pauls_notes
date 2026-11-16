@@ -2,6 +2,9 @@
 
 Scope: the complete repository. Read this before editing. Repository owner: Paul Skeffington. This independent educational project covers computational oncology across cancer types; breast cancer and TCGA-BRCA are worked examples, not universal assumptions.
 
+## Breast cancer statistics textbook alignment
+For any request to build or review the breast cancer biostatistics textbook, retrieve `oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md` and the actual `oncology/book-manifest.json` first. Use the eighth-edition Rosner guide `02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` only within its recorded review scope, keep the sixth edition separate, implement the BR-001–BR-010 gates, and do not mark a planned chapter as drafted or validated without source, numeric, runtime and reviewer evidence.
+
 ## Biomedical R / biostatistics coding — mandatory example
 For any biomedical R, R Markdown, biostatistics or knitted-report generation/review, retrieve `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` before writing code. For complete study templates or broad multi-method walkthroughs also retrieve `02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd` (retrieval key `pauls-notes.biomedical-r.full-study.v1`). It is the canonical *layout and style example*, not a substitute for study-specific data dictionary, statistical-design decisions or `02_biomedical_coding/IMPLEMENTATION_GATES.md`. Apply named chunks, `##` R code section comments, explicit checks, computed statistical evidence in narrative, Okabe–Ito plots and real knit verification. Never put Markdown `**` into executable R code.
 
