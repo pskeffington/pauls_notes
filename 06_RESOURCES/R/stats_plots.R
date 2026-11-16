@@ -26,7 +26,13 @@ validate_numeric <- function(x, label = "x") {
   invisible(TRUE)
 }
 
-# Comprehensive numerical summary. One row per group, including explicit
+# Comprehensive numerical summary. Returned numeric measurements are ROUNDED
+# for presentation. Do not reuse rounded summaries for downstream tests, models,
+# intervals or scientific estimands; calculate from original unrounded inputs.
+# Rosner 8e section 2.4 illustrates quantile type 2. For Rosner-specific
+# replication use rosner_descriptive_contract.R (method = "rosner8").
+# The existing helper deliberately preserves historical type 7 behavior.
+# One row per group, including explicit
 # missingness and robust quantiles. SD and variance are *sample* statistics.
 # IQR is Q3 - Q1 using the same type=7 quantile convention as base R.
 # CV and skewness are intentionally omitted: they require additional
