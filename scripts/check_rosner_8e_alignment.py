@@ -65,6 +65,21 @@ def validate():
         raise ValueError("Missing quantile fixture")
     if not (ROOT / "06_RESOURCES/R/rosner_descriptive_contract.R").is_file():
         raise ValueError("Missing quantile implementation")
+    workbook = (ROOT / "02_biomedical_coding/examples/"
+                "SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd").read_text(
+                    encoding="utf-8")
+    import re
+    chunk_labels = re.findall(r"^```\\{r\\s+([^,}\\s]+)", workbook, re.M)
+    closing_fences = len(re.findall(r"^```\\s*$", workbook, re.M))
+    if len(chunk_labels) != 17 or len(set(chunk_labels)) != 17:
+        raise ValueError("Expected 17 unique R chunk labels")
+    if closing_fences != len(chunk_labels):
+        raise ValueError("Unbalanced R Markdown code fences")
+    if "wide$score.Follow-up" in workbook:
+        raise ValueError("Unsafe hyphenated $ column reference in paired analysis")
+    for expr in ('wide[["score.Baseline"]]', 'wide[["score.Follow-up"]]'):
+        if expr not in workbook:
+            raise ValueError("Paired analysis missing exact column key: " + expr)
     return len(records), len(book_ids)
 
 if __name__ == "__main__":
