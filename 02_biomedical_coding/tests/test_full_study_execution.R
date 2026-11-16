@@ -59,6 +59,35 @@ stopifnot(
   all(e$p_raw>=0 & e$p_raw<=1),
   nrow(e$audit)==1L
 )
+## Independent numeric reference for unequal-variance mean difference
+## and paired mean change; never use display-rounded table values.
+b <- e$b; a <- e$a
+difference_mean <- mean(b) - mean(a)
+se2 <- stats::var(b)/length(b) + stats::var(a)/length(a)
+se <- sqrt(se2)
+df <- se2^2 / ((stats::var(b)/length(b))^2/(length(b)-1L) +
+                (stats::var(a)/length(a))^2/(length(a)-1L))
+reference_t <- difference_mean/se
+reference_ci <- difference_mean + c(-1, 1)*stats::qt(.975,df=df)*se
+stopifnot(
+  isTRUE(all.equal(unname(e$welch$statistic),unname(reference_t), tolerance=1e-10)),
+  isTRUE(all.equal(unname(e$welch$parameter),unname(df), tolerance=1e-10)),
+  isTRUE(all.equal(unname(e$welch$conf.int),unname(reference_ci),
+                   tolerance=1e-10))
+)
+
+n_pairs <- length(e$difference)
+paired_mean <- mean(e$difference)
+paired_se <- stats::sd(e$difference)/sqrt(n_pairs)
+paired_ci <- paired_mean +
+  c(-1, 1)*stats::qt(.975, df=n_pairs-1L)*paired_se
+stopifnot(
+  isTRUE(all.equal(unname(e$paired_t$estimate),unname(paired_mean),
+                   tolerance=1e-10)),
+  isTRUE(all.equal(unname(e$paired_t$conf.int),unname(paired_ci),
+                   tolerance=1e-10))
+)
+
 auc <- e$auc_rank(e$probs,e$test_set$response)
 stopifnot(is.finite(auc),auc>=0,auc<=1)
 cat("PASS: full synthetic workbook code executed, 17 chunks and analytical contracts.\n")
