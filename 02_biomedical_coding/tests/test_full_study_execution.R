@@ -4,7 +4,7 @@
 # This executes ALL chunks (via knitr::purl), checks invariants, and does not
 # read patient data or install packages. The separate CI knit verifies HTML.
 
-required <- c("knitr", "ggplot2")
+required <- c("knitr", "ggplot2", "survival", "nlme")
 missing <- required[!vapply(required, requireNamespace, logical(1), quietly=TRUE)]
 if (length(missing)) stop("Missing required packages: ",paste(missing,collapse=", "))
 path <- "02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd"
