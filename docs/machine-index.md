@@ -2,6 +2,13 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
+## First-pass biomedical coding source alignment
+
+| Topic key | Entrypoint | Content role | Boundary |
+| --- | --- | --- | --- |
+| `biomedical.rosner8.first_pass_audit` | `02_biomedical_coding/ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md` | source-to-code discrepancy ledger and verification commands | R runtime and knit not yet verified |
+| `biomedical.rosner8.quantiles` | `06_RESOURCES/R/rosner_descriptive_contract.R` | explicit opt-in type-2 and type-7 quantile implementations | code authored, deterministic R test execution pending |
+
 ## Breast cancer statistics book methodology route
 
 | Topic key | Entrypoint | Content role | Boundary |
