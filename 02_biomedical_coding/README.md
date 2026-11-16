@@ -22,6 +22,10 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
+## Scientific reporting, LaTeX, and PDF finishing
+
+For reproducible report layout, use the [study-neutral R Markdown/PDF presentation and acceptance workflow](RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). It documents math alignment, figure floats, table layout, page breaks, APA-aware scientific copyediting, knit-stage evidence and final page-image review. No example-study data or results belong in this methods guide.
+
 ## biostatistics acceptance evidence
 [Verification and acceptance ledger](BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md) · [complete synthetic R workbook execution test](tests/test_full_study_execution.R) · [CI workflow](../.github/workflows/learning-case-validation.yml). The ledger distinguishes verified source pages and independent numerical/structural checks from pending R execution, knit and specialist review. Never mark those gates completed from a documentation commit.
 
