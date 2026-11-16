@@ -5,6 +5,10 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
+## Breast cancer biostatistics roadmap
+- [Rosner-aligned breast cancer textbook build plan](https://github.com/pskeffington/pauls_notes/blob/main/oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md): gated chapter and method alignment, original synthetic R examples, review requirements, BR-001–BR-010 tasks; retrieval key `pauls-notes.breast-cancer.rosner-methodology-roadmap.v1`.
+- [Rosner eighth-edition coding companion](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/ROSNER_8E_SOURCE_VERIFIED_IMPLEMENTATION.md): source-aware statistical method cards and coding safeguards.
+
 ## Computational Oncology textbook
 - [Book navigation](https://github.com/pskeffington/pauls_notes/blob/main/oncology/README.md): canonical reader entrypoint
 - [Purpose-led introduction](https://github.com/pskeffington/pauls_notes/blob/main/oncology/INTRODUCTION.md): why oncology research and why these methods
