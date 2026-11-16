@@ -38,6 +38,29 @@ def validate_workbook_markup(workbook):
     return tuple(chunk_labels)
 
 
+def validate_graph_gallery(graphs):
+    """Check reproducible synthetic figure gallery structure and method routes."""
+    import re
+    labels = re.findall(r"^```\{r\s+([^,}\s]+)", graphs, re.M)
+    closes = re.findall(r"^```\s*$", graphs, re.M)
+    required = {
+        "graph-setup", "graph-bars", "graph-distribution",
+        "graph-box", "graph-stem", "graph-bootstrap", "graph-roc"
+    }
+    if len(labels) != len(required) or set(labels) != required:
+        raise ValueError("Graph gallery requires exactly seven named R chunks")
+    if len(closes) != len(labels):
+        raise ValueError("Graph gallery R Markdown fences are unbalanced")
+    for call in (
+        "biostat_graph_bar(", "biostat_graph_box(",
+        "biostat_graph_stem(", "biostat_graph_bootstrap(",
+        "biostat_graph_roc("
+    ):
+        if call not in graphs:
+            raise ValueError("Graph gallery missing method: " + call)
+    return tuple(labels)
+
+
 def validate():
     with REGISTRY.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -86,6 +109,15 @@ def validate():
                 "SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd").read_text(
                     encoding="utf-8")
     validate_workbook_markup(workbook)
+    for call in ("biostat_graph_box(", "biostat_graph_bar(",
+                 "biostat_graph_roc("):
+        if call not in workbook:
+            raise ValueError("Full study missing aligned graph: " + call)
+    graph_path = ROOT / "06_RESOURCES/R/biostat_graphs.R"
+    if not graph_path.is_file():
+        raise ValueError("Missing shared graph implementation")
+    gallery_path = ROOT / "03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd"
+    validate_graph_gallery(gallery_path.read_text(encoding="utf-8"))
     return len(records), len(book_ids)
 
 if __name__ == "__main__":
