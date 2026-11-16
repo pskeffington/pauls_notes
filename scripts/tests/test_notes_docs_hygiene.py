@@ -36,6 +36,18 @@ class NotesDocHygieneTests(unittest.TestCase):
                                      "One paragraph\\nAnother paragraph")
         self.assertTrue(any("backslash-n" in x for x in issues))
 
+    def test_historical_execution_scope_is_required(self):
+        issues = module.inspect_page("03_learning/bio_stats/README.md",
+                                     "Reviewed and executed in the latest work")
+        self.assertTrue(any("distinct evidence scopes" in item
+                            for item in issues))
+
+    def test_new_workbook_status_scope_is_required(self):
+        issues = module.inspect_page("03_learning/bio_stats/R_VALIDATION_STATUS.md",
+                                     "All examples passed")
+        self.assertTrue(any("historical atlas" in item
+                            for item in issues))
+
     def test_legacy_placeholder_rejected(self):
         issues = module.inspect_page("03_learning/README.md",
                                      "Biomedical methods chapter outline")
