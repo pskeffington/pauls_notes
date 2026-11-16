@@ -67,6 +67,44 @@ jobs:
           python3 -m unittest discover -s scripts/tests -p 'test_biostat_8e_alignment.py' -v
           python3 scripts/check_methodology_attribution.py
 
+  breast-cancer-workbook:
+    name: Isolated synthetic breast cancer R acceptance
+    needs: methodology-preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install minimal reproducible R requirements
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            r-base-core r-cran-knitr r-cran-rmarkdown r-cran-ggplot2 \
+            r-cran-survival r-cran-nlme pandoc
+      - name: Run descriptive and full-study numerical acceptance
+        run: |
+          Rscript --vanilla 06_RESOURCES/tests/test_biostat_descriptive_contract.R
+          Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R
+      - name: Render and inspect complete synthetic study
+        run: |
+          mkdir -p "$RUNNER_TEMP/biomedical-methods-artifacts"
+          Rscript --vanilla -e 'rmarkdown::render("02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd", output_format="html_document", output_file="synthetic-breast-cancer-methods.html", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
+          test -s "$RUNNER_TEMP/synthetic-breast-cancer-methods.html"
+          grep -Fq "Synthetic Breast Cancer Study" "$RUNNER_TEMP/synthetic-breast-cancer-methods.html"
+          grep -Fq "Computational provenance" "$RUNNER_TEMP/synthetic-breast-cancer-methods.html"
+          cp "$RUNNER_TEMP/synthetic-breast-cancer-methods.html" "$RUNNER_TEMP/biomedical-methods-artifacts/"
+          Rscript --vanilla -e 'writeLines(capture.output(utils::sessionInfo()), file.path(Sys.getenv("RUNNER_TEMP"),"biomedical-methods-artifacts","session-info.txt"))'
+      - name: Retain synthetic knitted report and environment evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: synthetic-breast-cancer-methods
+          path: ${{ runner.temp }}/biomedical-methods-artifacts/
+          if-no-files-found: warn
+          retention-days: 14
+
   execute-case:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
