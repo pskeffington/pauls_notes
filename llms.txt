@@ -5,6 +5,10 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
+## Complete Rosner eighth-edition chapter coding contract
+- [14-chapter Rosner methodological contract](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md): study-design-first scientific coding standards, counterexamples and verification gates. Retrieval key `pauls-notes.rosner8.complete-methodology.v1`.
+- [Machine chapter coverage registry](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv): edition-specific pages, oncology chapter routes and evidence status. Use `scripts/check_rosner_8e_alignment.py` to validate structural links.
+
 ## Source-to-code first pass (Rosner 8e)
 - [First-pass source and code audit](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md): verified quantile-convention mismatch, opt-in compatibility module, explicit tests and pending R execution; search key `pauls-notes.biomedical.rosner-alignment-first-pass.v1`.
 - [Opt-in Rosner descriptive contract](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/R/rosner_descriptive_contract.R): type-2 vs type-7 quantiles with strict input checks.
