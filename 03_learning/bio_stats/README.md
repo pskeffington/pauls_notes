@@ -6,7 +6,9 @@
 
 **Breast cancer narrative:** [26-method worked interpretation atlas](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [synthetic laboratory](../examples/breast_cancer_test_atlas.R) · [tests](../tests/test_breast_cancer_test_atlas.R).
 
-**Reviewed and executed: 2026-10-22.** Follow the node ID printed in the chart. Every one of its **19 objects** has a named publication, a source location, and either an executable design check or an implemented method. A decision diamond is a scientific question; it does not have its own hypothesis-test p-value.
+**Validation scope:** The paper-linked decision-tree atlas below records a **historical, bounded execution dated 2026-10-22**. That evidence applies to the original 19-object mapping and its selected toy/synthetic fixtures, **not** to the subsequently added 27-route gate matrix, complete synthetic breast cancer workbook, graph-method gallery, or their CI runs. For newer work use [R validation status](R_VALIDATION_STATUS.md) and the [biomedical acceptance ledger](../../02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md); runtime and report-rendering gates remain pending until confirmed logs/artifacts are reviewed.
+
+**Historical atlas review (2026-10-22):** Follow the node ID printed in the chart. Every one of its **19 objects** has a named publication, a source location, and either an executable design check or an implemented method. A decision diamond is a scientific question; it does not have its own hypothesis-test p-value.
 
 This is a teaching atlas, with three explicitly different evidence levels:
 
@@ -384,7 +386,7 @@ The fixture deliberately rejects missing values rather than silently dropping th
 | Independent numerical checks | Welch statistic/CI, Poisson aggregate rate ratio, competing-risk .5 vs .625, BH/Holm arithmetic pass | Selected independent verification cases |
 | Invalid-input checks | Reject duplicate person/pair keys, missing marker, zero exposure, invalid event code, fractional assay counts and sample-ID reordering | Prevents selected silent misuse; not a universal data validator |
 
-Local execution used **R 4.3.3** and compatible Ubuntu 24.04 packages: MASS 7.3-60.0.1, nnet 7.3-19, lme4 1.1-35.1, geepack 1.3.10, survey 4.2-1, ordinal 2023.12-4, survival 3.5-8, cmprsk 2.2-11, DESeq2 1.42.0, edgeR 4.0.16, limma 3.58.1. Check the installed runtime rather than assuming a current online manual matches these versions. CI reruns the full suite; numerical values above are bounded teaching checks, not clinical validation.
+The historical atlas execution record reports **R 4.3.3** and compatible Ubuntu 24.04 packages: MASS 7.3-60.0.1, nnet 7.3-19, lme4 1.1-35.1, geepack 1.3.10, survey 4.2-1, ordinal 2023.12-4, survival 3.5-8, cmprsk 2.2-11, DESeq2 1.42.0, edgeR 4.0.16, limma 3.58.1. Check the installed runtime rather than assuming a current online manual matches these versions. CI reruns the full suite; numerical values above are bounded teaching checks, not clinical validation.
 
 ## Source register
 
