@@ -2,6 +2,8 @@
 
 **Computational Oncology: A Clinician–Scientist's Guide**
 
+[Paul's Notes](../README.md) · [Task-first navigation](../docs/NAVIGATION.md) · [Chapter roadmap](ROADMAP.md) · [Biostatistics learning](../03_learning/bio_stats/README.md)
+
 A ten-part, 60-chapter independent learning architecture spanning cancer biology, quantitative reasoning, study design, clinical data engineering, genomics, imaging, machine learning, applied AI and reproducible research. Six manuscript chapters and the introduction are drafted; **none are yet independently peer reviewed or released as final textbook chapters**.
 
 ## Start reading
