@@ -2,7 +2,7 @@
 
 This page is for search systems, RAG pipelines, documentation harvesters and autonomous coding agents. The human entrypoint remains [README](../README.md). The lightweight machine entrypoint is [llms.txt](../llms.txt). Paths below are repository-relative; resolve them against the same commit revision whenever possible.
 
-## Complete eighth-edition methods biomedical source-to-code contract
+## Biomedical statistics: source-to-code methods and acceptance
 
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
@@ -11,7 +11,7 @@ This page is for search systems, RAG pipelines, documentation harvesters and aut
 
 Structural validator: `python3 scripts/check_biostat_8e_alignment.py`. Do not interpret a structural pass as an inferential code pass.
 
-## First-pass biomedical coding source alignment
+## Biomedical coding: source-to-code audit
 
 | Topic key | Entrypoint | Content role | Boundary |
 | --- | --- | --- | --- |
