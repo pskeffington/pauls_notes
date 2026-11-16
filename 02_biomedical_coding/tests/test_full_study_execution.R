@@ -88,6 +88,67 @@ stopifnot(
                    tolerance=1e-10))
 )
 
+## Analysis-specific denominators must reflect the known synthetic NA map.
+stopifnot(
+  stats::nobs(e$linear_fit) == 234L,
+  stats::nobs(e$logit_fit) == 238L,
+  stats::nobs(e$pois_fit) == 240L,
+  e$audit$baseline_N == 240L,
+  e$audit$linear_model_n == 234L,
+  e$audit$logistic_model_n == 238L,
+  e$audit$poisson_model_n == 240L
+)
+
+## Wald intervals and exponentiated coefficients: odds != risks.
+logit_coefficients <- stats::coef(e$logit_fit)
+logit_se <- sqrt(diag(stats::vcov(e$logit_fit)))
+logit_z <- stats::qnorm(.975)
+logit_or_reference <- exp(logit_coefficients)
+logit_lower <- exp(logit_coefficients - logit_z * logit_se)
+logit_upper <- exp(logit_coefficients + logit_z * logit_se)
+stopifnot(
+  all(is.finite(logit_or_reference)), all(logit_lower > 0),
+  isTRUE(all.equal(as.numeric(e$logit_or$odds_ratio),
+                   as.numeric(logit_or_reference), tolerance=1e-10)),
+  isTRUE(all.equal(as.numeric(e$logit_or$lower),
+                   as.numeric(logit_lower), tolerance=1e-10)),
+  isTRUE(all.equal(as.numeric(e$logit_or$upper),
+                   as.numeric(logit_upper), tolerance=1e-10))
+)
+
+## Poisson model: the log exposure must remain an offset, not a
+## freely estimated coefficient. The resulting exponentiated slopes
+## are incidence rate ratios, not event probabilities.
+stopifnot(
+  any(grepl("offset", attr(stats::terms(e$pois_fit),"term.labels"), fixed=TRUE)),
+  all(e$study$exposure_years > 0)
+)
+pois_coefficients <- stats::coef(e$pois_fit)
+pois_se <- sqrt(diag(stats::vcov(e$pois_fit)))
+pois_rr_reference <- exp(pois_coefficients)
+pois_lower <- exp(pois_coefficients - logit_z * pois_se)
+pois_upper <- exp(pois_coefficients + logit_z * pois_se)
+stopifnot(
+  isTRUE(all.equal(as.numeric(e$pois_fit$offset),
+                   log(e$study$exposure_years), tolerance=1e-10)),
+  isTRUE(all.equal(as.numeric(e$pois_fit$fitted.values),
+                   as.numeric(stats::predict(e$pois_fit,type="response")),
+                   tolerance=1e-10)),
+  isTRUE(all.equal(as.numeric(exp(e$pois_ci[,1])),
+                   as.numeric(pois_lower), tolerance=1e-10)),
+  isTRUE(all.equal(as.numeric(exp(e$pois_ci[,2])),
+                   as.numeric(pois_upper), tolerance=1e-10)),
+  isTRUE(all.equal(as.numeric(exp(stats::coef(e$pois_fit))),
+                   as.numeric(pois_rr_reference), tolerance=1e-10))
+)
+
+## Synthetic visits are deliberately within-subject correlated.
+## Test the design feature rather than claiming two independent visits.
+stopifnot(
+  stats::cor(e$wide[["score.Baseline"]],
+             e$wide[["score.Follow-up"]]) > 0.5
+)
+
 auc <- e$auc_rank(e$probs,e$test_set$response)
 stopifnot(is.finite(auc),auc>=0,auc<=1)
 cat("PASS: full synthetic workbook code executed, 17 chunks and analytical contracts.\n")
