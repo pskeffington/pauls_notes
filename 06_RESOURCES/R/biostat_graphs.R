@@ -186,3 +186,59 @@ biostat_graph_stem <- function(x, unit, scale = 1) {
             length(y), sum(is.na(x)), unit),
     capture.output(graphics::stem(y, scale = scale)))
 }
+
+# Repeated-estimator histogram: the displayed spread is the *bootstrap
+# estimator distribution*, not the distribution of individual patients.
+biostat_graph_bootstrap <- function(estimates, estimate, unit,
+                                    interval = c(.025, .975),
+                                    title = "Bootstrap estimator distribution",
+                                    bins = 25L) {
+  biostat_graph_require_ggplot2()
+  biostat_graph_validate_numeric(estimates, "estimates")
+  observed <- estimates[!is.na(estimates)]
+  if (length(observed) < 20L)
+    stop("Supply at least 20 observed bootstrap estimates.", call. = FALSE)
+  if (!is.numeric(estimate) || length(estimate) != 1L ||
+      is.na(estimate) || !is.finite(estimate))
+    stop("estimate must be a finite scalar.", call. = FALSE)
+  if (!is.character(unit) || length(unit) != 1L ||
+      is.na(unit) || !nzchar(trimws(unit)))
+    stop("unit must be documented.", call. = FALSE)
+  if (!is.numeric(interval) || length(interval) != 2L ||
+      anyNA(interval) || any(!is.finite(interval)) ||
+      interval[1] < 0 || interval[2] > 1 || interval[1] >= interval[2])
+    stop("interval must be two ordered probabilities in [0,1].", call. = FALSE)
+  if (!is.numeric(bins) || length(bins) != 1L ||
+      is.na(bins) || !is.finite(bins) || bins < 1 || bins != floor(bins))
+    stop("bins must be a positive integer.", call. = FALSE)
+  limits <- unname(stats::quantile(observed, interval, type = 7))
+  figure_data <- data.frame(estimate = observed)
+  markers <- data.frame(value = c(limits[1], estimate, limits[2]),
+                        marker = c("Lower percentile", "Point estimate",
+                                   "Upper percentile"))
+  p <- ggplot2::ggplot(figure_data,
+       ggplot2::aes(x = .data$estimate)) +
+    ggplot2::geom_histogram(bins = bins, fill = "#0072B2",
+                            colour = "white") +
+    ggplot2::geom_vline(data = markers,
+      ggplot2::aes(xintercept = .data$value,
+                   linetype = .data$marker), linewidth = .75,
+      colour = "#D55E00", inherit.aes = FALSE) +
+    ggplot2::scale_linetype_manual(values = c(
+      "Lower percentile" = "dashed", "Point estimate" = "solid",
+      "Upper percentile" = "dotted"
+    ), breaks = c("Lower percentile", "Point estimate", "Upper percentile")) +
+    ggplot2::labs(title = title,
+      x = paste0("Bootstrap estimate (", unit, ")"),
+      y = "Number of bootstrap replicates", linetype = "Reference",
+      caption = sprintf(
+        "Resamples=%d; percentile interval %g%%–%g%% (type-7 quantiles); independent sampling units required.",
+        length(observed), 100*interval[1], 100*interval[2]
+      )) +
+    ggplot2::theme_classic(base_size = 12)
+  attr(p, "figure_statistics") <- list(
+    resamples = length(observed), estimate = estimate,
+    interval = limits, quantile_type = 7L
+  )
+  p
+}
