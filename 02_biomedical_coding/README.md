@@ -22,6 +22,10 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 - [Machine-readable official-source register](official_methods_register.csv) — provider URLs, original entry IDs, implementation requirements and version checks.
 - [Matrix regression checks](tests/test_literature_matrix.py) — offline source-register structural tests.
 
+## Scientific reporting agent skill
+
+[Scientific Reporting QA skill](../skills/scientific-reporting-qa/SKILL.md) coordinates evidence verification, methods appraisal, Author Grammar, LaTeX and R Markdown presentation, and final PDF acceptance. It complements, rather than replaces, the [methods-only compilation and editorial guide](RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Do not transfer study-specific results into either reusable resource.
+
 ## Scientific reporting, LaTeX, and PDF finishing
 
 For reproducible report layout, use the [study-neutral R Markdown/PDF presentation and acceptance workflow](RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). It documents math alignment, figure floats, table layout, page breaks, APA-aware scientific copyediting, knit-stage evidence and final page-image review. No example-study data or results belong in this methods guide.
