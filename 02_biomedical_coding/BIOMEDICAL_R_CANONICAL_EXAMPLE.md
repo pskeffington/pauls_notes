@@ -18,6 +18,10 @@ When asked to create, repair, review, or extend an R/R Markdown biomedical analy
 
 **Code-generation output contract:** deliver one complete working `.Rmd` (or a focused chunk when editing an existing document); concise execution notes; exact validation status; any unresolved assumptions. No extraneous Git commentary in the generated analysis report.
 
+## Statistical convention audit — quantiles
+
+For descriptive percentile, quartile and IQR calculations, explicitly state the quantile algorithm. Existing Paul’s Notes examples use `stats::quantile(..., type=7)`. Rosner eighth edition §2.4 demonstrates `type=2`, which differs numerically for some finite samples. The opt-in [Rosner descriptive contract](../06_RESOURCES/R/rosner_descriptive_contract.R) allows `method="rosner8"` (type 2) or `method="pauls_notes"` (type 7). Do not alter an existing analysis convention without a documented method decision and a comparison of changed results. See the [first-pass source audit](ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md). Keep full numerical precision until display.
+
 ## Reusable section order
 
 | Section | Task | Output / acceptance |
