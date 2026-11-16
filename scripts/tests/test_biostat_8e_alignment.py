@@ -18,6 +18,9 @@ class WorkbookMarkupTests(unittest.TestCase):
             "02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd"
         )
         cls.original = cls.workbook_path.read_text(encoding="utf-8")
+        cls.gallery = (ROOT / (
+            "03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd"
+        )).read_text(encoding="utf-8")
 
     def test_real_workbook_has_17_named_chunks(self):
         labels = MODULE.validate_workbook_markup(self.original)
@@ -51,6 +54,23 @@ class WorkbookMarkupTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "exact column key"):
             MODULE.validate_workbook_markup(broken)
+
+
+    def test_original_seven_figure_gallery(self):
+        labels = MODULE.validate_graph_gallery(self.gallery)
+        self.assertEqual(len(labels), 7)
+        self.assertIn("graph-roc", labels)
+
+    def test_gallery_omitted_roc_fails(self):
+        broken = self.gallery.replace("biostat_graph_roc(", "untracked_plot(", 1)
+        with self.assertRaisesRegex(ValueError, "missing method"):
+            MODULE.validate_graph_gallery(broken)
+
+    def test_gallery_missing_fence_fails(self):
+        head, tail = self.gallery.rsplit("\n```\n", 1)
+        broken = head + "\n[missing closing fence]\n" + tail
+        with self.assertRaisesRegex(ValueError, "unbalanced"):
+            MODULE.validate_graph_gallery(broken)
 
 
 if __name__ == "__main__":
