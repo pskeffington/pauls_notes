@@ -5,6 +5,10 @@ Canonical repository: https://github.com/pskeffington/pauls_notes
 Human overview: https://github.com/pskeffington/pauls_notes/blob/main/README.md
 Machine navigation: https://github.com/pskeffington/pauls_notes/blob/main/docs/machine-index.md
 
+## Biomedical figure methodology and graph acceptance
+- [Original figure-method alignment](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/bio_stats/GRAPH_METHODS_ALIGNMENT.md): categorical bars, stem-and-leaf, box/mean and outlier fences, bootstrap estimator histograms, ROC and survival axes, source-scope and acceptance gates; retrieval key `pauls-notes.biomedical.graph-methods.v1`.
+- [Executable graph module](https://github.com/pskeffington/pauls_notes/blob/main/06_RESOURCES/R/biostat_graphs.R) and [synthetic gallery](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/bio_stats/GRAPH_METHODS_SYNTHETIC_GALLERY.Rmd): original synthetic figures, with machine-checkable graph statistics.
+
 ## Complete Eighth-edition biostatistics chapter coding contract
 - [14-chapter biostatistics methodological contract](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/BIOSTAT_8E_COMPLETE_METHODOLOGY_CONTRACT.md): study-design-first scientific coding standards, counterexamples and verification gates. Retrieval key `pauls-notes.biostat8.complete-methodology.v1`.
 - [Machine chapter coverage registry](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/biostat_8e_complete_chapter_alignment.csv): edition-specific pages, oncology chapter routes and evidence status. Use `scripts/check_biostat_8e_alignment.py` to validate structural links.
