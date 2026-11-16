@@ -15,7 +15,7 @@ params:
 
 **Aim:** demonstrate defensible R workflows on **invented breast cancer data**, not estimate any genuine cancer effect. Every row and value is generated in this document. Subtype, tumor size, ERBB2 score, toxicity, response, survival, person-time, and longitudinal measures are fictional. The quantities, effects and directions are **not validated clinical patterns**. Continuous ERBB2 values are arbitrary teaching scores, not raw gene counts, normalized RNA-seq data or a clinical HER2 assay. The synthetic study uses one baseline row per invented patient; the longitudinal dataset has multiple records per patient and is modeled separately.
 
-**Study estimands:** mean ERBB2 difference by subtype; grade–subtype association; response odds ratio; toxicity event rate ratio; within-patient outcome change; hazard ratio for an illustrative time-to-event endpoint; diagnostic discrimination; and exploratory multi-feature associations. None of these are causal effects. No experiment or randomized treatment allocation is represented.
+**Study estimands:** mean ERBB2 difference by subtype; grade-specific ERBB2 score comparisons; response odds ratio; toxicity event rate ratio; within-patient outcome change; hazard ratio for an illustrative time-to-event endpoint; held-out prediction discrimination; and exploratory multi-feature associations. None of these are causal effects. No experiment or randomized treatment allocation is represented.
 
 **Before applying to actual research:** replace synthetic generation with approved inputs and a validated dictionary; establish design, eligibility, patient-specimen cardinality, assay, provenance, transformations, missing-data mechanism, sampling and endpoints. In particular, a subtype classification based on the same gene cannot be used to claim independent confirmation of that gene association.
 
@@ -368,14 +368,14 @@ Define event, competing events, time zero, administrative censoring and proporti
 
 ```{r paired-and-repeated}
 ## 13.01 Two synthetic measurements from the SAME patient
+## Use a shared patient baseline so the two visits are correlated.
+baseline_score <- stats::rnorm(n,mean=40,sd=6)
+followup_score <- baseline_score + stats::rnorm(n,mean=2,sd=3)
 repeated <- data.frame(
  patient_id=rep(study$patient_id,each=2L),
  visit=factor(rep(c("Baseline","Follow-up"),times=n),
               levels=c("Baseline","Follow-up")),
- score=as.vector(t(cbind(
-    stats::rnorm(n,mean=40,sd=6),
-    stats::rnorm(n,mean=42,sd=6)
-  )))
+ score=as.vector(t(cbind(baseline_score,followup_score)))
 )
 wide <- reshape(repeated,idvar="patient_id",timevar="visit",direction="wide")
 stopifnot(nrow(wide)==n,!anyDuplicated(wide$patient_id),
