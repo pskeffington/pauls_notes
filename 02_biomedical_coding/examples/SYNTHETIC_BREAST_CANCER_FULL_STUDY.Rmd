@@ -456,6 +456,16 @@ auc_rank <- function(p,y) {
  (sum(ranks[pos])-length(pos)*(length(pos)+1)/2)/(length(pos)*length(neg))
 }
 cat("Held-out empirical AUC:",fmt(auc_rank(probs,test_set$response)),"\n")
+## 14.03 Source-aligned ROC axes: sensitivity vs (1 - specificity).
+## Predictions are from the frozen, disjoint patient-level test partition.
+p_roc <- biostat_graph_roc(
+  data.frame(predicted_probability=as.numeric(probs),
+             response=test_set$response),
+  score="predicted_probability",outcome="response",
+  positive=1L,evaluation_partition="held-out",
+  title="Synthetic response prediction: held-out ROC"
+)
+print(p_roc)
 ```
 
 AUC estimates rank discrimination; Brier score evaluates probability prediction error. Neither proves calibration, external validity, or clinical utility. In genuine studies, split by patient/site/time as appropriate, prevent leakage and tune models **inside** the training data only; use untouched test data once. For very small or sparse subsets, report undefined denominators explicitly.
