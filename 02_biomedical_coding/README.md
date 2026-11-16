@@ -24,7 +24,7 @@ This section supports [research across cancer types](../docs/cancer-research-sco
 
 ## Scientific reporting agent skill
 
-[Scientific Reporting QA skill](../skills/scientific-reporting-qa/SKILL.md) coordinates evidence verification, methods appraisal, Author Grammar, LaTeX and R Markdown presentation, and final PDF acceptance. It complements, rather than replaces, the [methods-only compilation and editorial guide](RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Do not transfer study-specific results into either reusable resource.
+[Scientific Reporting QA skill](https://github.com/pskeffington/agent_skills/blob/main/.agents/skills/scientific-reporting-qa/SKILL.md) coordinates evidence verification, methods appraisal, Author Grammar, LaTeX and R Markdown presentation, and final PDF acceptance. It complements, rather than replaces, the [methods-only compilation and editorial guide](RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Do not transfer study-specific results into either reusable resource.
 
 ## Scientific reporting, LaTeX, and PDF finishing
 
