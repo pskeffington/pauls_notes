@@ -6,6 +6,8 @@ Authored by Paul Skeffington · Compiled with OpenAI
 
 An open, methods-focused notebook for **research across all cancer types**, including molecular oncology, pathology/imaging, cancer epidemiology, computational biology and translational research. The **current worked case** uses a breast cancer teaching book and synthetic paired-specimen ML, with **TCGA-BRCA as the current data-source example under consideration**. Neither TCGA nor breast cancer limits this repository's research scope. Start with a research question, then build a documented, reproducibly checked analysis.
 
+**Choose your route:** [Task-first navigation](docs/NAVIGATION.md) · [Learn by subject](03_learning/README.md) · [Research resources](06_RESOURCES/README.md) · [Computational oncology book](oncology/README.md). Start with the outcome you need, then use the linked method, example and verification evidence.
+
 **Machine-readable access:** [Agent discovery (llms.txt)](llms.txt) · [Indexing and retrieval contract](docs/machine-index.md) — stable topic routes, provenance, source boundaries and RAG guidance.
 
 **Quick navigation:** [Start with your task](#start-here) · [Browse learning tracks](#learn-by-topic) · [Research scope](docs/cancer-research-scope.md) · [Research workflow](#follow-a-research-question) · [Run an example](#put-the-methods-to-work) · [Progress and limitations](#research-progress-and-boundaries)
