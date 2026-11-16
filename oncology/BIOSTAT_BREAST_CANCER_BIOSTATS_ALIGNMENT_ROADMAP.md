@@ -52,7 +52,7 @@ A researcher should be able to start from a breast-cancer question; identify ind
 
 ### Phase P1 — Mathematical and clinical foundations
 
-**Biomedical methods scope:** chapters 1–6 plus 7's foundations. **Oncology chapters:** CO-04/05/06 then CO-07 through CO-11; clinical examples connect to CO-01/02/03 and CO-15/20.
+**biostatistics scope:** chapters 1–6 plus 7's foundations. **Oncology chapters:** CO-04/05/06 then CO-07 through CO-11; clinical examples connect to CO-01/02/03 and CO-15/20.
 
 For each topic produce original derivation (notation and denominator defined), synthetic patient-level case, worked calculation and independent R cross-check:
 - probability rules, base-rate effects and Bayes screening;
@@ -66,7 +66,7 @@ For each topic produce original derivation (notation and denominator defined), s
 
 ### Phase P2 — Statistical test choice and inference
 
-**Biomedical methods scope:** chapters 7–10 and 12. **Oncology:** CO-11/12/13 and CO-17/20/22.
+**biostatistics scope:** chapters 7–10 and 12. **Oncology:** CO-11/12/13 and CO-17/20/22.
 
 Build one reusable method card and one runnable named chunk for each: one-sample t, Welch/pooled t, paired t, sign, Wilcoxon signed-rank/rank-sum, one-way/two-way ANOVA, Kruskal–Wallis, Fisher/chi-square/R×C GOF, one/two proportions, McNemar, kappa, group contrast, and familywise/FDR adjustment. Test sample-size and power under simple and design-adjusted cases.
 
@@ -74,7 +74,7 @@ Build one reusable method card and one runnable named chunk for each: one-sample
 
 ### Phase P3 — Adjusted oncology analyses and study design
 
-**Biomedical methods scope:** chapters 11 and 13. **Oncology:** CO-14/16/17/18/19 and CO-22/23/27/28.
+**biostatistics scope:** chapters 11 and 13. **Oncology:** CO-14/16/17/18/19 and CO-22/23/27/28.
 
 Produce linear/logistic models; confounding and effect modification; Mantel–Haenszel and standardization; crossover/clustered and repeated outcomes; ICC, random effects and GEE; missing data, measurement error, meta-analysis and equivalence. Separate model-adjusted association from causal identification and never treat odds, risk, rate and hazard ratios as interchangeable.
 
@@ -82,7 +82,7 @@ Produce linear/logistic models; confounding and effect modification; Mantel–Ha
 
 ### Phase P4 — Epidemiology, person-time, survival and prediction
 
-**Biomedical methods scope:** chapters 3, 13 and 14. **Oncology:** CO-15/20/24/25/26 and CO-43–48 as modern extensions.
+**biostatistics scope:** chapters 3, 13 and 14. **Oncology:** CO-15/20/24/25/26 and CO-43–48 as modern extensions.
 
 Build nested synthetic cancer follow-up demonstrations: risk sets, person-time, incidence-rate ratios, Poisson offset and dispersion, KM/log-rank, Cox PH residual diagnostics and sample-size planning. Modern extensions are separately identified: competing risks, time-varying exposures, calibration, decision curves, internal/temporal/external validation, leakage prevention, clinical threshold selection.
 
@@ -90,7 +90,7 @@ Build nested synthetic cancer follow-up demonstrations: risk sets, person-time, 
 
 ### Phase P5 — Molecular oncology translation
 
-**Textbook relation:** Biomedical methods provides basic distributions, multiple testing and regression, **not a substitute for current RNA-seq/assay methods**. **Oncology:** CO-37–42 plus the ESR1/ERBB2 breast cancer learning case.
+**Textbook relation:** biostatistics provides basic distributions, multiple testing and regression, **not a substitute for current RNA-seq/assay methods**. **Oncology:** CO-37–42 plus the ESR1/ERBB2 breast cancer learning case.
 
 Use *entirely synthetic* count matrices with independent biological samples to demonstrate:
 - raw counts vs normalized expression and log-transformed scores;
@@ -120,10 +120,10 @@ For each chapter, keep **separate labels**: `outlined`, `drafted`, `source_check
 | 6 | 13 | CO-14, CO-16–19, CO-23, CO-27 | epidemiologic effects, confounding, logistic/cluster |
 | 7 | 14 | CO-15, CO-24–26 | person-time, KM, Cox |
 | 8 | 12 (FDR), contemporary omics | CO-37–42 | genes, variance, FDR and appropriate assays |
-| 9 | Biomedical methods + modern validation methods | CO-43–48 | prediction, leakage, calibration and generalizability |
+| 9 | biostatistics + modern validation methods | CO-43–48 | prediction, leakage, calibration and generalizability |
 | 10 | all above | CO-55–60 | evidence appraisal, manuscript and audit |
 
-The remaining oncology chapters (including AI, Rust/Python, deployment, clinical governance) retain their own independent references; Biomedical methods is **not** declared an authority for unrelated software engineering or modern clinical AI.
+The remaining oncology chapters (including AI, Rust/Python, deployment, clinical governance) retain their own independent references; biostatistics is **not** declared an authority for unrelated software engineering or modern clinical AI.
 
 ## Required chapter artifact contract
 
@@ -174,7 +174,7 @@ Retrieve in this order for breast-cancer biostatistics:
 `AGENTS.md` → `llms.txt` → **this roadmap** → `oncology/book-manifest.json` → `02_biomedical_coding/BIOSTAT_8E_SOURCE_VERIFIED_IMPLEMENTATION.md` → `03_learning/bio_stats/BIOSTAT_TEST_SELECTION_MATRIX.md` → `02_biomedical_coding/BIOMEDICAL_R_CANONICAL_EXAMPLE.md` → relevant verified chapter and R code.
 
 **Stable retrieval key:** `pauls-notes.breast-cancer.biostat-methodology-roadmap.v1`.  
-**Search aliases:** Biomedical methods aligned breast cancer biostatistics book; breast cancer stats textbook roadmap; Biomedical methods method to oncology chapter crosswalk; Paul's Notes bio-stats author alignment.
+**Search aliases:** biostatistics aligned breast cancer biostatistics book; breast cancer stats textbook roadmap; biostatistics method to oncology chapter crosswalk; Paul's Notes bio-stats author alignment.
 
 ## Open risks
 
