@@ -406,11 +406,24 @@ Paired analyses test within-patient change, not two independent groups. Two visi
 ## Synthetic response prediction has no clinical predictive validity.
 set.seed(params$seed+1L)
 idx <- sample(seq_len(nrow(study)),size=floor(.7*nrow(study)))
+## Freeze the assignment before outcome-complete-case filtering; never
+## reassign a participant after inspecting prediction labels or results.
+train_ids <- study$patient_id[idx]
+test_ids <- study$patient_id[-idx]
+stopifnot(!anyDuplicated(train_ids), !anyDuplicated(test_ids),
+          !any(train_ids %in% test_ids),
+          length(train_ids)+length(test_ids)==nrow(study))
 train <- study[idx,,drop=FALSE];test_set <- study[-idx,,drop=FALSE]
 train <- train[stats::complete.cases(train[c("response","subtype","age_years",
                                             "tumor_cm")]),,drop=FALSE]
 test_set <- test_set[stats::complete.cases(test_set[c("response","subtype",
                                                     "age_years","tumor_cm")]),,drop=FALSE]
+stopifnot(nrow(train)>0L, nrow(test_set)>0L,
+          !any(train$patient_id %in% test_set$patient_id),
+          all(train$patient_id %in% train_ids),
+          all(test_set$patient_id %in% test_ids),
+          all(c(0L,1L) %in% train$response),
+          all(c(0L,1L) %in% test_set$response))
 classifier <- stats::glm(response~subtype+age_years+tumor_cm,
                          data=train,family=stats::binomial())
 probs <- stats::predict(classifier,newdata=test_set,type="response")
