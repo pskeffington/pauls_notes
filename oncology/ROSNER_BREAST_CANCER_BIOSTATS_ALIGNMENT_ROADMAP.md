@@ -31,6 +31,10 @@ A researcher should be able to start from a breast-cancer question; identify ind
 | Implementation acceptance gates | `02_biomedical_coding/IMPLEMENTATION_GATES.md` | G0–G10 and evidence grading |
 | Visualization standards | `06_RESOURCES/R/scientific_palette.R`; `06_RESOURCES/R/stats_plots.R` | Plot overlays, Okabe–Ito mapping, labels |
 
+## Complete chapter-method contract and structural gate
+
+[Rosner 8e complete methodology contract](../02_biomedical_coding/ROSNER_8E_COMPLETE_METHODOLOGY_CONTRACT.md) and the [14-chapter machine coverage ledger](../02_biomedical_coding/rosner_8e_complete_chapter_alignment.csv) establish chapter-by-chapter method expectations. Run `python3 scripts/check_rosner_8e_alignment.py` to verify all 14 source chapter IDs, correct edition/page-offset mapping, manifest links, method sections and test file presence. This checks structural coverage **only**; statistical and R/knit gates remain separate. No book-manifest completion statuses have been advanced.
+
 ## First alignment implementation checkpoint
 
 [BR-001 first source-to-code audit](../02_biomedical_coding/ROSNER_ALIGNMENT_FIRST_PASS_AUDIT.md) has been authored. It identifies the Rosner 8e type-2 versus Paul's Notes type-7 quantile convention and adds an opt-in helper/test without changing established descriptive results. **No R runtime was available; all execution, knitting and scientific-review gates remain pending.** This is a partial BR-001 checkpoint, not closure of BR-001 or advancement of any CO chapter status.
