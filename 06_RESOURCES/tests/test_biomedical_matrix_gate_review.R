@@ -6,7 +6,7 @@ here <- dirname(normalizePath(sub("^--file=", "", file_arg[1L]),
                               mustWork = TRUE))
 root <- normalizePath(file.path(here, "..", ".."), mustWork = TRUE)
 source(file.path(here, "..", "R", "biomedical_test_selector.R"))
-source(file.path(here, "..", "R", "rosner_method_crosswalk.R"))
+source(file.path(here, "..", "R", "biostat_method_crosswalk.R"))
 source(file.path(here, "..", "R", "biomedical_matrix_gate_review.R"))
 
 catalog <- bio_matrix_catalog(root)
@@ -84,6 +84,6 @@ stopifnot(fails(bio_matrix_card(list(method_id="welch-t"), root)),
                                       c(unit="documented", unit="concern"))),
           is.character(capture.output(print(bio_matrix_gate_review(example, root)))))
 annotated <- biomedical_method_decision("continuous", n_groups=2L,
-                                       include_rosner=TRUE)
-stopifnot(identical(bio_matrix_card(annotated, root)$rosner$chapters, "8"))
+                                       include_biostat=TRUE)
+stopifnot(identical(bio_matrix_card(annotated, root)$biostat$chapters, "8"))
 cat("PASS: 27 selector routes, matrix cards, 25-gate dictionary, non-automatic review and invalid inputs.\n")
