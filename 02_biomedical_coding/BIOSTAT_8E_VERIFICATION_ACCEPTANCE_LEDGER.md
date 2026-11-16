@@ -1,8 +1,8 @@
-# Biomedical methods 8e breast cancer biostatistics — verification and acceptance ledger
+# eighth-edition methods breast cancer biostatistics — verification and acceptance ledger
 
 **Date:** 2026-11-15  
 **Workstream:** BC-BIOSTAT-ALIGN-2026; continuation of BR-001/BR-010 acceptance engineering  
-**Source:** the cited textbook author, *Fundamentals of Biostatistics*, 8th ed. (2016), user-supplied 962-page PDF. The 6e contents reference remains separate.
+**Source:** *Fundamentals of Biostatistics*, 8th ed. (2016), user-supplied 962-page PDF. The 6e contents reference remains separate.
 
 ## Acceptance results observed in this pass
 
