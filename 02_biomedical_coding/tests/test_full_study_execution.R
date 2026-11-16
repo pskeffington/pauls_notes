@@ -159,6 +159,30 @@ stopifnot(
 
 auc <- e$auc_rank(e$probs,e$test_set$response)
 stopifnot(is.finite(auc),auc>=0,auc<=1)
+stopifnot(inherits(e$p_roc,"ggplot"),
+          isTRUE(all.equal(
+            as.numeric(attr(e$p_roc,"figure_statistics")$auc),
+            as.numeric(auc),tolerance=1e-12)),
+          identical(attr(e$p_roc,"figure_statistics")$partition,"held-out"))
+box_summary <- attr(e$p_box,"figure_statistics")
+bar_summary <- attr(e$p_bar,"figure_statistics")
+stopifnot(inherits(e$p_box,"ggplot"),inherits(e$p_bar,"ggplot"),
+          nrow(box_summary)==2L,
+          sum(box_summary$n_observed)==236L,
+          sum(box_summary$n_missing)==4L,
+          sum(bar_summary$n)==240L)
+for (i in seq_len(nrow(box_summary))) {
+  observed <- e$study$erbb2_score[
+    as.character(e$study$subtype)==box_summary$group[i] &
+      !is.na(e$study$erbb2_score)]
+  q <- as.numeric(stats::quantile(observed,c(.25,.50,.75),type=2))
+  stopifnot(
+    isTRUE(all.equal(as.numeric(box_summary[i,c("q1","median","q3")]),
+                     q,tolerance=1e-12)),
+    isTRUE(all.equal(as.numeric(box_summary$mean[i]),
+                     mean(observed),tolerance=1e-12))
+  )
+}
 ## Independent pairwise concordance reference, including score ties.
 positive_scores <- e$probs[e$test_set$response==1L]
 negative_scores <- e$probs[e$test_set$response==0L]
