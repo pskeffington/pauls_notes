@@ -94,3 +94,16 @@ small changes supported by exact file inspection, with regression coverage.
 **Regression controls:** The bounded hygiene checker now covers 12 documentation entrypoints, requires the atlas's historical-versus-new acceptance distinction and the status page's epoch breakdown, and accepts both repository-root navigation paths and valid relative Markdown links while checking their actual targets. The Python suite has 10 test cases; **source-reviewed and configured** does not mean executed. The CI outcome of this change has not been obtained.
 
 **Next gate:** Execute `scripts/check_notes_docs_hygiene.py`, its unit tests, `scripts/check_documentation.py`, and independent R/HTML acceptance in CI or a reproducible local environment. Record exact run URL, result, and artifact before marking the respective new gates passed.
+
+
+## Reader and agent navigation presentation pass — 2026-11-16
+
+**Presentation:** The root `README.md` now shows the existing task-first **Start here** and **Learn by topic** routes before the longer agentic template/tooling section. That content was **moved without modifying its scientific or operational statements**. Section heading slugs remain unchanged.
+
+**Three-layer navigation ownership:** `docs/NAVIGATION.md` is the short task-first reader route. `docs/navigation-routes.json` is the canonical role-aware set of task IDs, homes, boundaries and suggested next routes. `docs/machine-index.md` retains fine-grained machine retrieval and source-section mapping. These layers have different responsibilities and are not competing copies of every note.
+
+**Discovery:** Root README, the learning index, biomedical coding index, resources index, ontology textbook index, AGENTS and llms discovery now point to the short navigation guide. Machine-index.md references the route manifest. Stable scientific source and acceptance documents are linked, not duplicated.
+
+**Source-level acceptance:** GitHub source inspection found **13 distinct route IDs**, no unknown next-route IDs, and **13/13 existing canonical entrypoint files**. The new route validator also enforces route shape, permitted audiences, safe relative file targets, unique IDs, nonempty scientific boundaries, guide discovery in root/machine entrypoints, and a task-first README heading order. Nine regression test functions have been authored and integrated into the existing Python CI preflight.
+
+**Not yet established:** The latest Python navigation validator/unit suite and repository-wide Markdown link checker have not been witnessed running in this session. Reader rendering/accessibility review has not been performed; source and file-existence checks do not establish visual success. R/HTML and independent scientific acceptance remain pending per their own evidence ledger.
