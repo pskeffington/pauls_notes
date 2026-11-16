@@ -14,9 +14,9 @@ on:
       - "scripts/check_book_learning.py"
       - "scripts/check_biostatistics_evidence.py"
       - "scripts/check_biostatistics_matrix.py"
-      - "scripts/check_rosner_8e_alignment.py"
+      - "scripts/check_biostat_8e_alignment.py"
       - "02_biomedical_coding/**"
-      - "oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
+      - "oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
       - "scripts/tests/test_biostatistics_matrix.py"
       - "scripts/tests/test_biostatistics_evidence.py"
       - ".github/workflows/learning-case-validation.yml"
@@ -29,9 +29,9 @@ on:
       - "scripts/check_book_learning.py"
       - "scripts/check_biostatistics_evidence.py"
       - "scripts/check_biostatistics_matrix.py"
-      - "scripts/check_rosner_8e_alignment.py"
+      - "scripts/check_biostat_8e_alignment.py"
       - "02_biomedical_coding/**"
-      - "oncology/ROSNER_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
+      - "oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
       - "scripts/tests/test_biostatistics_matrix.py"
       - "scripts/tests/test_biostatistics_evidence.py"
       - ".github/workflows/learning-case-validation.yml"
@@ -70,7 +70,7 @@ jobs:
         run: |
           python3 scripts/check_biostatistics_matrix.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_matrix.py' -v
-          python3 scripts/check_rosner_8e_alignment.py
+          python3 scripts/check_biostat_8e_alignment.py
           python3 scripts/check_biostatistics_evidence.py
           python3 -m unittest discover -s scripts/tests -p 'test_biostatistics_evidence.py' -v
           Rscript --vanilla 03_learning/tests/test_paper_linked_tests.R --full
@@ -89,10 +89,10 @@ jobs:
           Rscript --vanilla 03_learning/tests/test_breast_cancer_distribution_lab.R
           Rscript --vanilla 03_learning/tests/test_breast_cancer_reference_values.R
           Rscript --vanilla 03_learning/tests/test_breast_cancer_test_atlas.R
-          Rscript --vanilla 03_learning/tests/test_rosner_method_cases.R
+          Rscript --vanilla 03_learning/tests/test_biostat_method_cases.R
           Rscript --vanilla 03_learning/tests/test_breast_cancer_study_design.R
           Rscript --vanilla 03_learning/tests/test_breast_cancer_protocol_replay.R
-          Rscript --vanilla 03_learning/tests/test_rosner_method_crosswalk.R
+          Rscript --vanilla 03_learning/tests/test_biostat_method_crosswalk.R
       - name: Knit the synthetic breast cancer protocol report
         run: |
           mkdir -p "$RUNNER_TEMP/breast-cancer-report"
@@ -101,10 +101,10 @@ jobs:
       - name: Execute all full-study R chunks and analytic invariants
         run: Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R
 
-      - name: Knit full synthetic Rosner-aligned breast cancer methods workbook
+      - name: Knit full synthetic Biomedical methods-aligned breast cancer methods workbook
         run: |
-          Rscript --vanilla -e 'rmarkdown::render("02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd", output_format="html_document", output_file="rosner-8e-synthetic-breast-cancer.html", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
-          test -s "$RUNNER_TEMP/rosner-8e-synthetic-breast-cancer.html"
+          Rscript --vanilla -e 'rmarkdown::render("02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd", output_format="html_document", output_file="biostat-8e-synthetic-breast-cancer.html", output_dir=Sys.getenv("RUNNER_TEMP"), quiet=TRUE)'
+          test -s "$RUNNER_TEMP/biostat-8e-synthetic-breast-cancer.html"
 
       - name: Validate matrix gate review against all 27 statistical routes
         run: Rscript --vanilla 06_RESOURCES/tests/test_biomedical_matrix_gate_review.R
