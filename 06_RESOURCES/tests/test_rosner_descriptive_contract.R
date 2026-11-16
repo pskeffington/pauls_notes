@@ -34,7 +34,7 @@ assert_close(p$q1,1.75)
 
 ## 04 Missing-data handling is explicit, singleton / empty guarded
 expect_error(rosner_quantiles(c(1,NA_real_)))
-assert_close(rosner_quantiles(c(1,NA_real_),missing="omit"),1)
+assert_close(rosner_quantiles(c(1,NA_real_),missing="omit"),rep(1,3L))
 expect_error(rosner_quantiles(c(NA_real_,NA_real_),missing="omit"))
 expect_error(rosner_quantiles(numeric()))
 expect_error(rosner_quantiles(c(1,Inf)))
