@@ -56,12 +56,25 @@ biostat_graph_box_stats <- function(data, value, group) {
 
 biostat_graph_box <- function(data, value, group, unit,
                               title = "Distribution by group",
-                              points = TRUE) {
+                              points = TRUE, palette = NULL) {
   biostat_graph_require_ggplot2()
   if (!is.character(unit) || length(unit) != 1L ||
       is.na(unit) || !nzchar(trimws(unit)))
     stop("unit must be a documented nonempty string.", call. = FALSE)
   stats <- biostat_graph_box_stats(data, value, group)
+  if (is.null(palette)) {
+    defaults <- c("#0072B2", "#D55E00", "#009E73", "#CC79A7",
+                  "#E69F00", "#56B4E9", "#000000", "#F0E442")
+    if (nrow(stats) > length(defaults))
+      stop("More than eight groups: specify a vetted palette or facet.",
+           call. = FALSE)
+    palette <- stats::setNames(defaults[seq_len(nrow(stats))], stats$group)
+  }
+  if (!is.character(palette) || anyNA(palette) ||
+      !all(stats$group %in% names(palette)))
+    stop("palette must be a named character vector covering every group.",
+         call. = FALSE)
+  palette <- palette[stats$group]
   raw <- data.frame(
     group = factor(as.character(data[[group]]), levels = stats$group),
     value = data[[value]]
@@ -74,8 +87,9 @@ biostat_graph_box <- function(data, value, group, unit,
   p <- ggplot2::ggplot(stats) +
     ggplot2::geom_rect(
       ggplot2::aes(xmin = .data$x - .24, xmax = .data$x + .24,
-                   ymin = .data$q1, ymax = .data$q3),
-      fill = "#56B4E9", colour = "#222222", linewidth = .5
+                   ymin = .data$q1, ymax = .data$q3,
+                   fill = .data$group),
+      colour = "#222222", linewidth = .5
     ) +
     ggplot2::geom_segment(
       ggplot2::aes(x = .data$x - .24, xend = .data$x + .24,
@@ -111,6 +125,7 @@ biostat_graph_box <- function(data, value, group, unit,
       inherit.aes = FALSE
     )
   p <- p +
+    ggplot2::scale_fill_manual(values = palette, guide = "none") +
     ggplot2::geom_point(
       ggplot2::aes(x = .data$x, y = .data$mean),
       shape = 3, size = 3.8, stroke = .95, colour = "#000000"
