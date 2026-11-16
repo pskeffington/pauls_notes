@@ -43,8 +43,11 @@ biostat_graph_box_stats <- function(data, value, group) {
     kept <- x[x >= q[1] - 1.5*iqr & x <= q[3] + 1.5*iqr]
     if (!length(kept))
       stop("No observations within whisker limits.", call. = FALSE)
+    unusual <- x < q[1]-1.5*iqr | x > q[3]+1.5*iqr
+    extreme <- x < q[1]-3*iqr | x > q[3]+3*iqr
     data.frame(group = level, x = i, n_total = length(raw),
       n_observed = length(x), n_missing = sum(is.na(raw)),
+      n_outlying = sum(unusual & !extreme), n_extreme = sum(extreme),
       whisker_low = min(kept), q1 = q[1], median = q[2],
       q3 = q[3], whisker_high = max(kept), mean = mean(x),
       stringsAsFactors = FALSE)
@@ -80,6 +83,14 @@ biostat_graph_box <- function(data, value, group, unit,
     value = data[[value]]
   )
   raw <- raw[!is.na(raw$group) & !is.na(raw$value), , drop = FALSE]
+  group_summary <- stats[match(as.character(raw$group), stats$group),,drop=FALSE]
+  group_iqr <- group_summary$q3 - group_summary$q1
+  unusual <- raw$value < group_summary$q1 - 1.5*group_iqr |
+             raw$value > group_summary$q3 + 1.5*group_iqr
+  extreme <- raw$value < group_summary$q1 - 3*group_iqr |
+             raw$value > group_summary$q3 + 3*group_iqr
+  mild <- raw[unusual & !extreme,,drop=FALSE]
+  strong <- raw[extreme,,drop=FALSE]
   xlabels <- stats::setNames(
     paste0(stats$group, "\n(n=", stats$n_observed, "; missing=", stats$n_missing, ")"),
     seq_len(nrow(stats))
@@ -124,6 +135,16 @@ biostat_graph_box <- function(data, value, group, unit,
       alpha = .28, colour = "#D55E00", size = .8,
       inherit.aes = FALSE
     )
+  if (nrow(mild))
+    p <- p + ggplot2::geom_point(
+      data=mild, ggplot2::aes(x=as.numeric(.data$group),y=.data$value),
+      shape=1,size=2.6,colour="#000000",inherit.aes=FALSE
+    )
+  if (nrow(strong))
+    p <- p + ggplot2::geom_point(
+      data=strong,ggplot2::aes(x=as.numeric(.data$group),y=.data$value),
+      shape=8,size=2.6,colour="#000000",inherit.aes=FALSE
+    )
   p <- p +
     ggplot2::scale_fill_manual(values = palette, guide = "none") +
     ggplot2::geom_point(
@@ -137,7 +158,8 @@ biostat_graph_box <- function(data, value, group, unit,
       y = paste0(value, " (", unit, ")"),
       caption = paste0(
         "Box: Q1–Q3 (quantile type 2); line: median; +: mean; ",
-        "whiskers: observed values within 1.5×IQR. ",
+        "whiskers: observed values within 1.5×IQR; ",
+        "○: 1.5–3×IQR outlier; *: >3×IQR extreme. ",
         "Whiskers and boxes are not confidence intervals."
       )) +
     ggplot2::theme_classic(base_size = 12) +
