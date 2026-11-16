@@ -2,6 +2,8 @@
 import importlib.util
 import unittest
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location(
@@ -39,6 +41,11 @@ class NotesDocHygieneTests(unittest.TestCase):
                                      "Biomedical methods chapter outline")
         self.assertTrue(any("placeholder" in x for x in issues))
 
+    def test_canonical_route_target_must_exist(self):
+        routes = module.REQUIRED_ROUTES["README.md"]
+        with TemporaryDirectory() as empty, patch.object(module, "ROOT", Path(empty)):
+            issues = module.inspect_page("README.md", "\n".join(routes))
+        self.assertTrue(any("route target missing" in x for x in issues))
     def test_canonical_routes_required(self):
         issues = module.inspect_page("README.md", "# Notes")
         self.assertTrue(any("canonical route" in x for x in issues))
