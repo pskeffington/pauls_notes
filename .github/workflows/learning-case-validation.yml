@@ -21,6 +21,10 @@ on:
       - "oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
       - "scripts/tests/test_biostatistics_matrix.py"
       - "scripts/tests/test_biostatistics_evidence.py"
+      - "AGENTS.md"
+      - "llms.txt"
+      - "docs/machine-index.md"
+      - "02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md"
       - ".github/workflows/learning-case-validation.yml"
   pull_request:
     paths:
@@ -37,12 +41,32 @@ on:
       - "oncology/BIOSTAT_BREAST_CANCER_BIOSTATS_ALIGNMENT_ROADMAP.md"
       - "scripts/tests/test_biostatistics_matrix.py"
       - "scripts/tests/test_biostatistics_evidence.py"
+      - "AGENTS.md"
+      - "llms.txt"
+      - "docs/machine-index.md"
+      - "02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md"
+      - "scripts/check_methodology_attribution.py"
       - ".github/workflows/learning-case-validation.yml"
 
 permissions:
   contents: read
 
 jobs:
+  methodology-preflight:
+    name: Author-neutral source and structure
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify chapter registry, R Markdown structure and attribution
+        run: |
+          python3 scripts/check_biostat_8e_alignment.py
+          python3 -m unittest discover -s scripts/tests -p 'test_biostat_8e_alignment.py' -v
+          python3 scripts/check_methodology_attribution.py
+
   execute-case:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
