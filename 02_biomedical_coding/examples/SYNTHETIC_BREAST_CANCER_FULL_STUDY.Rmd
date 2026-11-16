@@ -27,6 +27,13 @@ required <- c("knitr", "ggplot2")
 missing_packages <- required[!vapply(required, requireNamespace, logical(1), quietly=TRUE)]
 if (length(missing_packages)) stop("Missing packages: ", paste(missing_packages, collapse=", "))
 knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=TRUE)
+## Locate the canonical graph helpers whether executed by Rscript from the
+## repository root or rendered by knitr from this document's directory.
+graph_candidates <- c("06_RESOURCES/R/biostat_graphs.R",
+                      "../../06_RESOURCES/R/biostat_graphs.R")
+graph_paths <- graph_candidates[file.exists(graph_candidates)]
+if (!length(graph_paths)) stop("Cannot locate the biomedical graph module.")
+source(graph_paths[1], local=TRUE)
 set.seed(params$seed)
 
 ## 01.02 Standard Paul’s Notes / Okabe-Ito palette
@@ -147,17 +154,20 @@ p_hist <- ggplot2::ggplot(plot_data,ggplot2::aes(x=erbb2_score,fill=subtype))+
                      sum(is.na(study$erbb2_score))),
     x="ERBB2 expression (arbitrary score)",y="Specimen count",fill="Fictional subtype")
 print(p_hist)
-p_box <- ggplot2::ggplot(plot_data,ggplot2::aes(subtype,erbb2_score,fill=subtype))+
-  ggplot2::geom_boxplot(width=.48,outlier.shape=NA)+
-  ggplot2::geom_point(ggplot2::aes(color=subtype),
-    position=ggplot2::position_jitter(width=.12,height=0,seed=params$seed),alpha=.35)+
-  ggplot2::scale_fill_manual(values=pal)+ggplot2::scale_color_manual(values=pal)+
-  ggplot2::theme_classic()+ggplot2::theme(legend.position="none")+
-  ggplot2::labs(title="Synthetic ERBB2 by subtype",
-    subtitle=sprintf("n=%d complete expression measurements",nrow(plot_data)),
-    x="Fictional subtype",y="ERBB2 expression (arbitrary score)",
-    caption="Whiskers are 1.5 × IQR conventions, not confidence intervals.")
+## 04.04 Canonical instructional box: type-2 quartiles, median line,
+## explicitly marked mean (+), IQR whiskers and individual measurements.
+## This figure's quartile convention differs from the historical type-7
+## summary table above; neither convention is silently substituted.
+p_box <- biostat_graph_box(
+  study, value="erbb2_score", group="subtype",
+  unit="arbitrary teaching score", palette=pal,
+  title="Synthetic ERBB2 by fictional subtype", points=TRUE
+)
 print(p_box)
+## 04.05 Separate categorical bars with integer counts and total N.
+p_bar <- biostat_graph_bar(study, category="subtype",
+                          title="Synthetic subtype frequencies")
+print(p_bar)
 ```
 
 # 05 Test-selection logic — read before applying any method
