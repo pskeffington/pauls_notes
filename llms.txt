@@ -55,6 +55,9 @@ Stable route manifest: https://github.com/pskeffington/pauls_notes/blob/main/doc
 - [Full synthetic breast cancer study workbook](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd): complete Rmd with 17 code chunks, research test-selection matrix and multi-method walkthrough. Retrieval key `pauls-notes.biomedical-r.full-study.v1`.
 - [Biomedical implementation gates](https://github.com/pskeffington/pauls_notes/blob/main/02_biomedical_coding/IMPLEMENTATION_GATES.md): study/design/data/inference quality checks; read alongside the template.
 
+## Introduction to data science for cancer researchers
+- [Narrative chapter sequence](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/INTRODUCTION_TO_DATA_SCIENCE.md): applied breast-cancer research story from question and design through data preparation, exploration, inference, prediction and reproducible communication; chapter map labels existing lessons and planned integration work.
+
 ## Primary routes
 - [Cancer research scope](https://github.com/pskeffington/pauls_notes/blob/main/docs/cancer-research-scope.md): broad oncology use cases and boundaries
 - [Biomedical statistics decision guide](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/biomedical-statistics-decision-guide.md): select analyses by variable type and design

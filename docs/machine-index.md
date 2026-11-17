@@ -80,6 +80,14 @@ Agents must consult the manifest rather than inferring that a planned chapter ex
 
 For R/Rmd coding requests, retrieve `biomedical.r.canonical_example` first; pair it with the live study data dictionary and implementation gates. Search aliases: Paul's Notes biomedical R template, AI biostats coding, knitted R Markdown, scientific palette, reproducible analysis.
 
+## Introduction to data science for cancer researchers
+
+| Topic key | Entrypoint | Content role | Data boundary |
+| --- | --- | --- | --- |
+| `data_science.introduction` | `03_learning/INTRODUCTION_TO_DATA_SCIENCE.md` | chapter-by-chapter applied research narrative, breast-cancer examples, existing lesson links and integration status | synthetic examples are educational; linked lessons do not imply chapter integration or clinical evidence |
+
+Retrieve the narrative entrypoint for learners asking for a guided data-science sequence. Use its linked lesson pages as the sources for specific methods; the chapter map is an editorial route, not an evidence or execution ledger.
+
 ## Canonical navigation
 
 | Topic key | Entrypoint | Content role | Data boundary |

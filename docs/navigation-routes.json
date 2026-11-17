@@ -5,6 +5,23 @@
   "notes": "Routes select existing canonical documentation; they do not confer scientific or execution acceptance.",
   "routes": [
     {
+      "id": "data_science_intro",
+      "label": "Learn data science for cancer research",
+      "audience": [
+        "reader"
+      ],
+      "entry": "03_learning/INTRODUCTION_TO_DATA_SCIENCE.md",
+      "next": [
+        "research_question",
+        "unix",
+        "r_learning",
+        "biostatistics",
+        "machine_learning",
+        "acceptance"
+      ],
+      "boundary": "Applied learning narrative using breast-cancer examples; synthetic exercises are not clinical evidence and chapter links do not assert full integration or verification"
+    },
+    {
       "id": "research_question",
       "label": "Frame a cancer research question",
       "audience": [

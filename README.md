@@ -1,6 +1,6 @@
 # Paul's Notes
 
-**Cancer research · biomedical computing · reproducible machine learning**
+**An applied introduction to data science for cancer researchers**
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
@@ -12,7 +12,7 @@ An open, methods-focused notebook for **research across all cancer types**, incl
 
 **Quick navigation:** [Start with your task](#start-here) · [Browse learning tracks](#learn-by-topic) · [Research scope](docs/cancer-research-scope.md) · [Research workflow](#follow-a-research-question) · [Run an example](#put-the-methods-to-work) · [Progress and limitations](#research-progress-and-boundaries)
 
-This repository is a **modular field guide for biomedical students and early-career researchers**. Read one section to answer a current question, then follow prerequisites or related links when useful; there is no required course order. Each subject overview points to focused lessons, runnable examples, expected outputs, and limitations. Start with the task table below or browse by topic.
+This repository is evolving into a **narrative, applied introduction to data science for researchers**, using breast-cancer research as its recurring example. Follow the [chapter sequence](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) from research question and study design through data preparation, exploration, statistical reasoning, prediction, and reproducible communication. Existing subject guides remain available for readers who need one method or example directly; chapter links distinguish established material from bridges still to be written. Breast-cancer teaching examples include synthetic data and published studies, with their provenance and limits stated. The book does not present synthetic results as patient evidence or clinical findings.
 
 ## Biomedical statistics and original figures
 
@@ -24,10 +24,11 @@ The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md
 
 ## Start here
 
-Choose the route that matches what you need; no weekly sequence is required. Each topic can be used on its own, and the final column gives optional next steps.
+**Reading the book from the beginning?** Start with the [Introduction to Data Science for Cancer Researchers](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md), a chapter-by-chapter narrative using breast-cancer research examples. For a focused task, choose a row below and use its linked specialist guides.
 
 | I want to… | Start with | Then explore |
 | --- | --- | --- |
+| **Learn data science for cancer research from the beginning** | [Narrative chapter sequence](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) — research question to reproducible interpretation through breast-cancer examples | [Learning subjects](03_learning/README.md), [capstone roadmap](docs/learning-roadmap.md), and chapter links marking current material and planned bridges |
 | **Choose a cancer research question** | [Cancer research scope](docs/cancer-research-scope.md) — all cancer types, data modalities and study designs | [Independent study/data-access contract](docs/research-workflow.md) and [protocol template](templates/study-protocol.md) |
 | **Understand the current breast cancer example** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
 | **Learn Rust from zero** | [Rust foundations course](03_learning/rust/README.md) — variables, borrowing, object-oriented patterns, Cargo and tests | [Research-oriented Rust engineering](03_learning/rust/06_breast_cancer_engineering.md) and [source-backed practices](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) |

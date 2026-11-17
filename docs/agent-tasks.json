@@ -59,6 +59,15 @@
       "evidence": []
     },
     {
+      "id": "DOC-02",
+      "priority": "P1",
+      "state": "ready",
+      "depends_on": [],
+      "summary": "Develop the applied data-science introduction through a breast-cancer research narrative",
+      "acceptance_source": "docs/agent-tasking.md",
+      "evidence": []
+    },
+    {
       "id": "CO-08",
       "priority": "P1",
       "state": "planned",

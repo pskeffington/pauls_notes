@@ -1,12 +1,14 @@
-# Biomedical computing by subject
+# Learn data science for cancer research
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
 [Paul's Notes](../README.md) · [Task-first navigation](../docs/NAVIGATION.md) · [Research workflow](../docs/research-workflow.md)
 
-Choose the subject that matches your research question. Each guide explains a practical task, gives a runnable example, names the expected result, and asks you to change one assumption. Read any subject on its own, use the related-topic links for context, or combine the methods in the complete analysis example.
+**New to data science for research?** Follow the [Introduction to Data Science for Cancer Researchers](INTRODUCTION_TO_DATA_SCIENCE.md), a narrative chapter route that develops one breast-cancer research story from question and design to interpretation and reproducibility. The chapter map tells you which lessons already exist and where integration still needs to be written.
 
-Use the [current breast-cancer learning roadmap](../docs/learning-roadmap.md) for one complete worked example, or the [cancer-wide research scope](../docs/cancer-research-scope.md) to design a separate study with a different tumor site, modality or outcome.
+For a focused task, choose the subject that matches your research question. Each guide explains a practical task, gives a runnable example, names the expected result, and asks you to change one assumption. Read a guide on its own or follow the connected chapter sequence.
+
+Use the [breast-cancer learning roadmap](../docs/learning-roadmap.md) for the current advanced synthetic modeling sequence, or the [cancer-wide research scope](../docs/cancer-research-scope.md) when designing a study with another tumor site, modality, or outcome.
 
 ## Cancer study design
 

@@ -6,8 +6,11 @@ Choose the **question or deliverable first**, then open the canonical home for t
 
 ## First destination by task
 
+**For a guided introduction:** [Introduction to Data Science for Cancer Researchers](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) lays out the reader sequence from a breast-cancer research question to reproducible communication. It links to existing lessons and marks integration chapters that remain to be written.
+
 | Your objective | Start here | Then do |
 | --- | --- | --- |
+| Learn data science through a research narrative | [Introduction to Data Science for Cancer Researchers](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) | Follow the ordered chapter map; use each linked lesson and its evidence status |
 | Frame a cancer research question | [Research scope](cancer-research-scope.md) | [Study workflow and permissions](research-workflow.md) |
 | Define a study and estimand | [Research workflow](research-workflow.md) | [Biomedical implementation gates](../02_biomedical_coding/IMPLEMENTATION_GATES.md) |
 | Choose a defensible statistical test | [Decision matrix](../03_learning/bio_stats/BIOMEDICAL_DECISION_MATRIX_V2.md) | [Statistics learning atlas](../03_learning/bio_stats/README.md) |
@@ -21,6 +24,8 @@ Choose the **question or deliverable first**, then open the canonical home for t
 | Determine what has actually passed | [Biomedical acceptance ledger](../02_biomedical_coding/BIOSTAT_8E_VERIFICATION_ACCEPTANCE_LEDGER.md) | [Dated R validation summary](../03_learning/bio_stats/R_VALIDATION_STATUS.md) |
 
 ## Reader workflow
+
+For a guided course, follow the chapter order in the [data science introduction](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md). Its breast-cancer examples build on one research question; specialist notes remain independently navigable.
 
 **Question → method → example → check → interpretation.** Read the chosen guide's data assumptions and independent-unit definition before its example. Use the cited synthetic exercise, run the appropriate tests when available, and distinguish observed outcomes from proposed or merely committed checks. Navigate back to this page when the task changes rather than jumping between unrelated tutorials.
 

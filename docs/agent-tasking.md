@@ -18,6 +18,7 @@ This is an **execution queue**, not a claim of implementation. It defines propos
 | IDX-01 | P0 | **Verified (bounded)** — full index and orphan audit passed | Audit links, headings, duplicate section IDs, orphaned pages and indexing coverage across textbook and learning resources | Record baseline diagnostics and proposed repairs; determinism and existing machine-index tests pass |
 | IDX-02 | P0 | **Verified (bounded)** — deterministic registry, graph and CI checks passed | Add machine-readable agent task registry or verified task export, aligned to this human queue | Stable IDs, dependencies, statuses, owner-less handoffs, schema tests and deterministic output |
 | DOC-01 | P0 | Ready | Reconcile chapter statuses and navigation against the 60-entry book manifest and actual files | No chapter marked drafted without manuscript; README, oncology/README, llms.txt, registry and manifest cross-links agree |
+| DOC-02 | P1 | Ready | Develop the applied data-science introduction as a breast-cancer research narrative, integrating existing lessons into ordered chapters | Draft original chapter bridges, keep a single declared research question and data provenance across examples, include objectives/worked examples/exercises/interpretation/limitations, and preserve separate source, runtime and clinical evidence statuses |
 | CO-07 | P1 | Ready for authored draft; not delivered | Author original Ch. 07 probability and Bayes in oncology, with independent synthetic worked examples | Section citations, numerical R/Python replay where appropriate, clinical interpretation, exercises, limitations, editorial validation |
 | CO-08 | P1 | Planned after CO-07 conventions | Ch. 08 discrete outcomes: binomial, hypergeometric, Poisson, denominators and rates | Distribution-selection casework, independently checked numeric examples, source references and mastery checks |
 | CO-09 | P1 | Planned after CO-07 conventions | Ch. 09 continuous outcomes and transformations | Normal/log-normal and zeros, shape vs sampling distribution/CLT, worked reproducible examples |
@@ -36,6 +37,7 @@ Begin with **IDX-01 + DOC-01 as a documentation-only audit**. Inventory the trac
 - CO-07 establishes chapter format for CO-08/CO-09; CO-07–09 → CO-10; content chapters do not require G4 research success.
 - G4-01 follows its frozen synthetic survival protocol; G5-01 follows an independently selected method/result.
 - GOV-01 blocks all proposed admission of real participant-linked data, **not** synthetic textbook development.
+- DOC-02 uses synthetic and source-verified breast-cancer examples; chapter integration does not depend on admitting real participant data.
 - No task is complete from AI-generated text alone: demand tests or checkable review evidence matching its scope.
 - Keep broad cancer scope; use breast cancer as an explicit example rather than defaulting every chapter to BRCA.
 - For each pass, update this queue, affected navigation and documented evidence together. Annotate the actual date, branch/PR and observed checks rather than changing historical gate snapshots without verification.
