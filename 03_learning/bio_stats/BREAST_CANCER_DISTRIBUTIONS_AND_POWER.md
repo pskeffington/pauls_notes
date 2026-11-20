@@ -47,6 +47,42 @@ A=(8,10,12), B=(10,12,14), C=(12,14,16), with nine different participants. Group
 
 **Poisson:** An invented 40 events per 100,000 person-years across 20,000 person-years gives lambda=8. P(X≥10)=P(X>9)≈0.28337574. A count process assumes exposure and event structure; recurring events, nonconstant hazards and overdispersion can invalidate the simple model. In Poisson rate regression, include log(person-time) as an offset; exponentiated group coefficients are incidence rate ratios, not cumulative risks.
 
+### Exact observations and inclusive probability ranges
+
+A probability mass function answers an **exact count** question; a cumulative distribution function answers a **range or tail** question. For the same independent binomial trial model `X ~ Binomial(80, 0.35)`, distinguish `P(X = 36)`, `P(30 <= X <= 36)`, and `P(X >= 36)`:
+
+```r
+# ================================================================
+# 01 | BINOMIAL POINT, INCLUSIVE RANGE AND UPPER TAIL
+# ================================================================
+# The range includes both 30 and 36. Subtract the CDF below 30.
+p_exact <- stats::dbinom(36L, size = 80L, prob = 0.35)
+p_range <- stats::pbinom(36L, size = 80L, prob = 0.35) -
+           stats::pbinom(29L, size = 80L, prob = 0.35)
+p_upper <- stats::pbinom(35L, size = 80L, prob = 0.35,
+                         lower.tail = FALSE)
+stopifnot(isTRUE(all.equal(
+  p_range, sum(stats::dbinom(30L:36L, 80L, 0.35))
+)))
+```
+
+For a Poisson event-count process with `Y ~ Poisson(lambda = 8)`, the analogous questions are `P(Y = 10)`, `P(7 <= Y <= 10)`, and `P(Y >= 10)`. A constant average event count over a specified exposure interval is assumed; a rate per person-time requires stating its exposure denominator.
+
+```r
+# ================================================================
+# 02 | POISSON POINT, INCLUSIVE RANGE AND UPPER TAIL
+# ================================================================
+p_exact <- stats::dpois(10L, lambda = 8)
+p_range <- stats::ppois(10L, lambda = 8) -
+           stats::ppois(6L, lambda = 8)
+p_upper <- stats::ppois(9L, lambda = 8, lower.tail = FALSE)
+stopifnot(isTRUE(all.equal(
+  p_range, sum(stats::dpois(7L:10L, lambda = 8))
+)))
+```
+
+These examples use hypothetical parameters, not measured clinical outcomes. The separate reusable laboratory preserves its random-number state and returns the point, range, and upper-tail results with distinct names. Numerical checks are written in its existing test file; documentation does not establish that the test has been executed.
+
 ## Central limit theorem and standard error
 
 For independent identically distributed observations with finite nonzero variance, a standardized sample mean approaches a normal distribution as n grows. This does **not** make raw breast cancer biomarkers normally distributed. For synthetic right-skewed exponential individual measurements with mean and SD=10, theoretical standard error of the sample mean is 10/sqrt(n): 4.472 at n=5 and 1.414 at n=50. Seeded simulation of repeated sample means is included in the R laboratory. There is no universal n=30 guarantee; independence, tails and other sampling conditions remain necessary.
