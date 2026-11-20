@@ -61,4 +61,20 @@ stopifnot(length(x$clt$means_5) == 500L,
           length(x$clt$means_50) == 500L,
           identical(x$clt$means_5,
             breast_cancer_distribution_lab(repetitions=500L)$clt$means_5))
+# ================================================================
+# 06 | INVALID PARAMETER BOUNDARIES
+# ================================================================
+# Reject values that cannot be converted to valid integer parameters
+# before random-number generation or replication begins.
+rejects <- function(...) {
+  inherits(tryCatch(
+    breast_cancer_distribution_lab(...),
+    error = function(e) e
+  ), "error")
+}
+stopifnot(rejects(seed = -1L),
+          rejects(seed = .Machine$integer.max + 1),
+          rejects(seed = NA_real_),
+          rejects(repetitions = 99L),
+          rejects(repetitions = .Machine$integer.max + 1))
 cat("PASS: synthetic normal, t, Welch, chi-square, F, binomial and Poisson point/range/tail, CLT, power reference checks.\n")
