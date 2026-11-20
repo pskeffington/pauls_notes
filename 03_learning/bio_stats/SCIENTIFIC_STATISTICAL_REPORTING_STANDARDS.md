@@ -104,6 +104,32 @@ Each row identifies a *minimum results payload*, not a claim that each test requ
 
 Use the [contingency/risk/ROC chapter](CATEGORICAL_RISK_ROC_REPORTING.md) for a coherent synthetic four-cell demonstration, OR/RR/RD interval construction, threshold confusion matrix and a separate ROC example. Do not extract AUC from one threshold.
 
+## 4A | Executable reporting from the existing breast-cancer atlas
+
+The [synthetic R laboratory](../examples/breast_cancer_test_atlas.R) now exposes `breast_cancer_reporting_examples()`. It reuses the **same computed analysis objects** to produce a compact results table, four narrative paragraphs and denominators. This avoids copying values manually between calculations, tables and prose.
+
+```r
+# ================================================================
+# 01 | LOAD THE SYNTHETIC ANALYSIS
+# ================================================================
+source("03_learning/examples/breast_cancer_test_atlas.R")
+analysis <- breast_cancer_test_atlas()
+
+# ================================================================
+# 02 | GENERATE THE RESULTS TABLE AND NARRATIVE
+# ================================================================
+reporting <- breast_cancer_reporting_examples(analysis)
+knitr::kable(reporting$table, digits = 3,
+             caption = "Synthetic statistical results")
+cat(paste(reporting$narrative, collapse = "\\n\\n"))
+reporting$denominator
+reporting$methods
+```
+
+**Verified design intent, not runtime acceptance:** The function computes a Welch A−B mean difference with Welch CI and degrees of freedom, a within-person after−before paired difference, a two-by-two Pearson chi-square comparison with risk difference/RR/OR and approximate log-Wald intervals, and a Poisson count-model B-versus-A incidence rate ratio with its person-year offset. It explicitly labels all observations synthetic. The methods differ; the uniform reporting sequence does **not** mean that a Pearson omnibus statistic receives a fabricated confidence interval or that a ratio estimate receives a p-value from an unrelated test.
+
+Before using in coursework or a manuscript, execute the code in R, reconcile numbers with the source objects, and review output. The log-Wald risk/odds intervals are teaching examples for nonzero independent cells, not a substitute for sparse-count methods. The Poisson model requires a dispersion/model-fit review before inferential use. All estimates remain unadjusted except the explicitly modeled count contrast. The R example intentionally produces no ROC AUC, survival estimate or individual patient conclusions.
+
 ## 5 | Review gates before calling a report scientifically ready
 
 1. **Study identity:** source and design, authorization, eligible/included/analyzed N, patients versus repeated specimens, prespecification.
@@ -129,5 +155,7 @@ Use the [contingency/risk/ROC chapter](CATEGORICAL_RISK_ROC_REPORTING.md) for a 
 - McShane LM, et al. REMARK: Reporting Recommendations for Tumor Marker Prognostic Studies. https://pmc.ncbi.nlm.nih.gov/articles/PMC3362087/ — tumor tissue, assays, prognostic biomarkers and marker analyses.
 - PRISMA 2020 statement. https://www.prisma-statement.org/prisma-2020 — systematic review and meta-analysis.
 - Rosner B. *Fundamentals of Biostatistics*. Use the actual assigned edition for specific test-page references; descriptions here are a synthesis, not verbatim textbook excerpts.
+
+- Gallifant J, et al. TRIPOD-LLM reporting guideline. *Nature Medicine*. 2025;31:60–69. https://doi.org/10.1038/s41591-024-03425-5 — LLM-focused extension for relevant biomedical studies; not a replacement for conventional prediction reporting.
 
 **Update rule:** journal-specific instructions and current study-design reporting checklists can impose additional items. Reporting checklists are transparency frameworks, not substitutes for sound test selection or independent validation. Do not describe this synthesis as a newly published consensus standard.
