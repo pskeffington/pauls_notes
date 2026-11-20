@@ -27,62 +27,62 @@
 
 ## 1A | Statistical notation and mathematical typography
 
-**Authority and precedence.** Apply the [APA 7 numbers and statistics guide](https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf) as the default editorial style, subject to journal/instructor instructions and mathematically necessary exceptions. These are *display conventions*, distinct from the estimator and statistical method. The [R Markdown PDF acceptance guidance](../../02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md) governs whether the final rendered symbols are legible. Use italic Latin statistical symbols (for example, *t*, *F*, *p*, *n*, *r*), upright Greek symbols (for example, χ², α, β), and upright nonvariable descriptors (for example, SD and CI when used as labels). In mathematical LaTeX use \`\\mathrm{}\` for upright descriptors and \`\\text{}\` for explanatory units, not italics indiscriminately. Set vectors/matrices bold where relevant.
+**Authority and precedence.** Apply the [APA 7 numbers and statistics guide](https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf) as the default editorial style, subject to journal/instructor instructions and mathematically necessary exceptions. These are *display conventions*, distinct from the estimator and statistical method. The [R Markdown PDF acceptance guidance](../../02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md) governs whether the final rendered symbols are legible. Use italic Latin statistical symbols (for example, *t*, *F*, *p*, *n*, *r*), upright Greek symbols (for example, χ², α, β), and upright nonvariable descriptors (for example, SD and CI when used as labels). In mathematical LaTeX use `\\mathrm{}` for upright descriptors and `\\text{}` for explanatory units, not italics indiscriminately. Set vectors/matrices bold where relevant.
 
 **Estimation notation must separate population targets from sample estimates.** A hat denotes an estimate; a bar denotes a sample average; a subscript identifies an arm/time/condition. Define every unfamiliar symbol at first use, and retain that definition across manuscript text, code, figures and table notes.
 
 | Quantity | Mathematical form | Correct display / interpretation |
 | --- | --- | --- |
-| Overall and group sample size | \`N\`, \`n_A\`, \`n_B\` | \`N = 160\`, \`n_A = 80\`; distinguish participants from observations |
-| Population and sample mean | \`\\mu\`, \`\\bar{x}\` | μ is a target parameter; x̄ is an observed sample mean |
-| Group mean difference | \`\\widehat{\\Delta} = \\bar{x}_A-\\bar{x}_B\` | State **A − B**, not “between groups” without direction |
-| Individual spread and estimate precision | \`s\` or \`SD\`; \`SE(\\hat\\theta)\` | SD and SE are never interchangeable |
-| Median and quartiles | \`\\tilde{x}\`, \`Q_1\`, \`Q_3\` | Median [Q1, Q3]; coursework Q1/Q3 use R **type 2** |
-| Proportion and risk | \`\\hat p=a/n\` | \`36/80 (45.0%)\`; CI method when inferential |
-| Risk difference | \`\\widehat{RD}=\\hat p_A-\\hat p_B\` | 0.20, **20 percentage points**, not 20% relative change |
-| Risk ratio | \`\\widehat{RR}=\\hat p_A/\\hat p_B\` | Estimate, 95% CI and numerator/reference group |
-| Odds ratio | \`\\widehat{OR}=ad/bc\` | Odds-based comparison, **not** a risk ratio |
-| Regression coefficient | \`\\hat\\beta_j\` | β̂ on original model/link scale; report units and adjustment set |
-| Incidence rate ratio | \`\\widehat{IRR}=\\exp(\\hat\\beta)\` | Events/person-time, exposure offset and comparator |
-| Hazard ratio | \`\\widehat{HR}=\\exp(\\hat\\beta)\` | Hazard contrast with time origin, events and model |
-| Correlation | \`r\` (Pearson), \`r_s\` or \`\\rho_s\` (Spearman) | Specify estimator and analyzed pairs |
-| AUC and sensitivity | \`\\widehat{AUC}\`, \`\\widehat{Se}\`, \`\\widehat{Sp}\` | Validation set, uncertainty and threshold for Se/Sp |
-| Confidence and credible intervals | \`95\\%\\ \\mathrm{CI}\\,[L,U]\`; \`95\\%\\ \\mathrm{CrI}\\,[L,U]\` | Interval type, level and computation method; do not conflate |
-| Null and alternative | \`H_0: \\Delta=0\`; \`H_1: \\Delta\\neq0\` | Define target, scale, directional or two-sided alternative |
-| Statistical significance threshold | \`\\alpha=.05\` | State prespecified value when interpreting hypothesis testing |
-| Multiplicity-adjusted quantities | \`p_{\\mathrm{adj}}\`, \`q\` for FDR if defined | Name method and comparison family; don't call unadjusted CI simultaneous |
+| Overall and group sample size | `N`, `n_A`, `n_B` | `N = 160`, `n_A = 80`; distinguish participants from observations |
+| Population and sample mean | `\\mu`, `\\bar{x}` | μ is a target parameter; x̄ is an observed sample mean |
+| Group mean difference | `\\widehat{\\Delta} = \\bar{x}_A-\\bar{x}_B` | State **A − B**, not “between groups” without direction |
+| Individual spread and estimate precision | `s` or `SD`; `SE(\\hat\\theta)` | SD and SE are never interchangeable |
+| Median and quartiles | `\\tilde{x}`, `Q_1`, `Q_3` | Median [Q1, Q3]; coursework Q1/Q3 use R **type 2** |
+| Proportion and risk | `\\hat p=a/n` | `36/80 (45.0%)`; CI method when inferential |
+| Risk difference | `\\widehat{RD}=\\hat p_A-\\hat p_B` | 0.20, **20 percentage points**, not 20% relative change |
+| Risk ratio | `\\widehat{RR}=\\hat p_A/\\hat p_B` | Estimate, 95% CI and numerator/reference group |
+| Odds ratio | `\\widehat{OR}=ad/bc` | Odds-based comparison, **not** a risk ratio |
+| Regression coefficient | `\\hat\\beta_j` | β̂ on original model/link scale; report units and adjustment set |
+| Incidence rate ratio | `\\widehat{IRR}=\\exp(\\hat\\beta)` | Events/person-time, exposure offset and comparator |
+| Hazard ratio | `\\widehat{HR}=\\exp(\\hat\\beta)` | Hazard contrast with time origin, events and model |
+| Correlation | `r` (Pearson), `r_s` or `\\rho_s` (Spearman) | Specify estimator and analyzed pairs |
+| AUC and sensitivity | `\\widehat{AUC}`, `\\widehat{Se}`, `\\widehat{Sp}` | Validation set, uncertainty and threshold for Se/Sp |
+| Confidence and credible intervals | `95\\%\\ \\mathrm{CI}\\,[L,U]`; `95\\%\\ \\mathrm{CrI}\\,[L,U]` | Interval type, level and computation method; do not conflate |
+| Null and alternative | `H_0: \\Delta=0`; `H_1: \\Delta\\neq0` | Define target, scale, directional or two-sided alternative |
+| Statistical significance threshold | `\\alpha=.05` | State prespecified value when interpreting hypothesis testing |
+| Multiplicity-adjusted quantities | `p_{\\mathrm{adj}}`, `q` for FDR if defined | Name method and comparison family; don't call unadjusted CI simultaneous |
 
 ### Test statistic grammar: final Results text
 
 | Test | Standard reporting pattern | Preserve |
 | --- | --- | --- |
-| Independent or paired t | \`t(18.6) = −2.41, p = .027\` | Welch df may be noninteger; a negative t reflects defined subtraction |
-| One-way ANOVA | \`F(2, 57) = 4.61, p = .014\` | Numerator and denominator df, correct model type |
-| Pearson chi-square | \`χ²(1, N = 160) = 7.03, p = .008\` | 2×2 correction policy, counts and expected cells |
-| McNemar | \`χ²(1) = [value], p = [value]\` | Pairs and discordance; exact variant names when used |
-| Kruskal–Wallis | \`H(2) = [value], p = [value]\` | Package may label result χ²; name statistic convention |
-| Wilcoxon rank-sum | \`W = [value], p = [value]\` | Specify software W/U convention, exact/approximate, ties |
-| Pearson correlation | \`r(98) = .43, 95% CI [.26, .57], p < .001\` | df = n − 2 for independent Pearson pairs |
-| Regression | \`b = −0.23, SE = 0.08, 95% CI [−0.39, −0.07], p = .005\` | Raw coefficient vs standardized β, scale and model |
-| Logistic regression | \`OR = 2.45, 95% CI [1.26, 4.78]\` | Effect per predictor unit, reference category |
-| Cox regression | \`HR = [value], 95% CI [L, U]\` | Hazard ratio, not risk; events, model and time origin |
-| ROC | \`AUC = .81, 95% CI [.75, .87]\` | Evaluation dataset and CI construction |
+| Independent or paired t | `t(18.6) = −2.41, p = .027` | Welch df may be noninteger; a negative t reflects defined subtraction |
+| One-way ANOVA | `F(2, 57) = 4.61, p = .014` | Numerator and denominator df, correct model type |
+| Pearson chi-square | `χ²(1, N = 160) = 7.03, p = .008` | 2×2 correction policy, counts and expected cells |
+| McNemar | `χ²(1) = [value], p = [value]` | Pairs and discordance; exact variant names when used |
+| Kruskal–Wallis | `H(2) = [value], p = [value]` | Package may label result χ²; name statistic convention |
+| Wilcoxon rank-sum | `W = [value], p = [value]` | Specify software W/U convention, exact/approximate, ties |
+| Pearson correlation | `r(98) = .43, 95% CI [.26, .57], p < .001` | df = n − 2 for independent Pearson pairs |
+| Regression | `b = −0.23, SE = 0.08, 95% CI [−0.39, −0.07], p = .005` | Raw coefficient vs standardized β, scale and model |
+| Logistic regression | `OR = 2.45, 95% CI [1.26, 4.78]` | Effect per predictor unit, reference category |
+| Cox regression | `HR = [value], 95% CI [L, U]` | Hazard ratio, not risk; events, model and time origin |
+| ROC | `AUC = .81, 95% CI [.75, .87]` | Evaluation dataset and CI construction |
 
 These numbers are notation demonstrations and **not estimates from any actual clinical study**. Do not insert illustrated values into an empirical Results section. For statistical tests where reporting conventions vary by discipline, favor the journal's mandated symbol while preserving exactly the statistic returned and its degrees of freedom.
 
 ### P-values, intervals and precision
 
-- **p-values:** \`p = .043\`, \`p = .006\`, \`p < .001\`, not \`p = 0.000\`, \`p = .000\`, \`p < .05\` when the exact result is available, or \`p = < .001\`. When a journal uses leading zeros, apply its convention uniformly. Very small exact values may be retained in supplements for reproducibility.
-- **Intervals:** \`95% CI [1.14, 2.83]\` in APA-oriented tables/text, or \`(95% CI 1.14–2.83)\` if journal style requires it. Use a proper minus sign (−) for negative endpoints. Do not imply a CI is adjusted merely because its paired p-value is adjusted.
+- **p-values:** `p = .043`, `p = .006`, `p < .001`, not `p = 0.000`, `p = .000`, `p < .05` when the exact result is available, or `p = < .001`. When a journal uses leading zeros, apply its convention uniformly. Very small exact values may be retained in supplements for reproducibility.
+- **Intervals:** `95% CI [1.14, 2.83]` in APA-oriented tables/text, or `(95% CI 1.14–2.83)` if journal style requires it. Use a proper minus sign (−) for negative endpoints. Do not imply a CI is adjusted merely because its paired p-value is adjusted.
 - **Rounding:** commonly two decimals for effect/test statistics and three for p; do not round a narrow CI into identical endpoints or convert a nonzero small effect into 0 without greater precision. Include units; rate denominator can be per 100,000 person-years if that scale was explicitly used.
-- **Typography:** Put spaces around equality/inequality operators; use × for multiplication in scientific notation; distinguish \`−\` from hyphen, \`χ\` (chi) from \`X\` and \`ρ\` (rho) from \`p\` (p-value). Avoid visually ambiguous \`l\`/ \`1\` and \`O\`/ \`0\` in tables.
+- **Typography:** Put spaces around equality/inequality operators; use × for multiplication in scientific notation; distinguish `−` from hyphen, `χ` (chi) from `X` and `ρ` (rho) from `p` (p-value). Avoid visually ambiguous `l`/ `1` and `O`/ `0` in tables.
 - **Formatting discipline:** Do not duplicate the entire numerical table in adjacent prose; write the primary estimate and clinical interpretation in the paragraph, with secondary contrasts in tables. Separate Methods definitions from Results findings.
 
 ### R Markdown / LaTeX notation specification
 
 Use inline math for symbolic definitions, display math for longer estimators and line breaks. For example:
 
-\`\`\`latex
+```latex
 The primary estimand was the mean difference, \(\Delta=\mu_A-\mu_B\).
 
 \[
@@ -90,9 +90,9 @@ The primary estimand was the mean difference, \(\Delta=\mu_A-\mu_B\).
 \mathrm{CI}_{95\%} =
 \widehat{\Delta}\pm t_{0.975,\nu}\operatorname{SE}(\widehat{\Delta}).
 \]
-\`\`\`
+```
 
-For a quantitative Results sentence computed from R, keep the *calculation* in R and the math/typographic wrapper in R Markdown. For example, \`r sprintf("%.2f", estimate)\` inserts an estimate inside \`$\\widehat{\\Delta} = ...$\`; it does not alter the estimator. If converting an R text reporter to TeX, escape literal percent signs and model variable labels appropriately; test HTML and PDF separately. Preserve the established searchable section boundaries in R source.
+For a quantitative Results sentence computed from R, keep the *calculation* in R and the math/typographic wrapper in R Markdown. For example, `r sprintf("%.2f", estimate)` inserts an estimate inside `$\\widehat{\\Delta} = ...$`; it does not alter the estimator. If converting an R text reporter to TeX, escape literal percent signs and model variable labels appropriately; test HTML and PDF separately. Preserve the established searchable section boundaries in R source.
 
 ### Source hierarchy and verification
 
