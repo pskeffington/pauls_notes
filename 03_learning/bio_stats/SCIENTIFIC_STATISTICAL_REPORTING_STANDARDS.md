@@ -181,6 +181,46 @@ Each row identifies a *minimum results payload*, not a claim that each test requ
 
 Use the [contingency/risk/ROC chapter](CATEGORICAL_RISK_ROC_REPORTING.md) for a coherent synthetic four-cell demonstration, OR/RR/RD interval construction, threshold confusion matrix and a separate ROC example. Do not extract AUC from one threshold.
 
+## 4B | Statistical graphic vocabulary and results reporting
+
+**Name what the graphic actually encodes.** A descriptive figure shows observed values or sample summaries; a diagnostic figure examines model adequacy; an inferential figure depicts estimates and uncertainty; a classification figure displays operating characteristics. A mathematical probability mass function (PMF) is a theoretical model, not an empirical histogram. Do not call a fitted model line an observed trend without specifying the fit.
+
+| Figure / statistical purpose | Correct visual and axis terminology | What to report in caption and Results | Avoid |
+| --- | --- | --- | --- |
+| **Discrete PMF**: model probabilities for event counts | Point-mass or probability-mass bars; x = integer event count, y = **probability mass**, not observed frequency | Named distribution and parameters; exact queried count, inclusive interval and/or tail; whether parameters were stipulated or estimated | Calling theoretical PMF bars a histogram of patients; saying a shaded interval represents a confidence interval |
+| **Categorical bar**: observed nominal/ordinal groups | Separate bars; x = category, y = **frequency (n)** or **proportion (%)** with denominators | Observed/missing N, category definitions, percentages' reference denominator | Using a continuous histogram for categorical observations; treating count and percentage axes as interchangeable |
+| **Continuous histogram or density** | Adjacent numeric bins: x = measurement (units), y = count, density, or relative frequency; KDE y = **estimated density** | Observed n, range, modality, skewness, meaningful tails, bin width or smoothing when material | Describing bar height as risk or probability of an exact continuous value; confusing density with percent |
+| **Box-and-whisker / raw dot display** | Median line; Q1–Q3 box; whiskers at observed values within 1.5 IQR when that rule is implemented; raw points/outlier symbols; mean separately marked | Group n, median [Q1, Q3], IQR, identified outliers, type-2 quartile convention where selected | Calling whiskers SD, CI, min–max or mean without verifying actual implementation; interpreting overlap as a hypothesis test |
+| **Normal Q–Q** | x = theoretical normal quantiles; y = observed variable or residual quantiles; quartile-fitted reference line when used | Central alignment, curvature, tail deviations, ties/stepwise pattern; specify raw/log-transformed variable or residual | Calling it a histogram, a normality proof, or a test of equal variances |
+| **Residuals versus fitted / spread** | x = fitted value or factor group, y = residual (outcome units) or standardized residual (unitless); zero line if applicable | Pattern, unequal spread, nonlinearity, outliers/influence, group-specific variance | Saying no visible pattern *proves* homoscedasticity or independence |
+| **Group distribution / ANOVA** | Side-by-side box/dot/violin distribution plots of independent observations; model residual plots separately | Group n and mean (SD) or median [Q1,Q3]; F(df1,df2), upper-tail p, SS components, effect size where calculated | Plotting means alone as evidence of distributional normality; interpreting F>1 as automatic significance |
+| **Mean/estimate with interval** | Point is estimate; vertical/horizontal whiskers explicitly labeled **95% confidence interval**, **SD**, **SE**, or **prediction interval** | Estimator, reference comparison, interval method/level, n and units | Generic “error bars” with undefined meaning; treating a CI as individual data spread |
+| **Bootstrap distribution** | x = resampled estimate, y = bootstrap frequency/density; separate marks for point estimate/interval limits | Independent resampling unit, B, seed, statistic, interval method; precision of estimator | Calling resampled means a distribution of patient values; labeling a bootstrap percentile interval a 95% CI without its method |
+| **Scatterplot / fitted trend** | x and y = measured quantities (units); observed points distinct from model line or confidence band | Association direction, form, influential observations; correlation coefficient or slope/CI only if fitted | Equating correlation with a regression slope, causation or a marginal group comparison |
+| **ROC** | x = **false-positive rate (1−specificity)**; y = **true-positive rate (sensitivity)**; threshold trajectory and chance diagonal | Positive class, score direction, held-out versus development sample, AUC (CI/method when estimated), threshold-specific sensitivity/specificity | Calling AUC a probability of disease, percent of correctly classified patients, calibration, or accuracy at one threshold |
+| **Kaplan–Meier** | Step curve of estimated event-free/survival probability versus time since defined origin; censor marks | Event, censoring, time unit, n at risk, between-group method if tested | Calling a KM curve a cumulative incidence curve with competing events or hazard ratio plot |
+
+### Approved observation vocabulary
+
+- **Shape:** approximately symmetric, right-skewed/left-skewed, unimodal/bimodal, concentrated, dispersed, heavy-tailed, truncated, bounded, or showing discrete steps. Base these descriptors on inspected data, not the plotting function name.
+- **Group differences:** higher/lower *sample mean*, *sample median*, *proportion* or *estimated effect*; give the actual numeric magnitude and unit. Say **evidence of a difference** only when the stated inferential method supports it.
+- **Diagnostics:** “residual spread increased with fitted values,” “upper-tail points departed from the normal reference line,” or “groups showed comparable observed spread.” Do not replace these observations with “assumptions passed.”
+- **Uncertainty:** “95% confidence interval for the mean difference,” “sample SD,” “standard error of the mean,” “bootstrap percentile interval,” or “prediction interval.” These names have different statistical meanings.
+- **Probability:** “the model assigns probability P(X=k) to exactly k events,” “the inclusive probability P(a<=X<=b),” and “the upper-tail probability P(X>=k).” State whether parameters are stipulated, estimated or externally specified.
+
+### Two-sentence figure reporting pattern
+
+**Sentence 1 (descriptive observation):** Identify what was plotted and describe its most relevant visible pattern with group/scale and, if available, numeric summary.  
+**Sentence 2 (statistical interpretation):** Link the pattern to the appropriate computation or diagnostic conclusion, including the uncertainty or test evidence actually calculated. Do not substitute a statement of statistical significance for visual description.
+
+**Illustrative wording—use only after inspecting the relevant figure:** “The group-specific boxplots showed a higher sample median for group B, with broader interquartile spread than group A. The estimated B-minus-A difference and its 95% confidence interval are reported in Table 2.”
+
+**PMF example:** “Under a stipulated binomial model, the shaded bars represent the summed probability of integer counts in the inclusive interval, whereas the marked bar represents one exact count. These are probabilities from the model, not measured frequencies or a confidence interval.”
+
+### Figure verification and provenance
+
+For each figure verify: (1) observed/synthetic/model-predicted data classification; (2) unit of analysis and sample/replicate counts; (3) proper axes, origin and scale, including whether an axis is logarithmic; (4) what each mark, ribbon, bar, whisker and reference line represents; (5) transformation, bin/smoothing policy, quantile convention and interval method; (6) caption consistent with the actual statistical object; (7) a checked correspondence among plot, numeric table, short prose and source computation; and (8) readable rendering at final physical dimensions. Technical source review and visual inspection are separate acceptance stages.
+
 ## 4A | Executable reporting from the existing breast-cancer atlas
 
 The [synthetic R laboratory](../examples/breast_cancer_test_atlas.R) now exposes `breast_cancer_reporting_examples()`. It reuses the **same computed analysis objects** to produce a compact results table, four narrative paragraphs and denominators. This avoids copying values manually between calculations, tables and prose.
