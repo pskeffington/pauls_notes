@@ -2,6 +2,8 @@
 
 [Statistics foundations](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [methodology-aligned matrix](BIOSTAT_TEST_SELECTION_MATRIX.md) · [Breast cancer worked tests](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [27-route registry](biomedical_decision_matrix.csv) · [25-gate dictionary](biomedical_gate_dictionary.csv) · [R adviser](../../06_RESOURCES/R/biomedical_matrix_gate_review.R)
 
+**Reporting layer:** [Scientific statistical reporting standards](SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md) defines the minimum scientific results payload for each terminal method, alongside design-specific CONSORT/STROBE/STARD/TRIPOD+AI/REMARK manuscript conventions. Method selection and reporting requirements are separate decisions.
+
 **Paul's Notes | 2026-11-14 | Synthetic teaching layer.** This matrix extends the existing `biomedical_method_decision()` routes with structured clinical context and explicit pre-inference checks. It does **not** replace the original selector, download study records, execute a statistical test or certify a model's eligibility. Breast cancer is the continuous narrative, not a restriction on which cancers the methods apply to.
 
 ## The workflow from question to defensible analysis
