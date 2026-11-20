@@ -209,7 +209,7 @@ breast_cancer_reporting_examples <- function(
       "%d/%d (%.1f%%) in arm B (risk difference %.1f percentage points; ",
       "RR %s, 95%% CI %s to %s; OR %s, 95%% CI %s to %s). ",
       "The uncorrected Pearson chi-square test gave ",
-      "chi-square(%d) = %s, %s."),
+      "χ²(%d) = %s, %s."),
       a, a+b, 100*p_a, c, c+d0, 100*p_b,
       100*(p_a-p_b), number(rr), number(rr_ci[1]),
       number(rr_ci[2]), number(or), number(or_ci[1]),
