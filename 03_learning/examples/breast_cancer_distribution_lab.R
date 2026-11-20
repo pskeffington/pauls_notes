@@ -10,9 +10,13 @@ breast_cancer_distribution_lab <- function(seed = 7122026L, repetitions = 5000L)
   # ================================================================
   # Replication counts and random seeds must be finite whole numbers.
   if (length(seed) != 1L || !is.numeric(seed) || !is.finite(seed) ||
-      seed != floor(seed) || length(repetitions) != 1L ||
+      seed != floor(seed) || seed < 0 ||
+      seed > .Machine$integer.max ||
+      length(repetitions) != 1L ||
       !is.numeric(repetitions) || !is.finite(repetitions) ||
-      repetitions < 100L || repetitions != floor(repetitions)) {
+      repetitions < 100L ||
+      repetitions > .Machine$integer.max ||
+      repetitions != floor(repetitions)) {
     stop("Invalid seed or repetitions.", call. = FALSE)
   }
   had_seed <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
