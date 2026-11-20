@@ -248,4 +248,4 @@ breast_cancer_reporting_examples <- function(
 # Example, after sourcing the file:
 # reporting <- breast_cancer_reporting_examples()
 # print(reporting$table)
-# cat(paste(reporting$narrative, collapse = "\\n\\n"))
+# cat(paste(reporting$narrative, collapse = "\n\n"))
