@@ -83,6 +83,75 @@ stopifnot(isTRUE(all.equal(
 
 These examples use hypothetical parameters, not measured clinical outcomes. The separate reusable laboratory preserves its random-number state and returns the point, range, and upper-tail results with distinct names. Numerical checks are written in its existing test file; documentation does not establish that the test has been executed.
 
+## Recognizing normal and log-normal distributions
+
+Distribution identification requires both the measurement scale and diagnostic evidence. Under a **normal** model, the original continuous variable can take values across the real line and has a symmetric density about its mean. Under a **log-normal** model, the original variable is strictly positive and `log(X)` follows a normal distribution; the raw-scale distribution is generally right-skewed. Not every positive or right-skewed variable is log-normal. If zero and negative values are present, an ordinary log-normal model for the unmodified outcome is inappropriate.
+
+Report the analysis unit, observed and missing counts, scale and units, median and interquartile range on the original scale, and mean (SD) on any scale where these summaries answer the research question. When comparing distributions, inspect a histogram or density and a normal Q–Q plot on the **original** scale, then a corresponding histogram and normal Q–Q plot on the **natural-log** scale where all observations are positive. A log transformation changes the interpretation of numerical differences: a difference of logged means corresponds to a ratio of geometric means after exponentiation, not a raw-scale arithmetic mean difference.
+
+### Reproducible synthetic diagnostic example
+
+The example below generates strictly positive synthetic scores from a specified log-normal model. The source defines an **illustration of known generating parameters**, not a fitted distribution or evidence that a biomedical measurement follows this model. The four panels support a visual scale comparison. Normality Q–Q reference lines describe the observed sample quantiles relative to the theoretical normal quantiles; they are not proof of normality or of a model's other assumptions.
+
+```r
+# ================================================================
+# 01 | FIXED-SEED SYNTHETIC POSITIVE MEASUREMENTS
+# ================================================================
+# The natural logarithm of the invented measurements is normal by
+# construction; no observed clinical records are used.
+set.seed(2026L)
+marker <- stats::rlnorm(160L, meanlog = 2, sdlog = 0.55)
+log_marker <- log(marker)
+stopifnot(length(marker) == 160L, all(is.finite(marker)),
+          all(marker > 0), all(is.finite(log_marker)))
+
+# ================================================================
+# 02 | DISTRIBUTION SUMMARIES ON BOTH SCALES
+# ================================================================
+# Quartiles use the explicitly stated type-2 convention.
+summary_raw <- c(
+  n = length(marker), mean = mean(marker), sd = stats::sd(marker),
+  median = stats::median(marker),
+  stats::quantile(marker, c(.25, .75), type = 2)
+)
+summary_log <- c(
+  n = length(log_marker), mean = mean(log_marker),
+  sd = stats::sd(log_marker), median = stats::median(log_marker),
+  stats::quantile(log_marker, c(.25, .75), type = 2)
+)
+print(summary_raw)
+print(summary_log)
+
+# ================================================================
+# 03 | RAW AND LOG-SCALE HISTOGRAMS AND NORMAL Q-Q PLOTS
+# ================================================================
+# Histograms show observations in numeric bins. Q-Q plots compare
+# sample quantiles with theoretical normal quantiles.
+old_par <- graphics::par(mfrow = c(2, 2))
+tryCatch({
+  graphics::hist(marker, breaks = "FD",
+                 xlab = "Synthetic marker (arbitrary units)",
+                 main = "Original scale", col = "#0072B2",
+                 border = "white")
+  graphics::qqnorm(marker, main = "Normal Q-Q: original scale",
+                   xlab = "Theoretical normal quantiles",
+                   ylab = "Observed marker quantiles")
+  graphics::qqline(marker, col = "#D55E00", lwd = 2)
+  graphics::hist(log_marker, breaks = "FD",
+                 xlab = "Natural log of synthetic marker",
+                 main = "Natural-log scale", col = "#0072B2",
+                 border = "white")
+  graphics::qqnorm(log_marker, main = "Normal Q-Q: log scale",
+                   xlab = "Theoretical normal quantiles",
+                   ylab = "Observed log-marker quantiles")
+  graphics::qqline(log_marker, col = "#D55E00", lwd = 2)
+}, finally = graphics::par(old_par))
+```
+
+For the normal Q–Q panels above, `qqline()` uses sample quartiles to determine the reference line. Its default quartile convention is separate from the explicitly stated descriptive type-2 quartiles. Do not imply that the default plotting positions or `qqline()` use R quantile type 2 merely because the summary table does. For a report that requires identical quartile definitions, construct the reference line from explicit type-2 sample quartiles and theoretical normal quartiles.
+
+**Expected design-based observation, pending actual rendering:** Raw values from a right-skewed log-normal generator are expected to depart systematically from a normal Q–Q reference, while the natural-log values are expected to approximate normal behavior. Only describe the *observed* curvature and tail features after generating and inspecting the figures.
+
 ## Central limit theorem and standard error
 
 For independent identically distributed observations with finite nonzero variance, a standardized sample mean approaches a normal distribution as n grows. This does **not** make raw breast cancer biomarkers normally distributed. For synthetic right-skewed exponential individual measurements with mean and SD=10, theoretical standard error of the sample mean is 10/sqrt(n): 4.472 at n=5 and 1.414 at n=50. Seeded simulation of repeated sample means is included in the R laboratory. There is no universal n=30 guarantee; independence, tails and other sampling conditions remain necessary.
