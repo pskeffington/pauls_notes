@@ -26,6 +26,8 @@ Record the source revision, output file checksum, execution environment, and exp
 - For reporting, use correct syntax for p-values: `p = .042` or `p < .001`; avoid `p-value is = .042`. In `knitr::kable` columns, display the numeric/comparison value without an extra leading equals sign.
 - Make scientific limitations explicit: statistical significance is not automatically clinical or practical significance; correlation alone does not establish causation.
 
+**Statistical symbol reference:** [Scientific statistical reporting standards — notation](../03_learning/bio_stats/SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md#1a--statistical-notation-and-mathematical-typography) defines estimator symbols, test-statistic grammar, italics, confidence-interval notation, and APA-oriented p-value style. Use that vocabulary consistently in source and rendered reports.
+
 ## 3. Mathematical notation and LaTeX
 
 Write a notation key before hypothesis blocks, defining population parameters, observed statistics, indices, outcomes, time points, and contrast directions. Each inferential question should distinguish a null hypothesis, an alternative hypothesis, the estimand, two-sided versus directional testing, and the multiplicity family. Do not invent a null test for a descriptive research question.
