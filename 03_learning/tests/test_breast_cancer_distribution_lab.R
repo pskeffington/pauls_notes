@@ -38,12 +38,16 @@ near(stats::pf(3,2,6,lower.tail=FALSE), .125)
 # ================================================================
 # Independent identities compare a cumulative interval to the sum of
 # individual probability masses; bounds are inclusive on both ends.
+near(x$binomial_point, 0.016376855419366523)
 near(x$binomial_point, stats::dbinom(36L, 80L, .35))
+near(x$binomial_range, 0.3341375125736392)
 near(x$binomial_range, sum(stats::dbinom(30L:36L, 80L, .35)))
 stopifnot(identical(unname(x$binomial_interval), c(30L, 36L)))
 near(x$binomial_tail, 0.04106885425072182)
 near(x$binomial$p.value, x$binomial_tail)
+near(x$poisson_point, 0.09926153383153544)
 near(x$poisson_point, stats::dpois(10L, 8))
+near(x$poisson_range, 0.5025115150221489)
 near(x$poisson_range, sum(stats::dpois(7L:10L, 8)))
 stopifnot(identical(unname(x$poisson_interval), c(7L, 10L)))
 near(x$poisson_tail, 0.28337574127298903)
