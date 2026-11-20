@@ -2,6 +2,8 @@
 
 This chapter follows the breast-cancer research narrative from a two-by-two table through comparative effects to diagnostic discrimination. It synthesizes standard reporting practice consistent with Bernard Rosner, *Fundamentals of Biostatistics*; verify section/page references against the edition assigned in class. Worked counts below are **synthetic teaching data**, not observed patients.
 
+For the shared structure of Methods, Results, tables, plots, precision, and report-type guidelines, see [Scientific statistical reporting standards](SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md). The following worked example supplies the underlying 2×2 and ROC mechanics.
+
 ## 1. Contingency tables
 
 **Research question:** Is biomarker-positive status associated with pathological complete response (pCR)? Define each patient as one independent unit, the assessment window, positive biomarker threshold, and whether response is observed.
