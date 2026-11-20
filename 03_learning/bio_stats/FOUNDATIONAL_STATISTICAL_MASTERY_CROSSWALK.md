@@ -1,6 +1,6 @@
-# Foundational biostatistics statistical mastery — Notes-to-synthetic-demonstration crosswalk
+# Foundational statistical mastery — Notes-to-synthetic-demonstration crosswalk
 
-**Scope:** Six foundational statistical learning outcomes. This is a source-level coverage audit and build specification, not evidence of fresh R execution, figure rendering, or proficiency certification. The companion statistical presentation is authored in `pskeffington/dartmouth_applied exercises/statistical_competency/`.
+**Scope:** Six foundational statistical learning outcomes. This is a source-level coverage audit and build specification, not evidence of fresh R execution, figure rendering, or proficiency certification. A separate presentation project may draw on these general-purpose methods.
 
 ## Required teaching and demonstration sequence
 For every outcome follow **concept → sampling unit and assumptions → mathematical model → manual calculation → reproducible R analysis with deterministic synthetic data → numerical/visual diagnostics → example Methods/Results table, figure, and ≤2-sentence visual interpretation → test assertions → slide source link**. A finished explanation alone cannot pass its example or execution gate. Label synthetic outcomes explicitly.
