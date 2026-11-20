@@ -121,7 +121,7 @@ analysis <- breast_cancer_test_atlas()
 reporting <- breast_cancer_reporting_examples(analysis)
 knitr::kable(reporting$table, digits = 3,
              caption = "Synthetic statistical results")
-cat(paste(reporting$narrative, collapse = "\\n\\n"))
+cat(paste(reporting$narrative, collapse = "\n\n"))
 reporting$denominator
 reporting$methods
 ```
@@ -148,7 +148,7 @@ Before using in coursework or a manuscript, execute the code in R, reconcile num
 - *JACC* Statistical Reporting Guidelines for Observational Studies. https://www.jacc.org/author-center/statistical-reporting-guidelines — correct terminology and modeling distinctions.
 
 **Study-design guidelines**
-- Hopewell S, et al. CONSORT 2025 statement: updated guideline for randomized trials. *BMJ*. 2025;388:e081123. https://equator-network.org/reporting-guidelines/consort/ — replaces older default CONSORT citation for general randomized-trial reporting.
+- Hopewell S, et al. CONSORT 2025 statement: updated guideline for randomized trials. *BMJ*. 2025;389:e081123. https://equator-network.org/reporting-guidelines/consort/ — replaces older default CONSORT citation for general randomized-trial reporting.
 - von Elm E, et al. STROBE statement. https://www.strobe-statement.org/ — observational design checklist.
 - Cohen JF, et al. STARD 2015 diagnostic accuracy. https://www.equator-network.org/reporting-guidelines/stard/ — diagnostic study and patient-flow reporting.
 - Collins GS, et al. TRIPOD+AI statement. *BMJ*. 2024;385:e078378. https://doi.org/10.1136/bmj-2023-078378 — current regression/ML prediction-model checklist; supersedes original TRIPOD 2015.
