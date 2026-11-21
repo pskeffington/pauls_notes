@@ -193,6 +193,10 @@ stopifnot(meta$original == 600L, meta$displayed == 60L,
           all(attr(p5, "group_descriptives")$n == 200L),
           identical(p5$labels$x, "group"))
 box_data <- ggplot2::ggplot_build(p5)$data[[2]]
+point_data <- ggplot2::ggplot_build(p5)$data[[3]]
+stopifnot(nrow(point_data) == 60L,
+          all(point_data$colour == "#808080"),
+          all(point_data$alpha == .4))
 stopifnot("middle" %in% names(box_data),
           isTRUE(all.equal(unname(box_data$middle), c(100.5, 350.5, 600.5))))
 must_fail(plot_sampled_distribution(high, "value", "group", "mg/L",

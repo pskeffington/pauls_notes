@@ -67,3 +67,49 @@ The above intermediate checkpoint text records its original *in-progress* state.
 **IDX-01 and IDX-02 are Verified within their documentation/index scope only.** The updated validator also forbids marking a task Verified while any declared task dependency is unverified. The current draft PR is not a merged release, future CI is not presumed green, and none of these checks establish scientific truth, citation suitability, external model validity, or D0/D1 data admission.
 
 **Next unblocked P0 task:** DOC-01: reconcile reader navigation, chapter-level manuscript completeness and cross-file publication readiness against the existing 60-entry manifest without writing new chapter claims. GOV-01 remains blocked for real-data admission until independent privacy and access review.
+
+## 2026-11-21 investigator-reference development checkpoint
+
+**Tasks:** DOC-01 / DOC-02. **State:** In progress; substantive drafts and bounded verification, not final textbook acceptance. **Review vehicle:** [existing draft PR 42](https://github.com/pskeffington/pauls_notes/pull/42), branch `docs/data-science-narrative-intro`. The current mainline source at `ea68a32` was merged into the earlier narrative branch at `cc26d1d`; its newer statistical-reporting and notation work is preserved. The PR records the exact committed head and any subsequent CI result.
+
+### Delivered content and integration
+
+- Expanded the existing [data-science introduction](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) with an original opening chapter: clinical question types, estimands, participant/specimen units, an 80-person synthetic response comparison, missing-outcome bounds and six reasoned exercises.
+- Extended [CO-02 clinical data](../oncology/chapters/CO-02-clinical-oncology-data.md) with breast cancer receptor/classifier distinctions; pCR, RCB, IDFS, IBCFS and EFS; patient-to-assay lineage; TCGA export/manifest/assay/CDR distinctions; WDBC suitability; and a 12-person cohort-accounting example. Added 14 source records and synchronized its 18 H2/H3 citation mappings.
+- Repaired four damaged sample-size displays in the [study-design guide](../03_learning/bio_stats/CANCER_STUDY_DESIGN.md), defined their notation and independently checked the existing numerical planning values. The [protocol template](../templates/study-protocol.md) now captures time zero, ascertainment, denominators, intercurrent-event strategies, missingness, source versions and review evidence.
+- Replaced the obsolete 2017 ICH draft link in the touched protocol/design material with [final FDA E9(R1) guidance (May 2021)](https://www.fda.gov/media/148473/download). Clarified the frozen synthetic protocol's documented-response endpoint and supplementary analyses. The Rmd now labels Fisher's conditional odds ratio **A relative to B** separately from the primary **B minus A** risk difference; calculation expressions and data generation are preserved.
+- Added the [investigator pathway](NAVIGATION.md#breast-cancer-investigator-pathway), retained the original route IDs and registered clinical-data/reporting destinations. Corrected two stale crosswalk-test paths in existing acceptance notes. Adjusted the existing navigation regression test to verify retained routes and new canonical homes instead of assuming the old route count was permanent.
+- Reconciled seven attribution findings in current reporting/quantile notes with the existing author-neutral contract; full textbook author credit remains in the canonical methodology bibliography. No statistical convention was changed.
+
+### Sources, arithmetic and review scope
+
+All new examples are invented teaching constructions. Clinical source material consists of primary papers, official guidance and provider documentation; no participant-level data or new clinical result was ingested. Individual source dates and claim scope are retained in the [source registry](../oncology/evidence/source-registry.json). The 2026 survival-planning methodological update is supported at **publisher-abstract level**, not a claimed full-paper replication.
+
+Python standard-library replay reproduced the opening contrast of 0.15; the available-case contrast of 0.1842105263; missing-outcome bounds of 0.10 and 0.25; the 12-person intersection accounting; a normal-approximation requirement of 90.41909454 per arm, rounded to 91; enrollment inflation to 102; and an event requirement of 379.35172960, rounded to 380. Missing-outcome bounds are not confidence intervals, and required events are not recruited participants.
+
+An independent AI review checked the argument, primary-source correspondence and arithmetic; its findings about relative links and the supplementary odds-ratio direction were resolved. This is **not external statistical or clinical expert review**. The 60-chapter oncology manifest remains **six drafts and 54 planned**; the separate narrative opening does not promote CO-07 or another manuscript chapter.
+
+### Verification record
+
+**Observed locally on 2026-11-21:**
+
+| Gate | Exact checks | Observed scope |
+| --- | --- | --- |
+| Reader/documentation integrity | `check_navigation_routes.py`, `check_notes_docs_hygiene.py`, `check_documentation.py` | 16 valid routes; 12 hygiene entrypoints; 163 Markdown pages with local links and anchors resolving |
+| Source and book structure | `check_methodology_attribution.py`, `check_biostat_8e_alignment.py`, `validate_oncology_book.py`, `validate_oncology_citations.py` | Attribution, 14 source chapters/60 oncology IDs, manifest and section-citation checks pass |
+| Task, scope and evidence consistency | `check_agent_tasks.py`, `check_cancer_research_scope.py`, `check_milestone_evidence.py`, `validate_research_methods.py` | Existing gates retain their scientific boundaries; 13 task records valid |
+| Source/repository checks | `check_repository.py`, `check_repository_artifacts.py`, `git diff --check` | 98 Python/Bash source files parse; 443 tracked paths contain no incidental editor/build debris; diff whitespace clean |
+| Existing regression suites | `scripts/tests/test_navigation_routes.py`, `test_notes_docs_hygiene.py`, `test_documentation.py`; `scripts/test_oncology_citations.py`, `test_oncology_book.py`, `test_agent_tasks.py`, `test_research_method_registry.py` | 39 tests pass across these seven suites |
+| Machine-index suites and replay | `python3 -m unittest discover -s scripts -p 'test_*machine_index.py' -v`; index build, deterministic replay, enrichment and coverage audit | 13 tests pass; 1,630 sections across all 163 documents indexed; zero broken links, orphan candidates or structural errors |
+
+Run the named checker scripts from `scripts/` unless a full path is given. The index audit initially identified the existing quantile/Q–Q guide as a navigation orphan; a contextual link from the canonical reporting standard resolves that discovery gap. The generated index and audit are disposable `/tmp` outputs; recreate them with the commands in `AGENTS.md`.
+
+Source comparison confirmed that all eight R chunks preserve their calculation expressions; only supplementary table labels changed. The three expanded teaching chapters have paired display-math delimiters and no embedded control characters.
+
+**Not run locally:** R execution, R Markdown knitting and rendered-page inspection. `Rscript` was unavailable, and installing base R was blocked by the environment's package-manager permissions. The existing Biomedical learning case CI includes the study-design tests, frozen protocol replay and HTML render; its actual result must be read from the final PR head. External statistical and clinical expert review remain pending. None of these uncompleted gates is recorded as passed.
+
+### Next bounded work
+
+1. Continue DOC-02 with an integrated data-dictionary/join exercise using the existing observation-grain and clinical-data material; keep its synthetic cohort and effect direction explicit.
+2. For CO-07, inspect and reuse the existing probability R/Python labs and tests before authoring the probability/Bayes manuscript. Follow the existing biostatistics source/fixture dependencies; do not create a duplicate laboratory.
+3. Obtain independent R replay and rendered acceptance for affected reports; retain specialist statistical and clinical review as publication requirements. Real-data admission remains governed by the existing D0/D1 workflow.

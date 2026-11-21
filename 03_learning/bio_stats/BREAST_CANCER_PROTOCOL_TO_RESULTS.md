@@ -17,13 +17,13 @@ Among hypothetical adults with a **defined early breast cancer population** star
 | Allocation | 1:1, complete random allocation within one synthetic cohort |
 | Unit | One randomized participant, not cells or specimens |
 | Primary endpoint | Binary **documented pCR** by assessment window; missing pCR assessment coded as no documented pCR under a *prespecified composite endpoint* |
-| Estimand | Treatment-policy-style randomized-arm **difference in documented pCR probability**, B minus A, in all randomized participants |
-| Intercurrent events | Assessment unavailable or no documented surgery/pCR by time window counts as failure for this teaching **composite**; this does not infer pathological nonresponse |
+| Estimand | Randomized-arm **difference in documented pCR probability**, B minus A, in all randomized participants under the prespecified documented-response composite |
+| Unavailable assessment rule | Assessment unavailable or no documented surgery/pCR by the time window counts as no documented response for this teaching **composite**; this does not infer pathological nonresponse or identify a clinical intercurrent event |
 | Target effect | Planning p_A=.30 and p_B=.45 for *assessable outcomes*, difference .15 |
 | Alpha / power | Two-sided alpha .05; 80% power for standard independent two-proportion approximation |
 | Attrition planning | 10% anticipated endpoint unavailability; inflate approximate per-arm analyzable n by 1/(1-.10) |
 | Primary analysis | Difference in observed **documented response** proportions B−A and an unpooled Wald 95% CI (educational large-sample approximation); two-sided independent two-proportion test with continuity correction disabled |
-| Secondary checks | Fisher exact conditional test and a complete-case analysis explicitly labeled **sensitivity**, not substitute primary |
+| Secondary checks | Fisher exact conditional comparison and a complete-case comparison, labeled **supplementary** because their reported effect scales or analyzed populations differ from the primary target |
 | Multiplicity | One primary hypothesis; secondary outcomes exploratory, no confirmatory claims |
 | Random seed | 7122026; local RNG state preserved |
 | Outcome simulation | Hypothetical Bernoulli p=.30/.45 followed by independent 10% unavailable-assessment indicator |
@@ -50,7 +50,7 @@ The primary endpoint is `documented_response` with no missing values by construc
 1. Verify one row per person, exactly two arms, 1:1 allocation, unique IDs, 0/1 primary values and consistent missing counts.
 2. Report randomized N, per-arm randomized n, per-arm assessed and unassessed counts, documented pCR numerator and denominator.
 3. Calculate B−A risk difference; report the 95% CI and two-sided primary p-value, without interpreting p as probability of truth.
-4. Display event proportions and uncertainty with denominators, primary contrast direction and a missingness summary. Report Fisher exact as sensitivity and assessed-only analysis as a different estimand.
+4. Display event proportions and uncertainty with denominators, primary contrast direction and a missingness summary. Label the Fisher conditional odds ratio and assessed-only contrast as supplementary; the latter changes the endpoint population. A sensitivity analysis for the primary estimand must retain that target while varying its assumptions.
 5. State statistical assumptions, simulation process and why results do not imply biological truth or clinical effect. Run validation tests before claiming R output has been independently reproduced.
 
 **Required review for any real study:** G0 citation validity; G1 permission; G2 unique keys, units and missingness; G3 time zero/estimand and randomization; G5 inference and interval suitability; G7 plot/label review; G8 independent computational replay. Governance and ethics approval remain separate.
@@ -65,4 +65,6 @@ Rscript --vanilla 03_learning/tests/test_breast_cancer_protocol_replay.R
 Rscript -e 'rmarkdown::render("03_learning/examples/breast_cancer_protocol_report.Rmd", output_format="html_document")'
 ```
 
-The code has to be executed with a real R installation before any numerical result can be marked validated. Source standards: [SPIRIT 2025](https://www.bmj.com/content/389/bmj-2024-081477), [CONSORT 2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC11995449/), and [ICH E9(R1)](https://www.fda.gov/media/108698/download). Verify current versions for clinical use; protocol statements above are original teaching specifications.
+The code has to be executed with a real R installation before any numerical result can be marked validated. Source standards: [SPIRIT 2025](https://www.bmj.com/content/389/bmj-2024-081477), [CONSORT 2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC11995449/), and [ICH E9(R1), final FDA guidance (May 2021)](https://www.fda.gov/media/148473/download). Protocol statements above are original teaching specifications.
+
+**Terminology correction — 2026-11-21:** Removed the ambiguous “treatment-policy-style” label and distinguished supplementary comparisons from sensitivity analyses of the same estimand. Unavailable assessment is a missing-data state; it is not itself evidence of a clinical intercurrent event. The frozen documented-response rule, simulation, seed, sample-size calculation and primary estimator are unchanged.

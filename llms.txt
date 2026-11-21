@@ -84,3 +84,8 @@ Stable route manifest: https://github.com/pskeffington/pauls_notes/blob/main/doc
 - [Agent operating contract](https://github.com/pskeffington/pauls_notes/blob/main/AGENTS.md): scoped task selection, privacy boundaries and verification.
 - [Agent roadmap and task queue](https://github.com/pskeffington/pauls_notes/blob/main/docs/agent-tasking.md): stable IDs, dependencies, acceptance gates and handoffs.
 - [Agent route index](https://github.com/pskeffington/pauls_notes/blob/main/docs/agent-index.md): find the controlling documents for every agent workstream.
+
+## Breast cancer investigator pathway
+- [Investigator navigation](https://github.com/pskeffington/pauls_notes/blob/main/docs/NAVIGATION.md#breast-cancer-investigator-pathway): question, data, protocol, analysis, reporting and review; reuses canonical sources.
+- [Clinical data and endpoint definitions](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-02-clinical-oncology-data.md): receptor/classifier distinctions; pCR, RCB, IDFS, IBCFS and EFS; TCGA/CDR/WDBC suitability; patient and specimen denominators. Navigation route `clinical_data`.
+- [Scientific reporting](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/bio_stats/SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md): canonical estimate, uncertainty, denominator, test and interpretation contract. Navigation route `scientific_reporting`.

@@ -114,9 +114,20 @@
           "GDC-BIO",
           "GDC-ENTITY"
         ],
+        "2.1. Preserve the patient-to-assay hierarchy": [
+          "GDC-BARCODE",
+          "GDC-BIO",
+          "LEAKAGE"
+        ],
         "3. Stage, grade, histology and molecular classification": [
           "NCI-STAGE",
           "NCI-GRADE"
+        ],
+        "3.1. Keep breast cancer receptor findings and molecular subtypes distinct": [
+          "ASCO-CAP-ER-2020",
+          "ASCO-CAP-HER2-2023",
+          "FDA-HER2-2025",
+          "TCGA-BRCA-2012"
         ],
         "4. Response and toxicity are different constructs": [
           "RECIST",
@@ -124,11 +135,24 @@
         ],
         "5. Endpoint semantics and the denominator": [
           "NCI-OS",
-          "TRIPOD-AI"
+          "IMMORTAL-TIME-2007"
+        ],
+        "5.1. Define breast cancer endpoints before selecting a model": [
+          "STEEP-2021",
+          "NEOSTEEP-2023",
+          "FDA-PCR-2020",
+          "ICH-E9-R1-2021"
         ],
         "6. A minimum clinical oncology research dictionary": [
           "GDC-ENTITY",
           "STROBE"
+        ],
+        "6.1. Match the breast cancer dataset to the scientific question": [
+          "GDC-REPOSITORY",
+          "GDC-RNA",
+          "TCGA-CDR-2018",
+          "UCI-WDBC",
+          "UCI-WPBC"
         ],
         "7. Worked example: a teaching extract with related records": [
           "GDC-BIO",
@@ -138,13 +162,20 @@
           "GDC-ENTITY",
           "STROBE"
         ],
+        "7.1. Worked planning example: account for every analysis denominator": [
+          "STROBE",
+          "MISSING"
+        ],
         "8. Research governance": [
           "HHS-RESEARCH",
           "GDC-BIO"
         ],
         "9. Competency exercises and answer checks": [
           "RECIST",
-          "NCI-STAGE"
+          "NCI-STAGE",
+          "UCI-WDBC",
+          "NEOSTEEP-2023",
+          "TCGA-BRCA-2012"
         ],
         "10. Core sources and further reading": [
           "NCI-CTCAE",

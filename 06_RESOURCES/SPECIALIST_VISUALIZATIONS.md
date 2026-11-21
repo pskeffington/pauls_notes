@@ -110,7 +110,7 @@ attr(micro_plot, "specimens")
 
 ## 5. Large-n scientific distribution: full data + audited sampling
 
-The violin summarizes *all* valid observations; a deterministic subset of raw observations is overlaid. Both observed extremes are always retained for each group. The function records original N, displayed n, retained extrema, and seed without mutating the caller's random-number generator state.
+The violin summarizes *all* valid observations with Okabe–Ito group fills; a deterministic subset of raw observations is overlaid in neutral grey (`#808080`, opacity 0.4). Both observed extremes are retained per group. The function records original N, displayed n, retained extrema, and seed without mutating the caller's random-number generator state.
 
 ```r
 large <- data.frame(

@@ -15,8 +15,24 @@
 | Empirical ROC curve | §3.9 / Fig. 3.7 uses sensitivity vertically versus 1−specificity horizontally, connecting threshold coordinates | `biostat_graph_roc()`, with explicit positive class, threshold coordinates, held-out/synthetic partition label and rank/trapezoid AUC identity | Axes both 0–1, never interchange specificity with false-positive rate; AUC is discrimination rather than calibration or PPV |
 | Survival curve | §14.9 / Fig. 14.5 displays group-specific estimated survival probabilities against elapsed time | Existing workbook's `survival::survfit()` plot, with months on x and event-free probability on y; censor marks and diagnostic context | Survival is conditional on time zero/event/censoring; these curves are not risk ratios or competing-risk cumulative incidence |
 | Ordinary continuous histogram | Distribution shape through adjacent numeric bins; teaching supplement | Gallery’s direct `ggplot2::geom_histogram()` | Frequency counts, bins and measurement units; not categorical percentages |
+| **Discrete theoretical PMF** | Teaching supplement, not a claim of directly recreated textbook artwork | Base-R mass functions `stats::dbinom()` and `stats::dpois()`; use explicit integer-count sticks/bars | x = count, y = **probability mass**; point/range/tail separately defined; shaded interval is summed mass, **not a confidence interval** |
 
 The source’s original plot is not recreated, traced, downloaded, embedded, or supplied as a reusable asset. The new figures use entirely synthetic breast cancer teaching values and the existing Okabe–Ito scientific palette.
+
+## Graph selection and description guidance
+
+Select the graph from the estimand and data-generating structure, not from a convenient plotting function. The [statistical reporting standards, §4B](SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md#4b--statistical-graphic-vocabulary-and-results-reporting) define precise axis, mark, figure-caption and results-language contracts for probability-mass functions, categorical bars, continuous histograms, boxplots, Q–Q and residual diagnostics, mean/CI plots, bootstrap distributions, scatterplots, ROC and survival curves.
+
+A figure description must identify **what is visible** (shape, separation, spread, outliers, monotonic relation, central/tail deviations), whereas a separate inference sentence names **the computed estimator/test and its uncertainty**. A smooth density, a Q–Q reference line, a boxplot whisker and a fitted-model confidence band do not mean the same thing.
+
+- **PMF:** say *probability mass assigned to integer event counts*, not observed frequency. For an inclusive event range, the probability is the sum of mass bars; the dashed count marker represents a particular queried value.
+- **Histogram:** say *observed frequency within numeric bins* or *estimated density* according to the plotted y-axis. For continuous variables, the probability at any one exact real number under an absolutely continuous model is zero, whereas a positive-width interval can have positive probability.
+- **Boxplot:** report the median, IQR, quartile algorithm, whisker rule, and outlier display. The box and whiskers are not standard errors or confidence intervals. If a plus sign encodes a mean, name it.
+- **Q–Q diagnostic:** report *alignment with the reference line*, curvature, deviations in tails, and ties. Avoid phrases such as “normality confirmed” or “model assumptions passed.”
+- **Residual plot:** report visible structure or spread in residuals by fitted value/group; it does not assess sampling independence merely because it looks patternless.
+- **ROC:** report *sensitivity versus false-positive rate across thresholds*, not sensitivity versus specificity; AUC describes rank discrimination, not calibration or overall classification accuracy.
+
+Use no more than two findings-led sentences when summarizing one graph in a short teaching report. Render and inspect the output before writing a claim about observed features.
 
 ## Explicit conventions and compatibility
 

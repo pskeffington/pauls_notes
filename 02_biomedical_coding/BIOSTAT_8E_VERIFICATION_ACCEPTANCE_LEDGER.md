@@ -37,7 +37,7 @@ Run at repository root in a clean R-enabled machine:
 python3 scripts/check_biostat_8e_alignment.py
 Rscript --vanilla 06_RESOURCES/tests/test_biostat_descriptive_contract.R
 Rscript --vanilla 02_biomedical_coding/tests/test_full_study_execution.R
-Rscript --vanilla 03_learning/tests/test_biostat_method_crosswalk.R
+Rscript --vanilla 06_RESOURCES/tests/test_biostat_method_crosswalk.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_test_atlas.R
 Rscript --vanilla -e 'rmarkdown::render("02_biomedical_coding/examples/SYNTHETIC_BREAST_CANCER_FULL_STUDY.Rmd", output_format="html_document", quiet=TRUE)'
 ```

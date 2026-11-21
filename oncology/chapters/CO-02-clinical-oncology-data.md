@@ -1,6 +1,6 @@
 # CO-02 — Clinical Oncology Data: From Care to Research Variables
 
-*Computational Oncology: A Clinician–Scientist's Guide · Part I · Draft 0.1*  
+*Computational Oncology: A Clinician–Scientist's Guide · Part I · Draft 0.2*
 [Book home](../README.md) · [Introduction](../INTRODUCTION.md) · [CO-01: Cancer biology](CO-01-cancer-biology.md) · [Roadmap](../ROADMAP.md)
 
 ## Why clinical data matter
@@ -28,11 +28,11 @@ The reader should be able to:
 
 ## 1. The clinical timeline precedes the data model
 
-Consider a person diagnosed with lung cancer. A diagnostic biopsy may occur before definitive staging; a molecular result may become available later; a first treatment may start later still. A follow-up scan may be completed at another institution. The record might also contain prior cancers, multiple lesions, additional lines of treatment and incomplete follow-up.
+Consider a person diagnosed with breast cancer. A diagnostic biopsy may occur before definitive staging; a molecular result may become available later; a first treatment may start later still. A follow-up scan may be completed at another institution. The record might also contain prior cancers, multiple lesions, additional lines of treatment and incomplete follow-up.
 
 A research question determines which timeline is relevant. For example, measuring overall survival *from diagnosis* is different from measuring survival *from initiation of second-line therapy*. An analysis that labels both as `survival_months` obscures a major scientific difference.
 
-We should document at least five elements for every clinically defined time-to-event endpoint:
+Every clinically defined time-to-event endpoint requires at least five documented elements:
 
 - **Population:** whose follow-up contributes to the estimate?
 - **Time origin:** the precise date or eligibility event at which the clock begins.
@@ -64,6 +64,16 @@ This is an illustrative normalized schema, not a claim that all electronic healt
 
 **Section references:** [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/)
 
+### 2.1. Preserve the patient-to-assay hierarchy
+
+In TCGA, participant, sample, portion, analyte and aliquot identifiers describe different levels of specimen processing. A file is a digital product associated with that lineage. The [GDC barcode documentation](https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/) explains the hierarchy and identifies UUIDs as primary identifiers; a human-readable barcode remains useful for interpretation. Preserve both identifiers where supplied, with the source relationships. A shortened barcode is not a substitute for verifying the submitted lineage.
+
+Before creating an analysis table, state its intended grain: one row per participant, specimen, lesion or observation. Record the number of distinct identifiers at each retained level. For a participant-level analysis, prespecify how multiple eligible specimens are handled; options might include a defined baseline specimen or an explicitly paired analysis. The choice follows the biological question and collection history. Selecting the first available filename does not define a biological sampling rule.
+
+Consider an invented study with six participants, two tissue specimens per participant and two assay files per specimen. It contains 24 files, 12 specimens and six participants. A paired tumor–normal contrast has at most six participant pairs, provided the specimen identities and pairing are verified. The file count supplies neither 24 independent participants nor 24 independent treatment assignments. If the target is prediction in new participants, the related records must remain together across training and evaluation sets.
+
+**Section references:** [TCGA Barcode](https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/) · [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization) · [Kapoor and Narayanan: Data Leakage (2023)](https://doi.org/10.1016/j.patter.2023.100804)
+
 ## 3. Stage, grade, histology and molecular classification
 
 **Stage** generally characterizes extent of disease; many solid tumors use TNM-related systems, but staging is disease-specific and some cancers use other systems ([NCI cancer staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging)). **Grade** typically characterizes histologic or cellular differentiation or aggressiveness according to a particular grading framework. Neither should be treated as a simple continuous number merely because it is encoded numerically.
@@ -80,6 +90,23 @@ An example oncology dataset might contain:
 Do not calculate a mean of stage categories as though the differences between stage I and II and between III and IV have equal scientific meaning.
 
 **Section references:** [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging) · [Tumor Grade](https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/tumor-grade)
+
+### 3.1. Keep breast cancer receptor findings and molecular subtypes distinct
+
+A breast cancer study may contain pathology-based receptor results, expression-based molecular assignments and quantitative molecular measurements. These are separate variables. The [original TCGA breast cancer analysis](https://doi.org/10.1038/nature11412) demonstrated that clinical HER2 positivity and the HER2-enriched expression subtype do not identify identical groups. Consequently, a label such as `subtype` needs a definition, assay or classifier, specimen and assessment time.
+
+| Research variable | Information to retain | Interpretation boundary |
+| --- | --- | --- |
+| ER and progesterone receptor by immunohistochemistry (IHC) | Percentage of stained tumor nuclei, staining intensity when available, interpretation, controls, specimen and guideline version | A receptor result is not an RNA-expression value |
+| HER2 by IHC and in situ hybridization (ISH) | IHC score, ISH result when performed, final interpretation, assay and specimen | Preserve an equivocal or unresolved result; do not silently recode it as negative |
+| Intrinsic expression subtype | Classifier name/version, input platform, preprocessing, source label and specimen | A HER2-enriched assignment is not a replacement for clinical HER2 testing |
+| Individual gene measurement | Gene identifier, assay, units, normalization and sample identity | An ESR1 or ERBB2 expression threshold requires its own justification |
+
+Under the [2020 ASCO/CAP ER/PgR guideline](https://ascopubs.org/doi/10.1200/JCO.19.02309), 1%–100% nuclear staining is interpreted as positive; invasive cancers with 1%–10% ER staining have the specific ER Low Positive reporting category. That category should not be automatically applied to PgR. A research dictionary should preserve the percentage and reported interpretation so that any later grouping remains reproducible.
+
+Interpretation must also retain its date and purpose. The [2023 ASCO/CAP HER2 update](https://www.cap.org/cap-guidelines/her2-testing-in-breast-cancer-2023-guideline-update/) affirmed the existing testing algorithm and did not introduce a HER2-low interpretive category. Separately, a [January 2025 FDA approval](https://www.fda.gov/drugs/cancer-approvals/fda-approves-fam-trastuzumab-deruxtecan-nxki-unresectable-or-metastatic-hr-positive-her2-low-or-her2) used HER2-low and HER2-ultralow eligibility definitions in a specified advanced-disease setting. These distinct uses make a single undated `HER2_positive` flag inadequate for reproducing all research groupings; retain the underlying test results and the exact grouping rule.
+
+**Section references:** [Estrogen and Progesterone Receptor Testing in Breast Cancer: ASCO/CAP Guideline Update (2020)](https://ascopubs.org/doi/10.1200/JCO.19.02309) · [HER2 Testing in Breast Cancer: ASCO/CAP Guideline Update (2023)](https://www.cap.org/cap-guidelines/her2-testing-in-breast-cancer-2023-guideline-update/) · [FDA approval: HR-positive, HER2-low or HER2-ultralow breast cancer (January 2025)](https://www.fda.gov/drugs/cancer-approvals/fda-approves-fam-trastuzumab-deruxtecan-nxki-unresectable-or-metastatic-hr-positive-her2-low-or-her2) · [Comprehensive molecular portraits of human breast tumours (2012)](https://doi.org/10.1038/nature11412)
 
 ## 4. Response and toxicity are different constructs
 
@@ -111,7 +138,25 @@ For right-censored data we may store `time` plus `event` for a given estimand, w
 
 **Immortal-time warning:** defining the exposed group using a treatment that could only be received after surviving to a later date, then analyzing survival from an earlier origin as if exposure existed from the start, creates a structural bias. Represent treatment start and eligibility times explicitly.
 
-**Section references:** [Overall Survival (NCI Dictionary)](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/overall-survival) · [TRIPOD+AI Reporting Statement (2024)](https://pubmed.ncbi.nlm.nih.gov/38626948/)
+**Section references:** [Overall Survival (NCI Dictionary)](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/overall-survival) · [Immortal time bias in observational studies of drug effects (2007)](https://pubmed.ncbi.nlm.nih.gov/17252614/)
+
+### 5.1. Define breast cancer endpoints before selecting a model
+
+Breast cancer endpoint standards distinguish the treatment setting, starting point and qualifying events. [STEEP 2.0](https://pmc.ncbi.nlm.nih.gov/articles/PMC10166345/) addresses adjuvant trials; [NeoSTEEP](https://pmc.ncbi.nlm.nih.gov/articles/PMC10522109/) addresses neoadjuvant trials. Use the chosen standard and protocol together when constructing the outcome variable.
+
+| Endpoint | Definition to preserve | Required study information |
+| --- | --- | --- |
+| Pathologic complete response (pCR) | NeoSTEEP prefers `ypT0/Tis ypN0`: no residual invasive cancer in the resected breast or sampled regional nodes; residual in situ disease in the breast is allowed | Surgery/pathology assessment, breast and nodal findings, analysis population and rules for missing surgery or assessment |
+| Residual cancer burden (RCB) | Retain the continuous score and, when used, its defined class; NeoSTEEP recommends its collection as a secondary endpoint when feasible | Calculation method, pathology inputs, specimen and assessment timing |
+| Invasive disease-free survival (IDFS) | STEEP includes invasive breast recurrence, contralateral invasive breast cancer, second nonbreast invasive primary cancer and death from any cause | Prespecified origin, event components, first qualifying event and ascertainment/censoring rules |
+| Invasive breast cancer-free survival (IBCFS) | STEEP 2.0 excludes second nonbreast invasive primary cancers from the IDFS event set | Exact event-component mapping; retain the IBCFS name |
+| Event-free survival (EFS) in a neoadjuvant trial | Define events from random assignment, including relevant presurgery progression and deaths | Randomization date and events before as well as after surgery |
+
+For pCR, a breast-only response field cannot establish the combined breast-and-node endpoint. A stricter definition excluding residual in situ disease must be named and prespecified. NeoSTEEP also classifies absent surgery or inadequate final pathology as non-pCR for its trial endpoint; this prespecified classification does not establish an unobserved biological response. For time-to-event outcomes, starting follow-up at surgery would omit the earlier risk period that a randomization-based EFS estimand is intended to capture. These distinctions change the analysis dataset before any regression function is selected.
+
+Write the endpoint specification as a short operational paragraph: eligible population; time origin or assessment window; positive event definition; source and adjudication; censoring or competing-event rules; and missing-outcome strategy. Then connect it to the [cancer study-design chapter](../../03_learning/bio_stats/CANCER_STUDY_DESIGN.md) and [statistical reporting standards](../../03_learning/bio_stats/SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md). A familiar acronym alone is insufficient documentation.
+
+**Section references:** [Updated Standardized Definitions for Efficacy End Points: STEEP Version 2.0 (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10166345/) · [Standardized Definitions for Efficacy End Points in Neoadjuvant Breast Cancer Clinical Trials: NeoSTEEP (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10522109/) · [Pathological Complete Response in Neoadjuvant Treatment of High-Risk Early-Stage Breast Cancer (2020)](https://www.fda.gov/media/83507/download) · [ICH E9(R1): Estimands and Sensitivity Analysis, Final FDA Guidance (May 2021)](https://www.fda.gov/media/148473/download)
 
 ## 6. A minimum clinical oncology research dictionary
 
@@ -137,6 +182,26 @@ Missingness codes should distinguish truly unknown, not applicable, not collecte
 Each research release must include provenance: source system, extraction date, codebook version, transformation history, access classification and eligibility rules.
 
 **Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
+
+### 6.1. Match the breast cancer dataset to the scientific question
+
+Dataset selection follows the required measurements and outcomes. The table distinguishes the data products that are often described collectively as “the breast cancer data.” It is a source-to-question assessment; no participant records have been downloaded or admitted by this chapter.
+
+| Data product | What it supplies | Appropriate starting use and missing requirements |
+| --- | --- | --- |
+| GDC clinical and biospecimen exports | Clinical annotations and specimen relationships for the selected cases | Inventory variables, assess missingness and define cohort membership; these exports alone are not gene-expression measurements |
+| GDC file manifest | Identifiers of selected downloadable files | Reproduce file selection and retrieval; a manifest is not the contents of those files |
+| TCGA-BRCA assay files with linked metadata | Measurements of the selected molecular modality | Molecular analysis after verifying file type, workflow, identifiers and sample selection; clinical JSON does not supply the corresponding RNA-seq matrix |
+| TCGA Pan-Cancer Clinical Data Resource (TCGA-CDR) | Publication-specific, curated clinical endpoints, including OS, PFI, DFI and DSS | Endpoint-based molecular research after checking derivation, eligibility, follow-up and version |
+| Wisconsin Diagnostic Breast Cancer (WDBC) | 569 diagnostic instances with 30 features derived from breast-mass fine-needle aspirate images and a benign/malignant target | Diagnostic-feature description and classification; the documented schema lacks treatment histories and time-to-event follow-up |
+
+The first three distinctions follow the [GDC repository documentation](https://docs.gdc.cancer.gov/Data_Portal/Users_Guide/Repository/) and [mRNA pipeline specification](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/). For RNA-seq work, record the chosen count or normalized-expression field, annotation and workflow; the availability of an expression file does not make its columns interchangeable. The same candidate cohort can yield different usable sample counts for different assays.
+
+[Liu et al. (2018)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6066282/) recommended PFI and DFI for the evaluated BRCA cohort and advised caution with OS and DSS because of follow-up limitations. That historical recommendation does not certify a newly extracted subset. Their PFI includes specified new tumor events or death with tumor; it must not be renamed trial PFS. Their DFI construction requires evidence that initial treatment rendered the patient disease-free. Record the curated release and derivation instead of inferring either endpoint from a generic vital-status field.
+
+The [UCI WDBC record](https://archive.ics.uci.edu/dataset/17/breast-cancer-wisconsin-data-set) documents diagnostic morphometric features, not sequencing data. A Kaplan–Meier analysis, treatment-response comparison or ESR1 expression study therefore requires another source with those variables. WDBC is also distinct from the [Wisconsin prognostic dataset](https://www.archive.ics.uci.edu/dataset/16/breast%2Bcancer%2Bwisconsin%2Bprognostic); identify the exact dataset and DOI. For either WDBC or TCGA, inspect the actual schema, source terms and eligibility before selecting a statistical test. Use the repository's [research workflow](../../docs/research-workflow.md) for the separate data-access and provenance review.
+
+**Section references:** [GDC Repository and Download Products](https://docs.gdc.cancer.gov/Data_Portal/Users_Guide/Repository/) · [GDC mRNA Analysis Pipeline](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/) · [An Integrated TCGA Pan-Cancer Clinical Data Resource to Drive High-Quality Survival Outcome Analytics (2018)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6066282/) · [Breast Cancer Wisconsin (Diagnostic), DOI:10.24432/C5DW2B](https://archive.ics.uci.edu/dataset/17/breast-cancer-wisconsin-data-set) · [Breast Cancer Wisconsin (Prognostic), DOI:10.24432/C5GK50](https://www.archive.ics.uci.edu/dataset/16/breast%2Bcancer%2Bwisconsin%2Bprognostic)
 
 ## 7. Worked example: a teaching extract with related records
 
@@ -179,6 +244,25 @@ This example checks **join cardinality**, not a cancer treatment outcome. An ass
 
 **Section references:** [Biospecimen Data (GDC Documentation)](https://docs.gdc.cancer.gov/Encyclopedia/pages/Biospecimen_Data/) · [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/)
 
+### 7.1. Worked planning example: account for every analysis denominator
+
+Suppose an invented breast cancer study has 12 eligible participants. Ten have a recorded baseline assay; eight have sufficient follow-up information for a separately specified endpoint; seven have both. These values are a constructed set example, not measurements from WDBC or TCGA.
+
+Let $A$ denote participants with an eligible assay and $F$ those with the required follow-up. Then
+
+$$
+|A|=10,\qquad |F|=8,\qquad |A\cap F|=7,\qquad
+|A\cup F|=10+8-7=11.
+$$
+
+The assay-only group contains three participants, the follow-up-only group contains one, and one has neither. The joint-analysis denominator is therefore seven; replacing it with 10 or 12 would misstate who contributes to that particular analysis. Seven complete records also do not establish that complete-case analysis answers the intended population question; the missing-data assessment remains part of the design.
+
+The resulting cohort record should show the 12-person eligibility roster, the 10-person assay subset, the eight-person endpoint subset and their seven-person intersection. Exclusions need stated reasons, and each table or figure needs its applicable denominator. If the question changes to baseline assay availability, all 12 eligible people again form the relevant denominator.
+
+This example demonstrates the bookkeeping needed before a molecular–outcome analysis. It does not supply enough information to fit a survival model: the endpoint definition, event indicators, elapsed times and assumptions must still be specified. The [missing-data chapter](../../03_learning/missingness-and-comparisons.md) develops the observation process, while the [analysis record](../../templates/analysis-record.md) preserves the decisions made for a particular study.
+
+**Section references:** [STROBE Observational Study Reporting](https://www.equator-network.org/reporting-guidelines/strobe/) · [Sterne et al., Missing Data (2009)](https://pubmed.ncbi.nlm.nih.gov/19564179/)
+
 ## 8. Research governance
 
 Patient-linked clinical records may contain direct or indirect identifiers and may be subject to privacy, institutional, contractual and consent restrictions. Publicly available documentation about a data source does not authorize exporting its restricted data. Prefer fabricated teaching fixtures. Any real oncology research dataset requires project-specific review of access rights, acceptable use, retention, disclosure and de-identification before ingestion or publication.
@@ -195,8 +279,12 @@ A distinction central to this book: **a model that can read a record is not nece
 4. **Safety:** Is a grade 3 AE necessarily caused by study therapy? *Check:* no; severity and attribution are distinct.
 5. **Protocol design:** A paper reports ORR without specifying response criteria or the denominator. What must be requested? *Check:* response system/version, imaging rules, evaluable population, assessment/confirmation and missingness rules.
 6. **Data debugging:** A specimen-level table is joined to an event table by `person_id` and the number of event rows doubles. What should be verified? *Check:* keys, event grain, duplicate matches and intended estimand before deduplication.
+7. **Dataset suitability:** Can the documented WDBC table estimate five-year recurrence? *Check:* no event times or recurrence follow-up are supplied; diagnostic status is a different outcome.
+8. **Endpoint definition:** A post-treatment breast specimen has no invasive tumor but a sampled regional node contains invasive disease. Does it satisfy NeoSTEEP's preferred pCR definition? *Check:* no; both the breast and sampled nodes must meet the definition.
+9. **Label provenance:** Is a HER2-enriched expression assignment sufficient to replace an absent clinical HER2 result? *Check:* no; preserve the classifier result and missing clinical assay separately.
+10. **Analysis population:** Reconstruct the four mutually exclusive groups in the 12-person planning example. *Check:* seven with both requirements, three with assay only, one with follow-up only and one with neither; their sum is 12.
 
-**Section references:** [RECIST 1.1: Revised Response Evaluation Criteria (2009)](https://pubmed.ncbi.nlm.nih.gov/19097774/) · [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging)
+**Section references:** [RECIST 1.1: Revised Response Evaluation Criteria (2009)](https://pubmed.ncbi.nlm.nih.gov/19097774/) · [Cancer Staging](https://www.cancer.gov/about-cancer/diagnosis-staging/staging) · [Breast Cancer Wisconsin (Diagnostic), DOI:10.24432/C5DW2B](https://archive.ics.uci.edu/dataset/17/breast-cancer-wisconsin-data-set) · [Standardized Definitions for Efficacy End Points in Neoadjuvant Breast Cancer Clinical Trials: NeoSTEEP (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10522109/) · [Comprehensive molecular portraits of human breast tumours (2012)](https://doi.org/10.1038/nature11412)
 
 ## 10. Core sources and further reading
 
@@ -207,7 +295,7 @@ A distinction central to this book: **a model that can read a record is not nece
 - NCI GDC. [Biospecimen Data Standardization](https://gdc.cancer.gov/about-data/gdc-data-processing/biospecimen-data-standardization). Case-to-sample lineage and specimen metadata.
 - NCI. [TCGA Data Types Collected](https://www.cancer.gov/ccg/research/genome-sequencing/tcga/using-tcga-data/types). Illustrates clinical, molecular and biospecimen data with access distinctions.
 
-**Review record:** Draft 0.1; original synthesis and invented teaching example. Source links checked during October 2026 authoring; exact practice is disease-, protocol- and edition-specific. No clinical validation or independent expert peer review has been completed.
+**Review record:** Draft 0.2; original synthesis and invented teaching examples. The breast cancer endpoint, receptor and data-product sources added in this revision were checked on November 21, 2026. The cohort-set arithmetic is explicit; no new participant-data analysis or clinical validation is claimed. Earlier material retains its October 2026 source-review scope. Independent clinical expert review remains pending.
 
 **Next:** [CO-03 — Molecular Foundations](CO-03-molecular-foundations.md).
 

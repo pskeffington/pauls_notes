@@ -10,6 +10,8 @@ A ten-part, 60-chapter independent learning architecture spanning cancer biology
 
 Read the original [Introduction — Why Cancer Research Matters](INTRODUCTION.md), then follow the drafted opening sequence.
 
+For an active breast cancer study, use the [investigator pathway](../docs/NAVIGATION.md#breast-cancer-investigator-pathway). The expanded [clinical-data chapter](chapters/CO-02-clinical-oncology-data.md) covers patient/specimen lineage, receptor and molecular labels, breast-specific endpoints, TCGA/WDBC source selection and analysis denominators. The [applied data-science opening](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) supplies a worked introduction to the question-to-result reasoning.
+
 | Chapter | Clinical and scientific question | Manuscript status |
 | --- | --- | --- |
 | [CO-01: Cancer Biology](chapters/CO-01-cancer-biology.md) | How does cancer biology become a research variable? | Draft; section-linked evidence |

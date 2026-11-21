@@ -133,3 +133,24 @@ The following records are in the source registry for foundational probability an
 ## Verification and release boundary
 
 The listed URLs have been inspected for subject suitability in the October 2026 manuscript work, but availability, source version, clinical interpretation, publication rights and suitability for any specific claim require independent review before chapter release. The course examples are fabricated and no protected or patient-level records are stored here.
+
+## Breast cancer investigation: clinical data and endpoints
+
+Sources below were checked for the stated additions on **2026-11-21**. This dated claim-level source review does not replace independent clinical review. The registry retains earlier review dates for unchanged sources.
+
+| Reference ID | Direct linked source | Relevance |
+| --- | --- | --- |
+| `GDC-BARCODE` | [TCGA Barcode](https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/) | Participant, sample, portion, analyte and aliquot lineage; UUID identifiers |
+| `ASCO-CAP-ER-2020` | [Estrogen and Progesterone Receptor Testing in Breast Cancer: ASCO/CAP Guideline Update (2020)](https://ascopubs.org/doi/10.1200/JCO.19.02309) | IHC receptor interpretation; ER Low Positive category and distinction from PgR |
+| `ASCO-CAP-HER2-2023` | [HER2 Testing in Breast Cancer: ASCO/CAP Guideline Update (2023)](https://www.cap.org/cap-guidelines/her2-testing-in-breast-cancer-2023-guideline-update/) | Dated HER2 assay interpretation, retained IHC/ISH results and testing algorithm |
+| `FDA-HER2-2025` | [FDA approval: HR-positive, HER2-low or HER2-ultralow breast cancer (January 2025)](https://www.fda.gov/drugs/cancer-approvals/fda-approves-fam-trastuzumab-deruxtecan-nxki-unresectable-or-metastatic-hr-positive-her2-low-or-her2) | Example of dated, setting-specific assay-defined eligibility; not treatment recommendations |
+| `TCGA-BRCA-2012` | [Comprehensive molecular portraits of human breast tumours (2012)](https://doi.org/10.1038/nature11412) | Distinction between clinical HER2 status and intrinsic expression subtype |
+| `IMMORTAL-TIME-2007` | [Immortal time bias in observational studies of drug effects (2007)](https://pubmed.ncbi.nlm.nih.gov/17252614/) | Time-fixed classification using later treatment information and survival bias |
+| `STEEP-2021` | [Updated Standardized Definitions for Efficacy End Points: STEEP Version 2.0 (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10166345/) | Adjuvant breast cancer endpoint components; IDFS and IBCFS distinctions |
+| `NEOSTEEP-2023` | [Standardized Definitions for Efficacy End Points in Neoadjuvant Breast Cancer Clinical Trials: NeoSTEEP (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10522109/) | Preferred pCR definition, RCB score/class, neoadjuvant EFS and assessment rules |
+| `GDC-REPOSITORY` | [GDC Repository and Download Products](https://docs.gdc.cancer.gov/Data_Portal/Users_Guide/Repository/) | Clinical/biospecimen exports, file manifests and measurement-file contents |
+| `TCGA-CDR-2018` | [An Integrated TCGA Pan-Cancer Clinical Data Resource to Drive High-Quality Survival Outcome Analytics (2018)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6066282/) | Curated survival endpoint construction and historical BRCA follow-up recommendations |
+| `UCI-WDBC` | [Breast Cancer Wisconsin (Diagnostic), DOI:10.24432/C5DW2B](https://archive.ics.uci.edu/dataset/17/breast-cancer-wisconsin-data-set) | 569 diagnostic instances, 30 morphometric features and benign/malignant target; schema suitability |
+| `UCI-WPBC` | [Breast Cancer Wisconsin (Prognostic), DOI:10.24432/C5GK50](https://www.archive.ics.uci.edu/dataset/16/breast%2Bcancer%2Bwisconsin%2Bprognostic) | Separate Wisconsin prognostic dataset with recurrence/follow-up information |
+| `ICH-E9-R1-2021` | [ICH E9(R1): Estimands and Sensitivity Analysis, Final FDA Guidance (May 2021)](https://www.fda.gov/media/148473/download) | Estimands, intercurrent events, missing data, sensitivity and supplementary analyses; final guidance replaces 2017 draft |
+| `FDA-PCR-2020` | [Pathological Complete Response in Neoadjuvant Treatment of High-Risk Early-Stage Breast Cancer (2020)](https://www.fda.gov/media/83507/download) | Breast-and-node pCR definitions and their study-setting context |

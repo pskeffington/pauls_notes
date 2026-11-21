@@ -53,7 +53,7 @@ knitr::kable(design, digits=3,
 
 Participants are assigned 1:1 to A or B using fixed-seed pseudorandom allocation. Synthetic underlying binary responses are generated independently by assigned arm, followed by an independent assessment-unavailable indicator. The composite endpoint is 1 only for a measured underlying response; otherwise 0.
 
-The primary estimand is the randomized-arm **difference in documented response rates (B − A)**. The teaching analysis reports an unpooled Wald 95% CI for the risk difference and a two-sided independent two-proportion Pearson score test with continuity correction disabled. Fisher's exact test and a complete-case comparison are *sensitivity analyses*, not a replacement primary analysis. The Wald CI is used to expose the formula; more robust score/Newcombe or exact interval methods require methodological review before clinical use. There is one primary hypothesis; secondary results are exploratory.
+The primary estimand is the randomized-arm **difference in documented response proportions (B − A)**. The teaching analysis reports an unpooled Wald 95% CI for the risk difference and a two-sided independent two-proportion Pearson score test with continuity correction disabled. Fisher's conditional odds ratio and the assessed-only comparison are *supplementary analyses*: the first changes the reported effect scale; the second changes the analyzed population. A sensitivity analysis targeting the primary estimand would retain that target while varying its assumptions, following [ICH E9(R1), §A.5](https://www.fda.gov/media/148473/download). The Wald CI is used to expose the formula; more robust score/Newcombe or exact interval methods require methodological review before clinical use. There is one primary hypothesis; secondary results are exploratory.
 
 # Data quality and participant flow
 
@@ -106,22 +106,22 @@ cat(sprintf(
 ))
 ```
 
-# Sensitivity analyses
+# Supplementary analyses
 
 ```{r sensitivity}
 sensitivity <- data.frame(
-  Method=c("Fisher exact (two-sided, documented response)",
+  Method=c("Fisher exact (two-sided), odds ratio A relative to B",
            "Assessed-only risk difference B minus A"),
   Estimate=c(unname(a$fisher_test$estimate),
              a$assessed_only_difference),
-  Interpretation=c("Odds ratio, not risk ratio",
+  Interpretation=c("Odds of documented response in A divided by odds in B",
                    "Different denominator and missingness estimand")
 )
 knitr::kable(sensitivity,digits=4,
-             caption="Exploratory sensitivity comparisons")
+             caption="Exploratory supplementary comparisons")
 ```
 
-Fisher's estimate is a conditional **odds ratio**, not the primary risk difference. The assessed-only analysis conditions on having an available assessment, which may introduce selection bias and **changes the estimand**. Neither is a replacement for the prespecified composite endpoint.
+Fisher's estimate is the conditional **odds ratio for documented response in A relative to B**, following the table's A/B row order and yes/no column order. The primary risk difference uses **B minus A**; these are distinct effect scales and reference directions. The assessed-only analysis conditions on having an available assessment, which may introduce selection bias and **changes the estimand**. Neither is a replacement for the prespecified composite endpoint.
 
 # Discussion, limitations and governance
 

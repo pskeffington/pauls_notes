@@ -116,3 +116,136 @@ breast_cancer_test_report <- function(results=breast_cancer_test_atlas()) {
 # print(summary(r$linear))
 # print(summary(r$logistic))
 # print(summary(r$poisson_model))
+
+# ================================================================
+# 04 | SCIENTIFIC REPORTING EXAMPLES
+# ================================================================
+# Produce a compact Results table and narrative from the same R objects.
+# These records describe synthetic teaching data, not clinical findings.
+# Calling this function performs no file writes and installs no packages.
+breast_cancer_reporting_examples <- function(
+    results = breast_cancer_test_atlas()) {
+  stopifnot(is.list(results), is.list(results$data))
+  number <- function(x, digits = 2L) sprintf(
+    paste0("%.", digits, "f"), as.numeric(x))
+  p_text <- function(p) if (p < .001) "p < .001" else
+    paste0("p = ", sub("^0", "", number(p, 3L)))
+
+  marker <- results$data$marker
+  group <- results$data$group
+  n <- table(group)
+  means <- tapply(marker, group, mean)
+  sds <- tapply(marker, group, stats::sd)
+  # The t.test formula uses factor A as the reference first group:
+  # the estimated difference and CI are A minus B.
+  welch <- results$welch
+  d <- results$data$change
+  paired <- results$paired
+  tab <- results$data$binary_table
+  a <- unname(tab["A", "yes"])
+  b <- unname(tab["A", "no"])
+  c <- unname(tab["B", "yes"])
+  d0 <- unname(tab["B", "no"])
+  p_a <- a / (a + b)
+  p_b <- c / (c + d0)
+  rr <- p_a / p_b
+  or <- (a * d0) / (b * c)
+  rr_ci <- exp(log(rr) + c(-1, 1) * stats::qnorm(.975) *
+                 sqrt(1/a - 1/(a+b) + 1/c - 1/(c+d0)))
+  or_ci <- exp(log(or) + c(-1, 1) * stats::qnorm(.975) *
+                 sqrt(1/a + 1/b + 1/c + 1/d0))
+  pearson <- stats::chisq.test(tab, correct = FALSE)
+
+  counts <- results$data$count
+  events <- tapply(counts$visits, counts$group, sum)
+  person_years <- tapply(counts$years, counts$group, sum)
+  rates <- events / person_years
+  poisson_fit <- results$poisson_model
+  beta <- stats::coef(poisson_fit)[["groupB"]]
+  se <- sqrt(diag(stats::vcov(poisson_fit)))[["groupB"]]
+  irr <- exp(beta)
+  irr_ci <- exp(beta + c(-1, 1) * stats::qnorm(.975) * se)
+  fit_summary <- summary(poisson_fit)$coefficients
+
+  # The numerical table is the canonical source for the prose below.
+  table <- data.frame(
+    method = c("Welch two-sample t", "Paired t",
+               "Pearson chi-square", "Risk ratio A/B",
+               "Odds ratio A/B", "Poisson rate ratio B/A"),
+    estimate = c(unname(diff(rev(means))), mean(results$data$change),
+                 unname(pearson$statistic), rr, or, irr),
+    ci_lower = c(welch$conf.int[1], paired$conf.int[1],
+                 NA_real_, rr_ci[1], or_ci[1], irr_ci[1]),
+    ci_upper = c(welch$conf.int[2], paired$conf.int[2],
+                 NA_real_, rr_ci[2], or_ci[2], irr_ci[2]),
+    p_value = c(welch$p.value, paired$p.value, pearson$p.value,
+                NA_real_, NA_real_, fit_summary["groupB", "Pr(>|z|)"]),
+    stringsAsFactors = FALSE
+  )
+  stopifnot(isTRUE(all.equal(table$estimate[1],
+                             unname(welch$estimate[1] -
+                                      welch$estimate[2]))))
+
+  narrative <- c(
+    sprintf(paste0(
+      "Marker score was %s (SD %s; n = %d) in arm A and ",
+      "%s (SD %s; n = %d) in arm B. The A-minus-B mean ",
+      "difference was %s (95%% CI %s to %s; Welch t(%s) = %s, %s)."),
+      number(means["A"]), number(sds["A"]), n[["A"]],
+      number(means["B"]), number(sds["B"]), n[["B"]],
+      number(table$estimate[1]), number(welch$conf.int[1]),
+      number(welch$conf.int[2]), number(welch$parameter, 1L),
+      number(welch$statistic), p_text(welch$p.value)),
+    sprintf(paste0(
+      "In %d matched measurements, mean after-minus-before change ",
+      "was %s (SD %s; 95%% CI %s to %s; paired t(%d) = %s, %s)."),
+      length(results$data$change), number(mean(results$data$change)),
+      number(stats::sd(results$data$change)),
+      number(paired$conf.int[1]), number(paired$conf.int[2]),
+      as.integer(paired$parameter), number(paired$statistic),
+      p_text(paired$p.value)),
+    sprintf(paste0(
+      "Response occurred in %d/%d (%.1f%%) in arm A and ",
+      "%d/%d (%.1f%%) in arm B (risk difference %.1f percentage points; ",
+      "RR %s, 95%% CI %s to %s; OR %s, 95%% CI %s to %s). ",
+      "The uncorrected Pearson chi-square test gave ",
+      "χ²(%d) = %s, %s."),
+      a, a+b, 100*p_a, c, c+d0, 100*p_b,
+      100*(p_a-p_b), number(rr), number(rr_ci[1]),
+      number(rr_ci[2]), number(or), number(or_ci[1]),
+      number(or_ci[2]), as.integer(pearson$parameter),
+      number(pearson$statistic), p_text(pearson$p.value)),
+    sprintf(paste0(
+      "Arm A had %d visits over %s person-years (rate %s/year), ",
+      "versus %d over %s person-years (rate %s/year) in arm B. ",
+      "The Poisson B-versus-A incidence rate ratio was ",
+      "%s (95%% Wald CI %s to %s; %s)."),
+      events[["A"]], number(person_years["A"]),
+      number(rates["A"], 3L), events[["B"]],
+      number(person_years["B"]), number(rates["B"], 3L),
+      number(irr), number(irr_ci[1]), number(irr_ci[2]),
+      p_text(fit_summary["groupB", "Pr(>|z|)"]))
+  )
+  list(
+    synthetic = TRUE,
+    table = table,
+    narrative = narrative,
+    denominator = list(
+      marker = as.integer(n),
+      paired = length(results$data$change),
+      binary = rowSums(tab),
+      count_events = events,
+      person_years = person_years
+    ),
+    methods = c(
+      "Two-sided Welch/Satterthwaite CI; two-sided paired t CI",
+      "Uncorrected Pearson chi-square; log-Wald RR and OR CIs",
+      "Poisson GLM with log(person-years) offset and Wald IRR CI"
+    )
+  )
+}
+
+# Example, after sourcing the file:
+# reporting <- breast_cancer_reporting_examples()
+# print(reporting$table)
+# cat(paste(reporting$narrative, collapse = "\n\n"))
