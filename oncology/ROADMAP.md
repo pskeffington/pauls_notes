@@ -222,3 +222,11 @@ The [CO-06 calculus, matrices and optimization draft](chapters/CO-06-essential-m
 The October 27 read-back found **60 registered chapters, six drafts, seven citation-mapped manuscript documents, 93 mapped H2/H3 sections, 194 section/source assignments and 36 registered sources**, with no observed structural citation mismatches. These are indexing facts, not completed scholarly peer review.
 
 **Next manuscript gate: CO-07 — Randomness and Probability.** Develop sample spaces and events, conditional probability, Bayes' theorem, independence, disease-screening base-rate examples, reproducible discrete simulations, and method-aware citations. Link those foundations to CO-08 binomial and Poisson outcomes and retain the same synthetic-data, independent-review and validation boundaries.
+
+## Data linkage and probability authoring checkpoint — 2026-11-21
+
+The [CO-04 data-literacy draft](chapters/CO-04-data-literacy.md) now includes a worked dictionary and specimen/visit join exercise using the existing six-person fixture. It demonstrates a 16-row person-only join, preserves the nine specimen records under a validated match, and reconciles missing links and baseline selection to the participant roster. The [existing lab](examples/observation_grain.py) carries executable checks and the [dictionary worksheet](../templates/data-dictionary.md) records the corresponding source, key, timing and denominator contracts.
+
+[CO-07 — Randomness and Probability](chapters/CO-07-randomness-and-probability.md) is now a substantive draft with 16 source-linked sections and nine exercises with answer reasoning. Its existing Python and base-R laboratories have [observed execution evidence](evidence/CO-07-VALIDATION-2026-11-21.md), independent rational references and a completed AI editorial/method review. The manuscript remains subject to external scientific and visual publication review.
+
+The current manifest therefore contains **seven draft chapters and 53 planned chapters**. Earlier dated snapshots above retain their historical counts. The next manuscript target is CO-08: connect the existing distribution laboratories to original binomial, hypergeometric and Poisson teaching cases, with explicit denominators, tail directions and model assumptions. Reuse the current probability definitions and source/fixture gates.

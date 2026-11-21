@@ -1,6 +1,6 @@
 # Scientific statistical reporting standards: methods, results, tables, and figures
 
-**Scope.** Applied biomedical and breast-cancer research, including coursework, reproducible reports, and manuscript drafts. This is the central *reporting* companion to the [method-selection matrix](BIOMEDICAL_DECISION_MATRIX_V2.md), not a replacement for statistical design or the [R Markdown rendering acceptance guide](../../02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Published standards describe required transparency; local rules below specify consistent presentation. **No example values are actual patient findings.** Rosner, *Fundamentals of Biostatistics*, provides the conceptual statistics sequence; verify edition-specific chapter/page references before citing pages.
+**Scope.** Applied biomedical and breast-cancer research, including coursework, reproducible reports, and manuscript drafts. This is the central *reporting* companion to the [method-selection matrix](BIOMEDICAL_DECISION_MATRIX_V2.md), not a replacement for statistical design or the [R Markdown rendering acceptance guide](../../02_biomedical_coding/RMARKDOWN_PDF_PRESENTATION_ACCEPTANCE.md). Published standards describe required transparency; local rules below specify consistent presentation. **No example values are actual patient findings.** The [foundational biostatistics source](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md) provides the conceptual statistics sequence; verify edition-specific chapter/page references before citing pages.
 
 ## 1 | What every quantitative result must communicate
 
@@ -16,9 +16,11 @@
 
 **Presentation defaults:** two-sided tests unless predeclared otherwise; p = .042 (or p < .001), never p = .000 or “NS”; report effect and CI before p; use consistent rounding appropriate to precision. State sample sizes and units in table captions/footnotes. Distinguish SD (variability of observations), SE (precision of estimator), CI (uncertainty), and prediction interval (future observation). An alpha cutoff never substitutes for a clinical importance threshold. For coursework, use **R quantile type 2** for quartiles/IQR and matching custom boxplot hinges and whiskers; specify the convention in Methods. Do not silently change standard boxplots to another algorithm.
 
+For type-2 boxplots and normal Q–Q reference lines, use the [quantile and Q–Q reporting guide](../../06_RESOURCES/QUANTILE_QQ_REPORTING_BEST_PRACTICES.md); the sample-quartile convention and theoretical plotting positions are separate choices.
+
 ### Minimal prose structure for every method
 
-**Methods:** “Among [population, design and N], [outcome] was compared between [groups/reference] using [method, sidedness and assumptions]. We estimated [estimand] with [95% CI method]; [handling of missingness/multiplicity] was prespecified.”
+**Methods:** “Among [population, design and N], [outcome] was compared between [groups/reference] using [method, sidedness and assumptions]. The analysis estimated [estimand] with [95% CI method]; [handling of missingness/multiplicity] was prespecified.”
 
 **Results:** “[Group-specific n, descriptive statistic and units]. The [contrast/effect] was [estimate] (95% CI [limits]); [statistic(df) = value, p = value when relevant]. [One sentence describing direction, magnitude and clinical context].”
 
@@ -148,7 +150,7 @@ Each row identifies a *minimum results payload*, not a claim that each test requ
 
 | Report type | Required structure | Governing reporting framework |
 | --- | --- | --- |
-| Coursework R Markdown | Question/hypothesis; study design; variable dictionary; preparation; descriptive table; diagnostics; test and CI; 1–2 sentence interpretation; references; reproducible code | Rosner methods + explicit rubric + this house guide; no assumption that a journal checklist supersedes coursework rubric |
+| Coursework R Markdown | Question/hypothesis; study design; variable dictionary; preparation; descriptive table; diagnostics; test and CI; 1–2 sentence interpretation; references; reproducible code | Foundational biostatistics methods + explicit rubric + this house guide; no assumption that a journal checklist supersedes coursework rubric |
 | Randomized trial | Structured abstract; registration/protocol; participant flow; assignment; arm baseline table; estimands/outcomes; effect and CI; harms; missingness; analyses | **CONSORT 2025**, plus relevant extension |
 | Observational cohort, case-control, cross-sectional | Eligibility and flow; design/sampling; confounders; missingness; descriptive estimates; adjusted effects/CI; sensitivity | **STROBE**; RECORD when routinely collected data |
 | Diagnostic accuracy | Intended use, target condition, reference standard, test threshold, participant flow, indeterminates, TP/FP/FN/TN; accuracy with CI | **STARD 2015** and relevant extensions |
@@ -271,7 +273,7 @@ Before using in coursework or a manuscript, execute the code in R, reconcile num
 - Collins GS, et al. TRIPOD+AI statement. *BMJ*. 2024;385:e078378. https://doi.org/10.1136/bmj-2023-078378 — current regression/ML prediction-model checklist; supersedes original TRIPOD 2015.
 - McShane LM, et al. REMARK: Reporting Recommendations for Tumor Marker Prognostic Studies. https://pmc.ncbi.nlm.nih.gov/articles/PMC3362087/ — tumor tissue, assays, prognostic biomarkers and marker analyses.
 - PRISMA 2020 statement. https://www.prisma-statement.org/prisma-2020 — systematic review and meta-analysis.
-- Rosner B. *Fundamentals of Biostatistics*. Use the actual assigned edition for specific test-page references; descriptions here are a synthesis, not verbatim textbook excerpts.
+- [Foundational biostatistics source and full author attribution](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md). Use the actual assigned edition for specific test-page references; descriptions here are a synthesis, not verbatim textbook excerpts.
 
 - Gallifant J, et al. TRIPOD-LLM reporting guideline. *Nature Medicine*. 2025;31:60–69. https://doi.org/10.1038/s41591-024-03425-5 — LLM-focused extension for relevant biomedical studies; not a replacement for conventional prediction reporting.
 

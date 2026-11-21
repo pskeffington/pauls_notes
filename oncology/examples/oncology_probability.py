@@ -39,9 +39,11 @@ def union(p_a: float, p_b: float, p_intersection: float) -> float:
     a = probability(p_a, "P(A)")
     b = probability(p_b, "P(B)")
     i = probability(p_intersection, "P(A and B)")
-    if i > min(a, b) or i < max(0.0, a + b - 1.0):
+    # The lower bound involves subtraction; allow only machine-scale roundoff.
+    tolerance = 8 * math.ulp(1.0)
+    if i > min(a, b) or i < max(0.0, a + b - 1.0) - tolerance:
         raise ValueError("intersection is incompatible with marginal probabilities")
-    return a + b - i
+    return min(1.0, a + b - i)
 
 
 def screening_probabilities(prevalence: float, sensitivity: float, specificity: float) -> dict[str, float]:
@@ -74,7 +76,8 @@ def expected_screening_counts(n: int, prevalence: float, sensitivity: float, spe
     """Expected, possibly fractional cell counts in a hypothetical population."""
     size = positive_size(n)
     probs = screening_probabilities(prevalence, sensitivity, specificity)
-    return {key.replace("p_", "expected_", 1): round(size * probs[key], 12)
+    # Retain full precision; rounding belongs to presentation, not returned data.
+    return {key.replace("p_", "expected_", 1): size * probs[key]
             for key in ("p_true_positive", "p_false_positive", "p_false_negative", "p_true_negative")}
 
 
@@ -94,7 +97,11 @@ def probabilities_from_table(tp: int, fp: int, fn: int, tn: int) -> dict[str, fl
 
 
 def simulate_screening(n: int, prevalence: float, sensitivity: float, specificity: float, *, seed: int = 711) -> dict[str, int]:
-    """Draw a hypothetical cohort; does not force observed cells to equal expectation."""
+    """Draw a hypothetical cohort with Python's arbitrary-size integer seed.
+
+    The R companion accepts representable R integer seeds and has its own stream;
+    a shared seed does not promise identical cross-language simulated counts.
+    """
     size = positive_size(n)
     pi = probability(prevalence, "prevalence")
     se = probability(sensitivity, "sensitivity")

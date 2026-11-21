@@ -36,7 +36,7 @@ Rscript --vanilla 03_learning/tests/test_breast_cancer_test_atlas.R
 Rscript --vanilla 03_learning/tests/test_biostat_method_cases.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_study_design.R
 Rscript --vanilla 03_learning/tests/test_breast_cancer_protocol_replay.R
-Rscript --vanilla 03_learning/tests/test_biostat_method_crosswalk.R
+Rscript --vanilla 06_RESOURCES/tests/test_biostat_method_crosswalk.R
 ```
 
 ### R Markdown render

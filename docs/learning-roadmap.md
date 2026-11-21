@@ -2,9 +2,9 @@
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-[Paul’s Notes](../README.md) · [Computing subjects](../03_learning/README.md) · [Machine learning](../04_machine_learning/README.md) · [Breast cancer book, Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data)
+[Paul’s Notes](../README.md) · [Data science introduction](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) · [Computing subjects](../03_learning/README.md) · [Machine learning](../04_machine_learning/README.md) · [Breast cancer book, Chapter 11](../06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#applying-machine-learning-to-breast-cancer-data)
 
-**Scope note:** This learning roadmap follows the **current breast-cancer worked example**, not the limit of Paul's Notes. The overall repository supports [research across all cancer types](cancer-research-scope.md); other cancers, imaging/omics sources or clinical endpoints should start with their own study contract rather than inheriting the TCGA-BRCA labels.
+**Scope note:** This is the advanced **breast-cancer worked-example and machine-learning capstone roadmap**, not the introductory reader sequence. Start with the [narrative Introduction to Data Science for Cancer Researchers](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) for the chapter-by-chapter learning path. This roadmap follows the **current breast-cancer worked example**, not the limit of Paul's Notes. The overall repository supports [research across all cancer types](cancer-research-scope.md); other cancers, imaging/omics sources or clinical endpoints should start with their own study contract rather than inheriting the TCGA-BRCA labels.
 
 Updated **2026-10-16**, following the [corpus review and validation run](../04_machine_learning/corpus-review.md). This is a progression through research competencies and repository development, organized by subject and evidence of understanding. Move forward when you can explain and demonstrate the completion check; there is no weekly schedule.
 

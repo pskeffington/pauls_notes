@@ -2,7 +2,7 @@
 
 [Statistics foundations](BREAST_CANCER_STATISTICS_FOUNDATIONS.md) · [Distribution and power guide](BREAST_CANCER_DISTRIBUTIONS_AND_POWER.md) · [Worked breast cancer tests](BREAST_CANCER_WORKED_TEST_ATLAS.md) · [Design calculator](../examples/breast_cancer_study_design.R) · [Synthetic validation](../tests/test_breast_cancer_study_design.R) · [Study protocol template](../../templates/study-protocol.md)
 
-**Independent teaching chapter · November 2026.** Breast cancer is the running narrative; methods transfer to other cancer sites. All numerical assumptions and scenarios below are hypothetical, **not observed trial results or treatment recommendations**. biostatistics, *Fundamentals of Biostatistics* (8th ed.), supplies core probability, hypothesis tests and power foundations. Modern protocol/reporting standards and oncology endpoint guidance are cited at the end. This is a learning resource, not a complete protocol ready for human-participant recruitment.
+**Independent teaching chapter · November 2026.** Breast cancer is the running narrative; methods transfer to other cancer sites. All numerical assumptions and scenarios below are hypothetical, **not observed trial results or treatment recommendations**. Core probability, hypothesis testing and power foundations follow the [eighth-edition methodological references](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md). Modern protocol/reporting standards and oncology endpoint guidance are cited at the end. This is a learning resource, not a complete protocol ready for human-participant recruitment.
 
 ## Worked end-to-end companion
 
@@ -58,7 +58,7 @@ The *estimand* specifies the scientific treatment effect or contrast of interest
 - **Intercurrent events:** treatment discontinuation, switching, surgery not performed, progression or death before assessment. Define each handling strategy explicitly; do not silently exclude participants.
 - **Summary:** difference in pCR probability (intervention minus control) at the prespecified endpoint.
 
-Treatment-policy, composite, hypothetical, while-on-treatment and principal-stratum strategies answer different questions; no single strategy is universally correct. A treatment-policy approach is not synonymous with a naive complete-case analysis. Specify data collection and statistical method to actually target the estimand. [ICH E9(R1)](https://www.fda.gov/media/108698/download) and the [estimands primer](https://www.bmj.com/content/384/bmj-2023-076316) explain these distinctions.
+Treatment-policy, composite, hypothetical, while-on-treatment and principal-stratum strategies answer different questions; no single strategy is universally correct. A treatment-policy approach is not synonymous with a naive complete-case analysis. Specify data collection and statistical method to actually target the estimand. [ICH E9(R1)](https://www.fda.gov/media/148473/download) and the [estimands primer](https://www.bmj.com/content/384/bmj-2023-076316) explain these distinctions.
 
 ## 4. Choose and operationalize the endpoint
 
@@ -74,6 +74,8 @@ Treatment-policy, composite, hypothetical, while-on-treatment and principal-stra
 | Gene-expression contrast | Raw counts, person/specimen IDs, batches, replicate structure | Assay-aware differential expression / FDR | Pseudoreplication and leakage |
 
 The FDA's [Clinical Trial Endpoints for Approval of Cancer Drugs and Biologics](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/clinical-trial-endpoints-approval-cancer-drugs-and-biologics) is a relevant regulatory resource, not a blanket endorsement of any endpoint in this hypothetical study. The FDA's [August 2025 overall survival assessment guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/approaches-assessment-overall-survival-oncology-clinical-trials) is explicitly a **draft**, not final implementation guidance.
+
+For a breast cancer study, document the exact pathological complete response definition, whether residual in situ disease is allowed, the nodal component, and the surgery assessment window. For recurrence endpoints, list the component events and competing-death rule. The [clinical-data chapter](../../oncology/chapters/CO-02-clinical-oncology-data.md#5-endpoint-semantics-and-the-denominator) supplies the breast-specific endpoint and source-selection distinctions; an acronym alone is not an analysis specification.
 
 ## 5. Select the primary statistical family and reporting target
 
@@ -94,38 +96,49 @@ A well-documented plan specifies the primary effect size deemed clinically meani
 
 ### 6.1 Continuous endpoint, two independent groups
 
-For equal allocation under a common **planning SD** sigma and a normal approximation, a rough sample size per group is
+Let $\Delta=\mu_T-\mu_C$ be the target treatment-minus-control mean difference, $\sigma$ a common **planning standard deviation**, $\alpha$ the two-sided Type I error probability, and $1-\beta$ the target power. Write $z_q=\Phi^{-1}(q)$ for the $q$th standard-normal quantile. With equal allocation and independent observations, $\operatorname{Var}(\bar X_T-\bar X_C)=2\sigma^2/n$; a normal approximation therefore gives the unrounded requirement per group:
 
-[
-n_{mathrm{per group}}approxrac{2(z_{1-alpha/2}+z_{1-eta})^2sigma^2}{Delta^2}.
-]
+$$
+n_{\mathrm{per\ group}}
+\approx
+\frac{2\left(z_{1-\alpha/2}+z_{1-\beta}\right)^2\sigma^2}{\Delta^2}.
+$$
 
-For a hypothetical **5-unit clinically meaningful score difference**, planning SD=12, two-sided alpha=.05 and power=.80, calculate in R with `stats::power.t.test(delta=5,sd=12,sig.level=.05,power=.80,type="two.sample",alternative="two.sided")`. **Round up** the unrounded per-arm n. The t-test routine differs slightly from the normal approximation; the formula and implementation must be labeled accordingly. The assumption of equal *planning* variance for sample-size calculations does not require using pooled Student t at analysis; an unequal-variance sensitivity scenario should be investigated for planned Welch inference.
+For a hypothetical **5-unit clinically meaningful score difference**, planning $\sigma=12$, two-sided $\alpha=.05$ and power $.80$, the normal approximation gives $n\approx90.419$ per arm; rounding up gives **91 analyzable participants per arm**. The effect and standard deviation must be expressed in the same measurement units. The numbers are original planning assumptions, not observed treatment effects.
 
-For allocation `r=n_treatment/n_control` and equal planning SD, an approximate control-arm size is
+The [R documentation for `stats::power.t.test()`](https://www.stat.ethz.ch/R-manual/R-devel/library/stats/html/power.t.test.html) describes a separate t-distribution calculation. Use `stats::power.t.test(delta=5, sd=12, sig.level=.05, power=.80, type="two.sample", alternative="two.sided")` and round its returned per-arm requirement up. Record the routine's `strict` argument; the default `FALSE` counts rejection in the direction of the assumed effect, whereas `TRUE` includes both rejection tails. The equal planning variance does not require a pooled-variance analysis; planned Welch inference needs its own unequal-variance scenarios.
 
-[
-n_Capprox(z_{1-alpha/2}+z_{1-eta})^2,rac{sigma^2}{Delta^2}(1+1/r),
-quad n_Tapprox r n_C.
-]
+For allocation ratio $r=n_T/n_C$ and the same planning standard deviation, the variance becomes $\sigma^2(1+1/r)/n_C$. The approximate unrounded requirements are:
 
-An unequal ratio usually increases total n for a fixed target contrast under equal variances. Compare scenarios and clinical feasibility rather than optimizing n alone.
+$$
+n_C
+\approx
+\frac{\left(z_{1-\alpha/2}+z_{1-\beta}\right)^2\sigma^2}{\Delta^2}
+\left(1+\frac{1}{r}\right),
+\qquad n_T\approx r\,n_C.
+$$
 
-**Independent numerical teaching reference:** For the hypothetical Δ=5, σ=12, α=.05 and power=.80, the **normal-approximation** equal-arm calculation is **91 analyzable participants per arm** (rounded up). Assuming 10% missing primary endpoints gives **102 enrolled per arm** under the simple inflation rule. These are not the exact t-test requirements; the R companion also calculates `power.t.test()`, which must be reported separately after execution. For the hypothetical HR=.75 and balanced allocation, the asymptotic Schoenfeld expression gives approximately **380 observed events**; this is not 380 recruited patients.
+Round recruitment targets to feasible integers and report the achieved allocation. Under these equal-variance assumptions, moving away from $r=1$ increases the total requirement for a fixed target contrast. Enrollment feasibility, cost and precision can justify another allocation.
+
+**Numerical reference:** With the stated assumptions and 10% unavailable primary endpoints, inflating the rounded normal-approximation requirement gives **102 enrolled participants per arm**. This value is distinct from the t-distribution calculation and from the survival-event requirement in §6.5. The existing [design calculator](../examples/breast_cancer_study_design.R) retains both normal and t-based outputs with separate labels.
 
 ### 6.2 Binary response endpoint
 
-Let the *hypothetical planning* control pCR probability be 0.30 and intervention probability 0.45, with absolute difference .15. Use `stats::power.prop.test(p1=.30,p2=.45,power=.80,sig.level=.05,alternative="two.sided")` for a standard equal-arm approximate design. **Round up** each arm. In a protocol, identify the effect scale (risk difference, OR, etc.) and justify the assumed .30 and .45; do not call them historical trial results unless verified. Exact, score, regression-adjusted and simulation-based designs may require different sample sizes.
+Let the *hypothetical planning* control pCR probability be 0.30 and intervention probability 0.45, with absolute difference .15. Use [`stats::power.prop.test()`](https://www.stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html) with `p1=.30, p2=.45, power=.80, sig.level=.05, alternative="two.sided"` for a standard equal-arm approximate design; record the chosen `strict` argument, as in §6.1. **Round up** each arm. In a protocol, identify the effect scale (risk difference, OR, etc.) and justify the assumed .30 and .45; do not call them historical trial results unless verified. Exact, score, regression-adjusted and simulation-based designs may require different sample sizes.
 
 ### 6.3 Attrition and missing primary outcomes
 
-If `n_analyzable` is needed and a hypothetical fraction `loss=.10` is expected not to supply analyzable endpoint data, naive inflation is
+Let $\ell$ be the expected fraction without an analyzable primary outcome, with $0\leq\ell<1$. A simple enrollment inflation is:
 
-[
-n_{mathrm{enroll}}=leftlceilrac{n_{mathrm{analyzable}}}{1-mathrm{loss}}ightceil.
-]
+$$
+n_{\mathrm{enroll}}
+=
+\left\lceil
+\frac{n_{\mathrm{analyzable}}}{1-\ell}
+\right\rceil.
+$$
 
-**This is only a planning heuristic.** It neither handles MNAR mechanisms nor guarantees valid analysis after discontinuation, death or missing surgery. Actual missing-outcome procedures and intercurrent-event strategies must be prespecified separately.
+For $n_{\mathrm{analyzable}}=91$ and $\ell=.10$, $\lceil91/.90\rceil=102$. This arithmetic increases recruitment; it does not repair outcome-dependent missingness, define how discontinuation or death enters the endpoint, or guarantee that the selected estimator targets the intended effect. Prespecify intercurrent-event strategies and missing-data assumptions separately in the [protocol template](../../templates/study-protocol.md), following [ICH E9(R1), final FDA guidance, §A.3 and §A.5](https://www.fda.gov/media/148473/download).
 
 ### 6.4 Repeated measurements and clustering
 
@@ -133,13 +146,20 @@ For m=4 approximately equal observations per cluster and intraclass correlation 
 
 ### 6.5 Survival event-driven sample size
 
-For two-group log-rank/Cox planning under a proportional-hazards approximation, target hazard ratio HR=.75, balanced allocation p=.5 and two-sided alpha=.05, power=.80:
+For a two-group proportional-hazards planning approximation, let $q$ be the fraction allocated to treatment, $\mathrm{HR}$ the target treatment-to-control hazard ratio, and $D$ the required number of observed primary events. Using the same $\alpha$, $\beta$ and standard-normal quantiles as §6.1:
 
-[
-Dapproxrac{(z_{1-alpha/2}+z_{1-eta})^2}{p(1-p)(log HR)^2}.
-]
+$$
+D
+\approx
+\frac{\left(z_{1-\alpha/2}+z_{1-\beta}\right)^2}
+{q(1-q)\left\{\log(\mathrm{HR})\right\}^2}.
+$$
 
-D is an **approximate number of observed events**, not enrolled patients. Translate events to participant recruitment only after specifying accrual rate, entry times, follow-up, baseline survival/hazard, dropout and competing events. This formula relies on proportional-hazards and other asymptotic assumptions; consider simulation for nonproportional hazards or unequal follow-up. In particular, **do not convert D into n with a guessed fixed event proportion and label it a validated clinical design**.
+For hypothetical $\mathrm{HR}=.75$, $q=.5$, two-sided $\alpha=.05$ and power $.80$, the expression gives $D\approx379.352$, rounded up to **380 observed events**. The logarithm is natural. The formula is an asymptotic planning approximation for the specified survival contrast; its foundation is the [original proportional-hazards sample-size paper](https://pubmed.ncbi.nlm.nih.gov/6354290/).
+
+The event requirement must be translated into recruitment using an accrual schedule, entry times, follow-up, baseline event distribution, dropout and endpoint-specific competing events. **Events and recruited participants are different quantities.** A guessed event fraction does not establish an adequate clinical design.
+
+Proportional hazards alone does not remove every approximation. A [2026 methodological analysis](https://doi.org/10.1177/09622802261427024) examines the risk-set proportionality assumption behind this formula and shows why simulation can be valuable when that approximation is weak. Evaluate planned follow-up, unequal risk sets and departures from proportional hazards in design-specific scenarios; do not label this single calculation a simulation-validated trial design.
 
 ### 6.6 Multiple primary endpoints and interim analyses
 
@@ -171,7 +191,7 @@ Prespecify the hypothesis family, alpha allocation, co-primary success rule (AND
 | Cluster dependence | Patient/site/batch IDs | Random effects or GEE/design-aware SE |
 | Multiple looks/tests | Family and planned interim schedule | Prespecified alpha spending, adjusted intervals/FDR |
 
-**Analysis population is not an estimand.** Intention-to-treat terminology does not by itself solve missing responses. Complete-case analysis is not universally unbiased; do not silently impute missing pathological responses as failures absent a defensible endpoint definition.
+**Analysis population is not an estimand.** Intention-to-treat terminology does not by itself solve missing responses. An intercurrent event, such as treatment switching, affects the interpretation or existence of an outcome; failure to collect a relevant measurement creates a missing-data problem. A composite strategy can define progression or death before surgery as failure, while an unavailable pathology report still needs its stated handling rule. Complete-case analysis changes the analyzed set; counting every unavailable assessment as nonresponse changes the response definition unless that endpoint was explicitly chosen. These decisions belong in the protocol, following [ICH E9(R1), §A.3–A.5](https://www.fda.gov/media/148473/download).
 
 ## 9. Reproducibility, ethics and governance
 
@@ -185,11 +205,11 @@ Copy these fields to the [protocol template](../../templates/study-protocol.md):
 
 ## References and guideline hierarchy
 
-1. biostatistics B. *Fundamentals of Biostatistics*. 8th ed. Cengage; 2016. [Publisher record](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md).
+1. *Fundamentals of Biostatistics*, 8th ed. (2016): see the [canonical methodology bibliography](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md) for full author attribution, edition and source-review scope.
 2. [SPIRIT 2025 randomized trial protocol guidance](https://www.bmj.com/content/389/bmj-2024-081477); [explanation of sample-size reporting](https://pmc.ncbi.nlm.nih.gov/articles/PMC12128891/).
 3. [CONSORT 2025 randomized trial reporting guidance](https://pmc.ncbi.nlm.nih.gov/articles/PMC11995449/), particularly endpoints, sample size, participant flow and missing data.
-4. [ICH E9(R1), estimands and sensitivity analysis](https://www.fda.gov/media/108698/download); [2024 BMJ primer](https://www.bmj.com/content/384/bmj-2023-076316).
+4. [ICH E9(R1), estimands and sensitivity analysis, final FDA guidance (May 2021)](https://www.fda.gov/media/148473/download); [2024 BMJ primer](https://www.bmj.com/content/384/bmj-2023-076316).
 5. [FDA oncology endpoints guidance page](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/clinical-trial-endpoints-approval-cancer-drugs-and-biologics); [FDA August 2025 overall survival draft guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/approaches-assessment-overall-survival-oncology-clinical-trials) (**draft**, not final).
 6. [STROBE observational study reporting](https://www.strobe-statement.org/checklists/); [TRIPOD+AI predictive model reporting](https://www.tripod-statement.org/).
 
-**Validation status:** The formulas and examples are transparent teaching calculations. The [design R module](../examples/breast_cancer_study_design.R) and [tests](../tests/test_breast_cancer_study_design.R) must be actually executed in R before claiming computational validation. Guideline citations support design/reporting principles, not the numerical assumptions chosen here.
+**Verification scope:** On 2026-11-21, the displayed normal-approximation, attrition and event-count arithmetic was independently replayed in Python. This is distinct from executing the [design R module](../examples/breast_cancer_study_design.R) and its [tests](../tests/test_breast_cancer_study_design.R), which require a working R installation. Guideline citations support design/reporting principles, not the hypothetical planning assumptions. The [development checkpoint](../../docs/agent-tasking.md#2026-11-21-investigator-reference-development-checkpoint) records the precise checks and remaining review requirements.

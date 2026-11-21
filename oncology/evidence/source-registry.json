@@ -378,6 +378,169 @@
       "kind": "authoritative-overview",
       "supports": "Interactions between malignant cells, immune cells, stromal cells and tumor microenvironment",
       "verification": "Official source inspected October 2026; scientific editorial review pending"
+    },
+    {
+      "id": "GDC-BARCODE",
+      "title": "TCGA Barcode",
+      "url": "https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/",
+      "kind": "technical-specification",
+      "supports": "Participant, sample, portion, analyte and aliquot lineage; UUID identifiers",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "ASCO-CAP-ER-2020",
+      "title": "Estrogen and Progesterone Receptor Testing in Breast Cancer: ASCO/CAP Guideline Update (2020)",
+      "url": "https://ascopubs.org/doi/10.1200/JCO.19.02309",
+      "kind": "clinical-guideline",
+      "supports": "IHC receptor interpretation; ER Low Positive category and distinction from PgR",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "ASCO-CAP-HER2-2023",
+      "title": "HER2 Testing in Breast Cancer: ASCO/CAP Guideline Update (2023)",
+      "url": "https://www.cap.org/cap-guidelines/her2-testing-in-breast-cancer-2023-guideline-update/",
+      "kind": "clinical-guideline",
+      "supports": "Dated HER2 assay interpretation, retained IHC/ISH results and testing algorithm",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "FDA-HER2-2025",
+      "title": "FDA approval: HR-positive, HER2-low or HER2-ultralow breast cancer (January 2025)",
+      "url": "https://www.fda.gov/drugs/cancer-approvals/fda-approves-fam-trastuzumab-deruxtecan-nxki-unresectable-or-metastatic-hr-positive-her2-low-or-her2",
+      "kind": "regulatory-source",
+      "supports": "Example of dated, setting-specific assay-defined eligibility; not treatment recommendations",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "TCGA-BRCA-2012",
+      "title": "Comprehensive molecular portraits of human breast tumours (2012)",
+      "url": "https://doi.org/10.1038/nature11412",
+      "kind": "primary-research",
+      "supports": "Distinction between clinical HER2 status and intrinsic expression subtype",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "IMMORTAL-TIME-2007",
+      "title": "Immortal time bias in observational studies of drug effects (2007)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17252614/",
+      "kind": "peer-reviewed-method",
+      "supports": "Time-fixed classification using later treatment information and survival bias",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "STEEP-2021",
+      "title": "Updated Standardized Definitions for Efficacy End Points: STEEP Version 2.0 (2021)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10166345/",
+      "kind": "consensus-method",
+      "supports": "Adjuvant breast cancer endpoint components; IDFS and IBCFS distinctions",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "NEOSTEEP-2023",
+      "title": "Standardized Definitions for Efficacy End Points in Neoadjuvant Breast Cancer Clinical Trials: NeoSTEEP (2023)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10522109/",
+      "kind": "consensus-method",
+      "supports": "Preferred pCR definition, RCB score/class, neoadjuvant EFS and assessment rules",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "GDC-REPOSITORY",
+      "title": "GDC Repository and Download Products",
+      "url": "https://docs.gdc.cancer.gov/Data_Portal/Users_Guide/Repository/",
+      "kind": "technical-specification",
+      "supports": "Clinical/biospecimen exports, file manifests and measurement-file contents",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "TCGA-CDR-2018",
+      "title": "An Integrated TCGA Pan-Cancer Clinical Data Resource to Drive High-Quality Survival Outcome Analytics (2018)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6066282/",
+      "kind": "primary-research",
+      "supports": "Curated survival endpoint construction and historical BRCA follow-up recommendations",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "UCI-WDBC",
+      "title": "Breast Cancer Wisconsin (Diagnostic), DOI:10.24432/C5DW2B",
+      "url": "https://archive.ics.uci.edu/dataset/17/breast-cancer-wisconsin-data-set",
+      "kind": "dataset-documentation",
+      "supports": "569 diagnostic instances, 30 morphometric features and benign/malignant target; schema suitability",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "UCI-WPBC",
+      "title": "Breast Cancer Wisconsin (Prognostic), DOI:10.24432/C5GK50",
+      "url": "https://www.archive.ics.uci.edu/dataset/16/breast%2Bcancer%2Bwisconsin%2Bprognostic",
+      "kind": "dataset-documentation",
+      "supports": "Separate Wisconsin prognostic dataset with recurrence/follow-up information",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "ICH-E9-R1-2021",
+      "title": "ICH E9(R1): Estimands and Sensitivity Analysis, Final FDA Guidance (May 2021)",
+      "url": "https://www.fda.gov/media/148473/download",
+      "kind": "methodological-guidance",
+      "supports": "Estimands, intercurrent events, missing data, sensitivity and supplementary analyses; final guidance replaces 2017 draft",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "FDA-PCR-2020",
+      "title": "Pathological Complete Response in Neoadjuvant Treatment of High-Risk Early-Stage Breast Cancer (2020)",
+      "url": "https://www.fda.gov/media/83507/download",
+      "kind": "regulatory-source",
+      "supports": "Breast-and-node pCR definitions and their study-setting context",
+      "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "GDC-DICTIONARY",
+      "title": "GDC Data Dictionary",
+      "url": "https://docs.gdc.cancer.gov/Data_Dictionary/",
+      "kind": "technical-specification",
+      "supports": "Entity properties, links, types, allowed values and source dictionary provenance",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "POSTGRES-JOINS",
+      "title": "PostgreSQL: joined tables",
+      "url": "https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN",
+      "kind": "technical-specification",
+      "supports": "Inner/outer joins, multiplicity and retention of unmatched left records",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "FDA-DIAGNOSTIC-2007",
+      "title": "FDA: Statistical Guidance on Reporting Results from Studies Evaluating Diagnostic Tests (2007)",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda",
+      "kind": "methodological-guidance",
+      "supports": "Reference standards, intended population, four-cell diagnostic quantities and reporting; final guidance issued March 13, 2007",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "STARD-2015",
+      "title": "STARD 2015: Diagnostic Accuracy Reporting",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4623764/",
+      "kind": "reporting-guideline",
+      "supports": "Diagnostic-study selection, reference standards, missing and indeterminate results, uncertainty and variation across settings; BMJ 2015;351:h5527",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
     }
-  ]
+  ],
+  "latest_additions_date": "2026-11-21"
 }
