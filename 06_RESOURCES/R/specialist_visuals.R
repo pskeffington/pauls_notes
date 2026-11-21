@@ -377,7 +377,8 @@ plot_sampled_distribution <- function(data, value, group, unit,
                           inherit.aes = FALSE,
                           position = ggplot2::position_jitter(
                             width = .12, height = 0, seed = as.integer(seed)),
-                          alpha = .4, size = .7) +
+                          alpha = .4, size = .7,
+                          colour = "#808080") +
     ggplot2::scale_fill_manual(values = colors, drop = FALSE) +
     ggplot2::scale_x_discrete(labels = function(z)
       paste0(z, " (n=", as.integer(counts[as.character(z)]), ")")) +
