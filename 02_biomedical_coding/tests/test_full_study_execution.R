@@ -127,8 +127,11 @@ stopifnot(
 ## Poisson model: the log exposure must remain an offset, not a
 ## freely estimated coefficient. The resulting exponentiated slopes
 ## are incidence rate ratios, not event probabilities.
+## R records offsets in the terms object's offset attribute and omits
+## them from term.labels, which lists the estimated model terms.
 stopifnot(
-  any(grepl("offset", attr(stats::terms(e$pois_fit),"term.labels"), fixed=TRUE)),
+  length(attr(stats::terms(e$pois_fit),"offset")) == 1L,
+  !any(grepl("exposure_years", names(stats::coef(e$pois_fit)), fixed=TRUE)),
   all(e$study$exposure_years > 0)
 )
 pois_coefficients <- stats::coef(e$pois_fit)
@@ -148,6 +151,16 @@ stopifnot(
                    as.numeric(pois_upper), tolerance=1e-10)),
   isTRUE(all.equal(as.numeric(exp(stats::coef(e$pois_fit))),
                    as.numeric(pois_rr_reference), tolerance=1e-10))
+)
+
+## At fixed covariates, doubling exposure must double the expected count.
+## This guards the offset's fixed coefficient of one without refitting.
+double_exposure <- e$study
+double_exposure$exposure_years <- 2 * double_exposure$exposure_years
+stopifnot(
+  isTRUE(all.equal(
+    as.numeric(stats::predict(e$pois_fit,newdata=double_exposure,type="response")),
+    2 * as.numeric(stats::fitted(e$pois_fit)), tolerance=1e-10))
 )
 
 ## Synthetic visits are deliberately within-subject correlated.
