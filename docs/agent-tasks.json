@@ -14,7 +14,7 @@
     "P1",
     "P2"
   ],
-  "notes": "Historical IDX-01/IDX-02 evidence remains bounded to its recorded commit. DOC-01/DOC-02 continue in draft PR 42; the 2026-11-21 investigator-reference checkpoint records source, numerical and structural checks separately from R execution, rendering and external scientific review.",
+  "notes": "Historical evidence remains bounded to its recorded commit. DOC-01/DOC-02 and the CO-07 draft continue in PR 42. The November 21 linkage/probability checkpoint and CO-07 verification record separate source inspection, exact arithmetic, Python/base-R execution, rendering and external scientific review.",
   "tasks": [
     {
       "id": "IDX-01",
@@ -49,17 +49,23 @@
       "acceptance_source": "docs/agent-tasking.md",
       "evidence": [
         "https://github.com/pskeffington/pauls_notes/pull/42",
-        "docs/agent-tasking.md#2026-11-21-investigator-reference-development-checkpoint"
+        "docs/agent-tasking.md#2026-11-21-investigator-reference-development-checkpoint",
+        "docs/agent-tasking.md#2026-11-21-data-linkage-and-probability-checkpoint"
       ]
     },
     {
       "id": "CO-07",
       "priority": "P1",
-      "state": "ready",
+      "state": "in_progress",
       "depends_on": [],
-      "summary": "Probability and Bayesian oncology chapter",
+      "summary": "Probability and Bayes manuscript drafted; technical execution recorded, external review pending",
       "acceptance_source": "docs/agent-tasking.md",
-      "evidence": []
+      "evidence": [
+        "https://github.com/pskeffington/pauls_notes/pull/42",
+        "docs/agent-tasking.md#2026-11-21-data-linkage-and-probability-checkpoint",
+        "oncology/evidence/CO-07-VALIDATION-2026-11-21.md",
+        "https://github.com/pskeffington/pauls_notes/actions/runs/44898310988"
+      ]
     },
     {
       "id": "DOC-02",
@@ -70,7 +76,8 @@
       "acceptance_source": "docs/agent-tasking.md",
       "evidence": [
         "https://github.com/pskeffington/pauls_notes/pull/42",
-        "docs/agent-tasking.md#2026-11-21-investigator-reference-development-checkpoint"
+        "docs/agent-tasking.md#2026-11-21-investigator-reference-development-checkpoint",
+        "docs/agent-tasking.md#2026-11-21-data-linkage-and-probability-checkpoint"
       ]
     },
     {

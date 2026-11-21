@@ -105,7 +105,7 @@ This bibliography groups registered external scientific and technical references
 | `NCI-TME` | [Tumor Biology and Microenvironment Research — NCI](https://www.cancer.gov/about-nci/organization/dcb/research-portfolio/tbmr) | Interactions between malignant cells, immune cells, stromal cells and tumor microenvironment |
 
 
-The following records are in the source registry for foundational probability and future textbook cases. Listing them does not establish that a future chapter has been authored or its claims scientifically reviewed.
+The following records support the [probability chapter](../chapters/CO-07-randomness-and-probability.md) and its computational examples. The chapter's separate verification record distinguishes numerical execution from expert scientific review.
 
 ## Probability and computational foundations
 
@@ -122,6 +122,8 @@ The following records are in the source registry for foundational probability an
 | `NCI-SCREEN-HCP` | [NCI PDQ: Cancer Screening Overview for Health Professionals](https://www.cancer.gov/about-cancer/screening/hp-screening-overview-pdq) | Cancer screening sensitivity, specificity, PPV, NPV, prevalence, false positives, harms and mortality endpoints |
 | `NCI-SCREEN-PAT` | [NCI PDQ: Cancer Screening Overview for Patients](https://www.cancer.gov/about-cancer/screening/patient-screening-overview-pdq) | Screening versus diagnosis, false positives, overdiagnosis and the limits of early detection |
 | `SCREEN-PRIMER` | [Assessment of Cancer Screening: Performance Measures](https://www.ncbi.nlm.nih.gov/books/NBK550207/) | 2-by-2 screening tables and the definitions of sensitivity, specificity, PPV and NPV |
+| `FDA-DIAGNOSTIC-2007` | [FDA: Statistical Guidance on Reporting Results from Studies Evaluating Diagnostic Tests (2007)](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda) | Reference standards, intended population, four-cell diagnostic quantities and reporting; final guidance issued March 13, 2007 |
+| `STARD-2015` | [STARD 2015: Diagnostic Accuracy Reporting](https://pmc.ncbi.nlm.nih.gov/articles/PMC4623764/) | Diagnostic-study selection, reference standards, missing and indeterminate results, uncertainty and variation across settings; BMJ 2015;351:h5527 |
 
 ## Reproducible random-number generation
 
@@ -154,3 +156,12 @@ Sources below were checked for the stated additions on **2026-11-21**. This date
 | `UCI-WPBC` | [Breast Cancer Wisconsin (Prognostic), DOI:10.24432/C5GK50](https://www.archive.ics.uci.edu/dataset/16/breast%2Bcancer%2Bwisconsin%2Bprognostic) | Separate Wisconsin prognostic dataset with recurrence/follow-up information |
 | `ICH-E9-R1-2021` | [ICH E9(R1): Estimands and Sensitivity Analysis, Final FDA Guidance (May 2021)](https://www.fda.gov/media/148473/download) | Estimands, intercurrent events, missing data, sensitivity and supplementary analyses; final guidance replaces 2017 draft |
 | `FDA-PCR-2020` | [Pathological Complete Response in Neoadjuvant Treatment of High-Risk Early-Stage Breast Cancer (2020)](https://www.fda.gov/media/83507/download) | Breast-and-node pCR definitions and their study-setting context |
+
+## Research dictionaries and relational joins
+
+The following official documentation was checked on **2026-11-21** for the original CO-04 linkage exercise. The exercise's participant/date matching rule is stipulated for its invented fixture.
+
+| Reference ID | Direct linked source | Relevance |
+| --- | --- | --- |
+| `GDC-DICTIONARY` | [GDC Data Dictionary](https://docs.gdc.cancer.gov/Data_Dictionary/) | Entity properties, links, types, allowed values and source dictionary provenance |
+| `POSTGRES-JOINS` | [PostgreSQL: joined tables](https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN) | Inner/outer joins, multiplicity and retention of unmatched left records |

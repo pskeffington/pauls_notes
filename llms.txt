@@ -33,10 +33,12 @@ Stable route manifest: https://github.com/pskeffington/pauls_notes/blob/main/doc
 - [CO-01 cancer biology](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-01-cancer-biology.md): draft first chapter
 - [CO-02 clinical oncology data](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-02-clinical-oncology-data.md): draft clinical endpoints and data schema
 - [CO-03 molecular foundations](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-03-molecular-foundations.md): draft omics and biomarker interpretation
-- [CO-04 data literacy](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-04-data-literacy.md): draft observation grains and leakage controls
+- [CO-04 data literacy](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-04-data-literacy.md): worked dictionary, specimen/visit join counterexample, unmatched records, participant selection and leakage controls
 - [CO-05 mathematics](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-05-essential-mathematics-i.md): ratios, oncology rates, unit conversion, log2 fold change and reproducible numerical examples
 - [CO-06 calculus and matrices](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-06-essential-mathematics-ii.md): derivatives, gene matrices, least squares and gradient descent
-- [CO-06 validation record](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/CO-06-VALIDATION-2026-10-27.md): hash-matched Python replay; R/CI pending
+- [CO-06 validation record](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/CO-06-VALIDATION-2026-10-27.md): historical hash-matched Python replay and review scope
+- [CO-07 probability and Bayes](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-07-randomness-and-probability.md): event algebra, conditioning direction, hypothetical screening predictive values, expectation and simulation. Navigation route `probability`.
+- [CO-07 verification record](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/CO-07-VALIDATION-2026-11-21.md): exact rational arithmetic, source identities and observed Python/base-R CI; expert review pending.
 - [Oncology teaching labs](https://github.com/pskeffington/pauls_notes/blob/main/oncology/examples/README.md): synthetic Python and R exercises
 - [Readable source bibliography](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/SOURCES.md): verified reference links by subject
 - [Section source register](https://github.com/pskeffington/pauls_notes/blob/main/oncology/evidence/source-registry.json): direct evidence URLs and claim scope
@@ -89,3 +91,5 @@ Stable route manifest: https://github.com/pskeffington/pauls_notes/blob/main/doc
 - [Investigator navigation](https://github.com/pskeffington/pauls_notes/blob/main/docs/NAVIGATION.md#breast-cancer-investigator-pathway): question, data, protocol, analysis, reporting and review; reuses canonical sources.
 - [Clinical data and endpoint definitions](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-02-clinical-oncology-data.md): receptor/classifier distinctions; pCR, RCB, IDFS, IBCFS and EFS; TCGA/CDR/WDBC suitability; patient and specimen denominators. Navigation route `clinical_data`.
 - [Scientific reporting](https://github.com/pskeffington/pauls_notes/blob/main/03_learning/bio_stats/SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md): canonical estimate, uncertainty, denominator, test and interpretation contract. Navigation route `scientific_reporting`.
+
+- [Research dictionary and join exercise](https://github.com/pskeffington/pauls_notes/blob/main/oncology/chapters/CO-04-data-literacy.md): canonical data-grain and record-linkage teaching; navigation route `data_integrity`; reuses the existing [dictionary worksheet](https://github.com/pskeffington/pauls_notes/blob/main/templates/data-dictionary.md).

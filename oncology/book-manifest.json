@@ -94,12 +94,21 @@
         {
           "id": "CO-07",
           "title": "Randomness and probability",
-          "status": "planned",
+          "status": "draft",
           "prerequisites": [
             "CO-06"
           ],
-          "evidence_status": "not-reviewed",
-          "chapter_path": null
+          "evidence_status": "section-linked-unreviewed",
+          "chapter_path": "oncology/chapters/CO-07-randomness-and-probability.md",
+          "lab_paths": [
+            "oncology/examples/oncology_probability.py",
+            "oncology/examples/oncology_probability.R"
+          ],
+          "test_paths": [
+            "scripts/test_oncology_probability.py"
+          ],
+          "execution_status": "python-and-base-r-fixtures-passed-ci-6316e60",
+          "validation_record": "oncology/evidence/CO-07-VALIDATION-2026-11-21.md"
         },
         {
           "id": "CO-08",

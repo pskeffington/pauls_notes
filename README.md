@@ -22,7 +22,7 @@ Start with the [statistical method decision matrix](03_learning/bio_stats/BIOMED
 
 ## Computational Oncology textbook
 
-The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
+The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with seven drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
 
 ## Start here
 

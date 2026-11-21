@@ -71,6 +71,8 @@ jobs:
         run: |
           python3 scripts/validate_oncology_citations.py
           python3 -m unittest discover -s scripts -p 'test_oncology_citations.py' -v
+      - name: Verify CO-04 observation grain and joins (Python)
+        run: python3 oncology/examples/observation_grain.py --check
       - name: Verify CO-05 arithmetic (Python)
         run: |
           python3 oncology/examples/oncology_math.py

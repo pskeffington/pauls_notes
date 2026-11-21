@@ -504,6 +504,42 @@
       "supports": "Breast-and-node pCR definitions and their study-setting context",
       "verification": "Primary or official source record and claim-level text checked for the stated additions; independent clinical review pending.",
       "verification_date": "2026-11-21"
+    },
+    {
+      "id": "GDC-DICTIONARY",
+      "title": "GDC Data Dictionary",
+      "url": "https://docs.gdc.cancer.gov/Data_Dictionary/",
+      "kind": "technical-specification",
+      "supports": "Entity properties, links, types, allowed values and source dictionary provenance",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "POSTGRES-JOINS",
+      "title": "PostgreSQL: joined tables",
+      "url": "https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN",
+      "kind": "technical-specification",
+      "supports": "Inner/outer joins, multiplicity and retention of unmatched left records",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "FDA-DIAGNOSTIC-2007",
+      "title": "FDA: Statistical Guidance on Reporting Results from Studies Evaluating Diagnostic Tests (2007)",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda",
+      "kind": "methodological-guidance",
+      "supports": "Reference standards, intended population, four-cell diagnostic quantities and reporting; final guidance issued March 13, 2007",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
+    },
+    {
+      "id": "STARD-2015",
+      "title": "STARD 2015: Diagnostic Accuracy Reporting",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4623764/",
+      "kind": "reporting-guideline",
+      "supports": "Diagnostic-study selection, reference standards, missing and indeterminate results, uncertainty and variation across settings; BMJ 2015;351:h5527",
+      "verification": "Official documentation or primary article text inspected for the stated CO-04/CO-07 additions; independent expert scientific review remains pending.",
+      "verification_date": "2026-11-21"
     }
   ],
   "latest_additions_date": "2026-11-21"

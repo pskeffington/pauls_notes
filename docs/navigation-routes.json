@@ -13,6 +13,8 @@
       "entry": "03_learning/INTRODUCTION_TO_DATA_SCIENCE.md",
       "next": [
         "research_question",
+        "data_integrity",
+        "probability",
         "unix",
         "r_learning",
         "biostatistics",
@@ -116,6 +118,7 @@
       ],
       "entry": "oncology/README.md",
       "next": [
+        "probability",
         "biostatistics",
         "research_protocol"
       ],
@@ -209,6 +212,7 @@
       ],
       "entry": "oncology/chapters/CO-02-clinical-oncology-data.md",
       "next": [
+        "data_integrity",
         "research_protocol",
         "biostatistics",
         "genomics"
@@ -228,6 +232,36 @@
         "acceptance"
       ],
       "boundary": "Reporting conventions do not establish numerical execution, scientific review or clinical validity"
+    },
+    {
+      "id": "data_integrity",
+      "label": "Define research records and validate joins",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "oncology/chapters/CO-04-data-literacy.md",
+      "next": [
+        "research_protocol",
+        "biostatistics",
+        "scientific_reporting"
+      ],
+      "boundary": "Synthetic record-linkage examples establish data contracts and denominators; study-specific keys and timing must be declared"
+    },
+    {
+      "id": "probability",
+      "label": "Reason about probability and diagnostic evidence",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "oncology/chapters/CO-07-randomness-and-probability.md",
+      "next": [
+        "biostatistics",
+        "scientific_reporting",
+        "acceptance"
+      ],
+      "boundary": "Hypothetical prevalence and test properties illustrate probability identities; executable calculations are separate from measured diagnostic accuracy"
     }
   ]
 }
