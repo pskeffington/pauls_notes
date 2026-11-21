@@ -18,6 +18,7 @@ on:
       - 'scripts/test_oncology_citations.py'
       - 'scripts/test_oncology_math.py'
       - 'scripts/test_oncology_calculus.py'
+      - 'scripts/test_oncology_probability.py'
       - 'scripts/test_oncology_book.py'
       - 'scripts/test_machine_index.py'
       - 'scripts/audit_machine_index.py'
@@ -82,6 +83,12 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_oncology_calculus.py' -v
       - name: Verify CO-06 calculus and linear algebra (base R)
         run: Rscript --vanilla oncology/examples/oncology_calculus.R
+      - name: Verify CO-07 probability and Bayes (Python)
+        run: |
+          python3 oncology/examples/oncology_probability.py
+          python3 -m unittest discover -s scripts -p 'test_oncology_probability.py' -v
+      - name: Verify CO-07 probability and Bayes (base R)
+        run: Rscript --vanilla oncology/examples/oncology_probability.R
       - name: Generate index
         run: python3 scripts/build_machine_index.py --output /tmp/pauls-notes-index.jsonl
       - name: Enrich and verify retrieval metadata
