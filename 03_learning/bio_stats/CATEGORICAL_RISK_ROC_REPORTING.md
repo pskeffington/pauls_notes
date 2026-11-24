@@ -1,6 +1,6 @@
 # Categorical outcomes, effect measures, and ROC reporting
 
-This chapter follows the breast-cancer research narrative from a two-by-two table through comparative effects to diagnostic discrimination. It synthesizes standard reporting practice consistent with Bernard Rosner, *Fundamentals of Biostatistics*; verify section/page references against the edition assigned in class. Worked counts below are **synthetic teaching data**, not observed patients.
+This chapter follows the breast-cancer research narrative from a two-by-two table through comparative effects to diagnostic discrimination. It synthesizes standard reporting practice linked to the [foundational methodology bibliography](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md); verify section/page references against the edition assigned in class. Worked counts below are **synthetic teaching data**, not observed patients.
 
 For the shared structure of Methods, Results, tables, plots, precision, and report-type guidelines, see [Scientific statistical reporting standards](SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md). The following worked example supplies the underlying 2×2 and ROC mechanics.
 
@@ -233,7 +233,7 @@ c(sensitivity = tp/(tp+fn), specificity = tn/(tn+fp),
 
 ## References and further reading
 
-- Rosner B. *Fundamentals of Biostatistics*. Refer to the assigned edition for exact chapter and page mapping.
+- [Foundational biostatistics source and full author attribution](../../02_biomedical_coding/METHODOLOGY_SOURCE_REFERENCES.md). Refer to the assigned edition for exact chapter and page mapping.
 - Kim H-Y. Statistical notes for clinical researchers: Chi-squared test and Fisher's exact test. *Restor Dent Endod*. 2017. https://doi.org/10.5395/rde.2017.42.2.152
 - Fagerland MW, Lydersen S, Laake P. The McNemar test for binary matched-pairs data. *BMC Med Res Methodol*. 2013. https://doi.org/10.1186/1471-2288-13-91
 - STARD 2015 diagnostic accuracy reporting: https://www.equator-network.org/reporting-guidelines/stard/

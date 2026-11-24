@@ -14,6 +14,8 @@ MATRIX_COLUMNS = (
 )
 GATE_COLUMNS = ("gate_key", "review_question", "minimum_evidence")
 BIOSTAT_COLUMNS = ("method_id", "topic", "biostat_chapters", "coverage")
+BIOSTAT_COVERAGE = {"textbook", "extension", "design_gate"}
+BIOSTAT_CHAPTERS = {str(chapter) for chapter in range(1, 15)}
 ROUTE_CLASSES = {"descriptive", "inferential", "review", "design_gate"}
 OUTCOME_FAMILIES = {
     "any", "numeric", "categorical", "omics_counts", "time_to_event", "count",
@@ -25,7 +27,12 @@ class MatrixValidationError(ValueError):
     """Matrix registry contract is not satisfied."""
 
 
-def read_rows(path: Path, expected_columns: tuple[str, ...]) -> list[dict[str, str]]:
+def read_rows(
+    path: Path,
+    expected_columns: tuple[str, ...],
+    *,
+    allow_empty: frozenset[str] = frozenset(),
+) -> list[dict[str, str]]:
     if not path.is_file():
         raise MatrixValidationError(f"Missing registry file: {path}")
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -36,7 +43,10 @@ def read_rows(path: Path, expected_columns: tuple[str, ...]) -> list[dict[str, s
     if not rows:
         raise MatrixValidationError(f"Empty registry: {path}")
     for i, row in enumerate(rows, start=2):
-        if None in row or any(v is None or not v.strip() for v in row.values()):
+        if None in row or any(
+            value is None or (not value.strip() and column not in allow_empty)
+            for column, value in row.items()
+        ):
             raise MatrixValidationError(f"Missing/empty values in {path}:{i}")
     return rows
 
@@ -52,7 +62,29 @@ def validate_matrix(root: Path = ROOT) -> dict[str, int]:
     base = root / BASE
     matrix = read_rows(base / "biomedical_decision_matrix.csv", MATRIX_COLUMNS)
     dictionary = read_rows(base / "biomedical_gate_dictionary.csv", GATE_COLUMNS)
-    biostat = read_rows(base / "biostat_method_registry.csv", BIOSTAT_COLUMNS)
+    biostat = read_rows(
+        base / "biostat_method_registry.csv", BIOSTAT_COLUMNS,
+        allow_empty=frozenset({"biostat_chapters"}),
+    )
+    for row in biostat:
+        method_id = row["method_id"]
+        coverage = row["coverage"]
+        if coverage not in BIOSTAT_COVERAGE:
+            raise MatrixValidationError(f"{method_id}: unknown biostat coverage")
+        chapter_text = row["biostat_chapters"]
+        chapters = chapter_text.split(";") if chapter_text else []
+        # An extension/design gate can deliberately have no textbook attribution.
+        # Present chapter IDs remain exact, unique eighth-edition chapter numbers.
+        if not chapters and coverage == "textbook":
+            raise MatrixValidationError(
+                f"{method_id}: textbook coverage requires chapter attribution"
+            )
+        if len(chapters) != len(set(chapters)) or any(
+            chapter not in BIOSTAT_CHAPTERS for chapter in chapters
+        ):
+            raise MatrixValidationError(
+                f"{method_id}: invalid or repeated biostat chapter IDs"
+            )
 
     ids = unique_keys(matrix, "method_id", "matrix")
     biostat_ids = unique_keys(biostat, "method_id", "Biomedical methods crosswalk")

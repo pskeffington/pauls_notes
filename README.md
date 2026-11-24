@@ -1,10 +1,10 @@
 # Paul's Notes
 
-**Cancer research · biomedical computing · reproducible machine learning**
+**Breast cancer investigation through data science, study design and reproducible research**
 
 Authored by Paul Skeffington · Compiled with OpenAI
 
-An open, methods-focused notebook for **research across all cancer types**, including molecular oncology, pathology/imaging, cancer epidemiology, computational biology and translational research. The **current worked case** uses a breast cancer teaching book and synthetic paired-specimen ML, with **TCGA-BRCA as the current data-source example under consideration**. Neither TCGA nor breast cancer limits this repository's research scope. Start with a research question, then build a documented, reproducibly checked analysis.
+Paul's Notes connects breast cancer biology, clinical data, study design, statistical analysis and reproducible scientific reporting. It is written for investigators who need to understand what a dataset measures, choose a defensible analysis and explain the resulting evidence. The methods support **research across all cancer types**; the **current worked case** uses breast cancer literature and explicitly synthetic examples, with **TCGA-BRCA as the current data-source example under consideration**.
 
 **Choose your route:** [Task-first navigation](docs/NAVIGATION.md) · [Learn by subject](03_learning/README.md) · [Research resources](06_RESOURCES/README.md) · [Computational oncology book](oncology/README.md). Start with the outcome you need, then use the linked method, example and verification evidence.
 
@@ -12,7 +12,9 @@ An open, methods-focused notebook for **research across all cancer types**, incl
 
 **Quick navigation:** [Start with your task](#start-here) · [Browse learning tracks](#learn-by-topic) · [Research scope](docs/cancer-research-scope.md) · [Research workflow](#follow-a-research-question) · [Run an example](#put-the-methods-to-work) · [Progress and limitations](#research-progress-and-boundaries)
 
-This repository is a **modular field guide for biomedical students and early-career researchers**. Read one section to answer a current question, then follow prerequisites or related links when useful; there is no required course order. Each subject overview points to focused lessons, runnable examples, expected outputs, and limitations. Start with the task table below or browse by topic.
+This repository is evolving into a **narrative, applied introduction to data science for researchers**, using breast-cancer research as its recurring example. Follow the [chapter sequence](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) from research question and study design through data preparation, exploration, statistical reasoning, prediction, and reproducible communication. Existing subject guides remain available for readers who need one method or example directly; chapter links distinguish established material from bridges still to be written. Breast-cancer teaching examples include synthetic data and published studies, with their provenance and limits stated. The book does not present synthetic results as patient evidence or clinical findings.
+
+**Starting a breast cancer investigation?** Follow the [investigator pathway](docs/NAVIGATION.md#breast-cancer-investigator-pathway) from question and dataset choice to endpoint specification, analysis and reporting. The [opening worked chapter](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md#chapter-1--from-a-breast-cancer-question-to-an-interpretable-result) introduces that reasoning through an 80-participant synthetic response example; the [clinical-data chapter](oncology/chapters/CO-02-clinical-oncology-data.md) explains receptor labels, breast cancer endpoints and the different research uses of TCGA and WDBC.
 
 ## Biomedical statistics and original figures
 
@@ -20,14 +22,16 @@ Start with the [statistical method decision matrix](03_learning/bio_stats/BIOMED
 
 ## Computational Oncology textbook
 
-The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with six drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
+The [Computational Oncology: A Clinician–Scientist's Guide](oncology/README.md) is a developing **ten-part, 60-chapter ebook** with seven drafted chapters, a [publication roadmap](oncology/ROADMAP.md), [machine-readable chapter manifest](oncology/book-manifest.json), and [section-linked reference registry](oncology/evidence/source-registry.json). The full manuscript remains in development and has not undergone peer review.
 
 ## Start here
 
-Choose the route that matches what you need; no weekly sequence is required. Each topic can be used on its own, and the final column gives optional next steps.
+**Reading the book from the beginning?** Start with the [Introduction to Data Science for Cancer Researchers](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md), a chapter-by-chapter narrative using breast-cancer research examples. For a focused task, choose a row below and use its linked specialist guides.
 
 | I want to… | Start with | Then explore |
 | --- | --- | --- |
+| **Learn data science for cancer research from the beginning** | [Narrative chapter sequence](03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) — research question to reproducible interpretation through breast-cancer examples | [Learning subjects](03_learning/README.md), [capstone roadmap](docs/learning-roadmap.md), and chapter links marking current material and planned bridges |
+| **Plan a breast cancer investigation** | [Investigator pathway](docs/NAVIGATION.md#breast-cancer-investigator-pathway) — question, measurements, endpoints, analysis and reporting | [Study-design guide](03_learning/bio_stats/CANCER_STUDY_DESIGN.md) and [protocol worksheet](templates/study-protocol.md) |
 | **Choose a cancer research question** | [Cancer research scope](docs/cancer-research-scope.md) — all cancer types, data modalities and study designs | [Independent study/data-access contract](docs/research-workflow.md) and [protocol template](templates/study-protocol.md) |
 | **Understand the current breast cancer example** | [Breast cancer book](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md) — 12 chapters and 60 gene profiles | [Gene lookup](06_RESOURCES/Genomics/BREAST_CANCER_60_GENE_COMPANION.md#alphabetical-gene-lookup) and [pathways](06_RESOURCES/Genomics/GENE_PATHWAY_OVERVIEW.md) |
 | **Learn Rust from zero** | [Rust foundations course](03_learning/rust/README.md) — variables, borrowing, object-oriented patterns, Cargo and tests | [Research-oriented Rust engineering](03_learning/rust/06_breast_cancer_engineering.md) and [source-backed practices](02_biomedical_coding/RUST_CODING_BEST_PRACTICES.md) |

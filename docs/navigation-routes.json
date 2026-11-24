@@ -5,6 +5,25 @@
   "notes": "Routes select existing canonical documentation; they do not confer scientific or execution acceptance.",
   "routes": [
     {
+      "id": "data_science_intro",
+      "label": "Learn data science for cancer research",
+      "audience": [
+        "reader"
+      ],
+      "entry": "03_learning/INTRODUCTION_TO_DATA_SCIENCE.md",
+      "next": [
+        "research_question",
+        "data_integrity",
+        "probability",
+        "unix",
+        "r_learning",
+        "biostatistics",
+        "machine_learning",
+        "acceptance"
+      ],
+      "boundary": "Applied learning narrative using breast-cancer examples; synthetic exercises are not clinical evidence and chapter links do not assert full integration or verification"
+    },
+    {
       "id": "research_question",
       "label": "Frame a cancer research question",
       "audience": [
@@ -13,6 +32,7 @@
       ],
       "entry": "docs/cancer-research-scope.md",
       "next": [
+        "clinical_data",
         "research_protocol",
         "biostatistics"
       ],
@@ -43,7 +63,8 @@
       "next": [
         "r_learning",
         "figures",
-        "acceptance"
+        "acceptance",
+        "scientific_reporting"
       ],
       "boundary": "Method gate output does not authorize inference"
     },
@@ -97,6 +118,7 @@
       ],
       "entry": "oncology/README.md",
       "next": [
+        "probability",
         "biostatistics",
         "research_protocol"
       ],
@@ -180,6 +202,66 @@
         "acceptance"
       ],
       "boundary": "Instructions define gates; execution evidence is separate"
+    },
+    {
+      "id": "clinical_data",
+      "label": "Define breast cancer clinical data and endpoints",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "oncology/chapters/CO-02-clinical-oncology-data.md",
+      "next": [
+        "data_integrity",
+        "research_protocol",
+        "biostatistics",
+        "genomics"
+      ],
+      "boundary": "Source suitability and endpoint definitions require study-specific review; no participant data are admitted by documentation"
+    },
+    {
+      "id": "scientific_reporting",
+      "label": "Report statistical results and scientific interpretation",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "03_learning/bio_stats/SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md",
+      "next": [
+        "figures",
+        "acceptance"
+      ],
+      "boundary": "Reporting conventions do not establish numerical execution, scientific review or clinical validity"
+    },
+    {
+      "id": "data_integrity",
+      "label": "Define research records and validate joins",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "oncology/chapters/CO-04-data-literacy.md",
+      "next": [
+        "research_protocol",
+        "biostatistics",
+        "scientific_reporting"
+      ],
+      "boundary": "Synthetic record-linkage examples establish data contracts and denominators; study-specific keys and timing must be declared"
+    },
+    {
+      "id": "probability",
+      "label": "Reason about probability and diagnostic evidence",
+      "audience": [
+        "reader",
+        "agent"
+      ],
+      "entry": "oncology/chapters/CO-07-randomness-and-probability.md",
+      "next": [
+        "biostatistics",
+        "scientific_reporting",
+        "acceptance"
+      ],
+      "boundary": "Hypothetical prevalence and test properties illustrate probability identities; executable calculations are separate from measured diagnostic accuracy"
     }
   ]
 }

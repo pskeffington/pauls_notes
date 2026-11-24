@@ -17,8 +17,9 @@ This is an **execution queue**, not a claim of implementation. It defines propos
 | --- | --- | --- | --- | --- |
 | IDX-01 | P0 | **Verified (bounded)** — full index and orphan audit passed | Audit links, headings, duplicate section IDs, orphaned pages and indexing coverage across textbook and learning resources | Record baseline diagnostics and proposed repairs; determinism and existing machine-index tests pass |
 | IDX-02 | P0 | **Verified (bounded)** — deterministic registry, graph and CI checks passed | Add machine-readable agent task registry or verified task export, aligned to this human queue | Stable IDs, dependencies, statuses, owner-less handoffs, schema tests and deterministic output |
-| DOC-01 | P0 | Ready | Reconcile chapter statuses and navigation against the 60-entry book manifest and actual files | No chapter marked drafted without manuscript; README, oncology/README, llms.txt, registry and manifest cross-links agree |
-| CO-07 | P1 | Ready for authored draft; not delivered | Author original Ch. 07 probability and Bayes in oncology, with independent synthetic worked examples | Section citations, numerical R/Python replay where appropriate, clinical interpretation, exercises, limitations, editorial validation |
+| DOC-01 | P0 | In progress | Reconcile chapter statuses and navigation against the 60-entry book manifest and actual files | No chapter marked drafted without manuscript; README, oncology/README, llms.txt, registry and manifest cross-links agree |
+| DOC-02 | P1 | In progress | Develop the applied data-science introduction as a breast-cancer research narrative, integrating existing lessons into ordered chapters | Draft original chapter bridges, keep a single declared research question and data provenance across examples, include objectives/worked examples/exercises/interpretation/limitations, and preserve separate source, runtime and clinical evidence statuses |
+| CO-07 | P1 | Draft authored; Python/R checks passed; external review pending | Review the original probability and Bayes manuscript and its recorded technical evidence | Section citations, numerical R/Python replay where appropriate, clinical interpretation, exercises, limitations, editorial validation |
 | CO-08 | P1 | Planned after CO-07 conventions | Ch. 08 discrete outcomes: binomial, hypergeometric, Poisson, denominators and rates | Distribution-selection casework, independently checked numeric examples, source references and mastery checks |
 | CO-09 | P1 | Planned after CO-07 conventions | Ch. 09 continuous outcomes and transformations | Normal/log-normal and zeros, shape vs sampling distribution/CLT, worked reproducible examples |
 | CO-10 | P1 | Planned after CO-07–09 | Ch. 10 sampling, standard error and resampling | Separate population-vs-sample and independent-vs-clustered sampling contracts; verified examples |
@@ -36,6 +37,7 @@ Begin with **IDX-01 + DOC-01 as a documentation-only audit**. Inventory the trac
 - CO-07 establishes chapter format for CO-08/CO-09; CO-07–09 → CO-10; content chapters do not require G4 research success.
 - G4-01 follows its frozen synthetic survival protocol; G5-01 follows an independently selected method/result.
 - GOV-01 blocks all proposed admission of real participant-linked data, **not** synthetic textbook development.
+- DOC-02 uses synthetic and source-verified breast-cancer examples; chapter integration does not depend on admitting real participant data.
 - No task is complete from AI-generated text alone: demand tests or checkable review evidence matching its scope.
 - Keep broad cancer scope; use breast cancer as an explicit example rather than defaulting every chapter to BRCA.
 - For each pass, update this queue, affected navigation and documented evidence together. Annotate the actual date, branch/PR and observed checks rather than changing historical gate snapshots without verification.
@@ -65,3 +67,78 @@ The above intermediate checkpoint text records its original *in-progress* state.
 **IDX-01 and IDX-02 are Verified within their documentation/index scope only.** The updated validator also forbids marking a task Verified while any declared task dependency is unverified. The current draft PR is not a merged release, future CI is not presumed green, and none of these checks establish scientific truth, citation suitability, external model validity, or D0/D1 data admission.
 
 **Next unblocked P0 task:** DOC-01: reconcile reader navigation, chapter-level manuscript completeness and cross-file publication readiness against the existing 60-entry manifest without writing new chapter claims. GOV-01 remains blocked for real-data admission until independent privacy and access review.
+
+## 2026-11-21 investigator-reference development checkpoint
+
+**Tasks:** DOC-01 / DOC-02. **State:** In progress; substantive drafts and bounded verification, not final textbook acceptance. **Review vehicle:** [existing draft PR 42](https://github.com/pskeffington/pauls_notes/pull/42), branch `docs/data-science-narrative-intro`. The current mainline source at `ea68a32` was merged into the earlier narrative branch at `cc26d1d`; its newer statistical-reporting and notation work is preserved. The PR records the exact committed head and any subsequent CI result.
+
+### Delivered content and integration
+
+- Expanded the existing [data-science introduction](../03_learning/INTRODUCTION_TO_DATA_SCIENCE.md) with an original opening chapter: clinical question types, estimands, participant/specimen units, an 80-person synthetic response comparison, missing-outcome bounds and six reasoned exercises.
+- Extended [CO-02 clinical data](../oncology/chapters/CO-02-clinical-oncology-data.md) with breast cancer receptor/classifier distinctions; pCR, RCB, IDFS, IBCFS and EFS; patient-to-assay lineage; TCGA export/manifest/assay/CDR distinctions; WDBC suitability; and a 12-person cohort-accounting example. Added 14 source records and synchronized its 18 H2/H3 citation mappings.
+- Repaired four damaged sample-size displays in the [study-design guide](../03_learning/bio_stats/CANCER_STUDY_DESIGN.md), defined their notation and independently checked the existing numerical planning values. The [protocol template](../templates/study-protocol.md) now captures time zero, ascertainment, denominators, intercurrent-event strategies, missingness, source versions and review evidence.
+- Replaced the obsolete 2017 ICH draft link in the touched protocol/design material with [final FDA E9(R1) guidance (May 2021)](https://www.fda.gov/media/148473/download). Clarified the frozen synthetic protocol's documented-response endpoint and supplementary analyses. The Rmd now labels Fisher's conditional odds ratio **A relative to B** separately from the primary **B minus A** risk difference; calculation expressions and data generation are preserved.
+- Added the [investigator pathway](NAVIGATION.md#breast-cancer-investigator-pathway), retained the original route IDs and registered clinical-data/reporting destinations. Corrected two stale crosswalk-test paths in existing acceptance notes. Adjusted the existing navigation regression test to verify retained routes and new canonical homes instead of assuming the old route count was permanent.
+- Reconciled seven attribution findings in current reporting/quantile notes with the existing author-neutral contract; full textbook author credit remains in the canonical methodology bibliography. No statistical convention was changed.
+
+### Sources, arithmetic and review scope
+
+All new examples are invented teaching constructions. Clinical source material consists of primary papers, official guidance and provider documentation; no participant-level data or new clinical result was ingested. Individual source dates and claim scope are retained in the [source registry](../oncology/evidence/source-registry.json). The 2026 survival-planning methodological update is supported at **publisher-abstract level**, not a claimed full-paper replication.
+
+Python standard-library replay reproduced the opening contrast of 0.15; the available-case contrast of 0.1842105263; missing-outcome bounds of 0.10 and 0.25; the 12-person intersection accounting; a normal-approximation requirement of 90.41909454 per arm, rounded to 91; enrollment inflation to 102; and an event requirement of 379.35172960, rounded to 380. Missing-outcome bounds are not confidence intervals, and required events are not recruited participants.
+
+An independent AI review checked the argument, primary-source correspondence and arithmetic; its findings about relative links and the supplementary odds-ratio direction were resolved. This is **not external statistical or clinical expert review**. The 60-chapter oncology manifest remains **six drafts and 54 planned**; the separate narrative opening does not promote CO-07 or another manuscript chapter.
+
+### Verification record
+
+**Observed locally on 2026-11-21:**
+
+| Gate | Exact checks | Observed scope |
+| --- | --- | --- |
+| Reader/documentation integrity | `check_navigation_routes.py`, `check_notes_docs_hygiene.py`, `check_documentation.py` | 16 valid routes; 12 hygiene entrypoints; 163 Markdown pages with local links and anchors resolving |
+| Source and book structure | `check_methodology_attribution.py`, `check_biostat_8e_alignment.py`, `validate_oncology_book.py`, `validate_oncology_citations.py` | Attribution, 14 source chapters/60 oncology IDs, manifest and section-citation checks pass |
+| Task, scope and evidence consistency | `check_agent_tasks.py`, `check_cancer_research_scope.py`, `check_milestone_evidence.py`, `validate_research_methods.py` | Existing gates retain their scientific boundaries; 13 task records valid |
+| Source/repository checks | `check_repository.py`, `check_repository_artifacts.py`, `git diff --check` | 98 Python/Bash source files parse; 443 tracked paths contain no incidental editor/build debris; diff whitespace clean |
+| Existing regression suites | `scripts/tests/test_navigation_routes.py`, `test_notes_docs_hygiene.py`, `test_documentation.py`; `scripts/test_oncology_citations.py`, `test_oncology_book.py`, `test_agent_tasks.py`, `test_research_method_registry.py` | 39 tests pass across these seven suites |
+| Machine-index suites and replay | `python3 -m unittest discover -s scripts -p 'test_*machine_index.py' -v`; index build, deterministic replay, enrichment and coverage audit | 13 tests pass; 1,630 sections across all 163 documents indexed; zero broken links, orphan candidates or structural errors |
+| Method-matrix and evidence follow-up | `check_biostatistics_matrix.py`, `check_biostatistics_evidence.py`; `scripts/tests/test_biostatistics_matrix.py`, `test_biostatistics_evidence.py` | 18 tests pass; 27 routes, 25 gates and 156 route-gate links validated; evidence registry records 19 chart objects, 26 papers and 39 method/diagnostic outputs within their stated reproduction boundaries |
+
+Run the named checker scripts from `scripts/` unless a full path is given. The index audit initially identified the existing quantile/Q–Q guide as a navigation orphan; a contextual link from the canonical reporting standard resolves that discovery gap. The generated index and audit are disposable `/tmp` outputs; recreate them with the commands in `AGENTS.md`.
+
+Source comparison confirmed that all eight R chunks preserve their calculation expressions; only supplementary table labels changed. The three expanded teaching chapters have paired display-math delimiters and no embedded control characters.
+
+**Not run locally:** R execution, R Markdown knitting and rendered-page inspection. `Rscript` was unavailable, and installing base R was blocked by the environment's package-manager permissions. The existing Biomedical learning case CI includes the study-design tests, frozen protocol replay and HTML render; its actual result must be read from the final PR head. External statistical and clinical expert review remain pending. None of these uncompleted gates is recorded as passed.
+
+**CI acceptance follow-up:** [Biomedical learning case run 44894127559](https://github.com/pskeffington/pauls_notes/actions/runs/44894127559) on `1bf317e` exposed two preexisting validation defects before the downstream report renders. The method-matrix checker required chapter numbers even for extension/design-gate routes whose source crosswalk intentionally has no textbook chapter; its correction permits that explicit distinction while rejecting missing core coverage, invalid chapter lists and empty required metadata. The full-study R acceptance test searched `term.labels` for an offset, although R stores offsets in a separate terms attribute. Its correction checks the actual offset and verifies that doubling exposure at fixed covariates doubles the expected count. The underlying registry, fitted model and study calculations are unchanged. The PR records the observed rerun outcome and exact head; neither a repaired assertion nor a queued job is recorded here as successful R execution.
+
+### Next bounded work
+
+1. Continue DOC-02 with an integrated data-dictionary/join exercise using the existing observation-grain and clinical-data material; keep its synthetic cohort and effect direction explicit.
+2. For CO-07, inspect and reuse the existing probability R/Python labs and tests before authoring the probability/Bayes manuscript. Follow the existing biostatistics source/fixture dependencies; do not create a duplicate laboratory.
+3. Obtain independent R replay and rendered acceptance for affected reports; retain specialist statistical and clinical review as publication requirements. Real-data admission remains governed by the existing D0/D1 workflow.
+
+## 2026-11-21 data linkage and probability checkpoint
+
+**Tasks:** DOC-01 / DOC-02 / CO-07. **Review vehicle:** [draft PR 42](https://github.com/pskeffington/pauls_notes/pull/42), branch `docs/data-science-narrative-intro`. This pass continues from `8976d90e72e705adae1392cf4ecc726be09f7530`. The focused probability-lab/CI commit is `6316e6002063e6196e30f5c07fca0fef939c3ac6`; the PR records the later integrated manuscript head and its observed CI outcomes.
+
+**Delivered:** The [CO-04 data-literacy chapter](../oncology/chapters/CO-04-data-literacy.md) now develops the existing six-person, nine-specimen exercise into a dictionary and linkage narrative. Nine visit records joined on person alone produce 16 rows, exclude P06 and change baseline assay availability from the roster's 5/6 to the retained subset's 4/5. The repaired specimen-preserving join keeps nine specimens and six participants, reports unmatched S06 and unused V03, and distinguishes `None` selection from recorded `False` availability. The existing [Python lab](../oncology/examples/observation_grain.py) adds `--join-demo` and `--check`; its original default JSON remains byte-for-byte unchanged. The [dictionary worksheet](../templates/data-dictionary.md) now captures keys, dates, measurement/availability timing, derivations, cardinality, provenance and denominator reconciliation.
+
+**New manuscript:** [CO-07 — Randomness and Probability](../oncology/chapters/CO-07-randomness-and-probability.md) contains 16 source-linked sections and nine exercises with reasoned solutions. It develops events, conditional direction, independence, total probability, Bayes, expected screening tables, prevalence effects and simulation. It reuses the existing Python/R lab and tests. The [chapter verification record](../oncology/evidence/CO-07-VALIDATION-2026-11-21.md) contains exact rational reference values, code blob identities and observed Python/base-R execution. With manuscript, source, numeric, runtime and independent AI review evidence present, the chapter is registered as `draft`; the manifest now has seven drafts and 53 planned chapters. Expert statistical/clinical review and publication acceptance remain open.
+
+**Sources and integration:** Four primary/official records were added for the GDC dictionary, relational join definitions, final FDA diagnostic-test reporting guidance and STARD 2015. Existing probability references were reused. The citation crosswalk covers all 18 CO-04 and 16 CO-07 sections. The learning chapter map, book home, roadmap, lab guide, machine entrypoints and 18-route navigation registry now lead to these canonical materials. No participant dataset was admitted.
+
+**Independent review and corrections:** Separate AI review checked both the probability derivations and the join/selection behavior. It identified empty identifier and alternate date-format cases that could create false or ambiguous matches; the lab now rejects malformed keys and requires canonical `YYYY-MM-DD` dates before matching. Probability review corrected R scalar-count coercion, integer-storage overflow, a valid union rejected by machine roundoff, premature rounding of tiny expected counts, and unrepresentable R seeds. The original fixture, principal probability assumptions and seed-711 generator are preserved. These reviews are not external scientific peer review.
+
+**Observed checks:**
+
+| Scope | Commands / evidence | Result |
+| --- | --- | --- |
+| Join and selection exercise | `python3 oncology/examples/observation_grain.py --check`; independent reproducer checks; comparison with previous default JSON | Passed, including malformed keys/dates, ambiguous matches, unmatched records and roster retention with absent specimens |
+| Probability arithmetic | `python3 -m unittest discover -s scripts -p 'test_oncology_probability.py' -v`; standard-library rational replay | Eight tests passed locally; exact fractions and both expected tables agree |
+| Base-R and Python probability execution | [CI run 44898310988](https://github.com/pskeffington/pauls_notes/actions/runs/44898310988), job `136828611540`, at `6316e60` | Both CO-07 steps passed; Python 3.12.3 and R 4.3.3 reported |
+| Documentation, source and structure | Navigation, documentation hygiene, Markdown links, attribution, book manifest, section citations, biostatistics alignment, agent tasks, research scope/methods, milestone evidence, repository syntax and artifact checks | Passed; 165 Markdown pages, 18 navigation routes, 445 tracked paths and 98 Python/Bash source files checked |
+| Existing local regression suites | Navigation 9; hygiene 10; documentation 4; oncology citations 4; book 5; tasks 5; method registry 2; machine index 13; index audit 5; probability 8 | 65 tests passed; the join lab's embedded assertions are additional |
+
+The integrated revision's deterministic index build, enrichment, coverage audit and complete CI results are recorded in the PR. R was unavailable locally; the chapter's R execution claim is tied to the observed CI source blobs. Chapter export/visual acceptance and independent expert review are not recorded as passed. Historical evidence and D0/D1 research-data gates retain their original scope.
+
+**Next bounded work:** Develop CO-08 from the existing discrete-distribution material: binomial response counts, hypergeometric sampling and Poisson events with explicit exposure. Preserve exact-mass versus tail-probability distinctions, source-defined model assumptions and the CO-07 notation. Continue independent editorial and specialist review of the authored drafts in parallel.

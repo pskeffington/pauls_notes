@@ -23,7 +23,15 @@ class NavigationContractTests(unittest.TestCase):
 
     def test_stable_full_route_set(self):
         self.assertEqual(module.validate_manifest(self.manifest, ROOT), [])
-        self.assertEqual(len(self.manifest["routes"]), 13)
+        routes = {route["id"]: route["entry"] for route in self.manifest["routes"]}
+        # Retain all original routes while allowing reviewed topic additions.
+        self.assertTrue(module.REQUIRED_ROUTES <= routes.keys())
+        self.assertEqual(routes["data_science_intro"],
+                         "03_learning/INTRODUCTION_TO_DATA_SCIENCE.md")
+        self.assertEqual(routes["clinical_data"],
+                         "oncology/chapters/CO-02-clinical-oncology-data.md")
+        self.assertEqual(routes["scientific_reporting"],
+                         "03_learning/bio_stats/SCIENTIFIC_STATISTICAL_REPORTING_STANDARDS.md")
 
     def test_duplicate_route_id_rejected(self):
         broken = copy.deepcopy(self.manifest)
